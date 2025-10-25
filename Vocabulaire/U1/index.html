@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>互动练习｜选词填空（法语市政主题）</title>
+  <style>
+    :root{
+      --bg:#f7f7fb;
+      --ink:#1f2937;
+      --muted:#6b7280;
+      --primary:#2563eb;
+      --surface:#ffffff;
+      --ok:#16a34a;
+      --bad:#dc2626;
+      --drop:#e5e7eb;
+      --ghost:#9ca3af33;
+      --token:#eef2ff;
+      --token-border:#c7d2fe;
+      --focus:#7c3aed;
+      --shadow:0 6px 18px rgba(0,0,0,.06);
+      --radius:12px;
+    }
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;}
+    .app{max-width:980px;margin:24px auto;padding:24px;}
+    .card{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px;}
+    h1{font-size:1.5rem;margin:0 0 6px;}
+    .sub{color:var(--muted);margin-bottom:18px}
+    .toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:12px 0 18px}
+    .toolbar .grow{flex:1}
+    .btn{border:1px solid #d1d5db;background:#fff;border-radius:10px;padding:10px 14px;cursor:pointer}
+    .btn.primary{background:var(--primary);border-color:var(--primary);color:#fff}
+    .btn.ghost{background:#fff;border-color:#e5e7eb}
+    .btn:focus{outline:3px solid var(--focus);outline-offset:2px}
+    .btn[disabled]{opacity:.6;cursor:not-allowed}
+    .switch{display:inline-flex;align-items:center;gap:8px;font-size:.95rem}
+    .switch input{inline-size:1.15rem;block-size:1.15rem}
+    .board{display:grid;grid-template-columns:1fr;gap:16px}
+    .bank{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;background:#fff;border:1px dashed #e5e7eb;border-radius:var(--radius);padding:12px}
+    .token{user-select:none;background:var(--token);border:1px solid var(--token-border);padding:10px 12px;border-radius:10px;text-align:center;box-shadow:0 2px 8px rgba(67,56,202,.08);cursor:grab}
+    .token.dragging{opacity:.5}
+    .token.selected{outline:3px solid var(--focus);outline-offset:2px}
+    .token[draggable="false"]{opacity:.75}
+    .para{background:#fff;border-radius:var(--radius);padding:16px;border:1px solid #e5e7eb}
+    .drop{display:inline-flex;align-items:center;justify-content:center;min-inline-size:140px;min-block-size:38px;padding:6px 10px;margin:0 4px;border-radius:10px;border:2px dashed var(--drop);vertical-align:middle;background:#fafafa;transition:.15s}
+    .drop.filled{border-style:solid;border-color:#d1d5db;background:#fff}
+    .drop.correct{border-color:var(--ok);background:rgba(22,163,74,.06)}
+    .drop.incorrect{border-color:var(--bad);background:rgba(220,38,38,.06)}
+    .drop:focus{outline:3px solid var(--focus);outline-offset:2px}
+    .ghost{color:#111827;background:var(--ghost);border-color:transparent !important}
+    .legend{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-top:8px;color:var(--muted);font-size:.95rem}
+    .score{font-weight:600;color:#111827}
+    .sr-only{position:absolute;inline-size:1px;block-size:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;padding:0;margin:-1px}
+    .footer{margin-top:20px;color:var(--muted);font-size:.9rem}
+    .accent{color:var(--primary)}
+    .hint{color:var(--muted);font-size:.9rem;margin:8px 0 0}
+    .confetti{pointer-events:none;position:fixed;inset:0;overflow:hidden}
+    .piece{position:absolute;inline-size:10px;block-size:14px;opacity:.9;animation:fall 1100ms linear forwards}
+    @keyframes fall{to{transform:translateY(110vh) rotate(540deg);opacity:0}}
+    @media (max-width:720px){
+      .drop{min-inline-size:120px}
+      .token{padding:12px}
+    }
+    code.inline{background:#f3f4f6;border-radius:6px;padding:2px 6px}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="card">
+      <h1>选词填空（可拖拽 / 可点击）</h1>
+      <div class="sub">把上方词语拖入（或点击选择后再点击空格放置）到合适的方框中，然后点击“检查/评分”。题面为法语，主题：<span class="accent">市政</span>。</div>
+      
+      <div class="toolbar" role="toolbar" aria-label="操作栏">
+        <button class="btn ghost" id="shuffleBtn" aria-label="打乱词库顺序">打乱词库</button>
+        <button class="btn" id="resetBtn" aria-label="清空当前作答">重置</button>
+        <button class="btn primary" id="checkBtn" aria-label="检查并评分">检查 / 评分</button>
+        <button class="btn ghost" id="revealBtn" aria-expanded="false" aria-controls="answerKey">显示答案</button>
+        <label class="switch" title="拖拽放置后自动评分">
+          <input type="checkbox" id="autoCheck" />
+          自动评分
+        </label>
+        <div class="grow"></div>
+        <div class="score" id="score">已完成 0 / 7</div>
+      </div>
+
+      <div class="board">
+        <section aria-labelledby="bankTitle">
+          <h2 id="bankTitle" class="sr-only">词库</h2>
+          <div id="bank" class="bank" role="listbox" aria-label="可拖拽词语"></div>
+          <p class="hint">提示：支持键盘操作。先聚焦词语按 <code class="inline">空格/回车</code> 选中，再跳到空格按 <code class="inline">空格/回车</code> 放置。</p>
+        </section>
+        
+        <section class="para" aria-labelledby="taskTitle">
+          <h2 id="taskTitle" class="sr-only">完形填空</h2>
+          <p>
+            <em>Complétez avec le mot ou l’expression correct(e).</em>
+          </p>
+          <p>
+            Dans notre ville, <strong>l’équipe municipale</strong> est très dynamique. J’habite dans 
+            <span class="drop" tabindex="0" data-answer="une_commune" aria-label="空格 1"></span> 
+            qui propose beaucoup d’activités artistiques. Il y a 
+            <span class="drop" tabindex="0" data-answer="un_centre_culturel" aria-label="空格 2"></span> 
+            où on peut prendre des cours de théâtre et de musique. Nous avons 
+            <span class="drop" tabindex="0" data-answer="un_maire" aria-label="空格 3"></span> 
+            très actif qui organise souvent des réunions avec 
+            <span class="drop" tabindex="0" data-answer="les_habitants" aria-label="空格 4"></span> 
+            pour discuter des projets de la ville. Dans notre ville, nous sommes 
+            <span class="drop" tabindex="0" data-answer="des_citoyens" aria-label="空格 5"></span> 
+            engagés, nous aimons participer aux décisions de 
+            <span class="drop" tabindex="0" data-answer="la_municipalite" aria-label="空格 6"></span> 
+            . L’année dernière, nous avons demandé 
+            <span class="drop" tabindex="0" data-answer="une_garderie" aria-label="空格 7"></span> 
+            pour nos enfants et l’équipe municipale a accepté notre proposition.
+          </p>
+        </section>
+        
+        <div class="legend">
+          <div>绿色：正确；红色：错误；灰色文字：参考答案（仅“显示答案”时出现）。</div>
+          <div id="status" aria-live="polite"></div>
+        </div>
+      </div>
+
+      <div id="answerKey" class="footer" hidden>
+        <strong>答案：</strong> 1) une commune　2) un centre culturel　3) un maire　4) les habitants　5) des citoyens　6) la municipalité　7) une garderie
+      </div>
+    </div>
+  </div>
+
+  <div class="confetti" id="confetti" aria-hidden="true"></div>
+
+  <script>
+    // ------------------------- 数据与工具 -------------------------
+    const WORDS = [
+      { id: "des_citoyens", text: "des citoyens" },
+      { id: "une_commune", text: "une commune" },
+      { id: "une_garderie", text: "une garderie" },
+      { id: "un_maire", text: "un maire" },
+      { id: "la_municipalite", text: "la municipalité" },
+      { id: "les_habitants", text: "les habitants" },
+      { id: "un_centre_culturel", text: "un centre culturel" }
+    ];
+    const LS_KEY = "dragfill_french_municipalite_v1";
+    const $ = (sel, root=document) => root.querySelector(sel);
+    const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
+    const shuffle = arr => arr.map(x=>[Math.random(),x]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]);
+
+    function announce(msg){ const s=$("#status"); s.textContent = msg; }
+
+    function makeToken(word){
+      const el = document.createElement('div');
+      el.className = 'token';
+      el.textContent = word.text;
+      el.setAttribute('role','option');
+      el.setAttribute('aria-grabbed','false');
+      el.dataset.word = word.id;
+      el.draggable = true;
+
+      // Drag handlers
+      el.addEventListener('dragstart', e => {
+        e.dataTransfer.setData('text/plain', word.id);
+        e.dataTransfer.effectAllowed = 'move';
+        el.classList.add('dragging');
+      });
+      el.addEventListener('dragend', () => el.classList.remove('dragging'));
+
+      // Click-to-select fallback (touch & keyboard)
+      el.addEventListener('click', () => toggleSelect(el));
+      el.addEventListener('keydown', e => {
+        if(e.key === ' ' || e.key === 'Enter'){
+          e.preventDefault();
+          toggleSelect(el);
+        }
+      });
+      return el;
+    }
+
+    function toggleSelect(token){
+      const already = token.classList.contains('selected');
+      $$('.token').forEach(t => t.classList.remove('selected'));
+      if(!already){ token.classList.add('selected'); token.setAttribute('aria-grabbed','true'); announce('已选中：“'+token.textContent+'”。请选择一个空格放置。'); }
+      else { token.setAttribute('aria-grabbed','false'); announce('已取消选择。'); }
+    }
+
+    function placeTokenInDrop(token, drop){
+      if(!token || !drop) return;
+      // If drop already has a token, move it back to bank
+      const existing = drop.querySelector('.token');
+      if(existing){ $('#bank').appendChild(existing); existing.classList.remove('selected'); }
+      drop.classList.add('filled');
+      drop.classList.remove('correct','incorrect','ghost');
+      drop.innerHTML = '';
+      const clone = token; // move the real token
+      drop.appendChild(clone);
+      clone.draggable = true;
+      clone.classList.remove('selected');
+      clone.setAttribute('aria-grabbed','false');
+      announce('已放置：'+clone.textContent);
+      updateProgress();
+      if($('#autoCheck').checked) checkAnswers(false);
+      saveState();
+    }
+
+    function removeFromDrop(drop){
+      const t = drop.querySelector('.token');
+      if(t){ $('#bank').appendChild(t); drop.classList.remove('filled','correct','incorrect','ghost'); drop.innerHTML=''; updateProgress(); saveState(); }
+    }
+
+    function checkAnswers(showFeedback=true){
+      const drops = $$('.drop');
+      let correct=0;
+      drops.forEach(d => {
+        const t = d.querySelector('.token');
+        if(t && t.dataset.word === d.dataset.answer){
+          correct++;
+          if(showFeedback){ d.classList.add('correct'); d.classList.remove('incorrect'); }
+        }else{
+          if(showFeedback){
+            if(t) d.classList.add('incorrect');
+            d.classList.remove('correct');
+          }
+        }
+      });
+      const total = drops.length;
+      $('#score').textContent = `得分 ${correct} / ${total}`;
+      announce(`当前得分 ${correct} 分，共 ${total} 分`);
+      if(correct===total) burstConfetti();
+      return {correct,total};
+    }
+
+    function showAnswers(){
+      // Fill empty slots with ghost-correct answers without taking tokens from bank
+      $$('.drop').forEach(d => {
+        if(!d.querySelector('.token')){
+          d.textContent = WORDS.find(w=>w.id===d.dataset.answer).text;
+          d.classList.add('ghost','filled');
+        }
+      });
+    }
+
+    function hideGhost(){
+      $$('.drop.ghost').forEach(d => { d.classList.remove('ghost'); d.textContent=''; d.classList.remove('filled'); });
+    }
+
+    function updateProgress(){
+      const filled = $$('.drop').filter(d=>d.querySelector('.token')).length;
+      const total = $$('.drop').length;
+      $('#score').textContent = `已完成 ${filled} / ${total}`;
+    }
+
+    function saveState(){
+      const state = {
+        bank: $$('#bank .token').map(t=>t.dataset.word),
+        drops: $$('.drop').map(d => {
+          const t = d.querySelector('.token');
+          return t ? t.dataset.word : null;
+        })
+      };
+      try{ localStorage.setItem(LS_KEY, JSON.stringify(state)); }catch(e){/* ignore */}
+    }
+
+    function loadState(){
+      try{
+        const raw = localStorage.getItem(LS_KEY);
+        if(!raw) return false;
+        const state = JSON.parse(raw);
+        // Rebuild tokens in given order
+        $('#bank').innerHTML='';
+        state.bank.forEach(id => {
+          const word = WORDS.find(w=>w.id===id);
+          if(word) $('#bank').appendChild(makeToken(word));
+        });
+        // Place drops
+        const drops = $$('.drop');
+        drops.forEach((d,i) => {
+          const id = state.drops[i];
+          if(id){
+            const token = $(`#bank .token[data-word="${id}"]`);
+            if(token) placeTokenInDrop(token, d);
+          }
+        });
+        updateProgress();
+        return true;
+      }catch(e){ return false; }
+    }
+
+    function resetAll(){
+      // Move all tokens back
+      $$('.drop').forEach(d => removeFromDrop(d));
+      hideGhost();
+      // Remove feedback
+      $$('.drop').forEach(d => d.classList.remove('correct','incorrect'));
+      // Rebuild and shuffle bank
+      buildBank(true);
+      localStorage.removeItem(LS_KEY);
+      announce('已重置。');
+    }
+
+    function buildBank(doShuffle=false){
+      const bank = $('#bank'); bank.innerHTML='';
+      const source = doShuffle ? shuffle(WORDS.slice()) : WORDS.slice();
+      source.forEach(w => bank.appendChild(makeToken(w)));
+    }
+
+    function enableDnd(){
+      // Drop handlers
+      $$('.drop').forEach(drop => {
+        drop.addEventListener('dragover', e => { e.preventDefault(); e.dataTransfer.dropEffect='move'; });
+        drop.addEventListener('drop', e => {
+          e.preventDefault();
+          const id = e.dataTransfer.getData('text/plain');
+          const token = $(`#bank .token[data-word="${id}"], .drop .token[data-word="${id}"]`);
+          if(token){ placeTokenInDrop(token, drop); }
+        });
+        drop.addEventListener('click', e => {
+          // If a token is selected in bank, place it. If clicking a filled drop, send back.
+          const selected = $('.token.selected');
+          if(selected && !drop.contains(selected)){ placeTokenInDrop(selected, drop); }
+          else if(!selected && drop.querySelector('.token')){ removeFromDrop(drop); }
+        });
+        drop.addEventListener('keydown', e => {
+          if(e.key==='Backspace' || e.key==='Delete'){ e.preventDefault(); removeFromDrop(drop); }
+          if(e.key===' ' || e.key==='Enter'){
+            e.preventDefault();
+            const selected = $('.token.selected');
+            if(selected){ placeTokenInDrop(selected, drop); }
+          }
+        });
+      });
+    }
+
+    // 简易彩带
+    function burstConfetti(){
+      const root = $('#confetti'); root.innerHTML='';
+      const colors = ['#60a5fa','#f472b6','#34d399','#fbbf24','#a78bfa','#fb7185'];
+      const count = 100;
+      for(let i=0;i<count;i++){
+        const el = document.createElement('div');
+        el.className='piece';
+        el.style.left = (Math.random()*100)+'vw';
+        el.style.top = '-10vh';
+        el.style.background = colors[Math.floor(Math.random()*colors.length)];
+        el.style.transform = `translateY(0) rotate(${Math.random()*360}deg)`;
+        el.style.animationDelay = (Math.random()*0.35)+'s';
+        root.appendChild(el);
+      }
+      setTimeout(()=>root.innerHTML='', 1500);
+    }
+
+    // ------------------------- 初始化 -------------------------
+    document.addEventListener('DOMContentLoaded', () => {
+      buildBank(true);
+      enableDnd();
+      if(!loadState()){ /* first load, already built */ }
+      updateProgress();
+
+      // Button wiring
+      $('#shuffleBtn').addEventListener('click', () => { 
+        const order = shuffle($$('#bank .token')); $('#bank').innerHTML=''; order.forEach(t=>$('#bank').appendChild(t)); announce('词库已打乱。'); saveState();
+      });
+      $('#resetBtn').addEventListener('click', resetAll);
+      $('#checkBtn').addEventListener('click', () => checkAnswers(true));
+      $('#revealBtn').addEventListener('click', (e) => {
+        const panel = $('#answerKey');
+        const expanded = e.currentTarget.getAttribute('aria-expanded')==='true';
+        if(expanded){
+          e.currentTarget.setAttribute('aria-expanded','false');
+          e.currentTarget.textContent='显示答案';
+          panel.hidden = true;
+          hideGhost();
+        }else{
+          e.currentTarget.setAttribute('aria-expanded','true');
+          e.currentTarget.textContent='隐藏答案';
+          panel.hidden = false;
+          showAnswers();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
