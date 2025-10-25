@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>语法 Grammaire｜目录</title>
+<style>
+  body{font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:#f7f7fb;margin:0;color:#0f172a}
+  .wrap{max-width:1100px;margin:0 auto;padding:28px}
+  .card{background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:22px;box-shadow:0 10px 26px rgba(0,0,0,.06)}
+  h1{margin:0 0 6px}
+  .sub{color:#64748b;margin:0 0 18px}
+  nav a{color:#16a34a;text-decoration:none;margin-right:12px}
+  .toolbar{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 16px}
+  .input{flex:1;min-width:220px;border:1px solid #d1d5db;border-radius:10px;padding:10px 12px}
+  .select{border:1px solid #d1d5db;border-radius:10px;padding:10px 12px;background:#fff}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 0}
+  .chip{border:1px solid #e5e7eb;border-radius:999px;padding:4px 10px;background:#f9fafb;cursor:pointer;font-size:.85rem}
+  .chip.active{border-color:#16a34a;background:#eef2ff}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin-top:12px}
+  a.cardlink{display:block;border:1px solid #e5e7eb;border-radius:12px;padding:14px 16px;text-decoration:none;background:#fff;color:#0f172a}
+  a.cardlink:hover{border-color:#16a34a;box-shadow:0 8px 22px rgba(37,99,235,.15)}
+  .muted{color:#6b7280;font-size:.9rem}
+  footer{margin-top:18px;color:#6b7280}
+  .tip{background:#eef2ff;border:1px solid #c7d2fe;border-radius:12px;padding:10px 12px;margin-top:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <nav><a href="../">← 返回首页</a></nav>
+    <h1>语法 Grammaire</h1>
+    <p class="sub">支持按 <strong>单元（U1…U9）</strong> 与 <strong>主题（市政/旅行…）</strong> 搜索与筛选。练习按单元放在 <code>Grammaire/U1/</code>…<code>U9/</code> 子文件夹。</p>
+
+    <div class="toolbar">
+      <input id="q" class="input" placeholder="搜索：标题 / 单元（如 U1） / 主题（如 市政） / 标签…" />
+      <select id="unit" class="select">
+        <option value="">全部单元</option>
+      </select>
+      <select id="theme" class="select">
+        <option value="">全部主题</option>
+      </select>
+    </div>
+    <div id="chips" class="chips"></div>
+
+    <div id="list" class="grid"></div>
+    <p id="empty" class="muted" style="display:none">暂无匹配结果。</p>
+
+    <div class="tip">
+      <strong>如何添加：</strong>
+      <ol>
+        <li>把练习 HTML 放到 <code>Grammaire/U1/</code>…<code>U9/</code> 对应子文件夹。</li>
+        <li>在下方 <code>DATA</code> 列表中添加一行（标题、路径、单元、主题、标签）。</li>
+        <li>保存后目录页自动出现；URL 可带参数（如 <code>?q=市政&unit=U1</code>）。</li>
+      </ol>
+    </div>
+  </div>
+  <footer>© 《高级法语综合课》</footer>
+</div>
+
+<script>
+  // ===== 目录数据（按需添加；示例已注释）=====
+  // path 为相对 Grammaire/ 的路径，支持子文件夹：如 "U1/U1_L1_vocab_municipalite.html"
+  const DATA = [
+    // {{ title: "U1·L1 市政词汇（拖拽填空）", path: "U1/U1_L1_vocab_municipalite.html", unit: "U1", theme: "市政", tags: ["公共服务","基础词汇"] }},
+  ];
+
+  // ===== 渲染逻辑（无需修改）=====
+  const $ = s => document.querySelector(s);
+  const list=$("#list"), empty=$("#empty"), q=$("#q"), unit=$("#unit"), theme=$("#theme"), chips=$("#chips");
+
+  function uniq(a){ return Array.from(new Set(a)).filter(Boolean); }
+
+  function populateFilters(){
+    const units = uniq(DATA.map(x=>x.unit)).sort();
+    const themes = uniq(DATA.map(x=>x.theme)).sort();
+    units.forEach(u=>{ const o=document.createElement('option'); o.value=o.textContent=u; unit.appendChild(o); });
+    themes.forEach(t=>{ const o=document.createElement('option'); o.value=o.textContent=t; theme.appendChild(o); });
+
+    const quick = uniq([...units, ...themes]);
+    chips.innerHTML = quick.map(t=>`<span class="chip" data-k="${t}">${t}</span>`).join("");
+    chips.addEventListener('click', e=>{
+      const k = e.target.dataset.k; if(!k) return;
+      if(/^U\d+$/i.test(k)) unit.value = k; else theme.value = k;
+      q.value = k;
+      chips.querySelectorAll('.chip').forEach(c=>c.classList.toggle('active', c.dataset.k===k));
+      render(true);
+    });
+  }
+
+  function render(pushURL){
+    const qw = q.value.trim().toLowerCase();
+    const uf = unit.value, tf = theme.value;
+
+    const rows = DATA.filter(x=>{
+      const inUnit = !uf || x.unit === uf;
+      const inTheme = !tf || x.theme === tf;
+      const hay = (x.title + " " + x.unit + " " + x.theme + " " + (x.tags||[]).join(" ") + " " + x.path).toLowerCase();
+      const inQuery = !qw || hay.includes(qw);
+      return inUnit && inTheme && inQuery;
+    });
+
+    list.innerHTML = "";
+    rows.forEach(x=>{
+      const a=document.createElement('a');
+      a.href = x.path;
+      a.className='cardlink';
+      a.innerHTML = `
+        <strong>${x.title}</strong><br>
+        <span class="muted">${x.unit || ""}${x.unit && x.theme ? " · " : ""}${x.theme || ""}</span>
+        <div style="margin-top:6px">${(x.tags||[]).map(t=>`<span class="chip">${t}</span>`).join("")}</div>`;
+      list.appendChild(a);
+    });
+    empty.style.display = rows.length ? "none":"block";
+
+    if(pushURL){
+      const p = new URLSearchParams();
+      if(qw) p.set("q",qw);
+      if(uf) p.set("unit",uf);
+      if(tf) p.set("theme",tf);
+      const qs = p.toString();
+      history.replaceState(null,"", qs ? ("?"+qs) : location.pathname);
+    }
+  }
+
+  (function initFromURL(){
+    const p = new URLSearchParams(location.search);
+    if(p.get("q")) q.value = p.get("q");
+    if(p.get("unit")) unit.value = p.get("unit");
+    if(p.get("theme")) theme.value = p.get("theme");
+  })();
+
+  ["input","change","keyup"].forEach(ev=>{
+    q.addEventListener(ev, ()=>render(true));
+    unit.addEventListener(ev, ()=>render(true));
+    theme.addEventListener(ev, ()=>render(true));
+  });
+
+  populateFilters();
+  render(false);
+</script>
+</body>
+</html>
