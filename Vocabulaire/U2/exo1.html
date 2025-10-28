@@ -1,162 +1,171 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<title>U2｜Solidarité & mobilisation — Drag & Drop</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>U2 · Engagement & actions — Compléter</title>
 <style>
   :root{
-    --green:#2aa36b; --wood:#8b5e3c; --board:#ffffff; --ink:#222; --hint:#6b7280;
-    --chip:#eaf7ff; --chip-b:#2a5d84;
+    --bg:#eef2f5; --ink:#141414; --muted:#666; --green:#47a574; --wood:#875f3d;
+    --panel:#e9e6e2; --panel2:#dfe5ea;
   }
-  body{font-family:ui-sans-serif,system-ui,Arial; background:#f6f8fb; margin:0; color:var(--ink);}
-  .wrap{max-width:1100px; margin:28px auto 60px; padding:0 16px;}
-  h1{font-size:22px; margin:0 0 14px;}
-  .row{display:grid; grid-template-columns:repeat(4,1fr); gap:14px;}
-  @media (max-width:900px){.row{grid-template-columns:repeat(2,1fr)}}
-  @media (max-width:540px){.row{grid-template-columns:1fr}}
+  html,body{margin:0;background:var(--bg);color:var(--ink);font-family:ui-sans-serif,system-ui,Arial}
+  .wrap{max-width:1180px;margin:28px auto 64px;padding:0 18px}
 
-  /* 木牌 */
-  .sign{position:relative; padding-top:18px;}
-  .stick{position:absolute; left:50%; top:0; width:14px; height:22px; background:var(--wood); transform:translateX(-50%); border-radius:3px 3px 0 0; box-shadow:inset 0 -8px 0 rgba(0,0,0,.08)}
-  .board{background:var(--board); border:1px solid #e5e7eb; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,.08); padding:14px 12px; text-align:center;}
-  .num{position:absolute; left:8px; top:-8px; width:24px; height:24px; background:var(--green); color:#fff; border-radius:999px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:13px; box-shadow:0 0 0 3px #e6f7ee;}
-  .blank{display:inline-block; min-width:90px; border-bottom:2px dashed #9ca3af; padding:0 4px; margin:0 4px; min-height:20px; vertical-align:baseline}
-  .good{background:#dcfce7; border-bottom-color:#16a34a}
-  .word{background:var(--chip); border:1px solid var(--chip-b); color:#0f172a; border-radius:999px; padding:6px 10px; cursor:grab; user-select:none}
-  .bank{display:flex; flex-wrap:wrap; gap:10px; margin-top:18px}
-  .toolbar{margin-top:16px; display:flex; gap:10px; flex-wrap:wrap}
-  button{background:#2a5d84; color:#fff; border:0; padding:9px 14px; border-radius:8px; cursor:pointer}
-  button.secondary{background:#e5e7eb; color:#111827}
-  .hint{color:var(--hint); font-size:13px; margin-top:10px}
+  /* 顶部标题与词表（逗号分隔，外观接近正文样式） */
+  h1{font-size:34px;line-height:1.25;margin:0 0 10px;font-weight:800}
+  .listline{font-size:20px;margin:4px 0 18px}
+  .listline .w{cursor:pointer;border-bottom:1px dashed transparent}
+  .listline .w:hover{border-bottom-color:#999}
+  .comma{color:#222}
+  .tools{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+  .btn{background:#2f5580;color:#fff;border:0;border-radius:8px;padding:9px 14px;cursor:pointer}
+  .btn.secondary{background:#e5e7eb;color:#111}
+
+  /* 四块“木牌公告” */
+  .row{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  @media (max-width:1020px){.row{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:560px){.row{grid-template-columns:1fr}}
+  .sign{position:relative;background:linear-gradient(#c7d0d9,#c7d0d9); /* 背后浅灰条 */
+        border-radius:8px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.05);padding:16px 12px 18px}
+  .pole{position:absolute;left:50%;top:8px;transform:translateX(-50%);
+        width:22px;height:86%;background:linear-gradient(#63452e,#8d6544,#63452e);
+        border-radius:10px;box-shadow:inset 0 -14px 0 rgba(0,0,0,.1)}
+  .panel{position:relative;margin:0 auto;background:var(--panel);
+         border-radius:6px;box-shadow:0 8px 14px rgba(0,0,0,.18);padding:18px 16px;max-width:95%}
+  .panel.alt{background:var(--panel2)}
+  .letter{position:absolute;left:-10px;top:-12px;background:var(--green);color:#fff;
+          width:28px;height:28px;border-radius:999px;display:flex;align-items:center;justify-content:center;
+          font-weight:700;text-transform:lowercase;box-shadow:0 0 0 4px rgba(92,210,150,.25)}
+  .panel b{font-weight:800}
+  .line{display:inline-block;min-width:110px;border-bottom:3px dotted #a8a8a8;min-height:20px;
+        vertical-align:baseline;margin:0 6px;padding:0 2px}
+  .ok{background:#d8f6e6;border-bottom-color:#2aa36b}
+
+  /* 顶部词在被放入后，从列表移除；可从空格点击回收 */
+  .hidden{display:none}
+  .hint{margin-top:10px;color:#6b7280}
+  a.back{display:inline-block;margin-bottom:8px;text-decoration:none;color:#2b6be0}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <a href="/Exo/Vocabulaire/" style="text-decoration:none;color:#2563eb">← 返回词汇目录</a>
-  <h1>Complétez les slogans (solidarité & mobilisation)</h1>
+  <a class="back" href="/Exo/Vocabulaire/">← 返回词汇目录</a>
+  <h1>Complétez avec les mots de la liste.</h1>
 
-  <div class="row" id="board">
-    <!-- 1 -->
+  <!-- 逗号分隔的词表：可拖拽 / 点击填入 -->
+  <div class="listline" id="bank">
+    <span class="w" draggable="true">soutenir</span><span class="comma">, </span>
+    <span class="w" draggable="true">mobilisation</span><span class="comma">, </span>
+    <span class="w" draggable="true">expulsions</span><span class="comma">, </span>
+    <span class="w" draggable="true">pétition</span><span class="comma">, </span>
+    <span class="w" draggable="true">causes</span><span class="comma">, </span>
+    <span class="w" draggable="true">bénévole</span><span class="comma">, </span>
+    <span class="w" draggable="true">solidarité</span><span class="comma">, </span>
+    <span class="w" draggable="true">régularisations</span>
+  </div>
+
+  <div class="tools">
+    <button class="btn" id="check">Vérifier</button>
+    <button class="btn secondary" id="reset">Réinitialiser</button>
+  </div>
+
+  <div class="row" style="margin-top:16px">
+    <!-- a -->
     <div class="sign">
-      <div class="stick"></div>
-      <div class="num">1</div>
-      <div class="board">
-        Nous devons <span class="blank" data-answer="soutenir"></span> les <span class="blank" data-answer="causes"></span> justes&nbsp;!
+      <div class="pole"></div>
+      <div class="panel alt">
+        <div class="letter">a</div>
+        <b>Nous devons</b> <span class="line blank" data-answer="soutenir"></span> <b>les</b>
+        <span class="line blank" data-answer="causes"></span> <b>justes !</b>
       </div>
     </div>
-    <!-- 2 -->
+    <!-- b -->
     <div class="sign">
-      <div class="stick"></div>
-      <div class="num">2</div>
-      <div class="board">
-        La <span class="blank" data-answer="solidarité"></span>, c’est penser aux autres&nbsp;!<br>Devenez <span class="blank" data-answer="bénévole"></span> &nbsp;!
+      <div class="pole"></div>
+      <div class="panel">
+        <div class="letter">b</div>
+        <b>La</b> <span class="line blank" data-answer="solidarité"></span> , c’est penser aux autres !
+        <b>Devenez</b> <span class="line blank" data-answer="bénévole"></span> !
       </div>
     </div>
-    <!-- 3 -->
+    <!-- c -->
     <div class="sign">
-      <div class="stick"></div>
-      <div class="num">3</div>
-      <div class="board">
-        Non aux <span class="blank" data-answer="expulsions"></span> injustes&nbsp;!<br>Oui aux <span class="blank" data-answer="régularisations"></span>&nbsp;!
+      <div class="pole"></div>
+      <div class="panel alt">
+        <div class="letter">c</div>
+        <b>Non aux</b> <span class="line blank" data-answer="expulsions"></span> <b>injustes !</b><br>
+        <b>Oui aux</b> <span class="line blank" data-answer="régularisations"></span> !
       </div>
     </div>
-    <!-- 4 -->
+    <!-- d -->
     <div class="sign">
-      <div class="stick"></div>
-      <div class="num">4</div>
-      <div class="board">
-        La <span class="blank" data-answer="mobilisation"></span> de tous est importante&nbsp;!<br>Signez la <span class="blank" data-answer="pétition"></span>&nbsp;!
+      <div class="pole"></div>
+      <div class="panel">
+        <div class="letter">d</div>
+        <b>La</b> <span class="line blank" data-answer="mobilisation"></span> <b>de tous est importante !</b><br>
+        <b>Signez la</b> <span class="line blank" data-answer="pétition"></span> !
       </div>
     </div>
   </div>
 
-  <div class="bank" id="bank">
-    <span class="word" draggable="true">soutenir</span>
-    <span class="word" draggable="true">mobilisation</span>
-    <span class="word" draggable="true">expulsions</span>
-    <span class="word" draggable="true">pétition</span>
-    <span class="word" draggable="true">causes</span>
-    <span class="word" draggable="true">bénévole</span>
-    <span class="word" draggable="true">solidarité</span>
-    <span class="word" draggable="true">régularisations</span>
-  </div>
-
-  <div class="toolbar">
-    <button id="check">Vérifier</button>
-    <button id="reset" class="secondary">Réinitialiser</button>
-  </div>
-  <div class="hint">提示：可拖拽或点击填空；再次点击已填入的词可回收。</div>
+  <div class="hint">提示：从上面词表拖拽/点击填入；点击空格可回收该词。</div>
 </div>
 
 <script>
+  const bank = document.getElementById('bank');
+  const words = Array.from(bank.querySelectorAll('.w'));
   const blanks = Array.from(document.querySelectorAll('.blank'));
-  const words = Array.from(document.querySelectorAll('.word'));
-  const bank  = document.getElementById('bank');
-
   let dragged = null;
 
-  /* 拖拽 */
+  // 词 → 支持拖拽和点击填充
   words.forEach(w=>{
-    w.addEventListener('dragstart', ()=> dragged = w);
-    w.addEventListener('dragend',   ()=> dragged = null);
-    // 点击也能填
+    w.addEventListener('dragstart',()=> dragged = w);
+    w.addEventListener('dragend',()=> dragged = null);
     w.addEventListener('click', ()=>{
-      const empty = blanks.find(b=>!b.textContent.trim());
-      if (!empty) return;
-      placeWord(empty, w.textContent);
-      w.remove();
+      const target = blanks.find(b=>!b.textContent.trim());
+      if(!target) return;
+      fill(target, w.textContent);
+      w.classList.add('hidden');
     });
   });
 
+  // 空格 → 接受拖拽；点击回收
   blanks.forEach(b=>{
-    b.addEventListener('dragover', e=>e.preventDefault());
+    b.addEventListener('dragover',e=>e.preventDefault());
     b.addEventListener('drop', ()=>{
-      if (!dragged || b.textContent.trim()) return;
-      placeWord(b, dragged.textContent);
-      dragged.remove();
+      if(!dragged || b.textContent.trim()) return;
+      fill(b, dragged.textContent);
+      dragged.classList.add('hidden');
       dragged=null;
     });
-    // 点击回收
     b.addEventListener('click', ()=>{
-      const txt = b.textContent.trim();
-      if (!txt) return;
-      recycle(txt);
-      b.textContent = "";
-      b.classList.remove('good');
+      const t = b.textContent.trim();
+      if(!t) return;
+      // 回收：让词重新显示
+      const w = [...bank.querySelectorAll('.w')].find(x=>x.textContent===t);
+      if(w) w.classList.remove('hidden');
+      b.textContent="";
+      b.classList.remove('ok');
     });
   });
 
-  function placeWord(blank, text){
+  function fill(blank, text){
     blank.textContent = text;
-    blank.classList.remove('good');
-  }
-  function recycle(text){
-    const chip = document.createElement('span');
-    chip.className='word'; chip.draggable=true; chip.textContent=text;
-    bank.appendChild(chip);
-    // 重新绑定事件
-    chip.addEventListener('dragstart', ()=> dragged = chip);
-    chip.addEventListener('dragend',   ()=> dragged = null);
-    chip.addEventListener('click', ()=>{
-      const empty = blanks.find(b=>!b.textContent.trim());
-      if (!empty) return;
-      placeWord(empty, chip.textContent);
-      chip.remove();
-    });
+    blank.classList.remove('ok');
   }
 
   // 校验
   document.getElementById('check').onclick = ()=>{
     blanks.forEach(b=>{
-      const ok = b.textContent.trim() === b.dataset.answer;
-      b.classList.toggle('good', ok);
+      b.classList.toggle('ok', b.textContent.trim() === b.dataset.answer);
     });
   };
 
   // 重置
   document.getElementById('reset').onclick = ()=>{
-    blanks.forEach(b=>{ if(b.textContent.trim()){ recycle(b.textContent.trim()); b.textContent=""; b.classList.remove('good');}});
+    blanks.forEach(b=>{ b.textContent=""; b.classList.remove('ok'); });
+    bank.querySelectorAll('.w').forEach(w=>w.classList.remove('hidden'));
   };
 </script>
 </body>
