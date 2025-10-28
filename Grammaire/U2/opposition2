@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>U2 · Grammaire — L’opposition (Complétez)</title>
+<style>
+  :root{--green:#1fa37c;--ink:#19232d;--muted:#5b6672;--bg:#f6f8fb;}
+  html,body{margin:0;background:var(--bg);color:var(--ink);font-family:ui-sans-serif,system-ui,Arial;}
+  .wrap{max-width:900px;margin:28px auto 64px;padding:0 18px;}
+  a.back{display:inline-block;margin-bottom:8px;text-decoration:none;color:#2b6be0}
+  h1{margin:0 0 8px;font-size:26px}
+  p.inst{color:var(--muted);margin:0 0 18px}
+  .choices{margin:0 0 20px;padding-left:14px}
+  .choices li{margin-bottom:4px}
+  .forum{background:#e8b64f;color:#fff;font-weight:700;padding:10px 14px;border-radius:10px 10px 0 0;display:inline-block}
+  .url{background:#ececec;color:#333;padding:6px 10px;font-size:13px;border-radius:0 0 8px 8px;margin-bottom:12px;display:inline-block}
+  .post{background:#fff;border-left:4px solid #e8b64f;border-radius:8px;padding:18px;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+  .name{font-weight:700;margin-bottom:6px}
+  .date{color:#6b7280;margin-bottom:12px;font-style:italic}
+  select{font-size:15px;padding:4px 8px;border-radius:6px;border:1px solid #ccc}
+  .ok{background:#d9f5df}
+  .err{background:#fddede}
+  .tools{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap}
+  button{background:#2f5580;color:#fff;border:0;border-radius:10px;padding:9px 14px;cursor:pointer}
+  button.secondary{background:#e5e7eb;color:#111}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="/Exo/Grammaire/">← 返回语法目录</a>
+  <h1>Lisez le témoignage de Jenina.</h1>
+  <p class="inst">Complétez le texte avec les phrases <b>1, 2, 3</b> ou <b>4</b>.</p>
+
+  <ol class="choices">
+    <li>1. en revanche nous pouvons agir pour aider les familles avec des enfants.</li>
+    <li>2. par contre il y a beaucoup de bénévoles dans l’association.</li>
+    <li>3. mais elle s’engage dans beaucoup d’actions.</li>
+    <li>4. alors que ces personnes sont en danger dans leur pays !</li>
+  </ol>
+
+  <div class="forum">Forum des échanges</div><br>
+  <div class="url">https://www.echanges-linguistiques.com/</div>
+
+  <div class="post">
+    <div class="name">Jenina</div>
+    <div class="date">18 janvier</div>
+    <p>« Je suis bénévole depuis quatre ans dans une association qui agit pour la régularisation des réfugiés. 
+    Mes amis sont tous mobilisés pour lutter contre le réchauffement climatique, 
+    mais moi, j’ai décidé d’aider les migrants. 
+    Il y a trop d’expulsions <select data-answer="4">
+      <option value="">---</option><option>1</option><option>2</option><option>3</option><option>4</option></select> 
+    Mon association est petite, <select data-answer="2">
+      <option value="">---</option><option>1</option><option>2</option><option>3</option><option>4</option></select> 
+    Nous n’avons pas d’argent, <select data-answer="1">
+      <option value="">---</option><option>1</option><option>2</option><option>3</option><option>4</option></select> 
+    C’est difficile de soutenir tous les migrants, <select data-answer="3">
+      <option value="">---</option><option>1</option><option>2</option><option>3</option><option>4</option></select> </p>
+    <p>Je suis fière de mon engagement ! »</p>
+  </div>
+
+  <div class="tools">
+    <button id="verify">Vérifier</button>
+    <button id="reset" class="secondary">Réinitialiser</button>
+  </div>
+</div>
+
+<script>
+  const selects = document.querySelectorAll('select');
+  document.getElementById('verify').onclick = ()=>{
+    selects.forEach(sel=>{
+      sel.classList.remove('ok','err');
+      if(!sel.value) return;
+      if(sel.value === sel.dataset.answer) sel.classList.add('ok');
+      else sel.classList.add('err');
+    });
+  };
+  document.getElementById('reset').onclick = ()=>{
+    selects.forEach(sel=>{
+      sel.value="";
+      sel.classList.remove('ok','err');
+    });
+  };
+</script>
+</body>
+</html>
