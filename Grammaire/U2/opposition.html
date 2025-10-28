@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>U2 · Grammaire — L’opposition (Associez)</title>
+<style>
+  :root{--green:#1fa37c;--ink:#19232d;--muted:#5b6672;--bg:#f6f8fb;}
+  html,body{margin:0;background:var(--bg);color:var(--ink);font-family:ui-sans-serif,system-ui,Arial;}
+  .wrap{max-width:960px;margin:28px auto 64px;padding:0 16px;}
+  a.back{display:inline-block;margin-bottom:8px;text-decoration:none;color:#2b6be0}
+  h1{margin:0 0 6px;font-size:28px}
+  .ex{color:var(--muted);margin-bottom:16px}
+  .pill{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;background:#e8fbf5;border-left:4px solid var(--green);border-radius:8px;font-weight:600}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .card{background:white;border:1px solid #e6eaee;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.04);padding:14px}
+  h2{font-size:16px;margin:0 0 8px;color:var(--muted)}
+  ul{list-style:none;margin:0;padding:0}
+  li{display:flex;gap:10px;align-items:flex-start;padding:10px;border-radius:10px;cursor:pointer;}
+  li:hover{background:#f3f6fa}
+  .idx{flex:0 0 auto;min-width:24px;height:24px;border-radius:999px;font-weight:700;display:flex;align-items:center;justify-content:center;color:#fff;background:var(--green)}
+  .idx.num{background:#64748b}
+  .txt{flex:1}
+  .chosen{outline:2px solid var(--green);background:#eefbf6}
+  .paired{background:#eef2ff;cursor:default}
+  .badge{font-weight:700;color:#384152;background:#e8ecf8;border-radius:8px;padding:2px 8px;margin-left:8px}
+  .tools{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap}
+  button{background:#2f5580;color:#fff;border:0;border-radius:10px;padding:10px 16px;cursor:pointer}
+  button.secondary{background:#e5e7eb;color:#111}
+  .result{margin-top:14px;font-size:14px;color:var(--muted)}
+  .ok{background:#dcfce7 !important}
+  .err{background:#fee2e2 !important}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="/Exo/Grammaire/">← 返回语法目录</a>
+  <div class="pill"><span style="font-size:20px">1</span> <span>Associez.</span></div>
+  <div class="ex">Ex. : <b>a → 4</b></div>
+
+  <div class="grid">
+    <!-- 左列：a–d -->
+    <div class="card">
+      <h2>À gauche</h2>
+      <ul id="left">
+        <li data-left="a"><span class="idx">a</span><div class="txt">Ça m’arrive de manifester pour défendre des causes,<span class="badge" data-badge="a"></span></div></li>
+        <li data-left="b"><span class="idx">b</span><div class="txt">Je travaille beaucoup<span class="badge" data-badge="b"></span></div></li>
+        <li data-left="c"><span class="idx">c</span><div class="txt">Pour aider les gens, je donne de la nourriture.<span class="badge" data-badge="c"></span></div></li>
+        <li data-left="d"><span class="idx">d</span><div class="txt">Je suis libre de faire grève pour défendre mes idées<span class="badge" data-badge="d"></span></div></li>
+      </ul>
+    </div>
+
+    <!-- 右列：1–4 -->
+    <div class="card">
+      <h2>À droite</h2>
+      <ul id="right">
+        <li data-right="1"><span class="idx num">1</span><div class="txt">En revanche, je ne donne jamais d’argent.</div></li>
+        <li data-right="2"><span class="idx num">2</span><div class="txt">mais je consacre quelques heures par semaine à une association caritative.</div></li>
+        <li data-right="3"><span class="idx num">3</span><div class="txt">alors que certaines personnes n’ont pas ce droit.</div></li>
+        <li data-right="4"><span class="idx num">4</span><div class="txt">par contre je ne suis pas engagé dans une association.</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="tools">
+    <button id="verify">Vérifier</button>
+    <button id="reset" class="secondary">Réinitialiser</button>
+  </div>
+  <div id="msg" class="result"></div>
+</div>
+
+<script>
+  // 正确答案映射
+  const SOL = { a:"4", b:"2", c:"1", d:"3" };
+
+  let pickedLeft = null;
+  const state = {}; // {a:"4", ...}
+
+  const $ = s => document.querySelector(s);
+  const $$ = s => Array.from(document.querySelectorAll(s));
+
+  // 左列点击：选中/取消
+  $$('#left li').forEach(li=>{
+    li.addEventListener('click', ()=>{
+      const k = li.dataset.left;
+      if (li.classList.contains('paired')) { // 已配对→取消
+        const num = state[k];
+        delete state[k];
+        li.classList.remove('paired','ok','err');
+        $(`#right li[data-right="${num}"]`)?.classList.remove('paired');
+        $(`[data-badge="${k}"]`).textContent = "";
+        return;
+      }
+      $$('#left li').forEach(x=>x.classList.remove('chosen'));
+      pickedLeft = k;
+      li.classList.add('chosen');
+    });
+  });
+
+  // 右列点击：与当前选中的左项配对
+  $$('#right li').forEach(li=>{
+    li.addEventListener('click', ()=>{
+      const r = li.dataset.right;
+      if (!pickedLeft) return;
+      // 右侧项若已被别的左项占用，先释放
+      Object.keys(state).forEach(k=>{
+        if (state[k]===r) {
+          state[k]=null; delete state[k];
+          $(`#left li[data-left="${k}"]`)?.classList.remove('paired','ok','err');
+          $(`[data-badge="${k}"]`).textContent = "";
+        }
+      });
+      state[pickedLeft]=r;
+      $(`#left li[data-left="${pickedLeft}"]`)?.classList.add('paired');
+      li.classList.add('paired');
+      $(`[data-badge="${pickedLeft}"]`).textContent = "→ " + r;
+      pickedLeft=null;
+      $$('#left li').forEach(x=>x.classList.remove('chosen'));
+    });
+  });
+
+  // 验证
+  $('#verify').addEventListener('click', ()=>{
+    let ok=0;
+    Object.keys(SOL).forEach(k=>{
+      const li = $(`#left li[data-left="${k}"]`);
+      li.classList.remove('ok','err');
+      if (state[k]===SOL[k]) { li.classList.add('ok'); ok++; }
+      else if (state[k]) { li.classList.add('err'); }
+    });
+    const msg = ok===4 ? "Parfait ! Toutes les paires sont correctes." :
+      `Bon essai : ${ok}/4 correct(s). Cliquez左侧项可取消，重新选择。`;
+    $('#msg').textContent = msg;
+  });
+
+  // 重置
+  $('#reset').addEventListener('click', ()=>{
+    Object.keys(state).forEach(k=>delete state[k]);
+    pickedLeft=null;
+    $$('#left li, #right li').forEach(li=>li.classList.remove('chosen','paired','ok','err'));
+    $$('.badge').forEach(b=>b.textContent="");
+    $('#msg').textContent="";
+  });
+</script>
+</body>
+</html>
