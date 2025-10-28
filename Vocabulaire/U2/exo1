@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Vocabulaire U2 – Drag & Drop</title>
+  <style>
+    body {
+      font-family: "Arial", sans-serif;
+      background-color: #f4f8fb;
+      padding: 30px;
+      line-height: 1.6;
+    }
+    h2 {
+      color: #2a5d84;
+      margin-bottom: 20px;
+    }
+    .word-bank {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 30px;
+    }
+    .word {
+      background-color: #e0f0ff;
+      border: 1px solid #2a5d84;
+      border-radius: 6px;
+      padding: 8px 12px;
+      cursor: grab;
+      user-select: none;
+    }
+    .sentence {
+      background-color: #fff;
+      padding: 15px;
+      border-left: 5px solid #2a5d84;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .blank {
+      display: inline-block;
+      width: 120px;
+      min-height: 22px;
+      border-bottom: 2px dashed #aaa;
+      margin: 0 5px;
+      vertical-align: middle;
+    }
+    .correct {
+      background-color: #c2f5d6;
+      border-bottom: 2px solid #2a8a4d;
+    }
+    button {
+      background-color: #2a5d84;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    button:hover {
+      background-color: #1f4a6a;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>🪧 Complétez les slogans avec les bons mots :</h2>
+
+  <div class="word-bank" id="wordBank">
+    <div class="word" draggable="true">soutenir</div>
+    <div class="word" draggable="true">mobilisation</div>
+    <div class="word" draggable="true">expulsions</div>
+    <div class="word" draggable="true">pétition</div>
+    <div class="word" draggable="true">causes</div>
+    <div class="word" draggable="true">bénévole</div>
+    <div class="word" draggable="true">solidarité</div>
+    <div class="word" draggable="true">régularisations</div>
+  </div>
+
+  <div class="sentence">1️⃣ Nous devons <span class="blank" data-answer="soutenir"></span> les <span class="blank" data-answer="causes"></span> justes !</div>
+
+  <div class="sentence">2️⃣ La <span class="blank" data-answer="solidarité"></span>, c’est penser aux autres ! Devenez <span class="blank" data-answer="bénévole"></span> !</div>
+
+  <div class="sentence">3️⃣ Non aux <span class="blank" data-answer="expulsions"></span> injustes ! Oui aux <span class="blank" data-answer="régularisations"></span> !</div>
+
+  <div class="sentence">4️⃣ La <span class="blank" data-answer="mobilisation"></span> de tous est importante ! Signez la <span class="blank" data-answer="pétition"></span> !</div>
+
+  <button onclick="checkAnswers()">Vérifier</button>
+
+  <script>
+    const words = document.querySelectorAll('.word');
+    const blanks = document.querySelectorAll('.blank');
+    let draggedWord = null;
+
+    words.forEach(word => {
+      word.addEventListener('dragstart', () => draggedWord = word);
+    });
+
+    blanks.forEach(blank => {
+      blank.addEventListener('dragover', e => e.preventDefault());
+      blank.addEventListener('drop', () => {
+        if (blank.textContent.trim() === '') {
+          blank.textContent = draggedWord.textContent;
+          blank.classList.remove('correct');
+        }
+      });
+    });
+
+    function checkAnswers() {
+      blanks.forEach(blank => {
+        if (blank.textContent.trim() === blank.dataset.answer) {
+          blank.classList.add('correct');
+        } else {
+          blank.classList.remove('correct');
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>
