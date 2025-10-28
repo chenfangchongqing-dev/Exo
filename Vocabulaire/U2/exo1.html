@@ -1,121 +1,164 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Vocabulaire U2 – Drag & Drop</title>
-  <style>
-    body {
-      font-family: "Arial", sans-serif;
-      background-color: #f4f8fb;
-      padding: 30px;
-      line-height: 1.6;
-    }
-    h2 {
-      color: #2a5d84;
-      margin-bottom: 20px;
-    }
-    .word-bank {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 30px;
-    }
-    .word {
-      background-color: #e0f0ff;
-      border: 1px solid #2a5d84;
-      border-radius: 6px;
-      padding: 8px 12px;
-      cursor: grab;
-      user-select: none;
-    }
-    .sentence {
-      background-color: #fff;
-      padding: 15px;
-      border-left: 5px solid #2a5d84;
-      border-radius: 8px;
-      margin-bottom: 20px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-    .blank {
-      display: inline-block;
-      width: 120px;
-      min-height: 22px;
-      border-bottom: 2px dashed #aaa;
-      margin: 0 5px;
-      vertical-align: middle;
-    }
-    .correct {
-      background-color: #c2f5d6;
-      border-bottom: 2px solid #2a8a4d;
-    }
-    button {
-      background-color: #2a5d84;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 6px;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-    button:hover {
-      background-color: #1f4a6a;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>U2｜Solidarité & mobilisation — Drag & Drop</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root{
+    --green:#2aa36b; --wood:#8b5e3c; --board:#ffffff; --ink:#222; --hint:#6b7280;
+    --chip:#eaf7ff; --chip-b:#2a5d84;
+  }
+  body{font-family:ui-sans-serif,system-ui,Arial; background:#f6f8fb; margin:0; color:var(--ink);}
+  .wrap{max-width:1100px; margin:28px auto 60px; padding:0 16px;}
+  h1{font-size:22px; margin:0 0 14px;}
+  .row{display:grid; grid-template-columns:repeat(4,1fr); gap:14px;}
+  @media (max-width:900px){.row{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:540px){.row{grid-template-columns:1fr}}
+
+  /* 木牌 */
+  .sign{position:relative; padding-top:18px;}
+  .stick{position:absolute; left:50%; top:0; width:14px; height:22px; background:var(--wood); transform:translateX(-50%); border-radius:3px 3px 0 0; box-shadow:inset 0 -8px 0 rgba(0,0,0,.08)}
+  .board{background:var(--board); border:1px solid #e5e7eb; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,.08); padding:14px 12px; text-align:center;}
+  .num{position:absolute; left:8px; top:-8px; width:24px; height:24px; background:var(--green); color:#fff; border-radius:999px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:13px; box-shadow:0 0 0 3px #e6f7ee;}
+  .blank{display:inline-block; min-width:90px; border-bottom:2px dashed #9ca3af; padding:0 4px; margin:0 4px; min-height:20px; vertical-align:baseline}
+  .good{background:#dcfce7; border-bottom-color:#16a34a}
+  .word{background:var(--chip); border:1px solid var(--chip-b); color:#0f172a; border-radius:999px; padding:6px 10px; cursor:grab; user-select:none}
+  .bank{display:flex; flex-wrap:wrap; gap:10px; margin-top:18px}
+  .toolbar{margin-top:16px; display:flex; gap:10px; flex-wrap:wrap}
+  button{background:#2a5d84; color:#fff; border:0; padding:9px 14px; border-radius:8px; cursor:pointer}
+  button.secondary{background:#e5e7eb; color:#111827}
+  .hint{color:var(--hint); font-size:13px; margin-top:10px}
+</style>
 </head>
 <body>
+<div class="wrap">
+  <a href="/Exo/Vocabulaire/" style="text-decoration:none;color:#2563eb">← 返回词汇目录</a>
+  <h1>Complétez les slogans (solidarité & mobilisation)</h1>
 
-  <h2>🪧 Complétez les slogans avec les bons mots :</h2>
-
-  <div class="word-bank" id="wordBank">
-    <div class="word" draggable="true">soutenir</div>
-    <div class="word" draggable="true">mobilisation</div>
-    <div class="word" draggable="true">expulsions</div>
-    <div class="word" draggable="true">pétition</div>
-    <div class="word" draggable="true">causes</div>
-    <div class="word" draggable="true">bénévole</div>
-    <div class="word" draggable="true">solidarité</div>
-    <div class="word" draggable="true">régularisations</div>
+  <div class="row" id="board">
+    <!-- 1 -->
+    <div class="sign">
+      <div class="stick"></div>
+      <div class="num">1</div>
+      <div class="board">
+        Nous devons <span class="blank" data-answer="soutenir"></span> les <span class="blank" data-answer="causes"></span> justes&nbsp;!
+      </div>
+    </div>
+    <!-- 2 -->
+    <div class="sign">
+      <div class="stick"></div>
+      <div class="num">2</div>
+      <div class="board">
+        La <span class="blank" data-answer="solidarité"></span>, c’est penser aux autres&nbsp;!<br>Devenez <span class="blank" data-answer="bénévole"></span> &nbsp;!
+      </div>
+    </div>
+    <!-- 3 -->
+    <div class="sign">
+      <div class="stick"></div>
+      <div class="num">3</div>
+      <div class="board">
+        Non aux <span class="blank" data-answer="expulsions"></span> injustes&nbsp;!<br>Oui aux <span class="blank" data-answer="régularisations"></span>&nbsp;!
+      </div>
+    </div>
+    <!-- 4 -->
+    <div class="sign">
+      <div class="stick"></div>
+      <div class="num">4</div>
+      <div class="board">
+        La <span class="blank" data-answer="mobilisation"></span> de tous est importante&nbsp;!<br>Signez la <span class="blank" data-answer="pétition"></span>&nbsp;!
+      </div>
+    </div>
   </div>
 
-  <div class="sentence">1️⃣ Nous devons <span class="blank" data-answer="soutenir"></span> les <span class="blank" data-answer="causes"></span> justes !</div>
+  <div class="bank" id="bank">
+    <!-- 词库（8个） -->
+    <span class="word" draggable="true">soutenir</span>
+    <span class="word" draggable="true">mobilisation</span>
+    <span class="word" draggable="true">expulsions</span>
+    <span class="word" draggable="true">pétition</span>
+    <span class="word" draggable="true">causes</span>
+    <span class="word" draggable="true">bénévole</span>
+    <span class="word" draggable="true">solidarité</span>
+    <span class="word" draggable="true">régularisations</span>
+  </div>
 
-  <div class="sentence">2️⃣ La <span class="blank" data-answer="solidarité"></span>, c’est penser aux autres ! Devenez <span class="blank" data-answer="bénévole"></span> !</div>
+  <div class="toolbar">
+    <button id="check">Vérifier</button>
+    <button id="reset" class="secondary">Réinitialiser</button>
+  </div>
+  <div class="hint">提示：可拖拽或点击填空；再次点击已填入的词可回收。</div>
+</div>
 
-  <div class="sentence">3️⃣ Non aux <span class="blank" data-answer="expulsions"></span> injustes ! Oui aux <span class="blank" data-answer="régularisations"></span> !</div>
+<script>
+  const blanks = Array.from(document.querySelectorAll('.blank'));
+  const words = Array.from(document.querySelectorAll('.word'));
+  const bank  = document.getElementById('bank');
 
-  <div class="sentence">4️⃣ La <span class="blank" data-answer="mobilisation"></span> de tous est importante ! Signez la <span class="blank" data-answer="pétition"></span> !</div>
+  let dragged = null;
 
-  <button onclick="checkAnswers()">Vérifier</button>
-
-  <script>
-    const words = document.querySelectorAll('.word');
-    const blanks = document.querySelectorAll('.blank');
-    let draggedWord = null;
-
-    words.forEach(word => {
-      word.addEventListener('dragstart', () => draggedWord = word);
+  /* 拖拽 */
+  words.forEach(w=>{
+    w.addEventListener('dragstart', ()=> dragged = w);
+    w.addEventListener('dragend',   ()=> dragged = null);
+    // 点击也能填
+    w.addEventListener('click', ()=>{
+      const empty = blanks.find(b=>!b.textContent.trim());
+      if (!empty) return;
+      placeWord(empty, w.textContent);
+      w.remove();
     });
+  });
 
-    blanks.forEach(blank => {
-      blank.addEventListener('dragover', e => e.preventDefault());
-      blank.addEventListener('drop', () => {
-        if (blank.textContent.trim() === '') {
-          blank.textContent = draggedWord.textContent;
-          blank.classList.remove('correct');
-        }
-      });
+  blanks.forEach(b=>{
+    b.addEventListener('dragover', e=>e.preventDefault());
+    b.addEventListener('drop', ()=>{
+      if (!dragged || b.textContent.trim()) return;
+      placeWord(b, dragged.textContent);
+      dragged.remove();
+      dragged=null;
     });
+    // 点击回收
+    b.addEventListener('click', ()=>{
+      const txt = b.textContent.trim();
+      if (!txt) return;
+      recycle(txt);
+      b.textContent = "";
+      b.classList.remove('good');
+    });
+  });
 
-    function checkAnswers() {
-      blanks.forEach(blank => {
-        if (blank.textContent.trim() === blank.dataset.answer) {
-          blank.classList.add('correct');
-        } else {
-          blank.classList.remove('correct');
-        }
-      });
-    }
-  </script>
+  function placeWord(blank, text){
+    blank.textContent = text;
+    blank.classList.remove('good');
+  }
+  function recycle(text){
+    const chip = document.createElement('span');
+    chip.className='word'; chip.draggable=true; chip.textContent=text;
+    bank.appendChild(chip);
+    // 重新绑定事件
+    chip.addEventListener('dragstart', ()=> dragged = chip);
+    chip.addEventListener('dragend',   ()=> dragged = null);
+    chip.addEventListener('click', ()=>{
+      const empty = blanks.find(b=>!b.textContent.trim());
+      if (!empty) return;
+      placeWord(empty, chip.textContent);
+      chip.remove();
+    });
+  }
 
+  // 校验
+  document.getElementById('check').onclick = ()=>{
+    blanks.forEach(b=>{
+      const ok = b.textContent.trim() === b.dataset.answer;
+      b.classList.toggle('good', ok);
+    });
+  };
+
+  // 重置
+  document.getElementById('reset').onclick = ()=>{
+    blanks.forEach(b=>{ if(b.textContent.trim()){ recycle(b.textContent.trim()); b.textContent=""; b.classList.remove('good');}});
+  };
+</script>
 </body>
 </html>
