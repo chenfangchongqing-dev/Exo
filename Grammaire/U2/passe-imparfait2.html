@@ -32,4 +32,41 @@
     <div class="txt">
       Hawa, une jeune Malienne, <b>est arrivée</b> (arriver) en France en 2019, à l’âge de 16 ans.  
       Elle <input class="blank" data-answer="a reçu" placeholder="..." /> (recevoir) une aide sociale comme mineure étrangère et elle  
-      <input class="blank" data-answer="s’est inst
+      <input class="blank" data-answer="s’est installée" placeholder="..." /> (s’installer) à Bordeaux où elle  
+      <input class="blank" data-answer="allait" placeholder="..." /> (aller) au lycée.  
+      Puis elle <input class="blank" data-answer="a fait" placeholder="..." /> (faire) un BTS en commerce international.  
+      Chaque jour, elle <input class="blank" data-answer="se levait" placeholder="..." /> (se lever) tôt pour aller en cours et elle  
+      <input class="blank" data-answer="travaillait" placeholder="..." /> (travailler) très tard le soir.  
+      Quand elle <input class="blank" data-answer="a eu" placeholder="..." /> (avoir) son diplôme, une entreprise  
+      <input class="blank" data-answer="lui a proposé|a proposé" placeholder="..." /> (proposer) de l’embaucher,  
+      mais Hawa n’ <input class="blank" data-answer="avait" style="min-width:80px" placeholder="..." /> (avoir) pas le droit d’avoir un emploi sans autorisation de la préfecture.  
+      Ses amis <input class="blank" data-answer="se sont mobilisés" placeholder="..." /> (se mobiliser) pour l’aider à obtenir ce droit le plus vite possible.  
+      Trois mois plus tard, elle <input class="blank" data-answer="a obtenu" placeholder="..." /> (obtenir) l’autorisation de travailler  
+      et <input class="blank" data-answer="est devenue" placeholder="..." /> (devenir) l’employée la plus célèbre de son entreprise.
+    </div>
+
+    <div class="tools">
+      <button id="verify">Vérifier</button>
+      <button id="reset" class="secondary">Réinitialiser</button>
+    </div>
+    <div class="hint">说明：答案区分时态与助动词；不区分大小写与引号形式。</div>
+  </div>
+</div>
+
+<script>
+  const blanks = Array.from(document.querySelectorAll('.blank'));
+  const norm = s => (s||"").trim().toLowerCase().replaceAll("’","'").replace(/\s+/g," ");
+  function checkOne(input){
+    const answers = input.dataset.answer.split("|").map(norm);
+    const val = norm(input.value);
+    const ok = answers.includes(val);
+    input.classList.toggle('ok', ok);
+    input.classList.toggle('err', !ok && val.length>0);
+  }
+  function verifyAll(){ blanks.forEach(checkOne); }
+  function resetAll(){ blanks.forEach(i=>{i.value=""; i.classList.remove('ok','err');}); }
+  document.getElementById('verify').onclick = verifyAll;
+  document.getElementById('reset').onclick = resetAll;
+</script>
+</body>
+</html>
