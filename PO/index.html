@@ -31,6 +31,7 @@
   .rec-note{color:#6b7280;font-size:13px;margin-top:6px}
   .rec-meta{color:#6b7280;font-size:14px}
   audio{width:100%}
+  .tip-box{background:#e2e8f0;border-left:5px solid var(--brand);padding:10px 14px;border-radius:6px;color:#334155;margin:10px 0;font-size:14px}
 </style>
 </head>
 <body>
@@ -38,6 +39,12 @@
   <a href="/Exo/"><span style="color:var(--brand)">← 返回 首页</span></a>
   <h1>口语 PO | Expression Orale</h1>
   <p class="muted">Sélectionnez une unité ou un thème / 搜索练习</p>
+
+  <!-- 💡 学生提示 -->
+  <div class="tip-box">
+    💡 <b>提示：</b> 请在录音前点击 “允许麦克风” 权限。<br>
+    完成录音后可回放或下载音频。若要上传现有文件，请点击“选择文件”后直接播放预听。
+  </div>
 
   <!-- 录音 / 上传（PO） -->
   <div class="rec-card" id="po-recorder">
@@ -52,7 +59,6 @@
       <div class="rec-row" style="margin-top:8px">
         <button class="rec-btn" id="rec-download">⬇️ Télécharger</button>
         <button class="rec-btn secondary" id="rec-reset">🔄 Réinitialiser</button>
-        <!-- 如需提交到学校系统，可把下面链接改为你的提交地址 -->
         <a class="rec-btn secondary" href="#" target="_blank" id="submit-link" style="text-decoration:none">📤 提交入口</a>
       </div>
     </div>
@@ -61,7 +67,7 @@
       <input type="file" id="file-input" accept="audio/*">
       <span class="rec-meta" id="file-name"></span>
     </div>
-    <div class="rec-note">说明：点击 <b>Commencer</b> 录音，<b>Arrêter</b> 结束后可回放与下载（webm/mpeg，取决于浏览器）。也可选择本地音频预听后再提交。</div>
+    <div class="rec-note">说明：点击 <b>Commencer</b> 录音，<b>Arrêter</b> 结束后可回放与下载。也可选择本地音频预听后再提交。</div>
     <div class="rec-note">隐私：音频仅保存在本地浏览器内存，下载前不会上传到任何服务器。</div>
   </div>
 
@@ -84,148 +90,129 @@
 </div>
 
 <script>
-  /* ---------- 练习清单（先登记你已有的 U2 口语任务） ---------- */
-  const DATA = [
-    {
-      title:"U2 口语｜Témoigne : raconter son engagement",
-      path:"/Exo/Agir/U2/parler-engagement.html",
-      unit:"U2",
-      theme:"engagement",
-      tags:["expression orale","témoignage","actions","solidarité"]
-    }
-    // 之后新增 PO 练习，继续往这里 push 对象即可
-  ];
+/* ---------- 练习清单 ---------- */
+const DATA = [
+  {
+    title:"U2 口语｜Témoigne : raconter son engagement",
+    path:"/Exo/Agir/U2/parler-engagement.html",
+    unit:"U2",
+    theme:"engagement",
+    tags:["expression orale","témoignage","actions","solidarité"]
+  }
+];
 
-  /* ---------- 工具函数 ---------- */
-  const $ = s=>document.querySelector(s);
-  const norm=s=>(s||"").toString().trim().toLowerCase();
-  const includesAny=(h,n)=>norm(h).includes(norm(n));
-  const toURL=p=>p.startsWith("/")?p:"/Exo/"+p.replace(/^\/+/,"");
+/* ---------- 工具 ---------- */
+const $=s=>document.querySelector(s);
+const norm=s=>(s||"").toString().trim().toLowerCase();
+const includesAny=(h,n)=>norm(h).includes(norm(n));
+const toURL=p=>p.startsWith("/")?p:"/Exo/"+p.replace(/^\/+/,"");
 
-  /* ---------- 主题下拉 ---------- */
-  function buildThemeOptions(){
-    const t=[...new Set(DATA.map(x=>x.theme).filter(Boolean))].sort();
-    $("#theme").innerHTML=["ALL",...t].map(v=>`<option value="${v}">${v==="ALL"?"全部主题":v}</option>`).join("");
+/* ---------- 主题下拉 ---------- */
+function buildThemeOptions(){
+  const t=[...new Set(DATA.map(x=>x.theme).filter(Boolean))].sort();
+  $("#theme").innerHTML=["ALL",...t].map(v=>`<option value="${v}">${v==="ALL"?"全部主题":v}</option>`).join("");
+}
+
+/* ---------- 渲染 ---------- */
+function filterList(q,u,t){
+  return DATA.filter(it=>{
+    if(u!=="ALL"&&norm(it.unit)!==norm(u)) return false;
+    if(t!=="ALL"&&norm(it.theme)!==norm(t)) return false;
+    const hay=[it.title,it.unit,it.theme,...(it.tags||[]),it.path].join("|");
+    return !q||includesAny(hay,q);
+  });
+}
+function render(items){
+  const list=$("#list"),empty=$("#empty");
+  if(!items.length){list.innerHTML="";empty.style.display="block";return;}
+  empty.style.display="none";
+  list.innerHTML=items.map(x=>`
+    <a class="card" href="${toURL(x.path)}">
+      <div class="title">${x.title}</div>
+      <div class="meta">单元 ${x.unit}  |  主题 ${x.theme}</div>
+      <div class="tags">${(x.tags||[]).map(t=>`<span class="tag">${t}</span>`).join("")}</div>
+    </a>
+  `).join("");
+}
+
+/* ---------- 交互 ---------- */
+function update(){const q=$("#q").value.trim(),u=$("#unit").value,t=$("#theme").value;render(filterList(q,u,t));}
+$("#q").addEventListener("input",update);
+$("#unit").addEventListener("change",update);
+$("#theme").addEventListener("change",update);
+
+/* ---------- 初始化 ---------- */
+buildThemeOptions();
+render(DATA);
+
+/* ========== 录音 / 上传（PO） ========== */
+(()=>{
+  const startBtn=$('#rec-start'),stopBtn=$('#rec-stop'),timerEl=$('#rec-timer'),
+  playerCt=$('#rec-player'),audioEl=$('#audio'),dlBtn=$('#rec-download'),
+  resetBtn=$('#rec-reset'),fileIn=$('#file-input'),fileName=$('#file-name');
+  let mediaRec=null,chunks=[],t0=0,tick=null,blob=null,mimeType=null;
+
+  function format(t){const s=Math.floor(t/1000),mm=String(Math.floor(s/60)).padStart(2,'0'),ss=String(s%60).padStart(2,'0');return`${mm}:${ss}`;}
+
+  async function startRec(){
+    try{
+      const stream=await navigator.mediaDevices.getUserMedia({audio:true});
+      const types=['audio/webm;codecs=opus','audio/webm','audio/mpeg','audio/ogg'];
+      mimeType=types.find(t=>MediaRecorder.isTypeSupported?.(t))||'';
+      mediaRec=new MediaRecorder(stream,mimeType?{mimeType}:undefined);
+      chunks=[];
+      mediaRec.ondataavailable=e=>{if(e.data&&e.data.size>0)chunks.push(e.data);};
+      mediaRec.onstop=()=>{
+        blob=new Blob(chunks,{type:mimeType||'audio/webm'});
+        audioEl.src=URL.createObjectURL(blob);
+        playerCt.style.display='block';
+        dlBtn.disabled=false;
+      };
+      mediaRec.start();
+      t0=Date.now();timerEl.textContent='00:00';
+      tick=setInterval(()=>{timerEl.textContent=format(Date.now()-t0);},250);
+      startBtn.disabled=true;stopBtn.disabled=false;
+    }catch(err){alert('无法访问麦克风：'+(err.message||err));}
   }
 
-  /* ---------- 渲染 ---------- */
-  function filterList(q,u,t){
-    return DATA.filter(it=>{
-      if(u!=="ALL"&&norm(it.unit)!==norm(u)) return false;
-      if(t!=="ALL"&&norm(it.theme)!==norm(t)) return false;
-      const hay=[it.title,it.unit,it.theme,...(it.tags||[]),it.path].join("|");
-      return !q||includesAny(hay,q);
-    });
-  }
-  function render(items){
-    const list=$("#list"),empty=$("#empty");
-    if(!items.length){list.innerHTML="";empty.style.display="block";return;}
-    empty.style.display="none";
-    list.innerHTML=items.map(x=>`
-      <a class="card" href="${toURL(x.path)}">
-        <div class="title">${x.title}</div>
-        <div class="meta">单元 ${x.unit}  |  主题 ${x.theme}</div>
-        <div class="tags">${(x.tags||[]).map(t=>`<span class="tag">${t}</span>`).join("")}</div>
-      </a>
-    `).join("");
+  function stopRec(){
+    if(mediaRec&&mediaRec.state==='recording'){mediaRec.stop();}
+    if(tick){clearInterval(tick);tick=null;}
+    stopBtn.disabled=true;startBtn.disabled=false;
   }
 
-  /* ---------- 交互 ---------- */
-  function update(){ const q=$("#q").value.trim(),u=$("#unit").value,t=$("#theme").value; render(filterList(q,u,t)); }
-  $("#q").addEventListener("input",update);
-  $("#unit").addEventListener("change",update);
-  $("#theme").addEventListener("change",update);
+  function download(){
+    if(!blob)return;
+    const ext=(blob.type.includes('mpeg')?'mp3':blob.type.includes('ogg')?'ogg':'webm');
+    const stamp=new Date().toISOString().replace(/[:.]/g,'-');
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(blob);
+    a.download=`PO-enregistrement-${stamp}.${ext}`;
+    a.click();URL.revokeObjectURL(a.href);
+  }
 
-  /* ---------- 初始化 ---------- */
-  buildThemeOptions();
-  render(DATA);
+  function resetAll(){
+    if(mediaRec&&mediaRec.state==='recording'){mediaRec.stop();}
+    if(tick){clearInterval(tick);tick=null;}
+    startBtn.disabled=false;stopBtn.disabled=true;
+    timerEl.textContent='00:00';playerCt.style.display='none';
+    audioEl.removeAttribute('src');audioEl.load();blob=null;chunks=[];
+    fileIn.value='';fileName.textContent='';
+  }
 
-  /* ========== 录音 / 上传（PO） ========== */
-  (function(){
-    const startBtn = $('#rec-start');
-    const stopBtn  = $('#rec-stop');
-    const timerEl  = $('#rec-timer');
-    const playerCt = $('#rec-player');
-    const audioEl  = $('#audio');
-    const dlBtn    = $('#rec-download');
-    const resetBtn = $('#rec-reset');
-    const fileIn   = $('#file-input');
-    const fileName = $('#file-name');
+  function handleFile(e){
+    const f=e.target.files?.[0];if(!f)return;
+    fileName.textContent=`已选择：${f.name} (${Math.round(f.size/1024)} KB)`;
+    const url=URL.createObjectURL(f);
+    playerCt.style.display='block';audioEl.src=url;dlBtn.disabled=true;
+  }
 
-    let mediaRec=null, chunks=[], t0=0, tick=null, blob=null, mimeType=null;
-
-    function format(t){
-      const s = Math.floor(t/1000), mm=String(Math.floor(s/60)).padStart(2,'0'), ss=String(s%60).padStart(2,'0');
-      return `${mm}:${ss}`;
-    }
-
-    async function startRec(){
-      try{
-        const stream = await navigator.mediaDevices.getUserMedia({ audio:true });
-        const types = ['audio/webm;codecs=opus','audio/webm','audio/mpeg','audio/ogg'];
-        mimeType = types.find(t=>MediaRecorder.isTypeSupported?.(t)) || '';
-        mediaRec = new MediaRecorder(stream, mimeType?{mimeType}:undefined);
-        chunks = [];
-        mediaRec.ondataavailable = e=>{ if(e.data && e.data.size>0) chunks.push(e.data); };
-        mediaRec.onstop = ()=> {
-          blob = new Blob(chunks, {type: mimeType || 'audio/webm'});
-          audioEl.src = URL.createObjectURL(blob);
-          playerCt.style.display = 'block';
-          dlBtn.disabled = false;
-        };
-        mediaRec.start();
-        t0=Date.now(); timerEl.textContent='00:00';
-        tick=setInterval(()=>{ timerEl.textContent = format(Date.now()-t0); }, 250);
-        startBtn.disabled = true; stopBtn.disabled = false;
-      }catch(err){
-        alert('无法访问麦克风：' + (err.message||err));
-      }
-    }
-
-    function stopRec(){
-      if(mediaRec && mediaRec.state==='recording'){ mediaRec.stop(); }
-      if(tick){ clearInterval(tick); tick=null; }
-      stopBtn.disabled = true; startBtn.disabled = false;
-    }
-
-    function download(){
-      if(!blob) return;
-      const ext = (blob.type.includes('mpeg')?'mp3': blob.type.includes('ogg')?'ogg':'webm');
-      const stamp = new Date().toISOString().replace(/[:.]/g,'-');
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = `PO-enregistrement-${stamp}.${ext}`;
-      a.click();
-      URL.revokeObjectURL(a.href);
-    }
-
-    function resetAll(){
-      if(mediaRec && mediaRec.state==='recording'){ mediaRec.stop(); }
-      if(tick){ clearInterval(tick); tick=null; }
-      startBtn.disabled=false; stopBtn.disabled=true;
-      timerEl.textContent='00:00';
-      playerCt.style.display='none';
-      audioEl.removeAttribute('src'); audioEl.load();
-      blob=null; chunks=[];
-      fileIn.value=''; fileName.textContent='';
-    }
-
-    function handleFile(e){
-      const f = e.target.files?.[0];
-      if(!f) return;
-      fileName.textContent = `已选择：${f.name} (${Math.round(f.size/1024)} KB)`;
-      const url = URL.createObjectURL(f);
-      playerCt.style.display = 'block';
-      audioEl.src = url;
-      dlBtn.disabled = true; // 上传文件不提供二次下载
-    }
-
-    startBtn.addEventListener('click', startRec);
-    stopBtn .addEventListener('click', stopRec);
-    dlBtn   .addEventListener('click', download);
-    resetBtn.addEventListener('click', resetAll);
-    fileIn  .addEventListener('change', handleFile);
-  })();
+  startBtn.addEventListener('click',startRec);
+  stopBtn.addEventListener('click',stopRec);
+  dlBtn.addEventListener('click',download);
+  resetBtn.addEventListener('click',resetAll);
+  fileIn.addEventListener('change',handleFile);
+})();
 </script>
 </body>
 </html>
