@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>U2 · Engagement — Témoignage (imparfait / passé composé)</title>
+<style>
+  :root{--ink:#1f2937;--muted:#64748b;--bg:#f6f8fb;--line:#cbd5e1;--brand:#2f5580;}
+  html,body{margin:0;background:var(--bg);color:var(--ink);font-family:ui-sans-serif,system-ui,Arial}
+  .wrap{max-width:980px;margin:28px auto 64px;padding:0 16px}
+  a.back{display:inline-block;margin-bottom:8px;text-decoration:none;color:#2b6be0}
+  h1{font-size:22px;margin:0 0 12px}
+  .lex{color:var(--muted);font-size:14px;margin:0 0 12px}
+  .card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,.05);padding:18px}
+  .txt{line-height:1.9}
+  input.blank{min-width:120px;font-size:16px;padding:6px 8px;margin:0 4px;border:1px solid #cbd5e1;border-radius:6px;outline:none}
+  input.blank.ok{background:#dcfce7;border-color:#86efac}
+  input.blank.err{background:#fee2e2;border-color:#fecaca}
+  .tools{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+  button{background:var(--brand);color:#fff;border:0;border-radius:10px;padding:9px 14px;cursor:pointer}
+  button.secondary{background:#e5e7eb;color:#111}
+  .hint{color:var(--muted);font-size:13px;margin-top:8px}
+  .ex{color:#16a34a;font-weight:700}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="/Exo/Grammaire/">← 返回语法目录</a>
+  <h1>Témoigne : raconte ton engagement (imparfait / passé composé)</h1>
+  <p class="lex">Lexique (rappel) : <i>engagement, actions, solidarité, s’engager, cuisine solidaire, dons, rénover</i></p>
+
+  <div class="card">
+    <div class="txt">
+      <b>Je m’appelle Wan Zuocheng.</b> En 2003, près de l’hôpital du cancer à Nanchang, je
+      <input class="blank" data-answer="vendais" placeholder="..." /> (vendre) des beignets.
+      Un jour, un couple <input class="blank" data-answer="est venu" placeholder="..." /> (venir) me voir et
+      <input class="blank" data-answer="m’a demandé|a demandé" placeholder="..." /> (demander à moi) de prêter un réchaud :
+      leur enfant <input class="blank" data-answer="était hospitalisé|était à l’hôpital|était a l'hopital" placeholder="..." /> (être hospitalisé) et il voulait “manger comme à la maison”.
+      J’ <span class="ex">ai accepté</span> (accepter) tout de suite et je
+      <input class="blank" data-answer="ai prêté" placeholder="..." /> (prêter) le feu, gratuitement.
+      La nouvelle <input class="blank" data-answer="s’est répandue|s'est repandue" placeholder="..." /> (se répandre) dans les services :
+      de plus en plus de familles <input class="blank" data-answer="venaient" placeholder="..." /> (venir) cuisiner.
+      Au début, j’ <input class="blank" data-answer="offrais" placeholder="..." /> (offrir) le matériel et le charbon ; mais comme il
+      <input class="blank" data-answer="y avait|avait" placeholder="..." /> (y avoir) beaucoup de monde et que tout
+      <input class="blank" data-answer="coûtait|coutait" placeholder="..." /> (coûter) cher, nous
+      <input class="blank" data-answer="avons demandé" placeholder="..." /> (demander) seulement 1 yuan pour couvrir les frais.
+      Pendant des années, la cuisine <input class="blank" data-answer="était" placeholder="..." /> (être) modeste et il
+      <input class="blank" data-answer="pleuvait" placeholder="..." /> (pleuvoir) dans la ruelle, mais nous
+      <input class="blank" data-answer="nous levions" placeholder="..." /> (se lever) très tôt et nous
+      <input class="blank" data-answer="aidions" placeholder="..." /> (aider) les familles.
+      En 2020, grâce aux autorités et aux dons, l’endroit
+      <input class="blank" data-answer="a été rénové|a ete renove" placeholder="..." /> (rénover) :
+      on <input class="blank" data-answer="a posé|a pose" placeholder="..." /> (poser) un toit, on
+      <input class="blank" data-answer="a ajouté|a ajoute" placeholder="..." /> (ajouter) des foyers et des étagères.
+      Aujourd’hui encore, nous <input class="blank" data-answer="continuons" placeholder="..." /> (continuer) notre engagement pour offrir “le goût de la maison”.
+    </div>
+
+    <div class="tools">
+      <button id="verify">Vérifier</button>
+      <button id="reset" class="secondary">Réinitialiser</button>
+    </div>
+    <div class="hint">说明：区分<b>imparfait</b>（背景/习惯）与<b>passé composé</b>（一次性动作/推进情节）。大小写与法式/直引号不敏感；可接受等价写法（如 <code>s’est</code>/<code>s'est</code>）。</div>
+  </div>
+</div>
+
+<script>
+  const blanks = Array.from(document.querySelectorAll('.blank'));
+  const norm = s => (s||"").trim().toLowerCase().replaceAll("’","'").replace(/\s+/g," ");
+  function checkOne(input){
+    const ans = input.dataset.answer.split("|").map(norm);
+    const val = norm(input.value);
+    const ok = ans.includes(val);
+    input.classList.toggle('ok', ok);
+    input.classList.toggle('err', !ok && val.length>0);
+  }
+  function verifyAll(){ blanks.forEach(checkOne); }
+  function resetAll(){ blanks.forEach(i=>{ i.value=""; i.classList.remove('ok','err'); }); blanks[0]?.focus(); }
+  document.getElementById('verify').onclick = verifyAll;
+  document.getElementById('reset').onclick = resetAll;
+</script>
+</body>
+</html>
