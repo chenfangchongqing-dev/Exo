@@ -47,42 +47,106 @@
     <div class="footer">© 《高级法语综合课》</div>
   </div>
 
-  <script>
-    /***** 1) 维护你的练习清单（可以挪到 DATA.js 再通过 <script src> 引入） *****/
-   const DATA = [
-  /* --- U1 --- */
-  { title: "U1 词汇｜（留空，待添加）", path: "Vocabulaire/U1/exo1.html", unit: "U1", theme: "", tags: [] },
+<script>
+  /* ---------- A. 练习清单（先放你已确认的那一条） ---------- */
+  const DATA = [
+    {
+      title: "U2 词汇｜拖拽填空：solidarité & mobilisation",
+      path: "/Exo/Vocabulaire/U2/exo1.html",
+      unit: "U2",
+      theme: "solidarité",
+      tags: ["vocabulaire","slogans","soutenir","mobilisation","pétition","expulsions","régularisations"]
+    }
+  ];
 
-  /* --- U2 --- */
-  {
-    title: "U2 词汇｜拖拽填空：solidarité & mobilisation",
-    path: "/Exo/Vocabulaire/U2/exo1.html",   // 绝对路径，确保可访问
-    unit: "U2",
-    theme: "solidarité",
-    tags: ["vocabulaire","slogans","soutenir","mobilisation","pétition","expulsions","régularisations"]
-  },
+  /* ---------- B. 小工具 ---------- */
+  const $ = (s) => document.querySelector(s);
+  const norm = (s) => (s ?? "").toString().trim().toLowerCase();
+  const includesAny = (hay, needle) => norm(hay).includes(norm(needle));
+  const toURL = (p) => p.startsWith("/") ? p : "/Exo/" + p.replace(/^\/+/, "");
 
-  /* --- U3 --- */
-  { title: "U3 词汇｜（留空，待添加）", path: "Vocabulaire/U3/exo1.html", unit: "U3", theme: "", tags: [] },
+  /* ---------- C. 下拉构建：U1~U9 默认 + DATA 推断 ---------- */
+  function buildUnitOptions() {
+    const base = Array.from({length:9},(_,i)=>`U${i+1}`);
+    const extra = [...new Set(DATA.map(x=>x.unit).filter(Boolean))].filter(u=>!base.includes(u));
+    const list = ["ALL", ...base, ...extra];
+    $("#unit").innerHTML = list.map(v=>`<option value="${v}">${v==="ALL"?"全部单元":v}</option>`).join("");
+  }
+  function buildThemeOptions() {
+    const set = [...new Set(DATA.map(x=>x.theme).filter(Boolean).map(String))].sort((a,b)=>a.localeCompare(b));
+    $("#theme").innerHTML = ["ALL", ...set].map(v=>`<option value="${v}">${v==="ALL"?"全部主题":v}</option>`).join("");
+  }
 
-  /* --- U4 --- */
-  { title: "U4 词汇｜（留空，待添加）", path: "Vocabulaire/U4/exo1.html", unit: "U4", theme: "", tags: [] },
+  /* ---------- D. 过滤与渲染 ---------- */
+  function filterList(q, unit, theme) {
+    return DATA.filter(it=>{
+      if (unit!=="ALL" && norm(it.unit)!==norm(unit)) return false;
+      if (theme!=="ALL" && norm(it.theme)!==norm(theme)) return false;
+      const hay = [it.title,it.unit,it.theme, ...(it.tags||[]), it.path].join("|");
+      return !q || includesAny(hay, q);
+    });
+  }
+  function renderList(items) {
+    const list = $("#list"), empty = $("#empty");
+    if (!items.length) { list.innerHTML=""; empty.style.display="block"; return; }
+    empty.style.display="none";
+    list.innerHTML = items.map(x=>`
+      <a class="card" href="${toURL(x.path)}">
+        <div class="title">${x.title||"(未命名练习)"}</div>
+        <div class="meta">单元：${x.unit||"-"}　主题：${x.theme||"-"}</div>
+        <div class="tags">${(x.tags||[]).map(t=>`<span class="tag">${t}</span>`).join("")}</div>
+      </a>
+    `).join("");
+  }
 
-  /* --- U5 --- */
-  { title: "U5 词汇｜（留空，待添加）", path: "Vocabulaire/U5/exo1.html", unit: "U5", theme: "", tags: [] },
+  /* ---------- E. URL 状态 ---------- */
+  function readParams() {
+    const u = new URL(location.href);
+    return {
+      q: u.searchParams.get("q") ?? "",
+      unit: u.searchParams.get("unit") ?? "ALL",
+      theme: u.searchParams.get("theme") ?? "ALL",
+    };
+  }
+  function writeParams(q, unit, theme) {
+    const u = new URL(location.href);
+    q ? u.searchParams.set("q", q) : u.searchParams.delete("q");
+    unit!=="ALL" ? u.searchParams.set("unit", unit) : u.searchParams.delete("unit");
+    theme!=="ALL" ? u.searchParams.set("theme", theme) : u.searchParams.delete("theme");
+    history.replaceState(null, "", u);
+  }
 
-  /* --- U6 --- */
-  { title: "U6 词汇｜（留空，待添加）", path: "Vocabulaire/U6/exo1.html", unit: "U6", theme: "", tags: [] },
+  /* ---------- F. 事件（确保 change 能触发；兼容某些浏览器怪癖） ---------- */
+  function bindEvents() {
+    const qI = $("#q"), uS = $("#unit"), tS = $("#theme");
+    const update = () => {
+      const q = qI.value.trim(), unit = uS.value, theme = tS.value;
+      writeParams(q, unit, theme);
+      renderList(filterList(q, unit, theme));
+    };
+    let timer=null;
+    qI.addEventListener("input", ()=>{ clearTimeout(timer); timer=setTimeout(update,180); });
+    // 有些浏览器只触发 input，不触发 change；两种都绑上
+    uS.addEventListener("change", update);
+    uS.addEventListener("input", update);
+    tS.addEventListener("change", update);
+    tS.addEventListener("input", update);
+  }
 
-  /* --- U7 --- */
-  { title: "U7 词汇｜（留空，待添加）", path: "Vocabulaire/U7/exo1.html", unit: "U7", theme: "", tags: [] },
+  /* ---------- G. 启动 ---------- */
+  (function init(){
+    buildUnitOptions();
+    buildThemeOptions();
+    bindEvents();
+    const {q,unit,theme} = readParams();
+    $("#q").value = q;
+    // 若 URL 中的值不在选项里，回退到 ALL
+    if (!$("#unit").querySelector(`option[value="${unit}"]`)) $("#unit").value = "ALL"; else $("#unit").value = unit;
+    if (!$("#theme").querySelector(`option[value="${theme}"]`)) $("#theme").value = "ALL"; else $("#theme").value = theme;
+    renderList(filterList($("#q").value, $("#unit").value, $("#theme").value));
+  })();
+</script>
 
-  /* --- U8 --- */
-  { title: "U8 词汇｜（留空，待添加）", path: "Vocabulaire/U8/exo1.html", unit: "U8", theme: "", tags: [] },
-
-  /* --- U9 --- */
-  { title: "U9 词汇｜（留空，待添加）", path: "Vocabulaire/U9/exo1.html", unit: "U9", theme: "", tags: [] }
-];
 
 
 
