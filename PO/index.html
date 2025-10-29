@@ -1,218 +1,144 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>口语 PO | Expression Orale</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>口语 PO｜目录</title>
 <style>
-  :root{ --brand:#475569; --ink:#1f2937; --bg:#f6f8fb; }
-  html,body{margin:0;background:var(--bg);color:var(--ink);font-family:ui-sans-serif,system-ui,Arial}
-  .wrap{max-width:960px;margin:28px auto 64px;padding:0 16px}
-  h1{font-size:24px;margin:0 0 12px}
-  .muted{color:#6b7280;font-size:14px}
-  .filters{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}
-  select,input{padding:6px 10px;font-size:15px;border-radius:6px;border:1px solid #cbd5e1}
-  .list{display:grid;gap:12px;margin-top:12px}
-  .card{background:#fff;border:1px solid #e5e7eb;border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,.05);padding:14px 16px;text-decoration:none;color:inherit;transition:.2s}
-  .card:hover{box-shadow:0 3px 10px rgba(0,0,0,.08)}
-  .title{font-weight:700;font-size:16px;color:var(--brand)}
-  .meta{font-size:14px;color:#6b7280;margin-top:2px}
-  .tags{margin-top:6px;display:flex;flex-wrap:wrap;gap:6px}
-  .tag{background:#f1f5f9;color:#475569;padding:2px 8px;border-radius:8px;font-size:12px}
-  #empty{display:none;color:#9ca3af;margin-top:20px;text-align:center}
-
-  /* —— 录音/上传组件 —— */
-  .rec-card{background:#fff;border:1px solid #e5e7eb;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,.05);padding:14px 16px;margin:12px 0}
-  .rec-title{font-weight:700;font-size:16px;color:var(--brand);margin-bottom:8px}
-  .rec-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
-  .rec-btn{background:#475569;color:#fff;border:0;border-radius:10px;padding:8px 14px;cursor:pointer}
-  .rec-btn.secondary{background:#e5e7eb;color:#111}
-  .rec-btn[disabled]{opacity:.6;cursor:not-allowed}
-  .rec-note{color:#6b7280;font-size:13px;margin-top:6px}
-  .rec-meta{color:#6b7280;font-size:14px}
-  audio{width:100%}
-  .tip-box{background:#e2e8f0;border-left:5px solid var(--brand);padding:10px 14px;border-radius:6px;color:#334155;margin:10px 0;font-size:14px}
+  body{font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:#f7f7fb;margin:0;color:#0f172a}
+  .wrap{max-width:1100px;margin:0 auto;padding:28px}
+  .card{background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:22px;box-shadow:0 10px 26px rgba(0,0,0,.06)}
+  h1{margin:0 0 6px}
+  .sub{color:#64748b;margin:0 0 18px}
+  nav a{color:#475569;text-decoration:none;margin-right:12px}
+  .toolbar{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 16px}
+  .input{flex:1;min-width:220px;border:1px solid #d1d5db;border-radius:10px;padding:10px 12px}
+  .select{border:1px solid #d1d5db;border-radius:10px;padding:10px 12px;background:#fff}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 0}
+  .chip{border:1px solid #e5e7eb;border-radius:999px;padding:4px 10px;background:#f9fafb;cursor:pointer;font-size:.85rem}
+  .chip.active{border-color:#475569;background:#eef2ff}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin-top:12px}
+  a.cardlink{display:block;border:1px solid #e5e7eb;border-radius:12px;padding:14px 16px;text-decoration:none;background:#fff;color:#0f172a}
+  a.cardlink:hover{border-color:#475569;box-shadow:0 8px 22px rgba(2,6,23,.12)}
+  .muted{color:#6b7280;font-size:.9rem}
+  footer{margin-top:18px;color:#6b7280}
+  .tip{background:#eef2ff;border:1px solid #c7d2fe;border-radius:12px;padding:10px 12px;margin-top:14px}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <a href="/Exo/"><span style="color:var(--brand)">← 返回 首页</span></a>
-  <h1>口语 PO | Expression Orale</h1>
-  <p class="muted">Sélectionnez une unité ou un thème / 搜索练习</p>
+  <div class="card">
+    <nav><a href="../">← 返回首页</a></nav>
+    <h1>口语 PO</h1>
+    <p class="sub">支持按 <strong>单元（U1…U9）</strong> 与 <strong>主题（如 engagement/portrait…）</strong> 搜索与筛选。练习按单元放在 <code>PO/U1/</code>…<code>U9/</code> 子文件夹。</p>
 
-  <!-- 💡 学生提示 -->
-  <div class="tip-box">
-    💡 <b>提示：</b> 请在录音前点击 “允许麦克风” 权限。<br>
-    完成录音后可回放或下载音频。若要上传现有文件，请点击“选择文件”后直接播放预听。
-  </div>
-
-  <!-- 录音 / 上传（PO） -->
-  <div class="rec-card" id="po-recorder">
-    <div class="rec-title">Enregistrez / Déposez un audio (PO)</div>
-    <div class="rec-row">
-      <button class="rec-btn" id="rec-start">🎙️ Commencer</button>
-      <button class="rec-btn secondary" id="rec-stop" disabled>⏹️ Arrêter</button>
-      <span class="rec-meta" id="rec-timer">00:00</span>
+    <div class="toolbar">
+      <input id="q" class="input" placeholder="搜索：标题 / 单元（如 U2） / 主题（如 engagement） / 标签…" />
+      <select id="unit" class="select">
+        <option value="">全部单元</option>
+      </select>
+      <select id="theme" class="select">
+        <option value="">全部主题</option>
+      </select>
     </div>
-    <div id="rec-player" style="margin-top:10px;display:none">
-      <audio id="audio" controls></audio>
-      <div class="rec-row" style="margin-top:8px">
-        <button class="rec-btn" id="rec-download">⬇️ Télécharger</button>
-        <button class="rec-btn secondary" id="rec-reset">🔄 Réinitialiser</button>
-        <a class="rec-btn secondary" href="#" target="_blank" id="submit-link" style="text-decoration:none">📤 提交入口</a>
-      </div>
-    </div>
-    <hr style="border:none;border-top:1px solid #e5e7eb;margin:12px 0">
-    <div class="rec-row">
-      <input type="file" id="file-input" accept="audio/*">
-      <span class="rec-meta" id="file-name"></span>
-    </div>
-    <div class="rec-note">说明：点击 <b>Commencer</b> 录音，<b>Arrêter</b> 结束后可回放与下载。也可选择本地音频预听后再提交。</div>
-    <div class="rec-note">隐私：音频仅保存在本地浏览器内存，下载前不会上传到任何服务器。</div>
-  </div>
+    <div id="chips" class="chips"></div>
 
-  <!-- 搜索 / 筛选 -->
-  <div class="filters">
-    <select id="unit">
-      <option value="ALL">全部单元</option>
-      <option>U1</option><option>U2</option><option>U3</option>
-      <option>U4</option><option>U5</option><option>U6</option>
-      <option>U7</option><option>U8</option><option>U9</option>
-    </select>
-    <select id="theme">
-      <option value="ALL">全部主题</option>
-    </select>
-    <input id="q" type="search" placeholder="搜索 标题 / 主题 / 标签 ...">
-  </div>
+    <div id="list" class="grid"></div>
+    <p id="empty" class="muted" style="display:none">暂无匹配结果。</p>
 
-  <div class="list" id="list"></div>
-  <div id="empty">暂无匹配结果 😅</div>
+    <div class="tip">
+      <strong>如何添加：</strong>
+      <ol>
+        <li>把练习 HTML 放到 <code>PO/U1/</code>…<code>U9/</code> 对应子文件夹。</li>
+        <li>在下方 <code>DATA</code> 列表中添加一行（标题、路径、单元、主题、标签）。<br>
+            <span class="muted">注意：<code>path</code> 为相对 <code>PO/</code> 的路径，例如 <code>"U2/mon_exo.html"</code>。</span>
+        </li>
+        <li>保存后目录页自动出现；URL 可带参数（如 <code>?q=engagement&unit=U2</code>）。</li>
+      </ol>
+    </div>
+  </div>
+  <footer>© 《高级法语综合课》</footer>
 </div>
 
 <script>
-/* ---------- 练习清单 ---------- */
-const DATA = [
-  {
-    title:"U2 口语｜Témoigne : raconter son engagement",
-    path:"/Exo/Agir/U2/parler-engagement.html",
-    unit:"U2",
-    theme:"engagement",
-    tags:["expression orale","témoignage","actions","solidarité"]
+  // ===== 目录数据（按需添加）=====
+  // path 为相对 PO/ 的路径，支持子文件夹：如 "U2/parler-engagement.html"
+  const DATA = [
+    // 示例（可删）：
+    // { title: "U2·口语｜Témoigne : raconter son engagement", path: "U2/parler-engagement.html", unit: "U2", theme: "engagement", tags: ["expression orale","témoignage","actions"] },
+  ];
+
+  // ===== 渲染逻辑（与写作 PE 保持一致）=====
+  const $ = s => document.querySelector(s);
+  const list=$("#list"), empty=$("#empty"), q=$("#q"), unit=$("#unit"), theme=$("#theme"), chips=$("#chips");
+  const uniq = a => Array.from(new Set(a)).filter(Boolean);
+
+  function populateFilters(){
+    const units = uniq(DATA.map(x=>x.unit)).sort();
+    const themes = uniq(DATA.map(x=>x.theme)).sort();
+    units.forEach(u=>{ const o=document.createElement('option'); o.value=o.textContent=u; unit.appendChild(o); });
+    themes.forEach(t=>{ const o=document.createElement('option'); o.value=o.textContent=t; theme.appendChild(o); });
+
+    const quick = uniq([...units, ...themes]);
+    chips.innerHTML = quick.map(t=>`<span class="chip" data-k="${t}">${t}</span>`).join("");
+    chips.addEventListener('click', e=>{
+      const k = e.target.dataset.k; if(!k) return;
+      if(/^U\d+$/i.test(k)) unit.value = k; else theme.value = k;
+      q.value = k;
+      chips.querySelectorAll('.chip').forEach(c=>c.classList.toggle('active', c.dataset.k===k));
+      render(true);
+    });
   }
-];
 
-/* ---------- 工具 ---------- */
-const $=s=>document.querySelector(s);
-const norm=s=>(s||"").toString().trim().toLowerCase();
-const includesAny=(h,n)=>norm(h).includes(norm(n));
-const toURL=p=>p.startsWith("/")?p:"/Exo/"+p.replace(/^\/+/,"");
+  function render(pushURL){
+    const qw = q.value.trim().toLowerCase();
+    const uf = unit.value, tf = theme.value;
+    const rows = DATA.filter(x=>{
+      const inUnit = !uf || x.unit === uf;
+      const inTheme = !tf || x.theme === tf;
+      const hay = (x.title + " " + x.unit + " " + x.theme + " " + (x.tags||[]).join(" ") + " " + x.path).toLowerCase();
+      const inQuery = !qw || hay.includes(qw);
+      return inUnit && inTheme && inQuery;
+    });
 
-/* ---------- 主题下拉 ---------- */
-function buildThemeOptions(){
-  const t=[...new Set(DATA.map(x=>x.theme).filter(Boolean))].sort();
-  $("#theme").innerHTML=["ALL",...t].map(v=>`<option value="${v}">${v==="ALL"?"全部主题":v}</option>`).join("");
-}
+    list.innerHTML = "";
+    rows.forEach(x=>{
+      const a=document.createElement('a');
+      a.href = x.path;
+      a.className='cardlink';
+      a.innerHTML = `
+        <strong>${x.title}</strong><br>
+        <span class="muted">${x.unit || ""}${x.unit && x.theme ? " · " : ""}${x.theme || ""}</span>
+        <div style="margin-top:6px">${(x.tags||[]).map(t=>`<span class="chip">${t}</span>`).join("")}</div>`;
+      list.appendChild(a);
+    });
+    empty.style.display = rows.length ? "none":"block";
 
-/* ---------- 渲染 ---------- */
-function filterList(q,u,t){
-  return DATA.filter(it=>{
-    if(u!=="ALL"&&norm(it.unit)!==norm(u)) return false;
-    if(t!=="ALL"&&norm(it.theme)!==norm(t)) return false;
-    const hay=[it.title,it.unit,it.theme,...(it.tags||[]),it.path].join("|");
-    return !q||includesAny(hay,q);
+    if(pushURL){
+      const p = new URLSearchParams();
+      if(qw) p.set("q",qw);
+      if(uf) p.set("unit",uf);
+      if(tf) p.set("theme",tf);
+      const qs = p.toString();
+      history.replaceState(null,"", qs ? ("?"+qs) : location.pathname);
+    }
+  }
+
+  (function initFromURL(){
+    const p = new URLSearchParams(location.search);
+    if(p.get("q")) q.value = p.get("q");
+    if(p.get("unit")) unit.value = p.get("unit");
+    if(p.get("theme")) theme.value = p.get("theme");
+  })();
+
+  ["input","change","keyup"].forEach(ev=>{
+    q.addEventListener(ev, ()=>render(true));
+    unit.addEventListener(ev, ()=>render(true));
+    theme.addEventListener(ev, ()=>render(true));
   });
-}
-function render(items){
-  const list=$("#list"),empty=$("#empty");
-  if(!items.length){list.innerHTML="";empty.style.display="block";return;}
-  empty.style.display="none";
-  list.innerHTML=items.map(x=>`
-    <a class="card" href="${toURL(x.path)}">
-      <div class="title">${x.title}</div>
-      <div class="meta">单元 ${x.unit}  |  主题 ${x.theme}</div>
-      <div class="tags">${(x.tags||[]).map(t=>`<span class="tag">${t}</span>`).join("")}</div>
-    </a>
-  `).join("");
-}
 
-/* ---------- 交互 ---------- */
-function update(){const q=$("#q").value.trim(),u=$("#unit").value,t=$("#theme").value;render(filterList(q,u,t));}
-$("#q").addEventListener("input",update);
-$("#unit").addEventListener("change",update);
-$("#theme").addEventListener("change",update);
-
-/* ---------- 初始化 ---------- */
-buildThemeOptions();
-render(DATA);
-
-/* ========== 录音 / 上传（PO） ========== */
-(()=>{
-  const startBtn=$('#rec-start'),stopBtn=$('#rec-stop'),timerEl=$('#rec-timer'),
-  playerCt=$('#rec-player'),audioEl=$('#audio'),dlBtn=$('#rec-download'),
-  resetBtn=$('#rec-reset'),fileIn=$('#file-input'),fileName=$('#file-name');
-  let mediaRec=null,chunks=[],t0=0,tick=null,blob=null,mimeType=null;
-
-  function format(t){const s=Math.floor(t/1000),mm=String(Math.floor(s/60)).padStart(2,'0'),ss=String(s%60).padStart(2,'0');return`${mm}:${ss}`;}
-
-  async function startRec(){
-    try{
-      const stream=await navigator.mediaDevices.getUserMedia({audio:true});
-      const types=['audio/webm;codecs=opus','audio/webm','audio/mpeg','audio/ogg'];
-      mimeType=types.find(t=>MediaRecorder.isTypeSupported?.(t))||'';
-      mediaRec=new MediaRecorder(stream,mimeType?{mimeType}:undefined);
-      chunks=[];
-      mediaRec.ondataavailable=e=>{if(e.data&&e.data.size>0)chunks.push(e.data);};
-      mediaRec.onstop=()=>{
-        blob=new Blob(chunks,{type:mimeType||'audio/webm'});
-        audioEl.src=URL.createObjectURL(blob);
-        playerCt.style.display='block';
-        dlBtn.disabled=false;
-      };
-      mediaRec.start();
-      t0=Date.now();timerEl.textContent='00:00';
-      tick=setInterval(()=>{timerEl.textContent=format(Date.now()-t0);},250);
-      startBtn.disabled=true;stopBtn.disabled=false;
-    }catch(err){alert('无法访问麦克风：'+(err.message||err));}
-  }
-
-  function stopRec(){
-    if(mediaRec&&mediaRec.state==='recording'){mediaRec.stop();}
-    if(tick){clearInterval(tick);tick=null;}
-    stopBtn.disabled=true;startBtn.disabled=false;
-  }
-
-  function download(){
-    if(!blob)return;
-    const ext=(blob.type.includes('mpeg')?'mp3':blob.type.includes('ogg')?'ogg':'webm');
-    const stamp=new Date().toISOString().replace(/[:.]/g,'-');
-    const a=document.createElement('a');
-    a.href=URL.createObjectURL(blob);
-    a.download=`PO-enregistrement-${stamp}.${ext}`;
-    a.click();URL.revokeObjectURL(a.href);
-  }
-
-  function resetAll(){
-    if(mediaRec&&mediaRec.state==='recording'){mediaRec.stop();}
-    if(tick){clearInterval(tick);tick=null;}
-    startBtn.disabled=false;stopBtn.disabled=true;
-    timerEl.textContent='00:00';playerCt.style.display='none';
-    audioEl.removeAttribute('src');audioEl.load();blob=null;chunks=[];
-    fileIn.value='';fileName.textContent='';
-  }
-
-  function handleFile(e){
-    const f=e.target.files?.[0];if(!f)return;
-    fileName.textContent=`已选择：${f.name} (${Math.round(f.size/1024)} KB)`;
-    const url=URL.createObjectURL(f);
-    playerCt.style.display='block';audioEl.src=url;dlBtn.disabled=true;
-  }
-
-  startBtn.addEventListener('click',startRec);
-  stopBtn.addEventListener('click',stopRec);
-  dlBtn.addEventListener('click',download);
-  resetBtn.addEventListener('click',resetAll);
-  fileIn.addEventListener('change',handleFile);
-})();
+  populateFilters();
+  render(false);
 </script>
 </body>
 </html>
