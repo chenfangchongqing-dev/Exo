@@ -1,0 +1,11 @@
+/* 轻量样式，不与现有样式冲突 */
+.po-rec-card{background:#fff;border:1px solid #e5e7eb;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,.05);padding:14px 16px;margin:18px 0}
+.po-rec-title{font-weight:700;font-size:16px;color:#475569;margin-bottom:8px}
+.po-rec-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.po-rec-btn{background:#475569;color:#fff;border:0;border-radius:10px;padding:8px 14px;cursor:pointer}
+.po-rec-btn.secondary{background:#e5e7eb;color:#111}
+.po-rec-btn[disabled]{opacity:.6;cursor:not-allowed}
+.po-rec-note{color:#6b7280;font-size:13px;margin-top:6px}
+.po-rec-meta{color:#6b7280;font-size:14px}
+.po-rec-audio{width:100%}
+.po-tip{background:#e2e8f0;border-left:5px solid #475569;padding:10px 14px;border-radius:6px;color:#334155;margin:10px 0;font-size:14px}
