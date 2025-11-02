@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>U2 · Vocabulaire · Engagement — Complétez & Traduisez</title>
+<style>
+  :root{--bg:#f7fafc;--card:#ffffff;--ink:#0f172a;--muted:#64748b;--brand:#2563eb;--ok:#16a34a;--bad:#dc2626;--chip:#eef2ff}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
+  .wrap{max-width:980px;margin:24px auto;padding:0 16px}
+  .h1{font-size:26px;font-weight:800;margin:6px 0 2px}
+  .h2{font-weight:700;color:#334155;margin:0 0 16px}
+  .note{color:var(--muted);font-size:14px;margin-bottom:10px}
+  .card{background:var(--card);border:1px solid #e5e7eb;border-radius:14px;box-shadow:0 4px 14px rgba(15,23,42,.05);padding:16px;margin:12px 0}
+  .bank{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{background:var(--chip);border:1px dashed #c7d2fe;color:#1e3a8a;padding:6px 10px;border-radius:999px;cursor:grab;user-select:none}
+  .chip:active{transform:scale(.98)}
+  .row{display:flex;gap:10px;align-items:flex-start}
+  .num{width:26px;height:26px;display:inline-grid;place-items:center;border-radius:50%;background:#e5e7eb;color:#111;font-weight:700;margin-top:2px}
+  .sent{flex:1}
+  .drop{display:inline-flex;min-width:160px;min-height:30px;align-items:center;justify-content:center;border:2px dashed #cbd5e1;border-radius:10px;padding:2px 8px;margin:0 4px;vertical-align:middle;background:#fff;transition:.15s}
+  .drop.filled{border-color:#94a3b8;background:#f8fafc}
+  .drop.ok{border-color:var(--ok);background:#ecfdf5}
+  .drop.bad{border-color:var(--bad);background:#fef2f2}
+  /* 点击选中空格的高亮样式 + 词块点击反馈 */
+  .drop.active{border-color:#2563eb; box-shadow:0 0 0 3px rgba(37,99,235,.15)}
+  textarea{width:100%;min-height:56px;border:1px solid #e5e7eb;border-radius:10px;padding:8px;font-size:14px}
+  .legend{color:var(--muted);font-size:13px;margin:8px 0 4px}
+  .bar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:16px 0}
+  .btn{background:var(--brand);color:#fff;border:0;border-radius:12px;padding:10px 14px;cursor:pointer}
+  .btn.secondary{background:#e5e7eb;color:#111}
+  .score{font-weight:700}
+  details{margin-top:8px}
+  summary{cursor:pointer;color:#475569}
+  .hint{color:#334155;background:#f1f5f9;border-radius:10px;padding:8px 10px;margin-top:6px}
+  @media (max-width:640px){.drop{min-width:120px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="h1">U2 · Vocabulaire · Engagement</div>
+  <div class="h2">Lisez les phrases et complétez avec les mots suivants. Puis traduisez en chinois.</div>
+  <div class="note">
+    PC：拖拽或点选填空；手机：先点空格使其高亮，再点词块填入；<b>长按空格清空</b>；完成后点“校对”。
+  </div>
+
+  <!-- Banque de mots -->
+  <div class="card">
+    <div class="bank" id="bank"></div>
+    <div class="legend">Banque de mots：bénévole, juste, une collecte, manifestons, un don, association caritative, agit, engagée, se mobiliser, pétition, solidarité, injustice, rassemblés, mobilisation, protection, soutiens</div>
+  </div>
+
+  <div id="items">
+    <!-- 1 -->
+    <div class="card">
+      <div class="row">
+        <div class="num">1</div>
+        <div class="sent">
+          Je suis devenu membre de cette <span class="drop" data-answer="association caritative"></span>
+          il y a deux ans, je suis <span class="drop" data-answer="bénévole"></span>.
+          <div class="legend">中文翻译：</div>
+          <textarea placeholder="在此填写你的翻译…"></textarea>
+          <details><summary>显示参考译文</summary><div class="hint">两年前我加入了这个慈善协会，我是一名志愿者。</div></details>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="card">
+      <div class="row">
+        <div class="num">2</div>
+        <div class="sent">
+          Si l’on veut développer plus de <span class="drop" data-answer="solidarité"></span>
+          avec les migrants, on doit <span class="drop" data-answer="se mobiliser"></span>.
+          <div class="legend">中文翻译：</div>
+          <textarea placeholder="在此填写你的翻译…"></textarea>
+          <details><summary>显示参考译文</summary><div class="hint">如果要与移民建立更多的团结，我们必须行动起来。</div></details>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="card">
+      <div class="row">
+        <div class="num">3</div>
+        <div class="sent">
+          La <span class="drop" data-answer="protection"></span> de la nature est très importante,
+          nous <span class="drop" data-answer="manifestons"></span> toutes les semaines.
+          <div class="legend">中文翻译：</div>
+          <textarea placeholder="在此填写你的翻译…"></textarea>
+          <details><summary>显示参考译文</summary><div class="hint">保护自然非常重要，我们每周都参加示威活动。</div></details>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="card">
+      <div class="row">
+        <div class="num">4</div>
+        <div class="sent">
+          Nous organisons <span class="drop" data-answer="une collecte"></span> d’argent pour notre association.
+          Faites <span class="drop" data-answer="un don"></span> !
+          <div class="legend">中文翻译：</div>
+          <textarea placeholder="在此填写你的翻译…"></textarea>
+          <details><summary>显示参考译文</summary><div class="hint">我们为协会组织一次募捐，请大家捐款！</div></details>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="card">
+      <div class="row">
+        <div class="num">5</div>
+        <div class="sent">
+          Ils se sont <span class="drop" data-answer="rassemblés"></span> sur la place des Vosges
+          pour montrer la force de la <span class="drop" data-answer="mobilisation"></span>.
+          <div class="legend">中文翻译：</div>
+          <textarea placeholder="在此填写你的翻译…"></textarea>
+          <details><summary>显示参考译文</summary><div class="hint">他们在孚日广场集合，展示动员的力量。</div></details>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="card">
+      <div class="row">
+        <div class="num">6</div>
+        <div class="sent">
+          Je <span class="drop" data-answer="soutiens"></span> cette association
+          parce qu’elle <span class="drop" data-answer="agit"></span> pour intégrer les réfugiés.
+          <div class="legend">中文翻译：</div>
+          <textarea placeholder="在此填写你的翻译…"></textarea>
+          <details><summary>显示参考译文</summary><div class="hint">我支持这个协会，因为它致力于帮助难民融入社会。</div></details>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="card">
+      <div class="row">
+        <div class="num">7</div>
+        <div class="sent">
+          Elle s’est <span class="drop" data-answer="engagée"></span> pour combattre cette
+          <span class="drop" data-answer="injustice"></span>.
+          <div class="legend">中文翻译：</div>
+          <textarea placeholder="在此填写你的翻译…"></textarea>
+          <details><summary>显示参考译文</summary><div class="hint">她投身行动，反对这种不公。</div></details>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <div class="bar">
+    <button class="btn" id="check">校对 / Vérifier</button>
+    <button class="btn secondary" id="reset">重做 / Réinitialiser</button>
+    <span class="score" id="score"></span>
+  </div>
+</div>
+
+<script>
+/* 词库 */
+const WORDS = [
+  "bénévole","juste","une collecte","manifestons","un don","association caritative",
+  "agit","engagée","se mobiliser","pétition","solidarité","injustice","rassemblés",
+  "mobilisation","protection","soutiens"
+];
+
+/* 生成词块 */
+const bank = document.getElementById('bank');
+WORDS.forEach(w=>{
+  const chip = document.createElement('span');
+  chip.className = 'chip';
+  chip.textContent = w;
+  chip.draggable = true;
+
+  // 拖拽
+  chip.addEventListener('dragstart', e=>{
+    e.dataTransfer.setData('text/plain', w);
+  });
+
+  // 点选：优先填入当前激活空格，否则填第一个空白空格
+  chip.addEventListener('click', ()=>{
+    const target = activeDrop || [...document.querySelectorAll('.drop')].find(d=>!d.dataset.value);
+    if(target) fillDrop(target, w);
+  });
+
+  bank.appendChild(chip);
+});
+
+/* 空格交互（拖拽 + 点选 + 长按清空） */
+const drops = [...document.querySelectorAll('.drop')];
+let activeDrop = null;
+let longTimer = null;
+
+function setActive(d){
+  drops.forEach(x=>x.classList.remove('active'));
+  activeDrop = d;
+  if(d) d.classList.add('active');
+  d.classList.remove('ok','bad');
+}
+function fillDrop(d, word){
+  d.textContent = word;
+  d.dataset.value = word;
+  d.classList.add('filled');
+  d.classList.remove('ok','bad');
+}
+function clearDrop(d){
+  d.textContent = '';
+  d.dataset.value = '';
+  d.classList.remove('filled','ok','bad','active');
+  if(activeDrop===d) activeDrop=null;
+}
+
+drops.forEach(d=>{
+  // 拖拽放置
+  d.addEventListener('dragover', e=>{e.preventDefault();});
+  d.addEventListener('drop', e=>{
+    e.preventDefault();
+    fillDrop(d, e.dataTransfer.getData('text/plain'));
+  });
+
+  // 点击激活
+  d.addEventListener('click', ()=> setActive(d));
+
+  // 长按清空（触屏）
+  d.addEventListener('touchstart', ()=>{ longTimer=setTimeout(()=>clearDrop(d), 500); }, {passive:true});
+  d.addEventListener('touchend', ()=> clearTimeout(longTimer));
+  d.addEventListener('touchmove', ()=> clearTimeout(longTimer));
+});
+
+/* 校对 */
+document.getElementById('check').addEventListener('click', ()=>{
+  let ok=0, total=drops.length;
+  drops.forEach(d=>{
+    const val=(d.dataset.value||'').trim();
+    const right=d.dataset.answer;
+    if(val===right){ d.classList.add('ok'); d.classList.remove('bad'); ok++; }
+    else if(val){ d.classList.add('bad'); d.classList.remove('ok'); }
+  });
+  document.getElementById('score').textContent=`得分：${ok} / ${total}`;
+});
+
+/* 重做 */
+document.getElementById('reset').addEventListener('click', ()=>{
+  drops.forEach(clearDrop);
+  document.getElementById('score').textContent='';
+});
+</script>
+</body>
+</html>
