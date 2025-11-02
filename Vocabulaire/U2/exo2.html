@@ -178,43 +178,82 @@ const WORDS = [
   "mobilisation","protection","soutiens"
 ];
 
-/*** Build bank ***/
+/*** 构建词库 ***/
 const bank = document.getElementById('bank');
 WORDS.forEach(w=>{
   const chip = document.createElement('span');
   chip.className = 'chip';
   chip.textContent = w;
   chip.draggable = true;
+
+  // 拖拽
   chip.addEventListener('dragstart', e=>{
     e.dataTransfer.setData('text/plain', w);
     chip.classList.add('is-drag');
   });
   chip.addEventListener('dragend', ()=>chip.classList.remove('is-drag'));
+
+  // 点选：将词填入当前激活空格；若没有激活空格，填入第一个空白空格
+  chip.addEventListener('click', ()=>{
+    const target = activeDrop || [...document.querySelectorAll('.drop')].find(d=>!d.dataset.value);
+    if(target) fillDrop(target, w);
+  });
+
   bank.appendChild(chip);
 });
 
-/*** DnD for drops ***/
+/*** 空格（drop）逻辑：支持拖拽 + 点选 + 长按清空 ***/
 const drops = [...document.querySelectorAll('.drop')];
+let activeDrop = null;
+let longPressTimer = null;
+
+function setActive(d){
+  if(activeDrop === d){ return; }
+  drops.forEach(x=>x.classList.remove('active'));
+  activeDrop = d;
+  if(d) d.classList.add('active');
+  // 取消“对错”着色，避免影响继续作答
+  d.classList.remove('ok','bad');
+}
+
+function fillDrop(d, word){
+  d.textContent = word;
+  d.dataset.value = word;
+  d.classList.add('filled');
+  d.classList.remove('ok','bad');
+}
+
+function clearDrop(d){
+  d.textContent = '';
+  d.dataset.value = '';
+  d.classList.remove('filled','ok','bad','active');
+  if(activeDrop === d) activeDrop = null;
+}
+
+// 每个空格：拖拽 & 点选 & 长按
 drops.forEach(d=>{
+  // 拖拽放置
   d.addEventListener('dragover', e=>{e.preventDefault(); d.classList.add('filled');});
   d.addEventListener('dragleave', ()=>d.classList.remove('filled'));
   d.addEventListener('drop', e=>{
     e.preventDefault();
     d.classList.remove('ok','bad');
     const word = e.dataTransfer.getData('text/plain');
-    d.textContent = word;
-    d.classList.add('filled');
-    d.dataset.value = word;
+    fillDrop(d, word);
   });
-  // allow click to clear
-  d.addEventListener('click', ()=>{
-    d.textContent = '';
-    d.dataset.value = '';
-    d.classList.remove('filled','ok','bad');
+
+  // 点一下：设为激活
+  d.addEventListener('click', ()=> setActive(d));
+
+  // 长按清空（触屏友好）
+  d.addEventListener('touchstart', ()=>{
+    longPressTimer = setTimeout(()=> clearDrop(d), 500);
   });
+  d.addEventListener('touchend', ()=> clearTimeout(longPressTimer));
+  d.addEventListener('touchmove', ()=> clearTimeout(longPressTimer));
 });
 
-/*** Check ***/
+/*** 校对 ***/
 document.getElementById('check').addEventListener('click', ()=>{
   let ok = 0, total = drops.length;
   drops.forEach(d=>{
@@ -231,13 +270,12 @@ document.getElementById('check').addEventListener('click', ()=>{
   document.getElementById('score').textContent = `得分：${ok} / ${total}`;
 });
 
-/*** Reset ***/
+/*** 重做 ***/
 document.getElementById('reset').addEventListener('click', ()=>{
-  drops.forEach(d=>{
-    d.textContent=''; d.dataset.value=''; d.classList.remove('filled','ok','bad');
-  });
+  drops.forEach(clearDrop);
   document.getElementById('score').textContent='';
 });
 </script>
+
 </body>
 </html>
