@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Activité – Solidarité & Engagement</title>
+  <style>
+    :root{
+      --bg:#0f172a; /* slate-900 */
+      --card:#111827; /* gray-900 */
+      --muted:#94a3b8; /* slate-400 */
+      --text:#e5e7eb; /* gray-200 */
+      --accent:#22d3ee; /* cyan-400 */
+      --accent2:#a78bfa; /* violet-400 */
+      --ok:#22c55e; /* green-500 */
+      --warn:#f59e0b; /* amber-500 */
+      --bad:#ef4444; /* red-500 */
+      --chip:#1f2937; /* gray-800 */
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:linear-gradient(120deg,#0b1224,#111827);color:var(--text);font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Noto Sans', 'Helvetica Neue', Arial, 'Apple Color Emoji','Segoe UI Emoji'}
+    .wrap{max-width:980px;margin:40px auto;padding:0 20px}
+    header{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-bottom:20px}
+    .title{font-size:clamp(22px,3vw,30px);font-weight:800;letter-spacing:.2px}
+    .pill{padding:6px 10px;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#051016;font-weight:700}
+    .card{background:rgba(17,24,39,.7);border:1px solid rgba(148,163,184,.2);backdrop-filter:blur(6px);border-radius:18px;padding:20px;margin:16px 0}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    @media (max-width:820px){.row{grid-template-columns:1fr}}
+    label{font-weight:700;display:block;margin:.2rem 0 .4rem}
+    select, textarea, input[type="text"]{width:100%;background:#0b1020;border:1px solid rgba(148,163,184,.25);color:var(--text);padding:12px 14px;border-radius:12px}
+    textarea{min-height:110px;resize:vertical}
+    .hint{color:var(--muted);font-size:.92rem}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+    .chip{background:var(--chip);padding:6px 10px;border-radius:999px;border:1px solid rgba(148,163,184,.2);font-weight:600}
+    .btn{appearance:none;border:0;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#041018;font-weight:800;padding:10px 14px;border-radius:12px;cursor:pointer}
+    .btn.secondary{background:#0b1020;color:var(--text);border:1px solid rgba(148,163,184,.3)}
+    .btn.ghost{background:transparent;color:var(--text);border:1px dashed rgba(148,163,184,.4)}
+    .flex{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    .space{height:6px}
+    .bad{color:var(--bad)}
+    .ok{color:var(--ok)}
+    .warn{color:var(--warn)}
+    .badge{font-weight:800;padding:4px 8px;border-radius:10px;background:rgba(148,163,184,.12);border:1px solid rgba(148,163,184,.25)}
+    details{border:1px solid rgba(148,163,184,.25);border-radius:12px;padding:10px 12px;background:#0b1020}
+    summary{cursor:pointer;font-weight:800}
+    footer{opacity:.9;margin-top:24px;text-align:center;color:var(--muted)}
+    .tiny{font-size:.9rem;color:var(--muted)}
+    .divider{height:1px;background:linear-gradient(90deg,transparent,rgba(148,163,184,.35),transparent);margin:16px 0}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="pill">B1+/B2</div>
+      <div class="title">Activité – Exprimer la <em>solidarité</em> et l’<em>engagement</em> avec des actions concrètes</div>
+    </header>
+
+    <section class="card">
+      <p><strong>Objectif :</strong> écrire 2 phrases qui utilisent le champ lexical <em>solidarité / engagement</em> et au moins un mot-clé parmi : <span class="badge">action</span>, <span class="badge">geste</span>, <span class="badge">agir</span>, <span class="badge">se mobiliser</span>.</p>
+      <div class="chips">
+        <div class="chip">s’engager</div>
+        <div class="chip">être engagé(e)</div>
+        <div class="chip">une action</div>
+        <div class="chip">un geste solidaire</div>
+        <div class="chip">se mobiliser</div>
+        <div class="chip">la solidarité</div>
+        <div class="chip">l’engagement</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="row">
+        <div>
+          <label for="mot">1) Choisissez le mot-clé principal</label>
+          <select id="mot">
+            <option value="">— choisir —</option>
+            <option value="solidarité">solidarité</option>
+            <option value="engagement">engagement</option>
+          </select>
+          <p class="hint">Astuce : vous pouvez insérer automatiquement ce mot dans vos phrases.</p>
+          <div class="space"></div>
+          <div class="flex">
+            <button class="btn secondary" id="insert1">Insérer dans la phrase 1</button>
+            <button class="btn secondary" id="insert2">Insérer dans la phrase 2</button>
+          </div>
+        </div>
+        <div>
+          <label>Exemples (cliquez pour voir)</label>
+          <details>
+            <summary>Modèles possibles</summary>
+            <ul>
+              <li>La <u>solidarité</u> ne s’exprime pas seulement dans de grandes <u>actions</u>, mais aussi dans les petits <u>gestes</u> du quotidien.</li>
+              <li>L’important, c’est d’<u>agir</u> avec <u>engagement</u> dans ce qu’on fait chaque jour.</li>
+              <li>On peut aussi se <u>mobiliser</u> pour une cause proche de nous.</li>
+            </ul>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <label for="p1">2) Modèle A</label>
+      <div class="hint">Commencez par : « La ______ ne s’exprime pas seulement dans de grandes actions, mais aussi dans… »</div>
+      <textarea id="p1" placeholder="La ______ ne s’exprime pas seulement dans de grandes actions, mais aussi dans …"></textarea>
+      <div id="fb1" class="tiny"></div>
+      <div class="divider"></div>
+      <label for="p2">3) Modèle B</label>
+      <div class="hint">Commencez par : « L’important, c’est d’agir avec ______ dans… »</div>
+      <textarea id="p2" placeholder="L’important, c’est d’agir avec ______ dans …"></textarea>
+      <div id="fb2" class="tiny"></div>
+    </section>
+
+    <section class="card">
+      <div class="flex">
+        <button class="btn" id="check">Vérifier</button>
+        <button class="btn secondary" id="save">Sauvegarder</button>
+        <button class="btn ghost" id="clear">Effacer</button>
+        <button class="btn secondary" id="export">Exporter (.txt)</button>
+      </div>
+      <p id="global" class="tiny"></p>
+    </section>
+
+    <footer>© Activité pédagogique – Solidarité & Engagement</footer>
+  </div>
+
+<script>
+(function(){
+  const mot = document.getElementById('mot');
+  const p1 = document.getElementById('p1');
+  const p2 = document.getElementById('p2');
+  const fb1 = document.getElementById('fb1');
+  const fb2 = document.getElementById('fb2');
+  const global = document.getElementById('global');
+
+  const reLexique = /(\baction(s)?\b|\bgeste(s)?\b|\bagir\b|\bse\s*mobiliser\b|\bmobiliser\b)/i;
+  const clean = s => (s||'').trim();
+
+  function feedback(text, fieldFb, chosen){
+    const issues = [];
+    const ok = [];
+    if(clean(text).length < 20){ issues.push('→ phrase trop courte (≥ 20 caractères)'); }
+    if(chosen){
+      if(!new RegExp('\\b'+chosen+'\\b','i').test(text)){
+        issues.push(`→ insérez le mot-clé « ${chosen} »`);
+      } else {
+        ok.push('mot-clé : OK');
+      }
+    }
+    if(!reLexique.test(text)){
+      issues.push('→ utilisez au moins : action / geste / agir / se mobiliser');
+    } else {
+      ok.push('lexique : OK');
+    }
+    if(issues.length===0){
+      fieldFb.innerHTML = '<span class="ok">✔ Phrase valide.</span> <span class="badge">Bien!</span>';
+    } else {
+      fieldFb.innerHTML = `${ok.map(s=>`<span class="ok">${s}</span>`).join(' ')} ${issues.map(s=>`<span class="bad">${s}</span>`).join(' ')}`;
+    }
+  }
+
+  function verify(){
+    const chosen = mot.value;
+    feedback(p1.value, fb1, chosen);
+    feedback(p2.value, fb2, chosen);
+    const okAll = fb1.textContent.includes('Phrase valide') && fb2.textContent.includes('Phrase valide');
+    global.innerHTML = okAll ? '<span class="ok">✔ Super : les deux phrases sont valides.</span>' : '<span class="warn">ℹ Vérifiez les indications en rouge pour chaque phrase.</span>';
+  }
+
+  document.getElementById('check').addEventListener('click', verify);
+  document.getElementById('insert1').addEventListener('click', ()=>{
+    if(!mot.value) return alert('Choisissez d’abord le mot-clé.');
+    const ph = p1.value || 'La ______ ne s’exprime pas seulement dans de grandes actions, mais aussi dans …';
+    p1.value = ph.replace('______', mot.value);
+  });
+  document.getElementById('insert2').addEventListener('click', ()=>{
+    if(!mot.value) return alert('Choisissez d’abord le mot-clé.');
+    const ph = p2.value || 'L’important, c’est d’agir avec ______ dans …';
+    p2.value = ph.replace('______', mot.value);
+  });
+
+  // sauvegarde locale
+  const KEY='act_solidarite_engagement_v1';
+  try{
+    const saved = JSON.parse(localStorage.getItem(KEY)||'null');
+    if(saved){
+      mot.value = saved.mot || '';
+      p1.value = saved.p1 || '';
+      p2.value = saved.p2 || '';
+    }
+  }catch(e){}
+
+  document.getElementById('save').addEventListener('click', ()=>{
+    localStorage.setItem(KEY, JSON.stringify({mot:mot.value,p1:p1.value,p2:p2.value,ts:Date.now()}));
+    global.innerHTML = '<span class="ok">✔ Sauvegardé localement.</span>';
+  });
+
+  document.getElementById('clear').addEventListener('click', ()=>{
+    if(confirm('Effacer les réponses ?')){
+      p1.value=''; p2.value='';
+      global.textContent=''; fb1.textContent=''; fb2.textContent='';
+    }
+  });
+
+  // exporter
+  document.getElementById('export').addEventListener('click', ()=>{
+    const content = [
+      '# Activité – Solidarité & Engagement',
+      `Mot-clé : ${mot.value||'(non choisi)'}`,
+      '',
+      'Phrase 1 :',
+      p1.value,
+      '',
+      'Phrase 2 :',
+      p2.value,
+      ''
+    ].join('\n');
+    const blob = new Blob([content],{type:'text/plain;charset=utf-8'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href=url; a.download='activite_solidarite_engagement.txt';
+    document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+  });
+})();
+</script>
+</body>
+</html>
