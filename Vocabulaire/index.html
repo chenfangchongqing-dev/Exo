@@ -157,33 +157,7 @@
 
 
 
-    /***** 2) 工具函数 *****/
-    const $ = (sel) => document.querySelector(sel);
-    const norm = (s) => (s ?? "").toString().trim().toLowerCase();
-    function includesAny(hay, needle) { return norm(hay).includes(norm(needle)); }
-    function toAbsOrRel(path) {
-      // 允许既写 "Vocabulaire/..." 也写 "/Exo/Vocabulaire/..."
-      if (path.startsWith("/")) return path;
-      return "/Exo/" + path.replace(/^\/+/, "");
-    }
-    function getParams() {
-      const u = new URL(location.href);
-      return {
-        q: u.searchParams.get("q") ?? "",
-        unit: u.searchParams.get("unit") ?? "ALL",
-        theme: u.searchParams.get("theme") ?? "ALL",
-      };
-    }
-    function setParams({q, unit, theme}) {
-      const u = new URL(location.href);
-      if (q) u.searchParams.set("q", q); else u.searchParams.delete("q");
-      if (unit && unit !== "ALL") u.searchParams.set("unit", unit); else u.searchParams.delete("unit");
-      if (theme && theme !== "ALL") u.searchParams.set("theme", theme); else u.searchParams.delete("theme");
-      history.replaceState(null, "", u);
-    }
-    function dedupe(arr) {
-      return Array.from(new Set(arr.filter(Boolean)));
-    }
+
 
     /***** 3) 下拉项：单元 & 主题 *****/
     function buildUnitOptions() {
