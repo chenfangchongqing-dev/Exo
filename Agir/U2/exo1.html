@@ -1,19 +1,30 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Agir – Unité 2 · Leçon 5</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Agir – U2 · L5 · Chronique radio</title>
   <link rel="stylesheet" href="../../style.css">
+  <style>
+    body{font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:#f7f7fb;margin:0;color:#0f172a}
+    header,main,footer{max-width:1000px;margin:0 auto;padding:20px}
+    h1{margin:.2rem 0}
+    .card{background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:18px;box-shadow:0 8px 22px rgba(0,0,0,.06)}
+    ol{padding-left:1.2rem}
+    details summary{cursor:pointer;user-select:none}
+    .hint{color:#64748b;font-size:.92rem}
+    .btn{display:inline-block;padding:8px 12px;border:1px solid #0ea5e9;border-radius:10px;text-decoration:none;color:#0ea5e9}
+  </style>
 </head>
 <body>
   <header>
+    <a href="./" style="text-decoration:none;color:#0ea5e9">← Retour à Agir</a>
     <h1>Agir – Unité 2 · Leçon 5</h1>
     <h2>Raconter un engagement dans une chronique radio</h2>
   </header>
 
-  <main>
-    <section class="instructions">
+  <main class="card">
+    <section>
       <h3>🎯 Consignes</h3>
       <ol>
         <li>Faites des recherches. Choisissez une personne qui s’est engagée pour lutter contre une injustice.</li>
@@ -23,35 +34,55 @@
       </ol>
     </section>
 
-    <section class="padlet-zone">
-      <h3>💬 Publiez votre chronique ici :</h3>
-      <!-- Zone Padlet -->
+    <section style="margin-top:18px">
+      <h3>💬 Publiez votre chronique (Padlet) :</h3>
+      <!-- Padlet：可直接在页面里发帖/上传录音 -->
       <div class="padlet-embed" style="border:1px solid rgba(0,0,0,0.1);border-radius:2px;box-sizing:border-box;overflow:hidden;position:relative;width:100%;background:#F4F4F4">
         <p style="padding:0;margin:0">
-          <iframe src="https://padlet.com/embed/rv4fpdttx7u3bfou" frameborder="0" allow="camera;microphone;geolocation;display-capture;clipboard-write" style="width:100%;height:608px;display:block;padding:0;margin:0"></iframe>
+          <iframe src="https://padlet.com/embed/rv4fpdttx7u3bfou"
+                  frameborder="0"
+                  allow="camera;microphone;geolocation;display-capture;clipboard-write"
+                  style="width:100%;height:608px;display:block;padding:0;margin:0"></iframe>
         </p>
         <div style="display:flex;align-items:center;justify-content:end;margin:0;height:28px">
-          <a href="https://padlet.com?ref=embed" style="display:block;flex-grow:0;margin:0;border:none;padding:0;text-decoration:none" target="_blank">
+          <a href="https://padlet.com?ref=embed" style="display:block;flex-grow:0;margin:0;border:none;padding:0;text-decoration:none" target="_blank" rel="noopener noreferrer">
             <div style="display:flex;align-items:center;">
               <img src="https://padlet.net/embeds/made_with_padlet_2022.png" width="114" height="28" style="padding:0;margin:0;background:0 0;border:none;box-shadow:none" alt="Made with Padlet">
             </div>
           </a>
         </div>
       </div>
+            <!-- Zone de commentaire / 互评提示 -->
+      <div style="margin-top:14px;padding:12px 14px;background:#f9fafb;border:1px solid #e5e7eb;border-radius:10px">
+        <p style="margin:0 0 4px;"><strong>💭 Laissez un commentaire !</strong></p>
+        <p style="margin:0;font-size:0.95rem;color:#475569;">
+          Écoutez les chroniques de vos camarades et laissez un commentaire positif :  
+          <em>Qu’avez-vous apprécié ? Quelle idée vous a touché ?</em>
+        </p>
+        <p style="margin:6px 0 0;font-size:0.95rem;color:#475569;">
+          聆听同学们的广播小品，并留下积极的评论：  
+          <em>你欣赏了什么？哪一点让你印象深刻？</em>
+        </p>
+      </div>
+
+      <p class="hint">如遇 Padlet 访问缓慢，可使用下方“备用提交通道”。</p>
     </section>
 
-    <section class="backup-zone">
+    <section style="margin-top:18px">
       <details>
-        <summary>🔄 备用提交通道（如 Padlet 无法打开）</summary>
-        <p>您也可以通过以下表单上传您的文本或录音：</p>
-        <!-- 替换为腾讯文档表单链接 -->
-        <iframe src="https://docs.qq.com/formpage/xxxxxxxx" width="100%" height="900" frameborder="0"></iframe>
+        <summary>🔄 备用提交通道（腾讯文档收集表）</summary>
+        <p class="hint" style="margin:10px 0 6px">
+          支持上传音频（MP3/M4A/WAV）与文本稿。若下方嵌入区未加载，请点击
+          <a class="btn" href="https://docs.qq.com/form/page/DSFpQZWRnS1FCeWNC" target="_blank" rel="noopener noreferrer">在新页面打开</a>
+        </p>
+        <iframe
+          src="https://docs.qq.com/form/page/DSFpQZWRnS1FCeWNC"
+          width="100%" height="900" frameborder="0"
+          style="background:#fff;border:1px solid #e5e7eb;border-radius:12px"></iframe>
       </details>
     </section>
   </main>
 
-  <footer>
-    <p>© 高级法语综合课 – Section Agir</p>
-  </footer>
+  <footer class="hint">© 《高级法语综合课》 – Section Agir</footer>
 </body>
 </html>
