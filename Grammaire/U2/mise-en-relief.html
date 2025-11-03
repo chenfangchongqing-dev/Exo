@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>U2 · Grammaire · La mise en relief</title>
+<style>
+body {
+  font-family: "Segoe UI", Roboto, sans-serif;
+  background: #f8fafc;
+  color: #1e293b;
+  margin: 40px auto;
+  max-width: 800px;
+  line-height: 1.6;
+}
+h1 {
+  color: #1e293b;
+  font-size: 1.6rem;
+}
+h2 {
+  color: #2563eb;
+  font-size: 1.2rem;
+}
+.instr {
+  font-weight: 600;
+  margin-bottom: 1em;
+}
+.question {
+  margin-bottom: 1.2em;
+  padding: 1em;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+label {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.9rem;
+  color: #475569;
+}
+input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+button {
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 20px;
+}
+button:hover {
+  background: #1e40af;
+}
+.answer {
+  margin-top: 0.5em;
+  padding: 0.75em;
+  background: #f1f5f9;
+  border-left: 4px solid #2563eb;
+  display: none;
+  border-radius: 6px;
+}
+footer {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 0.9rem;
+  color: #64748b;
+}
+</style>
+</head>
+<body>
+<h1>U2 · Grammaire · La mise en relief</h1>
+<p class="instr">Transformez comme dans l’exemple. Mettez en relief le mot souligné de deux manières différentes.</p>
+<p><strong>Exemple :</strong> <em>Cette mission m’a été très utile.</em> → Ce qui m’a été très utile, c’est cette mission. / Cette mission, c’est ce qui m’a été très utile.</p>
+
+<div class="question">
+  a. J’ai apprécié <u>les échanges</u> dans cette formation.
+  <label>→ Transformation 1 :</label>
+  <input type="text">
+  <label>→ Transformation 2 :</label>
+  <input type="text">
+  <div class="answer">✅ Ce que j’ai apprécié dans cette formation, ce sont les échanges. / Les échanges, c’est ce que j’ai apprécié dans cette formation.</div>
+</div>
+
+<div class="question">
+  b. J’ai besoin d’aider <u>les autres</u>.
+  <label>→ Transformation 1 :</label>
+  <input type="text">
+  <label>→ Transformation 2 :</label>
+  <input type="text">
+  <div class="answer">✅ Ce dont j’ai besoin, c’est aider les autres. / Aider les autres, c’est ce dont j’ai besoin.</div>
+</div>
+
+<div class="question">
+  c. <u>Ce métier</u> a changé ma vie.
+  <label>→ Transformation 1 :</label>
+  <input type="text">
+  <label>→ Transformation 2 :</label>
+  <input type="text">
+  <div class="answer">✅ Ce qui a changé ma vie, c’est ce métier. / Ce métier, c’est ce qui a changé ma vie.</div>
+</div>
+
+<div class="question">
+  d. J’ai envie de travailler avec <u>les enfants</u>.
+  <label>→ Transformation 1 :</label>
+  <input type="text">
+  <label>→ Transformation 2 :</label>
+  <input type="text">
+  <div class="answer">✅ Ce dont j’ai envie, c’est travailler avec les enfants. / Travailler avec les enfants, c’est ce dont j’ai envie.</div>
+</div>
+
+<div class="question">
+  e. Je voudrais <u>m’engager</u>.
+  <label>→ Transformation 1 :</label>
+  <input type="text">
+  <label>→ Transformation 2 :</label>
+  <input type="text">
+  <div class="answer">✅ Ce que je voudrais, c’est m’engager. / M’engager, c’est ce que je voudrais.</div>
+</div>
+
+<button onclick="toggleAnswers()">Afficher / Masquer les réponses</button>
+
+<footer>© 《高级法语综合课》</footer>
+
+<script>
+function toggleAnswers() {
+  document.querySelectorAll('.answer').forEach(a => {
+    a.style.display = (a.style.display === 'block') ? 'none' : 'block';
+  });
+}
+</script>
+</body>
+</html>
