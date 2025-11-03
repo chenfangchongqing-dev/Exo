@@ -3,21 +3,18 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>U2 · Vocabulaire · Le travail (3) — Drag & Drop</title>
+<title>U2 · Vocabulaire — Complétez avec les mots de la liste</title>
 <style>
-  :root{--bg:#f7fafc;--card:#fff;--ink:#0f172a;--muted:#64748b;--brand:#2563eb;--ok:#16a34a;--bad:#dc2626;--chip:#eef2ff}
+  :root{--bg:#f8fafc;--card:#fff;--ink:#0f172a;--muted:#64748b;--brand:#2563eb;--ok:#16a34a;--bad:#dc2626;--chip:#eef2ff}
   html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
-  .wrap{max-width:980px;margin:24px auto;padding:0 16px}
-  .h1{font-size:26px;font-weight:800;margin:6px 0 2px}
-  .note{color:var(--muted);font-size:14px;margin:0 0 12px}
+  .wrap{max-width:960px;margin:24px auto;padding:0 16px}
+  .title{font-size:22px;font-weight:700;margin-bottom:8px}
+  .note{color:var(--muted);font-size:14px;margin-bottom:16px}
   .card{background:var(--card);border:1px solid #e5e7eb;border-radius:14px;box-shadow:0 4px 14px rgba(15,23,42,.05);padding:16px;margin:12px 0}
-  .bank{display:flex;flex-wrap:wrap;gap:8px}
+  .bank{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px}
   .chip{background:var(--chip);border:1px dashed #c7d2fe;color:#1e3a8a;padding:6px 10px;border-radius:999px;cursor:grab;user-select:none}
   .chip:active{transform:scale(.98)}
-  .row{display:flex;gap:10px;align-items:flex-start}
-  .num{width:26px;height:26px;display:inline-grid;place-items:center;border-radius:50%;background:#e5e7eb;color:#111;font-weight:700;margin-top:2px}
-  .sent{flex:1}
-  .drop{display:inline-flex;min-width:160px;min-height:30px;align-items:center;justify-content:center;border:2px dashed #cbd5e1;border-radius:10px;padding:2px 8px;margin:0 4px;vertical-align:middle;background:#fff;transition:.15s}
+  .drop{display:inline-flex;min-width:140px;min-height:30px;align-items:center;justify-content:center;border:2px dashed #cbd5e1;border-radius:10px;padding:2px 8px;margin:0 4px;vertical-align:middle;background:#fff;transition:.15s}
   .drop.filled{border-color:#94a3b8;background:#f8fafc}
   .drop.ok{border-color:var(--ok);background:#ecfdf5}
   .drop.bad{border-color:var(--bad);background:#fef2f2}
@@ -26,151 +23,104 @@
   .btn{background:var(--brand);color:#fff;border:0;border-radius:12px;padding:10px 14px;cursor:pointer}
   .btn.secondary{background:#e5e7eb;color:#111}
   .score{font-weight:700}
-  @media (max-width:640px){.drop{min-width:120px}}
+  @media (max-width:640px){.drop{min-width:110px}}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="h1">U2 · Vocabulaire · Le travail (3)</div>
-  <div class="note">PC：拖拽或点选填空；手机：先点空格使其高亮，再点词块填入；长按空格清空；完成后点“校对”。</div>
+  <div class="title">Complétez avec les mots de la liste.</div>
+  <div class="note">PC：拖拽或点选填空；手机：点空格高亮后点击词块；长按空格清空；完成后点“Vérifier”。</div>
 
   <!-- Banque de mots -->
   <div class="card">
     <div class="bank" id="bank"></div>
     <div class="note">
-      Banque de mots：un contrat à durée déterminée · un contrat à durée indéterminée · un effectif · une entreprise · une mission · une multinationale · une vocation · embaucher · employer · à temps plein · à temps partiel
+      patron · CDI · mission · État · à temps plein · embauche · emploie · entreprise · effectif
     </div>
   </div>
 
-  <div id="items">
-    <div class="card"><div class="row"><div class="num">1</div><div class="sent">
-      Cette <span class="drop" data-answer="une entreprise"></span> compte
-      <span class="drop" data-answer="un effectif"></span> de soixante personnes.
-    </div></div></div>
-
-    <div class="card"><div class="row"><div class="num">2</div><div class="sent">
-      Elle <span class="drop" data-answer="employer"></span> trois personnes
-      <span class="drop" data-answer="à temps plein"></span> et deux
-      <span class="drop" data-answer="à temps partiel"></span>.
-    </div></div></div>
-
-    <div class="card"><div class="row"><div class="num">3</div><div class="sent">
-      Pour le nouveau projet, l’entreprise va
-      <span class="drop" data-answer="embaucher"></span> cinq ingénieurs.
-    </div></div></div>
-
-    <div class="card"><div class="row"><div class="num">4</div><div class="sent">
-      Les stagiaires ont chacun <span class="drop" data-answer="une mission"></span> bien précise.
-    </div></div></div>
-
-    <div class="card"><div class="row"><div class="num">5</div><div class="sent">
-      Lina pense avoir <span class="drop" data-answer="une vocation"></span> pour l’enseignement.
-    </div></div></div>
-
-    <div class="card"><div class="row"><div class="num">6</div><div class="sent">
-      Certains salariés sont en <span class="drop" data-answer="un contrat à durée déterminée"></span> ;
-      d’autres ont <span class="drop" data-answer="un contrat à durée indéterminée"></span>.
-    </div></div></div>
-
-    <div class="card"><div class="row"><div class="num">7</div><div class="sent">
-      Depuis la fusion avec un groupe allemand, c’est
-      <span class="drop" data-answer="une multinationale"></span>.
-    </div></div></div>
-
-    <div class="card"><div class="row"><div class="num">8</div><div class="sent">
-      Aujourd’hui, l’entreprise <span class="drop" data-answer="employer"></span> plus de 500 personnes dans le monde.
-    </div></div></div>
+  <!-- Texte à compléter -->
+  <div class="card" style="font-size:18px">
+    <p>
+      Cette <b>entreprise</b> a un <span class="drop" data-answer="effectif"></span> de soixante personnes.
+      Elle <span class="drop" data-answer="emploie"></span> trois personnes handicapées
+      <span class="drop" data-answer="à temps plein"></span> et deux à temps partiel.
+    </p>
+    <p>
+      Elles sont en CDD ou en <span class="drop" data-answer="CDI"></span>.
+      Elles ont toutes une <span class="drop" data-answer="mission"></span> bien précise.
+    </p>
+    <p>
+      Le <span class="drop" data-answer="patron"></span> reçoit une aide financière de l’
+      <span class="drop" data-answer="État"></span> pour l’
+      <span class="drop" data-answer="embauche"></span> des personnes en situation de handicap.
+    </p>
   </div>
 
+  <!-- Contrôles -->
   <div class="bar">
-    <button class="btn" id="check">校对 / Vérifier</button>
-    <button class="btn secondary" id="reset">重做 / Réinitialiser</button>
+    <button class="btn" id="check">Vérifier</button>
+    <button class="btn secondary" id="reset">Réinitialiser</button>
     <span class="score" id="score"></span>
   </div>
 </div>
 
 <script>
-/* 词库 */
-const WORDS = [
-  "un contrat à durée déterminée",
-  "un contrat à durée indéterminée",
-  "un effectif",
-  "une entreprise",
-  "une mission",
-  "une multinationale",
-  "une vocation",
-  "embaucher",
-  "employer",
-  "à temps plein",
-  "à temps partiel"
-];
+/* Mots disponibles */
+const WORDS = ["patron","CDI","mission","État","à temps plein","embauche","emploie","entreprise","effectif"];
 
-/* 生成词块（拖拽 + 点选） */
+/* Génération des étiquettes */
 const bank = document.getElementById('bank');
 WORDS.forEach(w=>{
-  const chip = document.createElement('span');
-  chip.className = 'chip';
-  chip.textContent = w;
-  chip.draggable = true;
-
-  chip.addEventListener('dragstart', e=>{
-    e.dataTransfer.setData('text/plain', w);
+  const chip=document.createElement('span');
+  chip.className='chip'; chip.textContent=w; chip.draggable=true;
+  chip.addEventListener('dragstart',e=>e.dataTransfer.setData('text/plain',w));
+  chip.addEventListener('click',()=>{
+    const target=activeDrop||[...document.querySelectorAll('.drop')].find(d=>!d.dataset.value);
+    if(target) fillDrop(target,w);
   });
-
-  chip.addEventListener('click', ()=>{
-    const target = activeDrop || [...document.querySelectorAll('.drop')].find(d=>!d.dataset.value);
-    if(target) fillDrop(target, w);
-  });
-
   bank.appendChild(chip);
 });
 
-/* 空格交互：拖拽 + 点选 + 长按清空 */
-const drops = [...document.querySelectorAll('.drop')];
-let activeDrop = null;
-let longTimer = null;
+/* Gestion des zones de dépôt */
+const drops=[...document.querySelectorAll('.drop')];
+let activeDrop=null, longTimer=null;
 
 function setActive(d){
   drops.forEach(x=>x.classList.remove('active'));
-  activeDrop = d; d.classList.add('active');
-  d.classList.remove('ok','bad');
+  activeDrop=d; d.classList.add('active'); d.classList.remove('ok','bad');
 }
-function fillDrop(d, word){
-  d.textContent = word;
-  d.dataset.value = word;
-  d.classList.add('filled');
-  d.classList.remove('ok','bad');
+function fillDrop(d,word){
+  d.textContent=word; d.dataset.value=word;
+  d.classList.add('filled'); d.classList.remove('ok','bad');
 }
 function clearDrop(d){
   d.textContent=''; d.dataset.value=''; d.classList.remove('filled','ok','bad','active');
   if(activeDrop===d) activeDrop=null;
 }
-
 drops.forEach(d=>{
-  d.addEventListener('dragover', e=>{e.preventDefault();});
-  d.addEventListener('drop', e=>{
-    e.preventDefault(); fillDrop(d, e.dataTransfer.getData('text/plain'));
-  });
-  d.addEventListener('click', ()=> setActive(d));
-  d.addEventListener('touchstart', ()=>{ longTimer=setTimeout(()=>clearDrop(d), 500); }, {passive:true});
-  d.addEventListener('touchend', ()=> clearTimeout(longTimer));
-  d.addEventListener('touchmove', ()=> clearTimeout(longTimer));
+  d.addEventListener('dragover',e=>{e.preventDefault();});
+  d.addEventListener('drop',e=>{e.preventDefault();fillDrop(d,e.dataTransfer.getData('text/plain'));});
+  d.addEventListener('click',()=>setActive(d));
+  d.addEventListener('touchstart',()=>{longTimer=setTimeout(()=>clearDrop(d),500);},{passive:true});
+  d.addEventListener('touchend',()=>clearTimeout(longTimer));
+  d.addEventListener('touchmove',()=>clearTimeout(longTimer));
 });
 
-/* 校对 */
-document.getElementById('check').addEventListener('click', ()=>{
+/* Vérification */
+document.getElementById('check').addEventListener('click',()=>{
   let ok=0,total=drops.length;
   drops.forEach(d=>{
     const val=(d.dataset.value||'').trim();
     const right=d.dataset.answer;
-    if(val===right){ d.classList.add('ok'); d.classList.remove('bad'); ok++; }
-    else if(val){ d.classList.add('bad'); d.classList.remove('ok'); }
+    if(val===right){d.classList.add('ok');d.classList.remove('bad');ok++;}
+    else if(val){d.classList.add('bad');d.classList.remove('ok');}
   });
   document.getElementById('score').textContent=`得分：${ok} / ${total}`;
 });
 
-/* 重做 */
-document.getElementById('reset').addEventListener('click', ()=>{
+/* Réinitialisation */
+document.getElementById('reset').addEventListener('click',()=>{
   drops.forEach(clearDrop);
   document.getElementById('score').textContent='';
 });
