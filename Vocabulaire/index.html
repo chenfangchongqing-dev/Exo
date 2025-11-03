@@ -3,271 +3,185 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>词汇 Vocabulaire — 目录</title>
+  <title>词汇 Vocabulaire</title>
   <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; margin:0; background:#f6f8fb; color:#1f2937; }
-    .wrap { max-width: 1080px; margin: 32px auto 80px; padding: 0 16px; }
-    h1 { font-size: 28px; margin: 0 0 8px; }
-    p.sub { margin:0 0 20px; color:#64748b; }
-    .toolbar { display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin: 12px 0 18px; }
-    .input, .select { height:40px; padding:0 12px; border:1px solid #d1d5db; border-radius:10px; background:#fff; outline:none; }
-    .input { flex:1 1 260px; }
-    .select { min-width:140px; }
-    .grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap:14px; }
-    .card { background:#fff; border:1px solid #e5e7eb; border-radius:16px; padding:16px; box-shadow:0 2px 6px rgba(0,0,0,.04); transition: transform .08s ease; }
-    .card:hover { transform: translateY(-1px); }
-    .title { font-weight:600; margin:0 0 8px; line-height:1.35; }
-    .meta { font-size:12px; color:#64748b; margin-bottom:12px; }
-    .tags { display:flex; flex-wrap:wrap; gap:6px; }
-    .tag { font-size:11px; padding:4px 8px; background:#eef2ff; color:#374151; border-radius:999px; border:1px solid #e5e7eb; }
-    .empty { background:#f1f5f9; border:1px dashed #cbd5e1; border-radius:14px; padding:18px; color:#64748b; }
-    .hint { font-size:13px; color:#94a3b8; margin-top:10px; }
-    a.btn { display:inline-block; margin-top:8px; font-size:13px; color:#2563eb; text-decoration:none; }
-    .footer { margin-top:28px; color:#94a3b8; font-size:12px; }
+    :root {
+      --bg: #f8fafc;
+      --card: #fff;
+      --ink: #0f172a;
+      --muted: #64748b;
+      --brand: #2563eb;
+      --radius: 14px;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial;
+      background: var(--bg);
+      color: var(--ink);
+    }
+    .wrap {
+      max-width: 960px;
+      margin: 32px auto;
+      padding: 0 16px;
+    }
+    h1 {
+      font-size: 28px;
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+    .note {
+      font-size: 15px;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+    .searchbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+    input, select {
+      padding: 10px 12px;
+      border-radius: var(--radius);
+      border: 1px solid #cbd5e1;
+      font-size: 15px;
+    }
+    input { flex: 1; min-width: 200px; }
+    select { background: #fff; }
+    .list { display: grid; gap: 12px; }
+    .card {
+      background: var(--card);
+      padding: 16px 20px;
+      border-radius: var(--radius);
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 2px 8px rgba(0,0,0,.04);
+      transition: .15s;
+    }
+    .card:hover { border-color: var(--brand); box-shadow: 0 4px 10px rgba(37,99,235,.08); }
+    .card a { color: var(--brand); text-decoration: none; font-weight: 600; }
+    footer {
+      margin-top: 48px;
+      font-size: 14px;
+      color: var(--muted);
+      text-align: center;
+    }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <a href="/Exo/" class="btn">← 返回首页</a>
+    <a href="../index.html" style="text-decoration:none;color:var(--brand);font-weight:600;">← 返回首页</a>
     <h1>词汇 Vocabulaire</h1>
-    <p class="sub">支持按 <b>单元（U1…U9）</b> 与 <b>主题</b> 搜索与筛选。将练习 HTML 放到 <code>Vocabulaire/U1…U9/</code>，并在 DATA 里登记即可出现在列表中。</p>
-
-    <div class="toolbar">
-      <input id="q" class="input" type="search" placeholder="搜索：标题 / 单元（U1） / 主题 / 标签 / 路径…" />
-      <select id="unit" class="select"></select>
-      <select id="theme" class="select"></select>
+    <div class="note">
+      支持按 <b>单元（U1…U9）</b> 与 <b>主题</b> 搜索与筛选。<br>
+      将练习 HTML 放到 <code>Vocabulaire/U1/…U9/</code> 对应子文件夹，并在 <code>DATA</code> 里登记即可出现在列表中。
     </div>
 
-    <div id="list" class="grid"></div>
-    <div id="empty" class="empty" style="display:none;">
-      暂无匹配结果。
-      <div class="hint">检查搜索词或筛选条件；或确认 DATA 中已登记该练习。</div>
+    <div class="searchbar">
+      <input type="text" id="search" placeholder="搜索：标题 / 单元（如 U1） / 主题 / 标签…" />
+      <select id="unit">
+        <option value="">全部单元</option>
+        <option>U1</option><option>U2</option><option>U3</option>
+        <option>U4</option><option>U5</option><option>U6</option>
+        <option>U7</option><option>U8</option><option>U9</option>
+      </select>
+      <select id="theme">
+        <option value="">全部主题</option>
+        <option value="engagement">engagement</option>
+        <option value="travail">travail</option>
+        <option value="vie">vie</option>
+      </select>
     </div>
 
-    <div class="footer">© 《高级法语综合课》</div>
+    <div class="list" id="list"></div>
+
+    <footer>© 《高级法语综合课》</footer>
   </div>
 
 <script>
-  /* ---------- A. 练习清单（先放你已确认的那一条） ---------- */
-  const DATA = [
-    {
-      title: "U2 词汇｜拖拽填空：engagement & actions",
-      path: "/Exo/Vocabulaire/U2/exo1.html",
-      unit: "U2",
-      theme: "engagement",
-      tags: ["vocabulaire","slogans","soutenir","mobilisation","pétition","expulsions","régularisations"]
-    },
-     { 
+/* ---------------- 练习数据 DATA ---------------- */
+const DATA = [
+  {
+    title: "U2 词汇｜拖拽填空：engagement & actions",
+    path: "Vocabulaire/U2/exo1.html",
+    unit: "U2",
+    theme: "engagement",
+    tags: ["vocabulaire","slogans","soutenir","mobilisation","pétition","expulsions","régularisations"]
+  },
+  { 
     title: "U2 · Engagement et actions — Complétez et traduisez", 
     path: "Vocabulaire/U2/exo2.html", 
     unit: "U2", 
     theme: "engagement", 
-    tags: ["solidarité", "actions", "vocabulaire"] 
+    tags: ["solidarité", "actions", "vocabulaire", "état psychologique", "etat psychologique", "心理状态"]
   },
-    {
-  title: "U2 · Le travail (3) — Complétez",
-  path: "Vocabulaire/U2/exo3.html",
-  unit: "U2",
-  theme: "travail"
-  tags: ["contrat", "entreprise", "emploi"]
-},
-{
-  title: "U2 · Témoignage de Léo — Complétez",
-  path: "Vocabulaire/U2/exo4.html",
-  unit: "U2",
-  theme: "travail" 
-  tags: ["état psychologique", "témoignage","emploi","vocation"]
-},
-
-  ];
-
-  /* ---------- B. 小工具 ---------- */
-  const $ = (s) => document.querySelector(s);
-  const norm = (s) => (s ?? "").toString().trim().toLowerCase();
-  const includesAny = (hay, needle) => norm(hay).includes(norm(needle));
-  const toURL = (p) => p.startsWith("/") ? p : "/Exo/" + p.replace(/^\/+/, "");
-
-  /* ---------- C. 下拉构建：U1~U9 默认 + DATA 推断 ---------- */
-  function buildUnitOptions() {
-    const base = Array.from({length:9},(_,i)=>`U${i+1}`);
-    const extra = [...new Set(DATA.map(x=>x.unit).filter(Boolean))].filter(u=>!base.includes(u));
-    const list = ["ALL", ...base, ...extra];
-    $("#unit").innerHTML = list.map(v=>`<option value="${v}">${v==="ALL"?"全部单元":v}</option>`).join("");
+  {
+    title: "U2 · Le travail (3) — Complétez",
+    path: "Vocabulaire/U2/exo3.html",
+    unit: "U2",
+    theme: "travail",
+    tags: ["contrat","entreprise","emploi","état psychologique","etat psychologique","psychologie","心理状态"]
+  },
+  {
+    title: "U2 · Témoignage de Léo — Complétez",
+    path: "Vocabulaire/U2/exo4.html",
+    unit: "U2",
+    theme: "travail",
+    tags: ["témoignage","emploi","vocation","état psychologique","etat psychologique","psychologie","心理状态"]
   }
-  function buildThemeOptions() {
-    const set = [...new Set(DATA.map(x=>x.theme).filter(Boolean).map(String))].sort((a,b)=>a.localeCompare(b));
-    $("#theme").innerHTML = ["ALL", ...set].map(v=>`<option value="${v}">${v==="ALL"?"全部主题":v}</option>`).join("");
-  }
+];
 
-  /* ---------- D. 过滤与渲染 ---------- */
-  function filterList(q, unit, theme) {
-    return DATA.filter(it=>{
-      if (unit!=="ALL" && norm(it.unit)!==norm(unit)) return false;
-      if (theme!=="ALL" && norm(it.theme)!==norm(theme)) return false;
-      const hay = [it.title,it.unit,it.theme, ...(it.tags||[]), it.path].join("|");
-      return !q || includesAny(hay, q);
-    });
-  }
-  function renderList(items) {
-    const list = $("#list"), empty = $("#empty");
-    if (!items.length) { list.innerHTML=""; empty.style.display="block"; return; }
-    empty.style.display="none";
-    list.innerHTML = items.map(x=>`
-      <a class="card" href="${toURL(x.path)}">
-        <div class="title">${x.title||"(未命名练习)"}</div>
-        <div class="meta">单元：${x.unit||"-"}　主题：${x.theme||"-"}</div>
-        <div class="tags">${(x.tags||[]).map(t=>`<span class="tag">${t}</span>`).join("")}</div>
-      </a>
-    `).join("");
+/* ---------------- 工具函数 ---------------- */
+// 去重音 + 小写
+const norm = (s) => (s ?? "")
+  .toString()
+  .normalize('NFD')
+  .replace(/[\u0300-\u036f]/g, '')
+  .toLowerCase();
+
+function match(item, keyword, unit, theme) {
+  const hay = norm(item.title + " " + item.unit + " " + item.theme + " " + item.path + " " + (item.tags||[]).join(" "));
+  if (keyword && !hay.includes(norm(keyword))) return false;
+  if (unit && item.unit !== unit) return false;
+  if (theme && item.theme !== theme) return false;
+  return true;
+}
+
+/* ---------------- 渲染列表 ---------------- */
+function render() {
+  const list = document.getElementById("list");
+  const keyword = document.getElementById("search").value.trim();
+  const unit = document.getElementById("unit").value;
+  const theme = document.getElementById("theme").value;
+
+  const filtered = DATA.filter(item => match(item, keyword, unit, theme));
+  list.innerHTML = "";
+
+  if (!filtered.length) {
+    list.innerHTML = `<div style="color:#64748b;text-align:center;padding:40px 0;">暂无匹配结果。<br>检查搜索词或筛选条件；或确认 DATA 中登记该练习。</div>`;
+    return;
   }
 
-  /* ---------- E. URL 状态 ---------- */
-  function readParams() {
-    const u = new URL(location.href);
-    return {
-      q: u.searchParams.get("q") ?? "",
-      unit: u.searchParams.get("unit") ?? "ALL",
-      theme: u.searchParams.get("theme") ?? "ALL",
-    };
-  }
-  function writeParams(q, unit, theme) {
-    const u = new URL(location.href);
-    q ? u.searchParams.set("q", q) : u.searchParams.delete("q");
-    unit!=="ALL" ? u.searchParams.set("unit", unit) : u.searchParams.delete("unit");
-    theme!=="ALL" ? u.searchParams.set("theme", theme) : u.searchParams.delete("theme");
-    history.replaceState(null, "", u);
-  }
+  filtered.forEach(item => {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = `
+      <a href="../${item.path}" target="_blank">${item.title}</a><br>
+      <small>单元：${item.unit} ｜ 主题：${item.theme}</small><br>
+      <small style="color:#64748b;">标签：${(item.tags||[]).join(", ")}</small>
+    `;
+    list.appendChild(card);
+  });
+}
 
-  /* ---------- F. 事件（确保 change 能触发；兼容某些浏览器怪癖） ---------- */
-  function bindEvents() {
-    const qI = $("#q"), uS = $("#unit"), tS = $("#theme");
-    const update = () => {
-      const q = qI.value.trim(), unit = uS.value, theme = tS.value;
-      writeParams(q, unit, theme);
-      renderList(filterList(q, unit, theme));
-    };
-    let timer=null;
-    qI.addEventListener("input", ()=>{ clearTimeout(timer); timer=setTimeout(update,180); });
-    // 有些浏览器只触发 input，不触发 change；两种都绑上
-    uS.addEventListener("change", update);
-    uS.addEventListener("input", update);
-    tS.addEventListener("change", update);
-    tS.addEventListener("input", update);
-  }
+/* ---------------- 事件监听 ---------------- */
+["search","unit","theme"].forEach(id => {
+  document.getElementById(id).addEventListener("input", render);
+  document.getElementById(id).addEventListener("change", render);
+});
 
-  /* ---------- G. 启动 ---------- */
-  (function init(){
-    buildUnitOptions();
-    buildThemeOptions();
-    bindEvents();
-    const {q,unit,theme} = readParams();
-    $("#q").value = q;
-    // 若 URL 中的值不在选项里，回退到 ALL
-    if (!$("#unit").querySelector(`option[value="${unit}"]`)) $("#unit").value = "ALL"; else $("#unit").value = unit;
-    if (!$("#theme").querySelector(`option[value="${theme}"]`)) $("#theme").value = "ALL"; else $("#theme").value = theme;
-    renderList(filterList($("#q").value, $("#unit").value, $("#theme").value));
-  })();
+/* 初始化 */
+render();
 </script>
-
-
-
-
-
-
-    /***** 3) 下拉项：单元 & 主题 *****/
-    function buildUnitOptions() {
-      // 基础：U1..U9
-      const baseUnits = Array.from({length:9}, (_,i)=>`U${i+1}`);
-      // 追加：DATA 中出现的其他 unit（如 U10、Révision 等）
-      const extra = dedupe(DATA.map(x=>x.unit)).filter(u => !baseUnits.includes(u));
-      const units = ["ALL", ...baseUnits, ...extra];
-      const sel = $("#unit");
-      sel.innerHTML = units.map(v=>{
-        const label = v==="ALL" ? "全部单元" : v;
-        return `<option value="${v}">${label}</option>`;
-      }).join("");
-    }
-    function buildThemeOptions() {
-      const themes = ["ALL", ...dedupe(DATA.map(x=>x.theme).filter(Boolean).sort((a,b)=>a.localeCompare(b)))];
-      const sel = $("#theme");
-      sel.innerHTML = themes.map(v=>{
-        const label = v==="ALL" ? "全部主题" : v;
-        return `<option value="${v}">${label}</option>`;
-      }).join("");
-    }
-
-    /***** 4) 过滤逻辑 *****/
-    function filterList({q, unit, theme}) {
-      return DATA.filter(item => {
-        // 单元筛选
-        if (unit && unit !== "ALL" && norm(item.unit) !== norm(unit)) return false;
-        // 主题筛选
-        if (theme && theme !== "ALL" && norm(item.theme) !== norm(theme)) return false;
-        // 搜索匹配：title + unit + theme + tags + path
-        const hay = [
-          item.title, item.unit, item.theme,
-          ...(Array.isArray(item.tags) ? item.tags : []),
-          item.path
-        ].join(" | ");
-        return !q || includesAny(hay, q);
-      });
-    }
-
-    /***** 5) 渲染列表 *****/
-    function renderList(items) {
-      const $list = $("#list");
-      const $empty = $("#empty");
-      if (!items.length) {
-        $list.innerHTML = "";
-        $empty.style.display = "block";
-        return;
-      }
-      $empty.style.display = "none";
-      $list.innerHTML = items.map(x => {
-        const url = toAbsOrRel(x.path);
-        const tagHtml = (x.tags || []).map(t=>`<span class="tag">${t}</span>`).join("");
-        return `
-          <a class="card" href="${url}">
-            <div class="title">${x.title || "(未命名练习)"}</div>
-            <div class="meta">单元：${x.unit || "-"}　主题：${x.theme || "-"}</div>
-            <div class="tags">${tagHtml}</div>
-          </a>
-        `;
-      }).join("");
-    }
-
-    /***** 6) 事件 & 状态同步 *****/
-    function applyStateFromURL() {
-      const {q, unit, theme} = getParams();
-      $("#q").value = q;
-      $("#unit").value = $("#unit").querySelector(`option[value="${unit}"]`) ? unit : "ALL";
-      $("#theme").value = $("#theme").querySelector(`option[value="${theme}"]`) ? theme : "ALL";
-      const items = filterList({q, unit: $("#unit").value, theme: $("#theme").value});
-      renderList(items);
-    }
-    function bindEvents() {
-      const onChange = () => {
-        const q = $("#q").value.trim();
-        const unit = $("#unit").value;
-        const theme = $("#theme").value;
-        setParams({q, unit, theme});
-        renderList(filterList({q, unit, theme}));
-      };
-      // 简单防抖
-      let timer = null;
-      $("#q").addEventListener("input", () => {
-        clearTimeout(timer);
-        timer = setTimeout(onChange, 200);
-      });
-      $("#unit").addEventListener("change", onChange);
-      $("#theme").addEventListener("change", onChange);
-    }
-
-    /***** 7) 启动 *****/
-    buildUnitOptions();
-    buildThemeOptions();
-    bindEvents();
-    applyStateFromURL();
-  </script>
 </body>
 </html>
