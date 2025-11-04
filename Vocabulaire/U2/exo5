@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Complétez avec les mots de la liste</title>
+  <link rel="stylesheet" href="../../_assets/style.css" />
+  <script src="../../_assets/script.js" defer></script>
+</head>
+<body>
+  <a href="../index.html" class="back-link">← 返回词法目录</a>
+  <h2>Complétez avec les mots de la liste.</h2>
+
+  <p class="word-bank">
+    patron • CDI • mission • État • à temps plein • embauche • emploie • entreprise • effectif
+  </p>
+
+  <div class="exercise">
+    <p>
+      Cette <strong>entreprise</strong> a un 
+      <span class="blank" data-answer="effectif"></span> de soixante personnes.
+      Elle <span class="blank" data-answer="emploie"></span> trois personnes handicapées 
+      <span class="blank" data-answer="à temps plein"></span> et deux à temps partiel.
+      Elles sont en CDD ou en <span class="blank" data-answer="CDI"></span>. 
+      Elles ont toutes une <span class="blank" data-answer="mission"></span> bien précise.
+      Le <span class="blank" data-answer="patron"></span> reçoit une aide financière de l’
+      <span class="blank" data-answer="État"></span> pour l’
+      <span class="blank" data-answer="embauche"></span> des personnes en situation de handicap.
+    </p>
+  </div>
+
+  <div class="btn-group">
+    <button onclick="checkAnswers()">Vérifier</button>
+    <button onclick="resetAnswers()">Réinitialiser</button>
+  </div>
+
+  <p class="note">说明：输入或选择单词填空后点击“Vérifier”核对答案；答案区分大小写（请注意大写É）。</p>
+
+  <script>
+    // 简单填空检测脚本
+    function checkAnswers() {
+      document.querySelectorAll(".blank").forEach(blank => {
+        const user = prompt("请输入该空的答案：", blank.textContent.trim());
+        if (!user) return;
+        blank.textContent = user;
+        if (user.trim() === blank.dataset.answer) {
+          blank.style.backgroundColor = "#d4edda";
+        } else {
+          blank.style.backgroundColor = "#f8d7da";
+        }
+      });
+    }
+
+    function resetAnswers() {
+      document.querySelectorAll(".blank").forEach(blank => {
+        blank.textContent = "__________";
+        blank.style.backgroundColor = "transparent";
+      });
+    }
+
+    // 初始化显示
+    resetAnswers();
+  </script>
+</body>
+</html>
