@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quel est le handicap ? Écoutez et cochez.</title>
+  <link rel="stylesheet" href="../../_assets/style.css" />
+  <style>
+    .sheet {background:#fff;border-radius:12px;padding:18px;box-shadow:0 6px 18px rgba(0,0,0,.06)}
+    .grid {width:100%;border-collapse:separate;border-spacing:0}
+    .grid th, .grid td {border:1px solid #cfd6e4;padding:12px 10px;text-align:center}
+    .grid th:first-child, .grid td:first-child {text-align:left}
+    .col-small {width:80px}
+    .col-letter {width:70px}
+    .play {display:inline-flex;gap:8px;align-items:center}
+    .play button{padding:6px 10px;border:1px solid #e0e6f0;border-radius:8px;background:#f8fafc;cursor:pointer}
+    .legend{font-size:.9rem;color:#5b677a}
+    .ok{background:#e9f9ee}
+    .ko{background:#fdecef}
+    .btns{display:flex;gap:10px;margin-top:14px}
+    .btns button{padding:10px 14px;border-radius:10px;border:1px solid #d8dfe9;background:#f6f8fb;cursor:pointer}
+    @media (max-width:760px){
+      .col-small{width:56px}
+      .col-letter{width:56px}
+    }
+  </style>
+</head>
+<body>
+  <a class="back-link" href="../index.html">← 返回听力 CO 目录</a>
+
+  <div class="sheet">
+    <h2>À deux · Quel est le handicap de la personne ? Écoutez et cochez.</h2>
+    <p><strong>Ex.：</strong>Je ne peux pas prendre les escaliers. → ✅ <em>se déplace en fauteuil roulant</em></p>
+
+    <!-- 播放区：点击字母播放对应音频 -->
+    <div class="play" aria-label="Commandes audio">
+      <span class="legend">点击字母播放：</span>
+      <button data-id="ex">Ex.</button>
+      <button data-id="a">a.</button>
+      <button data-id="b">b.</button>
+      <button data-id="c">c.</button>
+      <button data-id="d">d.</button>
+      <button data-id="e">e.</button>
+    </div>
+
+    <!-- 隐藏的 audio 元素 -->
+    <audio id="aud-ex" src="audio/ex.mp3" preload="none"></audio>
+    <audio id="aud-a"  src="audio/a.mp3"  preload="none"></audio>
+    <audio id="aud-b"  src="audio/b.mp3"  preload="none"></audio>
+    <audio id="aud-c"  src="audio/c.mp3"  preload="none"></audio>
+    <audio id="aud-d"  src="audio/d.mp3"  preload="none"></audio>
+    <audio id="aud-e"  src="audio/e.mp3"  preload="none"></audio>
+
+    <!-- 勾选表 -->
+    <table class="grid" role="table" aria-label="Écoutez et cochez">
+      <thead>
+        <tr>
+          <th class="col-small">La personne …</th>
+          <th class="col-letter">Ex.</th>
+          <th class="col-letter">a.</th>
+          <th class="col-letter">b.</th>
+          <th class="col-letter">c.</th>
+          <th class="col-letter">d.</th>
+          <th class="col-letter">e.</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr data-cat="wheelchair">
+          <th>… se déplace en fauteuil roulant.</th>
+          <td><input type="checkbox" data-q="ex"></td>
+          <td><input type="checkbox" data-q="a"></td>
+          <td><input type="checkbox" data-q="b"></td>
+          <td><input type="checkbox" data-q="c"></td>
+          <td><input type="checkbox" data-q="d"></td>
+          <td><input type="checkbox" data-q="e"></td>
+        </tr>
+        <tr data-cat="vision">
+          <th>… est malvoyante ou non-voyante.</th>
+          <td><input type="checkbox" data-q="ex"></td>
+          <td><input type="checkbox" data-q="a"></td>
+          <td><input type="checkbox" data-q="b"></td>
+          <td><input type="checkbox" data-q="c"></td>
+          <td><input type="checkbox" data-q="d"></td>
+          <td><input type="checkbox" data-q="e"></td>
+        </tr>
+        <tr data-cat="hearing">
+          <th>… est sourde ou malentendante.</th>
+          <td><input type="checkbox" data-q="ex"></td>
+          <td><input type="checkbox" data-q="a"></td>
+          <td><input type="checkbox" data-q="b"></td>
+          <td><input type="checkbox" data-q="c"></td>
+          <td><input type="checkbox" data-q="d"></td>
+          <td><input type="checkbox" data-q="e"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="btns">
+      <button id="btn-check">Vérifier</button>
+      <button id="btn-reset">Réinitialiser</button>
+      <span class="legend">提示：每句只有一个正确选项。</span>
+    </div>
+  </div>
+
+  <script>
+    // 1) 播放控制
+    const btns = document.querySelectorAll('.play button');
+    const audios = {
+      ex: document.getElementById('aud-ex'),
+      a:  document.getElementById('aud-a'),
+      b:  document.getElementById('aud-b'),
+      c:  document.getElementById('aud-c'),
+      d:  document.getElementById('aud-d'),
+      e:  document.getElementById('aud-e'),
+    };
+    btns.forEach(b=>{
+      b.addEventListener('click', ()=>{
+        const id = b.dataset.id;
+        Object.values(audios).forEach(a=>{a.pause(); a.currentTime=0;});
+        audios[id].play();
+      });
+    });
+
+    // 2) 每列只能勾 1 个（互斥）
+    const allChecks = document.querySelectorAll('tbody input[type="checkbox"]');
+    allChecks.forEach(chk=>{
+      chk.addEventListener('change', ()=>{
+        if(!chk.checked) return;
+        const q = chk.dataset.q;
+        document.querySelectorAll(`tbody input[data-q="${q}"]`).forEach(c=>{
+          if(c!==chk) c.checked = false;
+        });
+      });
+    });
+
+    // 3) 答案键（示例）
+    //   - ex（示例音频）：wheelchair（和书上一样“不能走楼梯”）
+    //   - a..e：请按你自己的音频语义改这行即可
+    const ANSWER = {
+      ex: 'wheelchair',
+      a:  'vision',
+      b:  'hearing',
+      c:  'wheelchair',
+      d:  'vision',
+      e:  'hearing'
+    };
+
+    // 4) 判分
+    const btnCheck = document.getElementById('btn-check');
+    const btnReset = document.getElementById('btn-reset');
+
+    btnCheck.addEventListener('click', ()=>{
+      // 清样式
+      document.querySelectorAll('tbody tr').forEach(tr=>{
+        tr.classList.remove('ok','ko');
+      });
+
+      // 检查每个问题（ex/a/b/c/d/e）
+      const letters = Object.keys(ANSWER);
+      letters.forEach(q=>{
+       const need = ANSWER[q]; // 应落在哪一行（wheelchair/vision/hearing）
+       // 找到该列被勾选的那一行
+       let pickedCat = null;
+       document.querySelectorAll(`tbody input[data-q="${q}"]`).forEach(c=>{
+         if(c.checked){
+           pickedCat = c.closest('tr').dataset.cat;
+         }
+       });
+       // 高亮反馈
+       if(!pickedCat){
+         // 未作答：弱提示（不判错）
+         return;
+       }
+       const row = document.querySelector(`tbody tr[data-cat="${pickedCat}"]`);
+       row.classList.add( pickedCat===need ? 'ok' : 'ko' );
+      });
+    });
+
+    btnReset.addEventListener('click', ()=>{
+      allChecks.forEach(c=>c.checked=false);
+      document.querySelectorAll('tbody tr').forEach(tr=>{
+        tr.classList.remove('ok','ko');
+      });
+      Object.values(audios).forEach(a=>{a.pause(); a.currentTime=0;});
+    });
+  </script>
+</body>
+</html>
