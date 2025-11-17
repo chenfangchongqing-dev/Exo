@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agir – U3 Donnez des renseignements sur un service en ligne</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+  <div class="container">
+
+    <!-- Titre principal -->
+    <h1 class="title-agir">AGIR – U3</h1>
+    <h2 class="activity-title">11 ▸ Donnez des renseignements sur un service en ligne</h2>
+
+    <!-- Bloc de tâche -->
+    <div class="task-block">
+
+      <p><strong>a.</strong> À deux, choisissez une application qui propose un service en ligne 
+        (cours de langue, coaching…).</p>
+
+      <p><strong>b.</strong> Rédigez le descriptif de l’application :  
+        les informations pratiques pour l’inscription,  
+        le fonctionnement,  
+        le déroulement des séances.
+      </p>
+
+      <p class="instruction">
+        <strong>📌 Consigne :</strong><br>
+        Postez le descriptif de votre application dans la colonne  
+        <strong>« U3 Donnez des renseignements sur un service en ligne »</strong>  
+        du Padlet de la classe.
+      </p>
+
+    </div>
+
+    <!-- Boutons d'action -->
+    <div class="actions">
+
+      <!-- Bouton Padlet -->
+      <a class="button-primary"
+         href="https://padlet.com/chenfangchongqing/agir-rv4fpdttx7u3bfou"
+         target="_blank">
+         ➜ Postez votre travail ici
+      </a>
+
+      <!-- Bouton retour -->
+      <a class="button-secondary" href="/index.html">
+         ← Retour à l’accueil des exercices
+      </a>
+
+    </div>
+
+  </div>
+
+</body>
+</html>
