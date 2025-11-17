@@ -76,17 +76,16 @@
   </header>
 
   <main class="card">
-    <!-- 听力播放键 -->
+    <!-- 听力播放键（防下载版本） -->
     <section>
       <h3>🎧 Écoutez la conversation téléphonique</h3>
       <p class="hint">
         Cliquez sur ▶ pour écouter l’enregistrement, puis faites les exercices 1 et 2.
       </p>
-      <audio controls>
-        <!-- 修改成你真实的 mp3 文件名 -->
-        <source src="audio/U3_L9_exo_en_classe.mp3" type="audio/mpeg">
-        Votre navigateur ne supporte pas l’élément audio.
-      </audio>
+      <!-- 禁用右键，隐藏下载按钮 -->
+      <div oncontextmenu="return false;">
+        <audio id="audioPlayer" controls controlsList="nodownload"></audio>
+      </div>
     </section>
 
     <!-- EXO 1 -->
@@ -234,6 +233,22 @@
   <footer class="hint">© 《高级法语综合课》</footer>
 
   <script>
+    // 防下载：用 Blob URL 加载音频，隐藏真实 mp3 路径
+    (function(){
+      const audio = document.getElementById("audioPlayer");
+      if (!audio) return;
+      fetch("audio/U3_L9_exo_en_classe.mp3")
+        .then(r => r.blob())
+        .then(blob => {
+          const url = URL.createObjectURL(blob);
+          audio.src = url;
+        })
+        .catch(err => {
+          console.error("Audio load error:", err);
+        });
+    })();
+
+    // 自动判分逻辑
     document.getElementById("checkBtn").addEventListener("click", function(){
       let ex1Total = 0, ex1Score = 0;
 
