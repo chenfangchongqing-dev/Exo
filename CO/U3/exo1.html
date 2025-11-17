@@ -26,7 +26,7 @@
       box-shadow:0 8px 22px rgba(0,0,0,.06);
     }
     .bloc-exo{margin-top:20px;padding-top:10px;border-top:1px dashed #e5e7eb;}
-    .q-block{margin:10px 0;}
+    .q-block{margin:10px 0;padding:8px 10px;border-radius:10px;}
     .q-label{font-weight:600;margin-bottom:4px;}
     .options{list-style:none;padding-left:0;margin:4px 0;}
     .options li{margin:2px 0;}
@@ -40,13 +40,32 @@
     }
     .order-line span{flex:1;}
     .order-line input{
-      width:60px;
+      width:70px;
       padding:4px 6px;
       border-radius:8px;
       border:1px solid #cbd5f5;
     }
     .hint{color:#64748b;font-size:.92rem;}
     audio{width:100%;margin-top:8px;}
+    .btn-check{
+      margin-top:18px;
+      padding:8px 14px;
+      border-radius:999px;
+      border:none;
+      background:#0ea5e9;
+      color:#fff;
+      cursor:pointer;
+      font-size:0.95rem;
+    }
+    .score-box{
+      margin-top:10px;
+      padding:8px 12px;
+      border-radius:10px;
+      background:#f9fafb;
+      border:1px solid #e5e7eb;
+      font-size:0.9rem;
+      color:#334155;
+    }
   </style>
 </head>
 <body>
@@ -61,10 +80,10 @@
     <section>
       <h3>🎧 Écoutez la conversation téléphonique</h3>
       <p class="hint">
-        Cliquez sur le bouton ▶ pour écouter l’enregistrement, puis faites les exercices 1 et 2.
+        Cliquez sur ▶ pour écouter l’enregistrement, puis faites les exercices 1 et 2.
       </p>
       <audio controls>
-        <!-- 把下面的 src 改成你自己的 mp3 文件名 -->
+        <!-- 修改成你真实的 mp3 文件名 -->
         <source src="audio/U3_L9_exo_en_classe.mp3" type="audio/mpeg">
         Votre navigateur ne supporte pas l’élément audio.
       </audio>
@@ -74,70 +93,84 @@
     <section class="bloc-exo">
       <h3>1. Cochez les fins de phrase correctes.</h3>
 
-      <div class="q-block">
+      <!-- Exemple：给出答案 -->
+      <div class="q-block" style="background:#f9fafb;">
         <div class="q-label"><strong>Ex.</strong> «&nbsp;perds tes rondeurs&nbsp;» est une application pour…</div>
         <ul class="options">
-          <li><label><input type="checkbox"> faire du sport.</label></li>
-          <li><label><input type="checkbox"> perdre du poids.</label></li>
-          <li><label><input type="checkbox"> rencontrer l’amour.</label></li>
+          <li>
+            <label>
+              <input type="checkbox" disabled>
+              faire du sport.
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" checked disabled>
+              perdre du poids.
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" disabled>
+              rencontrer l’amour.
+            </label>
+          </li>
         </ul>
       </div>
 
-      <div class="q-block">
+      <div class="q-block" data-q="a">
         <div class="q-label">a. Gonzague a hésité à s’inscrire car…</div>
         <ul class="options">
-          <li><label><input type="checkbox"> il ne veut pas vraiment perdre du poids.</label></li>
-          <li><label><input type="checkbox"> il n’a pas accès à Internet.</label></li>
-          <li><label><input type="checkbox"> il pense qu’il faut suivre un vrai régime pour perdre du poids.</label></li>
+          <li><label><input type="checkbox" data-correct="false"> il ne veut pas vraiment perdre du poids.</label></li>
+          <li><label><input type="checkbox" data-correct="false"> il n’a pas accès à Internet.</label></li>
+          <li><label><input type="checkbox" data-correct="true"> il pense qu’il faut suivre un vrai régime pour perdre du poids.</label></li>
         </ul>
       </div>
 
-      <div class="q-block">
+      <div class="q-block" data-q="b">
         <div class="q-label">b. Finalement, il a décidé de s’inscrire parce que/qu’…</div>
         <ul class="options">
-          <li><label><input type="checkbox"> ce n’est pas cher.</label></li>
-          <li><label><input type="checkbox"> il ne devra pas préparer ses menus.</label></li>
-          <li><label><input type="checkbox"> il n’aura plus besoin de faire ses courses.</label></li>
+          <li><label><input type="checkbox" data-correct="false"> ce n’est pas cher.</label></li>
+          <li><label><input type="checkbox" data-correct="true"> il ne devra pas préparer ses menus.</label></li>
+          <li><label><input type="checkbox" data-correct="false"> il n’aura plus besoin de faire ses courses.</label></li>
         </ul>
       </div>
 
-      <div class="q-block">
+      <div class="q-block" data-q="c">
         <div class="q-label">c. Pour s’inscrire,…</div>
         <ul class="options">
-          <li><label><input type="checkbox"> il est obligatoire de remplir son profil.</label></li>
-          <li><label><input type="checkbox"> il n’est pas nécessaire de compléter complètement son profil.</label></li>
-          <li><label><input type="checkbox"> il faut juste compléter les informations sur son poids.</label></li>
+          <li><label><input type="checkbox" data-correct="false"> il est obligatoire de remplir son profil.</label></li>
+          <li><label><input type="checkbox" data-correct="true"> il n’est pas nécessaire de compléter complètement son profil.</label></li>
+          <li><label><input type="checkbox" data-correct="false"> il faut juste compléter les informations sur son poids.</label></li>
         </ul>
       </div>
 
-      <div class="q-block">
+      <div class="q-block" data-q="d">
         <div class="q-label">d. Ce site…</div>
         <ul class="options">
-          <li><label><input type="checkbox"> propose des menus pour les végétariens.</label></li>
-          <li><label><input type="checkbox"> n’est pas pour les végétariens.</label></li>
-          <li><label><input type="checkbox"> est seulement pour les végétariens.</label></li>
+          <li><label><input type="checkbox" data-correct="true"> propose des menus pour les végétariens.</label></li>
+          <li><label><input type="checkbox" data-correct="false"> n’est pas pour les végétariens.</label></li>
+          <li><label><input type="checkbox" data-correct="false"> est seulement pour les végétariens.</label></li>
         </ul>
       </div>
 
-      <div class="q-block">
+      <div class="q-block" data-q="e">
         <div class="q-label">e. Pour suivre ce régime,…</div>
         <ul class="options">
-          <li><label><input type="checkbox"> il faut être bon cuisinier.</label></li>
-          <li><label><input type="checkbox"> il est indispensable d’être sportif.</label></li>
-          <li><label><input type="checkbox"> il n’est pas nécessaire de savoir cuisiner.</label></li>
+          <li><label><input type="checkbox" data-correct="false"> il faut être bon cuisinier.</label></li>
+          <li><label><input type="checkbox" data-correct="false"> il est indispensable d’être sportif.</label></li>
+          <li><label><input type="checkbox" data-correct="true"> il n’est pas nécessaire de savoir cuisiner.</label></li>
         </ul>
       </div>
 
-      <div class="q-block">
+      <div class="q-block" data-q="f">
         <div class="q-label">f. Finalement, Raoul décide de…</div>
         <ul class="options">
-          <li><label><input type="checkbox"> commander des menus végétariens.</label></li>
-          <li><label><input type="checkbox"> s’inscrire sur le site.</label></li>
-          <li><label><input type="checkbox"> faire du sport.</label></li>
+          <li><label><input type="checkbox" data-correct="false"> commander des menus végétariens.</label></li>
+          <li><label><input type="checkbox" data-correct="true"> s’inscrire sur le site.</label></li>
+          <li><label><input type="checkbox" data-correct="false"> faire du sport.</label></li>
         </ul>
       </div>
-
-      <p class="hint">👉 此练习不自动判分，课堂讲解时可一起核对答案。</p>
     </section>
 
     <!-- EXO 2 -->
@@ -145,52 +178,100 @@
       <h3>2. Réécoutez et numérotez les actions dans l’ordre.</h3>
       <p class="hint">
         Numérotez dans l’ordre les actions qu’il faut faire pour s’inscrire sur l’application et l’utiliser.
-        Attention, il y a plusieurs intrus（多余项）!
+        Attention, il y a plusieurs intrus : pour les intrus, écrivez <strong>0</strong>（多余项请填 0）。
       </p>
 
-      <div class="q-block">
+      <div class="q-block" style="background:#f9fafb;">
         <div class="order-line">
           <span>Remplir son profil</span>
-          <input type="number" min="1" max="9" placeholder="N°">
-        </div>
-        <div class="order-line">
-          <span>Envoyer une photo</span>
-          <input type="number" min="1" max="9" placeholder="N°">
-        </div>
-        <div class="order-line">
-          <span>Choisir un menu</span>
-          <input type="number" min="1" max="9" placeholder="N°">
-        </div>
-        <div class="order-line">
-          <span>Préparer les plats</span>
-          <input type="number" min="1" max="9" placeholder="N°">
-        </div>
-        <div class="order-line">
-          <span>Recevoir les plats préparés</span>
-          <input type="number" min="1" max="9" placeholder="N°">
-        </div>
-        <div class="order-line">
-          <span>Acheter de la viande</span>
-          <input type="number" min="1" max="9" placeholder="N°">
-        </div>
-        <div class="order-line">
-          <span>Sélectionner ses plats</span>
-          <input type="number" min="1" max="9" placeholder="N°">
-        </div>
-        <div class="order-line">
-          <span>Enregistrer sa liste de course</span>
-          <input type="number" min="1" max="9" placeholder="N°">
-        </div>
-        <div class="order-line">
-          <span>Aller faire des courses</span>
-          <input type="number" min="1" max="9" placeholder="N°">
+          <input type="number" min="0" max="6" value="1" disabled>
         </div>
       </div>
 
-      <p class="hint">👉 先自己完成，再在课堂上或和同伴一起对答案、找出“intrus（多余项）”。</p>
+      <div class="q-block">
+        <div class="order-line">
+          <span>Envoyer une photo</span>
+          <input type="number" min="0" max="6" placeholder="N°" data-key="0">
+        </div>
+        <div class="order-line">
+          <span>Choisir un menu</span>
+          <input type="number" min="0" max="6" placeholder="N°" data-key="2">
+        </div>
+        <div class="order-line">
+          <span>Préparer les plats</span>
+          <input type="number" min="0" max="6" placeholder="N°" data-key="6">
+        </div>
+        <div class="order-line">
+          <span>Recevoir les plats préparés</span>
+          <input type="number" min="0" max="6" placeholder="N°" data-key="0">
+        </div>
+        <div class="order-line">
+          <span>Acheter de la viande</span>
+          <input type="number" min="0" max="6" placeholder="N°" data-key="0">
+        </div>
+        <div class="order-line">
+          <span>Sélectionner ses plats</span>
+          <input type="number" min="0" max="6" placeholder="N°" data-key="3">
+        </div>
+        <div class="order-line">
+          <span>Enregistrer sa liste de courses</span>
+          <input type="number" min="0" max="6" placeholder="N°" data-key="4">
+        </div>
+        <div class="order-line">
+          <span>Aller faire des courses</span>
+          <input type="number" min="0" max="6" placeholder="N°" data-key="5">
+        </div>
+      </div>
+    </section>
+
+    <!-- 自动判分按钮 -->
+    <section class="bloc-exo">
+      <button type="button" class="btn-check" id="checkBtn">Corriger / 检查答案</button>
+      <div id="scoreBox" class="score-box" style="display:none;"></div>
     </section>
   </main>
 
   <footer class="hint">© 《高级法语综合课》</footer>
+
+  <script>
+    document.getElementById("checkBtn").addEventListener("click", function(){
+      let ex1Total = 0, ex1Score = 0;
+
+      // Exercice 1：多选题自动判分
+      document.querySelectorAll(".q-block[data-q]").forEach(block => {
+        ex1Total++;
+        let ok = true;
+        const inputs = block.querySelectorAll('input[type="checkbox"]');
+        inputs.forEach(inp => {
+          const should = inp.dataset.correct === "true";
+          if (inp.checked !== should) ok = false;
+        });
+        block.style.backgroundColor = ok ? "#ecfdf5" : "#fef2f2";
+        if (ok) ex1Score++;
+      });
+
+      // Exercice 2：排序题自动判分（intrus = 0）
+      let ex2Total = 0, ex2Score = 0;
+      document.querySelectorAll('.order-line input[data-key]').forEach(inp => {
+        ex2Total++;
+        const expected = Number(inp.dataset.key);
+        const val = Number(inp.value);
+        const ok = (val === expected);
+        inp.style.backgroundColor = ok ? "#ecfdf5" : "#fee2e2";
+        if (ok) ex2Score++;
+      });
+
+      const totalScore = ex1Score + ex2Score;
+      const totalMax = ex1Total + ex2Total;
+
+      const box = document.getElementById("scoreBox");
+      box.style.display = "block";
+      box.innerHTML = `
+        Exercice 1 : ${ex1Score} / ${ex1Total}<br>
+        Exercice 2 : ${ex2Score} / ${ex2Total}<br>
+        <strong>Total : ${totalScore} / ${totalMax}</strong>
+      `;
+    });
+  </script>
 </body>
 </html>
