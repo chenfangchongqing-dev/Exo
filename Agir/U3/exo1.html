@@ -6,19 +6,42 @@
   <title>Agir – U3 · Donnez des renseignements sur un service en ligne</title>
   <link rel="stylesheet" href="../../style.css">
   <style>
-    body{font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:#f7f7fb;margin:0;color:#0f172a}
-    header,main,footer{max-width:1000px;margin:0 auto;padding:20px}
+    body{
+      font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      background:#f7f7fb;
+      margin:0;
+      color:#0f172a;
+    }
+    header,main,footer{
+      max-width:1000px;
+      margin:0 auto;
+      padding:20px;
+    }
     h1{margin:.2rem 0}
-    .card{background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:18px;box-shadow:0 8px 22px rgba(0,0,0,.06)}
+    .card{
+      background:#fff;
+      border:1px solid #e5e7eb;
+      border-radius:14px;
+      padding:18px;
+      box-shadow:0 8px 22px rgba(0,0,0,.06);
+    }
     ol{padding-left:1.2rem}
     details summary{cursor:pointer;user-select:none}
     .hint{color:#64748b;font-size:.92rem}
-    .btn{display:inline-block;padding:8px 12px;border:1px solid #0ea5e9;border-radius:10px;text-decoration:none;color:#0ea5e9}
+    .btn{
+      display:inline-block;
+      padding:8px 12px;
+      border:1px solid #0ea5e9;
+      border-radius:10px;
+      text-decoration:none;
+      color:#0ea5e9;
+      font-size:0.95rem;
+      margin-top:8px;
+    }
   </style>
 </head>
 <body>
   <header>
-    <!-- U3/exo1.html 顶部 -->
     <a href="../" style="text-decoration:none;color:#0ea5e9">← Retour à Agir</a>
 
     <h1>Agir – Unité 3</h1>
@@ -26,6 +49,7 @@
   </header>
 
   <main class="card">
+    <!-- CONSIGNES -->
     <section>
       <h3>🎯 Consignes</h3>
       <ol>
@@ -40,49 +64,85 @@
       </ol>
     </section>
 
+    <!-- EXPRESSIONS UTILES -->
+    <section style="margin-top:18px">
+      <details open>
+        <summary>🧰 Expressions utiles – 语言工具箱</summary>
+        <div style="margin-top:10px;padding:10px 12px;background:#f9fafb;border:1px solid #e5e7eb;border-radius:10px">
+          <h4 style="margin-top:0;text-transform:uppercase;font-size:0.9rem;color:#b91c1c;letter-spacing:.03em">
+            Exprimer une obligation
+          </h4>
+          <ul style="margin-top:6px">
+            <li>Il est indispensable de présenter un numéro de sécurité sociale.</li>
+            <li>Il faut que vous possédiez un ordinateur, une tablette ou un smartphone.</li>
+            <li>Il doit opter pour une prise en charge médicale à distance.</li>
+          </ul>
+
+          <h4 style="margin-top:16px;text-transform:uppercase;font-size:0.9rem;color:#b91c1c;letter-spacing:.03em">
+            Parler d’un service en ligne
+          </h4>
+          <ul style="margin-top:6px">
+            <li>Tu peux même avoir la séance en replay si tu n’es pas disponible.</li>
+            <li>Il y a une séance d’essai gratuite.</li>
+            <li>La visioconférence, ça permet de faire des blagues.</li>
+            <li>Il peut donc parfois y avoir des blancs, des silences.</li>
+          </ul>
+
+          <p class="hint" style="margin-top:10px">
+            👉 写作建议：先说明<strong>条件</strong>（设备、网络、费用），
+            再介绍<strong>服务形式</strong>（visioconférence、replay 等）和<strong>优势</strong>。
+          </p>
+        </div>
+      </details>
+    </section>
+
+    <!-- PADLET -->
     <section style="margin-top:18px">
       <h3>💬 Publiez votre descriptif (Padlet) :</h3>
-      <!-- Padlet：可直接在页面里发帖/上传文本 -->
-      <div class="padlet-embed" style="border:1px solid rgba(0,0,0,0.1);border-radius:2px;box-sizing:border-box;overflow:hidden;position:relative;width:100%;background:#F4F4F4">
-        <p style="padding:0;margin:0">
-          <iframe src="https://padlet.com/embed/rv4fpdttx7u3bfou"
-                  frameborder="0"
-                  allow="camera;microphone;geolocation;display-capture;clipboard-write"
-                  style="width:100%;height:608px;display:block;padding:0;margin:0"></iframe>
-        </p>
-        <div style="display:flex;align-items:center;justify-content:end;margin:0;height:28px">
-          <a href="https://padlet.com?ref=embed" style="display:block;flex-grow:0;margin:0;border:none;padding:0;text-decoration:none" target="_blank" rel="noopener noreferrer">
-            <div style="display:flex;align-items:center;">
-              <img src="https://padlet.net/embeds/made_with_padlet_2022.png" width="114" height="28" style="padding:0;margin:0;background:0 0;border:none;box-shadow:none" alt="Made with Padlet">
-            </div>
+
+      <!-- ★ 强制显示 Padlet 工具栏（包含 + 按钮） -->
+      <div class="padlet-embed" style="border:1px solid rgba(0,0,0,0.1);border-radius:2px;overflow:hidden;width:100%;background:#F4F4F4">
+        <iframe 
+          src="https://padlet.com/embed/rv4fpdttx7u3bfou?toolbar=show"
+          frameborder="0"
+          allow="camera;microphone;geolocation;display-capture;clipboard-write"
+          style="width:100%;height:608px;display:block;padding:0;margin:0"></iframe>
+
+        <div style="display:flex;align-items:center;justify-content:end;height:28px">
+          <a href="https://padlet.com?ref=embed" target="_blank" rel="noopener noreferrer">
+            <img src="https://padlet.net/embeds/made_with_padlet_2022.png"
+                 width="114" height="28"
+                 alt="Made with Padlet">
           </a>
         </div>
       </div>
 
-      <!-- Zone de commentaire / 互评提示 -->
+      <!-- ★ 双保险：直接跳转提交按钮 -->
+      <a class="btn"
+         href="https://padlet.com/chenfangchongqing/agir-rv4fpdttx7u3bfou"
+         target="_blank" rel="noopener noreferrer">➕ 在 Padlet 全屏页面提交作品</a>
+
+      <p class="hint" style="margin-top:4px">如果看不到加号（➕），请点击上方按钮进入 Padlet 提交。</p>
+
+      <!-- 互评 -->
       <div style="margin-top:14px;padding:12px 14px;background:#f9fafb;border:1px solid #e5e7eb;border-radius:10px">
         <p style="margin:0 0 4px;"><strong>💭 Commentez les descriptifs de vos camarades</strong></p>
         <p style="margin:0;font-size:0.95rem;color:#475569;">
-          Lisez quelques descriptifs postés sur le Padlet et laissez un commentaire positif :  
-          <em>Qu’est-ce qui est clair et bien expliqué ? Qu’est-ce qui vous donne envie
-          d’essayer cette application ? Avez-vous une question à poser ?</em>
-        </p>
-        <p style="margin:6px 0 0;font-size:0.95rem;color:#475569;">
-          阅读同学发布的应用介绍，并留下建设性评论：  
-          <em>哪些信息最清楚？哪一点让你最想尝试这个服务？你还有什么问题想问？</em>
+          Lisez quelques descriptifs postés sur le Padlet et laissez un commentaire positif.
         </p>
       </div>
-
-      <p class="hint">如遇 Padlet 访问缓慢，可使用下方“备用提交通道”。</p>
     </section>
 
+    <!-- 腾讯文档备用提交 -->
     <section style="margin-top:18px">
       <details>
         <summary>🔄 备用提交通道（腾讯文档收集表）</summary>
         <p class="hint" style="margin:10px 0 6px">
-          支持上传文本稿（Word/PDF/截图等）。若下方嵌入区未加载，请点击
-          <a class="btn" href="https://docs.qq.com/form/page/DSFpQZWRnS1FCeWNC" target="_blank" rel="noopener noreferrer">在新页面打开</a>
+          若 Padlet 加载缓慢，请在此提交：  
+          <a class="btn" href="https://docs.qq.com/form/page/DSFpQZWRnS1FCeWNC"
+             target="_blank" rel="noopener noreferrer">打开腾讯文档收集表</a>
         </p>
+
         <iframe
           src="https://docs.qq.com/form/page/DSFpQZWRnS1FCeWNC"
           width="100%" height="900" frameborder="0"
