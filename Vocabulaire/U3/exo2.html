@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vocabulaire – Application de sport en ligne</title>
+
+  <!-- 按你的项目需要调整路径，如果有全局 style.css -->
+  <link rel="stylesheet" href="../../style.css">
+
+  <style>
+    body{
+      font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      background: radial-gradient(circle at 0 0,#eff6ff 0,#f5f7fb 40%,#f9fafb 100%);
+      color:#0f172a;
+      margin:0;
+    }
+    header,main,footer{
+      max-width:900px;
+      margin:0 auto;
+      padding:20px;
+    }
+    h1{margin:.2rem 0;font-size:1.5rem;}
+    .hint{color:#64748b;font-size:.92rem;}
+
+    .card{
+      background:#ffffff;
+      border-radius:14px;
+      border:1px solid #e5e7eb;
+      padding:18px;
+      box-shadow:0 8px 22px rgba(15,23,42,0.06);
+      margin-top:16px;
+    }
+
+    audio{width:100%; margin:10px 0;}
+
+    /* 折叠文本 */
+    details{
+      margin-top:10px;
+      font-size:0.95rem;
+    }
+    details summary{
+      cursor:pointer;
+      color:#0ea5e9;
+      font-weight:500;
+    }
+    details[open] summary{
+      color:#0284c7;
+    }
+    details p{
+      margin-top:8px;
+      padding:8px 10px;
+      background:#f9fafb;
+      border-radius:10px;
+      border:1px solid #e5e7eb;
+    }
+
+    /* 选择表格 */
+    .check-table{
+      width:100%;
+      border-collapse:collapse;
+      margin-top:18px;
+      font-size:0.95rem;
+    }
+    .check-table th,
+    .check-table td{
+      border:1px solid #d4b4ad;
+      text-align:center;
+      padding:8px 4px;
+    }
+    .check-table thead{
+      background:#fdf4f4;
+    }
+    .check-table th{
+      font-weight:600;
+      color:#7b5b5b;
+    }
+
+    .col-label{
+      text-align:left;
+      padding-left:6px;
+    }
+
+    .result-msg{
+      font-size:0.9rem;
+      margin-top:8px;
+    }
+    .correct-cell{
+      background:#ecfdf5;
+    }
+    .wrong-cell{
+      background:#fef2f2;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:8px 16px;
+      border-radius:999px;
+      border:1px solid #0ea5e9;
+      background:#0ea5e9;
+      color:#fff;
+      font-size:0.95rem;
+      cursor:pointer;
+      margin-top:14px;
+      margin-right:8px;
+      transition:all .15s ease-out;
+    }
+    .btn:hover{
+      background:#0284c7;
+      border-color:#0284c7;
+      transform:translateY(-1px);
+      box-shadow:0 10px 26px rgba(14,165,233,0.4);
+    }
+    .btn-secondary{
+      background:#e5e7eb;
+      border-color:#e5e7eb;
+      color:#111827;
+      box-shadow:none;
+    }
+    .btn-secondary:hover{
+      background:#d4d4d8;
+      border-color:#d4d4d8;
+      box-shadow:0 6px 16px rgba(148,163,184,.4);
+    }
+
+    .score-box{
+      margin-top:10px;
+      padding:8px 12px;
+      border-radius:10px;
+      border:1px solid #e5e7eb;
+      background:#f9fafb;
+      font-size:0.9rem;
+      color:#334155;
+    }
+
+    @media (max-width:640px){
+      .check-table th,
+      .check-table td{
+        padding:6px 2px;
+      }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <a href="../" style="text-decoration:none;color:#0ea5e9">← Retour</a>
+  <h1>Vocabulaire – Application de sport en ligne</h1>
+  <p class="hint">
+    Écoutez l’enregistrement puis cochez les personnes qui utilisent une application de sport en ligne.
+    听录音，勾选那些使用线上运动应用的人。
+  </p>
+</header>
+
+<main class="card">
+
+  <!-- 音频 -->
+  <audio controls>
+    <source src="audio/exo_voc_en_ligne.mp3" type="audio/mpeg">
+    Votre navigateur ne supporte pas l’élément audio.
+  </audio>
+
+  <!-- 折叠听力文本 -->
+  <details>
+    <summary>Afficher / 隐藏 听力文本</summary>
+    <p>
+      <strong>Exemple :</strong> Je fais de la gym avec une super appli !<br><br>
+      <strong>a.</strong> On est abonnés à cette salle de sport.<br>
+      <strong>b.</strong> Le prof nous regarde sur son écran pour nous corriger.<br>
+      <strong>c.</strong> Je reçois le lien le jour de la séance.<br>
+      <strong>d.</strong> Il va à la piscine tous les jours.<br>
+      <strong>e.</strong> Nous prenons des cours de gym à distance.<br>
+      <strong>f.</strong> Parfois, j’ai du mal à me connecter.<br>
+      <strong>g.</strong> Elle peut refaire la séance en replay.<br>
+      <strong>h.</strong> J’ai une webcam sur ma tablette pour voir le prof.
+    </p>
+  </details>
+
+  <!-- 选择表格 -->
+  <table class="check-table">
+    <thead>
+    <tr>
+      <th>Ex.</th>
+      <th>a.</th>
+      <th>b.</th>
+      <th>c.</th>
+      <th>d.</th>
+      <th>e.</th>
+      <th>f.</th>
+      <th>g.</th>
+      <th>h.</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>✔</td>
+      <td data-letter="a"><input type="checkbox" class="check-item" data-letter="a"></td>
+      <td data-letter="b"><input type="checkbox" class="check-item" data-letter="b" data-correct="true"></td>
+      <td data-letter="c"><input type="checkbox" class="check-item" data-letter="c" data-correct="true"></td>
+      <td data-letter="d"><input type="checkbox" class="check-item" data-letter="d"></td>
+      <td data-letter="e"><input type="checkbox" class="check-item" data-letter="e" data-correct="true"></td>
+      <td data-letter="f"><input type="checkbox" class="check-item" data-letter="f" data-correct="true"></td>
+      <td data-letter="g"><input type="checkbox" class="check-item" data-letter="g" data-correct="true"></td>
+      <td data-letter="h"><input type="checkbox" class="check-item" data-letter="h" data-correct="true"></td>
+    </tr>
+    </tbody>
+  </table>
+
+  <button type="button" class="btn" id="checkBtn">Vérifier / 检查答案</button>
+  <button type="button" class="btn btn-secondary" id="resetBtn">Réinitialiser / 重做</button>
+
+  <div id="scoreBox" class="score-box" style="display:none;"></div>
+
+</main>
+
+<footer class="hint" style="max-width:900px;margin:0 auto 20px;padding:0 20px;">
+  © 《高级法语综合课》
+</footer>
+
+<script>
+  const checkboxes = document.querySelectorAll(".check-item");
+  const cells = document.querySelectorAll(".check-table td[data-letter]");
+  const scoreBox = document.getElementById("scoreBox");
+
+  // 评分：正确答案 b c e f g h
+  document.getElementById("checkBtn").addEventListener("click", ()=>{
+    let total = 0;
+    let score = 0;
+
+    cells.forEach(cell=>{
+      cell.classList.remove("correct-cell","wrong-cell");
+    });
+
+    checkboxes.forEach(cb=>{
+      const isCorrect = cb.dataset.correct === "true";
+      const letter = cb.dataset.letter;
+      const cell = document.querySelector(`td[data-letter="${letter}"]`);
+
+      if(isCorrect){
+        total++;
+        if(cb.checked){
+          score++;
+          cell.classList.add("correct-cell");
+        }else{
+          cell.classList.add("wrong-cell");
+        }
+      }else{
+        // 错误选项被勾选，也标红提示一下
+        if(cb.checked){
+          cell.classList.add("wrong-cell");
+        }
+      }
+    });
+
+    scoreBox.style.display = "block";
+    scoreBox.textContent = `Score : ${score} / ${total}  （正确答案：b, c, e, f, g, h）`;
+  });
+
+  // 重做
+  document.getElementById("resetBtn").addEventListener("click", ()=>{
+    checkboxes.forEach(cb=> cb.checked = false);
+    cells.forEach(cell=> cell.classList.remove("correct-cell","wrong-cell"));
+    scoreBox.style.display = "none";
+    scoreBox.textContent = "";
+  });
+</script>
+
+</body>
+</html>
