@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PO – U3 · Téléconsultation</title>
+
+  <!-- 按你的目录调整路径 -->
+  <link rel="stylesheet" href="../../style.css">
+
+  <style>
+    /* 本页面专用的小样式，和全站 style.css 配合使用 */
+
+    body{
+      margin:0;
+      font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      background: radial-gradient(circle at 0 0,#eff6ff 0,#f5f7fb 40%,#f9fafb 100%);
+      color:#0f172a;
+    }
+    header,main,footer{
+      max-width:1000px;
+      margin:0 auto;
+      padding:20px;
+    }
+    h1{margin:.1rem 0;font-size:1.6rem;}
+    h2{margin:.2rem 0 .8rem;font-size:1.3rem;}
+    .hint{color:#64748b;font-size:.92rem;}
+
+    .card{
+      background:#ffffff;
+      border-radius:14px;
+      border:1px solid #e5e7eb;
+      padding:18px;
+      box-shadow:0 8px 22px rgba(15,23,42,0.06);
+      margin-top:16px;
+    }
+
+    /* 结构脚手架：左右两栏、手机端自动换行 */
+    .scaffold-grid{
+      display:flex;
+      flex-wrap:wrap;
+      gap:16px;
+      margin-top:10px;
+    }
+    .scaffold-col{
+      flex:1 1 280px;
+      background:#f9fafb;
+      border-radius:12px;
+      border:1px solid #e5e7eb;
+      padding:12px 14px;
+    }
+    .scaffold-col h3{
+      margin-top:0;
+      font-size:1rem;
+    }
+    .scaffold-item{
+      margin-bottom:4px;
+      font-size:0.94rem;
+    }
+    .scaffold-label{
+      font-weight:600;
+      color:#4b5563;
+    }
+
+    /* 观点语块 */
+    .opinions-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:16px;
+      margin-top:10px;
+    }
+    .opinion-card{
+      background:#ffffff;
+      border-radius:12px;
+      border:1px solid #e5e7eb;
+      padding:10px 12px;
+      box-shadow:0 4px 14px rgba(148,163,184,0.18);
+      font-size:0.94rem;
+    }
+    .opinion-card h3{
+      margin:.1rem 0 .4rem;
+      font-size:1rem;
+    }
+    .opinion-card ul{
+      margin:0;
+      padding-left:1.1rem;
+    }
+
+    /* Padlet 区域 */
+    .padlet-embed{
+      margin-top:12px;
+      border-radius:12px;
+      overflow:hidden;
+      border:1px solid rgba(0,0,0,0.1);
+      background:#f4f4f4;
+    }
+    .padlet-embed iframe{
+      width:100%;
+      height:480px;
+      border:0;
+    }
+
+    /* 练习录音器（非提交，只用于预演） */
+    .recorder{
+      margin-top:10px;
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px dashed #cbd5f5;
+      background:#eff6ff;
+      font-size:0.9rem;
+    }
+    .rec-controls{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:8px;
+      align-items:center;
+    }
+    .btn-rec{
+      padding:6px 12px;
+      border-radius:999px;
+      border:1px solid #0ea5e9;
+      background:#0ea5e9;
+      color:#fff;
+      font-size:0.9rem;
+      cursor:pointer;
+      transition:all .15s ease-out;
+    }
+    .btn-rec.stop{
+      background:#ef4444;
+      border-color:#ef4444;
+    }
+    .btn-rec[disabled]{
+      opacity:.6;
+      cursor:not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="../" style="text-decoration:none;color:#0ea5e9;">← Retour à PO</a>
+    <h1>PO – Unité 3</h1>
+    <h2>Que pensez-vous des consultations médicales en ligne ?</h2>
+    <p class="hint">
+      En 30&nbsp;secondes, exprimez spontanément votre avis sur les consultations médicales en ligne
+      en suivant la structure thème–thèse–arguments–conclusion.
+    </p>
+  </header>
+
+  <main>
+    <!-- 1. 结构脚手架 -->
+    <section class="card">
+      <h3>🧱 Langage support : organiser votre avis</h3>
+      <div class="scaffold-grid">
+        <div class="scaffold-col">
+          <h3>Structure</h3>
+
+          <div class="scaffold-item">
+            <span class="scaffold-label">Thème（话题）：</span>
+            <span>La téléconsultation / les consultations médicales en ligne.</span>
+          </div>
+
+          <div class="scaffold-item">
+            <span class="scaffold-label">Thèse（论点）：</span>
+            <span>
+              Moi, je la trouve <strong>utile</strong> / <strong>pratique</strong> /
+              <strong>pas très fiable</strong>, etc.
+            </span>
+          </div>
+
+          <div class="scaffold-item">
+            <span class="scaffold-label">Argument(s)（论据）：</span>
+            <span>
+              disponibilité, confort, distance, fiabilité du diagnostic, absence d’examens, etc.
+            </span>
+          </div>
+
+          <div class="scaffold-item">
+            <span class="scaffold-label">Conclusion（收束）：</span>
+            <span>
+              Donc, pour moi, c’est (plutôt) une bonne / mauvaise solution.  
+            </span>
+          </div>
+        </div>
+
+        <div class="scaffold-col">
+          <h3>Exemple de micro-expression (modèle)</h3>
+          <p style="font-size:0.94rem; margin-top:4px;">
+            Moi, je trouve la téléconsultation peu fiable.<br>
+            Sans examens ni analyses, on risque de recevoir un mauvais diagnostic,
+            et au final, ça peut faire plus de mal que de bien.<br>
+            Donc, pour moi, ce n’est pas une bonne solution.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. 观点语块 -->
+    <section class="card">
+      <h3>💬 Phrases utiles pour exprimer votre avis</h3>
+
+      <div class="opinions-grid">
+        <!-- positifs -->
+        <div class="opinion-card">
+          <h3>👍 Avis positifs</h3>
+          <ul>
+            <li>C’est super pratique, surtout quand on n’a pas le temps d’aller à l’hôpital.</li>
+            <li>Moi j’aime bien, ça évite d’attendre des heures dans la salle d’attente.</li>
+            <li>Pour des petits problèmes, ça suffit largement.</li>
+            <li>On peut consulter depuis chez soi, c’est plus confortable.</li>
+            <li>C’est une bonne solution pour les gens qui habitent loin des centres médicaux.</li>
+          </ul>
+        </div>
+
+        <!-- mitigés -->
+        <div class="opinion-card">
+          <h3>🤔 Avis mitigés</h3>
+          <ul>
+            <li>Ça dépend du problème : parfois ça marche, parfois non.</li>
+            <li>C’est bien pour un premier avis, mais j’ai quand même besoin de voir un médecin en vrai.</li>
+            <li>Je ne sais pas si c’est vraiment fiable pour diagnostiquer tout.</li>
+            <li>Je ne suis pas contre, mais je préfère le contact direct avec le médecin.</li>
+          </ul>
+        </div>
+
+        <!-- négatifs -->
+        <div class="opinion-card">
+          <h3>👎 Avis négatifs</h3>
+          <ul>
+            <li>Je n’ai pas confiance, on ne peut pas tout expliquer par vidéo.</li>
+            <li>Pour moi, la téléconsultation manque d’examens physiques, donc c’est limité.</li>
+            <li>Je trouve que c’est impersonnel.</li>
+            <li>Je pense que certains médecins ne peuvent pas être aussi précis à distance.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. 练习录音（预演用） -->
+    <section class="card">
+      <h3>🎤 Entraînez-vous à l’oral (optionnel)</h3>
+      <p class="hint">
+        Enregistrez-vous une fois pour vous entraîner, puis publiez votre production sur le Padlet de la classe.
+      </p>
+      <div class="recorder">
+        <div>Cliquer sur «&nbsp;Commencer&nbsp;» puis parler pendant 30&nbsp;secondes environ.</div>
+        <div class="rec-controls">
+          <button type="button" class="btn-rec" id="btnStart">Commencer l’enregistrement</button>
+          <button type="button" class="btn-rec stop" id="btnStop" disabled>Arrêter</button>
+          <audio id="playback" controls style="flex:1; min-width:180px; display:none;"></audio>
+        </div>
+        <div id="recStatus" class="hint" style="margin-top:6px;"></div>
+      </div>
+    </section>
+
+    <!-- 4. Padlet 提交区（嵌入，不跳转） -->
+    <section class="card">
+      <h3>📌 Publiez votre enregistrement (Padlet)</h3>
+      <p class="hint">
+        Cliquez sur le bouton «&nbsp;+&nbsp;» sur le Padlet ci-dessous et enregistrez ou déposez votre audio.
+      </p>
+      <div class="padlet-embed">
+        <!-- 建议最终用 Padlet 提供的 “Intégrer sur votre site Web” 代码；
+             这里先用你的墙链接填在 iframe 里。 -->
+        <iframe
+          src="https://padlet.com/chenfangchongqing/production-orale-qgrvct0nbvpkkqnj"
+          allow="camera; microphone; clipboard-read; clipboard-write; geolocation">
+        </iframe>
+      </div>
+    </section>
+  </main>
+
+  <footer class="hint">
+    © 《高级法语综合课》 – Production orale U3
+  </footer>
+
+  <!-- 简单录音器：只用于本地练习，不做上传 -->
+  <script>
+    (function(){
+      const btnStart = document.getElementById("btnStart");
+      const btnStop = document.getElementById("btnStop");
+      const audio = document.getElementById("playback");
+      const status = document.getElementById("recStatus");
+
+      let mediaRecorder = null;
+      let chunks = [];
+
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        status.textContent = "L’enregistrement audio n’est pas supporté par ce navigateur.";
+        btnStart.disabled = true;
+        return;
+      }
+
+      btnStart.addEventListener("click", async () => {
+        try {
+          const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+          mediaRecorder = new MediaRecorder(stream);
+          chunks = [];
+
+          mediaRecorder.ondataavailable = e => {
+            if (e.data.size > 0) chunks.push(e.data);
+          };
+
+          mediaRecorder.onstop = () => {
+            const blob = new Blob(chunks, { type: "audio/webm" });
+            const url = URL.createObjectURL(blob);
+            audio.src = url;
+            audio.style.display = "block";
+            status.textContent = "Enregistrement terminé. Vous pouvez réécouter votre production puis la publier sur Padlet.";
+          };
+
+          mediaRecorder.start();
+          btnStart.disabled = true;
+          btnStop.disabled = false;
+          status.textContent = "Enregistrement en cours… Parlez pendant environ 30 secondes.";
+        } catch (err) {
+          console.error(err);
+          status.textContent = "Impossible d’accéder au microphone.";
+        }
+      });
+
+      btnStop.addEventListener("click", () => {
+        if (mediaRecorder && mediaRecorder.state === "recording") {
+          mediaRecorder.stop();
+          btnStart.disabled = false;
+          btnStop.disabled = true;
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
