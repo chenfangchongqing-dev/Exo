@@ -34,25 +34,24 @@
       box-shadow:0 8px 22px rgba(15,23,42,0.06);
       margin-top:16px;
     }
-/* 箭头步骤块 */
-.arrow-step{
-  margin-bottom:10px;
-  padding:8px 10px;
-  border-radius:10px;
-  background:#f3f4f6;
-  border:1px solid #e5e7eb;
-}
 
-.arrow-title{
-  font-weight:600;
-  color:#374151;
-}
-
-.arrow-content{
-  margin-top:3px;
-  font-size:0.92rem;
-  color:#1f2937;
-}
+    /* 箭头步骤模块 */
+    .arrow-step{
+      margin-bottom:10px;
+      padding:8px 10px;
+      border-radius:10px;
+      background:#f3f4f6;
+      border:1px solid #e5e7eb;
+    }
+    .arrow-title{
+      font-weight:600;
+      color:#374151;
+    }
+    .arrow-content{
+      margin-top:3px;
+      font-size:0.92rem;
+      color:#1f2937;
+    }
 
     /* 结构脚手架：左右两栏、手机端自动换行 */
     .scaffold-grid{
@@ -71,14 +70,6 @@
     .scaffold-col h3{
       margin-top:0;
       font-size:1rem;
-    }
-    .scaffold-item{
-      margin-bottom:4px;
-      font-size:0.94rem;
-    }
-    .scaffold-label{
-      font-weight:600;
-      color:#4b5563;
     }
 
     /* 观点语块 */
@@ -151,6 +142,7 @@
     }
   </style>
 </head>
+
 <body>
   <header>
     <a href="../" style="text-decoration:none;color:#0ea5e9;">← Retour à PO</a>
@@ -165,80 +157,119 @@
   <main>
     <!-- 1. 结构脚手架 -->
     <section class="card">
-  <h3>🧱 Langage support : organiser votre avis</h3>
+      <h3>🧱 Langage support : organiser votre avis</h3>
 
-  <div class="scaffold-grid">
+      <div class="scaffold-grid">
+        <!-- 左栏：步骤（更新版） -->
+        <div class="scaffold-col">
+          <h3>Structure（步骤）</h3>
 
-    <!-- 左栏：箭头流程 -->
-    <div class="scaffold-col">
-      <h3>Structure (步骤)</h3>
+          <!-- Thème -->
+          <div class="arrow-step">
+            <div class="arrow-title">Thème（话题）</div>
+            <div class="arrow-content">
+              La téléconsultation / les consultations médicales en ligne.
+            </div>
+          </div>
 
-      <div class="arrow-step">
-        <div class="arrow-title">Thème（话题）</div>
-        <div class="arrow-content">La téléconsultation ?</div>
-      </div>
+          <div class="arrow-step"><div class="arrow-title">↓</div></div>
 
-      <div class="arrow-step">
-        <div class="arrow-title">↓</div>
-      </div>
+          <!-- Thèse -->
+          <div class="arrow-step">
+            <div class="arrow-title">Thèse（论点）</div>
+            <div class="arrow-content">
+              选择你的立场：  
+              <ul style="margin:6px 0 0 1rem; padding:0;">
+                <li>⭐  <strong>positive</strong>：Moi, je trouve que c’est très pratique.</li>
+                <li>🌓 <strong>mitigée</strong>：Pour moi, ça dépend des situations.</li>
+                <li>⚠️  <strong>négative</strong>：Je trouve que ce n’est pas très fiable.</li>
+              </ul>
+            </div>
+          </div>
 
-      <div class="arrow-step">
-        <div class="arrow-title">Thèse（论点）</div>
-        <div class="arrow-content">Moi, je la trouve peu fiable / pratique / utile…</div>
-      </div>
+          <div class="arrow-step"><div class="arrow-title">↓</div></div>
 
-      <div class="arrow-step">
-        <div class="arrow-title">↓</div>
-      </div>
+          <!-- Arguments -->
+          <div class="arrow-step">
+            <div class="arrow-title">Arguments（理由 / 论据）</div>
+            <div class="arrow-content">
+              可以从这些角度选择论据：
+              <ul style="margin:6px 0 0 1rem; padding:0;">
+                <li><strong>disponibilité</strong>（时间方便）</li>
+                <li><strong>situation</strong>（小问题 vs 大问题）</li>
+                <li><strong>distance</strong>（远离医院的人群）</li>
+                <li><strong>fiabilité</strong>（诊断准确性）</li>
+                <li><strong>confort</strong>（舒适度）</li>
+                <li><strong>limites</strong>（缺少必要检查等）</li>
+              </ul>
 
-      <div class="arrow-step">
-        <div class="arrow-title">Arguments（论据）</div>
-        <div class="arrow-content">
-          risque de mauvais diagnostics, absence d'examens, confort, distance, etc.
-          <br>
-          <span class="hint">逻辑链词：car / parce que / par exemple…</span>
+              <div style="margin-top:6px;" class="hint">
+                逻辑链词：car / parce que / par exemple…
+              </div>
+            </div>
+          </div>
+
+          <div class="arrow-step"><div class="arrow-title">↓</div></div>
+
+          <!-- Conclusion -->
+          <div class="arrow-step">
+            <div class="arrow-title">Conclusion（收束）</div>
+            <div class="arrow-content">
+              Donc, pour moi, c’est une bonne / mauvaise solution.
+            </div>
+          </div>
         </div>
+
+        <!-- 右栏：示例 + 解析 -->
+        <div class="scaffold-col">
+          <h3>Exemple + Analyse（示例＋解析）</h3>
+          <p style="font-size:0.94rem; margin-top:4px;">
+            <strong>1) Thème：</strong><br>
+            La téléconsultation.<br><br>
+
+            <strong>2) Thèse：</strong><br>
+            Moi, <strong>je pense que c’est peu fiable</strong>.
+            <br>
+            <span class="hint">→ 观点表达句式（je pense que / je trouve que）</span><br><br>
+
+            <strong>3) Arguments：</strong><br>
+            Sans examens ni analyses, on risque de recevoir un mauvais diagnostic,
+            car le médecin ne peut pas vérifier précisément l’état du patient.
+            <br>
+            <span class="hint">→ 使用“因果 + 示例”逻辑结构</span><br><br>
+
+            <strong>4) Conclusion：</strong><br>
+            Donc, pour moi, ce n’est pas une bonne solution.
+            <br>
+            <span class="hint">→ 收束 + 强调个人立场</span>
+          </p>
+        </div>
+
       </div>
+    </section>
 
-      <div class="arrow-step">
-        <div class="arrow-title">↓</div>
-      </div>
-
-      <div class="arrow-step">
-        <div class="arrow-title">Conclusion（收束）</div>
-        <div class="arrow-content">Donc, pour moi, ce n’est pas une bonne solution.</div>
-      </div>
-    </div>
-
-    <!-- 右栏：示例 + 解析 -->
-    <div class="scaffold-col">
-      <h3>Exemple + Analyse（示例＋解析）</h3>
-      <p style="font-size:0.94rem;">
-        <strong>1) Thème：</strong><br>
-        La téléconsultation.<br><br>
-
-        <strong>2) Thèse：</strong><br>
-        Moi, <strong>je la trouve peu fiable</strong>.
-        <br>
-        <span class="hint">→ 观点表达句式（je trouve que / je pense que）</span><br><br>
-
-        <strong>3) Arguments：</strong><br>
-        Sans examens ni analyses, on risque de recevoir un mauvais diagnostic,
-        car le médecin ne peut pas vérifier précisément l’état du patient.
-        <br>
-        <span class="hint">→ “因果 + 示例” 的典型结构</span><br><br>
-
-        <strong>4) Conclusion：</strong><br>
-        Donc, pour moi, ce n’est pas une bonne solution.
-        <br>
-        <span class="hint">→ 总结 + 重申个人立场</span>
+    <!-- 1bis. Exemple oral -->
+    <section class="card">
+      <h3>🎧 Exemple de production orale (modèle)</h3>
+      <p class="hint">
+        Écoutez un exemple de réponse en 30&nbsp;secondes, puis préparez votre propre avis.
       </p>
-    </div>
 
-  </div>
-</section>
+      <audio controls controlsList="nodownload noplaybackrate" style="width:100%; margin-top:8px;">
+        <source src="audio/Téléconsultation_modèle.mp3" type="audio/mpeg">
+        Votre navigateur ne supporte pas l’élément audio.
+      </audio>
 
-
+      <details style="margin-top:10px; font-size:0.9rem;">
+        <summary style="cursor:pointer;">Afficher / masquer la transcription</summary>
+        <p style="margin-top:6px;">
+          La téléconsultation ? Moi, je pense que c'est peu fiable.
+          Sans examens ni analyses, on risque de recevoir un mauvais diagnostic,
+          et au final, ça peut faire plus de mal que de bien.
+          Donc, pour moi, ce n’est pas une bonne solution.
+        </p>
+      </details>
+    </section>
     <!-- 2. 观点语块 -->
     <section class="card">
       <h3>💬 Phrases utiles pour exprimer votre avis</h3>
@@ -280,7 +311,7 @@
       </div>
     </section>
 
-    <!-- 3. 练习录音（预演用） -->
+    <!-- 3. 练习录音（预演用，本地） -->
     <section class="card">
       <h3>🎤 Entraînez-vous à l’oral (optionnel)</h3>
       <p class="hint">
