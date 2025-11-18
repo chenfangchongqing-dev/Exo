@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vocabulaire – Compléter les tweets</title>
+
+  <!-- 如果你有全站统一 style.css，就按需要调整路径 -->
+  <link rel="stylesheet" href="../../style.css">
+
+  <style>
+    /* 如果已经在全站 style.css 里有通用样式，
+       可以只保留 .tweets-grid 和 .tweet-bubble 这一块 */
+
+    body{
+      font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      background: radial-gradient(circle at 0 0,#eff6ff 0,#f5f7fb 40%,#f9fafb 100%);
+      color:#0f172a;
+      margin:0;
+    }
+    header,main,footer{
+      max-width:1000px;
+      margin:0 auto;
+      padding:20px;
+    }
+    h1{margin:.1rem 0;font-size:1.6rem;}
+    .hint{color:#64748b;font-size:.92rem;}
+
+    .card{
+      background:#ffffff;
+      border-radius:14px;
+      border:1px solid #e5e7eb;
+      padding:18px;
+      box-shadow:0 8px 22px rgba(15,23,42,0.06);
+      margin-top:16px;
+    }
+
+    .word-bank{
+      margin-bottom:12px;
+      font-size:0.95rem;
+    }
+    .word-bank span{
+      display:inline-block;
+      margin-right:6px;
+    }
+
+    /* ===== 推特气泡布局 ===== */
+    .tweets-grid{
+      display:grid;
+      grid-template-columns: minmax(0,1fr) minmax(0,1fr);
+      gap:16px;
+      margin-top:10px;
+    }
+    @media (max-width:768px){
+      .tweets-grid{
+        grid-template-columns:1fr;
+      }
+    }
+
+    .tweet-item{
+      display:flex;
+      align-items:flex-start;
+      gap:8px;
+    }
+    .tweet-label{
+      font-weight:600;
+      color:#9b87a8;
+      min-width:1.4em;
+    }
+
+    .tweet-bubble{
+      position:relative;
+      background:#e7f5ff;
+      border-radius:16px;
+      padding:10px 14px;
+      border:1px solid #cbdcf2;
+      box-shadow:0 4px 12px rgba(148,163,184,0.25);
+      flex:1;
+    }
+    .tweet-bubble::before{
+      content:"";
+      position:absolute;
+      left:-10px;
+      top:12px;
+      border-width:8px 10px 8px 0;
+      border-style:solid;
+      border-color:transparent #e7f5ff transparent transparent;
+      filter:drop-shadow(0 0 1px rgba(148,163,184,0.6));
+    }
+
+    .tweet-text{
+      font-size:0.95rem;
+    }
+
+    /* 空格输入框：做成像虚线填空 */
+    .gap-input{
+      border:none;
+      border-bottom:1px dotted #6b7280;
+      background:transparent;
+      padding:0 3px;
+      min-width:120px;
+      font-size:0.95rem;
+      font-family:inherit;
+      outline:none;
+    }
+    .gap-input:focus{
+      border-bottom-style:solid;
+      border-bottom-color:#0ea5e9;
+      background:rgba(255,255,255,0.7);
+    }
+
+    .gap-correct{
+      background:#ecfdf5;
+      border-bottom-color:#16a34a !important;
+    }
+    .gap-wrong{
+      background:#fef2f2;
+      border-bottom-color:#dc2626 !important;
+    }
+
+    .btn-check{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:8px 16px;
+      border-radius:999px;
+      border:1px solid #0ea5e9;
+      background:#0ea5e9;
+      color:#fff;
+      font-size:0.95rem;
+      cursor:pointer;
+      margin-top:16px;
+      transition:all .15s ease-out;
+    }
+    .btn-check:hover{
+      background:#0284c7;
+      border-color:#0284c7;
+      transform:translateY(-1px);
+      box-shadow:0 10px 26px rgba(14,165,233,0.4);
+    }
+
+    .score-box{
+      margin-top:10px;
+      padding:8px 12px;
+      border-radius:10px;
+      border:1px solid #e5e7eb;
+      background:#f9fafb;
+      font-size:0.9rem;
+      color:#334155;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="../" style="text-decoration:none;color:#0ea5e9">← Retour</a>
+    <h1>Vocabulaire – Compléter les tweets</h1>
+    <p class="hint">Complétez les tweets avec les mots ou expressions du cadre. 然后点击“Vérifier / 检查答案”。</p>
+  </header>
+
+  <main class="card">
+    <!-- 词汇栏 -->
+    <div class="word-bank">
+      <strong>Complétez avec :</strong><br>
+      <span>l’assurance maladie</span> •
+      <span>médecin</span> •
+      <span>assuré</span> •
+      <span>cabinet médical</span> •
+      <span>remboursement</span> •
+      <span>pharmacies</span> •
+      <span>consultation médicale</span> •
+      <span>numéro de sécurité sociale</span> •
+      <span>en pleine forme</span>
+    </div>
+
+    <!-- 推特气泡布局 -->
+    <div class="tweets-grid">
+
+      <!-- a -->
+      <div class="tweet-item">
+        <div class="tweet-label">a.</div>
+        <div class="tweet-bubble">
+          <div class="tweet-text">
+            Quand je suis arrivé en France, je me suis inscrit à
+            <strong>l’assurance maladie</strong>. Mais je n’ai toujours pas reçu mon
+            <input class="gap-input" data-answer="numéro de sécurité sociale" placeholder="............">
+            .<br>
+            Si je consulte un
+            <input class="gap-input" data-answer="médecin" placeholder="............">
+            , est-ce que j’aurai droit à un
+            <input class="gap-input" data-answer="remboursement" placeholder="............">
+            ?
+          </div>
+        </div>
+      </div>
+
+      <!-- b -->
+      <div class="tweet-item">
+        <div class="tweet-label">b.</div>
+        <div class="tweet-bubble">
+          <div class="tweet-text">
+            Tu n’as pas l’air d’être
+            <input class="gap-input" data-answer="en pleine forme" placeholder="............">
+            !<br>
+            Pourquoi tu ne vas pas faire une
+            <input class="gap-input" data-answer="consultation médicale" placeholder="............">
+            ?
+          </div>
+        </div>
+      </div>
+
+      <!-- c -->
+      <div class="tweet-item">
+        <div class="tweet-label">c.</div>
+        <div class="tweet-bubble">
+          <div class="tweet-text">
+            Avec l’assurance maladie, vous êtes
+            <input class="gap-input" data-answer="assuré" placeholder="............">
+            quand vous voyagez à l’étranger.
+          </div>
+        </div>
+      </div>
+
+      <!-- d -->
+      <div class="tweet-item">
+        <div class="tweet-label">d.</div>
+        <div class="tweet-bubble">
+          <div class="tweet-text">
+            Est-ce que les
+            <input class="gap-input" data-answer="pharmacies" placeholder="............">
+            prennent aussi la carte vitale ?<br>
+            Je dois acheter des médicaments.
+          </div>
+        </div>
+      </div>
+
+      <!-- e -->
+      <div class="tweet-item">
+        <div class="tweet-label">e.</div>
+        <div class="tweet-bubble">
+          <div class="tweet-text">
+            Tu peux m’envoyer l’adresse du
+            <input class="gap-input" data-answer="cabinet médical" placeholder="............">
+            du docteur Girard ?
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 按钮 + 得分显示 -->
+    <button type="button" class="btn-check" id="checkBtn">
+      Vérifier / 检查答案
+    </button>
+    <div id="scoreBox" class="score-box" style="display:none;"></div>
+  </main>
+
+  <footer class="hint" style="max-width:1000px;margin:0 auto 20px;padding:0 20px;">
+    © 《高级法语综合课》
+  </footer>
+
+  <script>
+    document.getElementById("checkBtn").addEventListener("click", function(){
+      const gaps = document.querySelectorAll(".gap-input");
+      let total = gaps.length;
+      let score = 0;
+
+      gaps.forEach(input => {
+        const expected = (input.dataset.answer || "").trim().toLowerCase();
+        const user = (input.value || "").trim().toLowerCase();
+
+        if (!expected) return;
+
+        if (user === expected) {
+          input.classList.remove("gap-wrong");
+          input.classList.add("gap-correct");
+          score++;
+        } else {
+          input.classList.remove("gap-correct");
+          input.classList.add("gap-wrong");
+        }
+      });
+
+      const box = document.getElementById("scoreBox");
+      box.style.display = "block";
+      box.innerHTML = `Score : ${score} / ${total}`;
+    });
+  </script>
+</body>
+</html>
