@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AGIR – Remettre la conversation en ordre</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: #f3f5f7;
+      margin: 0;
+      padding: 0;
+    }
+
+    .page {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px 12px 40px;
+    }
+
+    h1 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .instructions {
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+      line-height: 1.4;
+    }
+
+    .phone-frame {
+      background: #e5e5e5;
+      border-radius: 24px;
+      padding: 16px 10px;
+      border: 1px solid #d0d0d0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .chat-header {
+      text-align: center;
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+      color: #555;
+    }
+
+    .chat-window {
+      background: #fdfdfd;
+      border-radius: 18px;
+      padding: 10px 8px 14px;
+      max-height: 520px;
+      overflow-y: auto;
+      border: 1px solid #e2e2e2;
+    }
+
+    .fixed-part {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    #chatList {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .chat-item {
+      display: flex;
+      width: 100%;
+    }
+
+    .chat-item[draggable="true"] {
+      cursor: move;
+    }
+
+    .chat-item.dragging {
+      opacity: 0.6;
+    }
+
+    .bubble {
+      max-width: 78%;
+      padding: 8px 10px;
+      border-radius: 14px;
+      font-size: 0.95rem;
+      line-height: 1.35;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    /* 对方（学校）消息：左侧，白色气泡 */
+    .from-other {
+      justify-content: flex-start;
+    }
+
+    .from-other .bubble {
+      background: #ffffff;
+      color: #111;
+    }
+
+    /* 我方（学员）消息：右侧，绿色气泡（微信风格） */
+    .from-me {
+      justify-content: flex-end;
+    }
+
+    .from-me .bubble {
+      background: #95ec69;
+      color: #111;
+    }
+
+    .helper-text {
+      font-size: 0.85rem;
+      color: #666;
+      margin: 4px 0 8px 4px;
+    }
+
+    .controls {
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    button {
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: none;
+      font-size: 0.95rem;
+      cursor: pointer;
+      background: #007bff;
+      color: #fff;
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+
+    #feedback {
+      font-size: 0.95rem;
+    }
+
+    #feedback.ok {
+      color: #1b8a2b;
+    }
+
+    #feedback.error {
+      color: #c0392b;
+    }
+
+    /* ✓ 相关样式 */
+    .correct-mark {
+      font-size: 1.1rem;
+      color: #27ae60;
+      font-weight: bold;
+      margin-right: 6px;
+      display: flex;
+      align-items: center;
+    }
+
+    .check-wrapper {
+      display: flex;
+      align-items: flex-start;
+      gap: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <h1>Remets la conversation en ordre</h1>
+    <p class="instructions">
+      Tu vois ici les messages d’un chat à propos d’un cours de guitare en ligne.
+      Les deux premiers messages sont déjà dans le bon ordre. Fais glisser les
+      autres bulles pour remettre la suite de la conversation dans le bon ordre.
+      Ensuite, clique sur « Vérifier / 检查答案 ».
+    </p>
+
+    <div class="phone-frame">
+      <div class="chat-header">Appli de messagerie – Cours de guitare en ligne</div>
+      <div class="chat-window">
+
+        <!-- 部分 1：前两句固定，不可拖拽 -->
+        <div class="fixed-part">
+          <div class="chat-item from-other">
+            <div class="bubble">
+              Bonjour, je peux vous aider ?
+            </div>
+          </div>
+
+          <div class="chat-item from-me">
+            <div class="bubble">
+              Bonjour, oui merci, je voudrais me renseigner sur les cours de guitare en ligne.
+            </div>
+          </div>
+        </div>
+
+        <p class="helper-text">
+          À toi de remettre la suite de la conversation dans le bon ordre :
+        </p>
+
+        <!-- 部分 2：从第 3 句开始，拖拽排序 -->
+        <div id="chatList">
+          <!-- 3 -->
+          <div class="chat-item from-other" data-id="msg3" draggable="true">
+            <div class="check-wrapper">
+              <div class="correct-mark" style="visibility:hidden;">✓</div>
+              <div class="bubble">
+                C’est très simple. Vous avez déjà appris à jouer de la guitare ?
+              </div>
+            </div>
+          </div>
+
+          <!-- 4 -->
+          <div class="chat-item from-me" data-id="msg4" draggable="true">
+            <div class="check-wrapper">
+              <div class="correct-mark" style="visibility:hidden;">✓</div>
+              <div class="bubble">
+                Non, je n’ai jamais pratiqué la guitare.
+              </div>
+            </div>
+          </div>
+
+          <!-- 5 -->
+          <div class="chat-item from-other" data-id="msg5" draggable="true">
+            <div class="check-wrapper">
+              <div class="correct-mark" style="visibility:hidden;">✓</div>
+              <div class="bubble">
+                Très bien, vous allez donc vous inscrire à un cours débutant.
+                Vous voulez savoir comment se déroule un cours en ligne ?
+              </div>
+            </div>
+          </div>
+
+          <!-- 6 -->
+          <div class="chat-item from-me" data-id="msg6" draggable="true">
+            <div class="check-wrapper">
+              <div class="correct-mark" style="visibility:hidden;">✓</div>
+              <div class="bubble">
+                Oui, j’ai quelques questions, d’abord, est-ce qu’il faut un matériel spécial ?
+              </div>
+            </div>
+          </div>
+
+          <!-- 7 -->
+          <div class="chat-item from-other" data-id="msg7" draggable="true">
+            <div class="check-wrapper">
+              <div class="correct-mark" style="visibility:hidden;">✓</div>
+              <div class="bubble">
+                Il faut avoir une guitare bien sûr, et puis aussi un ordinateur ou une tablette
+                avec une bonne connexion Internet. C’est nécessaire aussi que vous soyez équipé
+                d’une webcam.
+              </div>
+            </div>
+          </div>
+
+          <!-- 8 -->
+          <div class="chat-item from-me" data-id="msg8" draggable="true">
+            <div class="check-wrapper">
+              <div class="correct-mark" style="visibility:hidden;">✓</div>
+              <div class="bubble">
+                Ah oui, c’est important que je puisse voir le professeur ! Combien de temps dure un cours ?
+              </div>
+            </div>
+          </div>
+
+          <!-- 9 -->
+          <div class="chat-item from-other" data-id="msg9" draggable="true">
+            <div class="check-wrapper">
+              <div class="correct-mark" style="visibility:hidden;">✓</div>
+              <div class="bubble">
+                C’est un cours individuel de 40 minutes, le professeur est en ligne avec vous pendant tout le cours.
+              </div>
+            </div>
+          </div>
+
+          <!-- 10 -->
+          <div class="chat-item from-me" data-id="msg10" draggable="true">
+            <div class="check-wrapper">
+              <div class="correct-mark" style="visibility:hidden;">✓</div>
+              <div class="bubble">
+                C’est parfait ! Je préfère un cours individuel ! Est-ce qu’il faut que je prenne un abonnement ?
+              </div>
+            </div>
+          </div>
+
+          <!-- 11 -->
+          <div class="chat-item from-other" data-id="msg11" draggable="true">
+            <div class="check-wrapper">
+              <div class="correct-mark" style="visibility:hidden;">✓</div>
+              <div class="bubble">
+                Oui, mais vous pouvez commencer sans abonnement : le premier cours est gratuit,
+                c’est une séance d’essai.
+              </div>
+            </div>
+          </div>
+
+          <!-- 12 -->
+          <div class="chat-item from-me" data-id="msg12" draggable="true">
+            <div class="check-wrapper">
+              <div class="correct-mark" style="visibility:hidden;">✓</div>
+              <div class="bubble">
+                Après la séance d’essai, si je veux continuer, où est-ce que je dois m’inscrire ?
+              </div>
+            </div>
+          </div>
+
+          <!-- 13 -->
+          <div class="chat-item from-other" data-id="msg13" draggable="true">
+            <div class="check-wrapper">
+              <div class="correct-mark" style="visibility:hidden;">✓</div>
+              <div class="bubble">
+                Sur le site guitare.com. Vous remplissez le formulaire, et après vous devrez payer votre inscription.
+              </div>
+            </div>
+          </div>
+
+          <!-- 14 -->
+          <div class="chat-item from-me" data-id="msg14" draggable="true">
+            <div class="check-wrapper">
+              <div class="correct-mark" style="visibility:hidden;">✓</div>
+              <div class="bubble">
+                Si je m’inscris, est-ce qu’il y a un engagement pour une durée ?
+              </div>
+            </div>
+          </div>
+
+          <!-- 15 -->
+          <div class="chat-item from-other" data-id="msg15" draggable="true">
+            <div class="check-wrapper">
+              <div class="correct-mark" style="visibility:hidden;">✓</div>
+              <div class="bubble">
+                Oui, si vous voulez vous inscrire après votre séance d’essai, vous devez prendre
+                un abonnement de 10 séances. C’est très facile de payer par carte sur l’appli
+                de guitare.com, vous n’êtes pas obligé de vous déplacer !
+              </div>
+            </div>
+          </div>
+
+          <!-- 16 -->
+          <div class="chat-item from-me" data-id="msg16" draggable="true">
+            <div class="check-wrapper">
+              <div class="correct-mark" style="visibility:hidden;">✓</div>
+              <div class="bubble">
+                D’accord, et après le paiement, comment ça se passe ?
+              </div>
+            </div>
+          </div>
+
+          <!-- 17 -->
+          <div class="chat-item from-other" data-id="msg17" draggable="true">
+            <div class="check-wrapper">
+              <div class="correct-mark" style="visibility:hidden;">✓</div>
+              <div class="bubble">
+                Vous recevez un lien le jour du cours et vous devez vous connecter à l’heure du cours.
+              </div>
+            </div>
+          </div>
+
+          <!-- 18 -->
+          <div class="chat-item from-me" data-id="msg18" draggable="true">
+            <div class="check-wrapper">
+              <div class="correct-mark" style="visibility:hidden;">✓</div>
+              <div class="bubble">
+                Merci beaucoup, c’est très clair, je vais m’inscrire au cours d’essai.
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="controls">
+      <button id="checkBtn">Vérifier / 检查答案</button>
+      <button id="resetBtn" type="button">Re-mélanger</button>
+      <span id="feedback"></span>
+    </div>
+  </div>
+
+  <script>
+    // 正确顺序：从第 3 条开始
+    const correctOrder = [
+      "msg3",
+      "msg4",
+      "msg5",
+      "msg6",
+      "msg7",
+      "msg8",
+      "msg9",
+      "msg10",
+      "msg11",
+      "msg12",
+      "msg13",
+      "msg14",
+      "msg15",
+      "msg16",
+      "msg17",
+      "msg18"
+    ];
+
+    const list = document.getElementById("chatList");
+    const feedback = document.getElementById("feedback");
+    const checkBtn = document.getElementById("checkBtn");
+    const resetBtn = document.getElementById("resetBtn");
+
+    function shuffleNodes() {
+      const items = Array.from(list.children);
+      items.sort(() => Math.random() - 0.5);
+      items.forEach((el) => list.appendChild(el));
+    }
+
+    // 初始打乱
+    shuffleNodes();
+
+    // Drag & drop
+    let draggedItem = null;
+
+    function addDnDHandlers(item) {
+      item.addEventListener("dragstart", () => {
+        draggedItem = item;
+        item.classList.add("dragging");
+      });
+
+      item.addEventListener("dragend", () => {
+        item.classList.remove("dragging");
+        draggedItem = null;
+      });
+
+      item.addEventListener("dragover", (e) => {
+        e.preventDefault();
+      });
+
+      item.addEventListener("drop", (e) => {
+        e.preventDefault();
+        if (!draggedItem || draggedItem === item) return;
+        const children = Array.from(list.children);
+        const draggedIndex = children.indexOf(draggedItem);
+        const targetIndex = children.indexOf(item);
+        if (draggedIndex < targetIndex) {
+          list.insertBefore(draggedItem, item.nextSibling);
+        } else {
+          list.insertBefore(draggedItem, item);
+        }
+      });
+    }
+
+    Array.from(list.children).forEach(addDnDHandlers);
+
+    // 容器本身也支持在末尾放置
+    list.addEventListener("dragover", (e) => {
+      e.preventDefault();
+    });
+
+    list.addEventListener("drop", (e) => {
+      e.preventDefault();
+      if (draggedItem) {
+        list.appendChild(draggedItem);
+      }
+    });
+
+    // 检查答案 + 显示绿色 ✓
+    checkBtn.addEventListener("click", () => {
+      // 先清空所有 ✓
+      document.querySelectorAll(".correct-mark").forEach((m) => {
+        m.style.visibility = "hidden";
+      });
+
+      const items = Array.from(list.children);
+      let allGood = true;
+
+      items.forEach((el, index) => {
+        const id = el.getAttribute("data-id");
+        const mark = el.querySelector(".correct-mark");
+
+        if (id === correctOrder[index]) {
+          mark.style.visibility = "visible"; // 显示 ✓
+        } else {
+          allGood = false;
+          mark.style.visibility = "hidden";
+        }
+      });
+
+      if (allGood) {
+        feedback.textContent = "Bravo ! La conversation est dans le bon ordre.";
+        feedback.className = "ok";
+      } else {
+        feedback.textContent =
+          "Il y a encore des erreurs. Réessaie en regardant la logique de la conversation.";
+        feedback.className = "error";
+      }
+    });
+
+    // 重新打乱 + 清空 ✓
+    resetBtn.addEventListener("click", () => {
+      shuffleNodes();
+      feedback.textContent = "";
+      feedback.className = "";
+      document.querySelectorAll(".correct-mark").forEach((m) => {
+        m.style.visibility = "hidden";
+      });
+    });
+  </script>
+</body>
+</html>
