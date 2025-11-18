@@ -9,9 +9,6 @@
   <link rel="stylesheet" href="../../style.css">
 
   <style>
-    /* 如果已经在全站 style.css 里有通用样式，
-       可以只保留 .tweets-grid 和 .tweet-bubble 这一块 */
-
     body{
       font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
       background: radial-gradient(circle at 0 0,#eff6ff 0,#f5f7fb 40%,#f9fafb 100%);
@@ -35,13 +32,41 @@
       margin-top:16px;
     }
 
+    /* ==== 词库 chip ==== */
     .word-bank{
       margin-bottom:12px;
       font-size:0.95rem;
     }
-    .word-bank span{
-      display:inline-block;
-      margin-right:6px;
+    .word-bank-label{
+      display:block;
+      margin-bottom:4px;
+    }
+    .chips{
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+    }
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:4px 10px;
+      border-radius:999px;
+      border:1px solid #d4d4d8;
+      background:#f9fafb;
+      font-size:0.9rem;
+      cursor:pointer;
+      user-select:none;
+      transition:all .12s ease-out;
+    }
+    .chip:hover{
+      border-color:#0ea5e9;
+      box-shadow:0 0 0 2px rgba(14,165,233,0.25);
+      transform:translateY(-1px);
+    }
+    .chip.used{
+      opacity:.5;
+      border-style:dashed;
     }
 
     /* ===== 推特气泡布局 ===== */
@@ -92,28 +117,29 @@
       font-size:0.95rem;
     }
 
-    /* 空格输入框：做成像虚线填空 */
-    .gap-input{
-      border:none;
-      border-bottom:1px dotted #6b7280;
-      background:transparent;
-      padding:0 3px;
+    /* ==== 可点击/拖拽空格 ==== */
+    .gap-blank{
+      display:inline-flex;
       min-width:120px;
-      font-size:0.95rem;
-      font-family:inherit;
-      outline:none;
+      padding:0 4px 1px;
+      margin:0 2px;
+      border-bottom:1px dotted #6b7280;
+      border-radius:3px;
+      background:rgba(255,255,255,0.55);
+      cursor:pointer;
+      transition:all .12s ease-out;
     }
-    .gap-input:focus{
+    .gap-blank.active{
       border-bottom-style:solid;
       border-bottom-color:#0ea5e9;
-      background:rgba(255,255,255,0.7);
+      background:rgba(255,255,255,0.95);
+      box-shadow:0 0 0 2px rgba(14,165,233,0.25);
     }
-
-    .gap-correct{
+    .gap-blank.gap-correct{
       background:#ecfdf5;
       border-bottom-color:#16a34a !important;
     }
-    .gap-wrong{
+    .gap-blank.gap-wrong{
       background:#fef2f2;
       border-bottom-color:#dc2626 !important;
     }
@@ -154,22 +180,27 @@
   <header>
     <a href="../" style="text-decoration:none;color:#0ea5e9">← Retour</a>
     <h1>Vocabulaire – Compléter les tweets</h1>
-    <p class="hint">Complétez les tweets avec les mots ou expressions du cadre. 然后点击“Vérifier / 检查答案”。</p>
+    <p class="hint">
+      Complétez les tweets avec les mots ou expressions du cadre.<br>
+      PC：拖拽词块到空格；手机：先点空格高亮，再点词块。完成后点击 “Vérifier / 检查答案”。
+    </p>
   </header>
 
   <main class="card">
     <!-- 词汇栏 -->
     <div class="word-bank">
-      <strong>Complétez avec :</strong><br>
-      <span>l’assurance maladie</span> •
-      <span>médecin</span> •
-      <span>assuré</span> •
-      <span>cabinet médical</span> •
-      <span>remboursement</span> •
-      <span>pharmacies</span> •
-      <span>consultation médicale</span> •
-      <span>numéro de sécurité sociale</span> •
-      <span>en pleine forme</span>
+      <span class="word-bank-label"><strong>Complétez avec :</strong></span>
+      <div class="chips" id="wordBank">
+        <div class="chip" draggable="true" data-word="l’assurance maladie">l’assurance maladie</div>
+        <div class="chip" draggable="true" data-word="médecin">médecin</div>
+        <div class="chip" draggable="true" data-word="assuré">assuré</div>
+        <div class="chip" draggable="true" data-word="cabinet médical">cabinet médical</div>
+        <div class="chip" draggable="true" data-word="remboursement">remboursement</div>
+        <div class="chip" draggable="true" data-word="pharmacies">pharmacies</div>
+        <div class="chip" draggable="true" data-word="consultation médicale">consultation médicale</div>
+        <div class="chip" draggable="true" data-word="numéro de sécurité sociale">numéro de sécurité sociale</div>
+        <div class="chip" draggable="true" data-word="en pleine forme">en pleine forme</div>
+      </div>
     </div>
 
     <!-- 推特气泡布局 -->
@@ -181,13 +212,13 @@
         <div class="tweet-bubble">
           <div class="tweet-text">
             Quand je suis arrivé en France, je me suis inscrit à
-            <strong>l’assurance maladie</strong>. Mais je n’ai toujours pas reçu mon
-            <input class="gap-input" data-answer="numéro de sécurité sociale" placeholder="............">
+            <strong> l’assurance maladie</strong>. Mais je n’ai toujours pas reçu mon
+            <span class="gap-blank" data-answer="numéro de sécurité sociale"></span>
             .<br>
             Si je consulte un
-            <input class="gap-input" data-answer="médecin" placeholder="............">
+            <span class="gap-blank" data-answer="médecin"></span>
             , est-ce que j’aurai droit à un
-            <input class="gap-input" data-answer="remboursement" placeholder="............">
+            <span class="gap-blank" data-answer="remboursement"></span>
             ?
           </div>
         </div>
@@ -199,10 +230,10 @@
         <div class="tweet-bubble">
           <div class="tweet-text">
             Tu n’as pas l’air d’être
-            <input class="gap-input" data-answer="en pleine forme" placeholder="............">
+            <span class="gap-blank" data-answer="en pleine forme"></span>
             !<br>
             Pourquoi tu ne vas pas faire une
-            <input class="gap-input" data-answer="consultation médicale" placeholder="............">
+            <span class="gap-blank" data-answer="consultation médicale"></span>
             ?
           </div>
         </div>
@@ -214,7 +245,7 @@
         <div class="tweet-bubble">
           <div class="tweet-text">
             Avec l’assurance maladie, vous êtes
-            <input class="gap-input" data-answer="assuré" placeholder="............">
+            <span class="gap-blank" data-answer="assuré"></span>
             quand vous voyagez à l’étranger.
           </div>
         </div>
@@ -226,7 +257,7 @@
         <div class="tweet-bubble">
           <div class="tweet-text">
             Est-ce que les
-            <input class="gap-input" data-answer="pharmacies" placeholder="............">
+            <span class="gap-blank" data-answer="pharmacies"></span>
             prennent aussi la carte vitale ?<br>
             Je dois acheter des médicaments.
           </div>
@@ -239,7 +270,7 @@
         <div class="tweet-bubble">
           <div class="tweet-text">
             Tu peux m’envoyer l’adresse du
-            <input class="gap-input" data-answer="cabinet médical" placeholder="............">
+            <span class="gap-blank" data-answer="cabinet médical"></span>
             du docteur Girard ?
           </div>
         </div>
@@ -259,30 +290,92 @@
   </footer>
 
   <script>
-    document.getElementById("checkBtn").addEventListener("click", function(){
-      const gaps = document.querySelectorAll(".gap-input");
-      let total = gaps.length;
-      let score = 0;
+    const blanks = Array.from(document.querySelectorAll(".gap-blank"));
+    const chips  = Array.from(document.querySelectorAll(".chip"));
+    const scoreBox = document.getElementById("scoreBox");
+    let activeBlank = null;
 
-      gaps.forEach(input => {
-        const expected = (input.dataset.answer || "").trim().toLowerCase();
-        const user = (input.value || "").trim().toLowerCase();
+    function setBlank(blank, word){
+      // 清除这个空格之前的内容
+      blank.textContent = "";
+      blank.classList.remove("gap-correct","gap-wrong");
+      // 如果别的空格里已经用了同一个词，把那里的删掉（保证一个词只用一次）
+      blanks.forEach(b => {
+        if (b !== blank && b.textContent.trim() === word){
+          b.textContent = "";
+          b.classList.remove("gap-correct","gap-wrong");
+        }
+      });
+      blank.textContent = word;
 
-        if (!expected) return;
+      // 标记 chip 已使用（只是视觉效果）
+      chips.forEach(chip=>{
+        if(chip.dataset.word === word){
+          chip.classList.add("used");
+        }
+      });
+    }
 
-        if (user === expected) {
-          input.classList.remove("gap-wrong");
-          input.classList.add("gap-correct");
-          score++;
-        } else {
-          input.classList.remove("gap-correct");
-          input.classList.add("gap-wrong");
+    // 空格：点击选中 + 接收拖拽
+    blanks.forEach(blank=>{
+      blank.addEventListener("click", ()=>{
+        if(activeBlank === blank){
+          blank.classList.remove("active");
+          activeBlank = null;
+        }else{
+          blanks.forEach(b=>b.classList.remove("active"));
+          blank.classList.add("active");
+          activeBlank = blank;
         }
       });
 
-      const box = document.getElementById("scoreBox");
-      box.style.display = "block";
-      box.innerHTML = `Score : ${score} / ${total}`;
+      blank.addEventListener("dragover", e=>e.preventDefault());
+      blank.addEventListener("drop", e=>{
+        e.preventDefault();
+        const word = e.dataTransfer.getData("text/plain");
+        if(word) setBlank(blank, word);
+      });
+    });
+
+    // 词块：点击 / 拖拽
+    chips.forEach(chip=>{
+      chip.addEventListener("click", ()=>{
+        if(!activeBlank) return;
+        const word = chip.dataset.word;
+        setBlank(activeBlank, word);
+      });
+
+      chip.addEventListener("dragstart", e=>{
+        e.dataTransfer.setData("text/plain", chip.dataset.word);
+      });
+    });
+
+    // Vérifier
+    document.getElementById("checkBtn").addEventListener("click", ()=>{
+      let total = blanks.length;
+      let score = 0;
+
+      blanks.forEach(blank=>{
+        const expected = (blank.dataset.answer || "").trim().toLowerCase();
+        const user     = (blank.textContent || "").trim().toLowerCase();
+
+        blank.classList.remove("gap-correct","gap-wrong");
+
+        if(!user){
+          blank.classList.add("gap-wrong");
+          return;
+        }
+
+        if(user === expected){
+          blank.classList.add("gap-correct");
+          score++;
+        }else{
+          blank.classList.add("gap-wrong");
+        }
+      });
+
+      scoreBox.style.display = "block";
+      scoreBox.textContent = `Score : ${score} / ${total}`;
     });
   </script>
 </body>
