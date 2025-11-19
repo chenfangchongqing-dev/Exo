@@ -3,200 +3,95 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>U3 · L’hypothèse (1) – Exercice à trous</title>
+<title>U2 · Grammaire — Imparfait ou Passé composé</title>
 <style>
-  :root{
-    --ink:#1f2937;
-    --muted:#64748b;
-    --bg:#f6f8fb;
-    --line:#cbd5e1;
-    --brand:#2f5580;
-  }
-  html,body{
-    margin:0;
-    background:var(--bg);
-    color:var(--ink);
-    font-family:ui-sans-serif,system-ui,Arial;
-  }
-  .wrap{
-    max-width:980px;
-    margin:28px auto 64px;
-    padding:0 16px;
-  }
-  a.back{
-    display:inline-block;
-    margin-bottom:8px;
-    text-decoration:none;
-    color:#2b6be0;
-  }
-  h1{
-    font-size:22px;
-    margin:0 0 12px;
-  }
-  .lex{
-    color:var(--muted);
-    font-size:14px;
-    margin:0 0 12px;
-  }
-  .card{
-    background:#fff;
-    border:1px solid #e2e8f0;
-    border-radius:10px;
-    box-shadow:0 2px 8px rgba(0,0,0,.05);
-    padding:18px;
-  }
-  .txt{
-    line-height:1.9;
-    font-size:16px;
-  }
-  .txt p{
-    margin:4px 0 8px;
-  }
+  :root{--ink:#1f2937;--muted:#64748b;--bg:#f6f8fb;--line:#cbd5e1;--brand:#2f5580;--ok:#16a34a;--err:#dc2626;}
+  html,body{margin:0;background:var(--bg);color:var(--ink);font-family:ui-sans-serif,system-ui,Arial}
+  .wrap{max-width:980px;margin:28px auto 64px;padding:0 16px}
+  h1{font-size:22px;margin:0 0 12px}
+  .card{background:#fff;border:1px solid #b6c2cf;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,.05);padding:18px 18px 8px}
+  .card h2{margin:0 0 10px;font-size:22px}
+  .txt{line-height:1.9}
   input.blank{
-    min-width:120px;
-    font-size:16px;
-    padding:6px 8px;
-    margin:0 4px;
-    border:1px solid #cbd5e1;
-    border-radius:6px;
-    outline:none;
+    width:auto; min-width:120px; font-size:16px; padding:6px 8px; margin:0 4px;
+    border:1px solid var(--line); border-radius:6px; outline:none; background:#fff;
   }
-  input.blank.ok{
-    background:#dcfce7;
-    border-color:#86efac;
-  }
-  input.blank.err{
-    background:#fee2e2;
-    border-color:#fecaca;
-  }
-  .tools{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-    margin-top:14px;
-  }
-  button{
-    background:var(--brand);
-    color:#fff;
-    border:0;
-    border-radius:10px;
-    padding:9px 14px;
-    cursor:pointer;
-    font-size:14px;
-  }
-  button.secondary{
-    background:#e5e7eb;
-    color:#111;
-  }
-  .hint{
-    color:var(--muted);
-    font-size:13px;
-    margin-top:8px;
-  }
+  input.blank.ok{background:#dcfce7;border-color:#86efac}
+  input.blank.err{background:#fee2e2;border-color:#fecaca}
+  .tools{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+  button{background:var(--brand);color:#fff;border:0;border-radius:10px;padding:9px 14px;cursor:pointer}
+  button.secondary{background:#e5e7eb;color:#111}
+  button.ghost{background:#fff;border:1px solid var(--line);color:#374151}
+  .hint{color:var(--muted);font-size:14px;margin-top:8px}
+  .ex{color:#16a34a;font-weight:700}
+  kbd{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; font-size:12px; background:#eef2f7; padding:2px 6px; border-radius:6px; border:1px solid #d6dde6}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <a class="back" href="/Exo/Grammaire/">← 返回语法目录</a>
-  <h1>U3 · L’hypothèse (1) – Exercice à trous</h1>
-  <p class="lex">
-    - pour donner des conseil
-    - pour faire une hypothèse sur le futur.<br>
-    Faites une hypothèse sur le futur, comme dans l'exemple.
-  </p>
+  <a href="/Exo/Grammaire/" style="text-decoration:none;color:#2563eb">← 返回语法目录</a>
+  <h1>Faites une hypothèse sur le futur, comme dans l’exemple.</h1>
 
   <div class="card">
     <div class="txt">
-
-      <p>
-        a. Si vous ne
-        <input class="blank" data-answer="faites" placeholder="..." />
-        (faire) pas de pause, 
-        <input class="blank" data-answer="vous fatiguerez|vous vous fatiguerez" placeholder="..." />
-        (se fatiguer) plus vite.
-      </p>
-
-      <p>
-        b. Si vous n’
-        <input class="blank" data-answer="éteignez|eteignez" placeholder="..." />
-        (éteindre) jamais votre ordinateur, le travail
-        <input class="blank" data-answer="prendra" placeholder="..." />
-        (prendre) trop de place dans votre vie perso&nbsp;!
-      </p>
-
-      <p>
-        c. Vous ne
-        <input class="blank" data-answer="serez" placeholder="..." />
-        (être) pas prêt mentalement à travailler si vous
-        <input class="blank" data-answer="restez" placeholder="..." />
-        (rester) en pyjama toute la journée.
-      </p>
-
-      <p>
-        d. Si vous ne
-        <input class="blank" data-answer="contactez" placeholder="..." />
-        (contacter) pas régulièrement vos collègues, le lien social vous
-        <input class="blank" data-answer="manquera" placeholder="..." />
-        (manquer).
-      </p>
-
-      <p>
-        e. Vous ne
-        <input class="blank" data-answer="suivrez" placeholder="..." />
-        (suivre) pas bien les visioconférences si vous ne
-        <input class="blank" data-answer="possédez|possedez" placeholder="..." />
-        (posséder) pas un bon équipement informatique.
-      </p>
-
-      <p>
-        f. Si vous
-        <input class="blank" data-answer="habitez" placeholder="..." />
-        (habiter) dans un petit appartement, il
-        <input class="blank" data-answer="faudra" placeholder="..." />
-        (falloir) aménager un coin bureau.
-      </p>
-
-    </div>
-
-    <div class="tools">
-      <button id="verify">Vérifier / 检查答案</button>
-      <button id="reset" class="secondary">Réinitialiser / 重做</button>
-    </div>
-    <div class="hint">
-      说明：本练习复习 <b>si + présent → futur simple</b> ；<b>si + présent → présent / impératif</b>的结构。<br>
-      大小写和重音不敏感，可接受等价写法（如 <code>éteignez</code>/<code>eteignez</code>）。
-    </div>
+      Ex. : Vous <span class="ex">gagnerez</span> (gagner) beaucoup de temps si vous <span class="ex">télétravaillez</span> (télétravailler).
+1. Si vous ne <input class="blank" data-answer="faites" placeholder="..." /> (faire) pas de pause, vous <input class="blank" data-answer="vous fatiguerez" placeholder="..." /> (se fatiguer) plus vite.
+2. Si vous n’ <input class="blank" data-answer="éteignez" placeholder="..." /> (éteindre) jamais votre ordinateur, le travail <input class="blank" data-answer="prendra" placeholder="..." /> (prendre) trop de place dans votre vie perso !
+3. Vous ne <input class="blank" data-answer="serez" placeholder="..." /> (être) pas prêt mentalement à travailler si vous <input class="blank" data-answer="restez" placeholder="..." /> (rester) en pyjama toute la journée.
+4. Si vous ne <input class="blank" data-answer="contactez" placeholder="..." /> (contacter) pas régulièrement vos collègues, le lien social vous <input class="blank" data-answer="manquera" placeholder="..." /> (manquer).
+5. Vous ne <input class="blank" data-answer="suivrez" placeholder="..." /> (suivre) pas bien les visioconférences si vous ne <input class="blank" data-answer="possédez" placeholder="..." /> (posséder) pas un bon équipement informatique. 
+6. Si vous <input class="blank" data-answer="habitez" placeholder="..." /> (habiter) dans un petit appartement, il <input class="blank" data-answer="faut" placeholder="..." /> (falloir) aménager un coin bureau. </div>
   </div>
 </div>
-
+  
 <script>
-  const blanks = Array.from(document.querySelectorAll('.blank'));
-  const norm = s => (s||"").trim().toLowerCase()
-    .replaceAll("’","'")
-    .replace(/\s+/g," ");
+  // 允许的可选写法（多个用 | 分隔）；比较时大小写不敏感，法式/直引号统一。
+  const blanks = Array.from(document.querySelectorAll('input.blank'));
+  const norm = s => (s||"")
+      .toString()
+      .trim()
+      .toLowerCase()
+      .replaceAll("’","'")            // 法式引号 → 直引号
+      .replace(/\s+/g," ");           // 合并空格
 
   function checkOne(input){
-    const ans = input.dataset.answer.split("|").map(norm);
+    const answer = input.dataset.answer.split("|").map(norm);
     const val = norm(input.value);
-    const ok = ans.includes(val);
+    const ok = answer.includes(val);
     input.classList.toggle('ok', ok);
     input.classList.toggle('err', !ok && val.length>0);
+    return ok;
   }
 
   function verifyAll(){
-    blanks.forEach(checkOne);
+    let okCount = 0;
+    blanks.forEach(inp => { if (checkOne(inp)) okCount++; });
+    return okCount;
   }
 
   function resetAll(){
-    blanks.forEach(i=>{
-      i.value = "";
-      i.classList.remove('ok','err');
-    });
+    blanks.forEach(inp => { inp.value=""; inp.classList.remove('ok','err'); });
     blanks[0]?.focus();
   }
 
-  document.getElementById('verify').onclick = verifyAll;
-  document.getElementById('reset').onclick = resetAll;
+  function showAll(){
+    blanks.forEach(inp => {
+      // 如果有多个合法答案，展示第一个
+      inp.value = inp.dataset.answer.split("|")[0];
+      inp.classList.remove('err');
+    });
+  }
+
+  // 事件
+  document.getElementById('verify').addEventListener('click', verifyAll);
+  document.getElementById('reset').addEventListener('click', resetAll);
+  document.getElementById('show').addEventListener('click', showAll);
+
+  // Enter 验证；Esc 重置
+  document.addEventListener('keydown', (e)=>{
+    if(e.key==="Enter") verifyAll();
+    if(e.key==="Escape") resetAll();
+  });
 </script>
 </body>
 </html>
