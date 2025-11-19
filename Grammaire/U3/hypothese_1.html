@@ -1,54 +1,202 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>U3 · L’hypothèse (1) – Exercice à trous</title>
-  <link rel="stylesheet" href="../../style.css" />
-  <script src="../../script-check.js" defer></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>U3 · L’hypothèse (1) – Exercice à trous</title>
+<style>
+  :root{
+    --ink:#1f2937;
+    --muted:#64748b;
+    --bg:#f6f8fb;
+    --line:#cbd5e1;
+    --brand:#2f5580;
+  }
+  html,body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:ui-sans-serif,system-ui,Arial;
+  }
+  .wrap{
+    max-width:980px;
+    margin:28px auto 64px;
+    padding:0 16px;
+  }
+  a.back{
+    display:inline-block;
+    margin-bottom:8px;
+    text-decoration:none;
+    color:#2b6be0;
+  }
+  h1{
+    font-size:22px;
+    margin:0 0 12px;
+  }
+  .lex{
+    color:var(--muted);
+    font-size:14px;
+    margin:0 0 12px;
+  }
+  .card{
+    background:#fff;
+    border:1px solid #e2e8f0;
+    border-radius:10px;
+    box-shadow:0 2px 8px rgba(0,0,0,.05);
+    padding:18px;
+  }
+  .txt{
+    line-height:1.9;
+    font-size:16px;
+  }
+  .txt p{
+    margin:4px 0 8px;
+  }
+  input.blank{
+    min-width:120px;
+    font-size:16px;
+    padding:6px 8px;
+    margin:0 4px;
+    border:1px solid #cbd5e1;
+    border-radius:6px;
+    outline:none;
+  }
+  input.blank.ok{
+    background:#dcfce7;
+    border-color:#86efac;
+  }
+  input.blank.err{
+    background:#fee2e2;
+    border-color:#fecaca;
+  }
+  .tools{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:14px;
+  }
+  button{
+    background:var(--brand);
+    color:#fff;
+    border:0;
+    border-radius:10px;
+    padding:9px 14px;
+    cursor:pointer;
+    font-size:14px;
+  }
+  button.secondary{
+    background:#e5e7eb;
+    color:#111;
+  }
+  .hint{
+    color:var(--muted);
+    font-size:13px;
+    margin-top:8px;
+  }
+</style>
 </head>
-
 <body>
-  <header class="top-bar">
-    <a href="../index.html" class="back-btn">← Retour</a>
-    <h2>U3 · L’hypothèse (1) – Exercice à trous</h2>
-  </header>
+<div class="wrap">
+  <a class="back" href="/Exo/Grammaire/">← 返回语法目录</a>
+  <h1>U3 · L’hypothèse (1) – Exercice à trous</h1>
+  <p class="lex">
+    - pour donner des conseil
+    - pour faire une hypothèse sur le futur.<br>
+    Faites une hypothèse sur le futur, comme dans l'exemple.
+  </p>
 
-  <main class="content">
-    <p class="instruction">
-      Complétez les phrases avec les verbes proposés entre parenthèses, au futur simple ou futur antérieur selon le sens.
-    </p>
+  <div class="card">
+    <div class="txt">
 
-    <div class="exo-block">
-      <p class="question">
-        a. Si vous ne <input type="text" data-answer="faites"> (faire) pas de pause, vous <input type="text" data-answer="vous fatiguerez"> (se fatiguer) plus vite.
+      <p>
+        a. Si vous ne
+        <input class="blank" data-answer="faites" placeholder="..." />
+        (faire) pas de pause, 
+        <input class="blank" data-answer="vous fatiguerez|vous vous fatiguerez" placeholder="..." />
+        (se fatiguer) plus vite.
       </p>
 
-      <p class="question">
-        b. Si vous n’<input type="text" data-answer="éteignez"> (éteindre) jamais votre ordinateur, le travail <input type="text" data-answer="prendra"> (prendre) trop de place dans votre vie perso !
+      <p>
+        b. Si vous n’
+        <input class="blank" data-answer="éteignez|eteignez" placeholder="..." />
+        (éteindre) jamais votre ordinateur, le travail
+        <input class="blank" data-answer="prendra" placeholder="..." />
+        (prendre) trop de place dans votre vie perso&nbsp;!
       </p>
 
-      <p class="question">
-        c. Vous ne <input type="text" data-answer="serez"> (être) pas prêt mentalement à travailler si vous <input type="text" data-answer="restez"> (rester) en pyjama toute la journée.
+      <p>
+        c. Vous ne
+        <input class="blank" data-answer="serez" placeholder="..." />
+        (être) pas prêt mentalement à travailler si vous
+        <input class="blank" data-answer="restez" placeholder="..." />
+        (rester) en pyjama toute la journée.
       </p>
 
-      <p class="question">
-        d. Si vous ne <input type="text" data-answer="contactez"> (contacter) pas régulièrement vos collègues, le lien social vous <input type="text" data-answer="manquera"> (manquer).
+      <p>
+        d. Si vous ne
+        <input class="blank" data-answer="contactez" placeholder="..." />
+        (contacter) pas régulièrement vos collègues, le lien social vous
+        <input class="blank" data-answer="manquera" placeholder="..." />
+        (manquer).
       </p>
 
-      <p class="question">
-        e. Vous ne <input type="text" data-answer="suivrez"> (suivre) pas bien les visioconférences si vous ne <input type="text" data-answer="possédez"> (posséder) pas un bon équipement informatique.
+      <p>
+        e. Vous ne
+        <input class="blank" data-answer="suivrez" placeholder="..." />
+        (suivre) pas bien les visioconférences si vous ne
+        <input class="blank" data-answer="possédez|possedez" placeholder="..." />
+        (posséder) pas un bon équipement informatique.
       </p>
 
-      <p class="question">
-        f. Si vous <input type="text" data-answer="habitez"> (habiter) dans un petit appartement, il <input type="text" data-answer="faudra"> (falloir) aménager un coin bureau.
+      <p>
+        f. Si vous
+        <input class="blank" data-answer="habitez" placeholder="..." />
+        (habiter) dans un petit appartement, il
+        <input class="blank" data-answer="faudra" placeholder="..." />
+        (falloir) aménager un coin bureau.
       </p>
+
     </div>
 
-    <div class="btn-zone">
-      <button class="check-btn">Vérifier / 检查答案</button>
-      <button class="reset-btn">Réinitialiser / 重做</button>
+    <div class="tools">
+      <button id="verify">Vérifier / 检查答案</button>
+      <button id="reset" class="secondary">Réinitialiser / 重做</button>
     </div>
-  </main>
+    <div class="hint">
+      说明：本练习复习 <b>si + présent → futur simple</b> ；<b>si + présent → présent / impératif</b>的结构。<br>
+      大小写和重音不敏感，可接受等价写法（如 <code>éteignez</code>/<code>eteignez</code>）。
+    </div>
+  </div>
+</div>
+
+<script>
+  const blanks = Array.from(document.querySelectorAll('.blank'));
+  const norm = s => (s||"").trim().toLowerCase()
+    .replaceAll("’","'")
+    .replace(/\s+/g," ");
+
+  function checkOne(input){
+    const ans = input.dataset.answer.split("|").map(norm);
+    const val = norm(input.value);
+    const ok = ans.includes(val);
+    input.classList.toggle('ok', ok);
+    input.classList.toggle('err', !ok && val.length>0);
+  }
+
+  function verifyAll(){
+    blanks.forEach(checkOne);
+  }
+
+  function resetAll(){
+    blanks.forEach(i=>{
+      i.value = "";
+      i.classList.remove('ok','err');
+    });
+    blanks[0]?.focus();
+  }
+
+  document.getElementById('verify').onclick = verifyAll;
+  document.getElementById('reset').onclick = resetAll;
+</script>
 </body>
 </html>
