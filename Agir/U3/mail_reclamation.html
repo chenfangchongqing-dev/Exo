@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agir – Écrire un e-mail de réclamation</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: #f5f5f5;
+      color: #333;
+    }
+
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background: #ffffff;
+      border-bottom: 1px solid #ddd;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .back-link {
+      text-decoration: none;
+      font-size: 0.95rem;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid #ddd;
+      background: #fafafa;
+    }
+
+    .back-link:hover {
+      background: #f0f0f0;
+    }
+
+    .unit-tag {
+      font-size: 0.85rem;
+      opacity: 0.8;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 18px 20px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    }
+
+    h1 {
+      font-size: 1.4rem;
+      margin: 0 0 8px;
+    }
+
+    h2 {
+      font-size: 1.15rem;
+      margin: 0 0 8px;
+    }
+
+    h3 {
+      font-size: 1rem;
+      margin: 0 0 6px;
+    }
+
+    .intro {
+      margin-top: 4px;
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    .steps {
+      padding-left: 18px;
+      margin: 12px 0 0;
+      font-size: 0.95rem;
+    }
+
+    .steps li {
+      margin-bottom: 6px;
+    }
+
+    .scaffold-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 8px;
+      font-size: 0.9rem;
+    }
+
+    .scaffold-block {
+      background: #fff7f2;
+      border-radius: 12px;
+      padding: 10px 12px;
+      border: 1px solid #ffd0a6;
+    }
+
+    .scaffold-block.right {
+      background: #f4f7ff;
+      border-color: #c5d4ff;
+    }
+
+    .scaffold-block ul {
+      margin: 4px 0 0;
+      padding-left: 16px;
+    }
+
+    .scaffold-block li {
+      margin-bottom: 2px;
+    }
+
+    .note {
+      font-size: 0.85rem;
+      margin-top: 8px;
+      opacity: 0.85;
+    }
+
+    .padlet-section p {
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    .btn-padlet {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: none;
+      text-decoration: none;
+      font-size: 0.95rem;
+      background: #ff4b4b;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .btn-padlet:hover {
+      filter: brightness(1.05);
+    }
+
+    @media (max-width: 700px) {
+      .scaffold-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="top-bar">
+    <a href="../index.html" class="back-link">← Retour</a>
+    <div class="unit-tag">Agir · Écrire</div>
+  </header>
+
+  <main>
+    <!-- Consigne -->
+    <section class="card">
+      <h1>Écrire un e-mail de réclamation</h1>
+      <p class="intro">
+        Situation : vous avez commandé des produits alimentaires sur Internet.
+        À la réception, le colis était ouvert et il manquait des articles.
+      </p>
+      <ol class="steps">
+        <li>
+          Choisissez le site marchand et les produits commandés.
+        </li>
+        <li>
+          Listez les motifs d’insatisfaction.
+        </li>
+        <li>
+          Rédigez l’e-mail de réclamation.
+        </li>
+      </ol>
+    </section>
+
+    <!-- Boîte à outils / langage -->
+    <section class="card">
+      <h2>Boîte à outils pour votre e-mail</h2>
+      <p class="intro">
+        Utilisez ces expressions comme langage de soutien pour organiser votre
+        e-mail de réclamation.
+      </p>
+
+      <div class="scaffold-grid">
+        <!-- Colonne gauche -->
+        <div class="scaffold-block">
+          <h3>Annoncer l’objet de l’e-mail (forme nominale)</h3>
+          <ul>
+            <li><em>Réclamation</em></li>
+            <li><em>Commande n°…</em></li>
+          </ul>
+        </div>
+
+        <div class="scaffold-block right">
+          <h3>Exprimer son insatisfaction</h3>
+          <ul>
+            <li>Je tiens à vous faire part de mon mécontentement.</li>
+            <li>Cette situation est inadmissible.</li>
+            <li>Je ne suis pas satisfait de vos services.</li>
+          </ul>
+        </div>
+
+        <div class="scaffold-block">
+          <h3>Commencer par une formule d’appel</h3>
+          <ul>
+            <li>Bonjour,</li>
+            <li>Madame, Monsieur,</li>
+          </ul>
+        </div>
+
+        <div class="scaffold-block right">
+          <h3>Donner des explications</h3>
+          <ul>
+            <li>En effet, j’ai bien réceptionné ma table.</li>
+            <li>[...] car elle était cassée.</li>
+            <li>Comme je n’avais pas de nouvelles…</li>
+          </ul>
+        </div>
+
+        <div class="scaffold-block">
+          <h3>Rappeler l’objet</h3>
+          <ul>
+            <li>Je vous adresse une réclamation.</li>
+            <li>Je souhaite vous faire part d’une réclamation.</li>
+          </ul>
+        </div>
+
+        <div class="scaffold-block right">
+          <h3>Formuler la demande</h3>
+          <ul>
+            <li>Je vous prie de / vous demande de me rembourser dans les meilleurs délais.</li>
+          </ul>
+        </div>
+
+        <div class="scaffold-block">
+          <h3>Exposer les faits</h3>
+          <ul>
+            <li>J’ai fait ma demande de retour.</li>
+            <li>J’ai contacté le service client.</li>
+          </ul>
+        </div>
+
+        <div class="scaffold-block right">
+          <h3>Terminer par une salutation</h3>
+          <ul>
+            <li>Cordialement,</li>
+            <li>Sincères salutations,</li>
+            <li>Salutations distinguées,</li>
+          </ul>
+        </div>
+
+        <div class="scaffold-block">
+          <h3>Rappeler le montant</h3>
+          <ul>
+            <li>Soit un total de 634 euros.</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="note">
+        Astuce : suivez cet ordre pour structurer votre texte, mais adaptez les
+        montants, les produits et les détails à votre propre situation.
+      </p>
+    </section>
+
+    <!-- Padlet -->
+    <section class="card padlet-section">
+      <h2>Soumettre votre production</h2>
+      <p>
+        Rédigez votre e-mail de réclamation dans un document, puis copiez-collez
+        votre texte sur le mur Padlet du cours.
+      </p>
+      <p>
+        点击下面按钮，在 Padlet 上提交你的法语邮件作品。
+      </p>
+      <a
+        class="btn-padlet"
+        href="https://padlet.com/chenfangchongqing/agir-rv4fpdttx7u3bfou?lang=fr"
+        target="_blank"
+        rel="noopener"
+      >
+        Ouvrir le Padlet / 提交作品
+      </a>
+    </section>
+  </main>
+</body>
+</html>
