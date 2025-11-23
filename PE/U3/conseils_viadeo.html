@@ -205,7 +205,7 @@
       width: 100%;
       border: none;
       resize: vertical;
-      min-height: 180px;
+      min-height: 200px;
       font-family: inherit;
       font-size: 0.95rem;
       line-height: 1.4;
@@ -217,7 +217,7 @@
       color: #b0b0b0;
     }
 
-    /* --- Zone de génération --- */
+    /* --- Boutons & résultats --- */
     .actions {
       margin-top: 12px;
       display: flex;
@@ -252,53 +252,37 @@
       background: #f5f5f5;
     }
 
-    .generated {
-      margin-top: 10px;
-      font-size: 0.9rem;
-    }
-
-    .generated textarea {
-      width: 100%;
-      border-radius: 8px;
-      border: 1px solid #d4d4d4;
-      padding: 8px;
-      font-size: 0.9rem;
-      font-family: inherit;
-      min-height: 160px;
-      resize: vertical;
-      white-space: pre-wrap;
-    }
     .check-results {
-  margin-top: 12px;
-  padding-top: 8px;
-  border-top: 1px dashed #ddd;
-  font-size: 0.85rem;
-}
+      margin-top: 12px;
+      padding-top: 8px;
+      border-top: 1px dashed #ddd;
+      font-size: 0.85rem;
+    }
 
-.check-list {
-  margin: 6px 0 0;
-  padding-left: 16px;
-}
+    .check-list {
+      margin: 6px 0 0;
+      padding-left: 16px;
+    }
 
-.check-list li {
-  margin-bottom: 4px;
-}
+    .check-list li {
+      margin-bottom: 4px;
+    }
 
-.check-problem {
-  background: #ffe3e3;
-  padding: 0 3px;
-  border-radius: 3px;
-}
+    .check-problem {
+      background: #ffe3e3;
+      padding: 0 3px;
+      border-radius: 3px;
+    }
 
-.check-suggest {
-  background: #e3ffe5;
-  padding: 0 3px;
-  border-radius: 3px;
-}
+    .check-suggest {
+      background: #e3ffe5;
+      padding: 0 3px;
+      border-radius: 3px;
+    }
 
-.check-explain {
-  opacity: 0.8;
-}
+    .check-explain {
+      opacity: 0.8;
+    }
 
     .hint {
       font-size: 0.8rem;
@@ -384,12 +368,12 @@
       </div>
     </section>
 
-    <!-- Fenêtre e-mail + génération -->
+    <!-- Fenêtre e-mail + vérification -->
     <section class="card">
       <h2>Écrivez votre e-mail de conseils</h2>
       <p>
-        Complétez le modèle d’e-mail ci-dessous, puis générez le texte complet
-        pour le copier dans votre devoir ou sur la plateforme de remise.
+        Complétez le modèle d’e-mail ci-dessous. Vous pouvez ensuite utiliser le
+        bouton « Vérifier le texte » pour repérer des erreurs de langue.
       </p>
 
       <div class="mail-window">
@@ -448,47 +432,26 @@
           <textarea
             id="field-body"
             class="mail-textarea"
-          >Bonjour Stella,
-
-Pour ta vidéo, je te conseille d’abord de choisir un endroit calme, bien éclairé, avec un fond simple. Tu pourrais parler de ton expérience de télétravail et expliquer comment tu t’organises dans la journée.
-
-Pense aussi à ta tenue : choisis des vêtements professionnels mais dans lesquels tu te sens à l’aise. Tu peux montrer le matériel que tu utilises (ordinateur, casque, connexion Internet…) pour montrer que tu es prête pour le travail à distance.
-
-N’oublie pas d’expliquer pourquoi le télétravail te plaît, et de parler de ta motivation professionnelle. À la fin de la vidéo, propose un premier contact, par exemple un entretien en visioconférence.
-
-Bon tournage !
-
-</textarea>
+            placeholder="Bonjour Stella,&#10;&#10;Écris ici ton e-mail de conseils..."
+          ></textarea>
         </div>
       </div>
 
       <div class="actions">
-  <button id="btn-generate" class="btn btn-primary">
-    Générer le texte complet
-  </button>
-  <button id="btn-copy" class="btn btn-outline">
-    Copier le texte généré
-  </button>
-  <button id="btn-check" class="btn btn-outline">
-    Vérifier le texte / 检查语言
-  </button>
-</div>
-
-
-      <div class="generated">
-        <p><strong>Texte généré :</strong></p>
-        <textarea
-          id="output-email"
-          readonly
-          placeholder="Cliquez sur « Générer le texte complet » pour voir votre e-mail ici."
-        ></textarea>
-        <p class="hint">
-          Astuce : vérifiez les verbes au conditionnel et utilisez des
-          expressions comme <em>je te conseille de…</em>,
-          <em>tu devrais…</em>, <em>pense à…</em>.
-        </p>
+        <button id="btn-check" class="btn btn-primary">
+          Vérifier le texte / 检查语言
+        </button>
+        <button id="btn-copy" class="btn btn-outline">
+          Copier mon texte / 复制文本
+        </button>
       </div>
-      <div id="check-results" class="check-results"></div>
+
+      <div id="check-results" class="check-results">
+        <span class="hint">
+          Conseil : terminez d’abord votre texte, puis cliquez sur « Vérifier le
+          texte ». Les propositions de correction s’afficheront ici.
+        </span>
+      </div>
     </section>
 
     <!-- Exemple de production (repliable) -->
@@ -496,114 +459,96 @@ Bon tournage !
       <h2>Exemple de production</h2>
       <details class="example">
         <summary>Cliquez pour afficher / 点击展开示例</summary>
-        <p>Bonjour Stella, Voici quelques recommandations pour te présenter sur Viadéo. D’abord, je te conseille de parler de tes expériences de télétravail. Tu t’habilles toujours comme pour aller au bureau parce que cela te prépare mentalement au travail. Tu as aménagé un espace bureau chez toi parce que cela te permet d’être plus efficace. Tu as un ordinateur et une webcam. Montre que tu es motivée pour travailler à distance. Tu as l’habitude d’organiser ton temps de travail comme une journée habituelle. Dis aussi que tu souhaiterais évoluer dans ton domaine professionnel. Et si on demande à te rencontrer, tu proposeras un entretien ou une visioconférence. Bon courage !</p>
+        <p>
+Bonjour Stella, Voici quelques recommandations pour te présenter sur Viadéo. D’abord, je te conseille de parler de tes expériences de télétravail. Tu t’habilles toujours comme pour aller au bureau parce que cela te prépare mentalement au travail. Tu as aménagé un espace bureau chez toi parce que cela te permet d’être plus efficace. Tu as un ordinateur et une webcam. Montre que tu es motivée pour travailler à distance. Tu as l’habitude d’organiser ton temps de travail comme une journée habituelle. Dis aussi que tu souhaiterais évoluer dans ton domaine professionnel. Et si on demande à te rencontrer, tu proposeras un entretien ou une visioconférence. Bon courage !
+        </p>
       </details>
     </section>
   </main>
 
   <script>
-    const fromInput = document.getElementById("field-from");
-    const toInput = document.getElementById("field-to");
-    const subjectInput = document.getElementById("field-subject");
     const bodyInput = document.getElementById("field-body");
-    const outputArea = document.getElementById("output-email");
-    const btnGenerate = document.getElementById("btn-generate");
-    const btnCopy = document.getElementById("btn-copy");
     const btnCheck = document.getElementById("btn-check");
+    const btnCopy = document.getElementById("btn-copy");
     const checkResults = document.getElementById("check-results");
 
-
-    function generateEmail() {
-      const from = fromInput.value.trim();
-      const to = toInput.value.trim();
-      const subject = subjectInput.value.trim();
-      const body = bodyInput.value.replace(/\s+$/, ""); // trim end only
-
-      const lines = [];
-      if (from) lines.push("De : " + from);
-      if (to) lines.push("À : " + to);
-      if (subject) lines.push("Objet : " + subject);
-      lines.push(""); // ligne vide
-      lines.push(body || "");
-
-      async function checkText() {
-  const text = bodyInput.value.trim(); // 只检查邮件正文
-  if (!text) {
-    checkResults.textContent = "Écrivez votre texte d'abord / 请先写一点内容。";
-    return;
-  }
-
-  checkResults.textContent = "Analyse en cours… / 正在检查…";
-
-  try {
-    const params = new URLSearchParams();
-    params.append("language", "fr"); // 法语
-    params.append("text", text);
-
-    const response = await fetch("https://api.languagetool.org/v2/check", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: params.toString()
-    });
-
-    const data = await response.json();
-
-    if (!data.matches || data.matches.length === 0) {
-      checkResults.textContent =
-        "Aucune erreur trouvée (ou très peu) 👍 / 暂未发现明显错误。";
-      return;
-    }
-
-    checkResults.innerHTML = "<strong>Propositions de correction :</strong>";
-    const list = document.createElement("ul");
-    list.className = "check-list";
-
-    data.matches.forEach((m) => {
-      const li = document.createElement("li");
-      const original = text.substr(m.offset, m.length);
-      const replacement =
-        m.replacements && m.replacements[0]
-          ? m.replacements[0].value
-          : "";
-
-      li.innerHTML =
-        `<span class="check-problem">${original}</span>` +
-        (replacement
-          ? ` → <span class="check-suggest">${replacement}</span>`
-          : "") +
-        `<div class="check-explain">${m.message}</div>`;
-
-      list.appendChild(li);
-    });
-
-    checkResults.appendChild(list);
-  } catch (e) {
-    console.error(e);
-    checkResults.textContent =
-      "Erreur pendant la vérification. Vérifiez votre connexion Internet. / 检查失败，请确认网络连接。";
-  }
-}
-
-      outputArea.value = lines.join("\n");
-    }
-
-    btnGenerate.addEventListener("click", generateEmail);
-
-    btnCopy.addEventListener("click", () => {
-      if (!outputArea.value.trim()) {
-        generateEmail();
+    async function checkText() {
+      const text = bodyInput.value.trim();
+      if (!text) {
+        checkResults.innerHTML =
+          "Écrivez d’abord votre texte dans le cadre ci-dessus，再点击“检查语言”。";
+        return;
       }
-      outputArea.select();
+
+      checkResults.textContent = "Analyse en cours… / 正在检查…";
+
+      try {
+        const params = new URLSearchParams();
+        params.append("language", "fr"); // 法语
+        params.append("text", text);
+
+        const response = await fetch("https://api.languagetool.org/v2/check", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: params.toString()
+        });
+
+        const data = await response.json();
+
+        if (!data.matches || data.matches.length === 0) {
+          checkResults.innerHTML =
+            "Aucune erreur claire détectée 👍<br/>暂未发现明显错误。";
+          return;
+        }
+
+        checkResults.innerHTML =
+          "<strong>Propositions de correction :</strong>";
+        const list = document.createElement("ul");
+        list.className = "check-list";
+
+        data.matches.forEach((m) => {
+          const li = document.createElement("li");
+          const original = text.substr(m.offset, m.length);
+          const replacement =
+            m.replacements && m.replacements[0]
+              ? m.replacements[0].value
+              : "";
+
+          li.innerHTML =
+            `<span class="check-problem">${original}</span>` +
+            (replacement
+              ? ` → <span class="check-suggest">${replacement}</span>`
+              : "") +
+            `<div class="check-explain">${m.message}</div>`;
+
+          list.appendChild(li);
+        });
+
+        checkResults.appendChild(list);
+      } catch (e) {
+        console.error(e);
+        checkResults.textContent =
+          "Erreur pendant la vérification. Vérifiez votre connexion Internet. / 检查失败，请确认网络连接。";
+      }
+    }
+
+    function copyText() {
+      const text = bodyInput.value;
+      if (!text.trim()) return;
+
+      bodyInput.select();
       try {
         const ok = document.execCommand("copy");
         if (!ok && navigator.clipboard) {
-          navigator.clipboard.writeText(outputArea.value);
+          navigator.clipboard.writeText(text);
         }
       } catch (e) {
-        // fallback : le texte est déjà sélectionné
+        // fallback : 选中状态下让学生自己 Ctrl+C
       }
-    });
+    }
+
     btnCheck.addEventListener("click", checkText);
+    btnCopy.addEventListener("click", copyText);
   </script>
 </body>
 </html>
