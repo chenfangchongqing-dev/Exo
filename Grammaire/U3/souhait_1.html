@@ -113,7 +113,7 @@
 
       <br>
 
-      <!-- a -->
+      <!-- 1 -->
       <p>1. Tu télétravailles deux fois par semaine.</p>
       <p class="arrow-line">
         &rarr; Nous voudrions
@@ -121,7 +121,7 @@
         trois fois par semaine.
       </p>
 
-      <!-- b -->
+      <!-- 2 -->
       <p>2. Léo organise des jeux en ligne avec ses amis tous les week-ends.</p>
       <p class="arrow-line">
         &rarr; Ses parents aimeraient
@@ -129,7 +129,7 @@
         moins souvent des jeux en ligne avec ses amis.
       </p>
 
-      <!-- c -->
+      <!-- 3 -->
       <p>3. Tu fais un apéro Zoom ce soir.</p>
       <p class="arrow-line">
         &rarr; Tu voudrais
@@ -137,7 +137,7 @@
         un apéro Zoom demain soir ?
       </p>
 
-      <!-- d -->
+      <!-- 4 -->
       <p>4. Nous achetons un nouveau PC pour remplacer l’ancien ordinateur.</p>
       <p class="arrow-line">
         &rarr; Nous souhaiterions
@@ -145,7 +145,7 @@
         un nouveau PC pour donner l’ancien ordinateur à notre fille.
       </p>
 
-      <!-- e -->
+      <!-- 5 -->
       <p>5. Tu restes en contact avec lui après ton déménagement.</p>
       <p class="arrow-line">
         &rarr; Il aimerait
@@ -153,7 +153,7 @@
         en contact avec lui pour le travail.
       </p>
 
-      <!-- f -->
+      <!-- 6 -->
       <p>6. Nous nous inscrivons sur un site de sport en ligne.</p>
       <p class="arrow-line">
         &rarr; Nous aimerions
@@ -161,7 +161,7 @@
         sur un site de sport en ligne pour perdre du poids.
       </p>
 
-      <!-- g -->
+      <!-- 7 -->
       <p>7. Tu loues du matériel de bureau pour aménager un espace chez toi.</p>
       <p class="arrow-line">
         &rarr; Tes parents souhaitent
@@ -169,7 +169,7 @@
         un siège de bureau confortable.
       </p>
 
-      <!-- h -->
+      <!-- 8 -->
       <p>8. Vous participez à des réunions en ligne.</p>
       <p class="arrow-line">
         &rarr; Vous voudriez
@@ -177,7 +177,7 @@
         à la visioconférence jeudi matin.
       </p>
 
-      <!-- i -->
+      <!-- 9 -->
       <p>9. Les télétravailleurs sont en contact avec les responsables des équipes.</p>
       <p class="arrow-line">
         &rarr; Les responsables aimeraient que
@@ -189,4 +189,45 @@
 
     <div class="tools">
       <button id="verify">Vérifier / 检查答案</button>
-      <butt
+      <button id="reset" class="secondary">Réinitialiser / 重做</button>
+    </div>
+    <div class="hint">
+      说明1：本练习复习 <b>le souhait au conditionnel présent</b>（je voudrais, j’aimerais, nous souhaiterions...）。
+      说明2：本练习复习<strong>表达愿望（le souhait）</strong>的两种结构：<br><br>
+  • 当<strong>主语相同</strong>时：<strong>vouloir / souhaiter + infinitif</strong><br>
+  • 当<strong>主语不同</strong>时：<strong>vouloir que / souhaiter que + subjonctif</strong><br><br>
+    </div>
+  </div>
+</div>
+
+<script>
+  const blanks = Array.from(document.querySelectorAll('.blank'));
+  const norm = s => (s||"").trim().toLowerCase()
+    .replaceAll("’","'")
+    .replace(/\s+/g," ");
+
+  function checkOne(input){
+    const ans = input.dataset.answer.split("|").map(norm);
+    const val = norm(input.value);
+    const ok = ans.includes(val);
+    input.classList.toggle('ok', ok);
+    input.classList.toggle('err', !ok && val.length>0);
+  }
+
+  function verifyAll(){
+    blanks.forEach(checkOne);
+  }
+
+  function resetAll(){
+    blanks.forEach(i=>{
+      i.value = "";
+      i.classList.remove('ok','err');
+    });
+    blanks[0]?.focus();
+  }
+
+  document.getElementById('verify').onclick = verifyAll;
+  document.getElementById('reset').onclick = resetAll;
+</script>
+</body>
+</html>
