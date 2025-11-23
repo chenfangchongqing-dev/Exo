@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>U3 · Le souhait – Transformez les phrases</title>
+<style>
+  :root{
+    --ink:#1f2937;
+    --muted:#64748b;
+    --bg:#f6f8fb;
+    --line:#cbd5e1;
+    --brand:#2f5580;
+  }
+  html,body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:ui-sans-serif,system-ui,Arial;
+  }
+  .wrap{
+    max-width:980px;
+    margin:28px auto 64px;
+    padding:0 16px;
+  }
+  a.back{
+    display:inline-block;
+    margin-bottom:8px;
+    text-decoration:none;
+    color:#2b6be0;
+  }
+  h1{
+    font-size:22px;
+    margin:0 0 12px;
+  }
+  .lex{
+    color:var(--muted);
+    font-size:14px;
+    margin:0 0 12px;
+  }
+  .card{
+    background:#fff;
+    border:1px solid #e2e8f0;
+    border-radius:10px;
+    box-shadow:0 2px 8px rgba(0,0,0,.05);
+    padding:18px;
+  }
+  .txt{
+    line-height:1.9;
+    font-size:16px;
+  }
+  .txt p{
+    margin:4px 0 4px;
+  }
+  .arrow-line{
+    margin-left:1.2em;
+  }
+  input.blank{
+    min-width:200px;
+    font-size:16px;
+    padding:6px 8px;
+    margin:0 4px;
+    border:1px solid #cbd5e1;
+    border-radius:6px;
+    outline:none;
+  }
+  input.blank.ok{
+    background:#dcfce7;
+    border-color:#86efac;
+  }
+  input.blank.err{
+    background:#fee2e2;
+    border-color:#fecaca;
+  }
+  .tools{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:14px;
+  }
+  button{
+    background:var(--brand);
+    color:#fff;
+    border:0;
+    border-radius:10px;
+    padding:9px 14px;
+    cursor:pointer;
+    font-size:14px;
+  }
+  button.secondary{
+    background:#e5e7eb;
+    color:#111;
+  }
+  .hint{
+    color:var(--muted);
+    font-size:13px;
+    margin-top:8px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="/Exo/Grammaire/">← 返回语法目录</a>
+  <h1>U3 · Le souhait – Exercice</h1>
+  <p class="lex">
+    Transformez les affirmations en souhaits, comme dans l’exemple.
+  </p>
+
+  <div class="card">
+    <div class="txt">
+
+      <!-- Exemple -->
+      <p><strong>Ex. :</strong> Je passe beaucoup de temps devant mon ordinateur.</p>
+      <p class="arrow-line">
+        &rarr; <strong>J’aimerais passer moins d’heures consécutives devant un écran.</strong>
+      </p>
+
+      <br>
+
+      <!-- a -->
+      <p>a. Tu télétravailles deux fois par semaine.</p>
+      <p class="arrow-line">
+        &rarr; Nous voudrions
+        <input class="blank" data-answer="télétravailler|teletravailler" placeholder="..." />
+        trois fois par semaine.
+      </p>
+
+      <!-- b -->
+      <p>b. Léo organise des jeux en ligne avec ses amis tous les week-ends.</p>
+      <p class="arrow-line">
+        &rarr; Ses parents aimeraient
+        <input class="blank" data-answer="qu'il organise|quil organise|qu il organise" placeholder="..." />
+        moins souvent des jeux en ligne avec ses amis.
+      </p>
+
+      <!-- c -->
+      <p>c. Tu fais un apéro Zoom ce soir.</p>
+      <p class="arrow-line">
+        &rarr; Tu voudrais
+        <input class="blank" data-answer="faire" placeholder="..." />
+        un apéro Zoom demain soir ?
+      </p>
+
+      <!-- d -->
+      <p>d. Nous achetons un nouveau PC pour remplacer l’ancien ordinateur.</p>
+      <p class="arrow-line">
+        &rarr; Nous souhaiterions
+        <input class="blank" data-answer="acheter" placeholder="..." />
+        un nouveau PC pour donner l’ancien ordinateur à notre fille.
+      </p>
+
+      <!-- e -->
+      <p>e. Tu restes en contact avec lui après ton déménagement.</p>
+      <p class="arrow-line">
+        &rarr; Il aimerait
+        <input class="blank" data-answer="rester" placeholder="..." />
+        en contact avec lui pour le travail.
+      </p>
+
+      <!-- f -->
+      <p>f. Nous nous inscrivons sur un site de sport en ligne.</p>
+      <p class="arrow-line">
+        &rarr; Nous aimerions
+        <input class="blank" data-answer="nous inscrire|sinscrire|s inscrire" placeholder="..." />
+        sur un site de sport en ligne pour perdre du poids.
+      </p>
+
+      <!-- g -->
+      <p>g. Tu loues du matériel de bureau pour aménager un espace chez toi.</p>
+      <p class="arrow-line">
+        &rarr; Tes parents souhaitent
+        <input class="blank" data-answer="t’acheter|tacheter|t acheter" placeholder="..." />
+        un siège de bureau confortable.
+      </p>
+
+      <!-- h -->
+      <p>h. Vous participez à des réunions en ligne.</p>
+      <p class="arrow-line">
+        &rarr; Vous voudriez
+        <input class="blank" data-answer="participer" placeholder="..." />
+        à la visioconférence jeudi matin.
+      </p>
+
+      <!-- i -->
+      <p>i. Les télétravailleurs sont en contact avec les responsables des équipes.</p>
+      <p class="arrow-line">
+        &rarr; Les responsables aimeraient que les télétravailleurs
+        <input class="blank" data-answer="soient" placeholder="..." />
+        plus en contact avec eux.
+      </p>
+
+    </div>
+
+    <div class="tools">
+      <button id="verify">Vérifier / 检查答案</button>
+      <butt
