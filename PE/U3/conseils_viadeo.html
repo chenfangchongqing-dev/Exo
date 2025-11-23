@@ -526,6 +526,64 @@ Bon tournage !
       lines.push(""); // ligne vide
       lines.push(body || "");
 
+      async function checkText() {
+  const text = bodyInput.value.trim(); // 只检查邮件正文
+  if (!text) {
+    checkResults.textContent = "Écrivez votre texte d'abord / 请先写一点内容。";
+    return;
+  }
+
+  checkResults.textContent = "Analyse en cours… / 正在检查…";
+
+  try {
+    const params = new URLSearchParams();
+    params.append("language", "fr"); // 法语
+    params.append("text", text);
+
+    const response = await fetch("https://api.languagetool.org/v2/check", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: params.toString()
+    });
+
+    const data = await response.json();
+
+    if (!data.matches || data.matches.length === 0) {
+      checkResults.textContent =
+        "Aucune erreur trouvée (ou très peu) 👍 / 暂未发现明显错误。";
+      return;
+    }
+
+    checkResults.innerHTML = "<strong>Propositions de correction :</strong>";
+    const list = document.createElement("ul");
+    list.className = "check-list";
+
+    data.matches.forEach((m) => {
+      const li = document.createElement("li");
+      const original = text.substr(m.offset, m.length);
+      const replacement =
+        m.replacements && m.replacements[0]
+          ? m.replacements[0].value
+          : "";
+
+      li.innerHTML =
+        `<span class="check-problem">${original}</span>` +
+        (replacement
+          ? ` → <span class="check-suggest">${replacement}</span>`
+          : "") +
+        `<div class="check-explain">${m.message}</div>`;
+
+      list.appendChild(li);
+    });
+
+    checkResults.appendChild(list);
+  } catch (e) {
+    console.error(e);
+    checkResults.textContent =
+      "Erreur pendant la vérification. Vérifiez votre connexion Internet. / 检查失败，请确认网络连接。";
+  }
+}
+
       outputArea.value = lines.join("\n");
     }
 
