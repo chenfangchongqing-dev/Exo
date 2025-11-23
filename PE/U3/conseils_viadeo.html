@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>U3 · Donner des conseils – E-mail à Stella</title>
+  <style>
+    /* --- Layout global --- */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: #f5f5f5;
+      color: #333;
+    }
+
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background: #ffffff;
+      border-bottom: 1px solid #ddd;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .back-link {
+      text-decoration: none;
+      font-size: 0.95rem;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid #ddd;
+      background: #fafafa;
+    }
+    .back-link:hover {
+      background: #f0f0f0;
+    }
+
+    .unit-tag {
+      font-size: 0.85rem;
+      opacity: 0.8;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 18px 20px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    }
+
+    h1 {
+      font-size: 1.35rem;
+      margin: 0 0 8px;
+    }
+
+    h2 {
+      font-size: 1.15rem;
+      margin: 0 0 10px;
+    }
+
+    p {
+      margin: 4px 0 6px;
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    /* --- Bloc consigne + post-it --- */
+    .task-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .sticky-note {
+      background: #ffd85c;
+      border-radius: 4px;
+      padding: 14px 18px;
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.18);
+      transform: rotate(-1deg);
+      font-size: 0.95rem;
+    }
+
+    .sticky-note ul {
+      margin: 6px 0 0;
+      padding-left: 20px;
+    }
+
+    .sticky-note li {
+      margin-bottom: 4px;
+    }
+
+    /* --- Fenêtre e-mail --- */
+    .mail-window {
+      margin-top: 10px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid #d1d1d1;
+      background: #fdfdfd;
+    }
+
+    .mail-header {
+      background: #f3f3f3;
+      padding: 6px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .traffic-lights {
+      display: flex;
+      gap: 6px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: #ccc;
+    }
+
+    .dot.red {
+      background: #ff5f57;
+    }
+
+    .dot.yellow {
+      background: #febc2e;
+    }
+
+    .dot.green {
+      background: #28c840;
+    }
+
+    .mail-icons {
+      display: flex;
+      gap: 6px;
+      font-size: 0.8rem;
+      opacity: 0.7;
+    }
+
+    .mail-icons span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+      border: 1px solid #d0d0d0;
+    }
+
+    .mail-body {
+      padding: 10px 14px 14px;
+      background: #ffffff;
+    }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: 70px minmax(0, 1fr);
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+      font-size: 0.9rem;
+    }
+
+    .field-label {
+      text-align: right;
+      font-weight: 500;
+    }
+
+    .field-input {
+      width: 100%;
+      border-radius: 4px;
+      border: 1px solid #d4d4d4;
+      padding: 4px 6px;
+      font-size: 0.9rem;
+      font-family: inherit;
+      background: #fafafa;
+    }
+
+    .field-input:focus,
+    .mail-textarea:focus {
+      outline: none;
+      border-color: #ff6b3d;
+      box-shadow: 0 0 0 1px rgba(255, 107, 61, 0.3);
+      background: #ffffff;
+    }
+
+    .mail-divider {
+      border: none;
+      border-top: 1px solid #e0e0e0;
+      margin: 8px 0 10px;
+    }
+
+    .mail-textarea {
+      width: 100%;
+      border: none;
+      resize: vertical;
+      min-height: 180px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      line-height: 1.4;
+      padding: 0;
+      white-space: pre-wrap;
+    }
+
+    .mail-textarea::placeholder {
+      color: #b0b0b0;
+    }
+
+    /* --- Zone de génération --- */
+    .actions {
+      margin-top: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 999px;
+      padding: 8px 16px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .btn-primary {
+      background: #ff6b3d;
+      color: #fff;
+    }
+    .btn-primary:hover {
+      filter: brightness(1.05);
+    }
+
+    .btn-outline {
+      background: #fff;
+      border: 1px solid #ccc;
+    }
+    .btn-outline:hover {
+      background: #f5f5f5;
+    }
+
+    .generated {
+      margin-top: 10px;
+      font-size: 0.9rem;
+    }
+
+    .generated textarea {
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid #d4d4d4;
+      padding: 8px;
+      font-size: 0.9rem;
+      font-family: inherit;
+      min-height: 160px;
+      resize: vertical;
+      white-space: pre-wrap;
+    }
+
+    .hint {
+      font-size: 0.8rem;
+      opacity: 0.75;
+      margin-top: 4px;
+    }
+
+    /* --- Exemple de production --- */
+    details.example {
+      font-size: 0.95rem;
+    }
+
+    details.example > summary {
+      cursor: pointer;
+      list-style: none;
+      font-weight: 600;
+    }
+
+    details.example > summary::marker,
+    details.example > summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details.example summary::after {
+      content: "▼";
+      font-size: 0.75rem;
+      margin-left: 6px;
+      opacity: 0.7;
+    }
+
+    details.example[open] summary::after {
+      content: "▲";
+    }
+
+    details.example p {
+      margin-top: 8px;
+      white-space: pre-wrap;
+    }
+
+    @media (max-width: 780px) {
+      .task-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="top-bar">
+    <a href="../index.html" class="back-link">← Retour</a>
+    <div class="unit-tag">Écrire · U3 Donner des conseils</div>
+  </header>
+
+  <main>
+    <!-- Consigne + post-it -->
+    <section class="card">
+      <h1>Conseiller une amie pour sa présentation vidéo</h1>
+
+      <div class="task-layout">
+        <div>
+          <p>
+            Votre amie <strong>Stella</strong> veut créer une vidéo pour se présenter
+            sur le réseau professionnel <strong>Viadeo</strong>. Elle vous
+            demande de la conseiller.
+          </p>
+          <p>
+            Vous lui envoyez un e-mail pour lui faire des recommandations.
+            Aidez-vous de vos notes et utilisez des expressions pour
+            <strong>donner des conseils</strong>.
+          </p>
+        </div>
+
+        <div class="sticky-note">
+          <ul>
+            <li>Raconter son expérience de télétravail</li>
+            <li>Comment et pourquoi s’habiller ?</li>
+            <li>Quel espace de travail et quel matériel ?</li>
+            <li>Quelle organisation de travail ?</li>
+            <li>Goût pour le travail à distance ?</li>
+            <li>Parler de sa motivation professionnelle</li>
+            <li>Proposer un premier contact</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Fenêtre e-mail + génération -->
+    <section class="card">
+      <h2>Écrivez votre e-mail de conseils</h2>
+      <p>
+        Complétez le modèle d’e-mail ci-dessous, puis générez le texte complet
+        pour le copier dans votre devoir ou sur la plateforme de remise.
+      </p>
+
+      <div class="mail-window">
+        <div class="mail-header">
+          <div class="traffic-lights">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+          </div>
+          <div class="mail-icons" aria-hidden="true">
+            <span>⬇️</span>
+            <span>📝</span>
+            <span>✉️</span>
+          </div>
+        </div>
+
+        <div class="mail-body">
+          <div class="field-row">
+            <div class="field-label">De :</div>
+            <div>
+              <input
+                id="field-from"
+                class="field-input"
+                type="text"
+                value="Moi"
+              />
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field-label">à :</div>
+            <div>
+              <input
+                id="field-to"
+                class="field-input"
+                type="text"
+                value="Stella Bachir"
+              />
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field-label">Objet :</div>
+            <div>
+              <input
+                id="field-subject"
+                class="field-input"
+                type="text"
+                value="Ta présentation sur Viadeo"
+              />
+            </div>
+          </div>
+
+          <hr class="mail-divider" />
+
+          <textarea
+            id="field-body"
+            class="mail-textarea"
+          >Bonjour Stella,
+
+Pour ta vidéo, je te conseille d’abord de choisir un endroit calme, bien éclairé, avec un fond simple. Tu pourrais parler de ton expérience de télétravail et expliquer comment tu t’organises dans la journée.
+
+Pense aussi à ta tenue : choisis des vêtements professionnels mais dans lesquels tu te sens à l’aise. Tu peux montrer le matériel que tu utilises (ordinateur, casque, connexion Internet…) pour montrer que tu es prête pour le travail à distance.
+
+N’oublie pas d’expliquer pourquoi le télétravail te plaît, et de parler de ta motivation professionnelle. À la fin de la vidéo, propose un premier contact, par exemple un entretien en visioconférence.
+
+Bon tournage !
+
+</textarea>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button id="btn-generate" class="btn btn-primary">
+          Générer le texte complet
+        </button>
+        <button id="btn-copy" class="btn btn-outline">
+          Copier le texte généré
+        </button>
+      </div>
+
+      <div class="generated">
+        <p><strong>Texte généré :</strong></p>
+        <textarea
+          id="output-email"
+          readonly
+          placeholder="Cliquez sur « Générer le texte complet » pour voir votre e-mail ici."
+        ></textarea>
+        <p class="hint">
+          Astuce : vérifiez les verbes au conditionnel et utilisez des
+          expressions comme <em>je te conseille de…</em>,
+          <em>tu devrais…</em>, <em>pense à…</em>.
+        </p>
+      </div>
+    </section>
+
+    <!-- Exemple de production (repliable) -->
+    <section class="card">
+      <h2>Exemple de production</h2>
+      <details class="example">
+        <summary>Cliquez pour afficher / 点击展开示例</summary>
+        <p>Bonjour Stella, Voici quelques recommandations pour te présenter sur Viadéo. D’abord, je te conseille de parler de tes expériences de télétravail. Tu t’habilles toujours comme pour aller au bureau parce cela te prépare mentalement au travail. Tu as aménagé un espace bureau chez toi parce que cela te permet d’être plus efficace. Tu as un ordinateur et une webcam. Montre que tu es motivée pour travailler à distance. Tu as l’habitude d’organiser ton temps de travail comme une journée habituelle. Dis aussi que tu souhaiterais évoluer dans ton domaine professionnel. Et si on demande à te rencontrer, tu proposeras un entretien ou une visioconférence. Bon courage !</p>
+      </details>
+    </section>
+  </main>
+
+  <script>
+    const fromInput = document.getElementById("field-from");
+    const toInput = document.getElementById("field-to");
+    const subjectInput = document.getElementById("field-subject");
+    const bodyInput = document.getElementById("field-body");
+    const outputArea = document.getElementById("output-email");
+    const btnGenerate = document.getElementById("btn-generate");
+    const btnCopy = document.getElementById("btn-copy");
+
+    function generateEmail() {
+      const from = fromInput.value.trim();
+      const to = toInput.value.trim();
+      const subject = subjectInput.value.trim();
+      const body = bodyInput.value.replace(/\s+$/, ""); // trim end only
+
+      const lines = [];
+      if (from) lines.push("De : " + from);
+      if (to) lines.push("À : " + to);
+      if (subject) lines.push("Objet : " + subject);
+      lines.push(""); // ligne vide
+      lines.push(body || "");
+
+      outputArea.value = lines.join("\n");
+    }
+
+    btnGenerate.addEventListener("click", generateEmail);
+
+    btnCopy.addEventListener("click", () => {
+      if (!outputArea.value.trim()) {
+        generateEmail();
+      }
+      outputArea.select();
+      try {
+        const ok = document.execCommand("copy");
+        if (!ok && navigator.clipboard) {
+          navigator.clipboard.writeText(outputArea.value);
+        }
+      } catch (e) {
+        // fallback : le texte est déjà sélectionné
+      }
+    });
+  </script>
+</body>
+</html>
