@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PE · U3 – Être un travailleur nomade en 2022</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: #f5f5f5;
+      color: #333;
+    }
+
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background: #ffffff;
+      border-bottom: 1px solid #ddd;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .back-link {
+      text-decoration: none;
+      font-size: 0.95rem;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid #ddd;
+      background: #fafafa;
+    }
+
+    .back-link:hover {
+      background: #f0f0f0;
+    }
+
+    .unit-tag {
+      font-size: 0.85rem;
+      opacity: 0.8;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 18px 20px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    }
+
+    h1 {
+      font-size: 1.3rem;
+      margin: 0 0 10px;
+    }
+
+    h2 {
+      font-size: 1.1rem;
+      margin: 0 0 8px;
+    }
+
+    p {
+      font-size: 0.95rem;
+      line-height: 1.4;
+      margin: 4px 0 6px;
+    }
+
+    /* Article bloc */
+    .article-header {
+      margin-bottom: 10px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #ff7b3a;
+      color: #fff;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .article-title {
+      margin-top: 8px;
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
+
+    .article-title span.script {
+      font-weight: 600;
+      font-style: italic;
+      color: #1f6ac8;
+    }
+
+    .article-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 16px;
+      margin-top: 10px;
+    }
+
+    .article-block {
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    /* Questions bloc */
+    .example {
+      margin-top: 8px;
+      font-size: 0.95rem;
+    }
+
+    .example p {
+      margin: 2px 0;
+    }
+
+    .example-justif {
+      color: #c0392b;
+      font-weight: 500;
+    }
+
+    .questions {
+      margin-top: 10px;
+    }
+
+    .question {
+      border-top: 1px solid #eee;
+      padding-top: 8px;
+      margin-top: 8px;
+      font-size: 0.95rem;
+    }
+
+    .q-text {
+      margin-bottom: 4px;
+    }
+
+    .q-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 4px;
+    }
+
+    .q-options label {
+      margin-right: 10px;
+      font-size: 0.9rem;
+    }
+
+    .justif-label {
+      font-size: 0.9rem;
+      margin-top: 2px;
+    }
+
+    .justif-input {
+      width: 100%;
+      border-radius: 6px;
+      border: 1px solid #ddd;
+      padding: 4px 6px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      resize: vertical;
+      min-height: 32px;
+    }
+
+    .justif-input:focus {
+      outline: none;
+      border-color: #ff7b3a;
+      box-shadow: 0 0 0 1px rgba(255, 123, 58, 0.3);
+    }
+
+    .feedback {
+      margin-top: 4px;
+      font-size: 0.85rem;
+    }
+
+    .feedback.correct {
+      color: #1e8449;
+    }
+
+    .feedback.incorrect {
+      color: #c0392b;
+    }
+
+    .btn-bar {
+      margin-top: 14px;
+      display: flex;
+      justify-content: flex-start;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 999px;
+      padding: 8px 16px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      font-family: inherit;
+      background: #ff7b3a;
+      color: #fff;
+    }
+
+    .btn:hover {
+      filter: brightness(1.05);
+    }
+
+    .hint {
+      font-size: 0.8rem;
+      opacity: 0.75;
+      margin-top: 6px;
+    }
+
+    @media (max-width: 780px) {
+      .article-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="top-bar">
+    <a href="../index.html" class="back-link">← 返回首页</a>
+    <div class="unit-tag">PE · U3 · Compréhension écrite</div>
+  </header>
+
+  <main>
+    <!-- Consigne + article -->
+    <section class="card">
+      <h1>Lecture – Être un travailleur nomade en 2022</h1>
+      <p>
+        Lisez l’article et cochez Vrai ou Faux. Justifiez votre réponse avec une
+        phrase de l’article.
+      </p>
+
+      <div class="article">
+        <div class="article-header">
+          <span class="badge">Emploi</span>
+          <div class="article-title">
+            Être un <span class="script">travailleur nomade</span> en 2022
+          </div>
+        </div>
+
+        <p><strong>Vous souhaitez voyager ? Vous voulez vivre au soleil toute l’année ? Mais vous devez aussi travailler !</strong></p>
+
+        <div class="article-layout">
+          <div class="article-block">
+            <p>
+              En 2022, si vous aimez voyager, changer de lieu régulièrement et
+              continuer à travailler, c’est possible ! Vous pouvez choisir de
+              devenir travailleur nomade. Il suffit d’avoir une bonne
+              connexion, un PC portable et un smartphone ! Aujourd’hui, le
+              télétravail est possible partout dans le monde.
+            </p>
+            <p>
+              C’est le choix de Pablo, 41 ans, un entrepreneur qui habite à
+              Lisbonne depuis deux ans. « Je voulais retourner dans la ville
+              natale de mes parents, profiter du soleil, de la plage, des prix
+              bas de ce pays. Alors, j’ai choisi de m’installer ici. Le matin,
+              je travaille en visioconférence avec mes équipes restées en
+              France. Le soir, je vais voir mes parents et mes amis, je les
+              appelle sur plusieurs plateformes en ligne. Ils viennent me voir
+              pendant les vacances ou pour de longs week-ends. La vie est très
+              agréable et je ne regrette pas mon choix ! »
+            </p>
+          </div>
+
+          <div class="article-block">
+            <p>
+              Rihanna, 24 ans, a posé ses valises à La Réunion il y a six mois :
+              « L’année dernière, j’étais en Tunisie. Le mois prochain, j’irai
+              vivre à Majorque. Ici, j’habite dans un grand hôtel où je
+              rencontre des travailleurs nomades comme moi. J’ai beaucoup
+              d’amis de toutes les nationalités. Le soir après le travail, nous
+              nous retrouvons pour boire un apéro. J’ai rencontré Yanis le mois
+              dernier et nous avons décidé de créer une entreprise de
+              cosmétique. Nous avons tout organisé en ligne et des
+              travailleurs nomades comme nous ont participé au projet. Nous
+              vendons nos produits partout dans le monde. Le responsable
+              commercial est à Madrid et le directeur financier à Santiago.
+              Nous sommes en contact en visio tous les jours. Et si nous
+              souhaitons nous rencontrer, nous nous donnons rendez-vous dans
+              une ville que nous choisissons. Le travail nomade, c’est
+              l’idéal ! »
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Questions -->
+    <section class="card">
+      <h2>Vrai ou Faux ? Justifiez avec une phrase de l’article.</h2>
+
+      <div class="example">
+        <p><strong>Ex.</strong> Cet article parle des gens qui voyagent et travaillent en même temps.</p>
+        <p class="example-justif">
+          Justification : Si vous aimez voyager, changer de lieu régulièrement
+          et continuer à travailler, c’est possible !
+        </p>
+      </div>
+
+      <div class="questions">
+        <!-- a -->
+        <div class="question" data-id="a">
+          <div class="q-text">
+            a. Pour être un travailleur nomade, il n’y a pas besoin
+            d’équipement.
+          </div>
+          <div class="q-row">
+            <div class="q-options">
+              <label>
+                <input type="radio" name="q_a" value="V" /> Vrai
+              </label>
+              <label>
+                <input type="radio" name="q_a" value="F" /> Faux
+              </label>
+            </div>
+          </div>
+          <div class="justif-label">Justification :</div>
+          <textarea class="justif-input" rows="1"></textarea>
+          <div class="feedback" id="fb_a"></div>
+        </div>
+
+        <!-- b -->
+        <div class="question" data-id="b">
+          <div class="q-text">
+            b. Aujourd’hui, il n’est pas possible de télétravailler trop loin de
+            chez soi.
+          </div>
+          <div class="q-row">
+            <div class="q-options">
+              <label>
+                <input type="radio" name="q_b" value="V" /> Vrai
+              </label>
+              <label>
+                <input type="radio" name="q_b" value="F" /> Faux
+              </label>
+            </div>
+          </div>
+          <div class="justif-label">Justification :</div>
+          <textarea class="justif-input" rows="1"></textarea>
+          <div class="feedback" id="fb_b"></div>
+        </div>
+
+        <!-- c -->
+        <div class="question" data-id="c">
+          <div class="q-text">
+            c. Pablo a choisi de télétravailler à Lisbonne parce que la vie y
+            est moins chère.
+          </div>
+          <div class="q-row">
+            <div class="q-options">
+              <label>
+                <input type="radio" name="q_c" value="V" /> Vrai
+              </label>
+              <label>
+                <input type="radio" name="q_c" value="F" /> Faux
+              </label>
+            </div>
+          </div>
+          <div class="justif-label">Justification :</div>
+          <textarea class="justif-input" rows="1"></textarea>
+          <div class="feedback" id="fb_c"></div>
+        </div>
+
+        <!-- d -->
+        <div class="question" data-id="d">
+          <div class="q-text">
+            d. Pablo gère ses équipes à distance.
+          </div>
+          <div class="q-row">
+            <div class="q-options">
+              <label>
+                <input type="radio" name="q_d" value="V" /> Vrai
+              </label>
+              <label>
+                <input type="radio" name="q_d" value="F" /> Faux
+              </label>
+            </div>
+          </div>
+          <div class="justif-label">Justification :</div>
+          <textarea class="justif-input" rows="1"></textarea>
+          <div class="feedback" id="fb_d"></div>
+        </div>
+
+        <!-- e -->
+        <div class="question" data-id="e">
+          <div class="q-text">
+            e. Rihanna change régulièrement de pays pour télétravailler.
+          </div>
+          <div class="q-row">
+            <div class="q-options">
+              <label>
+                <input type="radio" name="q_e" value="V" /> Vrai
+              </label>
+              <label>
+                <input type="radio" name="q_e" value="F" /> Faux
+              </label>
+            </div>
+          </div>
+          <div class="justif-label">Justification :</div>
+          <textarea class="justif-input" rows="1"></textarea>
+          <div class="feedback" id="fb_e"></div>
+        </div>
+
+        <!-- f -->
+        <div class="question" data-id="f">
+          <div class="q-text">
+            f. Pour Rihanna, le travail nomade ne permet pas de se faire des
+            amis.
+          </div>
+          <div class="q-row">
+            <div class="q-options">
+              <label>
+                <input type="radio" name="q_f" value="V" /> Vrai
+              </label>
+              <label>
+                <input type="radio" name="q_f" value="F" /> Faux
+              </label>
+            </div>
+          </div>
+          <div class="justif-label">Justification :</div>
+          <textarea class="justif-input" rows="1"></textarea>
+          <div class="feedback" id="fb_f"></div>
+        </div>
+
+        <!-- g -->
+        <div class="question" data-id="g">
+          <div class="q-text">
+            g. Rihanna a créé une entreprise en ligne avec d’autres travailleurs
+            nomades.
+          </div>
+          <div class="q-row">
+            <div class="q-options">
+              <label>
+                <input type="radio" name="q_g" value="V" /> Vrai
+              </label>
+              <label>
+                <input type="radio" name="q_g" value="F" /> Faux
+              </label>
+            </div>
+          </div>
+          <div class="justif-label">Justification :</div>
+          <textarea class="justif-input" rows="1"></textarea>
+          <div class="feedback" id="fb_g"></div>
+        </div>
+
+        <!-- h -->
+        <div class="question" data-id="h">
+          <div class="q-text">
+            h. Rihanna regrette d’être une travailleuse nomade.
+          </div>
+          <div class="q-row">
+            <div class="q-options">
+              <label>
+                <input type="radio" name="q_h" value="V" /> Vrai
+              </label>
+              <label>
+                <input type="radio" name="q_h" value="F" /> Faux
+              </label>
+            </div>
+          </div>
+          <div class="justif-label">Justification :</div>
+          <textarea class="justif-input" rows="1"></textarea>
+          <div class="feedback" id="fb_h"></div>
+        </div>
+      </div>
+
+      <div class="btn-bar">
+        <button id="btn-check" class="btn">
+          Vérifier / 检查答案
+        </button>
+      </div>
+      <div class="hint">
+        点击“Vérifier / 检查答案”后，每题会显示 ✔/✘ 以及一个可能的
+        Justification 示例句子。
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // 正确答案 & 标准 justification（来自你提供的截图）
+    const ANSWERS = {
+      a: {
+        correct: "F",
+        text:
+          "Faux. Il faut avoir une bonne connexion, un PC portable et un smartphone."
+      },
+      b: {
+        correct: "F",
+        text:
+          "Faux. « Aujourd’hui, le télétravail est possible partout dans le monde. »"
+      },
+      c: {
+        correct: "V",
+        text:
+          "Vrai. « Je voulais retourner dans la ville natale de mes parents, profiter […] des prix bas de ce pays. »"
+      },
+      d: {
+        correct: "V",
+        text:
+          "Vrai. « Le matin, je travaille en visioconférence avec mes équipes restées en France. »"
+      },
+      e: {
+        correct: "V",
+        text:
+          "Vrai. « Rihanna a posé ses valises à La Réunion il y a six mois : “L’année dernière, j’étais en Tunisie. Le mois prochain, j’irai vivre à Majorque.” »"
+      },
+      f: {
+        correct: "F",
+        text:
+          "Faux. « J’ai beaucoup d’amis de toutes les nationalités. »"
+      },
+      g: {
+        correct: "V",
+        text:
+          "Vrai. « Nous avons tout organisé en ligne et des travailleurs nomades comme nous ont participé au projet. »"
+      },
+      h: {
+        correct: "F",
+        text:
+          "Faux. « Le travail nomade, c’est l’idéal ! »"
+      }
+    };
+
+    const btnCheck = document.getElementById("btn-check");
+
+    btnCheck.addEventListener("click", () => {
+      Object.keys(ANSWERS).forEach((id) => {
+        const radios = document.querySelectorAll(
+          `input[name="q_${id}"]`
+        );
+        let selected = null;
+        radios.forEach((r) => {
+          if (r.checked) selected = r.value;
+        });
+
+        const fb = document.getElementById(`fb_${id}`);
+        if (!fb) return;
+
+        const { correct, text } = ANSWERS[id];
+
+        if (!selected) {
+          fb.className = "feedback";
+          fb.textContent = "Veuillez choisir Vrai ou Faux / 请先选择 V 或 F。";
+          return;
+        }
+
+        if (selected === correct) {
+          fb.className = "feedback correct";
+          fb.textContent = "✔ Réponse correcte. Justification possible : " + text;
+        } else {
+          fb.className = "feedback incorrect";
+          fb.textContent =
+            "✘ Réponse incorrecte. Réponse correcte : " + text;
+        }
+      });
+    });
+  </script>
+</body>
+</html>
