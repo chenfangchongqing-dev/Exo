@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grammaire – Pronoms compléments (écoute)</title>
+  <link rel="stylesheet" href="../../style.css">
+
+  <style>
+    body{
+      font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      background: radial-gradient(circle at 0 0,#eff6ff 0,#f5f7fb 40%,#f9fafb 100%);
+      color:#0f172a;
+      margin:0;
+    }
+    header,main,footer{
+      max-width:1000px;
+      margin:0 auto;
+      padding:20px;
+    }
+    h1{margin:.1rem 0;font-size:1.6rem;}
+    .hint{color:#64748b;font-size:.92rem;}
+
+    .card{
+      background:#ffffff;
+      border-radius:14px;
+      border:1px solid #e5e7eb;
+      padding:18px;
+      box-shadow:0 8px 22px rgba(15,23,42,0.06);
+      margin-top:16px;
+    }
+
+    audio{width:100%; margin:10px 0 4px;}
+
+    .q-list{
+      margin-top:12px;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+    .q-item{
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid #e5e7eb;
+      background:#f9fafb;
+    }
+    .q-header{
+      font-weight:600;
+      margin-bottom:6px;
+    }
+
+    .options{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+    .chip{
+      border-radius:999px;
+      padding:6px 10px;
+      border:1px solid #cbd5f5;
+      cursor:pointer;
+      font-size:0.93rem;
+      background:#fff;
+      transition:all .12s ease-out;
+    }
+    .chip.selected{
+      background:#2563eb;
+      color:#fff;
+      border-color:#2563eb;
+      box-shadow:0 4px 10px rgba(37,99,235,0.35);
+    }
+    .chip.correct{
+      background:#16a34a;
+      color:#fff;
+      border-color:#16a34a;
+    }
+    .chip.wrong{
+      background:#dc2626;
+      color:#fff;
+      border-color:#dc2626;
+    }
+
+    .btn-row{
+      margin-top:16px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:8px 16px;
+      border-radius:999px;
+      border:1px solid #0ea5e9;
+      background:#0ea5e9;
+      color:#fff;
+      font-size:0.95rem;
+      cursor:pointer;
+      transition:all .15s ease-out;
+    }
+    .btn.secondary{
+      background:#fff;
+      color:#0f172a;
+      border-color:#cbd5f5;
+    }
+    .btn:hover{
+      transform:translateY(-1px);
+      box-shadow:0 10px 26px rgba(14,165,233,0.35);
+    }
+
+    .score-box{
+      margin-top:10px;
+      padding:8px 12px;
+      border-radius:10px;
+      border:1px solid #e5e7eb;
+      background:#f9fafb;
+      font-size:0.9rem;
+      color:#334155;
+    }
+  </style>
+</head>
+<body>
+<header>
+  <a href="../" style="text-decoration:none;color:#0ea5e9;">← Retour</a>
+  <h1>Grammaire – Pronoms compléments</h1>
+  <p class="hint">Écoutez puis cliquez sur l’expression que le pronom remplace. 然后点击“Vérifier / 检查答案”。</p>
+</header>
+
+<main class="card">
+  <p><strong>Audio :</strong></p>
+
+  <!-- ★★★ 已替换为你的音频文件 ★★★ -->
+  <audio controls src="audio/U3_pronoms_audio.mp3"></audio>
+
+  <div class="q-list">
+
+    <!-- Ex -->
+    <div class="q-item">
+      <div class="q-header">Ex. du service client · au service client · le service client</div>
+      <div class="options" data-answer="2">
+        <button class="chip" data-value="1">du service client</button>
+        <button class="chip" data-value="2">au service client</button>
+        <button class="chip" data-value="3">le service client</button>
+      </div>
+    </div>
+
+    <!-- a -->
+    <div class="q-item">
+      <div class="q-header">a. des chaussures · les chaussures · aux chaussures</div>
+      <div class="options" data-answer="2">
+        <button class="chip" data-value="1">des chaussures</button>
+        <button class="chip" data-value="2">les chaussures</button>
+        <button class="chip" data-value="3">aux chaussures</button>
+      </div>
+    </div>
+
+    <!-- b -->
+    <div class="q-item">
+      <div class="q-header">b. mon ami Philippe · à mon frère · le service client</div>
+      <div class="options" data-answer="2">
+        <button class="chip" data-value="1">mon ami Philippe</button>
+        <button class="chip" data-value="2">à mon frère</button>
+        <button class="chip" data-value="3">le service client</button>
+      </div>
+    </div>
+
+    <!-- c -->
+    <div class="q-item">
+      <div class="q-header">c. à mon père et ma mère · à ma sœur et moi · toi et moi</div>
+      <div class="options" data-answer="2">
+        <button class="chip" data-value="1">à mon père et ma mère</button>
+        <button class="chip" data-value="2">à ma sœur et moi</button>
+        <button class="chip" data-value="3">toi et moi</button>
+      </div>
+    </div>
+
+    <!-- d -->
+    <div class="q-item">
+      <div class="q-header">d. moi · à moi · de moi</div>
+      <div class="options" data-answer="2">
+        <button class="chip" data-value="1">moi</button>
+        <button class="chip" data-value="2">à moi</button>
+        <button class="chip" data-value="3">de moi</button>
+      </div>
+    </div>
+
+    <!-- e -->
+    <div class="q-item">
+      <div class="q-header">e. la lettre de réclamation · de la lettre de réclamation · pour mon amie</div>
+      <div class="options" data-answer="1">
+        <button class="chip" data-value="1">la lettre de réclamation</button>
+        <button class="chip" data-value="2">de la lettre de réclamation</button>
+        <button class="chip" data-value="3">pour mon amie</button>
+      </div>
+    </div>
+
+    <!-- f -->
+    <div class="q-item">
+      <div class="q-header">f. les membres de son équipe · à son équipe · aux membres de son équipe</div>
+      <div class="options" data-answer="3">
+        <button class="chip" data-value="1">les membres de son équipe</button>
+        <button class="chip" data-value="2">à son équipe</button>
+        <button class="chip" data-value="3">aux membres de son équipe</button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="btn-row">
+    <button type="button" class="btn" id="checkBtn">Vérifier / 检查答案</button>
+    <button type="button" class="btn secondary" id="resetBtn">Réinitialiser / 重做</button>
+  </div>
+
+  <div id="scoreBox" class="score-box" style="display:none;"></div>
+</main>
+
+<footer class="hint" style="max-width:1000px;margin:0 auto 20px;padding:0 20px;">
+  © 《高级法语综合课》
+</footer>
+
+<script>
+  document.querySelectorAll(".options").forEach(group => {
+    const chips = group.querySelectorAll(".chip");
+    chips.forEach(chip => {
+      chip.addEventListener("click", () => {
+        chips.forEach(c => c.classList.remove("selected"));
+        chip.classList.add("selected");
+        chips.forEach(c => c.classList.remove("correct","wrong"));
+      });
+    });
+  });
+
+  document.getElementById("checkBtn").addEventListener("click", () => {
+    let total = 0;
+    let score = 0;
+
+    document.querySelectorAll(".options").forEach(group => {
+      const correct = group.dataset.answer;
+      total++;
+
+      const chips = group.querySelectorAll(".chip");
+      let selectedValue = null;
+
+      chips.forEach(c => {
+        if (c.classList.contains("selected")) selectedValue = c.dataset.value;
+      });
+
+      chips.forEach(c => c.classList.remove("correct","wrong"));
+
+      if (selectedValue) {
+        chips.forEach(c => {
+          if (c.dataset.value === correct) c.classList.add("correct");
+          else if (c.dataset.value === selectedValue) c.classList.add("wrong");
+        });
+
+        if (selectedValue === correct) score++;
+      }
+    });
+
+    const box = document.getElementById("scoreBox");
+    box.style.display = "block";
+    box.innerHTML = `Score : ${score} / ${total}`;
+  });
+
+  document.getElementById("resetBtn").addEventListener("click", () => {
+    document.getElementById("scoreBox").style.display = "none";
+    document.querySelectorAll(".chip").forEach(chip => {
+      chip.classList.remove("selected","correct","wrong");
+    });
+  });
+</script>
+</body>
+</html>
