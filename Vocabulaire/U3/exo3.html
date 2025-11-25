@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vocabulaire U3 – La vente en ligne, les réseaux sociaux</title>
+
+  <!-- 你的全局样式 -->
+  <link rel="stylesheet" href="../../style.css" />
+
+  <style>
+    body{
+      font:16px/1.6 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      background: radial-gradient(circle at 0 0,#eff6ff 0,#f5f7fb 40%,#f9fafb 100%);
+      color:#0f172a;
+      margin:0;
+    }
+    header,main,footer{
+      max-width:960px;
+      margin:0 auto;
+      padding:20px;
+    }
+    h1{
+      margin:.2rem 0;
+      font-size:1.5rem;
+    }
+    .hint{
+      font-size:.92rem;
+      color:#64748b;
+    }
+    .card{
+      background:#fff;
+      border-radius:14px;
+      border:1px solid #e5e7eb;
+      padding:18px 18px 22px;
+      box-shadow:0 8px 22px rgba(15,23,42,.06);
+      margin-top:16px;
+    }
+
+    /* banque de mots */
+    .word-bank-title{
+      font-weight:600;
+      margin-bottom:6px;
+    }
+    .word-bank{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-bottom:14px;
+    }
+    .chip{
+      border-radius:999px;
+      border:1px solid #cbd5f5;
+      padding:4px 10px;
+      background:#eef2ff;
+      font-size:.9rem;
+      cursor:pointer;
+      user-select:none;
+      transition:all .15s ease-out;
+    }
+    .chip:hover{
+      box-shadow:0 6px 14px rgba(99,102,241,.25);
+      transform:translateY(-1px);
+    }
+    .chip.used{
+      opacity:.45;
+      background:#e5e7eb;
+      border-color:#cbd5e1;
+      box-shadow:none;
+      transform:none;
+      cursor:default;
+    }
+
+    /* texte + blancs */
+    .text-block{
+      font-size:0.98rem;
+      text-align:justify;
+    }
+    .drop{
+      display:inline-block;
+      min-width:90px;
+      padding:2px 4px;
+      margin:0 1px;
+      border-bottom:2px dotted #9ca3af;
+      cursor:pointer;
+      transition:background .15s ease,border-color .15s ease,transform .08s ease;
+    }
+    .drop::after{
+      content:"";
+    }
+    .drop-empty{
+      color:#9ca3af;
+    }
+    .drop-active{
+      background:#e0f2fe;
+      border-color:#0ea5e9;
+      transform:translateY(-1px);
+    }
+    .drop.good{
+      background:#ecfdf5;
+      border-color:#16a34a;
+    }
+    .drop.bad{
+      background:#fef2f2;
+      border-color:#dc2626;
+    }
+
+    /* boutons */
+    .btn-row{
+      margin-top:18px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:8px 16px;
+      border-radius:999px;
+      border:1px solid #0ea5e9;
+      background:#0ea5e9;
+      color:#fff;
+      font-size:0.95rem;
+      cursor:pointer;
+      transition:all .15s ease-out;
+    }
+    .btn.secondary{
+      background:#ffffff;
+      color:#0ea5e9;
+    }
+    .btn:hover{
+      transform:translateY(-1px);
+      box-shadow:0 9px 24px rgba(14,165,233,.35);
+    }
+    .btn.secondary:hover{
+      background:#f1f5f9;
+    }
+
+    .score-box{
+      margin-top:10px;
+      padding:8px 12px;
+      border-radius:10px;
+      border:1px solid #e5e7eb;
+      background:#f9fafb;
+      font-size:0.9rem;
+      color:#334155;
+      display:none;
+    }
+  </style>
+</head>
+<body>
+<header>
+  <a href="../" style="text-decoration:none;color:#0ea5e9;">← Retour</a>
+  <h1>Vocabulaire U3 – La vente en ligne, les réseaux sociaux</h1>
+  <p class="hint">
+    Complétez le texte avec les mots de la liste (cliquer /拖拽填空). Puis cliquez sur
+    « Vérifier / 检查答案 »。
+  </p>
+</header>
+
+<main class="card">
+
+  <div class="word-bank-title">Mots à utiliser :</div>
+  <div class="word-bank" id="wordBank">
+    <span class="chip" draggable="true" data-word="commandé">commandé</span>
+    <span class="chip" draggable="true" data-word="likes">likes</span>
+    <span class="chip" draggable="true" data-word="article">article</span>
+    <span class="chip" draggable="true" data-word="frais de port">frais de port</span>
+    <span class="chip" draggable="true" data-word="sécurisé">sécurisé</span>
+    <span class="chip" draggable="true" data-word="livraison">livraison</span>
+    <span class="chip" draggable="true" data-word="le service client">le service client</span>
+    <span class="chip" draggable="true" data-word="renvoi">renvoi</span>
+    <span class="chip" draggable="true" data-word="remboursement">remboursement</span>
+    <span class="chip" draggable="true" data-word="commentaire">commentaire</span>
+    <span class="chip" draggable="true" data-word="arnaque">arnaque</span>
+  </div>
+
+  <div class="text-block" id="textBlock">
+    Il y a un mois, j’ai
+    <span class="drop drop-empty" data-answer="commandé"></span>
+    un pantalon de sport sur le site de culturesport.
+    Il y avait beaucoup de
+    <span class="drop drop-empty" data-answer="likes"></span>.
+    J’ai acheté mon
+    <span class="drop drop-empty" data-answer="article"></span>
+    en ligne et les
+    <span class="drop drop-empty" data-answer="frais de port"></span>
+    étaient gratuits.
+    Le site était
+    <span class="drop drop-empty" data-answer="sécurisé"></span>.
+    La
+    <span class="drop drop-empty" data-answer="livraison"></span>
+    a eu lieu un jeudi matin ! J’ai ouvert le paquet et il y avait du matériel de gymnastique.
+    J’ai contacté
+    <span class="drop drop-empty" data-answer="le service client"></span>
+    qui m’a proposé un
+    <span class="drop drop-empty" data-answer="renvoi"></span>
+    des articles et un
+    <span class="drop drop-empty" data-answer="remboursement"></span>
+    de mon achat.
+    J’ai reçu mon pantalon deux jours après. J’étais content,
+    j’ai laissé un
+    <span class="drop drop-empty" data-answer="commentaire"></span>
+    sur le site : « Bravo, cette boutique en ligne est honnête, ce n’est pas une
+    <span class="drop drop-empty" data-answer="arnaque"></span>
+    ! »
+  </div>
+
+  <div class="btn-row">
+    <button type="button" class="btn" id="checkBtn">Vérifier / 检查答案</button>
+    <button type="button" class="btn secondary" id="resetBtn">Réinitialiser / 重做</button>
+  </div>
+
+  <div id="scoreBox" class="score-box"></div>
+</main>
+
+<footer class="hint" style="max-width:960px;margin:0 auto 20px;padding:0 20px;">
+  © 《高级法语综合课》
+</footer>
+
+<script>
+(function(){
+  const chips = Array.from(document.querySelectorAll('.chip'));
+  const drops = Array.from(document.querySelectorAll('.drop'));
+  const scoreBox = document.getElementById('scoreBox');
+  let activeDrop = null;
+
+  // 点击空格：选中
+  drops.forEach(drop => {
+    drop.addEventListener('click', () => {
+      drops.forEach(d => d.classList.remove('drop-active'));
+      if (drop.dataset.current) {
+        // 若想清空已有答案：再次点击空格即可清空
+        const word = drop.dataset.current;
+        const chip = chips.find(c => c.dataset.word === word);
+        if (chip) chip.classList.remove('used');
+        drop.textContent = '';
+        drop.dataset.current = '';
+        drop.classList.add('drop-empty');
+        activeDrop = drop;
+        drop.classList.add('drop-active');
+      } else {
+        activeDrop = drop;
+        drop.classList.add('drop-active');
+      }
+    });
+
+    // 为桌面提供拖拽支持
+    drop.addEventListener('dragover', e => e.preventDefault());
+    drop.addEventListener('drop', e => {
+      e.preventDefault();
+      const word = e.dataTransfer.getData('text/word');
+      placeWord(word, drop);
+    });
+  });
+
+  // 点击单词：填入当前选中的空格
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      if (!activeDrop) return;
+      if (chip.classList.contains('used')) return;
+      placeWord(chip.dataset.word, activeDrop);
+    });
+
+    chip.addEventListener('dragstart', e => {
+      e.dataTransfer.setData('text/word', chip.dataset.word);
+    });
+  });
+
+  function placeWord(word, drop){
+    if (!word || !drop) return;
+
+    // 若该空格已有旧词，释放旧词
+    if (drop.dataset.current) {
+      const oldChip = chips.find(c => c.dataset.word === drop.dataset.current);
+      if (oldChip) oldChip.classList.remove('used');
+    }
+    // 若该词已经被用在其他空格，也先释放
+    const otherDrop = drops.find(d => d.dataset.current === word && d !== drop);
+    if (otherDrop) {
+      otherDrop.textContent = '';
+      otherDrop.dataset.current = '';
+      otherDrop.classList.add('drop-empty');
+      otherDrop.classList.remove('good','bad');
+    }
+
+    drop.textContent = word;
+    drop.dataset.current = word;
+    drop.classList.remove('drop-empty','good','bad');
+    chips.find(c => c.dataset.word === word)?.classList.add('used');
+  }
+
+  document.getElementById('checkBtn').addEventListener('click', () => {
+    let total = drops.length;
+    let score = 0;
+
+    drops.forEach(drop => {
+      const expected = (drop.dataset.answer || '').trim().toLowerCase();
+      const given = (drop.dataset.current || '').trim().toLowerCase();
+
+      drop.classList.remove('good','bad');
+
+      if (!given) {
+        drop.classList.add('bad');
+        return;
+      }
+      if (given === expected) {
+        drop.classList.add('good');
+        score++;
+      } else {
+        drop.classList.add('bad');
+      }
+    });
+
+    scoreBox.style.display = 'block';
+    scoreBox.textContent = `Score : ${score} / ${total}`;
+  });
+
+  document.getElementById('resetBtn').addEventListener('click', () => {
+    drops.forEach(drop => {
+      drop.textContent = '';
+      drop.dataset.current = '';
+      drop.classList.remove('good','bad','drop-active');
+      drop.classList.add('drop-empty');
+    });
+    chips.forEach(chip => chip.classList.remove('used'));
+    activeDrop = null;
+    scoreBox.style.display = 'none';
+    scoreBox.textContent = '';
+  });
+})();
+</script>
+</body>
+</html>
