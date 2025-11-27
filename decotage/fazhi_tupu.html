@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>中国特色社会主义法治理念 · 图谱导航</title>
+  <style>
+    :root {
+      --ink: #0f172a;
+      --muted: #64748b;
+      --bg: #f7f7fb;
+      --surface: #ffffff;
+      --shadow: 0 16px 40px rgba(2, 6, 23, 0.08);
+      --red-main: #dc2626;
+    }
+    html, body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+    }
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px 20px 32px;
+    }
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .back-link {
+      text-decoration: none;
+      font-size: 0.95rem;
+      color: var(--muted);
+      padding: 6px 10px 6px 4px;
+      border-radius: 999px;
+      border: 1px solid #e5e7eb;
+      background: #ffffffaa;
+    }
+    .back-link:hover {
+      background: #e5e7eb;
+      color: #111827;
+    }
+    .badge {
+      font-size: 0.8rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #fee2e2;
+      color: #b91c1c;
+      border: 1px solid #fecaca;
+    }
+    .panel {
+      border-radius: 20px;
+      padding: 22px 20px 24px;
+      background: #ffffff;
+      border: 1px solid #fee2e2;
+      box-shadow: var(--shadow);
+    }
+    .panel h1 {
+      margin: 0 0 4px;
+      font-size: 1.5rem;
+      text-align: center;
+    }
+    .panel .subtitle {
+      margin: 0 0 18px;
+      text-align: center;
+      font-size: 0.96rem;
+      color: var(--muted);
+    }
+    .panel .subtitle span {
+      display: block;
+    }
+    .graph-container {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+    }
+    .center-node {
+      background: linear-gradient(135deg, #dc2626, #b91c1c);
+      color: #ffffff;
+      padding: 12px 20px;
+      border-radius: 999px;
+      font-size: 0.98rem;
+      font-weight: 600;
+      text-align: center;
+      box-shadow: 0 10px 24px rgba(185, 28, 28, 0.38);
+    }
+    .center-node span {
+      display: block;
+      font-size: 0.9rem;
+      opacity: 0.95;
+    }
+    .branch {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 4px;
+    }
+    .node {
+      background-color: #ffffff;
+      padding: 12px 16px;
+      border-radius: 10px;
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.18);
+      width: 260px;
+      text-align: center;
+      border-top: 3px solid rgba(220, 38, 38, 0.6);
+    }
+    .node h3 {
+      margin: 0;
+      color: #1f2933;
+      font-size: 0.98rem;
+    }
+    .node p {
+      margin: 6px 0 0;
+      font-size: 0.88rem;
+      color: #64748b;
+    }
+    .hint {
+      margin-top: 18px;
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-align: center;
+    }
+    .hint span {
+      display: block;
+    }
+    @media (max-width: 640px) {
+      .panel {
+        padding: 18px 14px 20px;
+      }
+      .node {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <a href="./index.html" class="back-link">← 返回“文化解读 Décodage culturel”</a>
+      <div class="badge">中国特色社会主义法治理念 · 图谱导航</div>
+    </div>
+
+    <section class="panel">
+      <h1>中国特色社会主义法治理念</h1>
+      <p class="subtitle">
+        <span>图谱导航 · 关键词中法对照</span>
+        <span>Principes de l'État de droit socialiste à la chinoise</span>
+      </p>
+
+      <div class="graph-container">
+        <div class="center-node">
+          法治核心理念
+          <span>Principe central : État de droit</span>
+        </div>
+
+        <div class="branch">
+          <div class="node">
+            <h3>依法治国</h3>
+            <p>Gouvernance fondée sur la loi</p>
+          </div>
+          <div class="node">
+            <h3>执法为民（以人为本）</h3>
+            <p>Application de la loi au service du peuple</p>
+          </div>
+          <div class="node">
+            <h3>公平正义</h3>
+            <p>Équité et justice</p>
+          </div>
+          <div class="node">
+            <h3>服务大局</h3>
+            <p>Servir l’intérêt général</p>
+          </div>
+          <div class="node">
+            <h3>德法并举（社会治理）</h3>
+            <p>Gouvernance fondée sur la vertu et la loi</p>
+          </div>
+          <div class="node">
+            <h3>法治与生态文明建设</h3>
+            <p>État de droit et civilisation écologique</p>
+          </div>
+        </div>
+
+        <div class="hint">
+          <span>可以把每一个节点看作一个“语言任务入口”：</span>
+          <span>后续可为每个理念配套阅读、口语或写作练习页面。</span>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
