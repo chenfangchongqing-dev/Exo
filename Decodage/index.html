@@ -85,12 +85,29 @@
       box-shadow: 0 16px 36px rgba(15, 23, 42, 0.14);
       border-color: #d1d5db;
     }
-    .tag {
-      display: inline-block;
+
+    /* 中法双语标题块 */
+    .title-block {
+      margin-bottom: 8px;
+    }
+    .title-cn,
+    .title-fr {
       font-weight: 700;
       font-size: 0.95rem;
-      margin-bottom: 6px;
+      line-height: 1.35;
     }
+    .title-fr {
+      margin-top: 2px;
+    }
+    .title-red .title-cn,
+    .title-red .title-fr {
+      color: #dc2626;
+    }
+    .title-blue .title-cn,
+    .title-blue .title-fr {
+      color: #4f46e5;
+    }
+
     .muted {
       color: var(--muted);
       font-size: 0.95rem;
@@ -106,18 +123,19 @@
       color: #4b5563;
       background: #f9fafb;
     }
-    .card-red .tag {
-      color: #dc2626;
-    }
     .card-red {
       border-top: 4px solid #dc2626;
-    }
-    .card-blue .tag {
-      color: #4f46e5;
     }
     .card-blue {
       border-top: 4px solid #4f46e5;
     }
+
+    footer{
+      margin-top:22px;
+      color:var(--muted);
+      font-size:0.9rem;
+    }
+
     @media (max-width: 600px) {
       .hero {
         padding: 22px 16px 20px;
@@ -138,8 +156,10 @@
       <div class="grid">
         <!-- 红色卡片：中国特色社会主义法治理念 -->
         <a class="card card-red" href="./fazhi_tupu.html">
-          <div class="tag">中国特色社会主义法治理念</div>
-          <p class="muted">Principes de l'État de droit socialiste à la chinoise</p>
+          <div class="title-block title-red">
+            <div class="title-cn">中国特色社会主义法治理念</div>
+            <div class="title-fr">Principes de l'État de droit socialiste à la chinoise</div>
+          </div>
           <p class="muted">
             通过法治核心理念图谱，梳理关键词与中法对照表达，为后续阅读、口语与写作任务打基础。
           </p>
@@ -148,8 +168,10 @@
 
         <!-- 蓝紫色卡片：中法法律文化对话 -->
         <a class="card card-blue" href="./regards/index.html">
-          <div class="tag">Regards croisés sur le droit</div>
-          <p class="muted">中法法律文化对话 · Comparaisons et regards croisés</p>
+          <div class="title-block title-blue">
+            <div class="title-cn">中法法律文化对话</div>
+            <div class="title-fr">Regards croisés sur le droit</div>
+          </div>
           <p class="muted">
             围绕交通法规、隐私保护、环境法等主题，引导学生比较中法法治文化与制度表达。
           </p>
@@ -157,6 +179,8 @@
         </a>
       </div>
     </section>
+
+    <footer>© 《高级法语综合课》</footer>
   </div>
 </body>
 </html>
