@@ -11,6 +11,8 @@
       --bg: #f7f7fb;
       --surface: #ffffff;
       --shadow: 0 16px 40px rgba(2, 6, 23, 0.08);
+      --red-soft: #d32f2f;
+      --blue-soft: #5c6bc0;
     }
     html, body {
       margin: 0;
@@ -82,8 +84,8 @@
     }
     a.card:hover {
       transform: translateY(-2px);
-      box-shadow: 0 16px 36px rgba(15, 23, 42, 0.14);
-      border-color: #d1d5db;
+      box-shadow: 0 16px 36px rgba(15, 23, 42, 0.12);
+      border-color: #dde1ea;
     }
 
     /* 中法双语标题块 */
@@ -101,11 +103,11 @@
     }
     .title-red .title-cn,
     .title-red .title-fr {
-      color: #dc2626;
+      color: var(--red-soft);
     }
     .title-blue .title-cn,
     .title-blue .title-fr {
-      color: #4f46e5;
+      color: var(--blue-soft);
     }
 
     .muted {
@@ -124,10 +126,10 @@
       background: #f9fafb;
     }
     .card-red {
-      border-top: 4px solid #dc2626;
+      border-top: 3px solid var(--red-soft);
     }
     .card-blue {
-      border-top: 4px solid #4f46e5;
+      border-top: 3px solid var(--blue-soft);
     }
 
     footer{
