@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>U3 · Comparer le sport en ligne et le sport en salle</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Helvetica Neue", Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f5f5f5;
+      color: #333;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-bottom: 12px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid #ddd;
+      background: #fff;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      padding: 18px 16px 20px;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      font-size: 1.2rem;
+      margin: 0 0 4px;
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 8px;
+    }
+
+    .consigne {
+      font-size: 0.95rem;
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+
+    .word-bank {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+
+    .choice {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid #ddd;
+      background: #fff;
+      font-size: 0.9rem;
+      cursor: pointer;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .choice:active {
+      transform: scale(0.97);
+    }
+
+    .hint {
+      font-size: 0.8rem;
+      color: #888;
+      margin-bottom: 6px;
+    }
+
+    .dialogue p {
+      margin: 6px 0;
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    .speaker {
+      font-weight: 600;
+      margin-right: 4px;
+    }
+
+    .blank {
+      display: inline-block;
+      min-width: 70px;
+      max-width: 130px;
+      padding: 2px 4px;
+      margin: 0 3px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      font-size: 0.95rem;
+    }
+
+    .blank:focus {
+      outline: 2px solid #5c6bc0;
+      outline-offset: 1px;
+      border-color: transparent;
+    }
+
+    .blank.correct {
+      border-color: #4caf50;
+      background: #e8f5e9;
+    }
+
+    .blank.incorrect {
+      border-color: #f44336;
+      background: #ffebee;
+    }
+
+    .buttons {
+      margin-top: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    button {
+      border-radius: 999px;
+      padding: 8px 14px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+
+    #check-btn {
+      background: #5c6bc0;
+      color: #fff;
+    }
+
+    #reset-btn {
+      background: #e0e0e0;
+      color: #333;
+    }
+
+    #result {
+      margin-top: 10px;
+      font-size: 0.9rem;
+    }
+
+    #result.ok {
+      color: #2e7d32;
+    }
+
+    #result.err {
+      color: #c62828;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #999;
+      padding: 14px 8px 10px;
+    }
+
+    @media (max-width: 600px) {
+      .card {
+        border-radius: 12px;
+        padding: 14px 12px 16px;
+      }
+      h1 {
+        font-size: 1.05rem;
+      }
+      .blank {
+        min-width: 60px;
+        max-width: 110px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- 返回按钮：如有需要可修改链接路径 -->
+    <a href="../index.html" class="back-btn">← Retour</a>
+
+    <div class="card">
+      <h1>U3 · Dialogue à trous – Comparer le sport en ligne et le sport en salle</h1>
+      <div class="subtitle">Grammaire · Les comparatifs</div>
+      <p class="consigne">
+        Consigne : complétez avec :
+        <strong>plus / moins / autant / aussi / beaucoup plus / bien moins / tout aussi / meilleur / mieux</strong>
+      </p>
+      <div class="word-bank">
+        <span class="choice">plus</span>
+        <span class="choice">moins</span>
+        <span class="choice">autant</span>
+        <span class="choice">aussi</span>
+        <span class="choice">beaucoup plus</span>
+        <span class="choice">bien moins</span>
+        <span class="choice">tout aussi</span>
+        <span class="choice">meilleur</span>
+        <span class="choice">mieux</span>
+      </div>
+      <div class="hint">
+        💡 Cliquez sur un mot de la liste puis sur une case vide, ou tapez directement votre réponse.
+      </div>
+
+      <div class="dialogue">
+        <p>
+          <span class="speaker">Nina :</span>
+          Depuis que je fais du sport en ligne, je suis
+          <input class="blank" data-answer="plus" /> motivée qu’avant.
+        </p>
+        <p>
+          <span class="speaker">Émilie :</span>
+          Sérieux ? Moi, je pensais que les cours en ligne étaient
+          <input class="blank" data-answer="moins" /> efficaces que la salle de sport.
+        </p>
+        <p>
+          <span class="speaker">Nina :</span>
+          Franchement, mon appli est
+          <input class="blank" data-answer="tout aussi" /> bien que mon ancien coach. Le programme est même
+          <input class="blank" data-answer="beaucoup plus" /> personnalisé.
+        </p>
+        <p>
+          <span class="speaker">Émilie :</span>
+          Mais tu dois passer
+          <input class="blank" data-answer="moins" /> de temps devant l’écran, non ?
+        </p>
+        <p>
+          <span class="speaker">Nina :</span>
+          Pas vraiment. Je passe
+          <input class="blank" data-answer="moins" /> de temps dans les transports, donc au final je gagne du temps.
+        </p>
+        <p>
+          <span class="speaker">Émilie :</span>
+          Et niveau résultats, tu te sens
+          <input class="blank" data-answer="mieux" /> ?
+        </p>
+        <p>
+          <span class="speaker">Nina :</span>
+          Oui, je dors
+          <input class="blank" data-answer="mieux" /> et je me sens en
+          <input class="blank" data-answer="meilleure" /> forme.
+        </p>
+        <p>
+          <span class="speaker">Émilie :</span>
+          Moi, je suis
+          <input class="blank" data-answer="moins" /> disciplinée que toi… J’ai besoin qu’on me regarde pour faire des efforts.
+        </p>
+        <p>
+          <span class="speaker">Nina :</span>
+          Justement, il y a une fonction « live ». Le coach voit nos vidéos. C’est
+          <input class="blank" data-answer="plus" /> motivant que les cours enregistrés.
+        </p>
+      </div>
+
+      <div class="buttons">
+        <button id="check-btn">Vérifier / 检查答案</button>
+        <button id="reset-btn" type="button">Réinitialiser / 重置</button>
+      </div>
+      <div id="result"></div>
+    </div>
+  </div>
+
+  <div class="footer">®《高级法语综合课》</div>
+
+  <script>
+    (function () {
+      const blanks = Array.from(document.querySelectorAll(".blank"));
+      const choices = Array.from(document.querySelectorAll(".choice"));
+      const checkBtn = document.getElementById("check-btn");
+      const resetBtn = document.getElementById("reset-btn");
+      const result = document.getElementById("result");
+
+      let activeInput = null;
+
+      // 选中当前输入框
+      blanks.forEach((input) => {
+        input.addEventListener("focus", () => {
+          activeInput = input;
+        });
+        input.addEventListener("click", () => {
+          activeInput = input;
+        });
+      });
+
+      // 点击词库填入当前输入框
+      choices.forEach((choice) => {
+        choice.addEventListener("click", () => {
+          if (activeInput) {
+            activeInput.value = choice.textContent.trim();
+            activeInput.focus();
+          }
+        });
+      });
+
+      // 规范化字符串：去空格、小写
+      function normalize(str) {
+        return str.replace(/\s+/g, " ").trim().toLowerCase();
+      }
+
+      checkBtn.addEventListener("click", () => {
+        let correctCount = 0;
+        blanks.forEach((input) => {
+          input.classList.remove("correct", "incorrect");
+        });
+
+        blanks.forEach((input) => {
+          const user = normalize(input.value);
+          const expected = normalize(input.dataset.answer || "");
+          if (user && user === expected) {
+            input.classList.add("correct");
+            correctCount++;
+          } else {
+            input.classList.add("incorrect");
+          }
+        });
+
+        const total = blanks.length;
