@@ -34,7 +34,7 @@
     }
     header {
       text-align: center;
-      margin-bottom: 42px;
+      margin-bottom: 34px;
     }
     .tag {
       display: inline-block;
@@ -56,8 +56,15 @@
     .subtitle {
       margin-top: 14px;
       color: var(--muted);
-      font-size: clamp(20px, 2vw, 28px);
-      font-weight: 700;
+      font-size: clamp(22px, 2.2vw, 30px);
+      font-weight: 800;
+    }
+    .entry-url {
+      margin-top: 8px;
+      color: var(--primary);
+      font-size: clamp(28px, 3vw, 42px);
+      font-weight: 900;
+      letter-spacing: .02em;
     }
     .grid {
       display: grid;
@@ -69,9 +76,9 @@
       background: var(--card);
       border: 1px solid var(--line);
       border-radius: 20px;
-      padding: 34px 36px;
+      padding: 32px 36px;
       box-shadow: 0 10px 28px rgba(31, 41, 55, .07);
-      min-height: 350px;
+      min-height: 470px;
       display: flex;
       flex-direction: column;
     }
@@ -84,25 +91,45 @@
       margin-bottom: 8px;
     }
     h2 {
-      margin: 0 0 18px;
+      margin: 0 0 16px;
       font-size: 32px;
       line-height: 1.3;
       font-weight: 900;
     }
     p {
-      margin: 0 0 18px;
+      margin: 0 0 14px;
       font-size: 19px;
       font-weight: 600;
     }
+    .checkin-note {
+      font-size: 20px;
+      font-weight: 700;
+      color: #374151;
+      margin-bottom: 18px;
+    }
+    .qr-wrap {
+      margin-top: 4px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .qr-wrap img {
+      width: min(100%, 320px);
+      height: auto;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      box-shadow: 0 8px 24px rgba(31, 41, 55, .08);
+      background: #fff;
+    }
     .browser-tip {
-      margin: 0 0 24px;
+      margin: 4px 0 24px;
       padding-left: 1.1em;
       color: #374151;
-      font-size: 18px;
-      font-weight: 600;
+      font-size: 19px;
+      font-weight: 650;
     }
     .browser-tip li {
-      margin: 8px 0;
+      margin: 9px 0;
     }
     .spacer {
       flex: 1;
@@ -126,7 +153,7 @@
       transform: translateY(-1px);
     }
     .footer {
-      margin-top: 30px;
+      margin-top: 28px;
       color: var(--muted);
       font-size: 18px;
       text-align: center;
@@ -145,6 +172,7 @@
       }
       h2 { font-size: 28px; }
       .btn { font-size: 20px; }
+      .qr-wrap img { width: min(100%, 300px); }
     }
   </style>
 </head>
@@ -153,34 +181,36 @@
     <header>
       <div class="tag">翻译项目管理与本地化系列工作坊</div>
       <h1>第1期｜游戏本地化LQA工作坊</h1>
-      <div class="subtitle">现场入口页：请按照顺序完成签到、登录、加群和软件安装</div>
+      <div class="subtitle">现场扫码签到后，请在电脑浏览器输入</div>
+      <div class="entry-url">bit.ly/sisufr</div>
     </header>
 
     <section class="grid">
       <div class="card">
         <div class="step">Step 1</div>
-        <h2>打开飞书网页版登录/注册</h2>
-        <ul class="browser-tip">
-          <li>请使用电脑浏览器打开飞书网页版。</li>
-          <li>推荐浏览器：Chrome 或 Microsoft Edge。</li>
-          <li>不建议使用 IE、旧版 360/搜狗兼容模式浏览器。</li>
-          <li>如使用 360、搜狗、QQ 浏览器，请切换到极速模式。</li>
-        </ul>
-        <div class="spacer"></div>
-        <a class="btn" href="https://www.feishu.cn/messenger/" target="_blank" rel="noopener">打开飞书网页版</a>
+        <h2>手机扫码签到</h2>
+        <p class="checkin-note">请使用微信扫码填写现场签到表，并填写报名时使用的真实姓名和手机号。</p>
+        <div class="qr-wrap">
+          <img src="checkin.png" alt="现场签到二维码">
+        </div>
       </div>
 
       <div class="card">
         <div class="step">Step 2</div>
         <h2>加入LQA工作坊飞书群</h2>
-        <p>登录飞书后，点击下方按钮加入本次工作坊群。</p>
+        <p>点击下方按钮加入本次工作坊飞书群。无飞书账号的同学，请根据页面提示使用手机号注册/登录。</p>
+        <ul class="browser-tip">
+          <li>推荐浏览器：Chrome 或 Microsoft Edge。</li>
+          <li>不建议使用 IE、旧版 360/搜狗兼容模式浏览器。</li>
+          <li>如使用 360、搜狗、QQ 浏览器，请切换到极速模式。</li>
+        </ul>
         <div class="spacer"></div>
         <a class="btn" href="https://applink.feishu.cn/client/chat/chatter/add_by_link?link_token=32fv59bc-a859-46f4-aef5-3857e421c13d" target="_blank" rel="noopener">加入LQA工作坊飞书群</a>
       </div>
     </section>
 
     <div class="footer">
-      如遇登录或加群问题，请联系现场工作人员。
+      如遇签到、登录或加群问题，请联系现场工作人员。
     </div>
   </main>
 </body>
