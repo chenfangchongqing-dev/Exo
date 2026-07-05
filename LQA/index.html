@@ -1,0 +1,301 @@
+
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>第1期｜游戏本地化LQA工作坊入口</title>
+  <style>
+    :root {
+      --bg: #f4f7ff;
+      --card: #ffffff;
+      --text: #182235;
+      --muted: #667085;
+      --line: #dce6f2;
+      --blue: #2563eb;
+      --blue-soft: #eaf2ff;
+      --cyan-soft: #edfaff;
+      --green-soft: #f0fdf4;
+      --orange-soft: #fff7ed;
+      --shadow: 0 14px 34px rgba(24, 34, 53, .10);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 10% 10%, rgba(37,99,235,.10), transparent 28%),
+        radial-gradient(circle at 90% 20%, rgba(14,165,233,.12), transparent 26%),
+        linear-gradient(135deg, #f8fbff, var(--bg));
+      overflow: hidden;
+    }
+
+    .wrap {
+      width: min(1420px, 97vw);
+      height: 100vh;
+      margin: 0 auto;
+      padding: 18px 0 20px;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 16px;
+    }
+
+    header {
+      text-align: center;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 4px 15px;
+      border-radius: 999px;
+      color: #1d4ed8;
+      background: #dbeafe;
+      font-size: clamp(13px, 1vw, 16px);
+      font-weight: 850;
+      margin-bottom: 7px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(36px, 4.3vw, 62px);
+      line-height: 1.08;
+      font-weight: 950;
+      letter-spacing: .02em;
+    }
+
+    .subtitle {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: clamp(19px, 1.9vw, 29px);
+      font-weight: 850;
+    }
+
+    .grid {
+      min-height: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .card {
+      min-height: 0;
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      background: rgba(255,255,255,.93);
+      box-shadow: var(--shadow);
+      padding: 22px 26px;
+      display: grid;
+      grid-template-rows: auto auto 1fr;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      border-radius: 999px;
+      right: -70px;
+      top: -80px;
+      background: rgba(37,99,235,.07);
+      pointer-events: none;
+    }
+
+    .card.checkin { background: linear-gradient(180deg, #ffffff, #f7fbff); }
+    .card.app { background: linear-gradient(180deg, #ffffff, var(--orange-soft)); }
+    .card.group { background: linear-gradient(180deg, #ffffff, var(--blue-soft)); }
+    .card.web { background: linear-gradient(180deg, #ffffff, var(--green-soft)); }
+
+    .step {
+      color: var(--blue);
+      font-size: clamp(17px, 1.35vw, 21px);
+      line-height: 1;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      font-weight: 950;
+      margin-bottom: 8px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(27px, 2.5vw, 38px);
+      line-height: 1.16;
+      font-weight: 950;
+      letter-spacing: -.02em;
+      position: relative;
+      z-index: 1;
+    }
+
+    p {
+      margin: 10px 0 0;
+      color: #394559;
+      font-size: clamp(17px, 1.28vw, 21px);
+      line-height: 1.55;
+      font-weight: 760;
+      position: relative;
+      z-index: 1;
+    }
+
+    .visual {
+      min-height: 0;
+      margin-top: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .checkin-qr {
+      width: min(100%, 360px);
+      max-height: 32vh;
+      object-fit: contain;
+      border-radius: 16px;
+      background: #fff;
+      box-shadow: 0 10px 24px rgba(24,34,53,.11);
+    }
+
+    .group-qr {
+      width: min(100%, 300px);
+      max-height: 29vh;
+      object-fit: contain;
+      padding: 10px;
+      border-radius: 18px;
+      background: #fff;
+      border: 1px solid #cbd5e1;
+      box-shadow: 0 12px 26px rgba(24,34,53,.14);
+    }
+
+    .app-visual {
+      gap: 24px;
+      justify-content: flex-start;
+      padding-left: 10px;
+    }
+
+    .app-icon {
+      width: clamp(74px, 7vw, 112px);
+      height: clamp(74px, 7vw, 112px);
+      border-radius: 25px;
+      object-fit: cover;
+      box-shadow: 0 14px 28px rgba(24,34,53,.18);
+      border: 1px solid rgba(0,0,0,.08);
+      background: #fff;
+      flex: 0 0 auto;
+    }
+
+    .store-text {
+      font-size: clamp(24px, 2.4vw, 38px);
+      line-height: 1.2;
+      font-weight: 950;
+      color: #111827;
+    }
+
+    .web-url {
+      align-self: center;
+      justify-self: center;
+      width: 100%;
+      text-align: center;
+      padding: 24px 20px;
+      border-radius: 22px;
+      border: 1px solid #bbf7d0;
+      background: rgba(255,255,255,.78);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.90);
+    }
+
+    .web-url .url {
+      display: block;
+      margin-top: 8px;
+      color: #16a34a;
+      font-size: clamp(42px, 5vw, 76px);
+      line-height: 1.05;
+      font-weight: 950;
+      letter-spacing: .01em;
+    }
+
+    .footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: clamp(15px, 1.2vw, 19px);
+      font-weight: 800;
+    }
+
+    @media (max-width: 980px) {
+      body { overflow: auto; }
+      .wrap { height: auto; min-height: 100vh; }
+      .grid { grid-template-columns: 1fr; grid-template-rows: auto; }
+      .card { min-height: 360px; }
+      .checkin-qr, .group-qr { max-height: none; }
+    }
+
+    @media (min-width: 981px) and (max-height: 820px) {
+      .wrap { padding-top: 10px; padding-bottom: 10px; gap: 10px; }
+      .grid { gap: 14px; }
+      .card { padding: 18px 22px; border-radius: 22px; }
+      p { margin-top: 7px; line-height: 1.45; }
+      .visual { margin-top: 8px; }
+      .checkin-qr { width: min(100%, 315px); max-height: 29vh; }
+      .group-qr { width: min(100%, 265px); max-height: 27vh; }
+      .web-url { padding: 18px 16px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header>
+      <div class="tag">翻译项目管理与本地化系列工作坊</div>
+      <h1>第1期｜游戏本地化LQA工作坊</h1>
+      <div class="subtitle">请按照顺序完成签到、下载飞书 App、加入工作坊群并登录电脑端</div>
+    </header>
+
+    <section class="grid">
+      <section class="card checkin">
+        <div class="step">Step 1</div>
+        <h2>现场签到二维码</h2>
+        <p>请使用微信扫码填写现场签到表，并填写报名时使用的真实姓名和手机号。</p>
+        <div class="visual">
+          <img class="checkin-qr" src="checkin.png" alt="现场签到二维码">
+        </div>
+      </section>
+
+      <section class="card group">
+        <div class="step">Step 3</div>
+        <h2>扫码加入LQA工作坊飞书群</h2>
+        <p>请使用手机飞书 App 扫码入群。无飞书账号的同学，请根据页面提示使用手机号注册/登录。</p>
+        <div class="visual">
+          <img class="group-qr" src="feishu_group_qr.png" alt="LQA工作坊飞书群二维码">
+        </div>
+      </section>
+
+      <section class="card app">
+        <div class="step">Step 2</div>
+        <h2>手机应用商店下载“飞书”App</h2>
+        <p>请在手机应用商店搜索并下载“飞书”App。已安装的同学可直接进入下一步。</p>
+        <div class="visual app-visual">
+          <img class="app-icon" src="feishu_icon.png" alt="飞书 App 图标">
+          <div class="store-text">搜索<br>“飞书”</div>
+        </div>
+      </section>
+
+      <section class="card web">
+        <div class="step">Step 4</div>
+        <h2>电脑端登录网页版飞书</h2>
+        <p>入座后打开电脑浏览器，进入飞书网页版。推荐使用 Chrome 或 Microsoft Edge。</p>
+        <div class="visual">
+          <div class="web-url">
+            <span>请在电脑浏览器输入</span>
+            <span class="url">feishu.cn</span>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <div class="footer">如遇签到、下载、注册、加群或电脑端登录问题，请联系现场工作人员。</div>
+  </main>
+</body>
+</html>
