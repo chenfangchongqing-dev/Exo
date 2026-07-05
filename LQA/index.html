@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>第1期｜游戏本地化LQA工作坊入口</title>
+  <style>
+    :root {
+      --bg: #f6f7fb;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --line: #e5e7eb;
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .wrap {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 36px 18px 60px;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+    .tag {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: #e0ecff;
+      color: #1d4ed8;
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 44px);
+      line-height: 1.2;
+      letter-spacing: .02em;
+    }
+    .subtitle {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 18px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 18px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 8px 24px rgba(31, 41, 55, .06);
+    }
+    .step {
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 15px;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    h2 {
+      margin: 0 0 12px;
+      font-size: 24px;
+      line-height: 1.3;
+    }
+    p { margin: 0 0 14px; }
+    .browser-tip {
+      margin: 0 0 18px;
+      padding-left: 1.1em;
+      color: #374151;
+    }
+    .browser-tip li {
+      margin: 6px 0;
+    }
+    .btn {
+      display: inline-block;
+      width: 100%;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 14px;
+      padding: 14px 16px;
+      background: var(--primary);
+      color: #fff;
+      font-weight: 800;
+      font-size: 17px;
+      transition: background .15s ease, transform .15s ease;
+    }
+    .btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+    .footer {
+      margin-top: 20px;
+      color: var(--muted);
+      font-size: 14px;
+      text-align: center;
+    }
+    @media (max-width: 720px) {
+      .grid { grid-template-columns: 1fr; }
+      .wrap { padding-top: 24px; }
+      .card { padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header>
+      <div class="tag">翻译项目管理与本地化系列工作坊</div>
+      <h1>第1期｜游戏本地化LQA工作坊</h1>
+      <div class="subtitle">现场入口页：请按照顺序完成签到、登录、加群和软件安装</div>
+    </header>
+
+    <section class="grid">
+      <div class="card">
+        <div class="step">Step 1</div>
+        <h2>打开飞书网页版</h2>
+        <ul class="browser-tip">
+          <li>请使用电脑浏览器打开飞书网页版。</li>
+          <li>推荐浏览器：Chrome 或 Microsoft Edge。</li>
+          <li>不建议使用 IE、旧版 360/搜狗兼容模式浏览器。</li>
+          <li>如使用 360、搜狗、QQ 浏览器，请切换到极速模式。</li>
+        </ul>
+        <a class="btn" href="https://www.feishu.cn/messenger/" target="_blank" rel="noopener">打开飞书网页版</a>
+      </div>
+
+      <div class="card">
+        <div class="step">Step 2</div>
+        <h2>加入LQA工作坊飞书群</h2>
+        <p>登录飞书后，点击下方按钮加入本次工作坊群。</p>
+        <a class="btn" href="https://applink.feishu.cn/client/chat/chatter/add_by_link?link_token=32fv59bc-a859-46f4-aef5-3857e421c13d" target="_blank" rel="noopener">加入LQA工作坊飞书群</a>
+      </div>
+    </section>
+
+    <div class="footer">
+      如遇登录或加群问题，请联系现场工作人员。
+    </div>
+  </main>
+</body>
+</html>
