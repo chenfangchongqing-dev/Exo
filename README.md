@@ -1,24 +1,16 @@
-# 互动法语练习平台
+# Inspire 4 — Ressources interactives
+Ce dépôt contient uniquement les ressources conservées pour la nouvelle organisation du cours.
 
-- 首页：`index.html`（封面 + 六个彩色模块卡片）
-- 模块：`Vocabulaire/`、`Grammaire/`、`CO/`、`CE/`、`PE/`、`Agir/`
-- 每个模块首页：`index.html`（带搜索/筛选目录页，`DATA` 列表登记练习，支持 URL 参数）
-- 每个模块预建：`U1` … `U9` 子文件夹（含 README 占位）
-- 页脚：`《高级法语综合课》`
+## Pages
+- Accueil : `index.html`
+- Unité 1 — *Le bonheur, en mots* : `Vocabulaire/U1/index.html`
+- Champ lexical et collocations : `Vocabulaire/U1/lexique.html`
+- Révisions — passé composé et imparfait : `Grammaire/U2/passe-imparfait.html`, `passe-imparfait2.html`, `temoignage-engagement.html`
+- Atelier d'oral : `PO/atelier-interculturel/index.html` (cinq vidéos locales)
+- Atelier LQA : `LQA/index.html`
 
-## 发布到 GitHub Pages
-1. 新建仓库 → 上传全部文件（保持结构不变）。
-2. Settings → Pages：Branch 选 `main`，Folder 选 `/ (root)` → Save。
-3. 访问：`https://你的用户名.github.io/你的仓库名/`。
+L'ancien contenu de manuel, les dossiers d'unités vides, les archives d'exercices précédents et le graphe des ateliers de traduction bouddhique ont été retirés du travail courant. L'historique Git permet de retrouver les versions anciennes.
 
-## 在目录中添加一条练习（示例）
-1. 上传到 `Vocabulaire/U1/`：比如 `U1_L1_vocab_municipalite.html`
-2. 打开 `Vocabulaire/index.html`，在 DATA 数组内追加：
-   ```js
-   { title: "U1·L1 市政词汇（拖拽填空）",
-     path: "U1/U1_L1_vocab_municipalite.html",
-     unit: "U1",
-     theme: "市政",
-     tags: ["公共服务","基础词汇"] }
-   ```
-3. 保存后即可在目录页搜索/筛选到；也可用 `?q=市政&unit=U1` 分享筛选结果。
+Les URL des trois exercices de révision ont été conservées pour éviter de casser les liens déjà partagés.
+
+GitHub Pages : https://chenfangchongqing-dev.github.io/Exo/

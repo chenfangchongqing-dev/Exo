@@ -1,214 +1,40 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>语法 Grammaire｜目录</title>
-<style>
-  body{font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:#f7f7fb;margin:0;color:#0f172a}
-  .wrap{max-width:1100px;margin:0 auto;padding:28px}
-  .card{background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:22px;box-shadow:0 10px 26px rgba(0,0,0,.06)}
-  h1{margin:0 0 6px}
-  .sub{color:#64748b;margin:0 0 18px}
-  nav a{color:#16a34a;text-decoration:none;margin-right:12px}
-  .toolbar{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 16px}
-  .input{flex:1;min-width:220px;border:1px solid #d1d5db;border-radius:10px;padding:10px 12px}
-  .select{border:1px solid #d1d5db;border-radius:10px;padding:10px 12px;background:#fff}
-  .chips{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 0}
-  .chip{border:1px solid #e5e7eb;border-radius:999px;padding:4px 10px;background:#f9fafb;cursor:pointer;font-size:.85rem}
-  .chip.active{border-color:#16a34a;background:#eef2ff}
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin-top:12px}
-  a.cardlink{display:block;border:1px solid #e5e7eb;border-radius:12px;padding:14px 16px;text-decoration:none;background:#fff;color:#0f172a}
-  a.cardlink:hover{border-color:#16a34a;box-shadow:0 8px 22px rgba(37,99,235,.15)}
-  .muted{color:#6b7280;font-size:.9rem}
-  footer{margin-top:18px;color:#6b7280}
-  .tip{background:#eef2ff;border:1px solid #c7d2fe;border-radius:12px;padding:10px 12px;margin-top:14px}
-</style>
-</head>
-<body>
-<div class="wrap">
-  <div class="card">
-    <nav><a href="../">← 返回首页</a></nav>
-    <h1>语法 Grammaire</h1>
-    <p class="sub">支持按 <strong>单元（U1…U9）</strong> 与 <strong>主题（市政/旅行…）</strong> 搜索与筛选。练习按单元放在 <code>Grammaire/U1/</code>…<code>U9/</code> 子文件夹。</p>
-
-    <div class="toolbar">
-      <input id="q" class="input" placeholder="搜索：标题 / 单元（如 U1） / 主题（如 市政） / 标签…" />
-      <select id="unit" class="select">
-        <option value="">全部单元</option>
-      </select>
-      <select id="theme" class="select">
-        <option value="">全部主题</option>
-      </select>
-    </div>
-    <div id="chips" class="chips"></div>
-
-    <div id="list" class="grid"></div>
-    <p id="empty" class="muted" style="display:none">暂无匹配结果。</p>
-
-    <div class="tip">
-      <strong>如何添加：</strong>
-      <ol>
-        <li>把练习 HTML 放到 <code>Grammaire/U1/</code>…<code>U9/</code> 对应子文件夹。</li>
-        <li>在下方 <code>DATA</code> 列表中添加一行（标题、路径、单元、主题、标签）。</li>
-        <li>保存后目录页自动出现；URL 可带参数（如 <code>?q=市政&unit=U1</code>）。</li>
-      </ol>
-    </div>
-  </div>
-  <footer>© 《高级法语综合课》</footer>
-</div>
-
-<script>
-  // ===== 目录数据（按需添加；示例已注释）=====
-  // path 为相对 Grammaire/ 的路径，支持子文件夹：如 "U1/U1_L1_vocab_municipalite.html"
-  const DATA = [
-  {
-    title: "U2 语法｜L’opposition（配对练习）",
-    path: "/Exo/Grammaire/U2/opposition.html",
-    unit: "U2",
-    theme: "l’opposition",
-    tags: ["mais","en revanche","alors que","par contre","associer"]
-  },
-  {
-    title: "U2 语法｜L’opposition（完形选择）",
-    path: "/Exo/Grammaire/U2/opposition2.html",
-    unit: "U2",
-    theme: "l’opposition",
-    tags: ["en revanche","par contre","alors que","mais","compléter"]
-  },
-  {
-    title: "U2 语法｜Imparfait & Passé composé（完形填空）",
-    path: "/Exo/Grammaire/U2/passe-imparfait.html",
-    unit: "U2",
-    theme: "temps du passé",
-    tags: ["imparfait","passé composé","se lever","devenir","se mobiliser","récit"]
-  },
-  {
-    title: "U2 语法｜Imparfait & Passé composé（练习2）",
-    path: "/Exo/Grammaire/U2/passe-imparfait2.html",
-    unit: "U2",
-    theme: "temps du passé",
-    tags: ["imparfait","passé composé","solidarité","récit"]
-  },
-    {
-  title: "U2 语法｜Engagement – Témoignage（PC vs Imparfait）",
-  path: "/Exo/Grammaire/U2/temoignage-engagement.html",
-  unit: "U2",
-  theme: "engagement",
-  tags: ["engagement","actions","solidarité","témoignage","imparfait","passé composé","cuisine solidaire"]
-},
-    {
-  title: "U2 语法｜La mise en relief",
-  path: "Grammaire/U2/mise-en-relief.html",
-  unit: "U2",
-  theme: "grammaire",
-  tags: ["mise en relief", "ce qui", "ce que", "ce dont", "structure emphatique"]
-},
-    {
-  title: "U3 语法｜L'hypothèse (1) — Exercice à trous",
-  path: "/Exo/Grammaire/U3/hypothese_1.html",
-  unit: "U3",
-  theme: "grammaire",
-  tags: ["hypothèse", "conseil", "futur", "si"]
-},
-     {
-  title: "U3 语法｜Le souhait - Transformez les phrases",
-  path: "/Exo/Grammaire/U3/souhait_1.html",
-  unit: "U3",
-  theme: "grammaire",
-  tags: ["souhait", "conditionnel", "infinitif", "subjonctif"]
-},
-    {
-  title: "U3 语法｜COD / COI – Écoutez et choisissez",
-  path: "/Exo/Grammaire/U3/COD_COI.html",
-  unit: "U3",
-  theme: "grammaire",
-  tags: ["grammaire", "pronoms", "COD", "COI", "écouter", "exercice"]
-},
-    {
-  title: "U3 语法｜Comparatifs (1) – Dialogue à trous",
-  path: "/Exo/Grammaire/U3/comparatif_1.html",
-  unit: "U3",
-  theme: "grammaire",
-  tags: ["comparatif", "plus", "moins", "mieux", "meilleur", "exercice"]
-},
-    
-];
-
-
-  // ===== 渲染逻辑（无需修改）=====
-  const $ = s => document.querySelector(s);
-  const list=$("#list"), empty=$("#empty"), q=$("#q"), unit=$("#unit"), theme=$("#theme"), chips=$("#chips");
-
-  function uniq(a){ return Array.from(new Set(a)).filter(Boolean); }
-
-  function populateFilters(){
-    const units = uniq(DATA.map(x=>x.unit)).sort();
-    const themes = uniq(DATA.map(x=>x.theme)).sort();
-    units.forEach(u=>{ const o=document.createElement('option'); o.value=o.textContent=u; unit.appendChild(o); });
-    themes.forEach(t=>{ const o=document.createElement('option'); o.value=o.textContent=t; theme.appendChild(o); });
-
-    const quick = uniq([...units, ...themes]);
-    chips.innerHTML = quick.map(t=>`<span class="chip" data-k="${t}">${t}</span>`).join("");
-    chips.addEventListener('click', e=>{
-      const k = e.target.dataset.k; if(!k) return;
-      if(/^U\d+$/i.test(k)) unit.value = k; else theme.value = k;
-      q.value = k;
-      chips.querySelectorAll('.chip').forEach(c=>c.classList.toggle('active', c.dataset.k===k));
-      render(true);
-    });
-  }
-
-  function render(pushURL){
-    const qw = q.value.trim().toLowerCase();
-    const uf = unit.value, tf = theme.value;
-
-    const rows = DATA.filter(x=>{
-      const inUnit = !uf || x.unit === uf;
-      const inTheme = !tf || x.theme === tf;
-      const hay = (x.title + " " + x.unit + " " + x.theme + " " + (x.tags||[]).join(" ") + " " + x.path).toLowerCase();
-      const inQuery = !qw || hay.includes(qw);
-      return inUnit && inTheme && inQuery;
-    });
-
-    list.innerHTML = "";
-    rows.forEach(x=>{
-      const a=document.createElement('a');
-      a.href = x.path;
-      a.className='cardlink';
-      a.innerHTML = `
-        <strong>${x.title}</strong><br>
-        <span class="muted">${x.unit || ""}${x.unit && x.theme ? " · " : ""}${x.theme || ""}</span>
-        <div style="margin-top:6px">${(x.tags||[]).map(t=>`<span class="chip">${t}</span>`).join("")}</div>`;
-      list.appendChild(a);
-    });
-    empty.style.display = rows.length ? "none":"block";
-
-    if(pushURL){
-      const p = new URLSearchParams();
-      if(qw) p.set("q",qw);
-      if(uf) p.set("unit",uf);
-      if(tf) p.set("theme",tf);
-      const qs = p.toString();
-      history.replaceState(null,"", qs ? ("?"+qs) : location.pathname);
-    }
-  }
-
-  (function initFromURL(){
-    const p = new URLSearchParams(location.search);
-    if(p.get("q")) q.value = p.get("q");
-    if(p.get("unit")) unit.value = p.get("unit");
-    if(p.get("theme")) theme.value = p.get("theme");
-  })();
-
-  ["input","change","keyup"].forEach(ev=>{
-    q.addEventListener(ev, ()=>render(true));
-    unit.addEventListener(ev, ()=>render(true));
-    theme.addEventListener(ev, ()=>render(true));
-  });
-
-  populateFilters();
-  render(false);
-</script>
-</body>
-</html>
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#FDBA12"><meta name="description" content="Trois exercices de révision du passé composé et de l'imparfait."><title>Grammaire | Inspire 4</title><style>
+:root{--bg:#faf8f2;--paper:#fff;--ink:#272923;--muted:#6d6d63;--line:#ece5d5;--sun:#fdba12;--orange:#e99517;--shadow:0 14px 36px rgba(72,58,24,.075);--max:1060px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);font-family:Arial,"Helvetica Neue",system-ui,sans-serif;background:var(--bg);line-height:1.5}
+a{color:inherit}a:focus-visible{outline:3px solid #a86402;outline-offset:3px}
+.wrap{max-width:var(--max);padding:0 23px;margin:auto}
+.top{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:24px 0}
+.logo{font-weight:800;letter-spacing:.075em;text-decoration:none;font-size:15px}
+.small-link{color:var(--muted);text-decoration:none;font-size:14px}.small-link:hover{text-decoration:underline}
+.hero{border:1px solid #e9d9ab;border-radius:24px;background:linear-gradient(122deg,#ffcf51 0%,#ffebba 65%,#fff7e5 100%);padding:43px clamp(24px,5vw,58px);margin-top:12px;position:relative;overflow:hidden}
+.hero:after{content:"";display:block;position:absolute;right:-62px;bottom:-146px;width:345px;height:345px;border:70px solid #fff5d588;border-radius:50%;pointer-events:none}
+.overline{color:#6b4909;font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;margin:0 0 11px}
+h1{font-size:clamp(34px,5vw,54px);line-height:1.08;letter-spacing:-.035em;margin:0 0 16px;font-weight:800;max-width:750px}
+.intro{max-width:700px;font-size:clamp(16px,2vw,19px);color:#544a33;margin:0}
+.section{margin:34px 0 0}.section-head{display:flex;justify-content:space-between;gap:12px;align-items:end;margin:0 0 16px}
+.section-head h2{font-size:21px;letter-spacing:-.015em;margin:0}.section-head p{margin:0;color:var(--muted);font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.card{display:block;border:1px solid var(--line);border-radius:17px;background:white;box-shadow:var(--shadow);padding:24px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s}
+.card:hover{transform:translateY(-3px);box-shadow:0 20px 40px rgba(78,54,20,.12);border-color:#e7bd5c}
+.card .eyebrow{font-size:11px;letter-spacing:.12em;font-weight:800;color:#a96908;text-transform:uppercase;margin-bottom:11px}
+.card h3{font-size:22px;margin:0 0 10px;line-height:1.2}
+.card p{color:#625f57;margin:0 0 15px;font-size:15px}
+.card .action{font-weight:750;color:#a76500;font-size:14px}
+.primary{background:#fffdf6;border-color:#eed7a4}
+.primary .mark{background:var(--sun);display:inline-flex;padding:6px 11px;border-radius:999px;font-size:12px;font-weight:800;letter-spacing:.06em;margin-bottom:15px;color:#513807}
+.list{display:grid;gap:12px}
+.list-link{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:17px 20px;background:white;border:1px solid var(--line);border-radius:13px;text-decoration:none;transition:background .2s,border-color .2s}
+.list-link:hover{background:#fffaee;border-color:#e1bf79}
+.list-link strong{display:block;font-size:16px}.list-link span{display:block;color:var(--muted);font-size:13px;margin-top:3px}
+.list-link .arr{font-size:20px;color:#bb7a0b;flex:none}
+.note{font-size:13px;color:var(--muted);line-height:1.7}
+footer{margin:38px 0 35px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted);font-size:12px}
+@media(max-width:690px){.hero{padding:31px 22px}.grid{grid-template-columns:1fr}.section-head{display:block}.section-head p{margin-top:5px}.card{padding:22px}.top{padding:18px 0}.wrap{padding:0 16px}}
+</style></head><body><div class="wrap"><header class="top"><a class="logo" href="../index.html">INSPIRE 4 <span style="color:#d48a06">↗</span></a><a href="../index.html" class="small-link">← Accueil</a></header>
+<section class="hero"><div class="overline">Grammaire · Révisions</div><h1>Passé composé<br>et imparfait.</h1><p class="intro">Trois activités pour choisir le temps du passé et construire un récit.</p></section>
+<section class="section"><div class="section-head"><h2>Exercices disponibles</h2><p>Conjuguer et raconter</p></div><div class="list">
+<a class="list-link" href="./U2/passe-imparfait.html"><div><strong>Imparfait ou passé composé ?</strong><span>Un bel exemple de solidarité</span></div><div class="arr">↗</div></a>
+<a class="list-link" href="./U2/passe-imparfait2.html"><div><strong>Imparfait ou passé composé ? (2)</strong><span>Le témoignage de Sessou</span></div><div class="arr">↗</div></a>
+<a class="list-link" href="./U2/temoignage-engagement.html"><div><strong>Raconter un engagement</strong><span>Imparfait et passé composé dans le récit</span></div><div class="arr">↗</div></a></div></section>
+<footer>INSPIRE 4 · Révisions de grammaire</footer></div></body></html>

@@ -1,223 +1,37 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>词汇 Vocabulaire</title>
-  <style>
-    :root {
-      --bg: #f8fafc;
-      --card: #fff;
-      --ink: #0f172a;
-      --muted: #64748b;
-      --brand: #2563eb;
-      --radius: 14px;
-    }
-    html, body {
-      margin: 0;
-      padding: 0;
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial;
-      background: var(--bg);
-      color: var(--ink);
-    }
-    .wrap {
-      max-width: 960px;
-      margin: 32px auto;
-      padding: 0 16px;
-    }
-    h1 {
-      font-size: 28px;
-      margin-bottom: 12px;
-      font-weight: 700;
-    }
-    .note {
-      font-size: 15px;
-      color: var(--muted);
-      margin-bottom: 24px;
-    }
-    .searchbar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 24px;
-    }
-    input, select {
-      padding: 10px 12px;
-      border-radius: var(--radius);
-      border: 1px solid #cbd5e1;
-      font-size: 15px;
-    }
-    input { flex: 1; min-width: 200px; }
-    select { background: #fff; }
-    .list { display: grid; gap: 12px; }
-    .card {
-      background: var(--card);
-      padding: 16px 20px;
-      border-radius: var(--radius);
-      border: 1px solid #e2e8f0;
-      box-shadow: 0 2px 8px rgba(0,0,0,.04);
-      transition: .15s;
-    }
-    .card:hover { border-color: var(--brand); box-shadow: 0 4px 10px rgba(37,99,235,.08); }
-    .card a { color: var(--brand); text-decoration: none; font-weight: 600; }
-    footer {
-      margin-top: 48px;
-      font-size: 14px;
-      color: var(--muted);
-      text-align: center;
-    }
-  </style>
-</head>
-<body>
-  <div class="wrap">
-    <a href="../index.html" style="text-decoration:none;color:var(--brand);font-weight:600;">← 返回首页</a>
-    <h1>词汇 Vocabulaire</h1>
-    <div class="note">
-      支持按 <b>单元（U1…U9）</b> 与 <b>主题</b> 搜索与筛选。<br>
-      将练习 HTML 放到 <code>Vocabulaire/U1/…U9/</code> 对应子文件夹，并在 <code>DATA</code> 里登记即可出现在列表中。
-    </div>
-
-    <div class="searchbar">
-      <input type="text" id="search" placeholder="搜索：标题 / 单元（如 U1） / 主题 / 标签…" />
-      <select id="unit">
-        <option value="">全部单元</option>
-        <option>U1</option><option>U2</option><option>U3</option>
-        <option>U4</option><option>U5</option><option>U6</option>
-        <option>U7</option><option>U8</option><option>U9</option>
-      </select>
-      <select id="theme">
-        <option value="">全部主题</option>
-        <option value="bonheur">bonheur</option>
-        <option value="engagement">engagement</option>
-        <option value="travail">travail</option>
-        <option value="vie">vie</option>
-      </select>
-    </div>
-
-    <div class="list" id="list"></div>
-
-    <footer>© 《高级法语综合课》</footer>
-  </div>
-
-<script>
-/* ---------------- 练习数据 DATA ---------------- */
-const DATA = [
-  {
-    title: "U1 · Le bonheur, en mots — Champ lexical interactif",
-    path: "Vocabulaire/U1/index.html",
-    unit: "U1",
-    theme: "bonheur",
-    tags: ["Inspire 4", "bonheur", "Piste 002", "Piste 003", "champ lexical", "collocations", "expressions", "émotions"]
-  },
-  {
-    title: "U2 词汇｜engagement & actions",
-    path: "Vocabulaire/U2/exo1.html",
-    unit: "U2",
-    theme: "engagement",
-    tags: ["vocabulaire","slogans","soutenir","mobilisation","pétition","expulsions","régularisations"]
-  },
-  { 
-    title: "U2 · Engagement et actions — Complétez et traduisez", 
-    path: "Vocabulaire/U2/exo2.html", 
-    unit: "U2", 
-    theme: "engagement", 
-    tags: ["solidarité", "actions", "vocabulaire", "état psychologique", "etat psychologique"]
-  },
-  {
-    title: "U2 · Le travail (3) — Complétez",
-    path: "Vocabulaire/U2/exo3.html",
-    unit: "U2",
-    theme: "travail",
-    tags: ["contrat","entreprise","emploi","état psychologique","etat psychologique","psychologie"]
-  },
-  {
-    title: "U2 · Témoignage de Léo — Complétez",
-    path: "Vocabulaire/U2/exo4.html",
-    unit: "U2",
-    theme: "état psychologique",
-    tags: ["témoignage","emploi","vocation","état psychologique","etat psychologique","psychologie"]
-  },
-  {
-  title: "U2 · Le travail (3) — Complétez avec les mots de la liste",
-  path: "Vocabulaire/U2/exo5.html",
-  unit: "U2",
-  theme: "travail",
-  tags: ["travail","emploi","entreprise","contrat","embauche","état psychologique"]
-},
-  {
-  title: "U3 · La santé (1) — Complétez avec les mots de la liste",
-  path: "Vocabulaire/U3/exo1.html",
-  unit: "U3",
-  theme: "santé",
-  tags: ["assurance maladie","sécurité sociale","consultation médialce"]
-},
-  {
-  title: "U3 · Les activités en ligne, l'équipement — Écoutez et cochez",
-  path: "Vocabulaire/U3/exo2.html",
-  unit: "U3",
-  theme: "activités en ligne",
-  tags: ["matériel numérique","équipement","activité en ligne"]
-},
-   {
-  title: "U3 · La vente en ligne, les réseaux sociaux — Complétez avec les mots de la liste",
-  path: "Vocabulaire/U3/exo3.html",
-  unit: "U3",
-  theme: "activités en ligne",
-  tags: ["vente en ligne","réseaux sociaux"]
-},
-];
-
-/* ---------------- 工具函数 ---------------- */
-// 去重音 + 小写
-const norm = (s) => (s ?? "")
-  .toString()
-  .normalize('NFD')
-  .replace(/[\u0300-\u036f]/g, '')
-  .toLowerCase();
-
-function match(item, keyword, unit, theme) {
-  const hay = norm(item.title + " " + item.unit + " " + item.theme + " " + item.path + " " + (item.tags||[]).join(" "));
-  if (keyword && !hay.includes(norm(keyword))) return false;
-  if (unit && item.unit !== unit) return false;
-  if (theme && item.theme !== theme) return false;
-  return true;
-}
-
-/* ---------------- 渲染列表 ---------------- */
-function render() {
-  const list = document.getElementById("list");
-  const keyword = document.getElementById("search").value.trim();
-  const unit = document.getElementById("unit").value;
-  const theme = document.getElementById("theme").value;
-
-  const filtered = DATA.filter(item => match(item, keyword, unit, theme));
-  list.innerHTML = "";
-
-  if (!filtered.length) {
-    list.innerHTML = `<div style="color:#64748b;text-align:center;padding:40px 0;">暂无匹配结果。<br>检查搜索词或筛选条件；或确认 DATA 中登记该练习。</div>`;
-    return;
-  }
-
-  filtered.forEach(item => {
-    const card = document.createElement("div");
-    card.className = "card";
-    card.innerHTML = `
-      <a href="../${item.path}" target="_blank">${item.title}</a><br>
-      <small>单元：${item.unit} ｜ 主题：${item.theme}</small><br>
-      <small style="color:#64748b;">标签：${(item.tags||[]).join(", ")}</small>
-    `;
-    list.appendChild(card);
-  });
-}
-
-/* ---------------- 事件监听 ---------------- */
-["search","unit","theme"].forEach(id => {
-  document.getElementById(id).addEventListener("input", render);
-  document.getElementById(id).addEventListener("change", render);
-});
-
-/* 初始化 */
-render();
-</script>
-</body>
-</html>
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#FDBA12"><meta name="description" content="Vocabulaire Inspire 4 — Champ lexical du bonheur"><title>Vocabulaire | Inspire 4</title><style>
+:root{--bg:#faf8f2;--paper:#fff;--ink:#272923;--muted:#6d6d63;--line:#ece5d5;--sun:#fdba12;--orange:#e99517;--shadow:0 14px 36px rgba(72,58,24,.075);--max:1060px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);font-family:Arial,"Helvetica Neue",system-ui,sans-serif;background:var(--bg);line-height:1.5}
+a{color:inherit}a:focus-visible{outline:3px solid #a86402;outline-offset:3px}
+.wrap{max-width:var(--max);padding:0 23px;margin:auto}
+.top{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:24px 0}
+.logo{font-weight:800;letter-spacing:.075em;text-decoration:none;font-size:15px}
+.small-link{color:var(--muted);text-decoration:none;font-size:14px}.small-link:hover{text-decoration:underline}
+.hero{border:1px solid #e9d9ab;border-radius:24px;background:linear-gradient(122deg,#ffcf51 0%,#ffebba 65%,#fff7e5 100%);padding:43px clamp(24px,5vw,58px);margin-top:12px;position:relative;overflow:hidden}
+.hero:after{content:"";display:block;position:absolute;right:-62px;bottom:-146px;width:345px;height:345px;border:70px solid #fff5d588;border-radius:50%;pointer-events:none}
+.overline{color:#6b4909;font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;margin:0 0 11px}
+h1{font-size:clamp(34px,5vw,54px);line-height:1.08;letter-spacing:-.035em;margin:0 0 16px;font-weight:800;max-width:750px}
+.intro{max-width:700px;font-size:clamp(16px,2vw,19px);color:#544a33;margin:0}
+.section{margin:34px 0 0}.section-head{display:flex;justify-content:space-between;gap:12px;align-items:end;margin:0 0 16px}
+.section-head h2{font-size:21px;letter-spacing:-.015em;margin:0}.section-head p{margin:0;color:var(--muted);font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.card{display:block;border:1px solid var(--line);border-radius:17px;background:white;box-shadow:var(--shadow);padding:24px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s}
+.card:hover{transform:translateY(-3px);box-shadow:0 20px 40px rgba(78,54,20,.12);border-color:#e7bd5c}
+.card .eyebrow{font-size:11px;letter-spacing:.12em;font-weight:800;color:#a96908;text-transform:uppercase;margin-bottom:11px}
+.card h3{font-size:22px;margin:0 0 10px;line-height:1.2}
+.card p{color:#625f57;margin:0 0 15px;font-size:15px}
+.card .action{font-weight:750;color:#a76500;font-size:14px}
+.primary{background:#fffdf6;border-color:#eed7a4}
+.primary .mark{background:var(--sun);display:inline-flex;padding:6px 11px;border-radius:999px;font-size:12px;font-weight:800;letter-spacing:.06em;margin-bottom:15px;color:#513807}
+.list{display:grid;gap:12px}
+.list-link{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:17px 20px;background:white;border:1px solid var(--line);border-radius:13px;text-decoration:none;transition:background .2s,border-color .2s}
+.list-link:hover{background:#fffaee;border-color:#e1bf79}
+.list-link strong{display:block;font-size:16px}.list-link span{display:block;color:var(--muted);font-size:13px;margin-top:3px}
+.list-link .arr{font-size:20px;color:#bb7a0b;flex:none}
+.note{font-size:13px;color:var(--muted);line-height:1.7}
+footer{margin:38px 0 35px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted);font-size:12px}
+@media(max-width:690px){.hero{padding:31px 22px}.grid{grid-template-columns:1fr}.section-head{display:block}.section-head p{margin-top:5px}.card{padding:22px}.top{padding:18px 0}.wrap{padding:0 16px}}
+</style></head><body><div class="wrap"><header class="top"><a class="logo" href="../index.html">INSPIRE 4 <span style="color:#d48a06">↗</span></a><a href="../index.html" class="small-link">← Accueil</a></header>
+<section class="hero"><div class="overline">Vocabulaire</div><h1>Les mots de l’unité.</h1><p class="intro">Explorez les expressions dans leur contexte et retrouvez leurs collocations.</p></section>
+<section class="section"><div class="section-head"><h2>Unité 1 · Le bonheur est-il utopique ?</h2><p>Pistes 002 et 003</p></div><a class="card primary" href="./U1/index.html"><div class="mark">CHAMP LEXICAL</div><h3>Le bonheur, en mots</h3><p>Émotions, bien-être, relations humaines, activités et verbes utiles. Cliquez sur un mot pour découvrir son emploi.</p><div class="action">Accéder à l’activité →</div></a></section>
+<footer>INSPIRE 4 · Vocabulaire</footer></div></body></html>
