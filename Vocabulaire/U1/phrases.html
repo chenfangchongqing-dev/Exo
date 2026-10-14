@@ -153,7 +153,7 @@ h1 em{font-family:"Times New Roman",Times,serif;font-style:italic;font-weight:40
 <p class="hint">Glisser à gauche ou à droite<br>pour changer de phrase.</p>
 </div>
 </main>
-<footer class="footer">Phrases tirées de la fiche de vocabulaire de l'unité 1. Les exemples servent à réemployer les mots en contexte ; ils ne sont pas des citations des enregistrements.</footer>
+<footer class="footer">Inspire 4 · Unité 1 · Révision autonome</footer>
 </div>
 <script src="phrases-data.js"></script>
 <script>
@@ -213,8 +213,8 @@ var s=byId("cardStatus");s.className="status";var status=progress[card.id];s.tex
 }
 function move(dir){var length=pool().length;if(!length)return;state.index=(state.index+dir+length)%length;clearReveals();render();}
 function mark(value){var list=pool();if(!list.length)return;var id=list[state.index].id;progress[id]=value;save();
-if(state.filter==="review"&&value==="known"&&state.index>=list.length-1)state.index=Math.max(0,state.index-1);
-else if(state.filter!=="review")state.index=(state.index+1)%list.length;
+if(state.filter==="review"){if(value==="known"){state.index=Math.min(state.index,Math.max(0,list.length-2));}else{state.index=(state.index+1)%list.length;}}
+else{state.index=(state.index+1)%list.length;}
 clearReveals();render();}
 document.querySelectorAll(".filter").forEach(function(b){b.addEventListener("click",function(){setFilter(b.dataset.filter);});});
 byId("prevBtn").addEventListener("click",function(){move(-1);});
