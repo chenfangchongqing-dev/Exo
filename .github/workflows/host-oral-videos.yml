@@ -1,0 +1,66 @@
+name: Cache oral atelier MP4 on GitHub Pages
+
+on:
+  push:
+    paths:
+      - ".github/workflows/host-oral-videos.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Verify tools
+        shell: bash
+        run: |
+          set -euo pipefail
+          command -v curl
+          command -v ffprobe
+          command -v ffmpeg
+      - name: Download and compress five videos
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p PO/atelier-interculturel/videos
+          mkdir -p "$RUNNER_TEMP/oral_downloads"
+          fetch_video() {
+            local key="$1"
+            local url="$2"
+            local raw="$RUNNER_TEMP/oral_downloads/$key.mp4"
+            local target="PO/atelier-interculturel/videos/$key.mp4"
+            echo "::group::Fetching $key"
+            curl --fail --location --silent --show-error --retry 3 --retry-delay 5 --connect-timeout 30 --max-time 300 --user-agent 'Mozilla/5.0' --output "$raw" "$url"
+            bytes=$(wc -c < "$raw")
+            echo "Downloaded $key: $bytes bytes"
+            test "$bytes" -gt 100000
+            ffprobe -v error -select_streams v:0 -show_entries stream=codec_type -of csv=p=0 "$raw" | grep -qx video
+            ffprobe -v error -select_streams a:0 -show_entries stream=codec_type -of csv=p=0 "$raw" | grep -qx audio
+            ffmpeg -hide_banner -nostdin -loglevel error -y -i "$raw" -map 0:v:0 -map 0:a:0 -vf 'scale=1280:-2' -c:v libx264 -crf 25 -preset fast -pix_fmt yuv420p -maxrate 2500k -bufsize 5000k -c:a aac -b:a 128k -movflags +faststart "$target"
+            test -s "$target"
+            test "$(wc -c < "$target")" -lt 40000000
+            ffprobe -v error -show_entries format=duration,size -of default=noprint_wrappers=1 "$target"
+            sha256sum "$target"
+            echo "::endgroup::"
+          }
+          fetch_video '01_compliment' 'https://cdn.openart.ai/openart-ai/production/2026-10/create-video/HNnBxHxCZIH5vKlXimQ7/cgt-20261014195409-gssd8_1791979236699_2e051147.mp4'
+          fetch_video '02_fatigue' 'https://cdn.openart.ai/openart-ai/production/2026-10/create-video/HNnBxHxCZIH5vKlXimQ7/cgt-20261014202440-dimqn_1791981196446_76da2f9c.mp4'
+          fetch_video '03_invitation' 'https://cdn.openart.ai/openart-ai/production/2026-10/create-video/HNnBxHxCZIH5vKlXimQ7/cgt-20261014205256-es26w_1791982737518_c51db0cc.mp4'
+          fetch_video '04_cadeau' 'https://cdn.openart.ai/openart-ai/production/2026-10/create-video/HNnBxHxCZIH5vKlXimQ7/cgt-20261014202535-o53r0_1791981096922_1001a221.mp4'
+          fetch_video '05_brocante' 'https://cdn.openart.ai/openart-ai/production/2026-10/create-video/HNnBxHxCZIH5vKlXimQ7/cgt-20261014202538-6qthc_1791981406698_f03977ea.mp4'
+      - name: Publish local videos
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add PO/atelier-interculturel/videos/*.mp4
+          if git diff --cached --quiet; then echo 'No changes'; exit 0; fi
+          git commit -m 'Host oral atelier MP4 directly from GitHub Pages'
+          git push origin HEAD:main
