@@ -1,0 +1,19 @@
+{
+  "name": "Le bonheur, en mots — Inspire 4",
+  "short_name": "Le bonheur",
+  "description": "Champ lexical interactif — Pistes 002 et 003",
+  "lang": "fr",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#FFF9ED",
+  "theme_color": "#FDBA12",
+  "icons": [
+    {
+      "src": "assets/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
