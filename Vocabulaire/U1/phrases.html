@@ -194,7 +194,7 @@ byId("knownStat").innerHTML="<b>"+knownCount+"</b> maîtrisées";
 byId("reviewStat").innerHTML="<b>"+reviewCount+"</b> à revoir";
 document.querySelectorAll(".filter").forEach(function(b){var isOn=b.dataset.filter===state.filter;b.classList.toggle("active",isOn);b.setAttribute("aria-pressed",String(isOn));});
 var empty=total===0;byId("learningArea").style.display=empty?"none":"";byId("empty").style.display=empty?"block":"none";byId("shuffleBtn").hidden=empty;
-if(empty)return;
+if(empty){document.querySelector("#empty h2").textContent=state.filter==="review"?"Aucune phrase à revoir.":"Aucune phrase dans cette sélection.";document.querySelector("#empty p").textContent=state.filter==="review"?"Marquez une phrase « À revoir » pour la retrouver ici.":"Choisissez un autre thème.";return;}
 state.index=((state.index%total)+total)%total;
 var card=list[state.index];
 byId("cardIndex").textContent="PHRASE "+String(state.index+1).padStart(2,"0")+" / "+String(total).padStart(2,"0");
