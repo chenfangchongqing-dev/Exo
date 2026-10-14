@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FDBA12">
+<meta name="description" content="Inspire 4 · Unité 1 — Réviser le vocabulaire en phrases et mémoriser les expressions en contexte.">
+<title>Apprendre en phrases · Inspire 4</title>
+<style>
+:root{color-scheme:light;--bg:#F7F4ED;--surface:#FFFEFA;--ink:#2A241C;--muted:#746A60;--line:#E7D9C4;--gold:#FDBA12;--orange:#D88913;--gold-soft:#FFF2C5;--shadow:0 18px 46px rgba(101,74,26,.075)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,"Helvetica Neue",Helvetica,sans-serif;-webkit-font-smoothing:antialiased}
+button,a{font:inherit;-webkit-tap-highlight-color:transparent}
+button{cursor:pointer}
+button:focus-visible,a:focus-visible{outline:3px solid #BD7D13;outline-offset:3px}
+a{color:inherit;text-decoration:none}
+.shell{max-width:840px;margin:auto;padding:20px 20px calc(44px + env(safe-area-inset-bottom))}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;font-size:13px;margin:0 0 25px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.15em;color:#8F6319}
+.dot{display:inline-block;height:11px;width:11px;border-radius:50%;background:var(--gold)}
+.back{color:#766959;font-weight:700;padding:8px 0;white-space:nowrap}
+.back:hover{text-decoration:underline}
+.hero{margin-bottom:27px}
+.eyebrow{text-transform:uppercase;letter-spacing:.16em;font-size:12px;font-weight:800;color:#B4761C;margin:0 0 9px}
+h1{font-size:clamp(35px,6.5vw,57px);line-height:1.03;letter-spacing:-.05em;margin:0 0 10px}
+h1 em{font-family:"Times New Roman",Times,serif;font-style:italic;font-weight:400}
+.subtitle{font:clamp(17px,3vw,21px)/1.4 "Times New Roman",Times,serif;color:#756A5B;margin:0}
+.stats{display:flex;gap:9px;flex-wrap:wrap;margin-top:20px}
+.stat{font-size:12px;font-weight:700;color:#675A48;background:#FFFBF3;border:1px solid var(--line);border-radius:999px;padding:8px 12px;white-space:nowrap}
+.stat b{color:#9A6010}
+.controls{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:0 0 21px}
+.filter{border:1px solid #E1D3C0;border-radius:999px;padding:10px 15px;background:#FFFDFA;color:#67594C;font-size:14px;font-weight:700;min-height:42px}
+.filter.active{background:var(--gold);color:#34250F;border-color:var(--gold)}
+.filter:hover{border-color:#C99239}
+.card{position:relative;background:var(--surface);border:1px solid #E7D3AF;border-radius:25px;box-shadow:var(--shadow);overflow:hidden}
+.cardhead{display:flex;justify-content:space-between;align-items:center;gap:12px;background:#FFF6DF;border-bottom:1px solid #F0E0C5;padding:18px 24px}
+.cardhead .index{font-size:12px;letter-spacing:.1em;color:#9B6718;font-weight:800}
+.cardhead .topic{font-size:12px;color:#7A6141;font-weight:800}
+.progress{height:4px;background:#F1E4D0;overflow:hidden}
+.progress>div{height:100%;background:var(--orange);width:0;transition:width .25s}
+.phrasebox{padding:38px 31px 23px;min-height:253px;display:flex;align-items:center;justify-content:center;touch-action:pan-y}
+.quote{font:clamp(29px,4.1vw,39px)/1.43 "Times New Roman",Times,Georgia,serif;text-align:center;overflow-wrap:break-word;hyphens:auto;letter-spacing:-.009em;margin:0;width:100%}
+.highlight{background:#FFF0BF;box-shadow:inset 0 -.20em #F6BB5166,0 4px 12px #BE7F1733;padding:.02em .1em;border-radius:.18em;-webkit-box-decoration-break:clone;box-decoration-break:clone;font-weight:700;color:#3D2B0E}
+.missing{font:700 .68em/1 Arial,Helvetica,sans-serif;display:inline-block;vertical-align:baseline;border:1.5px dashed #BD903F;background:#FFEAB2;color:#9F6A19;letter-spacing:.09em;padding:.28em .5em;border-radius:8px;white-space:nowrap}
+.missing:hover{background:#FFE098}
+.tools{padding:0 22px 25px;display:flex;justify-content:center;flex-wrap:wrap;gap:10px}
+.utility{border:1px solid #DFCFB3;background:#FFF9ED;color:#684D29;padding:11px 15px;min-height:45px;border-radius:11px;font-size:14px;font-weight:700}
+.utility:hover{background:#FFF0D0}
+.utility[data-selected=true]{background:#FBE5B4;border-color:#E3AE4C}
+.answer{margin:0 23px 26px;background:#FAF6EE;border:1px solid #E8DCCA;border-radius:15px;padding:20px 20px 18px}
+.answer[hidden]{display:none}
+.answer-label{font-size:11px;text-transform:uppercase;letter-spacing:.12em;font-weight:800;color:#B27B24;margin:0 0 8px}
+.translation{font:17px/1.6 "PingFang SC","Noto Sans CJK SC","Microsoft YaHei",sans-serif;margin:0 0 14px;color:#473E34}
+.association{margin:0;font:16px/1.5 "Times New Roman",Times,serif;color:#6A4D25}
+.association b{font-family:Arial,Helvetica,sans-serif;font-size:12px;letter-spacing:.025em;color:#A16D27;margin-right:7px}
+.cardfoot{padding:19px 23px 23px;border-top:1px solid #EFE7DD;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.pagination{display:flex;gap:8px}
+.navbtn{height:45px;width:47px;border:1px solid #E1D4BE;border-radius:11px;background:white;font-size:19px;font-weight:700;color:#82652E}
+.navbtn:hover{background:#FFF2D2}
+.status{font-size:13px;color:#93846F;white-space:nowrap;font-weight:700}
+.status.known{color:#357456}.status.review{color:#B06E1E}
+.judge{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:15px}
+.judge button{min-height:56px;border-radius:14px;border:1px solid #DCBA73;font-size:16px;font-weight:800}
+.again{background:#FFFBF3;color:#86531C}.again:hover{background:#FFF0D8}
+.known-btn{background:#2D2A24;border-color:#2D2A24;color:white}.known-btn:hover{background:#494137}
+.bottomrow{display:flex;justify-content:space-between;gap:14px;align-items:center;margin:20px 3px 0}
+.shuffle{border:none;background:transparent;color:#A16B25;text-decoration:underline;text-underline-offset:3px;font-size:14px;font-weight:700;padding:9px 1px}
+.hint{font-size:12px;color:#8C7E6E;margin:0;text-align:right;line-height:1.45}
+.empty{display:none;background:white;border:1px dashed #D4B985;border-radius:18px;padding:35px 22px;text-align:center}
+.empty h2{font-size:22px;margin:0 0 10px}.empty p{color:var(--muted);line-height:1.5}
+.empty button{background:#FDBA12;border:none;border-radius:12px;padding:12px 18px;font-size:15px;font-weight:800}
+.footer{padding:20px 0 0;margin-top:30px;border-top:1px solid var(--line);font-size:12px;line-height:1.65;color:#8D7E6D}
+@media(max-width:630px){
+.shell{padding:16px 13px calc(26px + env(safe-area-inset-bottom))}
+.topbar{margin-bottom:24px;font-size:11px}
+.back{font-size:12px}
+.hero{margin-bottom:23px}
+.subtitle{font-size:18px}
+.stats{gap:7px;margin-top:17px}.stat{font-size:11px;padding:7px 9px}
+.controls{gap:7px;margin-bottom:15px}
+.filter{font-size:12px;padding:9px 12px;min-height:39px}
+.card{border-radius:19px}.cardhead{padding:15px 17px}
+.phrasebox{padding:29px 20px 20px;min-height:230px}
+.quote{font-size:clamp(26px,7vw,33px);line-height:1.47}
+.tools{padding:0 15px 22px;gap:8px}
+.utility{flex:1;font-size:13px;padding:10px 9px;min-height:45px}
+.answer{margin:0 14px 20px;padding:16px}
+.cardfoot{padding:14px 15px 17px}.judge{gap:10px}.judge button{font-size:14px;min-height:54px}
+.hint{text-align:right;font-size:11px}
+}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="shell">
+<header class="topbar">
+<div class="brand"><i class="dot" aria-hidden="true"></i> INSPIRE 4 · UNITÉ 1</div>
+<a href="index.html" class="back">← Retour à l'unité</a>
+</header>
+<main>
+<section class="hero">
+<p class="eyebrow">Vocabulaire · Révision</p>
+<h1>Apprendre <em>en phrases.</em></h1>
+<p class="subtitle">Une phrase, une expression à retenir. À votre rythme.</p>
+<div class="stats" aria-live="polite">
+<span class="stat" id="totalStat">34 phrases</span>
+<span class="stat" id="knownStat"><b>0</b> maîtrisées</span>
+<span class="stat" id="reviewStat"><b>0</b> à revoir</span>
+</div>
+</section>
+<nav class="controls" aria-label="Choisir les phrases">
+<button class="filter active" type="button" data-filter="all" aria-pressed="true">Toutes</button>
+<button class="filter" type="button" data-filter="0" aria-pressed="false">Émotions</button>
+<button class="filter" type="button" data-filter="1" aria-pressed="false">Verbes</button>
+<button class="filter" type="button" data-filter="2" aria-pressed="false">Nuances</button>
+<button class="filter" type="button" data-filter="3" aria-pressed="false">Connecteurs</button>
+<button class="filter" type="button" data-filter="review" aria-pressed="false">À revoir</button>
+</nav>
+<section id="learningArea" aria-label="Cartes de révision">
+<article class="card" id="card">
+<div class="cardhead"><span class="index" id="cardIndex">PHRASE 01 / 34</span><span class="topic" id="cardTopic">Émotions</span></div>
+<div class="progress"><div id="progressBar"></div></div>
+<div class="phrasebox" id="phrasebox">
+<p class="quote" id="sentence" aria-live="polite"></p>
+</div>
+<div class="tools">
+<button class="utility" id="clozeBtn" type="button" aria-pressed="false">Masquer l'expression</button>
+<button class="utility" id="translationBtn" type="button" aria-expanded="false" aria-controls="answer">Voir le sens</button>
+</div>
+<div class="answer" id="answer" hidden>
+<p class="answer-label">Sens de la phrase</p>
+<p class="translation" id="translation" lang="zh-Hans"></p>
+<p class="association" id="association"></p>
+</div>
+<div class="cardfoot">
+<div class="pagination"><button class="navbtn" id="prevBtn" aria-label="Phrase précédente" type="button">←</button><button class="navbtn" id="nextBtn" aria-label="Phrase suivante" type="button">→</button></div>
+<span class="status" id="cardStatus">À découvrir</span>
+</div>
+</article>
+<div class="judge">
+<button class="again" id="reviewBtn" type="button">↺ À revoir</button>
+<button class="known-btn" id="knownBtn" type="button">✓ Je connais</button>
+</div>
+</section>
+<section class="empty" id="empty" aria-live="polite">
+<h2>Bravo, cette série est terminée !</h2>
+<p>Aucune phrase à revoir dans cette sélection pour le moment.</p>
+<button type="button" id="allBtn">Revoir toutes les phrases</button>
+</section>
+<div class="bottomrow">
+<button class="shuffle" id="shuffleBtn" type="button">↝ Mélanger les phrases</button>
+<p class="hint">Glisser à gauche ou à droite<br>pour changer de phrase.</p>
+</div>
+</main>
+<footer class="footer">Phrases tirées de la fiche de vocabulaire de l'unité 1. Les exemples servent à réemployer les mots en contexte ; ils ne sont pas des citations des enregistrements.</footer>
+</div>
+<script src="phrases-data.js"></script>
+<script>
+(function(){
+"use strict";
+var cards=Array.isArray(window.SENTENCE_CARDS)?window.SENTENCE_CARDS:[];
+var STORAGE_KEY="inspire4-u1-phrases-progress-v1";
+var progress={};
+try{var stored=JSON.parse(localStorage.getItem(STORAGE_KEY)||"{}");if(stored&&typeof stored==="object")progress=stored;}catch(err){}
+var state={filter:"all",index:0,cloze:false,revealed:false,translation:false};
+var order=cards.slice();
+var topics=["Émotions et relations","Verbes et réactions","Nuances et images","Connecteurs"];
+function byId(id){return document.getElementById(id);}
+function save(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(progress));}catch(err){}}
+function pool(){return order.filter(function(c){return state.filter==="all"||(state.filter==="review"?progress[c.id]==="review":String(c.group)===state.filter);});}
+function clearReveals(){state.cloze=false;state.revealed=false;state.translation=false;}
+function setFilter(f){state.filter=f;state.index=0;clearReveals();render();}
+function addText(target,s){target.appendChild(document.createTextNode(s));}
+function fillSentence(card){
+var node=byId("sentence");node.textContent="";
+var ix=card.sentence.indexOf(card.target);
+if(ix<0){node.textContent=card.sentence;return;}
+addText(node,card.sentence.slice(0,ix));
+if(state.cloze&&!state.revealed){
+var button=document.createElement("button");button.className="missing";button.type="button";button.textContent="••••••";button.setAttribute("aria-label","Révéler l'expression masquée");button.addEventListener("click",function(){state.revealed=true;render();});
+node.appendChild(button);
+}else{
+var highlighted=document.createElement("span");highlighted.className="highlight";highlighted.textContent=card.target;node.appendChild(highlighted);
+}
+addText(node,card.sentence.slice(ix+card.target.length));
+}
+function render(){
+var list=pool(),total=list.length;
+byId("totalStat").textContent=cards.length+" phrases";
+var knownCount=cards.filter(function(c){return progress[c.id]==="known";}).length;
+var reviewCount=cards.filter(function(c){return progress[c.id]==="review";}).length;
+byId("knownStat").innerHTML="<b>"+knownCount+"</b> maîtrisées";
+byId("reviewStat").innerHTML="<b>"+reviewCount+"</b> à revoir";
+document.querySelectorAll(".filter").forEach(function(b){var isOn=b.dataset.filter===state.filter;b.classList.toggle("active",isOn);b.setAttribute("aria-pressed",String(isOn));});
+var empty=total===0;byId("learningArea").style.display=empty?"none":"";byId("empty").style.display=empty?"block":"none";byId("shuffleBtn").hidden=empty;
+if(empty)return;
+state.index=((state.index%total)+total)%total;
+var card=list[state.index];
+byId("cardIndex").textContent="PHRASE "+String(state.index+1).padStart(2,"0")+" / "+String(total).padStart(2,"0");
+byId("cardTopic").textContent=topics[card.group];
+byId("progressBar").style.width=(((state.index+1)/total)*100)+"%";
+fillSentence(card);
+byId("clozeBtn").textContent=!state.cloze?"Masquer l'expression":state.revealed?"Masquer à nouveau":"Voir la réponse";
+byId("clozeBtn").setAttribute("aria-pressed",String(state.cloze));
+byId("translationBtn").textContent=state.translation?"Masquer le sens":"Voir le sens";
+byId("translationBtn").setAttribute("aria-expanded",String(state.translation));
+byId("answer").hidden=!state.translation;
+byId("translation").textContent=card.zh;
+byId("association").textContent="";
+var title=document.createElement("b");title.textContent="À RETENIR";byId("association").appendChild(title);addText(byId("association"),card.association);
+var s=byId("cardStatus");s.className="status";var status=progress[card.id];s.textContent=status==="known"?"✓ Maîtrisée":status==="review"?"↺ À revoir":"À découvrir";if(status)s.classList.add(status);
+}
+function move(dir){var length=pool().length;if(!length)return;state.index=(state.index+dir+length)%length;clearReveals();render();}
+function mark(value){var list=pool();if(!list.length)return;var id=list[state.index].id;progress[id]=value;save();
+if(state.filter==="review"&&value==="known"&&state.index>=list.length-1)state.index=Math.max(0,state.index-1);
+else if(state.filter!=="review")state.index=(state.index+1)%list.length;
+clearReveals();render();}
+document.querySelectorAll(".filter").forEach(function(b){b.addEventListener("click",function(){setFilter(b.dataset.filter);});});
+byId("prevBtn").addEventListener("click",function(){move(-1);});
+byId("nextBtn").addEventListener("click",function(){move(1);});
+byId("knownBtn").addEventListener("click",function(){mark("known");});
+byId("reviewBtn").addEventListener("click",function(){mark("review");});
+byId("translationBtn").addEventListener("click",function(){state.translation=!state.translation;render();});
+byId("clozeBtn").addEventListener("click",function(){if(!state.cloze){state.cloze=true;state.revealed=false;}else if(!state.revealed){state.revealed=true;}else{state.revealed=false;}render();});
+byId("allBtn").addEventListener("click",function(){setFilter("all");});
+byId("shuffleBtn").addEventListener("click",function(){
+for(var i=order.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=order[i];order[i]=order[j];order[j]=t;}
+state.index=0;clearReveals();render();
+});
+document.addEventListener("keydown",function(e){
+if(["INPUT","TEXTAREA","SELECT"].includes(document.activeElement.tagName))return;
+if(e.key==="ArrowRight"){e.preventDefault();move(1);}
+if(e.key==="ArrowLeft"){e.preventDefault();move(-1);}
+});
+var x0=null,y0=null;
+byId("phrasebox").addEventListener("touchstart",function(e){if(e.touches.length!==1)return;x0=e.touches[0].clientX;y0=e.touches[0].clientY;},{passive:true});
+byId("phrasebox").addEventListener("touchend",function(e){if(x0===null||e.changedTouches.length!==1)return;var dx=e.changedTouches[0].clientX-x0,dy=e.changedTouches[0].clientY-y0;x0=null;y0=null;if(Math.abs(dx)>65&&Math.abs(dx)>Math.abs(dy)*1.5)move(dx<0?1:-1);},{passive:true});
+render();
+})();
+</script>
+</body>
+</html>
