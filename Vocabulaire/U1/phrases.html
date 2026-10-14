@@ -29,6 +29,9 @@ h1 em{font-family:"Times New Roman",Times,serif;font-style:italic;font-weight:40
 .stats{display:flex;gap:9px;flex-wrap:wrap;margin-top:20px}
 .stat{font-size:12px;font-weight:700;color:#675A48;background:#FFFBF3;border:1px solid var(--line);border-radius:999px;padding:8px 12px;white-space:nowrap}
 .stat b{color:#9A6010}
+.stat.review-link{appearance:none;cursor:pointer;line-height:inherit;transition:background .16s,border-color .16s,box-shadow .16s}
+.stat.review-link:hover,.stat.review-link:focus-visible{background:#FFF0CA;border-color:#D5A250;box-shadow:0 3px 12px rgba(153,100,21,.12)}
+.stat.review-link[aria-pressed="true"]{background:#FFF0CA;border-color:#D5A250}
 .controls{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:0 0 21px}
 .filter{border:1px solid #E1D3C0;border-radius:999px;padding:10px 15px;background:#FFFDFA;color:#67594C;font-size:14px;font-weight:700;min-height:42px}
 .filter.active{background:var(--gold);color:#34250F;border-color:var(--gold)}
@@ -106,7 +109,7 @@ h1 em{font-family:"Times New Roman",Times,serif;font-style:italic;font-weight:40
 <div class="stats" aria-live="polite">
 <span class="stat" id="totalStat">34 phrases</span>
 <span class="stat" id="knownStat"><b>0</b> maîtrisées</span>
-<span class="stat" id="reviewStat"><b>0</b> à revoir</span>
+<button class="stat review-link" id="reviewStat" type="button" aria-label="Voir les phrases à revoir" aria-controls="learningArea empty" aria-pressed="false"><b>0</b> à revoir</button>
 </div>
 </section>
 <nav class="controls" aria-label="Choisir les phrases">
@@ -192,6 +195,8 @@ var knownCount=cards.filter(function(c){return progress[c.id]==="known";}).lengt
 var reviewCount=cards.filter(function(c){return progress[c.id]==="review";}).length;
 byId("knownStat").innerHTML="<b>"+knownCount+"</b> maîtrisées";
 byId("reviewStat").innerHTML="<b>"+reviewCount+"</b> à revoir";
+byId("reviewStat").setAttribute("aria-label","Voir "+reviewCount+" phrase"+(reviewCount===1?"":"s")+" à revoir");
+byId("reviewStat").setAttribute("aria-pressed",String(state.filter==="review"));
 document.querySelectorAll(".filter").forEach(function(b){var isOn=b.dataset.filter===state.filter;b.classList.toggle("active",isOn);b.setAttribute("aria-pressed",String(isOn));});
 var empty=total===0;byId("learningArea").style.display=empty?"none":"";byId("empty").style.display=empty?"block":"none";byId("shuffleBtn").hidden=empty;
 if(empty){document.querySelector("#empty h2").textContent=state.filter==="review"?"Aucune phrase à revoir.":"Aucune phrase dans cette sélection.";document.querySelector("#empty p").textContent=state.filter==="review"?"Marquez une phrase « À revoir » pour la retrouver ici.":"Choisissez un autre thème.";return;}
@@ -213,10 +218,16 @@ var s=byId("cardStatus");s.className="status";var status=progress[card.id];s.tex
 }
 function move(dir){var length=pool().length;if(!length)return;state.index=(state.index+dir+length)%length;clearReveals();render();}
 function mark(value){var list=pool();if(!list.length)return;var id=list[state.index].id;progress[id]=value;save();
-if(state.filter==="review"){if(value==="known"){state.index=Math.min(state.index,Math.max(0,list.length-2));}else{state.index=(state.index+1)%list.length;}}
+if(state.filter==="review"){if(value==="known"){var remaining=list.length-1;state.index=remaining>0&&state.index<remaining?state.index:0;}else{state.index=(state.index+1)%list.length;}}
 else{state.index=(state.index+1)%list.length;}
 clearReveals();render();}
 document.querySelectorAll(".filter").forEach(function(b){b.addEventListener("click",function(){setFilter(b.dataset.filter);});});
+byId("reviewStat").addEventListener("click",function(){
+  setFilter("review");
+  var destination=byId(pool().length?"learningArea":"empty");
+  var reducedMotion=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  destination.scrollIntoView({behavior:reducedMotion?"auto":"smooth",block:"start"});
+});
 byId("prevBtn").addEventListener("click",function(){move(-1);});
 byId("nextBtn").addEventListener("click",function(){move(1);});
 byId("knownBtn").addEventListener("click",function(){mark("known");});
