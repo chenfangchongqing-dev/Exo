@@ -51,6 +51,23 @@ footer{border-top:1px solid var(--line);padding:21px 3px 0;margin-top:30px;font-
 .row{grid-template-columns:26px minmax(0,1fr);gap:6px;padding:15px 0;font-size:18px}.words{font-size:17px}
 footer{flex-direction:column;gap:4px}
 }
+
+/* Corrigés : consultables après une première réponse orale. */
+.correction{margin:18px 0 2px;border:1px solid #DFBC78;border-radius:15px;background:#FFFBF2;overflow:hidden}
+.correction summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;min-height:55px;padding:15px 17px;color:#825716;font-size:15px;font-weight:800;user-select:none;-webkit-tap-highlight-color:transparent}
+.correction summary::-webkit-details-marker{display:none}
+.correction summary:focus-visible{outline:3px solid #C88921;outline-offset:-3px}
+.correction summary:after{content:"＋";margin-left:auto;color:#AD791E;font-size:22px;line-height:1}
+.correction[open] summary:after{content:"－"}
+.correction[open] summary{border-bottom:1px solid #EBD9B8;background:#FFF5DF}
+.open-caption{display:none}.correction[open] .open-caption{display:inline}.correction[open] .closed-caption{display:none}
+.answer-total{font-size:12px;font-weight:700;color:#A0855B;margin-left:3px}
+.answer-intro{padding:14px 17px 0;margin:0;font:15px/1.5 "Times New Roman",Times,serif;color:#75634A}
+.answer-list{list-style:none;padding:9px 17px 17px;margin:0}
+.answer-row{display:grid;grid-template-columns:24px minmax(0,1fr);gap:8px;padding:11px 0;border-bottom:1px solid #EFE4D2;font:17px/1.55 "Times New Roman",Times,serif;overflow-wrap:break-word}
+.answer-row:last-child{border-bottom:none}
+.answer-letter{color:#9E762D;font-weight:700}
+.answer-row strong{font-weight:700;color:#A26910;background:#FFF0C9;padding:0 .08em;border-radius:3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 @media print{body{background:white}.wrap{max-width:none}.toc,.guide,.top{display:none}.exercise{box-shadow:none;break-inside:avoid}.row{break-inside:avoid}}
 </style>
@@ -58,7 +75,7 @@ footer{flex-direction:column;gap:4px}
 <header class="top"><span class="brand">INSPIRE 4 · UNITÉ 1 · LEÇON 1</span><a href="../index.html" class="back">← Grammaire</a></header>
 <main>
 <section class="hero"><p class="kicker">LEÇON 1 · DONNER UNE DÉFINITION DU BONHEUR</p><h1>La question<br><em>avec inversion.</em></h1><p class="subtitle">Exercices 7, 8 et 9 — entraînement oral</p><div class="tags"><span>22 questions</span><span>Réponses orales</span><span>Aucune saisie</span></div></section>
-<aside class="guide"><span class="symbol" aria-hidden="true">◉</span><div><strong>À faire à l’oral</strong><p>Formulez chaque question à voix haute en indiquant son numéro et sa lettre. Enregistrez vos réponses, puis envoyez votre fichier audio à votre enseignante par le canal habituel. Vous n’avez rien à écrire sur ce site.</p></div></aside>
+<aside class="guide"><span class="symbol" aria-hidden="true">◉</span><div><strong>À faire à l’oral</strong><p>Formulez chaque question à voix haute en indiquant son numéro et sa lettre. Enregistrez vos réponses, puis envoyez votre fichier audio à votre enseignante par le canal habituel. Vous n’avez rien à écrire sur ce site. Un corrigé est disponible à la fin de chaque exercice pour vérifier vos réponses après l’enregistrement.</p></div></aside>
 <nav class="toc" aria-label="Choisir un exercice"><a href="#ex7">07 · Remettre en ordre ↓</a><a href="#ex8">08 · Transformer ↓</a><a href="#ex9">09 · Compléter ↓</a></nav>
 <section class="exercise" id="ex7"><h2><span class="n">7</span>Mettez les mots dans l’ordre pour faire une question avec inversion.</h2>
 <p class="description">Reconstituez chaque question à voix haute.</p>
@@ -70,7 +87,21 @@ footer{flex-direction:column;gap:4px}
 <li class="row"><span class="letter">e.</span><div class="statement"><span class="words" lang="fr"><span class="morpheme">-t</span><i aria-hidden="true">·</i><span class="">envers son amie ?</span><i aria-hidden="true">·</i><span class="">sera</span><i aria-hidden="true">·</i><span class="">reconnaissante</span><i aria-hidden="true">·</i><span class="morpheme">-</span><i aria-hidden="true">·</i><span class="">elle</span><i aria-hidden="true">·</i><span class="">Martha</span></span></div></li>
 <li class="row"><span class="letter">f.</span><div class="statement"><span class="words" lang="fr"><span class="">nous</span><i aria-hidden="true">·</i><span class="">les philosophes</span><i aria-hidden="true">·</i><span class="">Que</span><i aria-hidden="true">·</i><span class="">sur le bonheur ?</span><i aria-hidden="true">·</i><span class="">enseignent</span></span></div></li>
 <li class="row"><span class="letter">g.</span><div class="statement"><span class="words" lang="fr"><span class="morpheme">-t-</span><i aria-hidden="true">·</i><span class="">vraiment plus de raisons</span><i aria-hidden="true">·</i><span class="">A</span><i aria-hidden="true">·</i><span class="">d’être heureux aujourd’hui ?</span><i aria-hidden="true">·</i><span class="">on</span></span></div></li>
-<li class="row"><span class="letter">h.</span><div class="statement"><span class="words" lang="fr"><span class="">permet</span><i aria-hidden="true">·</i><span class="">l’estime de soi</span><i aria-hidden="true">·</i><span class="">En quoi</span><i aria-hidden="true">·</i><span class="morpheme">-</span><i aria-hidden="true">·</i><span class="">de se sentir mieux ?</span><i aria-hidden="true">·</i><span class="">elle</span></span></div></li></ul></section>
+<li class="row"><span class="letter">h.</span><div class="statement"><span class="words" lang="fr"><span class="">permet</span><i aria-hidden="true">·</i><span class="">l’estime de soi</span><i aria-hidden="true">·</i><span class="">En quoi</span><i aria-hidden="true">·</i><span class="morpheme">-</span><i aria-hidden="true">·</i><span class="">de se sentir mieux ?</span><i aria-hidden="true">·</i><span class="">elle</span></span></div></li></ul>
+<details class="correction" id="corrige7">
+<summary><span class="closed-caption">Afficher le corrigé</span><span class="open-caption">Masquer le corrigé</span><span class="answer-total">8 réponses</span></summary>
+<p class="answer-intro">Comparez ces propositions avec vos réponses orales. Les éléments en couleur mettent en évidence l’inversion.</p>
+<ol class="answer-list" aria-label="Corrigé de l’exercice 7">
+<li class="answer-row"><span class="answer-letter">a.</span><span lang="fr">Pourquoi nos émotions négatives <strong>prennent-elles</strong> souvent le dessus sur nos émotions positives ?</span></li>
+<li class="answer-row"><span class="answer-letter">b.</span><span lang="fr">Comment <strong>fait-on</strong> pour développer sa tranquillité d’âme ?</span></li>
+<li class="answer-row"><span class="answer-letter">c.</span><span lang="fr">L’amitié <strong>tient-elle</strong> une place importante dans votre vie ?</span></li>
+<li class="answer-row"><span class="answer-letter">d.</span><span lang="fr">Qui <strong>vas-tu</strong> interroger pour ton enquête sur le bonheur ?</span></li>
+<li class="answer-row"><span class="answer-letter">e.</span><span lang="fr">Martha <strong>sera-t-elle</strong> reconnaissante envers son amie ?</span></li>
+<li class="answer-row"><span class="answer-letter">f.</span><span lang="fr">Que nous <strong>enseignent les philosophes</strong> sur le bonheur ?</span></li>
+<li class="answer-row"><span class="answer-letter">g.</span><span lang="fr"><strong>A-t-on</strong> vraiment plus de raisons d’être heureux aujourd’hui ?</span></li>
+<li class="answer-row"><span class="answer-letter">h.</span><span lang="fr">En quoi l’estime de soi <strong>permet-elle</strong> de se sentir mieux ?</span></li>
+</ol>
+</details></section>
 <section class="exercise" id="ex8"><h2><span class="n">8</span>Utilisez l’inversion avec reprise du sujet pour transformer les questions.</h2>
 <p class="description">Transformez chaque question en prononçant la phrase entière.</p>
 <div class="example"><b>EXEMPLE</b><div class="from">Est-ce que ressentir de la joie peut constituer un bonheur durable ?</div><div class="to"><span aria-hidden="true">→</span> Ressentir de la joie peut-il constituer un bonheur durable ?</div></div>
@@ -81,7 +112,21 @@ footer{flex-direction:column;gap:4px}
 <li class="row"><span class="letter">e.</span><div class="statement">Cet événement de votre vie a été le plus marquant ?</div></li>
 <li class="row"><span class="letter">f.</span><div class="statement">Est-ce que tous les individus sont conscients de leurs émotions agréables ?</div></li>
 <li class="row"><span class="letter">g.</span><div class="statement">Est-ce que l’amitié peut apporter l’estime de soi ?</div></li>
-<li class="row"><span class="letter">h.</span><div class="statement">Depuis quand ton amie s’intéresse à la question du bonheur individuel ?</div></li></ul></section>
+<li class="row"><span class="letter">h.</span><div class="statement">Depuis quand ton amie s’intéresse à la question du bonheur individuel ?</div></li></ul>
+<details class="correction" id="corrige8">
+<summary><span class="closed-caption">Afficher le corrigé</span><span class="open-caption">Masquer le corrigé</span><span class="answer-total">8 réponses</span></summary>
+<p class="answer-intro">Comparez ces propositions avec vos réponses orales. Les éléments en couleur mettent en évidence l’inversion.</p>
+<ol class="answer-list" aria-label="Corrigé de l’exercice 8">
+<li class="answer-row"><span class="answer-letter">a.</span><span lang="fr">Comment cette personne <strong>garde-t-elle</strong> sa sérénité en toutes circonstances ?</span></li>
+<li class="answer-row"><span class="answer-letter">b.</span><span lang="fr">Pourquoi les émotions négatives nous <strong>empêchent-elles</strong> de voir ce qui est positif ?</span></li>
+<li class="answer-row"><span class="answer-letter">c.</span><span lang="fr">Les philosophes <strong>pourraient-ils</strong> trouver une seule définition du bonheur ?</span></li>
+<li class="answer-row"><span class="answer-letter">d.</span><span lang="fr">Les enfants anxieux <strong>peuvent-ils</strong> apprendre à développer des émotions positives ?</span></li>
+<li class="answer-row"><span class="answer-letter">e.</span><span lang="fr">Cet événement de votre vie <strong>a-t-il</strong> été le plus marquant ?</span></li>
+<li class="answer-row"><span class="answer-letter">f.</span><span lang="fr">Tous les individus <strong>sont-ils</strong> conscients de leurs émotions agréables ?</span></li>
+<li class="answer-row"><span class="answer-letter">g.</span><span lang="fr">L’amitié <strong>peut-elle</strong> apporter l’estime de soi ?</span></li>
+<li class="answer-row"><span class="answer-letter">h.</span><span lang="fr">Depuis quand ton amie <strong>s’intéresse-t-elle</strong> à la question du bonheur individuel ?</span></li>
+</ol>
+</details></section>
 <section class="exercise" id="ex9"><h2><span class="n">9</span>Complétez pour faire une question avec inversion. Conjuguez les verbes au présent et faites les transformations nécessaires.</h2>
 <p class="description">Conjuguez les verbes et dites les questions complètes.</p>
 <div class="example"><b>EXEMPLE</b><div class="from">Comment la philosophie (permettre) … de mieux définir le bonheur ?</div><div class="to"><span aria-hidden="true">→</span> Comment la philosophie permet-elle de mieux définir le bonheur ?</div></div>
@@ -90,7 +135,19 @@ footer{flex-direction:column;gap:4px}
 <li class="row"><span class="letter">c.</span><div class="statement">Que <span class="blank" aria-label="expression manquante"></span> <span class="cue">(nous · percevoir)</span> du bonheur des autres ?</div></li>
 <li class="row"><span class="letter">d.</span><div class="statement">Comment les vicissitudes de la vie <span class="blank" aria-label="expression manquante"></span> <span class="cue">(pouvoir)</span> être acceptées sereinement ?</div></li>
 <li class="row"><span class="letter">e.</span><div class="statement">Pourquoi la notion de bonheur individuel <span class="blank" aria-label="expression manquante"></span> <span class="cue">(prendre)</span> de l’importance aujourd’hui ?</div></li>
-<li class="row"><span class="letter">f.</span><div class="statement"><span class="blank" aria-label="expression manquante"></span> <span class="cue">(vous · ressentir)</span> souvent des émotions négatives ?</div></li></ul></section>
+<li class="row"><span class="letter">f.</span><div class="statement"><span class="blank" aria-label="expression manquante"></span> <span class="cue">(vous · ressentir)</span> souvent des émotions négatives ?</div></li></ul>
+<details class="correction" id="corrige9">
+<summary><span class="closed-caption">Afficher le corrigé</span><span class="open-caption">Masquer le corrigé</span><span class="answer-total">6 réponses</span></summary>
+<p class="answer-intro">Comparez ces propositions avec vos réponses orales. Les éléments en couleur mettent en évidence l’inversion.</p>
+<ol class="answer-list" aria-label="Corrigé de l’exercice 9">
+<li class="answer-row"><span class="answer-letter">a.</span><span lang="fr">Tous les gens <strong>ont-ils</strong> la même définition du bonheur ?</span></li>
+<li class="answer-row"><span class="answer-letter">b.</span><span lang="fr">Cultiver l’estime de soi <strong>mène-t-il</strong> à la sérénité ?</span></li>
+<li class="answer-row"><span class="answer-letter">c.</span><span lang="fr">Que <strong>percevons-nous</strong> du bonheur des autres ?</span></li>
+<li class="answer-row"><span class="answer-letter">d.</span><span lang="fr">Comment les vicissitudes de la vie <strong>peuvent-elles</strong> être acceptées sereinement ?</span></li>
+<li class="answer-row"><span class="answer-letter">e.</span><span lang="fr">Pourquoi la notion de bonheur individuel <strong>prend-elle</strong> de l’importance aujourd’hui ?</span></li>
+<li class="answer-row"><span class="answer-letter">f.</span><span lang="fr"><strong>Ressentez-vous</strong> souvent des émotions négatives ?</span></li>
+</ol>
+</details></section>
 <p class="finish">Fin des exercices 7, 8 et 9.</p>
 </main><footer><span>Inspire 4 · Unité 1 · Leçon 1</span><span>Activité orale · Les enregistrements sont envoyés en dehors de ce site.</span></footer>
 </div></body></html>
