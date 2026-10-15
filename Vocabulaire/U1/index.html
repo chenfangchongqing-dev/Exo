@@ -9,7 +9,10 @@
 *{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#F7F4EE;color:var(--ink);-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}button{font:inherit}
 .shell{max-width:950px;margin:auto;padding:21px 20px 50px}
-.brand{display:flex;align-items:center;gap:10px;color:#8C681D;font-size:13px;font-weight:800;letter-spacing:.13em;margin:7px 0 21px}
+.brand{display:flex;align-items:center;gap:10px;color:#8C681D;font-size:13px;font-weight:800;letter-spacing:.13em;margin:0;min-width:0;overflow-wrap:anywhere}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:7px 0 21px}
+.back{color:#817160;font-size:14px;font-weight:700;white-space:nowrap;margin-left:auto;padding:8px 0}
+.back:hover{text-decoration:underline}.back:focus-visible{outline:3px solid #B87A13;outline-offset:3px;border-radius:5px}
 .brand-dot{width:12px;height:12px;background:var(--orange);border-radius:50%}
 .hero{display:grid;grid-template-columns:1.4fr .6fr;gap:16px;align-items:center;background:linear-gradient(125deg,#FEC53D,#FDBA12 57%,#F4A923);padding:42px 40px;border-radius:25px;box-shadow:0 15px 40px #AC740A25}
 .pretitle{font-size:14px;font-weight:800;letter-spacing:.12em;margin:0 0 19px;color:#704D12}
@@ -30,10 +33,10 @@ h1{font-size:clamp(40px,5.5vw,64px);line-height:1.02;letter-spacing:-.045em;marg
 .activity p{color:#76685B;font:17px/1.35 'Times New Roman',Times,serif;margin:8px 0 0}
 .activity .arrow{align-self:flex-end;color:#A86C19}
 .foot{margin-top:28px;padding:14px 4px;color:#877A68;border-top:1px solid #E2D8C8;display:flex;justify-content:space-between;gap:10px;font-size:13px;line-height:1.45}
-@media(max-width:660px){.shell{padding:16px 13px 30px}.brand{font-size:11px;margin:6px 0 14px}.hero{grid-template-columns:1fr;gap:0;padding:29px 24px 22px;border-radius:19px}.hero h1{font-size:49px}.hero p.description{font-size:22px}.primary{display:flex;width:100%;font-size:17px}.icon-cloud{min-height:0;display:none}.section-title{margin-top:23px}.grid{grid-template-columns:1fr;gap:10px}.activity{min-height:116px;padding:17px 18px;gap:8px}.activity h2{font-size:20px}.activity p{font-size:16px}.foot{display:block}.foot span{display:block;margin:6px 0}}
+@media(max-width:660px){.shell{padding:16px 13px 30px}.brand{font-size:10px;letter-spacing:.07em;gap:6px}.top{margin:6px 0 14px;gap:7px;align-items:flex-start}.back{font-size:12px;white-space:nowrap;flex:none;padding:3px 0}.hero{grid-template-columns:1fr;gap:0;padding:29px 24px 22px;border-radius:19px}.hero h1{font-size:49px}.hero p.description{font-size:22px}.primary{display:flex;width:100%;font-size:17px}.icon-cloud{min-height:0;display:none}.section-title{margin-top:23px}.grid{grid-template-columns:1fr;gap:10px}.activity{min-height:116px;padding:17px 18px;gap:8px}.activity h2{font-size:20px}.activity p{font-size:16px}.foot{display:block}.foot span{display:block;margin:6px 0}}
 </style></head><body>
 <div class="shell">
-<div class="brand"><span class="brand-dot"></span> INSPIRE 4&nbsp; / &nbsp;UNITÉ 1&nbsp; / &nbsp;LEÇON 1</div>
+<header class="top"><div class="brand"><span class="brand-dot"></span> INSPIRE 4&nbsp; / &nbsp;UNITÉ 1&nbsp; / &nbsp;LEÇON 1</div><a class="back" href="../index.html" aria-label="Retour au vocabulaire">← Vocabulaire</a></header>
 <main>
 <section class="hero">
 <div><p class="pretitle">CHAMP LEXICAL INTERACTIF</p><h1>Le bonheur,<br><em>en mots.</em></h1>
