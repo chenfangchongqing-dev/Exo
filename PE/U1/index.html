@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FDBA12">
+<meta name="description" content="Inspire 4 · Unité 1 · Leçon 2 : une idée reçue sur le bonheur. Un court texte argumentatif de 60 à 80 mots.">
+<title>Une idée reçue sur le bonheur · Production écrite · Inspire 4</title>
+<style>
+:root{color-scheme:light;--bg:#F7F4ED;--surface:#FFFEFA;--ink:#2A241C;--muted:#746A60;--line:#E7D9C4;--gold:#FDBA12;--orange:#D88913;--gold-soft:#FFF2C5;--shadow:0 18px 46px rgba(101,74,26,.075)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,"Helvetica Neue",Helvetica,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.5}
+a{color:inherit;text-decoration:none}button,textarea{font:inherit}button{cursor:pointer}
+button:focus-visible,a:focus-visible,textarea:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid #BD7D13;outline-offset:3px}
+.shell{max-width:1000px;margin:auto;padding:20px 20px calc(44px + env(safe-area-inset-bottom))}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;font-size:13px;margin:0 0 28px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.12em;color:#8F6319}
+.dot{display:inline-block;height:11px;width:11px;border-radius:50%;background:var(--gold)}
+.back{color:#766959;font-weight:700;padding:8px 0;white-space:nowrap}
+.back:hover{text-decoration:underline}
+.hero{margin-bottom:25px}
+.eyebrow{text-transform:uppercase;letter-spacing:.16em;font-size:12px;font-weight:800;color:#B4761C;margin:0 0 10px}
+h1{font-size:clamp(35px,6.2vw,56px);line-height:1.08;letter-spacing:-.045em;margin:0 0 10px}
+h1 em{font-family:"Times New Roman",Times,serif;font-style:italic;font-weight:400}
+.subtitle{font:clamp(18px,3vw,22px)/1.4 "Times New Roman",Times,serif;color:#756A5B;margin:0}
+.statrow{display:flex;gap:9px;flex-wrap:wrap;margin:20px 0 0}
+.stat{font-size:12px;font-weight:750;color:#675A48;background:#FFFBF3;border:1px solid var(--line);border-radius:999px;padding:8px 12px}
+.stat b{color:#9A6010}
+.task{background:linear-gradient(125deg,#FFCD49,#FFE4A3 68%,#FFF5D8);border:1px solid #EACB81;border-radius:24px;padding:29px 32px;box-shadow:0 13px 35px rgba(172,116,10,.09);margin-bottom:20px}
+.taskhead{display:flex;justify-content:space-between;gap:14px;align-items:center;margin:0 0 12px}
+.kicker{font-size:12px;font-weight:800;letter-spacing:.13em;color:#7B5319;margin:0}
+.time{font-size:12px;color:#77521A;font-weight:800;background:#FFF3CE;border-radius:999px;padding:7px 11px;white-space:nowrap}
+.task h2{font-size:24px;margin:0 0 9px;letter-spacing:-.015em}
+.consigne{font:22px/1.52 "Times New Roman",Times,serif;max-width:780px;margin:0}
+.grid{display:grid;grid-template-columns:minmax(0,1.38fr) minmax(270px,.9fr);gap:18px;align-items:start}
+.card{background:var(--surface);border:1px solid #E7D3AF;border-radius:23px;box-shadow:var(--shadow);overflow:hidden}
+.cardhead{display:flex;justify-content:space-between;align-items:center;gap:12px;background:#FFF6DF;border-bottom:1px solid #F0E0C5;padding:17px 22px}
+.cardhead h2{font-size:19px;margin:0}.cardhead small{font-size:12px;font-weight:800;color:#9B6718;letter-spacing:.06em}
+.content{padding:21px 22px 24px}
+textarea{display:block;width:100%;min-height:280px;resize:vertical;border:1.5px solid #DCC59E;border-radius:14px;background:#FFFEFB;color:var(--ink);padding:19px;font:21px/1.65 "Times New Roman",Times,serif;box-shadow:inset 0 1px 3px rgba(55,41,15,.035)}
+textarea::placeholder{color:#978A78}
+textarea:focus{border-color:#C68B2B}
+.counter{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;margin:13px 1px 8px;font-size:13px;color:var(--muted)}
+.count{font-weight:800;color:#9A6010}.count.in-range{color:#317252}.count.over{color:#A83A32}
+.feedback{font-size:12px;color:#776B5C;min-height:20px;margin:0 1px 15px}
+.actions{display:flex;gap:9px;flex-wrap:wrap}
+.btn{border:1px solid #DFCFB3;border-radius:11px;background:#FFF9ED;color:#684D29;padding:11px 15px;min-height:44px;font-size:14px;font-weight:800}
+.btn:hover{background:#FFF0D0}.btn.primary{background:#2D2A24;border-color:#2D2A24;color:white}.btn.primary:hover{background:#494137}
+.btn.reset{margin-left:auto;background:#FFFEFA;color:#8C7160}
+.note{font-size:12px;color:#857969;margin:16px 0 0;line-height:1.55}
+.message{font-size:13px;color:#2E7453;font-weight:700;min-height:20px;margin:11px 0 0}
+.side{display:grid;gap:18px}
+.aid-intro{font-size:14px;color:#776B5C;margin:0 0 13px}
+.scaffold{border-bottom:1px solid #EEE3D3;padding:11px 0 14px}
+.scaffold:first-of-type{padding-top:0}
+.scaffold:last-child{border-bottom:0;padding-bottom:0}
+.step{font-size:11px;text-transform:uppercase;letter-spacing:.075em;color:#AD7520;font-weight:800;margin:0 0 6px}
+.expression{font:22px/1.35 "Times New Roman",Times,serif;margin:0 0 8px}
+.highlight{background:#FFF0BF;box-shadow:inset 0 -.20em #F6BB5166,0 4px 12px #BE7F1733;padding:.02em .1em;border-radius:.18em;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:#3D2B0E}
+.insert{background:none;border:none;color:#A16B25;padding:5px 0;text-decoration:underline;text-underline-offset:3px;font-size:13px;font-weight:800}
+.insert:hover{color:#744412}
+.review{margin-top:19px;border-top:1px solid #EEE5D6;padding-top:18px}
+.review h3{font-size:16px;margin:0 0 11px}
+.review label{display:flex;gap:10px;align-items:flex-start;margin:9px 0;color:#665A4E;font-size:14px;line-height:1.4;cursor:pointer}
+.review input{accent-color:#C48921;margin:3px 0 0;flex:0 0 auto;width:17px;height:17px}
+.example{margin-top:20px;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:0 24px;box-shadow:var(--shadow)}
+.example summary{padding:20px 0;font-size:17px;font-weight:800;cursor:pointer;color:#4D3A20}
+.example[open] summary{border-bottom:1px solid var(--line)}
+.example .hint{font-size:13px;color:var(--muted);margin:14px 0 0}
+.example .model{font:20px/1.65 "Times New Roman",Times,serif;margin:12px 0 22px}
+.footer{padding:20px 0 0;margin-top:30px;border-top:1px solid var(--line);font-size:12px;line-height:1.65;color:#8D7E6D}
+@media(max-width:770px){.grid{grid-template-columns:1fr}.side{grid-template-columns:1fr}.task{padding:24px}.consigne{font-size:21px}}
+@media(max-width:580px){.shell{padding:16px 13px calc(26px + env(safe-area-inset-bottom))}.topbar{font-size:11px;margin-bottom:23px}.back{font-size:12px}.task{padding:21px;border-radius:19px}.task h2{font-size:22px}.consigne{font-size:20px}.card{border-radius:18px}.cardhead{padding:15px 16px}.content{padding:16px}.expression{font-size:21px}textarea{min-height:270px;padding:15px;font-size:20px}.btn{font-size:13px;flex:1}.btn.reset{margin-left:0;flex:0 0 100%}.example{padding:0 17px}.example .model{font-size:19px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="shell">
+<header class="topbar">
+<div class="brand"><span class="dot" aria-hidden="true"></span> INSPIRE 4 · UNITÉ 1 · LEÇON 2</div>
+<a href="../index.html" class="back">← Production écrite</a>
+</header>
+<main>
+<section class="hero" aria-labelledby="title">
+<p class="eyebrow">Production écrite · Donner son avis et l'illustrer</p>
+<h1 id="title">Une idée reçue <em>sur le bonheur.</em></h1>
+<p class="subtitle">Un point de vue, un exemple concret : construisez un court paragraphe argumenté.</p>
+<div class="statrow"><span class="stat"><b>60–80 mots</b> conseillés</span><span class="stat">Environ <b>10 minutes</b></span><span class="stat">Leçon 2 · Chansons</span></div>
+</section>
+<section class="task" aria-labelledby="taskTitle">
+<div class="taskhead"><p class="kicker">À VOUS D'ÉCRIRE</p><span class="time">✎ 10 MIN</span></div>
+<h2 id="taskTitle">Consigne</h2>
+<p class="consigne">Choisissez une idée reçue sur le bonheur évoquée dans les chansons. Dites si vous êtes d'accord ou non, en vous appuyant sur <strong>un exemple concret et pertinent.</strong></p>
+</section>
+<div class="grid">
+<section class="card" aria-labelledby="editorTitle">
+<div class="cardhead"><h2 id="editorTitle">Mon texte</h2><small>J'ÉCRIS</small></div>
+<div class="content">
+<label for="draft" class="aid-intro">Rédigez votre paragraphe ici. Vous pouvez reprendre les expressions proposées à droite.</label>
+<textarea id="draft" lang="fr" aria-describedby="wordFeedback" spellcheck="true" placeholder="On entend souvent dire que…"></textarea>
+<div class="counter"><span id="wordCount" class="count" aria-live="polite">0 mot</span><span>Objectif : 60 à 80 mots</span></div>
+<p class="feedback" id="wordFeedback">Commencez par identifier une idée reçue.</p>
+<div class="actions">
+<button id="copyBtn" class="btn primary" type="button">Copier mon texte</button>
+<button id="downloadBtn" class="btn" type="button">Télécharger .txt</button>
+<button id="clearBtn" class="btn reset" type="button">Effacer</button>
+</div>
+<p id="actionMessage" class="message" role="status" aria-live="polite"></p>
+<p class="note">Votre brouillon est conservé uniquement dans ce navigateur, sur cet appareil. Rien n'est envoyé automatiquement à l'enseignant.</p>
+</div>
+</section>
+<aside class="side" aria-label="Aide à la rédaction">
+<section class="card" aria-labelledby="aidTitle">
+<div class="cardhead"><h2 id="aidTitle">Pour structurer sa réponse</h2><small>4 ÉTAPES</small></div>
+<div class="content">
+<p class="aid-intro">Des amorces de phrases à adapter à votre propre idée.</p>
+<div class="scaffold"><p class="step">01 · Présenter l'idée reçue</p><p class="expression"><span class="highlight">On entend souvent dire que…</span></p><button type="button" class="insert" data-insert="On entend souvent dire que ">Insérer dans mon texte ↗</button></div>
+<div class="scaffold"><p class="step">02 · Prendre position</p><p class="expression"><span class="highlight">Pour ma part, je pense que…</span></p><button type="button" class="insert" data-insert="Pour ma part, je pense que ">Insérer dans mon texte ↗</button></div>
+<div class="scaffold"><p class="step">03 · Donner un exemple</p><p class="expression"><span class="highlight">Prenons l'exemple de…</span></p><button type="button" class="insert" data-insert="Prenons l'exemple de ">Insérer dans mon texte ↗</button></div>
+<div class="scaffold"><p class="step">04 · Expliquer l'exemple</p><p class="expression"><span class="highlight">Cet exemple montre que…</span></p><button type="button" class="insert" data-insert="Cet exemple montre que ">Insérer dans mon texte ↗</button></div>
+<div class="review" aria-labelledby="reviewTitle">
+<h3 id="reviewTitle">Avant de terminer</h3>
+<label><input type="checkbox" class="checkitem"> J'ai choisi une idée reçue.</label>
+<label><input type="checkbox" class="checkitem"> J'ai exprimé mon propre point de vue.</label>
+<label><input type="checkbox" class="checkitem"> Mon exemple est concret et pertinent.</label>
+<label><input type="checkbox" class="checkitem"> J'ai expliqué ce que montre mon exemple.</label>
+</div>
+</div>
+</section>
+</aside>
+</div>
+<details class="example">
+<summary>Voir une proposition de réponse (après avoir rédigé)</summary>
+<p class="hint">Un exemple parmi d'autres : observez le passage de l'idée reçue à l'exemple, puis à son interprétation.</p>
+<p class="model"><span class="highlight">On entend souvent dire que</span> la réussite matérielle rend heureux. Pourtant, je pense qu'elle ne suffit pas. <span class="highlight">Prenons l'exemple d'un étudiant</span> qui travaille tous les week-ends pour s'acheter des objets coûteux. Il peut finir par manquer de temps pour ses amis et ses loisirs. <span class="highlight">Cet exemple montre que</span> posséder davantage ne signifie pas nécessairement vivre mieux.</p>
+</details>
+</main>
+<footer class="footer">© 《高级法语综合课》 · Inspire 4 · Unité 1 · Production écrite</footer>
+</div>
+<script>
+(function(){
+"use strict";
+var draft = document.getElementById("draft");
+var wordCount = document.getElementById("wordCount");
+var wordFeedback = document.getElementById("wordFeedback");
+var message = document.getElementById("actionMessage");
+var checks = Array.prototype.slice.call(document.querySelectorAll(".checkitem"));
+var DRAFT_KEY = "inspire4-pe-u1-l2-bonheur-draft-v1";
+var CHECK_KEY = "inspire4-pe-u1-l2-bonheur-check-v1";
+function words(value){
+var found = value.match(/[A-Za-zÀ-ÖØ-öø-ÿ0-9]+(?:['’\-][A-Za-zÀ-ÖØ-öø-ÿ0-9]+)*/g);
+return found ? found.length : 0;
+}
+function store(){
+try{localStorage.setItem(DRAFT_KEY,draft.value);}catch(error){}
+}
+function renderCount(){
+var n=words(draft.value);
+wordCount.textContent = n + (n>1?" mots":" mot");
+wordCount.classList.toggle("in-range",n>=60&&n<=80);
+wordCount.classList.toggle("over",n>80);
+if(n===0)wordFeedback.textContent="Commencez par identifier une idée reçue.";
+else if(n<60)wordFeedback.textContent="Encore "+(60-n)+" mot"+(60-n>1?"s":"")+" pour atteindre la longueur conseillée.";
+else if(n<=80)wordFeedback.textContent="Vous êtes dans la longueur conseillée. Pensez à vérifier votre exemple.";
+else wordFeedback.textContent="Vous dépassez de "+(n-80)+" mot"+(n-80>1?"s":"")+" la longueur conseillée.";
+}
+function update(){store();renderCount();message.textContent="";}
+try{draft.value=localStorage.getItem(DRAFT_KEY)||"";}catch(error){}
+try{
+var saved=JSON.parse(localStorage.getItem(CHECK_KEY)||"[]");
+if(Array.isArray(saved))checks.forEach(function(c,i){c.checked=!!saved[i];});
+}catch(error){}
+draft.addEventListener("input",update);
+document.querySelectorAll("[data-insert]").forEach(function(button){
+button.addEventListener("click",function(){
+var phrase=button.getAttribute("data-insert")||"";
+var start=typeof draft.selectionStart==="number"?draft.selectionStart:draft.value.length;
+var end=typeof draft.selectionEnd==="number"?draft.selectionEnd:start;
+var before=draft.value.slice(0,start);
+var prefix=before.length&&!/\s$/.test(before)?" ":"";
+var insertion=prefix+phrase;
+draft.value=before+insertion+draft.value.slice(end);
+var caret=start+insertion.length;
+draft.focus();draft.setSelectionRange(caret,caret);
+update();
+});
+});
+checks.forEach(function(c){
+c.addEventListener("change",function(){
+try{localStorage.setItem(CHECK_KEY,JSON.stringify(checks.map(function(item){return item.checked;})));}catch(error){}
+});
+});
+function fallbackCopy(text){
+var tmp=document.createElement("textarea");
+tmp.value=text;tmp.style.position="fixed";tmp.style.opacity="0";document.body.appendChild(tmp);
+tmp.select();var ok=document.execCommand("copy");tmp.remove();return ok;
+}
+document.getElementById("copyBtn").addEventListener("click",async function(){
+if(!draft.value.trim()){message.textContent="Rédigez d'abord quelques phrases.";return;}
+try{
+if(navigator.clipboard&&window.isSecureContext)await navigator.clipboard.writeText(draft.value);
+else if(!fallbackCopy(draft.value))throw Error("copy");
+message.textContent="Votre texte a été copié.";
+}catch(error){message.textContent="Copie indisponible : sélectionnez le texte pour le copier.";}
+});
+document.getElementById("downloadBtn").addEventListener("click",function(){
+if(!draft.value.trim()){message.textContent="Rédigez d'abord quelques phrases.";return;}
+var blob=new Blob([draft.value],{type:"text/plain;charset=utf-8"});
+var url=URL.createObjectURL(blob);
+var link=document.createElement("a");link.href=url;link.download="inspire4-u1-l2-une-idee-recue.txt";document.body.appendChild(link);link.click();link.remove();
+setTimeout(function(){URL.revokeObjectURL(url);},1000);
+message.textContent="Votre fichier texte est prêt.";
+});
+document.getElementById("clearBtn").addEventListener("click",function(){
+if(!draft.value.trim()&&!checks.some(function(c){return c.checked;}))return;
+if(!window.confirm("Effacer le brouillon et remettre la liste de vérification à zéro ?"))return;
+draft.value="";checks.forEach(function(c){c.checked=false;});
+try{localStorage.removeItem(CHECK_KEY);}catch(error){}
+update();draft.focus();
+});
+renderCount();
+})();
+</script>
+</body>
+</html>
