@@ -70,6 +70,8 @@
 .roundup label{display:block;font-size:14px;font-weight:750;margin:0 0 8px}
 .roundup .roundup-text{min-height:125px;font-size:14px}
 .roundup-note{font-size:12px;color:var(--muted);margin:8px 0 0}
+.roundup-situation{font-size:15px;line-height:1.85;margin:6px 0 16px;color:var(--ink)}
+.roundup-takeaway{font-size:14px;line-height:1.85;padding:13px 15px;margin:5px 0 13px;border-left:3px solid var(--gold);background:#fff6e1;color:#5c4a2c;border-radius:0 9px 9px 0}
 @media(max-width:720px){.roundup{margin:18px 12px;padding:17px 15px}.roundup-compare{grid-template-columns:1fr}.roundup-questions{padding-left:20px}}
 @media print{.roundup[hidden]{display:none!important}.roundup{break-inside:avoid;margin:20px 0}}
 </style>
@@ -211,25 +213,28 @@
 
 <section id="roundup" class="roundup" aria-labelledby="roundup-title" hidden>
   <div class="roundup-head">
-    <h3 id="roundup-title">整体观察与讨论</h3>
+    <h3 id="roundup-title">从习作观察走向AIGC写作教学</h3>
     <small>S26 · S52 · 回看五份习作</small>
   </div>
+  <p class="roundup-situation">设想一个课堂情境：学生把自己的初稿交给生成式人工智能，提出同样的请求——“请帮我把这篇文章改得更好”。</p>
   <div class="roundup-compare">
     <div class="roundup-case">
-      <strong>S26｜原稿中有多处划改</strong>
-      <p>关于汽车不断升级的例子已有清楚思路，但结尾仍以重复观点为主。</p>
+      <strong>S26｜怎样确定修改重点？</strong>
+      <p>“不断追求更好的汽车”的例子已经切题，但结尾仍停留在重复观点。模型可以帮助修改语言，也可能直接重组论证。</p>
     </div>
     <div class="roundup-case">
-      <strong>S52｜成稿相对完整</strong>
-      <p>年轻父母的快乐与照护责任构成相关例证，原稿中较少出现明显划改。</p>
+      <strong>S52｜哪些修改其实没有必要？</strong>
+      <p>例子与观点基本匹配，原稿主要存在局部语言问题。模型即使给出更流畅的版本，也未必需要学生全部采纳。</p>
     </div>
   </div>
   <ol class="roundup-questions">
-    <li>两份作品有哪些可见的写作行为差异？我们能否仅凭修改痕迹多少，判断学生进行了怎样的自我监控？</li>
-    <li>回看全部五份习作：哪些元认知活动有直接证据？为了了解学生如何选择和调整写作策略，我们还希望他们说明什么？</li>
+    <li>如果让AI直接改写S26和S52，它可能替学生完成哪些问题诊断与修订决定？两份作品真的需要同样的修改方式吗？</li>
+    <li>再看S12、S09、S45：AI也能生成例子、提供法语表达、重组论证。我们怎样设计人机协作的写作任务，让学生逐步学会自己识别困难、选择求助方式，并说明修订的依据？</li>
   </ol>
-  <label for="roundup-note-input">整体讨论记录</label>
-  <textarea id="roundup-note-input" class="roundup-text" placeholder="记录教师们讨论后形成的问题、分歧或共识……" spellcheck="false"></textarea>
+  <p class="roundup-takeaway">讨论的重点由此转向：AI可以帮助完成写作任务，教师如何让学生在获得支持的过程中，仍然有机会练习对自身写作的监控与调节？</p>
+  <p class="roundup-note">以上是供教学研讨的假设情境，不表示这些学生写作时使用过AI。</p>
+  <label for="roundup-note-input">人机协作教学思路 · 讨论记录</label>
+  <textarea id="roundup-note-input" class="roundup-text" placeholder="可记录：哪些活动可以交给模型？哪些判断需要学生完成？教师可以提供什么帮助？" spellcheck="false"></textarea>
   <p class="roundup-note">内容仅保存在当前浏览器，点击上方“导出五份观察记录”时会一并导出。</p>
 </section>
 <div class="pager"><button type="button" class="btn small" id="prev-btn">← 上一份</button><span class="current" id="position">第 1 / 5 份</span><button type="button" class="btn small accent" id="next-btn">下一份 →</button></div>
@@ -286,7 +291,7 @@ roundupNote.addEventListener('input',()=>{try{localStorage.setItem(ROUNDUP_KEY,r
 tabs.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;e.preventDefault();let to=current;if(e.key==='ArrowLeft')to=Math.max(0,current-1);if(e.key==='ArrowRight')to=Math.min(CASES.length-1,current+1);if(e.key==='Home')to=0;if(e.key==='End')to=CASES.length-1;select(to);tabs.children[to].focus();});
 function currentText(){const c=CASES[current];return c.id+'｜教学质量周\n讨论问题：'+c.question+'\n\n我的观察：\n'+(observation.value||'（未填写）')+'\n\n还需向学生了解：\n'+(inquiry.value||'（未填写）');}
 $('copy-btn').addEventListener('click',async()=>{const text=currentText();try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(text);}else{const el=document.createElement('textarea');el.value=text;document.body.appendChild(el);el.select();if(!document.execCommand('copy'))throw Error('copy');el.remove();}$('save-status').textContent='已复制当前记录';}catch(e){$('save-status').textContent='复制不可用，请选中输入框中的内容手动复制';}});
-$('export-btn').addEventListener('click',()=>{persist();const lines=['教学质量周 · 五份法语写作习作观察记录','教师个人记录（由本设备导出）',''];CASES.forEach(c=>{const d=records[c.id]||{};lines.push('='.repeat(36),c.id,'讨论问题：'+c.question,'','我的观察：',d.obs||'（未填写）','','还需向学生了解：',d.ask||'（未填写）','');});lines.push('='.repeat(36),'整体观察与讨论（S26、S52及五份习作）','',roundupNote.value.trim()||'（未填写）','');const blob=new Blob(['\uFEFF'+lines.join('\n')],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='教学质量周_观察记录.txt';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1200);$('save-status').textContent='观察记录已导出';});
+$('export-btn').addEventListener('click',()=>{persist();const lines=['教学质量周 · 五份法语写作习作观察记录','教师个人记录（由本设备导出）',''];CASES.forEach(c=>{const d=records[c.id]||{};lines.push('='.repeat(36),c.id,'讨论问题：'+c.question,'','我的观察：',d.obs||'（未填写）','','还需向学生了解：',d.ask||'（未填写）','');});lines.push('='.repeat(36),'AIGC介入后的法语写作元认知教学研讨','',roundupNote.value.trim()||'（未填写）','');const blob=new Blob(['\uFEFF'+lines.join('\n')],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='教学质量周_观察记录.txt';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1200);$('save-status').textContent='观察记录已导出';});
 $('clear-btn').addEventListener('click',()=>{if(!hasNotes(CASES[current].id))return;if(!confirm('仅清空当前习作的观察记录？其他习作不会受影响。'))return;observation.value='';inquiry.value='';persist();});
 const viewer=$('viewer'),viewerImage=$('viewer-image'),viewerWindow=$('viewer-window');function applyZoom(){viewerImage.style.width=Math.round(950*zoom)+'px';}
 $('zoom-btn').addEventListener('click',()=>{const src=scan.src;if(typeof viewer.showModal!=='function'){window.open(src,'_blank','noopener');return;}viewerImage.src=src;viewerImage.alt=scan.alt;zoom=1;applyZoom();$('viewer-title').textContent=CASES[current].id+' · 原稿';viewer.showModal();viewerWindow.scrollTop=0;viewerWindow.scrollLeft=0;});
