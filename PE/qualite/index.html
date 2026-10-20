@@ -157,6 +157,39 @@
   </div>
 </section>
 
+
+<section id="theory-bridge-s45" class="theory-bridge" aria-labelledby="theory-title-s45" hidden>
+  <p class="theory-kicker">S45 · 共同观察之后</p>
+  <h3 id="theory-title-s45">从举例到论证的自我监控</h3>
+  <button type="button" id="toggle-theory-s45" class="btn accent theory-toggle" aria-expanded="false" aria-controls="theory-analysis-s45">展开 S45 的观察分析表 ↓</button>
+  <div id="theory-analysis-s45" class="theory-analysis" hidden>
+    <h4>找到了例子，是否已经证明了观点？</h4>
+    <div class="theory-table-wrap">
+      <table class="theory-table">
+        <tbody>
+          <tr><th scope="row">可观察现象</th><td>学生反对“幸福只来自爱情”的观点，选用居里夫人的科学研究作为例子。但由科研投入与成就，直接推断其私人幸福感及其与爱情的关系，缺少足够依据。</td></tr>
+          <tr><th scope="row">元认知知识</th><td>学生知道应以例证支持观点，并组织了“立场—例子—结论”。原稿尚不能确认其是否掌握了检验论据相关性与证据充分性的标准。</td></tr>
+          <tr><th scope="row">元认知监控</th><td>原稿尚未显示学生主动复核“这个例子究竟能证明什么”，也未区分可确认的事业事实与对人物个人感受的推断。</td></tr>
+          <tr><th scope="row">元认知调节</th><td>原稿未见针对这一论证缺口的进一步修订，尚不能据此认定学生已经有意识地调整了论据或结论。</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="theory-evidence">这里观察到的是论证的完成情况。判断推理存在缺口，并不自动说明学生已经对自己的论证过程进行了元认知监控。</p>
+    <details class="theory-concept" id="metacognition-concept-s45">
+      <summary>进一步理解：论证判断与元认知监控</summary>
+      <p class="theory-def">判断一个例子能否支持观点，需要论证知识；认识自己依据什么选择例子、哪些推断尚无把握，并据此调整论证，则进一步涉及元认知知识、监控与调节。</p>
+      <div class="theory-terms">
+        <div class="theory-term"><strong>认知活动 · 检验论据与结论</strong><p>学生希望说明“幸福不只来自爱情”。科研成就可以作为讨论其他幸福来源的切入点，但不能直接证明居里夫人具体的幸福体验，更不能据此断言她的幸福与爱情无关。</p></div>
+        <div class="theory-term"><strong>元认知监控 · 审视自己的判断依据</strong><p>我为什么认为居里夫人的事例能够支持我的观点？哪些内容是可以确认的事实？哪些是我作出的推测？这些问题帮助学习者认识自己推理过程中的不确定之处。</p></div>
+        <div class="theory-term"><strong>元认知调节 · 决定怎样处理论证缺口</strong><p>发现依据不足后，学习者可以选择进一步核实材料、限定表述范围，或改用能够充分解释的情境。关键是能够说明为什么作出这样的修订选择。</p></div>
+      </div>
+      <p class="theory-ref">理论参照：Flavell (1979), “Metacognition and Cognitive Monitoring”, <i>American Psychologist</i>, 34(10), 906–911；Flower &amp; Hayes (1981), “A Cognitive Process Theory of Writing”, <i>College Composition and Communication</i>, 32(4), 365–387。</p>
+    </details>
+    <div class="theory-bridge-question">认识到论据与观点之间存在缺口之后，学习者怎样决定改哪里、为什么改，并判断修改是否真正改善了论证？</div>
+    <button type="button" class="btn accent theory-next" id="continue-after-theory-s45">带着这个问题观察 S26 →</button>
+  </div>
+</section>
+
 <div class="pager"><button type="button" class="btn small" id="prev-btn">← 上一份</button><span class="current" id="position">第 1 / 5 份</span><button type="button" class="btn small accent" id="next-btn">下一份 →</button></div>
 </section>
 </div>
@@ -192,14 +225,17 @@ function select(i){if(i<0||i>=CASES.length)return;current=i;const c=CASES[i];
  $('question').textContent=c.question;$('question-box').hidden=true;$('question-placeholder').hidden=false;$('toggle-question').textContent='显示讨论问题';$('toggle-question').setAttribute('aria-expanded','false');
  $('theory-bridge').hidden=true;$('theory-analysis').hidden=true;$('toggle-theory').setAttribute('aria-expanded','false');$('toggle-theory').textContent='展开 S12 的观察分析表 ↓';$('metacognition-concept').open=false;
  $('theory-bridge-s09').hidden=true;$('theory-analysis-s09').hidden=true;$('toggle-theory-s09').setAttribute('aria-expanded','false');$('toggle-theory-s09').textContent='展开 S09 的观察分析表 ↓';$('metacognition-concept-s09').open=false;
+ $('theory-bridge-s45').hidden=true;$('theory-analysis-s45').hidden=true;$('toggle-theory-s45').setAttribute('aria-expanded','false');$('toggle-theory-s45').textContent='展开 S45 的观察分析表 ↓';$('metacognition-concept-s45').open=false;
  const record=records[c.id]||{};observation.value=record.obs||'';inquiry.value=record.ask||'';$('save-status').textContent=storageWorks?'输入后自动保存在本机':'此浏览器可能不支持本机保存';
  $('position').textContent='第 '+(i+1)+' / 5 份';$('prev-btn').disabled=i===0;$('next-btn').disabled=i===CASES.length-1;
  mark();}
-$('toggle-question').addEventListener('click',()=>{const box=$('question-box');box.hidden=!box.hidden;$('question-placeholder').hidden=!box.hidden;$('toggle-question').textContent=box.hidden?'显示讨论问题':'收起讨论问题';$('toggle-question').setAttribute('aria-expanded',String(!box.hidden));$('theory-bridge').hidden=(current!==0||box.hidden);$('theory-bridge-s09').hidden=(current!==1||box.hidden);});
+$('toggle-question').addEventListener('click',()=>{const box=$('question-box');box.hidden=!box.hidden;$('question-placeholder').hidden=!box.hidden;$('toggle-question').textContent=box.hidden?'显示讨论问题':'收起讨论问题';$('toggle-question').setAttribute('aria-expanded',String(!box.hidden));$('theory-bridge').hidden=(current!==0||box.hidden);$('theory-bridge-s09').hidden=(current!==1||box.hidden);$('theory-bridge-s45').hidden=(current!==2||box.hidden);});
 $('toggle-theory').addEventListener('click',()=>{const p=$('theory-analysis');p.hidden=!p.hidden;const shown=!p.hidden;$('toggle-theory').setAttribute('aria-expanded',String(shown));$('toggle-theory').textContent=shown?'收起 S12 的观察分析表 ↑':'展开 S12 的观察分析表 ↓';});
 $('continue-after-theory').addEventListener('click',()=>{select(1);$('workspace').scrollIntoView({behavior:'smooth',block:'start'});});
 $('toggle-theory-s09').addEventListener('click',()=>{const p=$('theory-analysis-s09');p.hidden=!p.hidden;const shown=!p.hidden;$('toggle-theory-s09').setAttribute('aria-expanded',String(shown));$('toggle-theory-s09').textContent=shown?'收起 S09 的观察分析表 ↑':'展开 S09 的观察分析表 ↓';});
 $('continue-after-theory-s09').addEventListener('click',()=>{select(2);$('workspace').scrollIntoView({behavior:'smooth',block:'start'});});
+$('toggle-theory-s45').addEventListener('click',()=>{const p=$('theory-analysis-s45');p.hidden=!p.hidden;const shown=!p.hidden;$('toggle-theory-s45').setAttribute('aria-expanded',String(shown));$('toggle-theory-s45').textContent=shown?'收起 S45 的观察分析表 ↑':'展开 S45 的观察分析表 ↓';});
+$('continue-after-theory-s45').addEventListener('click',()=>{select(3);$('workspace').scrollIntoView({behavior:'smooth',block:'start'});});
 [observation,inquiry].forEach(el=>el.addEventListener('input',persist));$('prev-btn').addEventListener('click',()=>select(current-1));$('next-btn').addEventListener('click',()=>select(current+1));
 tabs.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;e.preventDefault();let to=current;if(e.key==='ArrowLeft')to=Math.max(0,current-1);if(e.key==='ArrowRight')to=Math.min(CASES.length-1,current+1);if(e.key==='Home')to=0;if(e.key==='End')to=CASES.length-1;select(to);tabs.children[to].focus();});
 function currentText(){const c=CASES[current];return c.id+'｜教学质量周\n讨论问题：'+c.question+'\n\n我的观察：\n'+(observation.value||'（未填写）')+'\n\n还需向学生了解：\n'+(inquiry.value||'（未填写）');}
