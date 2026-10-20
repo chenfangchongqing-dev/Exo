@@ -21,6 +21,39 @@
 @media(max-width:540px){.shell{padding:14px 13px 30px}.top{margin-bottom:15px}.hero{padding:25px 21px;border-radius:19px}.steps{gap:6px}.steps span{font-size:11px;padding:5px 9px}.section-title{margin-top:23px}.tab{padding:9px 10px;min-height:67px}.tab .tab-id{font-size:18px}.panel{border-radius:16px}.panel-head{padding:15px}.scan-wrap{padding:10px}.scan-actions{padding:11px;gap:7px}.scan-actions .hint{flex-basis:100%;margin-left:0}.discussion{padding:16px}.question{font-size:19px}.pager{padding:13px 14px}.btn{font-size:13px}.viewer{border-radius:0;width:100%;height:100vh;max-height:100vh;max-width:100vw}.viewer-window{height:calc(100vh - 60px)}.viewerbar{padding:8px}.viewerbar .viewer-title{font-size:12px}.btn.small{padding:6px 9px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 @media print{body{background:white}.top,.tabs,.actions,.pager,.scan-actions,.privacy,.hero .steps{display:none!important}.shell{padding:0}.hero{border:0;background:white;padding:0;margin-bottom:20px}.workspace{display:block}.panel{box-shadow:none;border:0;margin:15px 0}.scan-wrap{background:white;padding:0}.scan-paper{box-shadow:none}.discussion{padding:16px 0}textarea{border:0;min-height:90px}.question-hidden{display:none}.question-box[hidden]{display:block!important}}
+
+/* S12 only · progressive bridge from observation to metacognitive theory */
+.theory-bridge{margin:23px -1px 0;border:1px solid #e8cb86;border-radius:17px;background:linear-gradient(180deg,#fff9eb 0%,#fffdf8 85%);padding:19px 17px 18px}
+.theory-bridge[hidden],.theory-analysis[hidden]{display:none!important}
+.theory-kicker{font-size:11px;color:#916420;font-weight:800;letter-spacing:.12em;margin:0 0 6px}
+.theory-bridge h3{font-size:21px;line-height:1.4;margin:0 0 7px;letter-spacing:-.018em}
+.theory-lead{font-size:14px;color:#655747;margin:0 0 16px;line-height:1.75}
+.theory-toggle{width:100%;text-align:center;white-space:normal;line-height:1.5}
+.theory-analysis{margin-top:19px}
+.theory-analysis h4{font-size:17px;margin:0 0 12px}
+.theory-table-wrap{overflow-x:auto;border:1px solid #edddbe;border-radius:11px;background:white}
+.theory-table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.7}
+.theory-table th,.theory-table td{border-bottom:1px solid #f0e7d7;padding:12px 11px;text-align:left;vertical-align:top}
+.theory-table th{font-size:13px;width:106px;min-width:106px;color:#644814;background:#fff6e2;font-weight:750}
+.theory-table tr:last-child th,.theory-table tr:last-child td{border-bottom:0}
+.theory-evidence{color:#655e50;font-size:12px;line-height:1.7;margin:11px 1px 17px}
+.theory-concept{border:1px solid #c9ddd5;background:#f4f9f5;border-radius:13px;padding:0 15px;margin-top:17px}
+.theory-concept summary{cursor:pointer;font-weight:800;font-size:15px;line-height:1.6;padding:16px 0;list-style:none}
+.theory-concept summary::-webkit-details-marker{display:none}
+.theory-concept summary:after{content:"＋";color:var(--teal);float:right;font-size:20px;line-height:1.2;margin-left:8px}
+.theory-concept[open] summary:after{content:"－"}
+.theory-concept[open] summary{border-bottom:1px solid #d9e8df}
+.theory-def{font-size:14px;margin:14px 0;line-height:1.75}
+.theory-terms{display:grid;gap:9px;margin:14px 0}
+.theory-term{background:white;border:1px solid #dfece4;border-radius:10px;padding:12px 13px}
+.theory-term strong{display:block;color:#285f52;font-size:14px;margin-bottom:3px}
+.theory-term p{font-size:13px;line-height:1.75;margin:0;color:#4c5f54}
+.theory-ref{font-size:11px;color:#67776e;line-height:1.8;margin:12px 0 16px}
+.theory-bridge-question{margin:19px 0 12px;border-left:4px solid var(--gold);padding:9px 13px;background:#fff0c7;font-size:15px;line-height:1.8;font-weight:700;color:#59431f}
+.theory-next{width:100%;white-space:normal}
+@media(min-width:1200px){.theory-bridge{padding:21px}.theory-table th{width:112px;min-width:112px}}
+@media(max-width:540px){.theory-bridge{padding:16px 11px;margin-top:20px}.theory-bridge h3{font-size:19px}.theory-table{font-size:13px}.theory-table th{width:86px;min-width:86px;font-size:12px}.theory-table th,.theory-table td{padding:10px 8px}.theory-concept{padding:0 11px}}
+@media print{.theory-bridge[hidden],.theory-analysis[hidden]{display:none!important}.theory-bridge{break-inside:avoid}.theory-toggle,.theory-next{display:none!important}}
 </style>
 </head>
 <body>
@@ -34,7 +67,7 @@
 <p class="overline">PRODUCTION ÉCRITE · OBSERVATION COLLECTIVE</p>
 <h1 id="main-title">教学质量周</h1>
 <p class="desc">从五份真实的匿名法语习作出发，观察学习者的写作表现，并讨论哪些认知过程可以从文本中看到、哪些还需要进一步询问学生。</p>
-<div class="steps" aria-label="活动流程"><span>01 · 观察原稿</span><span>02 · 显示讨论问题</span><span>03 · 记录与交流</span></div>
+<div class="steps" aria-label="活动流程"><span>01 · 观察原稿</span><span>02 · 显示讨论问题</span><span>03 · 记录与交流</span><span>04 · 理论导入</span></div>
 </section>
 <div class="section-title"><h2>选择一份习作</h2><small id="progress" aria-live="polite">5 份习作 · 0 份已有记录</small></div>
 <div class="tabs" id="case-tabs" role="tablist" aria-label="选择习作"></div>
@@ -58,6 +91,40 @@
 <p id="save-status" class="live" role="status" aria-live="polite"></p>
 <div class="actions"><button type="button" class="btn primary" id="export-btn">导出五份观察记录</button><button type="button" class="btn" id="copy-btn">复制当前记录</button><button type="button" class="btn flat" id="clear-btn">清空当前记录</button></div>
 </div>
+
+<section id="theory-bridge" class="theory-bridge" aria-labelledby="theory-title" hidden>
+  <p class="theory-kicker">S12 · 共同观察之后</p>
+  <h3 id="theory-title">从这份习作认识元认知</h3>
+  <p class="theory-lead">先交流：学生自己觉察到了什么？这份原稿还不能告诉我们什么？随后再打开教师分析。</p>
+  <button type="button" id="toggle-theory" class="btn accent theory-toggle" aria-expanded="false" aria-controls="theory-analysis">展开 S12 的观察分析表 ↓</button>
+  <div id="theory-analysis" class="theory-analysis" hidden>
+    <h4>从原稿中的行为，理解元认知活动</h4>
+    <div class="theory-table-wrap">
+      <table class="theory-table">
+        <tbody>
+          <tr><th scope="row">可观察现象</th><td>学生提出“幸福也可能成为挫败感的来源”，试图举例但未能写出具体例证，并在边注中说明想不出能够证明观点的例子。</td></tr>
+          <tr><th scope="row">元认知知识</th><td>学生认识到：写作任务要求用具体例证支持所提出的观点。</td></tr>
+          <tr><th scope="row">元认知监控</th><td>学生在写作过程中察觉到例证构思遇阻，能够指出自己当前的困难。</td></tr>
+          <tr><th scope="row">元认知调节</th><td>原稿可见一次被划去的举例尝试，但尚未形成有效例证；不能据此推断其尝试过哪些其他策略。</td></tr>
+          <tr><th scope="row">教学介入点</th><td>教师引导学生回到观点，借助回顾经验、设想情境、分解因果关系等方法寻找例子，再选择下一步写作策略。</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="theory-evidence">证据边界：边注明确显示学生对困难的觉察；对其内部思考及未写出的尝试，仍需进一步询问本人。表中“教学介入点”是教学设计，不是已发生的学习行为。</p>
+    <details class="theory-concept" id="metacognition-concept">
+      <summary>进一步理解：元认知知识、监控与调节</summary>
+      <p class="theory-def">元认知指学习者对自身认知活动的认识，以及在任务进行中对这些活动进行监控与调节。以下三个维度是便于课堂分析的综合性框架，并非某一篇文献原样提出的固定三阶段模型。</p>
+      <div class="theory-terms">
+        <div class="theory-term"><strong>元认知知识 · connaissances métacognitives</strong><p>我知道任务要求什么、自己掌握什么、还可以采用哪些策略。S12 知道论证需要一个支持观点的例子。</p></div>
+        <div class="theory-term"><strong>元认知监控 · monitoring</strong><p>我在写作中意识到哪里顺利、哪里受阻。S12 察觉自己在举例环节写不下去。</p></div>
+        <div class="theory-term"><strong>元认知调节 · régulation métacognitive</strong><p>我根据对困难的认识选择、检验并调整策略。S12 原稿尚未显示出能够解决当前困难的策略；教师可以在此提供支持。</p></div>
+      </div>
+      <p class="theory-ref">理论依据：Flavell (1979), <i>American Psychologist</i>, 34(10), 906–911；Nelson &amp; Narens (1990), <i>Psychology of Learning and Motivation</i>, 26, 125–173；Schraw &amp; Dennison (1994), <i>Contemporary Educational Psychology</i>, 19(4), 460–475。</p>
+    </details>
+    <div class="theory-bridge-question">学生已经意识到困难，却仍然不知道如何继续写作。教师如何帮助他从问题识别走向策略调节？</div>
+    <button type="button" class="btn accent theory-next" id="continue-after-theory">带着这个问题观察 S09 →</button>
+  </div>
+</section>
 <div class="pager"><button type="button" class="btn small" id="prev-btn">← 上一份</button><span class="current" id="position">第 1 / 5 份</span><button type="button" class="btn small accent" id="next-btn">下一份 →</button></div>
 </section>
 </div>
@@ -91,10 +158,13 @@ function select(i){if(i<0||i>=CASES.length)return;current=i;const c=CASES[i];
  $('paper-id').textContent=c.id;$('question-case').textContent=c.id;document.querySelector('.panel-head .eyebrow').textContent='匿名原件 · '+(i+1)+' / 5';
  const src='./copies/'+c.id+'.webp';scan.src=src;scan.alt='学生'+c.id+'的法语写作手写原稿';$('image-link').href=src;
  $('question').textContent=c.question;$('question-box').hidden=true;$('question-placeholder').hidden=false;$('toggle-question').textContent='显示讨论问题';$('toggle-question').setAttribute('aria-expanded','false');
+ $('theory-bridge').hidden=true;$('theory-analysis').hidden=true;$('toggle-theory').setAttribute('aria-expanded','false');$('toggle-theory').textContent='展开 S12 的观察分析表 ↓';$('metacognition-concept').open=false;
  const record=records[c.id]||{};observation.value=record.obs||'';inquiry.value=record.ask||'';$('save-status').textContent=storageWorks?'输入后自动保存在本机':'此浏览器可能不支持本机保存';
  $('position').textContent='第 '+(i+1)+' / 5 份';$('prev-btn').disabled=i===0;$('next-btn').disabled=i===CASES.length-1;
  mark();}
-$('toggle-question').addEventListener('click',()=>{const box=$('question-box');box.hidden=!box.hidden;$('question-placeholder').hidden=!box.hidden;$('toggle-question').textContent=box.hidden?'显示讨论问题':'收起讨论问题';$('toggle-question').setAttribute('aria-expanded',String(!box.hidden));});
+$('toggle-question').addEventListener('click',()=>{const box=$('question-box');box.hidden=!box.hidden;$('question-placeholder').hidden=!box.hidden;$('toggle-question').textContent=box.hidden?'显示讨论问题':'收起讨论问题';$('toggle-question').setAttribute('aria-expanded',String(!box.hidden));$('theory-bridge').hidden=(current!==0||box.hidden);});
+$('toggle-theory').addEventListener('click',()=>{const p=$('theory-analysis');p.hidden=!p.hidden;const shown=!p.hidden;$('toggle-theory').setAttribute('aria-expanded',String(shown));$('toggle-theory').textContent=shown?'收起 S12 的观察分析表 ↑':'展开 S12 的观察分析表 ↓';});
+$('continue-after-theory').addEventListener('click',()=>{select(1);$('workspace').scrollIntoView({behavior:'smooth',block:'start'});});
 [observation,inquiry].forEach(el=>el.addEventListener('input',persist));$('prev-btn').addEventListener('click',()=>select(current-1));$('next-btn').addEventListener('click',()=>select(current+1));
 tabs.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;e.preventDefault();let to=current;if(e.key==='ArrowLeft')to=Math.max(0,current-1);if(e.key==='ArrowRight')to=Math.min(CASES.length-1,current+1);if(e.key==='Home')to=0;if(e.key==='End')to=CASES.length-1;select(to);tabs.children[to].focus();});
 function currentText(){const c=CASES[current];return c.id+'｜教学质量周\n讨论问题：'+c.question+'\n\n我的观察：\n'+(observation.value||'（未填写）')+'\n\n还需向学生了解：\n'+(inquiry.value||'（未填写）');}
