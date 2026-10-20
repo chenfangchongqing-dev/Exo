@@ -72,6 +72,24 @@
 .roundup-note{font-size:12px;color:var(--muted);margin:8px 0 0}
 .roundup-situation{font-size:15px;line-height:1.85;margin:6px 0 16px;color:var(--ink)}
 .roundup-takeaway{font-size:14px;line-height:1.85;padding:13px 15px;margin:5px 0 13px;border-left:3px solid var(--gold);background:#fff6e1;color:#5c4a2c;border-radius:0 9px 9px 0}
+
+/* Theoretical capstone: Wu & Liu (2004), before the AIGC teaching scenario */
+.wu-final{padding:2px 0 6px}.wu-final h3{font-size:21px;line-height:1.4}
+.wu-intro{margin:0 0 16px;color:var(--sub);font-size:15px;line-height:1.85}
+.wu-model[hidden],.aigc-roundup[hidden]{display:none!important}
+.wu-model{padding-top:17px}
+.wu-model-grid{display:grid;grid-template-columns:1fr;gap:11px}
+.wu-card{background:#f2f8f3;border:1px solid #d3e4d9;border-radius:13px;padding:15px 16px}
+.wu-card h4{font-size:17px;line-height:1.5;color:#285e4f;margin:0 0 6px}
+.wu-card p{font-size:14px;line-height:1.8;margin:0;color:#475d52}
+.wu-card .wu-ask{border-top:1px solid #d8e7de;padding-top:9px;margin-top:10px}
+.wu-scope{margin:17px 0 10px;color:var(--sub);font-size:13px;line-height:1.8}
+.wu-study{margin:11px 0;color:var(--ink);font-size:13px;line-height:1.8}
+.wu-citation{margin:10px 0 18px;color:var(--muted);font-size:12px;line-height:1.8}
+.wu-citation a{color:#246751;text-decoration:underline;text-underline-offset:3px}
+.wu-hinge{background:#fff2ce;border-left:4px solid #dba23b;padding:13px 15px;margin:0 0 15px;color:#624a20;line-height:1.85;font-size:15px;font-weight:700}
+.aigc-roundup{margin-top:26px;padding-top:23px;border-top:1px solid var(--line)}
+@media(max-width:540px){.wu-card{padding:13px}.wu-final h3{font-size:19px}.wu-card h4{font-size:16px}.wu-intro{font-size:14px}}
 @media(max-width:720px){.roundup{margin:18px 12px;padding:17px 15px}.roundup-compare{grid-template-columns:1fr}.roundup-questions{padding-left:20px}}
 @media print{.roundup[hidden]{display:none!important}.roundup{break-inside:avoid;margin:20px 0}}
 </style>
@@ -212,6 +230,39 @@
 
 
 <section id="roundup" class="roundup" aria-labelledby="roundup-title" hidden>
+
+  <div class="wu-final" aria-labelledby="wu-title">
+    <p class="theory-kicker">理论收束 · 二语写作</p>
+    <div class="roundup-head"><h3 id="wu-title">二语写作元认知的三要素</h3><small>吴红云、刘润清（2004）</small></div>
+    <p class="wu-intro">此前我们借助“元认知知识—监控—调节”观察写作过程。吴红云、刘润清从二语写作研究出发，提出并检验了一个由三个要素构成的理论框架。</p>
+    <button type="button" id="toggle-wu-model" class="btn accent theory-toggle" aria-expanded="false" aria-controls="wu-model">展示三要素框架 ↓</button>
+    <div id="wu-model" class="wu-model" hidden>
+      <div class="wu-model-grid" aria-label="二语写作元认知三要素">
+        <article class="wu-card">
+          <h4>元认知主体评估</h4>
+          <p>对自身写作困难及其原因的认识与判断。</p>
+          <p class="wu-ask"><b>联系课堂：</b>我现在的障碍是什么？是构思困难、语言表达困难，还是论证依据不足？</p>
+        </article>
+        <article class="wu-card">
+          <h4>元认知策略</h4>
+          <p>写作者为完成任务、应对困难而选择和运用的方法。</p>
+          <p class="wu-ask"><b>联系课堂：</b>我可以怎样继续写作或修订？为什么选择这种方法？</p>
+        </article>
+        <article class="wu-card">
+          <h4>元认知任务评估</h4>
+          <p>对写作任务的要求及其特点所作的判断。</p>
+          <p class="wu-ask"><b>联系课堂：</b>这项写作任务要求证明什么？目前的例子是否充分、恰当？</p>
+        </article>
+      </div>
+      <p class="wu-scope">三个要素的名称取自原研究；卡片中的问题是为本次教学研讨作的解释与延伸。它们不是写作的三个先后步骤，也不能与前面“知识—监控—调节”的分析框架逐项等同。</p>
+      <p class="wu-study">作者的结构方程模型显示：主体评估和元认知策略对写作成绩具有直接影响，任务评估通过主体评估产生间接影响。研究对象是英语学习者，并未涉及生成式人工智能。</p>
+      <p class="wu-citation">吴红云、刘润清（2004）．《写作元认知结构方程模型研究》．《现代外语》，27(4)：370–377、437。<a href="https://xdwy.cbpt.cnki.net/portal/journal/portal/client/paper/032059c9c9af3b9052e3ff7a48a2177b" target="_blank" rel="noopener noreferrer">查看期刊原始记录 ↗</a></p>
+      <p class="wu-hinge">当AI能够参与写作困难的诊断、任务评价和文本修订时，哪些元认知活动仍应由学习者逐步承担？教师又应如何安排相应的支持？</p>
+      <button type="button" class="btn accent theory-next" id="continue-wu-ai" aria-controls="aigc-roundup" aria-expanded="false">进入AIGC介入后的写作教学讨论 →</button>
+    </div>
+  </div>
+
+  <div id="aigc-roundup" class="aigc-roundup" hidden>
   <div class="roundup-head">
     <h3 id="roundup-title">从习作观察走向AIGC写作教学</h3>
     <small>S26 · S52 · 回看五份习作</small>
@@ -236,6 +287,7 @@
   <label for="roundup-note-input">人机协作教学思路 · 讨论记录</label>
   <textarea id="roundup-note-input" class="roundup-text" placeholder="可记录：哪些活动可以交给模型？哪些判断需要学生完成？教师可以提供什么帮助？" spellcheck="false"></textarea>
   <p class="roundup-note">内容仅保存在当前浏览器，点击上方“导出五份观察记录”时会一并导出。</p>
+  </div>
 </section>
 <div class="pager"><button type="button" class="btn small" id="prev-btn">← 上一份</button><span class="current" id="position">第 1 / 5 份</span><button type="button" class="btn small accent" id="next-btn">下一份 →</button></div>
 </section>
@@ -276,6 +328,7 @@ function select(i){if(i<0||i>=CASES.length)return;current=i;const c=CASES[i];
  $('theory-bridge-s09').hidden=true;$('theory-analysis-s09').hidden=true;$('toggle-theory-s09').setAttribute('aria-expanded','false');$('toggle-theory-s09').textContent='展开 S09 的观察分析表 ↓';$('metacognition-concept-s09').open=false;
  $('theory-bridge-s45').hidden=true;$('theory-analysis-s45').hidden=true;$('toggle-theory-s45').setAttribute('aria-expanded','false');$('toggle-theory-s45').textContent='展开 S45 的观察分析表 ↓';$('metacognition-concept-s45').open=false;
  $('roundup').hidden=true;
+ $('wu-model').hidden=true;$('toggle-wu-model').setAttribute('aria-expanded','false');$('toggle-wu-model').textContent='展示三要素框架 ↓';$('aigc-roundup').hidden=true;$('continue-wu-ai').setAttribute('aria-expanded','false');$('continue-wu-ai').textContent='进入AIGC介入后的写作教学讨论 →';
  const record=records[c.id]||{};observation.value=record.obs||'';inquiry.value=record.ask||'';$('save-status').textContent=storageWorks?'输入后自动保存在本机':'此浏览器可能不支持本机保存';
  $('position').textContent='第 '+(i+1)+' / 5 份';$('prev-btn').disabled=i===0;$('next-btn').disabled=i===CASES.length-1;
  mark();}
@@ -286,6 +339,8 @@ $('toggle-theory-s09').addEventListener('click',()=>{const p=$('theory-analysis-
 $('continue-after-theory-s09').addEventListener('click',()=>{select(2);$('workspace').scrollIntoView({behavior:'smooth',block:'start'});});
 $('toggle-theory-s45').addEventListener('click',()=>{const p=$('theory-analysis-s45');p.hidden=!p.hidden;const shown=!p.hidden;$('toggle-theory-s45').setAttribute('aria-expanded',String(shown));$('toggle-theory-s45').textContent=shown?'收起 S45 的观察分析表 ↑':'展开 S45 的观察分析表 ↓';});
 $('continue-after-theory-s45').addEventListener('click',()=>{select(3);$('workspace').scrollIntoView({behavior:'smooth',block:'start'});});
+$('toggle-wu-model').addEventListener('click',()=>{const p=$('wu-model');p.hidden=!p.hidden;const shown=!p.hidden;$('toggle-wu-model').setAttribute('aria-expanded',String(shown));$('toggle-wu-model').textContent=shown?'收起三要素框架 ↑':'展示三要素框架 ↓';if(!shown){$('aigc-roundup').hidden=true;$('continue-wu-ai').setAttribute('aria-expanded','false');$('continue-wu-ai').textContent='进入AIGC介入后的写作教学讨论 →';}});
+$('continue-wu-ai').addEventListener('click',()=>{const target=$('aigc-roundup');target.hidden=false;$('continue-wu-ai').setAttribute('aria-expanded','true');$('continue-wu-ai').textContent='已进入AIGC教学讨论 ↓';target.scrollIntoView({behavior:'smooth',block:'start'});});
 roundupNote.addEventListener('input',()=>{try{localStorage.setItem(ROUNDUP_KEY,roundupNote.value);}catch(e){} });
 [observation,inquiry].forEach(el=>el.addEventListener('input',persist));$('prev-btn').addEventListener('click',()=>select(current-1));$('next-btn').addEventListener('click',()=>select(current+1));
 tabs.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;e.preventDefault();let to=current;if(e.key==='ArrowLeft')to=Math.max(0,current-1);if(e.key==='ArrowRight')to=Math.min(CASES.length-1,current+1);if(e.key==='Home')to=0;if(e.key==='End')to=CASES.length-1;select(to);tabs.children[to].focus();});
