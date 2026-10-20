@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<meta name="theme-color" content="#f3c05a"/>
+<meta name="description" content="公开研讨课：基于S09与S45匿名习作的生成式AI介入法语写作元认知教学互动模拟。逐轮展示学生—AI对话与教学介入点。"/>
+<title>AI介入写作｜显性元认知引导互动演示 · Exo</title>
+<style>
+:root{--paper:#fcfaf6;--ink:#26322d;--muted:#66736b;--line:#e7e0d3;--gold:#f3c05a;--gold-pale:#fff2d0;--orange:#a96d17;--teal:#356e64;--teal-pale:#e8f3ef;--bg:#f4f2eb;--white:#fff;--shadow:0 18px 50px rgba(54,49,34,.075)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,"PingFang SC","Microsoft YaHei",sans-serif;line-height:1.56;-webkit-font-smoothing:antialiased}
+button,a{font:inherit}
+button{cursor:pointer}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #b7781c;outline-offset:3px}
+a{color:inherit}
+.shell{max-width:1480px;margin:0 auto;padding:23px 27px 54px}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:23px;flex-wrap:wrap}
+.brand{font-size:14px;font-weight:850;letter-spacing:.075em;display:flex;align-items:center;gap:9px}
+.brandmark{width:13px;height:13px;border-radius:4px;background:var(--gold);transform:rotate(17deg);display:inline-block}
+.toplinks{display:flex;align-items:center;gap:12px;font-size:13px;color:var(--muted)}
+.toplinks a{text-decoration:none;border-bottom:1px solid currentColor}
+.hero{border-radius:27px;border:1px solid #ead3a0;background:linear-gradient(113deg,#f6c45f,#ffe5aa 61%,#fff3d6);padding:32px 38px 29px;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;right:-42px;bottom:-124px;width:300px;height:300px;border-radius:50%;border:58px solid rgba(255,255,255,.22);pointer-events:none}
+.kicker{font-size:12px;font-weight:850;color:#856122;letter-spacing:.14em;margin:0 0 9px}
+.hero h1{position:relative;font-size:clamp(28px,3.65vw,48px);line-height:1.24;letter-spacing:-.045em;margin:0 0 12px;max-width:1060px}
+.hero p{position:relative;max-width:1060px;font-size:clamp(15px,1.5vw,19px);color:#675336;margin:0}
+.hero .thesis{margin-top:16px;font-size:16px;font-weight:800;color:#4f3d1f}
+.modes{display:flex;align-items:center;gap:11px;flex-wrap:wrap;margin-top:21px}
+.mode{border:1px solid #d6b36d;border-radius:15px;background:#fff8e7;color:#715322;text-align:left;padding:12px 17px;min-height:60px;min-width:210px}
+.mode strong{display:block;font-size:16px}
+.mode span{font-size:11px;color:#8a7351}
+.mode[aria-pressed="true"]{border-color:#244e49;background:#315f57;color:#fff;box-shadow:0 6px 18px #315f5726}
+.mode[aria-pressed="true"] span{color:#cce1d6}
+.status-note{display:inline-flex;gap:7px;align-items:center;letter-spacing:.01em;font-size:12px;background:#fff7e7;border:1px solid #ead5b5;padding:9px 12px;border-radius:999px;color:#715a35;margin:12px 0 3px}
+.status-dot{display:inline-block;width:7px;height:7px;background:#ad7b24;border-radius:50%}
+.route{margin-top:22px;background:var(--white);border:1px solid var(--line);border-radius:23px;box-shadow:var(--shadow);padding:23px 25px 19px}
+.route-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:15px}
+.route-top h2{font-size:21px;letter-spacing:-.015em;margin:0}
+.stepmeta{font-size:13px;color:var(--muted)}
+.track{display:flex;gap:8px;overflow-x:auto;padding:1px 2px 12px;scrollbar-width:thin}
+.node{flex:1 0 123px;min-width:110px;position:relative;background:#faf9f5;border:1.5px solid #e4e0d7;border-radius:12px;padding:11px 9px 12px;text-align:left;color:#656b62;min-height:77px;transition:background .15s,border-color .15s,transform .15s}
+.node:hover{border-color:#d4aa55;transform:translateY(-1px)}
+.node .num{display:block;font-size:12px;font-weight:850;color:#b17c29}
+.node .label{display:block;margin-top:5px;font-weight:780;font-size:13px;line-height:1.25}
+.node.is-complete{background:#f2f6f3;border-color:#b8d2c5}
+.node.is-complete .num{color:#43816d}
+.node[aria-current="step"]{background:#315f57;border-color:#315f57;color:white;box-shadow:0 6px 16px #315f5733}
+.node[aria-current="step"] .num{color:#c8f1df}
+.progressbar{height:5px;border-radius:999px;background:#eeece6;overflow:hidden;margin-top:2px}
+.progressbar span{display:block;height:100%;background:linear-gradient(90deg,#dfae48,#427b6e);border-radius:inherit;width:12.5%;transition:width .25s}
+.workspace{display:grid;grid-template-columns:minmax(0,1.17fr) minmax(370px,.83fr);gap:19px;align-items:stretch;margin-top:20px}
+.panel{background:var(--white);border:1px solid var(--line);border-radius:23px;box-shadow:var(--shadow);overflow:hidden;min-width:0}
+.panel-head{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:19px 23px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.panel-head h2{font-size:20px;letter-spacing:-.01em;margin:0}
+.panel-head .sub{font-size:12px;color:#7b817a;margin-top:3px}
+.dialog{padding:21px 22px 11px;height:min(53vh,560px);min-height:390px;overflow:auto;scroll-behavior:smooth;background:linear-gradient(180deg,#fff,#fbfbf8 95%)}
+.turn{display:flex;align-items:flex-end;gap:9px;margin:0 0 15px;max-width:100%;animation:emerge .24s ease-out}
+@keyframes emerge{from{transform:translateY(7px);opacity:.6}to{transform:translateY(0);opacity:1}}
+.turn.student{justify-content:flex-end}
+.avatar{flex:0 0 32px;width:32px;height:32px;border-radius:11px;display:grid;place-items:center;background:#e8eee8;color:#315f57;font-weight:900;font-size:12px}
+.turn.student .avatar{order:2;background:#faeac3;color:#8e681b}
+.bubble{max-width:89%;border-radius:16px;padding:13px 16px;white-space:pre-wrap;font-size:16px;line-height:1.66;overflow-wrap:anywhere}
+.turn.ai .bubble{background:#eef6f3;border:1px solid #d4e8de;border-bottom-left-radius:4px}
+.turn.student .bubble{background:#fff2d5;border:1px solid #eddbb8;border-bottom-right-radius:4px}
+.tag{display:block;text-transform:uppercase;font-size:10px;letter-spacing:.12em;color:#50766c;font-weight:850;margin-bottom:6px}
+.turn.student .tag{color:#9c742f}
+.image-ref{margin:7px 0 16px;padding:12px;border:1px dashed #e0d5bd;background:#fffdf8;border-radius:12px;display:flex;gap:12px;align-items:center}
+.image-ref img{width:96px;height:78px;object-fit:cover;object-position:top;border-radius:6px;border:1px solid #ddd1bd;background:white}
+.image-ref p{font-size:12px;color:#817762;margin:0;max-width:300px}
+.image-ref a{display:inline-block;margin-top:4px;color:var(--teal);font-weight:750}
+.dialog-note{font-size:12px;color:#878982;padding:0 23px 16px}
+.teacher .panel-head{background:#f0f7f2}
+.teacher-body{padding:22px 23px}
+.intervention-title{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.pill{display:inline-block;border:1px solid #bbd3c8;color:#346a5d;background:#e8f3ed;padding:5px 10px;border-radius:999px;font-size:12px;font-weight:800}
+.intervention-title h3{font-size:clamp(23px,2vw,29px);margin:5px 0 7px;line-height:1.3}
+.teacher-lead{font-size:17px;font-weight:740;color:#294e45;line-height:1.65;margin:10px 0 19px}
+.teacher-card{border-top:1px solid #e4e9e3;padding:14px 0 10px}
+.teacher-card h4{font-size:13px;letter-spacing:.05em;color:#607067;margin:0 0 6px;font-weight:850}
+.teacher-card p{margin:0;color:#394b41;font-size:15px;line-height:1.7}
+.teacher-card.avoid p{color:#806443}
+.teacher-off{min-height:377px;display:flex;align-items:center;justify-content:center;flex-direction:column;color:#64776d;text-align:center;padding:32px}
+.teacher-off .visual{font-size:36px;margin-bottom:15px}
+.teacher-off p{font-size:16px;max-width:290px;margin:0}
+.footerbar{margin-top:18px;display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
+.controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.btn{border:1px solid #cbd6cc;background:#fff;color:#3e6459;padding:10px 16px;border-radius:11px;font-size:14px;font-weight:780;min-height:44px}
+.btn:hover{background:#f5f8f2}
+.btn.primary{background:#315f57;color:white;border-color:#315f57}
+.btn.primary:hover{background:#244a43}
+.btn:disabled{opacity:.39;cursor:default}
+.toggle{display:flex;gap:9px;align-items:center;font-size:14px;color:#4c5e53;cursor:pointer;font-weight:740}
+.toggle input{accent-color:#315f57;width:19px;height:19px}
+.bottom-note{font-size:13px;line-height:1.8;color:#7a776f;margin-top:22px}
+.bottom-note a{color:#376f65;font-weight:700}
+.footlinks{display:flex;gap:18px;flex-wrap:wrap;border-top:1px solid #e2ddd0;padding-top:16px;margin-top:22px;font-size:12px;color:#7a7a6e}
+.footlinks a{text-underline-offset:2px}
+@media(max-width:1040px){.workspace{grid-template-columns:1fr}.dialog{height:450px}.teacher-body{padding:19px}.node{flex-basis:150px}}
+@media(max-width:620px){.shell{padding:15px 12px 29px}.hero{padding:25px 21px;border-radius:20px}.hero h1{font-size:28px}.hero .thesis{font-size:14px}.modes{gap:8px}.mode{min-width:0;flex:1 1 140px}.route{padding:17px 14px 13px;border-radius:16px}.route-top h2{font-size:18px}.node{flex-basis:115px;min-width:115px;min-height:69px}.workspace{gap:13px;margin-top:14px}.panel{border-radius:16px}.panel-head{padding:15px}.panel-head h2{font-size:18px}.dialog{padding:14px 12px;min-height:360px;height:49vh}.bubble{font-size:15px;padding:12px 13px}.avatar{flex-basis:27px;width:27px;height:27px;border-radius:9px}.teacher-lead{font-size:16px}.footerbar{flex-direction:column;align-items:stretch}.controls{justify-content:space-between}.btn{padding:10px 12px}.toggle{justify-content:center}}
+@media print{body{background:white}.topbar,.footerbar,.modes,.bottom-note{display:none}.hero,.route,.panel{box-shadow:none}.dialog{height:auto;max-height:none;overflow:visible}.workspace{display:block}.teacher{margin-top:16px}.track{flex-wrap:wrap}}
+body.is-presenting .shell{max-width:1720px}
+body.is-presenting .dialog{height:57vh}
+body.is-presenting .bubble{font-size:19px}
+body.is-presenting .teacher-card p{font-size:18px}
+</style>
+</head>
+<body>
+<div class="shell">
+<header class="topbar">
+ <div class="brand"><span class="brandmark" aria-hidden="true"></span> EXO · PRODUCTION ÉCRITE <span style="font-weight:500;color:#7b8178">/ 教学质量月</span></div>
+ <div class="toplinks"><a href="../index.html">← 返回五份习作研讨</a><span>INSPIRÉ PAR INSPIRE 4</span></div>
+</header>
+<section class="hero" aria-labelledby="pageTitle">
+ <p class="kicker">DÉMONSTRATION PÉDAGOGIQUE · MÉTACOGNITION</p>
+ <h1 id="pageTitle">AI参与写作，<br/>元认知教学在哪里发生？</h1>
+ <p>点击进程节点，逐轮展示学生与AI学伴的模拟对话；右侧同步说明教师希望显化的判断与调节活动。</p>
+ <p class="thesis">核心命题：学生要逐步学会规划、监控和调节人与AI的协作。</p>
+ <div class="modes" role="group" aria-label="选择教学路径">
+   <button class="mode" type="button" id="mode-s09" aria-pressed="true"><strong>01 · 以写促学 S09</strong><span>语言不足时：拆句、调用已学资源</span></button>
+   <button class="mode" type="button" id="mode-s45" aria-pressed="false"><strong>02 · 学习书面论证 S45</strong><span>例子已找到：检验证据与推断</span></button>
+ </div>
+</section>
+<div class="status-note"><span class="status-dot"></span> 基于真实匿名习作的预设教学对话 · 非实时AI · 不代表学生已完成AI辅助写作实验</div>
+<section class="route" aria-labelledby="routeTitle">
+ <div class="route-top"><h2 id="routeTitle">S09 · 从表达中断到策略调节</h2><div class="stepmeta" id="stepmeta">第 1 / 8 轮</div></div>
+ <nav class="track" id="track" aria-label="点击教学介入节点"></nav>
+ <div class="progressbar" aria-hidden="true"><span id="progress"></span></div>
+</section>
+<div class="workspace">
+ <section class="panel" aria-labelledby="dialogTitle">
+   <div class="panel-head"><div><h2 id="dialogTitle">学生—AI 对话模拟</h2><div class="sub" id="dialogSub">逐轮显示，不自动补出整篇文章</div></div><span style="color:#9e782e;font-size:12px;font-weight:750">ÉTUDIANT ↔ IA</span></div>
+   <div class="dialog" id="dialog" role="log" aria-live="polite" aria-label="模拟对话"></div>
+   <div class="dialog-note">对话为教学设计示范；学生输入并非真实AI交互记录。点击上方任一节点可回看。</div>
+ </section>
+ <section class="panel teacher" aria-labelledby="teacherTitle">
+   <div class="panel-head"><div><h2 id="teacherTitle">显性元认知教学介入点</h2><div class="sub">教师讲解层 · 可隐藏，以便展示纯粹对话</div></div><span style="font-size:12px;font-weight:850;color:#397364">ENSEIGNANT</span></div>
+   <div class="teacher-body" id="teacherBody"></div>
+ </section>
+</div>
+<div class="footerbar">
+ <label class="toggle"><input type="checkbox" id="teacherToggle" checked/> 显示教学介入点（课堂讲解）</label>
+ <div class="controls">
+   <button class="btn" type="button" id="restart">↺ 重新开始</button>
+   <button class="btn" type="button" id="prev">← 上一轮</button>
+   <button class="btn primary" type="button" id="next">下一轮 →</button>
+   <button class="btn" type="button" id="present">全屏演示 ⛶</button>
+ </div>
+</div>
+<div class="bottom-note"><strong>使用建议：</strong>先隐藏右侧解释，让听众判断AI在哪一步应当停下；随后打开“教学介入点”，讨论学生完成了什么判断、下一步需要怎样的支持。演示页无需登录，也不调用外部AI服务。<br/>已学资源参照：<a href="../../Vocabulaire/U1/phrases.html" target="_blank" rel="noopener">Inspire 4 U1 词汇句子卡</a>（susciter une émotion / une réaction 等）；<a href="../../PE/U1/index.html" target="_blank" rel="noopener">写作任务</a>；<a href="../index.html">返回五份习作</a>。</div>
+<div class="footlinks"><span>教学示范 · 课堂使用</span><span>习作仅以 S 编号呈现</span><span>所有对话为预设内容，不能作为真实学生元认知发展证据</span></div>
+</div>
+<script>
+(function(){
+"use strict";
+var CASES = {
+ s09:{
+  title:"S09 · 从表达中断到策略调节",
+  desc:"语言不足时：拆分意义、检索已学资源、尝试表达",
+  image:"../copies/S09.webp",
+  steps:[
+   {label:"确认原意",tag:"任务理解",student:"我把习作拍给你了。我的法语写到一半，后面用中文写了酒店摆拍的例子。我想说物质幸福的追求似乎没有终点。",ai:"我先确认原意：你认为社交媒体展示的奢华生活容易引发新的物质欲望；你用多人合订酒店房间、轮流拍照的例子说明这种追逐。你想强调的是追求没有终点，对吗？",concept:"元认知任务评估 / 原意确认",point:"先核对写作目标，让学生确认自己的立场。",studentDo:"确认“物质追求无止境”是自己的观点，而不是由AI重新定义幸福。",teacherSay:"请看，AI首先做读者，确认学生究竟要证明什么。",boundary:"不得擅自加上“虚假的幸福”“这种追求必然带来痛苦”等学生尚未提出的结论。"},
+   {label:"纠正句法",tag:"语言诊断",student:"对。我开头那句也写不对。",ai:"第一句 On entend souvent dire que la course sans fin au bonheur matériel. 确实没有写完整：que 后面缺少变位谓语。\n可以改成：On entend souvent dire que la course au bonheur matériel est sans fin.\n以后使用 On entend souvent dire que… 时，请先检查从句的主语和变位动词。",concept:"诊断与语言知识监控",point:"直接纠正确定的结构错误，同时显化可以迁移的句法自查方法。",studentDo:"学会检查 que 后有没有完整从句；不需要反复猜测基础语法。",teacherSay:"这里直接纠错是必要的。元认知教学并不排斥及时示范。",boundary:"不可只关注 luxuriante 的词形，却漏掉整句缺谓语的问题；提供的正确句必须本身无误。"},
+   {label:"辨认困难",tag:"主体评估",student:"明白了，主语是 la course au bonheur matériel，动词是 est。可是后面的中文，我还是不知道怎么写成法语。",ai:"你已经写出具体的中文例子，说明现在主要困难可能在法语表达。我们先确认一下：是找不到个别词语，还是一句中文包含太多意思，不知道怎样组织？",concept:"元认知主体评估 / 困难分类",point:"帮助学生区分“缺少思想”“词汇不足”“句法组织困难”。",studentDo:"说清自己的障碍，而不是笼统地说“我不会写法语”。",teacherSay:"学生是否缺少观点与学生是否有能力用法语表达，必须分开判断。",boundary:"不得因法语不完整就认定学生不会论证，更不能立刻翻译整段中文。"},
+   {label:"选择拆句",tag:"策略调节",student:"主要是一句中文太复杂。我想先写简单一点。",ai:"可以。我们先把原意拆成两个小意思：\n① 在社交媒体上看见别人展示奢华生活。\n② 这些图片使我们产生新的欲望。\n你先只表达第一个意思，试着用 Sur les réseaux sociaux… 开头。",concept:"元认知策略选择",point:"学生主动选择“拆分语义、降低句法负担”的策略。",studentDo:"从一整句复杂中文中找出两个能独立表达的意思。",teacherSay:"我们简化的是语言形式，并不要求放弃学生想表达的因果关系。",boundary:"不直接推荐 avidité、convoitise 等未确认已学且不必要的高级词汇。"},
+   {label:"回顾已学",tag:"资源检索",student:"Sur les réseaux sociaux, on voit des photos d’hôtels de luxe.",ai:"这句已经准确表达了你想说的第一层意思。\n下一层是“这些图片引发新的欲望”。本单元词卡里有 susciter une émotion / une réaction。你能试着把 susciter 用在当前语境里吗？",concept:"元认知知识 / 资源调用",point:"有依据地检索已学动词，提示一种相关资源，交由学生尝试迁移。",studentDo:"回忆课堂语境中的 susciter，尝试将已学搭配用于自己的观点。",teacherSay:"注意，词卡教过的是 susciter une émotion / une réaction；下面“新的欲望”是学生在新语境中的迁移，不把新搭配冒称原样学过。",boundary:"不为展示词汇量而同时给出若干复杂同义词，也不替学生写出接下来的整句。"},
+   {label:"试写与纠错",tag:"学生尝试",student:"Ces images susciter de nouvelles envies.",ai:"意思已经表达出来了。这里有一处确定的动词变位错误：主语 Ces images 是复数，动词应写成 suscitent。\n修正后是：Ces images suscitent de nouvelles envies.\n下一次写类似句子时，可以先找出主语，再检查动词形式。",concept:"写作监控 / 反馈调节",point:"学生先尝试；AI及时修正必要错误，帮助其认识自查路径。",studentDo:"把知识缺口定位为动词变位，在后续句子中主动检查主谓一致。",teacherSay:"学生尝试并不意味着AI只能提问。遇到确定错误，给出正确局部示范才是有效支持。",boundary:"不得借纠正变位的机会重新写完酒店例子或给出整段“升级版”。"},
+   {label:"保留例证",tag:"局部继续",student:"我还想保留大家合订豪华酒店房间、轮流拍照的例子。我先写：Des personnes réservent une chambre ensemble. Elles prennent des photos.",ai:"你保留了原来的人物和动作，方向正确。中文里还有“轮流拍照”，这一层还没表达出来。如果需要，可以补充一个新词组 à tour de rôle（轮流）。\n先试着在第二句里补上它，再决定是否需要其他信息。",concept:"任务监控 / 支持渐退",point:"检查学生是否保留原例证；必要时只提供缺少的局部表达。",studentDo:"核对法语短句是否覆盖“订房间、轮流拍照”的关键事实。",teacherSay:"“à tour de rôle”如非课程既有资料，应坦然标注为当前需要的新表达，不把所有帮助都伪装成已学知识。",boundary:"不能随意删去学生独特的酒店摆拍例子，也不能捏造人物动机或结果。"},
+   {label:"检验与迁移",tag:"自我调节",student:"Elles prennent des photos à tour de rôle. 我发现我先拆句，再用 susciter，就能继续写下去。具体场景缺词时再问。",ai:"这次你采用了三个办法：保留原意、拆成短句、调用已经学过的 susciter。现在请自己检查：这些句子是否表达了“看到奢华生活—产生新欲望—酒店摆拍”的关系？\n下次遇到很长的中文构思，你愿意先尝试哪一步？",concept:"元认知监控与调节 / 迁移",point:"让学生解释一次策略选择，并检查原意是否保留，为下一次独立写作作准备。",studentDo:"能够说明“先拆句、再查已学表达、必要时局部求助”的策略及适用情境。",teacherSay:"这轮的评价对象不只是文本是否变好，还包括策略选择是否由学生承担、能否在相近任务中再使用。",boundary:"这只是预设对话，不据此声称已经验证学生获得元认知能力。"}
+  ]
+ },
+ s45:{
+  title:"S45 · 从具体例子到论证的自我监控",
+  desc:"事实边界、证据相关性与修订决定",
+  image:"../copies/S45.webp",
+  steps:[
+   {label:"确认论点",tag:"任务理解",student:"我写了：Le bonheur peut exister sans relation amoureuse. 我举了居里夫人做科学研究的例子。",ai:"我读到的观点是：幸福的来源可以不局限于恋爱关系。\n你希望居里夫人的科研经历证明的是“投入一项事业也可能带来满足”，还是“她本人不需要爱情也很幸福”？",concept:"元认知任务评估",point:"确认论点的边界，避免AI提前替学生写出更强的判断。",studentDo:"说清自己究竟希望例子支持哪一层结论。",teacherSay:"论证指导首先要问学生希望证明什么，而不只是把句子变流畅。",boundary:"不把“她在研究中有成就”直接等同于“她没有爱情也幸福”。"},
+   {label:"识别推断",tag:"证据检验",student:"我想说科学研究让她幸福，所以幸福不一定来自爱情。",ai:"科研经历和成就是可以查证的事实；但“她具体感到幸福”以及“她的幸福与爱情无关”，需要另外的证据。\n我们先区分：你能确认哪些事实？哪些是在推测她的感受？",concept:"元认知监控 / 推理觉察",point:"将隐含的证据判断外显：事实与对人物内心状态的推断是否混在一起。",studentDo:"识别自己的论证链中哪一步缺少根据。",teacherSay:"这一步是论证教学：让学生审视证据边界，并意识到自己的不确定性。",boundary:"不得制造居里夫人的引语或心理事实来填补证据缺口。"},
+   {label:"选择方案",tag:"自主决策",student:"科研活动和成果可以说，但我不能确定她本人到底怎样体验幸福。",ai:"可以有两种处理：查找可靠材料，或把表述缩回你目前能够支持的范围。\n你更想保留居里夫人这个人物并限制结论，还是换成一个自己能够具体描述的生活场景？",concept:"元认知调节 / 证据策略",point:"把“改写方向”的选择权留给学生，并明确各选项需要的证据。",studentDo:"根据当前材料与任务要求选择修订路径。",teacherSay:"我们的目标不是替学生删除有价值的例子，而是让他有理由地决定怎样使用。",boundary:"不要默认换例子；不以单纯语言润色掩盖证据不足。"},
+   {label:"语言纠错",tag:"准确表达",student:"我想保留居里夫人，但不推断她的私人感受。我原来写 sa bonheur / le recherche，也知道有错误。",ai:"这些是可以直接纠正的语言问题：son bonheur、la recherche scientifique。\n如果保留真实人物，应避免把尚未查证的私人感受写成事实。你可以先尝试写一个一般性的判断，例如“科学研究也可能成为满足的来源”。",concept:"语言准确性 + 论证调节",point:"直接纠正确定的冠词与性别搭配问题，再将一般论点与未证实的传记判断区分。",studentDo:"保留论证方向，避免重复未经证实的心理判断。",teacherSay:"语法错误可以直接讲；论证中的事实边界则需要学生主动判断。",boundary:"不可把错误的 sa bonheur 保留到正确示范中；不能混淆已证事实与概括性观点。"},
+   {label:"学生重写",tag:"自主尝试",student:"La recherche scientifique peut aussi apporter de la satisfaction. 这样我没有说居里夫人一定幸福。",ai:"这个句子表达了一种可能性，论证范围比原来审慎。接下来请再检查：你引用的事实能否支持这项一般性判断？如果要更具体地谈居里夫人，哪些内容还需要查证？",concept:"元认知监控 / 证据充分性",point:"学生先作出局部修订，再监控例证与结论是否一致。",studentDo:"辨认“可讨论的可能性”与“足以证明的人物心理事实”的区别。",teacherSay:"简单的 can/peut 意味着限定了结论，但不能因此免除论据相关性的检查。",boundary:"不直接生成一整篇替代文章；不能把“研究可能带来满足”冒称已由居里夫人的例子证明。"},
+   {label:"回顾策略",tag:"迁移反思",student:"我选择保留她的科研经历，但需要把事实和我自己的解释区分开；如果要说她的内心感受，还得找材料。",ai:"你这次通过限定表述，减少了没有依据的推断。下次选择名人事例时，可以先检查：事实是什么？我推断了什么？我的结论超过证据了吗？",concept:"元认知策略迁移",point:"让学生形成可迁移的证据自查问题，并解释为什么保留或修改例子。",studentDo:"说明修订决定的依据，并在相近写作中主动运用证据自查。",teacherSay:"结束时保留选择的理由，让“如何核查例证”成为学生自己的写作策略。",boundary:"模拟对话只展示预期教学路径，不宣称这是已测得的学习效果。"}
+  ]
+ }
+};
+var currentCase="s09", currentStep=0, showTeacher=true;
+var get=function(id){return document.getElementById(id)};
+function el(tag,cls,txt){
+ var x=document.createElement(tag);
+ if(cls)x.className=cls;
+ if(txt!==undefined)x.textContent=txt;
+ return x;
+}
+function switchMode(key){
+ currentCase=key;currentStep=0;
+ get("mode-s09").setAttribute("aria-pressed",String(key==="s09"));
+ get("mode-s45").setAttribute("aria-pressed",String(key==="s45"));
+ render();
+}
+function drawNav(){
+ var d=CASES[currentCase],target=get("track"); target.replaceChildren();
+ d.steps.forEach(function(s,i){
+  var b=el("button","node"+(i<currentStep?" is-complete":""),""); b.type="button";
+  if(i===currentStep)b.setAttribute("aria-current","step");
+  b.setAttribute("aria-label","第"+(i+1)+"轮："+s.label);
+  b.appendChild(el("span","num",("0"+(i+1)).slice(-2)+(i<currentStep?" ✓":"")));
+  b.appendChild(el("span","label",s.label));
+  b.addEventListener("click",function(){currentStep=i;render()});
+  target.appendChild(b);
+ });
+}
+function bubble(kind,text){
+ var row=el("div","turn "+kind);
+ row.appendChild(el("div","avatar",kind==="ai"?"AI":"学"));
+ var box=el("div","bubble");
+ box.appendChild(el("span","tag",kind==="ai"?"AI学伴 · 模拟回应":"学生 · 模拟输入"));
+ box.appendChild(document.createTextNode(text));
+ row.appendChild(box);
+ return row;
+}
+function drawChat(){
+ var d=CASES[currentCase],log=get("dialog");log.replaceChildren();
+ if(d.image){
+  var ref=el("div","image-ref"),img=el("img");
+  img.src=d.image;img.alt=d===CASES.s09?"S09匿名手写习作":"S45匿名手写习作";img.loading="lazy";
+  var expl=el("div","","");
+  expl.appendChild(el("p","","场景源自真实匿名手写习作。下方学生与AI的逐轮交流均为教学模拟。"));
+  var link=el("a","","查看原稿 →");link.href=d.image;link.target="_blank";link.rel="noopener";
+  expl.appendChild(link);ref.appendChild(img);ref.appendChild(expl);log.appendChild(ref);
+ }
+ d.steps.slice(0,currentStep+1).forEach(function(s){
+   log.appendChild(bubble("student",s.student));
+   log.appendChild(bubble("ai",s.ai));
+ });
+ requestAnimationFrame(function(){log.scrollTop=log.scrollHeight});
+}
+function teachCard(title,txt,isAvoid){
+ var d=el("div","teacher-card"+(isAvoid?" avoid":""));
+ d.appendChild(el("h4","",title));
+ d.appendChild(el("p","",txt));return d;
+}
+function drawTeacher(){
+ var box=get("teacherBody");box.replaceChildren();
+ if(!showTeacher){
+  var off=el("div","teacher-off");
+  off.appendChild(el("div","visual","◎"));
+  off.appendChild(el("p","","已隐藏教学解释。请先让听众观察左侧对话，判断AI应该在哪里停下、学生需要完成什么。"));
+  box.appendChild(off);return;
+ }
+ var s=CASES[currentCase].steps[currentStep];
+ var name=el("div","intervention-title");name.appendChild(el("span","pill",s.tag));
+ name.appendChild(el("h3","",s.concept));box.appendChild(name);
+ box.appendChild(el("p","teacher-lead",s.point));
+ box.appendChild(teachCard("学生实际需要完成的判断或行动",s.studentDo,false));
+ box.appendChild(teachCard("教师可在现场这样点拨",s.teacherSay,false));
+ box.appendChild(teachCard("这一轮AI不应越过的边界",s.boundary,true));
+}
+function render(){
+ var d=CASES[currentCase];
+ get("routeTitle").textContent=d.title;
+ get("dialogSub").textContent=d.desc;
+ get("stepmeta").textContent="第 "+(currentStep+1)+" / "+d.steps.length+" 轮";
+ get("progress").style.width=((currentStep+1)/d.steps.length*100)+"%";
+ get("prev").disabled=currentStep===0;
+ get("next").disabled=currentStep===d.steps.length-1;
+ get("next").textContent=currentStep===d.steps.length-1?"演示已到最后一轮 ✓":"下一轮 →";
+ drawNav();drawChat();drawTeacher();
+}
+get("mode-s09").addEventListener("click",function(){switchMode("s09")});
+get("mode-s45").addEventListener("click",function(){switchMode("s45")});
+get("restart").addEventListener("click",function(){currentStep=0;render()});
+get("prev").addEventListener("click",function(){if(currentStep>0){currentStep--;render()}});
+get("next").addEventListener("click",function(){if(currentStep<CASES[currentCase].steps.length-1){currentStep++;render()}});
+get("teacherToggle").addEventListener("change",function(e){showTeacher=e.target.checked;drawTeacher()});
+get("present").addEventListener("click",function(){
+ if(!document.fullscreenElement&&document.documentElement.requestFullscreen){document.documentElement.requestFullscreen().catch(function(){document.body.classList.toggle("is-presenting")})}
+ else if(document.fullscreenElement&&document.exitFullscreen){document.exitFullscreen()}
+ else{document.body.classList.toggle("is-presenting")}
+});
+document.addEventListener("fullscreenchange",function(){document.body.classList.toggle("is-presenting",Boolean(document.fullscreenElement))});
+document.addEventListener("keydown",function(e){
+ if(e.target&&["INPUT","TEXTAREA"].indexOf(e.target.tagName)>=0)return;
+ if(e.key==="ArrowRight"&&currentStep<CASES[currentCase].steps.length-1){currentStep++;render()}
+ if(e.key==="ArrowLeft"&&currentStep>0){currentStep--;render()}
+});
+render();
+})();
+</script>
+</body>
+</html>
