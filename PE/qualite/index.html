@@ -54,6 +54,24 @@
 @media(min-width:1200px){.theory-bridge{padding:21px}.theory-table th{width:112px;min-width:112px}}
 @media(max-width:540px){.theory-bridge{padding:16px 11px;margin-top:20px}.theory-bridge h3{font-size:19px}.theory-table{font-size:13px}.theory-table th{width:86px;min-width:86px;font-size:12px}.theory-table th,.theory-table td{padding:10px 8px}.theory-concept{padding:0 11px}}
 @media print{.theory-bridge[hidden],.theory-analysis[hidden]{display:none!important}.theory-bridge{break-inside:avoid}.theory-toggle,.theory-next{display:none!important}}
+
+/* Cross-case discussion is a synthesis of observations, not another theoretical stage. */
+.roundup{margin:22px 19px 19px;border:1px solid var(--line);border-radius:18px;padding:20px 22px;background:#fffdf8}
+.roundup[hidden]{display:none!important}
+.roundup-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.roundup-head h3{margin:0;font-size:20px}
+.roundup-head small{font-size:12px;color:var(--muted)}
+.roundup-compare{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:13px 0 20px}
+.roundup-case{border:1px solid var(--line);border-radius:12px;padding:14px 15px;background:#f9f7f2}
+.roundup-case strong{display:block;font-size:14px;margin:0 0 7px}
+.roundup-case p{font-size:14px;line-height:1.65;margin:0;color:var(--sub)}
+.roundup-questions{margin:0 0 18px;padding-left:20px}
+.roundup-questions li{margin:0 0 12px;font-size:15px;line-height:1.75}
+.roundup label{display:block;font-size:14px;font-weight:750;margin:0 0 8px}
+.roundup .roundup-text{min-height:125px;font-size:14px}
+.roundup-note{font-size:12px;color:var(--muted);margin:8px 0 0}
+@media(max-width:720px){.roundup{margin:18px 12px;padding:17px 15px}.roundup-compare{grid-template-columns:1fr}.roundup-questions{padding-left:20px}}
+@media print{.roundup[hidden]{display:none!important}.roundup{break-inside:avoid;margin:20px 0}}
 </style>
 </head>
 <body>
@@ -186,10 +204,34 @@
       <p class="theory-ref">理论参照：Flavell (1979), “Metacognition and Cognitive Monitoring”, <i>American Psychologist</i>, 34(10), 906–911；Flower &amp; Hayes (1981), “A Cognitive Process Theory of Writing”, <i>College Composition and Communication</i>, 32(4), 365–387。</p>
     </details>
     <div class="theory-bridge-question">认识到论据与观点之间存在缺口之后，学习者怎样决定改哪里、为什么改，并判断修改是否真正改善了论证？</div>
-    <button type="button" class="btn accent theory-next" id="continue-after-theory-s45">带着这个问题观察 S26 →</button>
+    <button type="button" class="btn accent theory-next" id="continue-after-theory-s45">继续观察 S26 →</button>
   </div>
 </section>
 
+
+<section id="roundup" class="roundup" aria-labelledby="roundup-title" hidden>
+  <div class="roundup-head">
+    <h3 id="roundup-title">整体观察与讨论</h3>
+    <small>S26 · S52 · 回看五份习作</small>
+  </div>
+  <div class="roundup-compare">
+    <div class="roundup-case">
+      <strong>S26｜原稿中有多处划改</strong>
+      <p>关于汽车不断升级的例子已有清楚思路，但结尾仍以重复观点为主。</p>
+    </div>
+    <div class="roundup-case">
+      <strong>S52｜成稿相对完整</strong>
+      <p>年轻父母的快乐与照护责任构成相关例证，原稿中较少出现明显划改。</p>
+    </div>
+  </div>
+  <ol class="roundup-questions">
+    <li>两份作品有哪些可见的写作行为差异？我们能否仅凭修改痕迹多少，判断学生进行了怎样的自我监控？</li>
+    <li>回看全部五份习作：哪些元认知活动有直接证据？为了了解学生如何选择和调整写作策略，我们还希望他们说明什么？</li>
+  </ol>
+  <label for="roundup-note-input">整体讨论记录</label>
+  <textarea id="roundup-note-input" class="roundup-text" placeholder="记录教师们讨论后形成的问题、分歧或共识……" spellcheck="false"></textarea>
+  <p class="roundup-note">内容仅保存在当前浏览器，点击上方“导出五份观察记录”时会一并导出。</p>
+</section>
 <div class="pager"><button type="button" class="btn small" id="prev-btn">← 上一份</button><span class="current" id="position">第 1 / 5 份</span><button type="button" class="btn small accent" id="next-btn">下一份 →</button></div>
 </section>
 </div>
@@ -211,9 +253,11 @@ const CASES=[
  {id:'S52',question:'一份写得相对完整的习作，是否也需要元认知教学？学生如何知道自己已经完成任务？'}
 ];
 const KEY='exo-pe-qualite-week-observations-v1';
+const ROUNDUP_KEY='exo-pe-qualite-week-roundup-v1';
 const $=id=>document.getElementById(id);let current=0;let records={};let zoom=1;let storageWorks=true;
 try {const stored=JSON.parse(localStorage.getItem(KEY)||'{}');if(stored&&typeof stored==='object'&&!Array.isArray(stored))records=stored;}catch(e){storageWorks=false;}
-const tabs=$('case-tabs');const scan=$('scan');const observation=$('observation');const inquiry=$('inquiry');
+const tabs=$('case-tabs');const scan=$('scan');const observation=$('observation');const inquiry=$('inquiry');const roundupNote=$('roundup-note-input');
+try{roundupNote.value=localStorage.getItem(ROUNDUP_KEY)||'';}catch(e){}
 CASES.forEach((c,i)=>{const btn=document.createElement('button');btn.type='button';btn.className='tab';btn.setAttribute('role','tab');btn.setAttribute('aria-controls','discussion-panel');btn.id='case-tab-'+c.id;btn.dataset.idx=String(i);btn.innerHTML='<span class="tab-num">习作 '+String(i+1).padStart(2,'0')+'</span><span class="tab-id">'+c.id+'</span><span class="saved-marker" id="saved-'+c.id+'"></span>';btn.addEventListener('click',()=>select(i));tabs.appendChild(btn);});
 function hasNotes(id){const d=records[id]||{};return Boolean((d.obs||'').trim()||(d.ask||'').trim());}
 function mark(){let n=0;CASES.forEach(c=>{const el=$('saved-'+c.id);const has=hasNotes(c.id);if(has)n++;el.textContent=has?'● 已记录':'尚未记录';});$('progress').textContent='5 份习作 · '+n+' 份已有记录';}
@@ -226,21 +270,23 @@ function select(i){if(i<0||i>=CASES.length)return;current=i;const c=CASES[i];
  $('theory-bridge').hidden=true;$('theory-analysis').hidden=true;$('toggle-theory').setAttribute('aria-expanded','false');$('toggle-theory').textContent='展开 S12 的观察分析表 ↓';$('metacognition-concept').open=false;
  $('theory-bridge-s09').hidden=true;$('theory-analysis-s09').hidden=true;$('toggle-theory-s09').setAttribute('aria-expanded','false');$('toggle-theory-s09').textContent='展开 S09 的观察分析表 ↓';$('metacognition-concept-s09').open=false;
  $('theory-bridge-s45').hidden=true;$('theory-analysis-s45').hidden=true;$('toggle-theory-s45').setAttribute('aria-expanded','false');$('toggle-theory-s45').textContent='展开 S45 的观察分析表 ↓';$('metacognition-concept-s45').open=false;
+ $('roundup').hidden=true;
  const record=records[c.id]||{};observation.value=record.obs||'';inquiry.value=record.ask||'';$('save-status').textContent=storageWorks?'输入后自动保存在本机':'此浏览器可能不支持本机保存';
  $('position').textContent='第 '+(i+1)+' / 5 份';$('prev-btn').disabled=i===0;$('next-btn').disabled=i===CASES.length-1;
  mark();}
-$('toggle-question').addEventListener('click',()=>{const box=$('question-box');box.hidden=!box.hidden;$('question-placeholder').hidden=!box.hidden;$('toggle-question').textContent=box.hidden?'显示讨论问题':'收起讨论问题';$('toggle-question').setAttribute('aria-expanded',String(!box.hidden));$('theory-bridge').hidden=(current!==0||box.hidden);$('theory-bridge-s09').hidden=(current!==1||box.hidden);$('theory-bridge-s45').hidden=(current!==2||box.hidden);});
+$('toggle-question').addEventListener('click',()=>{const box=$('question-box');box.hidden=!box.hidden;$('question-placeholder').hidden=!box.hidden;$('toggle-question').textContent=box.hidden?'显示讨论问题':'收起讨论问题';$('toggle-question').setAttribute('aria-expanded',String(!box.hidden));$('theory-bridge').hidden=(current!==0||box.hidden);$('theory-bridge-s09').hidden=(current!==1||box.hidden);$('theory-bridge-s45').hidden=(current!==2||box.hidden);$('roundup').hidden=(current!==4||box.hidden);});
 $('toggle-theory').addEventListener('click',()=>{const p=$('theory-analysis');p.hidden=!p.hidden;const shown=!p.hidden;$('toggle-theory').setAttribute('aria-expanded',String(shown));$('toggle-theory').textContent=shown?'收起 S12 的观察分析表 ↑':'展开 S12 的观察分析表 ↓';});
 $('continue-after-theory').addEventListener('click',()=>{select(1);$('workspace').scrollIntoView({behavior:'smooth',block:'start'});});
 $('toggle-theory-s09').addEventListener('click',()=>{const p=$('theory-analysis-s09');p.hidden=!p.hidden;const shown=!p.hidden;$('toggle-theory-s09').setAttribute('aria-expanded',String(shown));$('toggle-theory-s09').textContent=shown?'收起 S09 的观察分析表 ↑':'展开 S09 的观察分析表 ↓';});
 $('continue-after-theory-s09').addEventListener('click',()=>{select(2);$('workspace').scrollIntoView({behavior:'smooth',block:'start'});});
 $('toggle-theory-s45').addEventListener('click',()=>{const p=$('theory-analysis-s45');p.hidden=!p.hidden;const shown=!p.hidden;$('toggle-theory-s45').setAttribute('aria-expanded',String(shown));$('toggle-theory-s45').textContent=shown?'收起 S45 的观察分析表 ↑':'展开 S45 的观察分析表 ↓';});
 $('continue-after-theory-s45').addEventListener('click',()=>{select(3);$('workspace').scrollIntoView({behavior:'smooth',block:'start'});});
+roundupNote.addEventListener('input',()=>{try{localStorage.setItem(ROUNDUP_KEY,roundupNote.value);}catch(e){} });
 [observation,inquiry].forEach(el=>el.addEventListener('input',persist));$('prev-btn').addEventListener('click',()=>select(current-1));$('next-btn').addEventListener('click',()=>select(current+1));
 tabs.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;e.preventDefault();let to=current;if(e.key==='ArrowLeft')to=Math.max(0,current-1);if(e.key==='ArrowRight')to=Math.min(CASES.length-1,current+1);if(e.key==='Home')to=0;if(e.key==='End')to=CASES.length-1;select(to);tabs.children[to].focus();});
 function currentText(){const c=CASES[current];return c.id+'｜教学质量周\n讨论问题：'+c.question+'\n\n我的观察：\n'+(observation.value||'（未填写）')+'\n\n还需向学生了解：\n'+(inquiry.value||'（未填写）');}
 $('copy-btn').addEventListener('click',async()=>{const text=currentText();try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(text);}else{const el=document.createElement('textarea');el.value=text;document.body.appendChild(el);el.select();if(!document.execCommand('copy'))throw Error('copy');el.remove();}$('save-status').textContent='已复制当前记录';}catch(e){$('save-status').textContent='复制不可用，请选中输入框中的内容手动复制';}});
-$('export-btn').addEventListener('click',()=>{persist();const lines=['教学质量周 · 五份法语写作习作观察记录','教师个人记录（由本设备导出）',''];CASES.forEach(c=>{const d=records[c.id]||{};lines.push('='.repeat(36),c.id,'讨论问题：'+c.question,'','我的观察：',d.obs||'（未填写）','','还需向学生了解：',d.ask||'（未填写）','');});const blob=new Blob(['\uFEFF'+lines.join('\n')],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='教学质量周_观察记录.txt';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1200);$('save-status').textContent='观察记录已导出';});
+$('export-btn').addEventListener('click',()=>{persist();const lines=['教学质量周 · 五份法语写作习作观察记录','教师个人记录（由本设备导出）',''];CASES.forEach(c=>{const d=records[c.id]||{};lines.push('='.repeat(36),c.id,'讨论问题：'+c.question,'','我的观察：',d.obs||'（未填写）','','还需向学生了解：',d.ask||'（未填写）','');});lines.push('='.repeat(36),'整体观察与讨论（S26、S52及五份习作）','',roundupNote.value.trim()||'（未填写）','');const blob=new Blob(['\uFEFF'+lines.join('\n')],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='教学质量周_观察记录.txt';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1200);$('save-status').textContent='观察记录已导出';});
 $('clear-btn').addEventListener('click',()=>{if(!hasNotes(CASES[current].id))return;if(!confirm('仅清空当前习作的观察记录？其他习作不会受影响。'))return;observation.value='';inquiry.value='';persist();});
 const viewer=$('viewer'),viewerImage=$('viewer-image'),viewerWindow=$('viewer-window');function applyZoom(){viewerImage.style.width=Math.round(950*zoom)+'px';}
 $('zoom-btn').addEventListener('click',()=>{const src=scan.src;if(typeof viewer.showModal!=='function'){window.open(src,'_blank','noopener');return;}viewerImage.src=src;viewerImage.alt=scan.alt;zoom=1;applyZoom();$('viewer-title').textContent=CASES[current].id+' · 原稿';viewer.showModal();viewerWindow.scrollTop=0;viewerWindow.scrollLeft=0;});
