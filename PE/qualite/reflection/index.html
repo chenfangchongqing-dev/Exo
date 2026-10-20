@@ -410,7 +410,7 @@ function filename(ext){
  return "法语写作过程反思_"+(readForm().date||todayLocal())+"."+ext;
 }
 document.getElementById("exportTxt").addEventListener("click",function(){save();download(filename("txt"),plain(),"text/plain;charset=utf-8");notify("文字记录已下载，请按老师要求自行提交。")});
-document.getElementById("exportJson").addEventListener("click",function(){save();download(filename("json"),"\uFEFF"+JSON.stringify(snapshot(),null,2),"application/json;charset=utf-8");notify("结构化记录已下载；此文件没有自动发送给教师。")});
+document.getElementById("exportJson").addEventListener("click",function(){save();download(filename("json"),JSON.stringify(snapshot(),null,2),"application/json;charset=utf-8");notify("结构化记录已下载；此文件没有自动发送给教师。")});
 document.getElementById("print").addEventListener("click",function(){save();window.print()});
 document.getElementById("clear").addEventListener("click",function(){
  if(!confirm("确定清空当前设备上保存的这份反思表吗？已下载的文件不会受到影响。"))return;
