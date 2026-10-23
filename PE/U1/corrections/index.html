@@ -40,6 +40,17 @@ h1{position:relative;z-index:1;font-size:clamp(38px,5.5vw,60px);line-height:1.12
 .fr:last-child{margin-bottom:0}
 .cn{font:15px/1.8 "KaiTi","Kaiti SC","STKaiti","Noto Serif CJK SC",serif;color:#555044;margin:12px 0 0}
 .annotation{border-left:3px solid #e7af37;background:#fffae9;padding:9px 13px;margin:17px 0 0;font:15px/1.65 "KaiTi","STKaiti","Microsoft YaHei",sans-serif}
+.scan-stage{margin:0;padding:17px 18px 12px;background:#f1eee7;display:flex;flex-direction:column;gap:10px;align-items:center}
+.scan-preview{display:block;width:100%;height:auto;max-height:660px;background:white;border-radius:8px;border:1px solid #ddd5c8;box-shadow:0 6px 19px rgba(48,39,25,.12)}
+.scan-caption{align-self:stretch;text-align:center;font-size:12px;line-height:1.5;color:#7c6f60}
+.scan-caption a{color:#916218;text-underline-offset:2px;font-weight:750}
+.transcription{border-top:1px solid #e8dbca;background:var(--paper)}
+.transcription summary{cursor:pointer;padding:13px 22px;font-size:14px;color:#825614;font-weight:800;list-style:none}
+.transcription summary::-webkit-details-marker{display:none}
+.transcription summary:before{content:"＋";padding-right:9px}
+.transcription[open] summary:before{content:"－"}
+.transcription[open] summary{border-bottom:1px solid #eadcca;background:#fffbf2}
+.transcription .paper{padding:19px 22px}
 .source{border-top:1px solid #f0e4d2;padding:12px 22px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:12px;color:var(--muted)}
 .source a{text-underline-offset:3px;color:#986210;font-weight:750}
 .target{padding:23px}.eyebrow{font-size:11px;color:#a36f21;font-weight:850;letter-spacing:.13em;text-transform:uppercase;margin:0 0 8px}
@@ -92,6 +103,7 @@ textarea{width:100%;min-height:125px;resize:vertical;border:1px solid #d9c39e;ba
 .footer{font-size:12px;color:#817765;margin-top:33px;padding-top:16px;border-top:1px solid var(--line)}
 body.project{font-size:19px}body.project .fr,body.project .model{font-size:27px}body.project .prompt{font-size:26px}body.project .lesson .step p,body.project .lesson li{font-size:19px}body.project .tab{min-height:112px}body.project .shell{max-width:1380px}
 @media(max-width:850px){.intro-grid,.teaching-grid{grid-template-columns:1fr}}
+@media(max-width:680px){.scan-stage{padding:10px 9px 8px}.scan-caption{font-size:11px}.transcription summary{padding:12px 15px}
 @media(max-width:680px){.shell{padding:14px 12px 35px}.hero{padding:27px 21px;border-radius:18px}.tabs{display:flex;overflow-x:auto;gap:8px;scroll-snap-type:x mandatory;padding:0 1px 7px}.tab{flex:0 0 178px;scroll-snap-align:start}.paper{padding:17px}.fr{font-size:20px}.target{padding:18px}.lesson,.correction{padding:18px}.flow{grid-template-columns:repeat(2,minmax(0,1fr))}.flow span+span:before{content:""}.term-grid{grid-template-columns:1fr}.hero .sublead{font-size:13px}.exercise{padding:18px}.top-actions{gap:8px}.pager .btn{padding:8px 10px}}
 @media print{.shell{max-width:none;padding:0}.hero{border:0;padding:8px 0;background:none}.hero:after,.top,.tabs,.pager,.exercise-actions,.source a,.pills{display:none!important}.case{display:block!important;break-before:page}.case:first-of-type{break-before:auto}.intro-grid,.teaching-grid{grid-template-columns:1fr}.panel{box-shadow:none;break-inside:avoid}.lesson{break-inside:auto}.solution:not([open]) .answer{display:block!important}.solution[open] summary{border:0}.step{break-inside:avoid}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
@@ -123,7 +135,13 @@ body.project{font-size:19px}body.project .fr,body.project .model{font-size:27px}
 <article class="case" id="cas-S12" role="tabpanel" aria-labelledby="tab-S12" data-case-panel="S12">
 <div class="case-title"><div><p class="copy-label">S12 · CAS 01</p><h2>Quand le bonheur devient une source de frustration</h2><p class="aim">Objectif : partir d'une idée déjà trouvée pour construire un exemple qui la défend.</p></div><a class="btn" href="../../qualite/copies/S12.webp" target="_blank" rel="noopener">Voir le manuscrit ↗</a></div>
 <div class="intro-grid">
-<section class="panel"><div class="panel-hd"><h3>La copie originale</h3><small>TEXTE DE L'ÉTUDIANT · NON CORRIGÉ</small></div><div class="paper"><p class="fr">Dans la première chanson, le bonheur est présenté comme une chose fragile que les personnes ne peuvent pas arrêter d'échapper. Pour ma part, je pense que le monde cherche le bonheur, mais il peut aussi devenir une source de frustration parce qu'on ira peur de le perdre.</p><p class="annotation" lang="zh-CN">学生边注：后面想不出例子。能否证明“le bonheur peut devenir une source de frustration”的。</p></div><div class="source"><span>Texte original conservé, fautes comprises.</span><span>S12 · Anonymisé</span></div></section>
+<section class="panel"><div class="panel-hd"><h3>La copie originale</h3><small>MANUSCRIT · NON CORRIGÉ</small></div>
+<figure class="scan-stage">
+<svg class="scan-preview" viewBox="298 86 842 488" role="img" aria-label="Copie manuscrite de S12, recadrée sur le texte et ses annotations"><image href="../../qualite/copies/S12.webp" x="0" y="0" width="1150" height="1582"/></svg>
+<figcaption class="scan-caption">Extrait recadré pour la lecture en classe · <a href="../../qualite/copies/S12.webp" target="_blank" rel="noopener">Voir la page entière ↗</a></figcaption>
+</figure>
+<details class="transcription"><summary>Afficher la transcription</summary><div class="paper"><p class="fr">Dans la première chanson, le bonheur est présenté comme une chose fragile que les personnes ne peuvent pas arrêter d'échapper. Pour ma part, je pense que le monde cherche le bonheur, mais il peut aussi devenir une source de frustration parce qu'on ira peur de le perdre.</p><p class="annotation" lang="zh-CN">学生边注：后面想不出例子。能否证明“le bonheur peut devenir une source de frustration”的。</p></div></details>
+<div class="source"><span>Texte original conservé, fautes comprises.</span><span>S12 · Anonymisé</span></div></section>
 <aside class="panel target"><p class="eyebrow">Question de départ</p><p class="question">« Je n'arrive pas à trouver d'exemple. »</p><p class="zh-intro" lang="zh-CN">问题真的在于没有 idée 吗？先找出学生已经写出来的观点。</p><p class="focus-line"><strong>À préserver :</strong> « le bonheur peut devenir une source de frustration ». L'objectif n'est pas de remplacer la frustration par la simple peur de perdre le bonheur.</p></aside>
 </div>
 <div class="teaching-grid">
@@ -149,7 +167,13 @@ body.project{font-size:19px}body.project .fr,body.project .model{font-size:27px}
 <article class="case" id="cas-S09" role="tabpanel" aria-labelledby="tab-S09" data-case-panel="S09" hidden>
 <div class="case-title"><div><p class="copy-label">S09 · CAS 02</p><h2>L'idée est là, mais comment la dire en français ?</h2><p class="aim">Objectif : repérer une idée déjà développée en chinois et retrouver des ressources linguistiques simples.</p></div><a class="btn" href="../../qualite/copies/S09.webp" target="_blank" rel="noopener">Voir le manuscrit ↗</a></div>
 <div class="intro-grid">
-<section class="panel"><div class="panel-hd"><h3>La copie originale</h3><small>TEXTE DE L'ÉTUDIANT · NON CORRIGÉ</small></div><div class="paper"><p class="fr">On entend souvent dire que la course sans fin au bonheur matériel. Pour ma part, je pense que c'est vrai. Il y a objets luxuriante dont on peut jouir et nous pouvons les voir sur les réseaux sociaux, donc nous ne pouvons pas restreindre</p><p class="cn" lang="zh-CN">我们因为看到别人分享出来的更高品质的生活而无法遏制自己的向往和贪欲。比如，有许多人拼团订一间豪华酒店的房间，轮流拍照以模仿那些真正有能力承担这种生活的人。这样的例子展示出人对物质生活的追求是无法停止的——哪怕实际上享受不了，也要假装自己有，哪怕一秒钟，从而得到精神上的满足与快乐。</p></div><div class="source"><span>Texte original bilingue conservé.</span><span>S09 · Anonymisé</span></div></section>
+<section class="panel"><div class="panel-hd"><h3>La copie originale</h3><small>MANUSCRIT · NON CORRIGÉ</small></div>
+<figure class="scan-stage">
+<svg class="scan-preview" viewBox="68 92 1037 472" role="img" aria-label="Copie manuscrite de S09, recadrée sur le texte et ses annotations"><image href="../../qualite/copies/S09.webp" x="0" y="0" width="1150" height="1582"/></svg>
+<figcaption class="scan-caption">Extrait recadré pour la lecture en classe · <a href="../../qualite/copies/S09.webp" target="_blank" rel="noopener">Voir la page entière ↗</a></figcaption>
+</figure>
+<details class="transcription"><summary>Afficher la transcription</summary><div class="paper"><p class="fr">On entend souvent dire que la course sans fin au bonheur matériel. Pour ma part, je pense que c'est vrai. Il y a objets luxuriante dont on peut jouir et nous pouvons les voir sur les réseaux sociaux, donc nous ne pouvons pas restreindre</p><p class="cn" lang="zh-CN">我们因为看到别人分享出来的更高品质的生活而无法遏制自己的向往和贪欲。比如，有许多人拼团订一间豪华酒店的房间，轮流拍照以模仿那些真正有能力承担这种生活的人。这样的例子展示出人对物质生活的追求是无法停止的——哪怕实际上享受不了，也要假装自己有，哪怕一秒钟，从而得到精神上的满足与快乐。</p></div></details>
+<div class="source"><span>Texte original bilingue conservé.</span><span>S09 · Anonymisé</span></div></section>
 <aside class="panel target"><p class="eyebrow">Question de départ</p><p class="question">Manque-t-il d'idées ou de mots ?</p><p class="zh-intro" lang="zh-CN">法语部分在 restreindre 处中断，但中文部分已经给出了一个具体、独特的例子。</p><p class="focus-line"><strong>À préserver :</strong> les réseaux sociaux → le désir d'imiter → la chambre d'hôtel de luxe → la satisfaction passagère.</p></aside>
 </div>
 <div class="teaching-grid">
@@ -171,11 +195,17 @@ body.project{font-size:19px}body.project .fr,body.project .model{font-size:27px}
 <article class="case" id="cas-S45" role="tabpanel" aria-labelledby="tab-S45" data-case-panel="S45" hidden>
 <div class="case-title"><div><p class="copy-label">S45 · CAS 03</p><h2>Un exemple connu suffit-il à prouver une idée ?</h2><p class="aim">Objectif : vérifier ce que l'exemple de Marie Curie permet réellement d'affirmer.</p></div><a class="btn" href="../../qualite/copies/S45.webp" target="_blank" rel="noopener">Voir le manuscrit ↗</a></div>
 <div class="intro-grid">
-<section class="panel"><div class="panel-hd"><h3>La copie originale</h3><small>TEXTE DE L'ÉTUDIANT · NON CORRIGÉ</small></div><div class="paper"><p class="fr">On entend souvent dire que le bonheur vient uniquement de l'amour, une idée très répandue dans beaucoup de chansons.
+<section class="panel"><div class="panel-hd"><h3>La copie originale</h3><small>MANUSCRIT · NON CORRIGÉ</small></div>
+<figure class="scan-stage">
+<svg class="scan-preview" viewBox="66 20 924 795" role="img" aria-label="Copie manuscrite de S45, recadrée sur le texte et ses annotations"><image href="../../qualite/copies/S45.webp" x="0" y="0" width="1150" height="1582"/></svg>
+<figcaption class="scan-caption">Extrait recadré pour la lecture en classe · <a href="../../qualite/copies/S45.webp" target="_blank" rel="noopener">Voir la page entière ↗</a></figcaption>
+</figure>
+<details class="transcription"><summary>Afficher la transcription</summary><div class="paper"><p class="fr">On entend souvent dire que le bonheur vient uniquement de l'amour, une idée très répandue dans beaucoup de chansons.
 
 Pour ma part, je ne suis pas d'accord, car le bonheur peut exister sans relation amoureuse. Prenons l'exemple de Madame Curie : elle trouve sa bonheur dans le recherche scientifique, sans compter dans l'amour.
 
-Cet exemple montre que le bonheur peut naître de sa passion et de ses réussites professionnelles.</p></div><div class="source"><span>Texte original conservé, fautes comprises.</span><span>S45 · Anonymisé</span></div></section>
+Cet exemple montre que le bonheur peut naître de sa passion et de ses réussites professionnelles.</p></div></details>
+<div class="source"><span>Texte original conservé, fautes comprises.</span><span>S45 · Anonymisé</span></div></section>
 <aside class="panel target"><p class="eyebrow">Question de départ</p><p class="question">Que prouve l'exemple de Marie Curie ?</p><p class="zh-intro" lang="zh-CN">学生的立场明确，也找到了著名人物作为例子。问题不在于是否“有例子”，而在于事实能支持多大的结论。</p><p class="focus-line"><strong>À préserver :</strong> le bonheur peut avoir d'autres sources que l'amour, notamment une passion ou le travail.</p></aside>
 </div>
 <div class="teaching-grid">
@@ -196,7 +226,13 @@ Cet exemple montre que le bonheur peut naître de sa passion et de ses réussite
 <article class="case" id="cas-S26" role="tabpanel" aria-labelledby="tab-S26" data-case-panel="S26" hidden>
 <div class="case-title"><div><p class="copy-label">S26 · CAS 04</p><h2>Un bon exemple, mais une conclusion à renforcer</h2><p class="aim">Objectif : identifier une modification utile, au lieu de simplement multiplier les corrections.</p></div><a class="btn" href="../../qualite/copies/S26.webp" target="_blank" rel="noopener">Voir le manuscrit ↗</a></div>
 <div class="intro-grid">
-<section class="panel"><div class="panel-hd"><h3>La copie originale</h3><small>TEXTE DE L'ÉTUDIANT · NON CORRIGÉ</small></div><div class="paper"><p class="fr">On entend souvent dire que la course sans fin au bonheur matériel. Pour ma part, je suis d'accord, je pense que le bonheur matériel, c'est imprécis, c'est peut-être une voiture expensive, un appartement très luxueux, ou beaucoup d'argent, mais c'est impossible d'obtenir tous ce que on veut. Prenons l'exemple d'acheter une voiture, vous voulez une voiture simple, mais pour le bonheur matériel, peut-être vous avez envie d'acheter une voiture plus belle et sympa, et cette idée n'arrête jamais, parce qu'il y a toujours une meilleure voiture. Et ça montre que la course sans fin au bonheur matériel.</p></div><div class="source"><span>Texte original conservé, fautes comprises.</span><span>S26 · Anonymisé</span></div></section>
+<section class="panel"><div class="panel-hd"><h3>La copie originale</h3><small>MANUSCRIT · NON CORRIGÉ</small></div>
+<figure class="scan-stage">
+<svg class="scan-preview" viewBox="19 203 939 577" role="img" aria-label="Copie manuscrite de S26, recadrée sur le texte et ses annotations"><image href="../../qualite/copies/S26.webp" x="0" y="0" width="1150" height="1582"/></svg>
+<figcaption class="scan-caption">Extrait recadré pour la lecture en classe · <a href="../../qualite/copies/S26.webp" target="_blank" rel="noopener">Voir la page entière ↗</a></figcaption>
+</figure>
+<details class="transcription"><summary>Afficher la transcription</summary><div class="paper"><p class="fr">On entend souvent dire que la course sans fin au bonheur matériel. Pour ma part, je suis d'accord, je pense que le bonheur matériel, c'est imprécis, c'est peut-être une voiture expensive, un appartement très luxueux, ou beaucoup d'argent, mais c'est impossible d'obtenir tous ce que on veut. Prenons l'exemple d'acheter une voiture, vous voulez une voiture simple, mais pour le bonheur matériel, peut-être vous avez envie d'acheter une voiture plus belle et sympa, et cette idée n'arrête jamais, parce qu'il y a toujours une meilleure voiture. Et ça montre que la course sans fin au bonheur matériel.</p></div></details>
+<div class="source"><span>Texte original conservé, fautes comprises.</span><span>S26 · Anonymisé</span></div></section>
 <aside class="panel target"><p class="eyebrow">Question de départ</p><p class="question">Que faut-il vraiment modifier ?</p><p class="zh-intro" lang="zh-CN">学生已经用买车、换更好的车构成了一个切题的例子。修改不仅要让法语更正确，也要让最后一句真正解释例子。</p><p class="focus-line"><strong>À préserver :</strong> une voiture → une voiture plus belle → une autre envie → la course sans fin.</p></aside>
 </div>
 <div class="teaching-grid">
@@ -218,11 +254,17 @@ Cet exemple montre que le bonheur peut naître de sa passion et de ses réussite
 <article class="case" id="cas-S52" role="tabpanel" aria-labelledby="tab-S52" data-case-panel="S52" hidden>
 <div class="case-title"><div><p class="copy-label">S52 · CAS 05</p><h2>Quand l'exemple fonctionne déjà</h2><p class="aim">Objectif : reconnaître les réussites d'un texte et ne modifier que ce qui est nécessaire.</p></div><a class="btn" href="../../qualite/copies/S52.webp" target="_blank" rel="noopener">Voir le manuscrit ↗</a></div>
 <div class="intro-grid">
-<section class="panel"><div class="panel-hd"><h3>La copie originale</h3><small>TEXTE DE L'ÉTUDIANT · NON CORRIGÉ</small></div><div class="paper"><p class="fr">On entend souvent dire qu'avoir des enfants n'apporte que du bonheur. Pour ma part, je pense que cette idée est fausse.
+<section class="panel"><div class="panel-hd"><h3>La copie originale</h3><small>MANUSCRIT · NON CORRIGÉ</small></div>
+<figure class="scan-stage">
+<svg class="scan-preview" viewBox="95 79 1005 727" role="img" aria-label="Copie manuscrite de S52, recadrée sur le texte et ses annotations"><image href="../../qualite/copies/S52.webp" x="0" y="0" width="1150" height="1582"/></svg>
+<figcaption class="scan-caption">Extrait recadré pour la lecture en classe · <a href="../../qualite/copies/S52.webp" target="_blank" rel="noopener">Voir la page entière ↗</a></figcaption>
+</figure>
+<details class="transcription"><summary>Afficher la transcription</summary><div class="paper"><p class="fr">On entend souvent dire qu'avoir des enfants n'apporte que du bonheur. Pour ma part, je pense que cette idée est fausse.
 
 Prenons l'exemple de jeunes parents : ils vivent des moments de joie, mais ils doivent aussi supporter les pleurs des enfants et assumer les responsabilités d'un parent.
 
-Cet exemple montre que le bonheur parental ne va pas sans difficultés, il aussi mélange la joie et les soucis au quotidien.</p></div><div class="source"><span>Texte original conservé, fautes comprises.</span><span>S52 · Anonymisé</span></div></section>
+Cet exemple montre que le bonheur parental ne va pas sans difficultés, il aussi mélange la joie et les soucis au quotidien.</p></div></details>
+<div class="source"><span>Texte original conservé, fautes comprises.</span><span>S52 · Anonymisé</span></div></section>
 <aside class="panel target"><p class="eyebrow">Question de départ</p><p class="question">Faut-il tout réécrire pour faire mieux ?</p><p class="zh-intro" lang="zh-CN">这份文章已经有清晰的观点、恰当的例证和解释。我们首先要指出它为什么有效，然后才做有限订正。</p><p class="focus-line"><strong>À préserver :</strong> joie des jeunes parents + pleurs et responsabilités = une expérience faite de bonheur et de difficultés.</p></aside>
 </div>
 <div class="teaching-grid">
