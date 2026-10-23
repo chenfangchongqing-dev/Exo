@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#FDBA12">
+<meta name="description" content="Inspire 4 · Unité 1 · Leçon 2 · Compréhension écrite et bilan : Heureux à tout prix ?">
+<title>Heureux à tout prix ? · Bilan CE · Unité 1</title>
+<style>
+:root{--bg:#faf8f2;--paper:#fffefa;--ink:#2b2822;--muted:#756c5b;--line:#e7dbc8;--gold:#fdba12;--orange:#c4851d;--pink:#ce2878;--green:#2b7351;--red:#ad493b;--shadow:0 9px 28px rgba(78,54,22,.055)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.58 Arial,"Helvetica Neue",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+button,textarea{font:inherit}
+button{cursor:pointer}
+a{color:inherit}
+a:focus-visible,button:focus-visible,textarea:focus-visible,input:focus-visible{outline:3px solid #a97118;outline-offset:3px}
+[hidden]{display:none!important}
+.shell{max-width:1050px;margin:auto;padding:19px 20px 60px}
+.top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:13px;margin:0 0 20px;font-size:13px}
+.brand{font-weight:850;letter-spacing:.09em;color:#886019;text-decoration:none}
+.back{color:var(--muted);font-weight:750;text-decoration:none}
+.back:hover{text-decoration:underline}
+.hero{padding:32px clamp(22px,5vw,49px);border:1px solid #e8c981;border-radius:23px;background:linear-gradient(115deg,#ffcb4e,#ffe4a5 70%,#fff5df);box-shadow:0 12px 30px #d9a13413}
+.kicker{margin:0 0 7px;font-size:12px;font-weight:850;letter-spacing:.13em;color:#79551b;text-transform:uppercase}
+h1{font-size:clamp(31px,5vw,47px);line-height:1.12;letter-spacing:-.04em;margin:0 0 10px}
+.hero .lead{font:clamp(18px,2.5vw,21px)/1.45 "Times New Roman",Times,serif;margin:0;max-width:710px}
+.nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:17px}
+.nav a{font-size:13px;font-weight:800;text-decoration:none;background:#fff9e9;border:1px solid #eacb8e;border-radius:999px;padding:8px 13px}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:25px clamp(18px,3.5vw,34px);margin:19px 0;box-shadow:var(--shadow)}
+.section-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:9px;margin-bottom:17px}
+.section-head h2{font-size:22px;margin:0}
+.section-head .step{color:#ae781d;font-size:12px;font-weight:850;letter-spacing:.06em}
+.intro{font:19px/1.55 "Times New Roman",Times,serif;margin:0 0 17px}
+.note{color:var(--muted);font-size:13px;line-height:1.7}
+.reading{max-width:820px;margin:0 auto;border-top:5px solid #e7aa34;padding-top:20px}
+.reading h3{font:bold italic clamp(29px,4.2vw,39px)/1.08 Georgia,"Times New Roman",serif;color:var(--pink);margin:0 0 21px;letter-spacing:-.02em}
+.reading p{font:20px/1.56 Georgia,"Times New Roman",serif;margin:0 0 18px}
+.reading p.leadtext{font-weight:700;line-height:1.48}
+.reading .source{text-align:right;color:#6c6257;font:14px/1.5 Georgia,"Times New Roman",serif;margin-top:8px}
+.reading .initial{float:left;font-size:77px;line-height:.75;font-weight:bold;color:#be2874;margin:10px 8px 0 0}
+.reading q{quotes:"« " " »"}
+.example{background:#fff6e1;border:1px solid #edd5aa;border-radius:13px;padding:15px 17px;margin-bottom:19px}
+.example p{font-size:14px;margin:0 0 5px}
+.example .citation{font:16px/1.5 "Times New Roman",serif;color:#8f621c;margin:3px 0 0}
+#progress{color:#976716;font-size:12px;font-weight:800;letter-spacing:.04em}
+.questions{display:grid;gap:13px}
+.question{border:1px solid #e7dfd1;border-radius:14px;background:#fff;padding:17px 18px 16px;margin:0;min-width:0}
+.question legend{width:100%;padding:0;margin:0 0 12px;font-size:16px;font-weight:650;line-height:1.55}
+.qletter{color:#a67b31;font-weight:900;margin-right:8px}
+.choice-row{display:flex;gap:19px;flex-wrap:wrap;margin-bottom:12px}
+.choice{display:flex;align-items:center;gap:9px;font-weight:750;font-size:14px;cursor:pointer}
+.choice input{width:20px;height:20px;margin:0;accent-color:#c88b1e;cursor:pointer}
+.question label.justification{display:block;font-size:13px;color:#695d4f;font-weight:750;margin:6px 0}
+.question textarea,.lex textarea{width:100%;resize:vertical;min-height:74px;border:1px solid #d9cbb6;background:#fffdf8;border-radius:10px;padding:12px 13px;color:var(--ink);font:16px/1.5 "Times New Roman",serif}
+.question textarea::placeholder,.lex textarea::placeholder{color:#998d7f}
+.question textarea:focus,.lex textarea:focus{border-color:#bd8827}
+.question.correct{border-color:#a7d4b4;background:#f8fdf8}
+.question.incorrect{border-color:#e5b6a9;background:#fff9f6}
+.answer{border-top:1px solid #dcd7cb;margin-top:14px;padding-top:13px}
+.answer strong{font-size:14px;color:var(--green)}
+.question.incorrect .answer strong{color:var(--red)}
+.answer p{font:17px/1.55 "Times New Roman",Times,serif;margin:7px 0 0}
+.lex{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:17px}
+.lex-col{background:#fff;border:1px solid var(--line);border-radius:13px;padding:16px}
+.lex-col h3{font-size:16px;margin:0 0 9px}
+.lex-col .sample{font:16px/1.5 "Times New Roman",serif;color:#9b6721;margin-bottom:10px}
+.lex textarea{min-height:142px}
+.actions{display:flex;gap:11px;align-items:center;flex-wrap:wrap;margin-top:24px}
+.btn{font-size:14px;font-weight:850;padding:12px 19px;min-height:46px;border:1px solid #dacbb0;border-radius:11px;background:#fff8e8;color:#6c5126}
+.btn.primary{background:#2e2a24;color:white;border-color:#2e2a24}
+.btn:hover{filter:brightness(.94)}
+.warning{min-height:23px;margin:10px 0 0;color:var(--red);font-size:13px;font-weight:750}
+#results{margin:22px 0 0;border:1px solid #b9d6bf;background:#f6fcf5;border-radius:15px;padding:20px}
+#results strong{color:#236c47;font-size:26px}
+#results p{margin:7px 0 0;font-size:14px}
+.corrtitle{font-size:20px;margin:0 0 10px}
+.answers-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.answer-col{border:1px solid #e2d5bf;border-radius:13px;background:white;padding:17px}
+.answer-col h3{font-size:16px;margin:0 0 8px}
+.answer-col p{font:19px/1.6 "Times New Roman",serif;margin:0}
+#correction{scroll-margin-top:20px}
+footer{color:var(--muted);font-size:12px;padding-top:20px;margin-top:31px;border-top:1px solid var(--line)}
+@media(max-width:690px){.shell{padding:14px 13px 45px}.hero{padding:26px 22px}.panel{padding:19px 15px}.lex,.answers-grid{grid-template-columns:1fr}.question{padding:15px 13px}.reading p{font-size:19px}.reading h3{font-size:31px}.reading .initial{font-size:68px}.actions .btn{flex:1}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body><div class="shell">
+<header class="top"><a href="../index.html" class="brand">INSPIRE 4 · UNITÉ 1 · CE</a><a class="back" href="../index.html">← Compréhension écrite</a></header>
+<main>
+<section class="hero">
+<p class="kicker">Bilan de compréhension écrite · Leçon 2</p>
+<h1>Heureux à tout prix ?</h1>
+<p class="lead">Lire un article, confronter des affirmations au texte et repérer les mots des émotions.</p>
+<nav class="nav" aria-label="Navigation dans l'exercice"><a href="#article">Lire l'article ↓</a><a href="#questions">Vrai ou faux ↓</a><a href="#emotions">Les émotions ↓</a></nav>
+</section>
+<section class="panel" id="article" aria-labelledby="lecture">
+<div class="section-head"><h2 id="lecture">1 · Lisez l'article</h2><span class="step">DOCUMENT À LIRE</span></div>
+<article class="reading">
+<h3>Heureux à tout prix :<br> et si c'était une mauvaise idée ?</h3>
+<p class="leadtext"><span class="initial" aria-hidden="true">Ê</span>Être plus heureux, sûr de soi, moins angoissé... Ce sont des objectifs qu'on se fixe assez souvent. Et ça ne fonctionne pas toujours ! C'est peut-être parce qu'on se trompe de cible ? Commencer par accepter ses émotions négatives, voilà ce que proposent des spécialistes.</p>
+<p>S'appliquer à être souriant, serviable... Faire du yoga, des exercices de pleine conscience, lire des livres de psychologie positive... Nul n'y échappe... Tout ça pour se libérer des émotions désagréables qui s'agitent sous la surface – la jalousie, la colère, l'égoïsme, l'anxiété, la culpabilité... Non seulement on aurait tort de les ignorer, mais on ne les exploiterait pas assez ! C'est du moins la thèse de plusieurs chercheurs en psychologie, qui en ont assez de l'obsession culturelle du bonheur à tout prix.</p>
+<p>« On dirait qu'il faut toujours être dans le plaisir, le désir, la joie », constate Frédéric Langlois, professeur et chercheur en psychologie à l'Université du Québec à Trois-Rivières. C'est dommage, parce que toutes les émotions ont une fonction saine, même celles qui semblent détestables ou qu'on a envie de fuir. « Aucune émotion n'est inutile, sinon les humains ne les auraient pas développées au cours de leur évolution. » Elles nous aident à cerner les problèmes, trouver des solutions, obtenir des gains et nous protéger.</p>
+<p>Prenons la colère. Émotion détestée à cause du potentiel de violence qu'elle recèle et du malaise qu'elle nous impose. Pourtant, elle constitue un outil précieux pour obtenir justice lorsqu'on se sent sous-évalué, une manière de signaler qu'on ne se laissera pas exploiter. Elle apporte confiance et audace, en plus de rehausser notre statut : quand on est en colère, on est perçu comme plus compétent et plus crédible. C'est aussi un formidable vecteur d'action. Elle a permis aux femmes d'obtenir plus de droits et aux Noirs d'Afrique du Sud de renverser l'apartheid, entre autres.</p>
+<p>Les chercheurs concluent : « C'est lorsqu'on tire profit de toute la gamme des émotions, des pensées et des comportements de notre répertoire que nous devenons des êtres complets. »</p>
+<p class="source">D'après Marie-Hélène Proulx, <em>La Châtelaine</em>, 23 décembre 2018.</p>
+</article>
+</section>
+<form id="quiz" novalidate>
+<section class="panel" id="questions" aria-labelledby="consigne1">
+<div class="section-head"><h2 id="consigne1">2 · Vrai ou faux ?</h2><span id="progress">0 / 8 réponses</span></div>
+<p class="intro">Lisez l'article et cochez <strong>Vrai</strong> ou <strong>Faux</strong>. Justifiez chaque réponse avec une phrase de l'article.</p>
+<div class="example"><p><strong>Ex.</strong> L'article propose une réflexion sur les émotions négatives. <strong>✓ Vrai</strong></p>
+<p class="citation">Justification : « Être heureux à tout prix ?... Commencer par accepter ses émotions négatives... »</p></div>
+<div class="questions" id="question-list"></div>
+</section>
+<section class="panel" id="emotions" aria-labelledby="consigne2">
+<div class="section-head"><h2 id="consigne2">3 · Relevez les émotions</h2><span class="step">ACTIVITÉ 2</span></div>
+<p class="intro">Relisez l'article. Relevez les émotions citées (adjectifs et noms) et classez-les.</p>
+<div class="lex">
+<div class="lex-col"><h3>Émotions positives</h3><p class="sample">Exemple : <strong>heureux</strong></p><label for="positive" class="note">Notez les autres mots ou expressions, séparés par des virgules.</label><textarea id="positive" name="positive" rows="5" placeholder="Relevez les émotions positives..."></textarea></div>
+<div class="lex-col"><h3>Émotions négatives</h3><p class="sample">Exemple : <strong>angoissé</strong></p><label for="negative" class="note">Notez les autres mots ou expressions, séparés par des virgules.</label><textarea id="negative" name="negative" rows="5" placeholder="Relevez les émotions négatives..."></textarea></div>
+</div>
+<p class="note">Les justifications et les relevés de vocabulaire seront à comparer à la correction après validation. Seuls les choix Vrai / Faux sont notés automatiquement.</p>
+<div class="actions"><button type="submit" class="btn primary" id="validate">Valider mes réponses</button><button type="button" class="btn" id="reset-quiz" hidden>Recommencer</button></div>
+<p class="warning" id="warning" role="alert" aria-live="polite"></p>
+<div id="results" hidden tabindex="-1" aria-live="polite"><strong id="score"></strong><p id="score-note"></p></div>
+</section>
+</form>
+<section class="panel" id="correction" hidden aria-labelledby="corr-title">
+<div class="section-head"><h2 id="corr-title">4 · Corrigez vos réponses</h2><span class="step">APRÈS VALIDATION</span></div>
+<p>Revenez aux huit affirmations ci-dessus pour retrouver les réponses et les justifications proposées. Comparez ensuite votre relevé de vocabulaire avec le classement ci-dessous.</p>
+<div class="answers-grid">
+<div class="answer-col"><h3>Émotions positives</h3><p>heureux, sûr de soi, serviable, le plaisir, le désir, la joie, la confiance, l'audace.</p></div>
+<div class="answer-col"><h3>Émotions négatives</h3><p>angoissé, la jalousie, la colère, l'égoïsme, l'anxiété, la culpabilité, le malaise.</p></div>
+</div>
+<p class="note">Cette correction reproduit le classement proposé dans le corrigé du cahier d'activités.</p>
+</section>
+</main>
+<footer>Inspire 4 · Unité 1 · Leçon 2 · Compréhension écrite · Vos réponses restent dans cette page et ne sont pas envoyées à l'enseignante.</footer>
+</div>
+<script>
+(function(){
+"use strict";
+const data=[
+{key:"a",statement:"La tendance de notre époque est la quête du bien-être.",answer:"Vrai",citation:"Être plus heureux, sûr de soi, moins angoissé... Ce sont des objectifs qu'on se fixe assez souvent."},
+{key:"b",statement:"Les efforts que l'on fait pour se sentir bien sont toujours récompensés.",answer:"Faux",citation:"Et ça ne fonctionne pas toujours !"},
+{key:"c",statement:"Tout le monde essaie de suivre des recettes pour se sentir heureux.",answer:"Vrai",citation:"S'appliquer à être souriant, serviable... Faire du yoga, des exercices de pleine conscience, lire des livres de psychologie positive... Nul n'y échappe..."},
+{key:"d",statement:"Des chercheurs en psychologie recommandent de faire des exercices pour être heureux.",answer:"Faux",citation:"[...] plusieurs chercheurs en psychologie [...] en ont assez de l'obsession culturelle du bonheur à tout prix."},
+{key:"e",statement:"On peut être mal jugé si l'on ne se sent pas heureux ou joyeux.",answer:"Vrai",citation:"On dirait qu'il faut toujours être dans le plaisir, le désir, la joie."},
+{key:"f",statement:"La recherche du bonheur nous aide à mieux affronter les problèmes.",answer:"Faux",citation:"[...] toutes les émotions [...] nous aident à cerner les problèmes, trouver des solutions, obtenir des gains et nous protéger."},
+{key:"g",statement:"Il vaut mieux éviter de se mettre en colère pour faire accepter ses idées.",answer:"Faux",citation:"[...] quand on est en colère, on est perçu comme plus compétent et plus crédible."},
+{key:"h",statement:"Combattre les émotions négatives est nécessaire pour notre épanouissement.",answer:"Faux",citation:"C'est lorsqu'on tire profit de toute la gamme des émotions, des pensées et des comportements de notre répertoire que nous devenons des êtres complets."}
+];
+const list=document.getElementById("question-list");
+for(const q of data){
+const fieldset=document.createElement("fieldset");
+fieldset.className="question";fieldset.id="question-"+q.key;fieldset.dataset.key=q.key;
+const legend=document.createElement("legend");
+const letter=document.createElement("span");letter.className="qletter";letter.textContent=q.key+".";
+legend.append(letter,document.createTextNode(" "+q.statement));fieldset.appendChild(legend);
+const opts=document.createElement("div");opts.className="choice-row";
+for(const value of ["Vrai","Faux"]){
+const label=document.createElement("label");label.className="choice";
+const input=document.createElement("input");input.type="radio";input.name="answer-"+q.key;input.value=value;input.setAttribute("aria-label",q.key+" : "+value);
+const span=document.createElement("span");span.textContent=value;
+label.append(input,span);opts.appendChild(label)
+}
+fieldset.appendChild(opts);
+const label=document.createElement("label");label.className="justification";label.htmlFor="justification-"+q.key;label.textContent="Justification — relevez une phrase du texte :";
+const textarea=document.createElement("textarea");textarea.id="justification-"+q.key;textarea.name="justification-"+q.key;textarea.rows=2;textarea.placeholder="Recopiez ici une phrase de l'article...";
+fieldset.append(label,textarea);list.appendChild(fieldset)
+}
+const form=document.getElementById("quiz"), warning=document.getElementById("warning");
+const progress=document.getElementById("progress");
+function updateProgress(){
+const filled=data.filter(q=>form.querySelector('input[name="answer-'+q.key+'"]:checked')).length;
+progress.textContent=filled+" / 8 réponses";
+}
+form.addEventListener("change",updateProgress);
+form.addEventListener("submit",function(event){
+event.preventDefault();
+for(const q of data){
+if(!form.querySelector('input[name="answer-'+q.key+'"]:checked')){
+warning.textContent="Choisissez Vrai ou Faux pour la question "+q.key+".";
+form.querySelector('input[name="answer-'+q.key+'"]').focus();return
+}
+const justification=form.querySelector("#justification-"+q.key);
+if(!justification.value.trim()){
+warning.textContent="Ajoutez une justification tirée de l'article pour la question "+q.key+".";
+justification.focus();return
+}
+}
+for(const id of ["positive","negative"]){
+const node=document.getElementById(id);
+if(!node.value.trim()){warning.textContent="Complétez également le classement des émotions "+(id==="positive"?"positives.":"négatives.");node.focus();return}
+}
+warning.textContent="";
+let score=0;
+for(const q of data){
+const chosen=form.querySelector('input[name="answer-'+q.key+'"]:checked').value;
+const right=chosen===q.answer;if(right)score++;
+const fieldset=document.getElementById("question-"+q.key);
+fieldset.classList.add(right?"correct":"incorrect");
+const answer=document.createElement("div");answer.className="answer";
+const label=document.createElement("strong");label.textContent=(right?"✓ Bonne réponse":"À corriger")+" — "+q.answer;
+const quote=document.createElement("p");quote.textContent="Justification proposée : « "+q.citation+" »";
+answer.append(label,quote);fieldset.appendChild(answer);
+}
+form.querySelectorAll("input[type=radio]").forEach(el=>el.disabled=true);
+form.querySelectorAll("textarea").forEach(el=>el.readOnly=true);
+document.getElementById("validate").hidden=true;
+document.getElementById("reset-quiz").hidden=false;
+document.getElementById("score").textContent=score+" / 8";
+document.getElementById("score-note").textContent="Résultat pour les choix Vrai / Faux. Comparez vos citations et votre classement des émotions aux propositions de correction.";
+document.getElementById("results").hidden=false;document.getElementById("correction").hidden=false;
+document.getElementById("results").focus();
+});
+document.getElementById("reset-quiz").addEventListener("click",function(){
+form.reset();
+form.querySelectorAll("input[type=radio]").forEach(el=>el.disabled=false);
+form.querySelectorAll("textarea").forEach(el=>el.readOnly=false);
+list.querySelectorAll(".question").forEach(el=>{el.classList.remove("correct","incorrect");const correction=el.querySelector(".answer");if(correction)correction.remove()});
+document.getElementById("validate").hidden=false;
+document.getElementById("reset-quiz").hidden=true;
+document.getElementById("results").hidden=true;
+document.getElementById("correction").hidden=true;
+warning.textContent="";updateProgress();
+document.getElementById("questions").scrollIntoView({behavior:"smooth",block:"start"});
+});
+})();
+</script>
+</body>
+</html>
