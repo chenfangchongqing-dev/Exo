@@ -1,0 +1,122 @@
+name: Publish Inspire 4 U1 listening audio
+
+on:
+  push:
+    paths:
+      - ".github/workflows/publish-co-u1-audio.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  audio:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install browser
+        run: |
+          python -m pip install --quiet requests beautifulsoup4 playwright
+          python -m playwright install --with-deps chromium
+      - name: Download the official Inspire 4 CA track 02
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p CO/U1
+          python - <<'PY'
+          import os, re, requests, urllib.parse
+          from pathlib import Path
+          from playwright.sync_api import sync_playwright
+
+          page_url = "https://inspire.hachettefle.fr/inspire-4_cahier-d-activites_fr.html"
+          dest = Path("CO/U1/INSP_4_CA_Piste02.mp3")
+          session = requests.Session()
+          session.headers["User-Agent"] = "Mozilla/5.0"
+          response = session.get(page_url, timeout=45)
+          response.raise_for_status()
+          print("Publisher page:", response.status_code, "HTML bytes:", len(response.content), flush=True)
+          direct_matches = re.findall(r'''(?:https?://|/)[^"'<>\s]{0,220}INSP_4_CA_Piste0?2\.mp3''', response.text, re.I)
+          print("Direct matches in page HTML:", direct_matches[:5], flush=True)
+          for raw in direct_matches:
+              url = urllib.parse.urljoin(page_url, raw.replace("\\/", "/"))
+              result = session.get(url, timeout=90)
+              if result.ok and len(result.content)>30000 and ("audio" in result.headers.get("Content-Type","") or result.content[:3]==b"ID3" or result.content[:2]==b"\xff\xfb"):
+                  dest.write_bytes(result.content)
+                  break
+          if not dest.exists():
+              with sync_playwright() as p:
+                  browser = p.chromium.launch(headless=True)
+                  page = browser.new_page(accept_downloads=True)
+                  page.goto(page_url, wait_until="domcontentloaded", timeout=60000)
+                  page.wait_for_timeout(5000)
+                  print("Page title:", page.title(), flush=True)
+                  print("Piste 02 matches:", page.get_by_text("Piste 02", exact=True).count(), flush=True)
+                  probe = page.evaluate("""() => {
+                    const nodes = [...document.querySelectorAll('*')].filter(el => el.children.length === 0 && /Piste 0?2(?!\\d)/i.test(el.textContent || ''));
+                    return nodes.slice(0, 12).map(n => {
+                      let el=n, levels=[];
+                      for(let depth=0;depth<9 && el;depth++,el=el.parentElement){
+                        levels.push({depth,tag:el.tagName,class:el.className?.toString().slice(0,80),
+                          text:(el.innerText||'').slice(0,210),
+                          controls:[...el.querySelectorAll('a,button,audio,source')].slice(0,12).map(a=>({tag:a.tagName,text:(a.innerText||'').slice(0,35),href:a.href||a.getAttribute('data-src')||a.getAttribute('data-url')||''}))});
+                      }
+                      return levels;
+                    })
+                  }""")
+                  print("Candidate DOM structure:", str(probe)[:13000], flush=True)
+                  node = page.get_by_text("Piste 02", exact=True).first
+                  if node.count() == 0:
+                      raise RuntimeError("Piste 02 was not found in Hachette's download page")
+                  candidate = node.evaluate("""n => {
+                    for(let depth=0;depth<9 && n;depth++,n=n.parentElement){
+                      const controls=[...n.querySelectorAll('a,button')].filter(a => /télécharger|download/i.test(a.innerText||a.title||a.getAttribute('aria-label')||''));
+                      if(controls.length) return {depth,href:controls[0].href||'', tag:controls[0].tagName, text:controls[0].innerText, count:controls.length};
+                    }
+                    return null;
+                  }""")
+                  print("Selected download control:", candidate, flush=True)
+                  if not candidate:
+                      raise RuntimeError("Could not find the download control associated with Piste 02")
+                  anchor=node.locator("xpath=..")
+                  for i in range(candidate["depth"]-1):
+                      anchor=anchor.locator("xpath=..")
+                  ctl=anchor.locator("a,button").filter(has_text=re.compile("Télécharger|Download", re.I)).first
+                  url=candidate["href"]
+                  if url and not url.startswith("javascript:"):
+                      print("Trying download URL:", url, flush=True)
+                      try:
+                          dl=session.get(url,timeout=90)
+                          if dl.ok and len(dl.content)>30000 and ("audio" in dl.headers.get("Content-Type","") or dl.content[:3]==b"ID3" or dl.content[:2]==b"\xff\xfb"):
+                              dest.write_bytes(dl.content)
+                      except Exception as err:
+                          print("Direct request failed:",repr(err),flush=True)
+                  if not dest.exists():
+                      with page.expect_download(timeout=90000) as download_info:
+                          ctl.click()
+                      download=download_info.value
+                      print("Browser download:", download.suggested_filename, flush=True)
+                      download.save_as(str(dest))
+                  browser.close()
+          print("Downloaded:",dest,"bytes:",dest.stat().st_size,flush=True)
+          if dest.stat().st_size < 30000:
+              raise RuntimeError("Audio asset is unexpectedly small")
+          PY
+          ffprobe -v error -show_entries format=duration,size -of default=noprint_wrappers=1 CO/U1/INSP_4_CA_Piste02.mp3
+          duration=$(ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 CO/U1/INSP_4_CA_Piste02.mp3)
+          awk -v d="$duration" 'BEGIN{exit !(d>110 && d<200)}'
+      - name: Publish MP3 in the repository
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add CO/U1/INSP_4_CA_Piste02.mp3
+          if git diff --cached --quiet; then echo "Audio file unchanged"; exit 0; fi
+          git commit -m "Host Inspire 4 U1 cahier track 02 for the listening quiz"
+          git push origin HEAD:main
