@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#FDBA12">
+<meta name="description" content="Maquette de mise en page pour les corrections personnalisées de production écrite · Inspire 4 · Unité 1. Sans copie réelle.">
+<title>Mes corrections personnelles · Maquette · Inspire 4</title>
+<style>
+:root{--bg:#f8f6f1;--surface:#fffefa;--ink:#292720;--soft-ink:#594f43;--muted:#786c5d;--line:#e9deca;--warm:#fdba12;--honey:#a76c16;--shadow:0 15px 36px rgba(79,60,30,.065)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.68 Arial,"Helvetica Neue","PingFang SC","Microsoft YaHei",sans-serif;-webkit-font-smoothing:antialiased}
+[hidden]{display:none!important}
+a{color:#845817}
+a:focus-visible,button:focus-visible,textarea:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid #b47c24;outline-offset:3px}
+.page{max-width:1080px;margin:0 auto;padding:19px 24px 56px}
+.topbar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;margin-bottom:23px}
+.brand{font-weight:800;font-size:14px;letter-spacing:.07em;color:#8b5914;text-decoration:none}
+.top-links{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.top-links a{font-size:13px;color:#716554;font-weight:750;text-decoration:none}
+.top-links a:hover{text-decoration:underline}
+.preview{background:#fff8e9;border:1px solid #eddbb6;border-radius:10px;padding:8px 13px;color:#745931;font-size:12px;font-weight:700}
+.hero{border:1px solid #e7cd92;background:linear-gradient(125deg,#ffca43,#ffe2a0 58%,#fff3d7);border-radius:26px;padding:42px clamp(25px,5vw,49px);box-shadow:0 14px 34px rgba(151,99,15,.08)}
+.eyebrow{font-size:12px;color:#785019;font-weight:800;letter-spacing:.135em;text-transform:uppercase;margin:0 0 13px}
+h1{font-size:clamp(36px,5.2vw,54px);letter-spacing:-.045em;line-height:1.11;margin:0 0 14px}
+h1 em{font-family:"Times New Roman",Georgia,serif;font-weight:400}
+.hero p.intro{font:22px/1.48 "Times New Roman",Georgia,serif;color:#5b482c;max-width:800px;margin:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:21px}
+.chips span{font-size:12px;font-weight:750;color:#754e17;border:1px solid #dfb86c;background:#fff6df;border-radius:99px;padding:7px 12px}
+h2,h3{letter-spacing:-.018em}
+.card{border:1px solid var(--line);border-radius:20px;background:var(--surface);box-shadow:var(--shadow)}
+.entry-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(265px,.85fr);gap:18px;align-items:start;margin-top:23px}
+.entry{padding:30px 31px}
+.card h2{font-size:26px;line-height:1.25;margin:0 0 10px}
+.entry .description{color:#685e52;margin:0 0 24px;max-width:560px}
+.field-label{display:block;font-weight:800;font-size:14px;margin:0 0 8px}
+.code-row{display:flex;gap:9px}
+.code-row input{font:18px/1.3 Arial,sans-serif;text-transform:uppercase;min-height:52px;min-width:0;flex:1;padding:12px 14px;border:1px solid #c9af87;border-radius:11px;background:white}
+.code-row button,.action{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:11px;background:#292720;color:white;padding:12px 19px;min-height:52px;cursor:pointer;font:800 14px/1.3 Arial,sans-serif;text-decoration:none}
+.code-row button:hover,.action:hover{background:#51402e}
+.form-status{min-height:21px;font-size:13px;color:#87582d;margin:12px 0 0}
+.demo-note{border-top:1px solid var(--line);margin-top:19px;padding-top:17px;color:#786c5b;font-size:14px;line-height:1.7}
+.demo-note strong{color:#69491e}
+.demo-note a{font-weight:800;text-underline-offset:3px}
+.guide{padding:27px 27px 24px}
+.guide h2{font-size:22px}
+.guide ol{list-style:none;margin:15px 0 0;padding:0}
+.guide li{display:flex;align-items:flex-start;gap:13px;padding:13px 0;border-top:1px solid #efe6da}
+.guide li:first-child{border:0}
+.guide li .circle{display:flex;align-items:center;justify-content:center;flex:none;width:34px;height:34px;border-radius:50%;border:1px solid #e8cc91;color:#925b14;background:#fff3d8;font-weight:800;font-size:13px}
+.guide strong{font-size:15px;display:block;margin:0}
+.guide p{font-size:13px;color:#776c5e;margin:3px 0 0;line-height:1.58}
+.principle{margin-top:22px;padding:20px 24px;border-left:4px solid #efc35e;background:#fffcf6;border-radius:0 15px 15px 0;color:#60533f;font-size:15px}
+.principle p{margin:5px 0}
+footer{margin:37px 0 0;padding-top:19px;border-top:1px solid var(--line);font-size:12px;color:#887b6a}
+.feedback-topline{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin:5px 0 18px}
+.feedback-topline a{font-weight:750;font-size:13px;text-decoration:none}
+.feedback-topline p{font-size:12px;color:#7f715e;margin:0}
+.personal-hero{background:linear-gradient(125deg,#ffcc4d,#ffe6ae 70%,#fff6df);padding:35px clamp(24px,5vw,44px)}
+.personal-hero h1{font-size:clamp(33px,4.7vw,47px)}
+.personal-hero p.intro{font-size:21px}
+.feedback-layout{display:grid;grid-template-columns:224px minmax(0,1fr);align-items:start;gap:20px;margin-top:24px}
+.side{position:sticky;top:18px;padding:22px 19px}
+.side h2{font-size:16px;margin:0 0 14px}
+.side a{display:block;text-decoration:none;color:#554b40;padding:10px 10px;border-radius:9px;font-size:14px;font-weight:700}
+.side a:hover,.side a:focus{background:#fff2d3;color:#835319}
+.side .side-foot{border-top:1px solid var(--line);margin-top:12px;padding-top:15px;color:#827566;font-size:12px}
+.feedback-main{min-width:0}
+.copy{padding:25px 28px;margin-bottom:22px}
+.section-label{margin:0 0 8px;text-transform:uppercase;letter-spacing:.10em;font-size:11px;font-weight:850;color:#9c6b20}
+.copy h2{margin:0 0 10px;font-size:24px}
+.copy blockquote{margin:16px 0 12px;padding:18px 21px;border-left:4px solid #edbb55;background:#fff7e5;border-radius:0 11px 11px 0;font:21px/1.6 "Times New Roman",Georgia,serif}
+.copy .caption,.caption{color:#847564;font-size:13px;margin:0}
+.revision{border:1px solid var(--line);border-radius:21px;background:var(--surface);box-shadow:var(--shadow);padding:26px 29px;margin-bottom:21px;scroll-margin-top:16px}
+.revision-header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-bottom:16px;border-bottom:1px solid #eae1d3}
+.revision-header .num{font-size:12px;color:#925f1a;letter-spacing:.12em;font-weight:800}
+.revision-header .tag{font-size:12px;color:#7f7362;font-weight:700}
+.revision h2{font-size:23px;line-height:1.32;margin:18px 0 8px}
+.step{display:grid;grid-template-columns:37px minmax(0,1fr);gap:14px;padding:20px 0;border-bottom:1px solid #f0e8db}
+.step:last-child{border-bottom:0;padding-bottom:0}
+.stepno{width:35px;height:35px;display:flex;align-items:center;justify-content:center;border-radius:10px;background:#fff4d8;color:#855715;font-size:13px;font-weight:850}
+.step h3{font-size:18px;margin:0 0 7px}
+.step p{margin:0 0 8px;color:#514b40}
+.sentence{font:20px/1.55 "Times New Roman",Georgia,serif;color:#312a21!important}
+.intent{font:17px/1.58 "Times New Roman",Georgia,serif!important;color:#514734!important}
+.explanation{color:#736659!important;font-size:14px}
+.resource-links{display:flex;flex-wrap:wrap;gap:9px;margin:12px 0 0}
+.resource-links a{display:inline-flex;align-items:center;text-decoration:none;color:#86591b;font-size:13px;font-weight:750;border:1px solid #e5cfaa;background:#fff8e8;border-radius:10px;padding:9px 12px}
+.resource-links a:hover{background:#ffefc9}
+.rewrite{width:100%;min-height:102px;padding:13px 15px;border:1px solid #d8c3a3;border-radius:11px;background:#fff;font:18px/1.6 "Times New Roman",Georgia,serif;resize:vertical;margin:3px 0 6px}
+.rewrite::placeholder{color:#aba18f}
+.teacher{margin-top:15px;background:#fff9ed;border:1px solid #e9d6b5;border-radius:13px;overflow:hidden}
+.teacher summary{padding:15px 17px;cursor:pointer;font-weight:800;color:#7e5319;font-size:14px}
+.teacher[open] summary{border-bottom:1px solid #e9d6b5;background:#fff4d9}
+.teacher-body{padding:17px 19px}
+.teacher-body h4{font-size:14px;margin:0 0 6px;color:#80551b}
+.teacher-body .model{font:20px/1.5 "Times New Roman",Georgia,serif;color:#413525;margin:0 0 6px}
+.teacher-body p{font-size:14px;line-height:1.65;color:#6c5e4e;margin:0 0 14px}
+.teacher-body .note{border-top:1px solid #eadbc0;padding-top:12px;margin:7px 0 0;color:#7e684c}
+.transfer{padding:24px 26px}
+.transfer h2{font-size:22px}
+.transfer p{color:#645748;margin:8px 0 13px}
+.transfer a{font-weight:750}
+@media(max-width:780px){.feedback-layout{grid-template-columns:1fr}.side{position:static;padding:16px 18px}.side nav{display:flex;flex-wrap:wrap;gap:6px}.side a{padding:8px 10px}.side .side-foot{display:none}}
+@media(max-width:680px){.page{padding:14px 13px 38px}.hero{padding:30px 23px}.hero p.intro{font-size:19px}.entry-grid{grid-template-columns:1fr}.entry,.guide,.revision,.copy,.transfer{padding:21px 18px}.code-row{flex-direction:column}.code-row button{width:100%}.step{grid-template-columns:32px 1fr;gap:10px}.stepno{width:30px;height:30px}.copy blockquote{font-size:19px}.sentence{font-size:19px}.teacher-body .model{font-size:18px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="page">
+<header class="topbar"><a class="brand" href="../../index.html">INSPIRE 4 · PRODUCTION ÉCRITE</a><div class="top-links"><a href="../index.html">← Unité 1</a><span class="preview">MAQUETTE · SANS COPIE RÉELLE</span></div></header>
+<div id="entry-view">
+<section class="hero" aria-labelledby="entry-title">
+<p class="eyebrow">Unité 1 · Leçon 2 · Correction des PE</p>
+<h1 id="entry-title">Mes corrections <em>personnelles.</em></h1>
+<p class="intro">Relire mon texte, comprendre les propositions de correction et réutiliser les ressources de l’unité pour mieux m’exprimer.</p>
+<div class="chips"><span>Mon texte</span><span>Mes points à améliorer</span><span>Mes ressources</span></div>
+</section>
+<div class="entry-grid">
+<section class="entry card" aria-labelledby="access-title">
+<p class="section-label">Mon espace</p><h2 id="access-title">Retrouver mon retour</h2>
+<p class="description">L’espace personnel me permet de retrouver uniquement les passages commentés de ma production, sans afficher les travaux de toute la classe.</p>
+<form id="code-form" novalidate>
+<label class="field-label" for="code">Mon code d’accès</label>
+<div class="code-row"><input id="code" name="code" type="text" maxlength="32" placeholder="Saisir mon code" autocapitalize="characters" autocomplete="off" spellcheck="false" aria-describedby="code-help" required><button type="submit">Ouvrir mon retour <span aria-hidden="true">→</span></button></div>
+<p class="form-status" id="code-status" role="status" aria-live="polite"></p>
+</form>
+<div class="demo-note" id="code-help"><strong>Pour tester la maquette :</strong> saisissez le code <b>DEMO</b> ou <a href="#exemple">ouvrez directement la page de démonstration</a>. Aucun retour individuel réel n’est encore disponible.</div>
+</section>
+<aside class="guide card" aria-labelledby="guide-title">
+<h2 id="guide-title">Comment lire mon retour ?</h2>
+<ol>
+<li><span class="circle">01</span><div><strong>Retrouver ma phrase</strong><p>Partir de ce que j’ai réellement écrit.</p></div></li>
+<li><span class="circle">02</span><div><strong>Clarifier mon intention</strong><p>Identifier l’idée que je souhaite exprimer.</p></div></li>
+<li><span class="circle">03</span><div><strong>Mobiliser les ressources</strong><p>Revoir les mots et les formes étudiés en cours.</p></div></li>
+<li><span class="circle">04</span><div><strong>Comparer les formulations</strong><p>Essayer moi-même ou consulter directement les suggestions.</p></div></li>
+</ol>
+</aside>
+</div>
+<div class="principle" lang="zh-CN"><p>结构上保留认知引导，交互上给予学生自主权，内容上突出语言资源的迁移与复用。</p></div>
+</div>
+<div id="personal-view" hidden>
+<div class="feedback-topline"><a href="./index.html">← Mes corrections personnelles</a><p>Exemple fictif · Mise en page uniquement</p></div>
+<section class="hero personal-hero" aria-labelledby="personal-title">
+<p class="eyebrow">Unité 1 · Production écrite · Exemple de retour</p>
+<h1 id="personal-title">Mon parcours <em>de réécriture.</em></h1>
+<p class="intro">Une correction à mon rythme : comprendre l’idée, choisir les ressources et comparer plusieurs reformulations.</p>
+<div class="chips"><span>Exemple fictif</span><span>2 passages commentés</span><span>Sans remise obligatoire</span></div>
+</section>
+<div class="feedback-layout">
+<aside class="side card" aria-label="Navigation dans le retour">
+<h2>Dans mon retour</h2>
+<nav><a href="#copie">Mon texte</a><a href="#passage-1">Passage 01 · Nuancer</a><a href="#passage-2">Passage 02 · Préciser</a><a href="#reinvestir">Pour réemployer</a></nav>
+<p class="side-foot">Une véritable page personnelle ne présenterait que la copie et les annotations du titulaire.</p>
+</aside>
+<main class="feedback-main">
+<section id="copie" class="copy card" aria-labelledby="copy-title">
+<p class="section-label">Ma production initiale</p><h2 id="copy-title">Le bonheur et l’argent</h2>
+<blockquote>Je pense que l’argent n’est pas très important pour être heureux. Les personnes qui ne pensent qu’à l’argent ont une mauvaise idée du bonheur.</blockquote>
+<p class="caption" lang="zh-CN">以上两句为排版演示而编写，不是任何真实学生的作文。</p>
+</section>
+<article class="revision" id="passage-1" aria-labelledby="revision-1-title">
+<div class="revision-header"><span class="num">PASSAGE 01 / 02</span><span class="tag">Amélioration possible · précision du sens</span></div>
+<h2 id="revision-1-title">Exprimer l’idée avec plus de précision</h2>
+<div class="step"><span class="stepno">01</span><div><h3>Ma phrase initiale</h3><p class="sentence">Je pense que l’argent n’est pas très important pour être heureux.</p></div></div>
+<div class="step"><span class="stepno">02</span><div><h3>Mon intention</h3><p class="intent">Voulez-vous dire que l’argent joue un rôle secondaire, ou qu’il ne suffit pas à rendre heureux ?</p><p class="explanation" lang="zh-CN">这里有两种不同的意思：金钱不太重要，还是金钱虽有作用却不足以保证幸福？修改前先确定真正的观点。</p></div></div>
+<div class="step"><span class="stepno">03</span><div><h3>Je cherche des ressources</h3><p>Deux directions possibles : <strong>simplifier</strong> et <strong>nuancer son propos</strong>.</p><div class="resource-links"><a href="../../../Grammaire/U1/nuancer-un-propos.html">Nuancer un propos ↗</a><a href="../../../Grammaire/U1/index.html">La négation · Unité 1 ↗</a></div></div></div>
+<div class="step"><span class="stepno">04</span><div><h3>Je propose une reformulation</h3><textarea class="rewrite" id="rewrite-1" lang="fr" spellcheck="true" placeholder="Ma reformulation…" aria-label="Ma reformulation du passage 1"></textarea><p class="caption" lang="zh-CN">可以先自行改写，也可以直接展开教师建议；无需提交。</p>
+<details class="teacher"><summary>Voir les propositions commentées</summary><div class="teacher-body">
+<h4>01 · Simplifier</h4><p class="model">L’argent ne suffit pas à rendre heureux.</p><p>Cette phrase exprime que l’argent peut compter, mais qu’il ne constitue pas une condition suffisante du bonheur.</p>
+<h4>02 · Nuancer</h4><p class="model">L’argent ne garantit pas nécessairement le bonheur.</p><p><em>Pas nécessairement</em> limite la portée de l’affirmation : l’argent peut contribuer au bonheur sans le garantir.</p>
+<p class="note" lang="zh-CN">两种改写都比原句更明确地表达了“金钱不足以保证幸福”，但如果你原本想说的是“金钱根本不重要”，就不能直接采用这些句子。</p>
+</div></details>
+</div></div>
+</article>
+<article class="revision" id="passage-2" aria-labelledby="revision-2-title">
+<div class="revision-header"><span class="num">PASSAGE 02 / 02</span><span class="tag">Amélioration possible · choix du vocabulaire</span></div>
+<h2 id="revision-2-title">Choisir un adjectif qui précise l’évaluation</h2>
+<div class="step"><span class="stepno">01</span><div><h3>Ma phrase initiale</h3><p class="sentence">Les personnes qui ne pensent qu’à l’argent ont une mauvaise idée du bonheur.</p></div></div>
+<div class="step"><span class="stepno">02</span><div><h3>Mon intention</h3><p class="intent">Vous semblez vouloir critiquer une conception du bonheur limitée à l’argent.</p><p class="explanation" lang="zh-CN">先辨明评价对象：是批评某些人，还是批评一种把幸福等同于金钱的观念？这会影响主语和词语的选择。</p></div></div>
+<div class="step"><span class="stepno">03</span><div><h3>Je cherche des ressources</h3><p><strong>Préciser le vocabulaire</strong> et, si le sens s’y prête, <strong>réemployer un adjectif verbal</strong>.</p><div class="resource-links"><a href="../../../Vocabulaire/formation-des-mots/adjectif-verbal-cours.html">L’adjectif verbal · Cours ↗</a><a href="../../../Vocabulaire/U1/index.html">Les mots de l’unité ↗</a></div></div></div>
+<div class="step"><span class="stepno">04</span><div><h3>Je propose une reformulation</h3><textarea class="rewrite" id="rewrite-2" lang="fr" spellcheck="true" placeholder="Ma reformulation…" aria-label="Ma reformulation du passage 2"></textarea><p class="caption" lang="zh-CN">选择最符合原意的表达，不必为了使用新词而改变观点。</p>
+<details class="teacher"><summary>Voir les propositions commentées</summary><div class="teacher-body">
+<h4>01 · Rester simple</h4><p class="model">C’est une vision limitée du bonheur.</p><p>La critique porte sur l’idée plutôt que sur les personnes. Le mot <em>limitée</em> dit plus précisément ce que signifie ici <em>mauvaise</em>.</p>
+<h4>02 · Réutiliser le vocabulaire étudié</h4><p class="model">Réduire le bonheur à l’argent peut donner une vision appauvrissante de la vie.</p><p><em>Appauvrissante</em> apporte une évaluation plus précise. Cette formulation suppose toutefois que vous souhaitez critiquer une vision réductrice du bonheur.</p>
+<p class="note" lang="zh-CN">使用 <em>appauvrissante</em> 的前提是它准确服务于你的观点；并非换成复杂词汇就一定更好。</p>
+</div></details>
+</div></div>
+</article>
+<section class="transfer card" id="reinvestir" aria-labelledby="transfer-title">
+<p class="section-label">Pour poursuivre</p><h2 id="transfer-title">Réemployer dans ma prochaine production</h2>
+<p>Après avoir lu les remarques, retenez les expressions qui correspondent réellement à ce que vous souhaitez dire. Les propositions de l’enseignante sont des pistes de réécriture, pas des phrases à recopier automatiquement.</p>
+<div class="resource-links"><a href="../index.html">Revenir aux productions écrites ↗</a><a href="../../../Grammaire/U1/nuancer-un-propos.html">Revoir la nuance ↗</a><a href="../../../Vocabulaire/formation-des-mots/adjectif-verbal.html">Revoir l’adjectif verbal ↗</a></div>
+</section>
+</main>
+</div>
+</div>
+<footer>Inspire 4 · Production écrite · Maquette des retours personnalisés. Aucune copie réelle ni donnée d’élève n’est incluse.</footer>
+</div>
+<script>
+(function(){
+"use strict";
+const entry=document.getElementById("entry-view");
+const personal=document.getElementById("personal-view");
+const form=document.getElementById("code-form");
+const code=document.getElementById("code");
+const status=document.getElementById("code-status");
+function showView(){
+const isExample=location.hash==="#exemple"||location.hash.indexOf("#passage-")===0||location.hash==="#copie"||location.hash==="#reinvestir";
+entry.hidden=isExample;
+personal.hidden=!isExample;
+document.title=isExample?"Mon parcours de réécriture · Exemple fictif · Inspire 4":"Mes corrections personnelles · Maquette · Inspire 4";
+if(location.hash==="#exemple")window.scrollTo(0,0);
+}
+form.addEventListener("submit",function(e){
+e.preventDefault();
+const entered=code.value.replace(/\s+/g,"").toLocaleUpperCase("fr");
+if(entered==="DEMO"){status.textContent="";location.hash="exemple";return}
+status.textContent="Cette page est un prototype : aucun dossier d’étudiant n’est relié au formulaire. Saisissez DEMO pour tester l’interface.";
+});
+document.querySelectorAll(".rewrite").forEach(function(field){
+const storageKey="exo-pe-retours-maquette-"+field.id;
+try{field.value=localStorage.getItem(storageKey)||""}catch(e){}
+field.addEventListener("input",function(){try{localStorage.setItem(storageKey,field.value)}catch(e){}});
+});
+window.addEventListener("hashchange",showView);
+showView();
+})();
+</script>
+</body>
+</html>
