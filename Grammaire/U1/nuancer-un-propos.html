@@ -90,7 +90,7 @@ const status=document.getElementById("adverb-status");
 const output=document.getElementById("adverb-corrige");
 const key="exo-gr-u1-nuancer-adverbes-manuel-v1";
 const fields=answers.map(x=>document.getElementById("adv-"+x.id));
-function normalize(text){return String(text||"").normalize("NFC").toLocaleLowerCase("fr").trim().replace(/\\s+/g," ")}
+function normalize(text){return String(text||"").normalize("NFC").toLocaleLowerCase("fr").trim().replace(/\s+/g," ")}
 function save(){try{localStorage.setItem(key,JSON.stringify(fields.map(x=>x.value)))}catch(e){}}
 try{const saved=JSON.parse(localStorage.getItem(key)||"null");if(Array.isArray(saved)&&saved.length===fields.length)saved.forEach((v,i)=>fields[i].value=String(v||""))}catch(e){}
 form.addEventListener("input",function(){save();output.hidden=true;status.textContent="";fields.forEach(el=>el.classList.remove("is-right","is-wrong"))});
