@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#FDBA12">
+<meta name="description" content="Inspire 4 · Unité 1 · Production écrite · Exercice 9 : donner son avis sur la mesure du bonheur.">
+<title>Mesurer le bonheur ? · Production écrite · Inspire 4 U1</title>
+<style>
+:root{--bg:#f9f6f0;--paper:#fffefa;--ink:#2d291f;--muted:#716657;--line:#e8dbc5;--gold:#fdba12;--orange:#b37518;--shadow:0 14px 36px #76511d12}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;color:var(--ink);background:var(--bg);font:16px/1.65 Arial,"Helvetica Neue",Helvetica,sans-serif}
+a{color:#895c16}a:focus-visible,button:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid #ba791b;outline-offset:3px}
+.wrap{max-width:1040px;margin:auto;padding:19px 22px 55px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:23px;font-size:13px}
+.top a{font-weight:750;text-decoration:none}
+.hero{border-radius:24px;padding:37px 42px;background:linear-gradient(126deg,#ffca43,#ffe4a6 63%,#fff4d6);box-shadow:0 15px 35px #a7791512}
+.kicker{font-weight:800;color:#815711;font-size:12px;letter-spacing:.14em;text-transform:uppercase;margin:0 0 11px}
+h1{font-size:clamp(33px,5vw,53px);margin:0 0 14px;letter-spacing:-.04em;line-height:1.12}
+h1 em{font-family:"Times New Roman",Times,serif;font-weight:400}
+.hero .sub{font:22px/1.45 "Times New Roman",Times,serif;margin:0;color:#5e4b2d}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.chips span{border:1px solid #e3b86e;border-radius:100px;background:#fff4db;font-size:12px;font-weight:750;color:#83591b;padding:7px 11px}
+section{margin-top:23px}.card{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:26px 29px;box-shadow:var(--shadow)}
+.card h2{font-size:23px;margin:0 0 12px;line-height:1.3}.eyebrow{color:#a06a1b;font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin:0 0 11px}
+.task{font:21px/1.55 "Times New Roman",Times,serif;margin:0}.note-zh{font:15px/1.75 "PingFang SC","Microsoft YaHei",sans-serif;color:#766a59;margin:9px 0 0}
+.browser{margin-top:18px;border:1px solid #cdd1d1;background:white;border-radius:16px;overflow:hidden;box-shadow:0 14px 30px #2222220b}
+.browserbar{display:flex;align-items:center;gap:9px;padding:11px 15px;background:#e2e3e3;border-bottom:1px solid #d2d4d4}
+.dots{display:flex;gap:6px}.dots i{width:11px;height:11px;display:inline-block;border-radius:50%;background:#d7564c}.dots i:nth-child(2){background:#e9b348}.dots i:nth-child(3){background:#91b94f}
+.address{margin-left:15px;background:#fff;border:1px solid #c8d0d2;border-radius:8px;padding:5px 12px;font-size:12px;letter-spacing:.02em;color:#7b8587;min-width:0;flex:1}
+.article{padding:24px 30px 22px}.article-grid{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(250px,.82fr);gap:21px;align-items:center}
+.article h2{font:700 clamp(25px,3.7vw,34px)/1.2 "Times New Roman",Times,serif;letter-spacing:-.025em;margin:0 0 17px}
+.article p{font:19px/1.6 "Times New Roman",Times,serif;margin:0}
+.gauge{width:100%;max-width:340px;align-self:center;justify-self:center}.gauge svg{width:100%;height:auto;display:block}
+.gauge small{display:block;text-align:center;color:#827d72;font-size:11px;line-height:1.4;margin-top:4px}
+.lexique{display:flex;flex-wrap:wrap;column-gap:22px;row-gap:7px;font-size:14px;padding:16px 0 0;color:#776956}.lexique b{color:#8b5a14}
+.editor textarea{width:100%;min-height:235px;resize:vertical;font:20px/1.7 "Times New Roman",Times,serif;padding:18px;border:1.5px solid #d7bc91;border-radius:13px;background:#fffefa;color:#29241e}
+.editor textarea::placeholder{color:#a99a84}.editor p{color:#6c6254;margin:8px 0 12px}
+.count{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap;font-size:13px;color:#766b5a;margin:10px 0 18px}
+.count strong{color:#9b6417}.controls{display:flex;gap:9px;flex-wrap:wrap;align-items:center}
+.btn{background:#2d2922;border:1px solid #2d2922;border-radius:10px;color:#fff;cursor:pointer;font-size:14px;font-weight:800;padding:12px 16px;min-height:44px}
+.btn.secondary{background:#fff7e5;border:1px solid #dcc499;color:#805b20}.btn.danger{background:transparent;border:1px solid #e5d6c1;color:#8d7967}
+.feedback{min-height:18px;font-size:13px;color:#357050;margin-top:13px}
+.review{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+.review label{display:flex;align-items:flex-start;gap:9px;font-size:14px;color:#655b4b;background:#fffaf1;border:1px solid #eee2d0;padding:11px 13px;border-radius:11px}
+.review input{accent-color:#b37c1b;margin-top:4px;flex:none}.review h3{grid-column:1/-1;font-size:17px;margin:0 0 2px}
+.model{display:none;border:1px solid #ead1a0;border-radius:17px;background:#fff8e9;padding:21px 23px;margin-top:19px}.model.open{display:block}
+.model h3{font-size:20px;margin:0 0 10px}.model .sample{font:20px/1.7 "Times New Roman",Times,serif;margin:0 0 14px}
+.model p{color:#6c6050;margin:9px 0 0;font-size:14px}.model ul{margin:9px 0;padding-left:19px;color:#6c6050;font-size:14px}
+.links{display:flex;flex-wrap:wrap;gap:11px}.links a{border:1px solid #ebd6b4;background:#fff9eb;padding:12px 15px;border-radius:11px;text-decoration:none;font-size:14px;font-weight:750}
+footer{color:#8e8271;border-top:1px solid var(--line);margin-top:38px;padding-top:18px;font-size:12px}
+@media(max-width:720px){.wrap{padding:14px 13px 35px}.hero{padding:28px 23px}.card{padding:20px 17px}.article{padding:19px 18px}.article-grid,.review{grid-template-columns:1fr}.gauge{max-width:280px}.article h2{font-size:28px}.article p{font-size:18px}.editor textarea{font-size:19px;min-height:230px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="top" aria-label="Navigation"><a href="../index.html">← Production écrite · Unité 1</a><a href="../../index.html">Production écrite</a></nav>
+<header class="hero">
+<p class="kicker">Inspire 4 · Unité 1 · Production écrite · Exercice 9</p>
+<h1>Mesurer <em>le bonheur ?</em></h1>
+<p class="sub">Lire une brève, prendre position et justifier son opinion dans un commentaire.</p>
+<div class="chips"><span>Réagir à un article</span><span>Exprimer et justifier son avis</span><span>Nuancer</span></div>
+</header>
+<main>
+<section class="card">
+<p class="eyebrow">Exercice 9 · Consigne du manuel</p>
+<p class="task">Vous lisez une brève sur un site d’information. Pensez-vous que c’est important de mesurer le bonheur ? Pourquoi ? Vous laissez votre avis sur le site d’information.</p>
+<p class="note-zh" lang="zh-CN">阅读下方新闻短讯。你认为衡量幸福程度重要吗？为什么？请以读者身份在资讯网站下方留言，表达自己的观点并说明理由。</p>
+<div class="browser" role="group" aria-label="Brève à lire">
+<div class="browserbar" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span class="address">www.info.com</span></div>
+<div class="article"><div class="article-grid">
+<div><h2>Journée du bonheur : pourquoi vouloir mesurer le bonheur ?</h2>
+<p>Ce dimanche 20 mars, c’est la Journée du bonheur. Un groupe de recherche veut créer un « Indicateur trimestriel du bonheur des Français » pour que la croissance et le Produit national brut ne soient pas les seuls à guider l’action du gouvernement.</p></div>
+<div class="gauge" aria-label="Échelle illustrative allant de Mauvais à Très élevé, sans données chiffrées">
+<svg viewBox="0 0 400 252" role="img" aria-label="Jauge symbolique du bonheur avec cinq niveaux : mauvais, faible, moyen, élevé et très élevé">
+<path d="M 39 210 A 161 161 0 0 1 361 210" fill="none" stroke="#d4d5d5" stroke-width="68"/>
+<path d="M 39 210 A 161 161 0 0 1 70 114" fill="none" stroke="#d84337" stroke-width="65"/>
+<path d="M 70 114 A 161 161 0 0 1 154 56" fill="none" stroke="#ed8934" stroke-width="65"/>
+<path d="M 154 56 A 161 161 0 0 1 246 56" fill="none" stroke="#f6bb3f" stroke-width="65"/>
+<path d="M 246 56 A 161 161 0 0 1 330 114" fill="none" stroke="#b7d43f" stroke-width="65"/>
+<path d="M 330 114 A 161 161 0 0 1 361 210" fill="none" stroke="#73ae53" stroke-width="65"/>
+<path d="M 39 210 A 161 161 0 0 1 361 210" fill="none" stroke="#f5f5f5" stroke-width="4" opacity=".8"/>
+<g font-family="Arial,sans-serif" font-size="15" fill="#514e48" font-weight="700">
+<text x="48" y="211" text-anchor="middle" transform="rotate(-67 48 211)">Mauvais</text>
+<text x="93" y="99" transform="rotate(-40 93 99)">Faible</text>
+<text x="200" y="57" text-anchor="middle">Moyen</text>
+<text x="287" y="98" transform="rotate(36 287 98)">Élevé</text>
+<text x="357" y="200" text-anchor="middle" transform="rotate(66 357 200)">Très élevé</text></g>
+<path d="M 200 205 L 194 118 L 200 102 L 206 118 Z" fill="#252622" stroke="#f2f0ed" stroke-width="2"/>
+<circle cx="200" cy="208" r="15" fill="#252622" stroke="#ded9cf" stroke-width="4"/>
+</svg>
+<small>Illustration schématique · aucune donnée chiffrée</small>
+</div></div>
+</div>
+</div>
+<div class="lexique" aria-label="Mots utiles">
+<span><b>un indicateur</b> — 指标</span>
+<span><b>la croissance</b> — 经济增长</span>
+<span><b>le Produit national brut (PNB)</b> — 国民生产总值</span>
+</div>
+</section>
+<section class="card editor">
+<p class="eyebrow">Vous avez la parole !</p>
+<h2>Mon commentaire</h2>
+<p>Donnez votre avis sur la mesure du bonheur. Développez une raison qui soutient votre position, puis illustrez-la ou expliquez-la à l’aide d’un exemple pertinent.</p>
+<label for="draft" class="note-zh" lang="zh-CN">请写出自己的看法。可以赞成、反对，或提出有条件的观点。重要的是说明理由，而不只是表态。</label>
+<textarea id="draft" lang="fr" spellcheck="true" placeholder="À mon avis, mesurer le bonheur…" aria-label="Mon commentaire sur la mesure du bonheur"></textarea>
+<div class="count"><strong id="wordCount">0 mot</strong><span>Brouillon conservé uniquement dans ce navigateur</span></div>
+<div class="controls">
+<button class="btn" id="submit" type="button">Valider mon commentaire</button>
+<button class="btn secondary" id="copy" type="button">Copier</button>
+<button class="btn secondary" id="download" type="button">Télécharger .txt</button>
+<button class="btn danger" id="clear" type="button">Effacer</button>
+</div>
+<p class="feedback" id="feedback" role="status" aria-live="polite"></p>
+<div class="review">
+<h3>Avant de valider, je vérifie…</h3>
+<label><input type="checkbox" class="check"> J’exprime clairement ma position sur la question.</label>
+<label><input type="checkbox" class="check"> Je donne au moins une raison qui soutient cette position.</label>
+<label><input type="checkbox" class="check"> J’illustre ou j’explique cette raison.</label>
+<label><input type="checkbox" class="check"> Je nuance mes propos si nécessaire, sans m’éloigner du sujet.</label>
+</div>
+<div class="model" id="model" aria-live="polite">
+<h3>Proposition de réponse · Pour comparer après avoir écrit</h3>
+<p class="sample">À mon avis, il est important de mesurer le bonheur, car la richesse d’un pays ne nous dit pas toujours comment les habitants vivent. Les indicateurs économiques sont utiles, mais ils ne suffisent pas. Par exemple, un pays peut connaître une croissance importante alors que certaines personnes se sentent seules ou stressées. Un indicateur du bonheur pourrait donc compléter les données économiques et aider à mieux comprendre les besoins de la population. Ces résultats devraient toutefois être interprétés avec prudence, car le bonheur reste en partie subjectif.</p>
+<p lang="zh-CN" class="note-zh">这是一种可能的回答，并非唯一正确答案。请观察：观点是否清楚？理由与例子之间是否有逻辑联系？结尾的限定是否与前文观点一致？</p>
+</div>
+</section>
+<section class="card">
+<p class="eyebrow">Pour aller plus loin</p><h2>Réutiliser les ressources de l’unité</h2>
+<div class="links">
+<a href="../../Grammaire/U1/nuancer-un-propos.html">Nuancer un propos ↗</a>
+<a href="../../Grammaire/U1/registre-de-langue.html">Choisir un registre adapté ↗</a>
+<a href="./index.html">Une idée reçue sur le bonheur ↗</a>
+</div>
+</section>
+</main>
+<footer>Inspire 4 · Unité 1 · Production écrite · Exercice 9 · Le bonheur</footer>
+</div>
+<script>
+(function(){
+"use strict";
+const draft=document.getElementById("draft"),model=document.getElementById("model"),feedback=document.getElementById("feedback"),counter=document.getElementById("wordCount");
+const key="exo-inspire4-u1-pe-ex9-mesurer-bonheur-v1";
+function countWords(s){return(s.trim().match(/\S+/g)||[]).length}
+function update(){const count=countWords(draft.value);counter.textContent=count+" mot"+(count>1?"s":"");try{localStorage.setItem(key,draft.value)}catch(e){};model.classList.remove("open");feedback.textContent=""}
+try{draft.value=localStorage.getItem(key)||""}catch(e){}
+draft.addEventListener("input",update);
+document.getElementById("submit").addEventListener("click",function(){
+if(countWords(draft.value)<20){feedback.textContent="Écrivez quelques phrases pour exprimer et justifier votre avis avant de consulter la proposition.";draft.focus();return}
+model.classList.add("open");feedback.textContent="Votre brouillon est conservé sur cet appareil. Comparez-le à la proposition ci-dessous.";model.scrollIntoView({behavior:"smooth",block:"start"});
+});
+function fallbackCopy(text){const t=document.createElement("textarea");t.value=text;t.style.position="fixed";t.style.opacity="0";document.body.appendChild(t);t.select();const result=document.execCommand("copy");t.remove();return result}
+document.getElementById("copy").addEventListener("click",async function(){const text=draft.value.trim();if(!text){feedback.textContent="Écrivez d’abord votre commentaire.";return}try{if(navigator.clipboard&&window.isSecureContext)await navigator.clipboard.writeText(text);else if(!fallbackCopy(text))throw Error("copy");feedback.textContent="Commentaire copié."}catch(e){feedback.textContent="Sélectionnez votre texte pour le copier."}});
+document.getElementById("download").addEventListener("click",function(){const text=draft.value.trim();if(!text){feedback.textContent="Écrivez d’abord votre commentaire.";return}const url=URL.createObjectURL(new Blob([text],{type:"text/plain;charset=utf-8"}));const a=document.createElement("a");a.href=url;a.download="PE_U1_Ex9_mesurer_le_bonheur.txt";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1100);feedback.textContent="Votre commentaire est prêt à être téléchargé."});
+document.getElementById("clear").addEventListener("click",function(){if(!draft.value.trim())return;if(!confirm("Effacer ce brouillon ?"))return;draft.value="";document.querySelectorAll(".check").forEach(x=>x.checked=false);model.classList.remove("open");update();try{localStorage.removeItem(key)}catch(e){};draft.focus()});
+update();
+})();
+</script>
+</body></html>
