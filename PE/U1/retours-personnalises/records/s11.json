@@ -4,5 +4,31 @@
     "On entend souvent dire que le bonheur est la joie des petits gestes quotidiens. Pour ma part, je pense que le bonheur, c’est aussi que ça. Les rayons du soleil qui caressent mon épaule, les mélodies qui sont captivant, et notamment la compagnie de la famille et d’amis. Le bonheur n’est pas intouchable. Contrairement, il remplit des vides de notre cœur. Personnes parfois poursuivent le bonheur très fort, au point d’oublier ce qu’ils veulent vraiment. Donc, il faut être satisfait."
   ],
   "sourceNotes": [],
-  "cards": []
+  "cards": [
+    {
+      "initial": "les mélodies qui sont captivant",
+      "intent": "Vous souhaitez dire que les mélodies retiennent l’attention et procurent du plaisir.",
+      "strategies": [
+        "Employer un adjectif verbal",
+        "Vérifier l’accord"
+      ],
+      "resources": [
+        [
+          "L’adjectif verbal · Cours",
+          "../../../Vocabulaire/formation-des-mots/adjectif-verbal-cours.html"
+        ],
+        [
+          "Exercices · L’adjectif verbal",
+          "../../../Vocabulaire/formation-des-mots/adjectif-verbal-exercices.html"
+        ]
+      ],
+      "proposals": [
+        {
+          "label": "Réutiliser un adjectif verbal",
+          "text": "des mélodies captivantes",
+          "why": "« Captivant » qualifie ici « mélodies », nom féminin pluriel : « captivantes ». On peut ainsi alléger la relative."
+        }
+      ]
+    }
+  ]
 }

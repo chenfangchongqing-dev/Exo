@@ -4,5 +4,27 @@
     "On entend souvent dire que le bonheur vient des grandes réussites. Pourtant, je pense que les petits moments du quotidienne peuvent aussi nous rendre heureux. Par exemple, dans le premier bonheur du jour de Françoise Hardy, la joie est des petits gestes quotidiens. Personnellement, quand je rentre chez moi après une journée fatigante, je partage un repas avec ma famille, je me sens heureuse. Cet exemple montre que le bonheur ne dépende pas forcément de grandes réussites."
   ],
   "sourceNotes": [],
-  "cards": []
+  "cards": [
+    {
+      "initial": "Cet exemple montre que le bonheur ne dépende pas forcément de grandes réussites.",
+      "intent": "Vous voulez dire que les grandes réussites ne sont pas une condition indispensable du bonheur.",
+      "strategies": [
+        "Corriger le verbe",
+        "Conserver une nuance bien choisie"
+      ],
+      "resources": [
+        [
+          "Nuancer un propos",
+          "../../../Grammaire/U1/nuancer-un-propos.html"
+        ]
+      ],
+      "proposals": [
+        {
+          "label": "Corriger sans perdre la nuance",
+          "text": "Cet exemple montre que le bonheur ne dépend pas forcément de grandes réussites.",
+          "why": "Après « cet exemple montre que », on utilise ici l’indicatif « dépend ». En revanche, « pas forcément » est bien choisi : il n’exclut pas les grandes réussites comme source possible de bonheur."
+        }
+      ]
+    }
+  ]
 }

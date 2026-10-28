@@ -5,5 +5,28 @@
     "[学生边注：后面想不出例子。能否证明“le bonheur peut devenir une source de frustration”的。]"
   ],
   "sourceNotes": [],
-  "cards": []
+  "cards": [
+    {
+      "initial": "mais il peut aussi devenir une source de frustration parce qu’on ira peur de le perdre.",
+      "intent": "Vous semblez vouloir dire que la peur de perdre le bonheur peut elle-même provoquer de la frustration.",
+      "strategies": [
+        "Simplifier",
+        "Clarifier le lien de cause",
+        "Réutiliser le mot « frustration »"
+      ],
+      "resources": [
+        [
+          "Nuancer un propos",
+          "../../../Grammaire/U1/nuancer-un-propos.html"
+        ]
+      ],
+      "proposals": [
+        {
+          "label": "Clarifier l’idée",
+          "text": "On cherche le bonheur, mais la peur de le perdre peut aussi provoquer de la frustration.",
+          "why": "La reformulation met clairement en relation la peur de perdre le bonheur et la frustration. Le sens reste proche de votre intention."
+        }
+      ]
+    }
+  ]
 }

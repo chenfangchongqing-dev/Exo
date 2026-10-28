@@ -6,5 +6,28 @@
     "Cet exemple montre que le bonheur parental ne va pas sans difficultés, il aussi mélange la joie et les soucis au quotidien."
   ],
   "sourceNotes": [],
-  "cards": []
+  "cards": [
+    {
+      "initial": "il aussi mélange la joie et les soucis au quotidien.",
+      "intent": "Vous souhaitez montrer que le bonheur lié à la parentalité comprend à la fois des joies et des difficultés.",
+      "strategies": [
+        "Clarifier le sujet",
+        "Simplifier",
+        "Choisir un verbe précis"
+      ],
+      "resources": [
+        [
+          "Les mots de l’unité",
+          "../../../Vocabulaire/U1/"
+        ]
+      ],
+      "proposals": [
+        {
+          "label": "Préciser l’expression",
+          "text": "Le bonheur parental mêle la joie aux soucis du quotidien.",
+          "why": "Le sujet est explicite et le verbe « mêler » exprime la coexistence d’expériences différentes."
+        }
+      ]
+    }
+  ]
 }

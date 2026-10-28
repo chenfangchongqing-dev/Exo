@@ -4,5 +4,27 @@
     "On entend souvent dire que la course sans fin au bonheur matériel. Pour ma part, je suis d’accord, je pense que le bonheur matériel, c’est imprécis, c’est peut-être une voiture expensive, un appartement très luxueux, ou beaucoup d’argent, mais c’est impossible d’obtenir tous ce que on veut. Prenons l’exemple d’acheter une voiture, vous voulez une voiture simple, mais pour le bonheur matériel, peut-être vous avez envie d’acheter une voiture plus belle et sympa, et cette idée n’arrête jamais, parce qu’il y a toujours une meilleure voiture. Et ça montre que la course sans fin au bonheur matériel."
   ],
   "sourceNotes": [],
-  "cards": []
+  "cards": [
+    {
+      "initial": "c’est impossible d’obtenir tous ce que on veut.",
+      "intent": "Vous souhaitez montrer qu’il est impossible de satisfaire tous les désirs matériels.",
+      "strategies": [
+        "Simplifier",
+        "Corriger « tout ce que »"
+      ],
+      "resources": [
+        [
+          "Les mots de l’unité",
+          "../../../Vocabulaire/U1/"
+        ]
+      ],
+      "proposals": [
+        {
+          "label": "Correction nécessaire",
+          "text": "On ne peut pas obtenir tout ce que l’on veut.",
+          "why": "« Tout ce que » est la forme correcte. La construction « on ne peut pas » est plus directe et garde la même idée."
+        }
+      ]
+    }
+  ]
 }

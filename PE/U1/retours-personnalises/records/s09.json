@@ -8,5 +8,27 @@
     "装自己有，哪怕一秒钟，从而得到精神上的满足与快乐"
   ],
   "sourceNotes": [],
-  "cards": []
+  "cards": [
+    {
+      "initial": "On entend souvent dire que la course sans fin au bonheur matériel.",
+      "intent": "Vous souhaitez évoquer l’idée que la recherche du bonheur matériel peut devenir une course sans fin.",
+      "strategies": [
+        "Construire une proposition complète",
+        "Réutiliser une expression de la leçon"
+      ],
+      "resources": [
+        [
+          "Les mots de l’unité",
+          "../../../Vocabulaire/U1/"
+        ]
+      ],
+      "proposals": [
+        {
+          "label": "Clarifier la construction",
+          "text": "On entend souvent dire que la recherche du bonheur matériel est une course sans fin.",
+          "why": "Après « on entend souvent dire que », il faut une proposition complète. La reformulation conserve l’image de la « course sans fin »."
+        }
+      ]
+    }
+  ]
 }

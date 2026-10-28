@@ -4,5 +4,27 @@
     "On entend souvent dire que le bonheur vient des grands événements exceptionnels, notamment sur la richesse. Pour ma part, je pense qu’il réside dans les petits gestes quotidiens. Prenons l’exemple d’un réveil paisible avec le soleil, accompagné d’un mot gentil de la personne qu’on aime. Ce bonheur ne coûte rien et très touchant. Cet exemple montre que l’on n’a pas besoin de richesse pour accéder au vrai bonheur."
   ],
   "sourceNotes": [],
-  "cards": []
+  "cards": [
+    {
+      "initial": "Ce bonheur ne coûte rien et très touchant.",
+      "intent": "Vous voulez mettre en valeur un petit bonheur qui ne dépend pas de la richesse.",
+      "strategies": [
+        "Simplifier",
+        "Compléter la phrase"
+      ],
+      "resources": [
+        [
+          "Les mots de l’unité",
+          "../../../Vocabulaire/U1/"
+        ]
+      ],
+      "proposals": [
+        {
+          "label": "Correction nécessaire",
+          "text": "Ce bonheur ne coûte rien et il est très touchant.",
+          "why": "La seconde qualité nécessite ici le verbe « être » : « il est très touchant ». Il n’est pas nécessaire de chercher une formulation plus complexe."
+        }
+      ]
+    }
+  ]
 }

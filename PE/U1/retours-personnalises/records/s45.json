@@ -6,5 +6,37 @@
     "Cet exemple montre que le bonheur peut naître de sa passion et de ses réussites professionnelles."
   ],
   "sourceNotes": [],
-  "cards": []
+  "cards": [
+    {
+      "initial": "elle trouve sa bonheur dans le recherche scientifique, sans compter dans l’amour.",
+      "intent": "Vous souhaitez montrer que le bonheur peut aussi provenir d’une passion ou d’un travail, sans être réduit à l’amour.",
+      "strategies": [
+        "Corriger les groupes nominaux",
+        "Nuancer ce que l’exemple prouve",
+        "Éviter une affirmation biographique non vérifiée"
+      ],
+      "resources": [
+        [
+          "Nuancer un propos",
+          "../../../Grammaire/U1/nuancer-un-propos.html"
+        ],
+        [
+          "Production écrite · Unité 1",
+          "../../../PE/U1/"
+        ]
+      ],
+      "proposals": [
+        {
+          "label": "Séparer le fait de l’interprétation",
+          "text": "Marie Curie a consacré une grande partie de sa vie à la recherche scientifique.",
+          "why": "Cette formulation décrit une activité connue sans affirmer, sans preuve, qu’elle n’avait pas besoin d’amour pour être heureuse."
+        },
+        {
+          "label": "Interpréter l’exemple avec prudence",
+          "text": "Cet exemple peut illustrer l’importance d’une passion, mais il ne suffit pas à prouver que l’amour ne contribue pas au bonheur.",
+          "why": "La conclusion doit rester proportionnée à ce que l’exemple permet d’établir."
+        }
+      ]
+    }
+  ]
 }
