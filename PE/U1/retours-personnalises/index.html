@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#FDBA12">
-<meta name="description" content="Maquette de mise en page pour les corrections personnalisées de production écrite · Inspire 4 · Unité 1. Sans copie réelle.">
-<title>Mes corrections personnelles · Maquette · Inspire 4</title>
+<meta name="description" content="Productions écrites · Inspire 4 · Unité 1. Retrouvez votre transcription et vos remarques individuelles avec votre code.">
+<title>Mes corrections personnelles · Inspire 4</title>
 <style>
 :root{--bg:#f8f6f1;--surface:#fffefa;--ink:#292720;--soft-ink:#594f43;--muted:#786c5d;--line:#e9deca;--warm:#fdba12;--honey:#a76c16;--shadow:0 15px 36px rgba(79,60,30,.065)}
 *{box-sizing:border-box}
@@ -105,128 +105,157 @@ footer{margin:37px 0 0;padding-top:19px;border-top:1px solid var(--line);font-si
 @media(max-width:780px){.feedback-layout{grid-template-columns:1fr}.side{position:static;padding:16px 18px}.side nav{display:flex;flex-wrap:wrap;gap:6px}.side a{padding:8px 10px}.side .side-foot{display:none}}
 @media(max-width:680px){.page{padding:14px 13px 38px}.hero{padding:30px 23px}.hero p.intro{font-size:19px}.entry-grid{grid-template-columns:1fr}.entry,.guide,.revision,.copy,.transfer{padding:21px 18px}.code-row{flex-direction:column}.code-row button{width:100%}.step{grid-template-columns:32px 1fr;gap:10px}.stepno{width:30px;height:30px}.copy blockquote{font-size:19px}.sentence{font-size:19px}.teacher-body .model{font-size:18px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+.user-text{background:#fff7e5;border-left:4px solid #edbb55;border-radius:0 12px 12px 0;margin:14px 0 0;padding:19px 21px}
+.user-text p{font:20px/1.7 "Times New Roman",Georgia,"PingFang SC",serif;margin:0 0 14px;white-space:pre-wrap;overflow-wrap:anywhere}
+.user-text p:last-child{margin-bottom:0}
+.privacy{background:#fffcf7;border:1px solid #efe5d5;border-radius:12px;padding:13px 17px;margin:20px 0 0;color:#766755;font-size:13px;line-height:1.65}
+.second-field{margin:13px 0}.second-field input{font:17px/1.4 Arial,sans-serif;width:100%;min-height:50px;padding:11px 14px;border:1px solid #c9af87;border-radius:11px;background:#fff}
+.empty-return{background:#fff8e9;border:1px solid #eddfc7;border-radius:14px;padding:20px 24px;color:#65594a;line-height:1.75;margin-bottom:20px}
+.empty-return h2{font-size:19px;margin:0 0 7px}.empty-return p{margin:0;font-size:15px}
+.copy .caption{margin-top:13px}
+.revision .step .hint{font-size:14px;color:#7b6f5e}
+.revision .resource-links{margin-top:8px}
+.status-label{font-size:13px;color:#8a651d;font-weight:700}
+.caution-note{background:#fff9ed;color:#73562f;font-size:13px;padding:13px 16px;border-radius:11px;margin:0 0 18px}
+@media(max-width:680px){.user-text{padding:15px 16px}.user-text p{font-size:19px}}
 </style>
 </head>
 <body>
 <div class="page">
-<header class="topbar"><a class="brand" href="../../index.html">INSPIRE 4 · PRODUCTION ÉCRITE</a><div class="top-links"><a href="../index.html">← Unité 1</a><span class="preview">MAQUETTE · SANS COPIE RÉELLE</span></div></header>
+<header class="topbar"><a class="brand" href="../../index.html">INSPIRE 4 · PRODUCTION ÉCRITE</a><div class="top-links"><a href="../index.html">← Unité 1</a></div></header>
 <div id="entry-view">
 <section class="hero" aria-labelledby="entry-title">
 <p class="eyebrow">Unité 1 · Leçon 2 · Correction des PE</p>
 <h1 id="entry-title">Mes corrections <em>personnelles.</em></h1>
-<p class="intro">Relire mon texte, comprendre les propositions de correction et réutiliser les ressources de l’unité pour mieux m’exprimer.</p>
-<div class="chips"><span>Mon texte</span><span>Mes points à améliorer</span><span>Mes ressources</span></div>
+<p class="intro">Retrouver ma production, comprendre les remarques et réutiliser les ressources déjà étudiées pour améliorer mon expression.</p>
+<div class="chips"><span>Mon texte initial</span><span>Mes commentaires</span><span>Mes ressources</span></div>
 </section>
 <div class="entry-grid">
 <section class="entry card" aria-labelledby="access-title">
-<p class="section-label">Mon espace</p><h2 id="access-title">Retrouver mon retour</h2>
-<p class="description">L’espace personnel me permet de retrouver uniquement les passages commentés de ma production, sans afficher les travaux de toute la classe.</p>
+<p class="section-label">Mon espace</p>
+<h2 id="access-title">Retrouver ma production</h2>
+<p class="description">Saisissez les quatre derniers chiffres de votre numéro d’étudiant pour accéder directement à votre retour, sans parcourir les textes de la classe.</p>
 <form id="code-form" novalidate>
-<label class="field-label" for="code">Mon code d’accès</label>
-<div class="code-row"><input id="code" name="code" type="text" maxlength="32" placeholder="Saisir mon code" autocapitalize="characters" autocomplete="off" spellcheck="false" aria-describedby="code-help" required><button type="submit">Ouvrir mon retour <span aria-hidden="true">→</span></button></div>
+<label class="field-label" for="code">Les 4 derniers chiffres de mon numéro d’étudiant</label>
+<div class="code-row"><input id="code" name="code" type="text" inputmode="numeric" pattern="[0-9]{4}" maxlength="4" placeholder="0000" autocomplete="off" spellcheck="false" aria-describedby="code-help" required><button id="open" type="submit">Ouvrir mon retour <span aria-hidden="true">→</span></button></div>
+<div id="second-field" class="second-field" hidden>
+<label class="field-label" for="first-name">Mon prénom français</label>
+<input id="first-name" name="firstName" autocomplete="off" spellcheck="false" placeholder="Mon prénom français" aria-describedby="collision-hint">
+<p id="collision-hint" class="caption">Certains étudiants partagent les quatre derniers chiffres. Votre prénom français permet de les distinguer.</p>
+</div>
 <p class="form-status" id="code-status" role="status" aria-live="polite"></p>
 </form>
-<div class="demo-note" id="code-help"><strong>Pour tester la maquette :</strong> saisissez le code <b>DEMO</b> ou <a href="#exemple">ouvrez directement la page de démonstration</a>. Aucun retour individuel réel n’est encore disponible.</div>
+<div id="code-help" class="demo-note">Pour voir le fonctionnement avant d’ouvrir un travail réel, <a id="demo-link" href="#exemple">consultez un exemple fictif</a>.</div>
 </section>
 <aside class="guide card" aria-labelledby="guide-title">
 <h2 id="guide-title">Comment lire mon retour ?</h2>
 <ol>
-<li><span class="circle">01</span><div><strong>Retrouver ma phrase</strong><p>Partir de ce que j’ai réellement écrit.</p></div></li>
-<li><span class="circle">02</span><div><strong>Clarifier mon intention</strong><p>Identifier l’idée que je souhaite exprimer.</p></div></li>
-<li><span class="circle">03</span><div><strong>Mobiliser les ressources</strong><p>Revoir les mots et les formes étudiés en cours.</p></div></li>
-<li><span class="circle">04</span><div><strong>Comparer les formulations</strong><p>Essayer moi-même ou consulter directement les suggestions.</p></div></li>
+<li><span class="circle">01</span><div><strong>Ma phrase initiale</strong><p>Revenir à mes propres mots.</p></div></li>
+<li><span class="circle">02</span><div><strong>Mon intention</strong><p>Comprendre l’idée que j’ai voulu exprimer.</p></div></li>
+<li><span class="circle">03</span><div><strong>Je cherche des ressources</strong><p>Retrouver les expressions de l’unité.</p></div></li>
+<li><span class="circle">04</span><div><strong>Je propose une reformulation</strong><p>Comparer mes essais aux suggestions commentées.</p></div></li>
 </ol>
 </aside>
 </div>
 <div class="principle" lang="zh-CN"><p>结构上保留认知引导，交互上给予学生自主权，内容上突出语言资源的迁移与复用。</p></div>
+<div class="privacy" lang="zh-CN">说明：编号用于查找个人页面，不是身份认证。此网站为公开静态网站，请勿将编号视为保密密码。</div>
 </div>
 <div id="personal-view" hidden>
-<div class="feedback-topline"><a href="./index.html">← Mes corrections personnelles</a><p>Exemple fictif · Mise en page uniquement</p></div>
+<div class="feedback-topline"><button type="button" id="return-entry" class="manual-reset" style="border:0;background:transparent;cursor:pointer;padding:0;color:#825919;font:800 13px Arial">← Mes corrections personnelles</button><p id="personal-meta">Inspire 4 · Unité 1</p></div>
 <section class="hero personal-hero" aria-labelledby="personal-title">
-<p class="eyebrow">Unité 1 · Production écrite · Exemple de retour</p>
+<p class="eyebrow">Inspire 4 · Unité 1 · Leçon 2</p>
 <h1 id="personal-title">Mon parcours <em>de réécriture.</em></h1>
-<p class="intro">Une correction à mon rythme : comprendre l’idée, choisir les ressources et comparer plusieurs reformulations.</p>
-<div class="chips"><span>Exemple fictif</span><span>2 passages commentés</span><span>Sans remise obligatoire</span></div>
+<p class="intro">Observer mon texte, comprendre les propositions de correction et choisir des ressources qui correspondent à mon idée.</p>
+<div class="chips"><span>Ma production</span><span>Réécriture accompagnée</span><span>Sans remise obligatoire</span></div>
 </section>
 <div class="feedback-layout">
 <aside class="side card" aria-label="Navigation dans le retour">
-<h2>Dans mon retour</h2>
-<nav><a href="#copie">Mon texte</a><a href="#passage-1">Passage 01 · Nuancer</a><a href="#passage-2">Passage 02 · Préciser</a><a href="#reinvestir">Pour réemployer</a></nav>
-<p class="side-foot">Une véritable page personnelle ne présenterait que la copie et les annotations du titulaire.</p>
+<h2>Mon retour</h2>
+<nav id="feedback-menu"><a href="#copie">Mon texte initial</a></nav>
+<p class="side-foot">Les suggestions ne remplacent pas votre propre jugement sur le sens du texte.</p>
 </aside>
 <main class="feedback-main">
 <section id="copie" class="copy card" aria-labelledby="copy-title">
-<p class="section-label">Ma production initiale</p><h2 id="copy-title">Le bonheur et l’argent</h2>
-<blockquote>Je pense que l’argent n’est pas très important pour être heureux. Les personnes qui ne pensent qu’à l’argent ont une mauvaise idée du bonheur.</blockquote>
-<p class="caption" lang="zh-CN">以上两句为排版演示而编写，不是任何真实学生的作文。</p>
+<p class="section-label">Ma production initiale</p><h2 id="copy-title">Le bonheur</h2>
+<div id="copy-content" class="user-text"></div>
+<div id="source-notes"></div>
+<p class="caption">Transcription fidèle au document remis : les erreurs et formulations initiales sont conservées.</p>
 </section>
-<article class="revision" id="passage-1" aria-labelledby="revision-1-title">
-<div class="revision-header"><span class="num">PASSAGE 01 / 02</span><span class="tag">Amélioration possible · précision du sens</span></div>
-<h2 id="revision-1-title">Exprimer l’idée avec plus de précision</h2>
-<div class="step"><span class="stepno">01</span><div><h3>Ma phrase initiale</h3><p class="sentence">Je pense que l’argent n’est pas très important pour être heureux.</p></div></div>
-<div class="step"><span class="stepno">02</span><div><h3>Mon intention</h3><p class="intent">Voulez-vous dire que l’argent joue un rôle secondaire, ou qu’il ne suffit pas à rendre heureux ?</p><p class="explanation" lang="zh-CN">这里有两种不同的意思：金钱不太重要，还是金钱虽有作用却不足以保证幸福？修改前先确定真正的观点。</p></div></div>
-<div class="step"><span class="stepno">03</span><div><h3>Je cherche des ressources</h3><p>Deux directions possibles : <strong>simplifier</strong> et <strong>nuancer son propos</strong>.</p><div class="resource-links"><a href="../../../Grammaire/U1/nuancer-un-propos.html">Nuancer un propos ↗</a><a href="../../../Grammaire/U1/index.html">La négation · Unité 1 ↗</a></div></div></div>
-<div class="step"><span class="stepno">04</span><div><h3>Je propose une reformulation</h3><textarea class="rewrite" id="rewrite-1" lang="fr" spellcheck="true" placeholder="Ma reformulation…" aria-label="Ma reformulation du passage 1"></textarea><p class="caption" lang="zh-CN">可以先自行改写，也可以直接展开教师建议；无需提交。</p>
-<details class="teacher"><summary>Voir les propositions commentées</summary><div class="teacher-body">
-<h4>01 · Simplifier</h4><p class="model">L’argent ne suffit pas à rendre heureux.</p><p>Cette phrase exprime que l’argent peut compter, mais qu’il ne constitue pas une condition suffisante du bonheur.</p>
-<h4>02 · Nuancer</h4><p class="model">L’argent ne garantit pas nécessairement le bonheur.</p><p><em>Pas nécessairement</em> limite la portée de l’affirmation : l’argent peut contribuer au bonheur sans le garantir.</p>
-<p class="note" lang="zh-CN">两种改写都比原句更明确地表达了“金钱不足以保证幸福”，但如果你原本想说的是“金钱根本不重要”，就不能直接采用这些句子。</p>
-</div></details>
-</div></div>
-</article>
-<article class="revision" id="passage-2" aria-labelledby="revision-2-title">
-<div class="revision-header"><span class="num">PASSAGE 02 / 02</span><span class="tag">Amélioration possible · choix du vocabulaire</span></div>
-<h2 id="revision-2-title">Choisir un adjectif qui précise l’évaluation</h2>
-<div class="step"><span class="stepno">01</span><div><h3>Ma phrase initiale</h3><p class="sentence">Les personnes qui ne pensent qu’à l’argent ont une mauvaise idée du bonheur.</p></div></div>
-<div class="step"><span class="stepno">02</span><div><h3>Mon intention</h3><p class="intent">Vous semblez vouloir critiquer une conception du bonheur limitée à l’argent.</p><p class="explanation" lang="zh-CN">先辨明评价对象：是批评某些人，还是批评一种把幸福等同于金钱的观念？这会影响主语和词语的选择。</p></div></div>
-<div class="step"><span class="stepno">03</span><div><h3>Je cherche des ressources</h3><p><strong>Préciser le vocabulaire</strong> et, si le sens s’y prête, <strong>réemployer un adjectif verbal</strong>.</p><div class="resource-links"><a href="../../../Vocabulaire/formation-des-mots/adjectif-verbal-cours.html">L’adjectif verbal · Cours ↗</a><a href="../../../Vocabulaire/U1/index.html">Les mots de l’unité ↗</a></div></div></div>
-<div class="step"><span class="stepno">04</span><div><h3>Je propose une reformulation</h3><textarea class="rewrite" id="rewrite-2" lang="fr" spellcheck="true" placeholder="Ma reformulation…" aria-label="Ma reformulation du passage 2"></textarea><p class="caption" lang="zh-CN">选择最符合原意的表达，不必为了使用新词而改变观点。</p>
-<details class="teacher"><summary>Voir les propositions commentées</summary><div class="teacher-body">
-<h4>01 · Rester simple</h4><p class="model">C’est une vision limitée du bonheur.</p><p>La critique porte sur l’idée plutôt que sur les personnes. Le mot <em>limitée</em> dit plus précisément ce que signifie ici <em>mauvaise</em>.</p>
-<h4>02 · Réutiliser le vocabulaire étudié</h4><p class="model">Réduire le bonheur à l’argent peut donner une vision appauvrissante de la vie.</p><p><em>Appauvrissante</em> apporte une évaluation plus précise. Cette formulation suppose toutefois que vous souhaitez critiquer une vision réductrice du bonheur.</p>
-<p class="note" lang="zh-CN">使用 <em>appauvrissante</em> 的前提是它准确服务于你的观点；并非换成复杂词汇就一定更好。</p>
-</div></details>
-</div></div>
-</article>
+<div id="feedback-cards"></div>
 <section class="transfer card" id="reinvestir" aria-labelledby="transfer-title">
 <p class="section-label">Pour poursuivre</p><h2 id="transfer-title">Réemployer dans ma prochaine production</h2>
-<p>Après avoir lu les remarques, retenez les expressions qui correspondent réellement à ce que vous souhaitez dire. Les propositions de l’enseignante sont des pistes de réécriture, pas des phrases à recopier automatiquement.</p>
-<div class="resource-links"><a href="../index.html">Revenir aux productions écrites ↗</a><a href="../../../Grammaire/U1/nuancer-un-propos.html">Revoir la nuance ↗</a><a href="../../../Vocabulaire/formation-des-mots/adjectif-verbal.html">Revoir l’adjectif verbal ↗</a></div>
+<p>Les reformulations sont des pistes à comparer. Choisissez celles qui correspondent à votre intention et utilisez les ressources déjà étudiées pour progresser.</p>
+<div class="resource-links"><a href="../../../Grammaire/U1/nuancer-un-propos.html">Nuancer un propos ↗</a><a href="../../../Vocabulaire/formation-des-mots/adjectif-verbal.html">L’adjectif verbal ↗</a><a href="../index.html">Revenir à Production écrite ↗</a></div>
 </section>
 </main>
 </div>
 </div>
-<footer>Inspire 4 · Production écrite · Maquette des retours personnalisés. Aucune copie réelle ni donnée d’élève n’est incluse.</footer>
+<footer>Inspire 4 · Unité 1 · Leçon 2 · Correction personnalisée des productions écrites.</footer>
 </div>
 <script>
 (function(){
 "use strict";
-const entry=document.getElementById("entry-view");
-const personal=document.getElementById("personal-view");
-const form=document.getElementById("code-form");
-const code=document.getElementById("code");
-const status=document.getElementById("code-status");
-function showView(){
-const isExample=location.hash==="#exemple"||location.hash.indexOf("#passage-")===0||location.hash==="#copie"||location.hash==="#reinvestir";
-entry.hidden=isExample;
-personal.hidden=!isExample;
-document.title=isExample?"Mon parcours de réécriture · Exemple fictif · Inspire 4":"Mes corrections personnelles · Maquette · Inspire 4";
-if(location.hash==="#exemple")window.scrollTo(0,0);
+const entry=document.getElementById("entry-view"),personal=document.getElementById("personal-view"),
+form=document.getElementById("code-form"),code=document.getElementById("code"),
+firstName=document.getElementById("first-name"),second=document.getElementById("second-field"),
+notice=document.getElementById("code-status"),submit=document.getElementById("open");
+const urls={manifest:"./manifest.json"};
+let manifestPromise=null;
+function elt(tag,cl,txt){const e=document.createElement(tag);if(cl)e.className=cl;if(txt!==undefined)e.textContent=txt;return e}
+function labelLink(text,href){const a=elt("a",null,text+" ↗");a.href=href;return a}
+function normalize(value){return String(value||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").trim().toLowerCase().replace(/\s+/g," ")}
+function hash(value){let h=2166136261;for(let i=0;i<value.length;i++)h=Math.imul(h^value.charCodeAt(i),16777619);return(h>>>0).toString(16).padStart(8,"0")}
+async function getManifest(){if(!manifestPromise)manifestPromise=fetch(urls.manifest,{cache:"no-store"}).then(r=>{if(!r.ok)throw Error("manifest");return r.json()});return manifestPromise}
+function showReturn(record,storageKey,isDemo){
+document.getElementById("personal-meta").textContent=isDemo?"Exemple fictif":"Mon texte · Unité 1 · Leçon 2";
+const content=document.getElementById("copy-content");content.replaceChildren();
+for(const paragraph of record.paragraphs||[]){content.appendChild(elt("p",null,paragraph))}
+const source=document.getElementById("source-notes");source.replaceChildren();
+for(const note of record.sourceNotes||[]){source.appendChild(elt("p","caution-note",note))}
+const container=document.getElementById("feedback-cards"),menu=document.getElementById("feedback-menu");
+container.replaceChildren();menu.replaceChildren(labelLink("Mon texte initial","#copie"));
+const cards=Array.isArray(record.cards)?record.cards:[];
+if(!cards.length){const box=elt("section","empty-return");box.appendChild(elt("h2",null,"Mes commentaires"));box.appendChild(elt("p",null,"La transcription de votre texte est disponible. Aucune proposition individualisée de réécriture n’a encore été ajoutée à cette fiche."));container.appendChild(box)}
+for(let i=0;i<cards.length;i++){
+const item=cards[i],section=elt("article","revision");section.id="passage-"+(i+1);
+const top=elt("div","revision-header");top.appendChild(elt("span","num","PASSAGE "+String(i+1).padStart(2,"0")+" / "+String(cards.length).padStart(2,"0")));top.appendChild(elt("span","tag","Correction et amélioration"));section.appendChild(top);
+section.appendChild(elt("h2",null,"Améliorer ce passage"));
+function addStep(no,title){const wrap=elt("div","step");wrap.appendChild(elt("span","stepno",String(no).padStart(2,"0")));const inner=elt("div");inner.appendChild(elt("h3",null,title));wrap.appendChild(inner);section.appendChild(wrap);return inner}
+addStep(1,"Ma phrase initiale").appendChild(elt("p","sentence",item.initial));
+addStep(2,"Mon intention").appendChild(elt("p","intent",item.intent));
+const resources=addStep(3,"Je cherche des ressources");const tags=Array.isArray(item.strategies)?item.strategies.join(" · "):"";resources.appendChild(elt("p",null,tags));const links=elt("div","resource-links");for(const pair of item.resources||[]){if(Array.isArray(pair)&&typeof pair[0]==="string"&&typeof pair[1]==="string"&&pair[1].startsWith("../../../"))links.appendChild(labelLink(pair[0],pair[1]))}resources.appendChild(links);
+const rewrite=addStep(4,"Je propose une reformulation");
+const area=elt("textarea","rewrite");area.placeholder="Ma reformulation…";area.spellcheck=true;area.lang="fr";area.setAttribute("aria-label","Ma reformulation du passage "+(i+1));const key="inspire4-pe-u1-rewrite:"+storageKey+":"+i;
+try{area.value=localStorage.getItem(key)||""}catch(e){}
+area.addEventListener("input",()=>{try{localStorage.setItem(key,area.value)}catch(e){}});
+rewrite.appendChild(area);rewrite.appendChild(elt("p","caption","Vous pouvez réécrire ou consulter directement les propositions. Aucune validation n’est nécessaire."));
+const details=elt("details","teacher");const summary=elt("summary",null,"Voir les propositions commentées");details.appendChild(summary);const teacher=elt("div","teacher-body");
+for(const option of item.proposals||[]){teacher.appendChild(elt("h4",null,option.label));teacher.appendChild(elt("p","model",option.text));teacher.appendChild(elt("p",null,option.why))}details.appendChild(teacher);rewrite.appendChild(details);
+container.appendChild(section);menu.appendChild(labelLink("Passage "+String(i+1).padStart(2,"0"),"#passage-"+(i+1)));
 }
-form.addEventListener("submit",function(e){
-e.preventDefault();
-const entered=code.value.replace(/\s+/g,"").toLocaleUpperCase("fr");
-if(entered==="DEMO"){status.textContent="";location.hash="exemple";return}
-status.textContent="Cette page est un prototype : aucun dossier d’étudiant n’est relié au formulaire. Saisissez DEMO pour tester l’interface.";
+menu.appendChild(labelLink("Pour réemployer","#reinvestir"));
+entry.hidden=true;personal.hidden=false;window.scrollTo({top:0});document.title="Mon parcours de réécriture · Inspire 4";
+}
+function back(){personal.hidden=true;entry.hidden=false;code.value="";firstName.value="";second.hidden=true;notice.textContent="";document.title="Mes corrections personnelles · Inspire 4";window.scrollTo({top:0})}
+document.getElementById("return-entry").addEventListener("click",back);
+const example={paragraphs:["Je pense que l’argent n’est pas très important pour être heureux.","Les personnes qui ne pensent qu’à l’argent ont une mauvaise idée du bonheur."],sourceNotes:[],cards:[{initial:"Je pense que l’argent n’est pas très important pour être heureux.",intent:"Voulez-vous dire que l’argent est secondaire, ou qu’il ne suffit pas à rendre heureux ?",strategies:["Simplifier","Nuancer"],resources:[["Nuancer un propos","../../../Grammaire/U1/nuancer-un-propos.html"]],proposals:[{label:"Simplifier",text:"L’argent ne suffit pas à rendre heureux.",why:"Cette formulation considère que l’argent peut contribuer au bonheur, sans suffire à lui seul."},{label:"Nuancer",text:"L’argent ne garantit pas nécessairement le bonheur.",why:"« Pas nécessairement » évite une généralisation excessive. Le sens diffère légèrement de celui de la phrase initiale."}]}]};
+document.getElementById("demo-link").addEventListener("click",e=>{e.preventDefault();showReturn(example,"example",true)});
+code.addEventListener("input",()=>{second.hidden=true;firstName.value="";notice.textContent=""});
+form.addEventListener("submit",async function(event){
+event.preventDefault();const suffix=code.value.trim();
+if(!/^[0-9]{4}$/.test(suffix)){notice.textContent="Saisissez exactement quatre chiffres.";code.focus();return}
+submit.disabled=true;
+try{
+const manifest=await getManifest();
+if(manifest.needPrenom.includes(suffix)&&!normalize(firstName.value)){second.hidden=false;notice.textContent="Ce numéro est partagé. Indiquez aussi votre prénom français.";firstName.focus();return}
+const routeKey=hash("u1-pe|"+suffix+(manifest.needPrenom.includes(suffix)?"|"+normalize(firstName.value):""));
+const file=manifest.routes[routeKey];
+if(!file||!/^records\/s\d{2}\.json$/.test(file)){notice.textContent="Aucun texte correspondant. Vérifiez votre code et votre prénom français.";return}
+const resp=await fetch("./"+file,{cache:"no-store"});
+if(!resp.ok)throw Error("record");
+const record=await resp.json();showReturn(record,file,false);
+}catch(e){notice.textContent="Le retour n’est pas accessible actuellement. Vérifiez votre connexion ou réessayez plus tard."}finally{submit.disabled=false}
 });
-document.querySelectorAll(".rewrite").forEach(function(field){
-const storageKey="exo-pe-retours-maquette-"+field.id;
-try{field.value=localStorage.getItem(storageKey)||""}catch(e){}
-field.addEventListener("input",function(){try{localStorage.setItem(storageKey,field.value)}catch(e){}});
-});
-window.addEventListener("hashchange",showView);
-showView();
 })();
-</script>
-</body>
-</html>
+</script></body></html>
