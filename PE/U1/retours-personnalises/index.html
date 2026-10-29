@@ -119,6 +119,17 @@ footer{margin:37px 0 0;padding-top:19px;border-top:1px solid var(--line);font-si
 .status-label{font-size:13px;color:#8a651d;font-weight:700}
 .caution-note{background:#fff9ed;color:#73562f;font-size:13px;padding:13px 16px;border-radius:11px;margin:0 0 18px}
 @media(max-width:680px){.user-text{padding:15px 16px}.user-text p{font-size:19px}}
+
+.student-overview{padding:25px 28px;margin-bottom:21px;border-color:#ead3a5;background:#fffcf5;scroll-margin-top:16px}
+.student-overview h2{font-size:22px;margin:0 0 14px}
+.overview-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.overview-cell{border-top:1px solid #e7d9bd;padding-top:14px}
+.overview-cell h3{font-size:15px;margin:0 0 9px;color:#815816}
+.overview-cell p{font-size:15px;line-height:1.7;color:#655b4b;margin:0}
+.overview-cell .overview-zh{font:14px/1.75 "PingFang SC","Microsoft YaHei",sans-serif;color:#80705b;margin:10px 0 0}
+.step .step-zh{font:14px/1.75 "PingFang SC","Microsoft YaHei",sans-serif;color:#7b6c59;margin:8px 0 0}
+.teacher-body p.teacher-zh{font:14px/1.75 "PingFang SC","Microsoft YaHei",sans-serif;color:#78654c;margin:-6px 0 17px}
+@media(max-width:720px){.overview-grid{grid-template-columns:1fr}.student-overview{padding:21px 18px}}
 </style>
 </head>
 <body>
@@ -167,7 +178,7 @@ footer{margin:37px 0 0;padding-top:19px;border-top:1px solid var(--line);font-si
 <p class="eyebrow">Inspire 4 · Unité 1 · Leçon 2</p>
 <h1 id="personal-title">Mon parcours <em>de réécriture.</em></h1>
 <p class="intro">Observer mon texte, comprendre les propositions de correction et choisir des ressources qui correspondent à mon idée.</p>
-<div class="chips"><span>Ma production</span><span>Réécriture accompagnée</span><span>Sans remise obligatoire</span></div>
+<div class="chips"><span>Ma production</span><span id="review-count">Commentaires</span><span>Réécriture accompagnée</span><span>Sans remise obligatoire</span></div>
 </section>
 <div class="feedback-layout">
 <aside class="side card" aria-label="Navigation dans le retour">
@@ -182,6 +193,7 @@ footer{margin:37px 0 0;padding-top:19px;border-top:1px solid var(--line);font-si
 <div id="source-notes"></div>
 <p class="caption">Transcription fidèle au document remis : les erreurs et formulations initiales sont conservées.</p>
 </section>
+<section id="student-overview" class="student-overview card" aria-labelledby="overview-title" hidden></section>
 <div id="feedback-cards"></div>
 <section class="transfer card" id="reinvestir" aria-labelledby="transfer-title">
 <p class="section-label">Pour poursuivre</p><h2 id="transfer-title">Réemployer dans ma prochaine production</h2>
@@ -214,16 +226,30 @@ for(const paragraph of record.paragraphs||[]){content.appendChild(elt("p",null,p
 const source=document.getElementById("source-notes");source.replaceChildren();
 for(const note of record.sourceNotes||[]){source.appendChild(elt("p","caution-note",note))}
 const container=document.getElementById("feedback-cards"),menu=document.getElementById("feedback-menu");
+const overviewBox=document.getElementById("student-overview");overviewBox.replaceChildren();
+const overview=record.overview;
+if(overview&&overview.strength&&overview.focus){
+ const title=elt("h2",null,"Ce que je peux conserver et améliorer");title.id="overview-title";overviewBox.appendChild(title);
+ const columns=elt("div","overview-grid");
+ const strongSide=elt("div","overview-cell");strongSide.appendChild(elt("h3",null,"Ce qui fonctionne déjà"));strongSide.appendChild(elt("p",null,overview.strength));columns.appendChild(strongSide);
+ const focusSide=elt("div","overview-cell");focusSide.appendChild(elt("h3",null,"Mon objectif de réécriture"));focusSide.appendChild(elt("p",null,overview.focus));
+ if(overview.focusZh){const zh=elt("p","overview-zh",overview.focusZh);zh.lang="zh-CN";focusSide.appendChild(zh)}columns.appendChild(focusSide);overviewBox.appendChild(columns);overviewBox.hidden=false;
+}else{overviewBox.hidden=true}
+
 container.replaceChildren();menu.replaceChildren(labelLink("Mon texte initial","#copie"));
+if(!overviewBox.hidden)menu.appendChild(labelLink("Mon bilan","#student-overview"));
+document.getElementById("review-count").textContent=Array.isArray(record.cards)&&record.cards.length?record.cards.length+" passages commentés":"Transcription disponible";
 const cards=Array.isArray(record.cards)?record.cards:[];
 if(!cards.length){const box=elt("section","empty-return");box.appendChild(elt("h2",null,"Mes commentaires"));box.appendChild(elt("p",null,"La transcription de votre texte est disponible. Aucune proposition individualisée de réécriture n’a encore été ajoutée à cette fiche."));container.appendChild(box)}
 for(let i=0;i<cards.length;i++){
 const item=cards[i],section=elt("article","revision");section.id="passage-"+(i+1);
-const top=elt("div","revision-header");top.appendChild(elt("span","num","PASSAGE "+String(i+1).padStart(2,"0")+" / "+String(cards.length).padStart(2,"0")));top.appendChild(elt("span","tag","Correction et amélioration"));section.appendChild(top);
-section.appendChild(elt("h2",null,"Améliorer ce passage"));
+const top=elt("div","revision-header");top.appendChild(elt("span","num","PASSAGE "+String(i+1).padStart(2,"0")+" / "+String(cards.length).padStart(2,"0")));const types={correction:"Correction nécessaire",amelioration:"Amélioration possible",raisonnement:"Raisonnement et pertinence"};
+top.appendChild(elt("span","tag",types[item.kind]||"Correction et amélioration"));section.appendChild(top);
+section.appendChild(elt("h2",null,item.title||"Améliorer ce passage"));
 function addStep(no,title){const wrap=elt("div","step");wrap.appendChild(elt("span","stepno",String(no).padStart(2,"0")));const inner=elt("div");inner.appendChild(elt("h3",null,title));wrap.appendChild(inner);section.appendChild(wrap);return inner}
 addStep(1,"Ma phrase initiale").appendChild(elt("p","sentence",item.initial));
-addStep(2,"Mon intention").appendChild(elt("p","intent",item.intent));
+const intentStep=addStep(2,"Mon intention");intentStep.appendChild(elt("p","intent",item.intent));
+if(item.intentZh){const z=elt("p","step-zh",item.intentZh);z.lang="zh-CN";intentStep.appendChild(z)}
 const resources=addStep(3,"Je cherche des ressources");const tags=Array.isArray(item.strategies)?item.strategies.join(" · "):"";resources.appendChild(elt("p",null,tags));const links=elt("div","resource-links");for(const pair of item.resources||[]){if(Array.isArray(pair)&&typeof pair[0]==="string"&&typeof pair[1]==="string"&&pair[1].startsWith("../../../"))links.appendChild(labelLink(pair[0],pair[1]))}resources.appendChild(links);
 const rewrite=addStep(4,"Je propose une reformulation");
 const area=elt("textarea","rewrite");area.placeholder="Ma reformulation…";area.spellcheck=true;area.lang="fr";area.setAttribute("aria-label","Ma reformulation du passage "+(i+1));const key="inspire4-pe-u1-rewrite:"+storageKey+":"+i;
@@ -231,7 +257,7 @@ try{area.value=localStorage.getItem(key)||""}catch(e){}
 area.addEventListener("input",()=>{try{localStorage.setItem(key,area.value)}catch(e){}});
 rewrite.appendChild(area);rewrite.appendChild(elt("p","caption","Vous pouvez réécrire ou consulter directement les propositions. Aucune validation n’est nécessaire."));
 const details=elt("details","teacher");const summary=elt("summary",null,"Voir les propositions commentées");details.appendChild(summary);const teacher=elt("div","teacher-body");
-for(const option of item.proposals||[]){teacher.appendChild(elt("h4",null,option.label));teacher.appendChild(elt("p","model",option.text));teacher.appendChild(elt("p",null,option.why))}details.appendChild(teacher);rewrite.appendChild(details);
+for(const option of item.proposals||[]){teacher.appendChild(elt("h4",null,option.label));teacher.appendChild(elt("p","model",option.text));teacher.appendChild(elt("p",null,option.why));if(option.whyZh){const z=elt("p","teacher-zh",option.whyZh);z.lang="zh-CN";teacher.appendChild(z)}}details.appendChild(teacher);rewrite.appendChild(details);
 container.appendChild(section);menu.appendChild(labelLink("Passage "+String(i+1).padStart(2,"0"),"#passage-"+(i+1)));
 }
 menu.appendChild(labelLink("Pour réemployer","#reinvestir"));
