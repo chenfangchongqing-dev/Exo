@@ -130,6 +130,18 @@ footer{margin:37px 0 0;padding-top:19px;border-top:1px solid var(--line);font-si
 .step .step-zh{font:14px/1.75 "PingFang SC","Microsoft YaHei",sans-serif;color:#7b6c59;margin:8px 0 0}
 .teacher-body p.teacher-zh{font:14px/1.75 "PingFang SC","Microsoft YaHei",sans-serif;color:#78654c;margin:-6px 0 17px}
 @media(max-width:720px){.overview-grid{grid-template-columns:1fr}.student-overview{padding:21px 18px}}
+
+/* One-copy review: exact original + concise positive appreciation */
+.manuscript{margin:17px 0 12px;padding:12px;border-radius:15px;background:#fff7e6;border:1px solid #e9d9bb}
+.manuscript img{max-width:100%;height:auto;display:block;margin:0 auto;border-radius:8px;object-fit:contain}
+.positive-comment{margin:22px 0 0;border-left:4px solid var(--warm);background:#fff6e5;padding:17px 20px;border-radius:0 12px 12px 0;font:16px/1.82 "PingFang SC","Microsoft YaHei",Arial,sans-serif;color:#554a3b}
+.feedback-layout.simple-return{display:block;max-width:950px;margin:23px auto 0}
+.feedback-layout.simple-return .side,.feedback-layout.simple-return #reinvestir{display:none}
+.feedback-layout.simple-return .copy{padding:29px 32px}
+.feedback-layout.simple-return .copy .user-text{background:#fffbf2;margin:17px 0;border-left-color:#e6c37f}
+.feedback-layout.simple-return .copy .user-text p{font-size:20px;line-height:1.78}
+.feedback-layout.simple-return .copy .caption{margin-top:14px}
+@media(max-width:650px){.feedback-layout.simple-return .copy{padding:21px 17px}.positive-comment{padding:15px 15px;font-size:15px}}
 </style>
 </head>
 <body>
@@ -180,7 +192,7 @@ footer{margin:37px 0 0;padding-top:19px;border-top:1px solid var(--line);font-si
 <p class="intro">Observer mon texte, comprendre les propositions de correction et choisir des ressources qui correspondent à mon idée.</p>
 <div class="chips"><span>Ma production</span><span id="review-count">Commentaires</span><span>Réécriture accompagnée</span><span>Sans remise obligatoire</span></div>
 </section>
-<div class="feedback-layout">
+<div class="feedback-layout" id="feedback-layout">
 <aside class="side card" aria-label="Navigation dans le retour">
 <h2>Mon retour</h2>
 <nav id="feedback-menu"><a href="#copie">Mon texte initial</a></nav>
@@ -189,9 +201,11 @@ footer{margin:37px 0 0;padding-top:19px;border-top:1px solid var(--line);font-si
 <main class="feedback-main">
 <section id="copie" class="copy card" aria-labelledby="copy-title">
 <p class="section-label">Ma production initiale</p><h2 id="copy-title">Le bonheur</h2>
+<figure class="manuscript" id="manuscript-figure" hidden><img id="manuscript-image" alt="Production manuscrite anonymisée, cadrée sur le texte" loading="lazy"></figure>
 <div id="copy-content" class="user-text"></div>
 <div id="source-notes"></div>
-<p class="caption">Transcription fidèle au document remis : les erreurs et formulations initiales sont conservées.</p>
+<p class="caption" id="copy-caption">Texte initial · Transcription</p>
+<div id="positive-comment" class="positive-comment" hidden></div>
 </section>
 <section id="student-overview" class="student-overview card" aria-labelledby="overview-title" hidden></section>
 <div id="feedback-cards"></div>
@@ -223,6 +237,12 @@ function showReturn(record,storageKey,isDemo){
 document.getElementById("personal-meta").textContent=isDemo?"Exemple fictif":"Mon texte · Unité 1 · Leçon 2";
 const content=document.getElementById("copy-content");content.replaceChildren();
 for(const paragraph of record.paragraphs||[]){content.appendChild(elt("p",null,paragraph))}
+document.getElementById("copy-title").textContent=record.title||"Le bonheur";
+const scan=document.getElementById("manuscript-figure"),scanImg=document.getElementById("manuscript-image");
+const validScan=typeof record.scan==="string" && /^\.\.\/\.\.\/qualite\/copies\/S\d{2}\.webp$/.test(record.scan);
+scan.hidden=!validScan;content.hidden=validScan;
+if(validScan){scanImg.src=record.scan;scanImg.alt="Manuscrit original anonymisé et recadré";}else{scanImg.removeAttribute("src");}
+document.getElementById("copy-caption").textContent=validScan?"Manuscrit original · Anonymisé":"Texte initial · Transcription";
 const source=document.getElementById("source-notes");source.replaceChildren();
 for(const note of record.sourceNotes||[]){source.appendChild(elt("p","caution-note",note))}
 const container=document.getElementById("feedback-cards"),menu=document.getElementById("feedback-menu");
@@ -240,7 +260,14 @@ container.replaceChildren();menu.replaceChildren(labelLink("Mon texte initial","
 if(!overviewBox.hidden)menu.appendChild(labelLink("Mon bilan","#student-overview"));
 document.getElementById("review-count").textContent=Array.isArray(record.cards)&&record.cards.length?record.cards.length+" passages commentés":"Transcription disponible";
 const cards=Array.isArray(record.cards)?record.cards:[];
-if(!cards.length){const box=elt("section","empty-return");box.appendChild(elt("h2",null,"Mes commentaires"));box.appendChild(elt("p",null,"La transcription de votre texte est disponible. Aucune proposition individualisée de réécriture n’a encore été ajoutée à cette fiche."));container.appendChild(box)}
+const hasPositive=typeof record.positiveCommentZh==="string"&&record.positiveCommentZh.trim().length>0;
+const positive=document.getElementById("positive-comment");positive.replaceChildren();positive.hidden=!hasPositive;
+if(hasPositive){positive.lang="zh-CN";positive.textContent=record.positiveCommentZh;}
+const simple=hasPositive&&cards.length===0;
+document.getElementById("feedback-layout").classList.toggle("simple-return",simple);
+document.getElementById("personal-title").innerHTML=simple?'Ma <em>production initiale.</em>':'Mon parcours <em>de réécriture.</em>';
+document.querySelector(".personal-hero p.intro").textContent=simple?"Lire ma production et l’appréciation de l’enseignante.":"Observer mon texte, comprendre les propositions de correction et choisir des ressources qui correspondent à mon idée.";
+if(!cards.length&&!hasPositive){const box=elt("section","empty-return");box.appendChild(elt("h2",null,"Mes commentaires"));box.appendChild(elt("p",null,"La transcription de votre texte est disponible. Aucune proposition individualisée de réécriture n’a encore été ajoutée à cette fiche."));container.appendChild(box)}
 for(let i=0;i<cards.length;i++){
 const item=cards[i],section=elt("article","revision");section.id="passage-"+(i+1);
 const top=elt("div","revision-header");top.appendChild(elt("span","num","PASSAGE "+String(i+1).padStart(2,"0")+" / "+String(cards.length).padStart(2,"0")));const types={correction:"Correction nécessaire",amelioration:"Amélioration possible",raisonnement:"Raisonnement et pertinence"};
