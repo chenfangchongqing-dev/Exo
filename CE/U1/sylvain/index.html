@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f5b72e">
+<meta name="description" content="Lecture guidée : Sylvain, délit de faciès. Repérer, surligner, formuler, comparer.">
+<title>Sylvain, délit de faciès · Lecture guidée · Inspire 4</title>
+<style>
+:root{--bg:#f8f6f1;--paper:#fffefa;--ink:#242b32;--muted:#637078;--edge:#e4e0d6;--amber:#f8c850;--amber-soft:#fff4cf;--navy:#233a43;--red:#a04448;--green:#246c5c;--shadow:0 16px 42px rgba(51,52,45,.055)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.58 Arial,"Helvetica Neue",sans-serif;-webkit-font-smoothing:antialiased}
+button,textarea{font:inherit}
+button{cursor:pointer}
+a{color:inherit}
+button:focus-visible,a:focus-visible,textarea:focus-visible{outline:3px solid #c58b1b;outline-offset:3px}
+[hidden]{display:none!important}
+.shell{max-width:1220px;margin:0 auto;padding:22px 26px 58px}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:24px}
+.brand{font-size:12px;font-weight:900;letter-spacing:.13em;color:#93661c;text-decoration:none}
+.back{color:var(--muted);font-size:13px;text-decoration:none;font-weight:750}
+.back:hover{text-decoration:underline}
+.hero{position:relative;overflow:hidden;border:1px solid #dfc78d;border-radius:25px;background:linear-gradient(112deg,#ffda7a 0%,#ffe7b0 58%,#fffbf0 100%);padding:41px clamp(24px,5vw,58px);box-shadow:var(--shadow)}
+.hero:after{content:"";position:absolute;right:-115px;top:-155px;width:370px;height:370px;border:52px solid #ffffff40;border-radius:50%;pointer-events:none}
+.eyebrow{color:#7c5a22;font-size:12px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;margin:0 0 10px}
+h1{position:relative;z-index:1;letter-spacing:-.045em;font-size:clamp(36px,5vw,57px);line-height:1.07;margin:0 0 15px;max-width:880px}
+.hero .sub{position:relative;z-index:1;font:21px/1.55 "Times New Roman",Times,serif;margin:0;max-width:720px}
+.path{position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin-top:23px;font-size:12px;font-weight:800;color:#705522}
+.path span{padding:7px 11px;border-radius:999px;border:1px solid #dabc77;background:#fff8e7}
+.path b{font-size:13px;font-weight:800}
+.preview-card,.end-card{max-width:880px;background:var(--paper);margin:21px auto 0;border:1px solid var(--edge);border-radius:22px;padding:29px clamp(20px,4vw,40px);box-shadow:var(--shadow)}
+.preview-top{display:flex;justify-content:space-between;gap:16px;align-items:center;flex-wrap:wrap}
+h2{font-size:23px;letter-spacing:-.02em;margin:0}
+.intro-note{margin:11px 0 21px;color:#576169;font-size:15px}
+.counter{font-size:12px;letter-spacing:.1em;color:#94701c;font-weight:900;text-transform:uppercase}
+.prompt-card{background:#fffdf6;border:1px solid #eadfc6;border-radius:15px;padding:18px 21px;margin:13px 0}
+.prompt-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.prompt-label{color:#a67419;font-size:12px;font-weight:900;letter-spacing:.1em}
+.prompt-question{font:700 22px/1.4 "Times New Roman",Times,serif;margin:8px 0}
+.hint-wrap{position:relative;display:inline-flex;align-items:center;vertical-align:middle}
+.hint-btn{border:0;border-bottom:1px dashed #a65c61;color:var(--red);background:transparent;padding:2px 0;font-size:12px;font-weight:800;white-space:nowrap}
+.hint-popover{display:none;position:absolute;z-index:30;left:0;top:calc(100% + 9px);width:min(310px,75vw);padding:13px 15px;border:1px solid #ebcecf;background:#fffafa;box-shadow:0 13px 29px #442f301d;border-radius:12px;color:#7d3c42;font:14px/1.55 Arial,sans-serif;white-space:pre-line}
+.hint-wrap:hover .hint-popover,.hint-wrap:focus-within .hint-popover,.hint-wrap.open .hint-popover{display:block}
+.actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:19px}
+.btn{border:1px solid #c9c3b3;border-radius:11px;min-height:43px;padding:10px 18px;color:#39454b;background:#fffefa;font-size:14px;font-weight:800;transition:filter .15s,transform .15s}
+.btn:hover:not(:disabled){filter:brightness(.96)}
+.btn.primary{border-color:var(--navy);background:var(--navy);color:white}
+.btn.ghost{background:transparent;border-color:transparent;color:#68727a;padding:9px}
+.btn:disabled{cursor:not-allowed;opacity:.45}
+.howto{display:flex;gap:11px;align-items:flex-start;padding:14px 16px;margin-top:19px;border-radius:12px;border:1px solid #e9ddbd;background:#fffaf0;color:#685c48;font-size:13px;line-height:1.6}
+.howto strong{color:#805e22}
+.workspace{display:grid;grid-template-columns:minmax(325px,.78fr) minmax(0,1.25fr);gap:20px;align-items:start;margin-top:21px}
+.guide{position:sticky;top:15px;background:var(--paper);border:1px solid var(--edge);border-radius:20px;padding:24px;box-shadow:var(--shadow);max-height:calc(100vh - 30px);overflow-y:auto;scrollbar-width:thin}
+.guide h2{font:700 24px/1.3 "Times New Roman",Times,serif;margin:9px 0 11px;letter-spacing:0}
+.guide-sub{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:space-between}
+.step-track{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:24px 0 20px}
+.step-chip{font-size:11px;font-weight:800;text-align:center;border-top:4px solid #e6e4de;color:#889096;padding-top:9px}
+.step-chip.done{border-color:#89bd9d;color:var(--green)}
+.step-chip.active{border-color:#d69a2d;color:#855a17}
+.task{background:#fffaf0;border:1px solid #ecdfc4;border-radius:14px;padding:17px 17px 16px}
+.task h3{font-size:17px;margin:0 0 6px;letter-spacing:-.01em}
+.task p{font-size:14px;margin:0 0 12px;color:#5b6266}
+.task .micro{font-size:12px;color:#7a766d;margin:12px 0 0}
+.task .micro strong{color:#74551f}
+.status{min-height:22px;color:#8f5645;font-size:13px;font-weight:650;line-height:1.5;margin:12px 0 2px}
+.status.success{color:var(--green)}
+.selected-list{display:flex;flex-wrap:wrap;gap:6px;margin:11px 0}
+.selected-list span{padding:6px 9px;font-size:12px;border-radius:9px;background:#fff0bb;border:1px solid #e0cb91;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+textarea{display:block;width:100%;resize:vertical;min-height:145px;border:1px solid #cfccbf;border-radius:11px;background:white;color:var(--ink);padding:13px 14px;font:18px/1.55 "Times New Roman",Times,serif}
+textarea::placeholder{color:#96938a}
+.task label{font-size:13px;font-weight:750;display:block;margin:10px 0 7px}
+.feedback{padding:14px 15px;border:1px solid #c0d7c9;border-radius:12px;background:#f6faf7;margin-top:12px}
+.feedback strong{color:var(--green);font-size:13px}
+.feedback p{font:18px/1.57 "Times New Roman",Times,serif;margin:6px 0 0}
+.feedback .compare{font:13px/1.55 Arial,sans-serif;color:#64726b;margin-top:9px}
+.guide-footer{border-top:1px solid #eee9dd;margin-top:19px;padding-top:11px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.guide-footer p{color:#85847b;font-size:11px;margin:0}
+.article-card{background:var(--paper);border:1px solid var(--edge);border-radius:20px;padding:29px clamp(19px,3.7vw,41px) 31px;box-shadow:var(--shadow);min-width:0;scroll-margin-top:15px}
+.article-header{border-bottom:1px solid #ebe6d9;padding-bottom:16px;margin-bottom:22px}
+.article-header .rubric{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;font-size:11px;color:#9c6c18;font-weight:850;letter-spacing:.12em;text-transform:uppercase}
+.article-header h2{font:bold 34px/1.13 Georgia,"Times New Roman",serif;letter-spacing:-.03em;margin:10px 0;color:#a9632b}
+.article-header p{color:#7c817e;font-size:12px;margin:8px 0 0}
+.article-jump{color:var(--green);font-weight:800;font-size:12px;text-decoration:none}
+.read-instruction{background:#fff5da;color:#725a30;font-size:13px;line-height:1.65;padding:12px 14px;border-radius:12px;border:1px solid #efe0bb;margin:0 0 20px}
+.paragraph-row{display:grid;grid-template-columns:34px minmax(0,1fr);gap:10px;align-items:start;margin:0 0 19px;border-radius:12px;transition:background .15s}
+.paragraph-row.picked{background:#f5f9f5;outline:1px solid #b9d5c0}
+.paragraph-row .locate-btn{border:1px solid #dcd3bc;background:#fcf6e7;border-radius:9px;color:#a17a39;font-size:11px;line-height:1;font-weight:850;min-height:29px;margin-top:4px;padding:6px;transition:background .15s}
+.paragraph-row .locate-btn:hover:not(:disabled){background:#fae5a5}
+.paragraph-row .locate-btn.picked{color:#21644e;background:#ddf1e3;border-color:#9bc3aa}
+.paragraph-row .locate-btn:disabled{cursor:default;opacity:.7}
+.paragraph-row .passage{font:19px/1.65 "Times New Roman",Georgia,serif;color:#303a3d;line-break:normal;margin:0;user-select:text;-webkit-user-select:text}
+.quoted-question{font:700 18px/1.47 "Times New Roman",Georgia,serif;margin:19px 0 12px 44px;color:#374449;border-left:3px solid #e7bc68;padding-left:15px}
+mark{color:inherit;padding:0 1px;box-decoration-break:clone;-webkit-box-decoration-break:clone;cursor:pointer;border-radius:2px}
+mark[data-q="0"]{background:#ffe087;box-shadow:inset 0 -2px #dbab2e}
+mark[data-q="1"]{background:#bfe6dd;box-shadow:inset 0 -2px #51ad93}
+mark[data-q="2"]{background:#e2d0f2;box-shadow:inset 0 -2px #b290d0}
+mark.inactive-mark{opacity:.6}
+.article-foot{margin:21px 0 0 44px;padding-top:14px;border-top:1px solid #e9e6df;font-size:12px;color:#777c79}
+.article-foot a{color:#816020}
+.article-foot details{margin:11px 0 0;border:1px solid #e4e2d9;border-radius:10px;background:#fafaf6;padding:9px 12px}
+.article-foot summary{cursor:pointer;font-weight:800;color:#596369}
+.article-foot dl{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;margin:12px 0 0;line-height:1.6}
+.article-foot dt{font-weight:800;color:#8d5e40}
+.article-foot dd{margin:0}
+.end-card h2{font-size:29px}
+.result-row{padding:16px 0;border-bottom:1px solid #e7e3da}
+.result-row strong{color:#946718;font-size:14px}
+.result-row h3{font:700 20px/1.4 "Times New Roman",serif;margin:4px 0}
+.result-row p{font:18px/1.56 "Times New Roman",serif;margin:6px 0}
+.result-row .small{font:13px Arial,sans-serif;color:var(--muted)}
+footer{font-size:12px;color:#7e857d;margin-top:28px;border-top:1px solid #e9e3d7;padding-top:18px}
+@media(max-width:900px){.workspace{grid-template-columns:1fr}.guide{position:static;max-height:none}.article-card{padding:26px 23px}.guide{padding:23px}.article-card .passage{font-size:19px}}
+@media(max-width:620px){.shell{padding:14px 13px 42px}.topbar{margin-bottom:13px}.hero{padding:31px 22px;border-radius:18px}.hero .sub{font-size:19px}.preview-card,.end-card{padding:22px 17px}.workspace{gap:12px}.guide{padding:20px 17px;border-radius:16px}.article-card{padding:20px 14px;border-radius:16px}.article-header h2{font-size:30px}.paragraph-row{grid-template-columns:29px 1fr;gap:8px}.quoted-question{margin-left:37px}.article-foot{margin-left:37px}.paragraph-row .passage{font-size:18px}.path{gap:5px}.path span{padding:6px 8px}.prompt-question{font-size:20px}.step-chip{font-size:10px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
+@media print{body{background:white}.shell{max-width:none}.topbar,.hero,.preview-card,.guide .actions,.btn,.hint-btn,.article-jump{display:none!important}.workspace{display:block}.guide{position:static;max-height:none;box-shadow:none}.article-card{box-shadow:none}.paragraph-row .locate-btn{border:0}}
+</style>
+</head>
+<body><div class="shell">
+<header class="topbar"><a class="brand" href="../../">INSPIRE 4 · COMPRÉHENSION ÉCRITE</a><a class="back" href="../../">← Retour au module CE</a></header>
+<main>
+<section class="hero" aria-labelledby="page-title">
+<p class="eyebrow">Lecture guidée · Apparence et tolérance</p>
+<h1 id="page-title">Sylvain, délit de faciès</h1>
+<p class="sub">Lire avec une question en tête. Retrouver la preuve dans le texte. Choisir les mots qui comptent. Construire sa propre réponse.</p>
+<div class="path" aria-label="Les étapes de la lecture"><span>01 · Repérer</span><b>→</b><span>02 · Surligner</span><b>→</b><span>03 · Répondre</span><b>→</b><span>04 · Comparer</span></div>
+</section>
+<section id="preview" class="preview-card" aria-labelledby="preview-title">
+<div class="preview-top"><h2 id="preview-title">Avant de lire, découvrez les questions</h2><span class="counter" id="preview-count">Question 1 sur 3</span></div>
+<p class="intro-note">Prenez connaissance des questions une à une. Gardez-les à l'esprit avant de découvrir le texte. Les indices de l'enseignante apparaissent au survol (ou au clic).</p>
+<div id="preview-questions" aria-live="polite"></div>
+<div class="actions"><button type="button" id="preview-next" class="btn primary">Découvrir la question suivante →</button><button type="button" id="preview-start" class="btn primary" hidden>Entrer dans le texte →</button></div>
+<div class="howto"><span aria-hidden="true">✦</span><div>Une fois dans le texte, <strong>cliquez sur le numéro du passage</strong> où vous pensez trouver une réponse. Puis <strong>faites glisser la souris sur les mots importants</strong> pour les surligner. Vous rédigerez ensuite votre réponse en français avant de voir une proposition de correction.</div></div>
+</section>
+<section id="workspace" class="workspace" hidden aria-label="Lecture interactive">
+<aside class="guide" id="question-panel">
+<div class="guide-sub"><span class="counter" id="question-counter">QUESTION A / 3</span><span class="counter" id="stage-counter">ÉTAPE 1 / 4</span></div>
+<h2 id="current-question">Qu'apprend-on sur Sylvain ?</h2>
+<div class="hint-wrap" id="current-hint"><button type="button" class="hint-btn" aria-label="Voir l'indice de l'enseignante" aria-expanded="false">● Indice de l'enseignante</button><div class="hint-popover" role="tooltip" id="current-hint-text"></div></div>
+<div class="step-track" id="step-track" aria-label="Progression dans la question"></div>
+<section class="task" id="task-locate" aria-labelledby="locate-title">
+<h3 id="locate-title">1. Repérez dans le texte</h3><p>Où se trouvent les informations utiles ? Cliquez sur le <strong>numéro</strong> du ou des passages qui permettent de répondre.</p>
+<p class="micro">Vous pouvez relire le texte autant de fois que nécessaire. La correction reste masquée.</p>
+</section>
+<section class="task" id="task-highlight" aria-labelledby="highlight-title" hidden>
+<h3 id="highlight-title">2. Surlignez les mots clés</h3><p>Dans le texte, sélectionnez avec la souris les mots ou groupes de mots qui serviront à construire votre réponse. Le surlignage apparaît dès que vous relâchez le bouton.</p>
+<div id="selected-keywords" class="selected-list" aria-live="polite"></div>
+<div class="actions"><button class="btn" id="mark-selection" type="button">Surligner la sélection</button><button class="btn ghost" id="undo-mark" type="button">Annuler le dernier</button></div>
+<button type="button" class="btn primary" id="to-write">Organiser ma réponse →</button>
+<p class="micro">Une sélection courte est plus utile qu'une phrase entière. Cliquez sur un surlignage pour le supprimer.</p>
+</section>
+<section class="task" id="task-write" aria-labelledby="write-title" hidden>
+<h3 id="write-title">3. Formulez votre réponse</h3><p>À partir de vos mots clés, écrivez une réponse en français, avec vos propres phrases. Appuyez-vous sur les faits du texte.</p>
+<label for="student-answer">Votre réponse en français</label><textarea id="student-answer" placeholder="Je réponds à la question en phrases complètes…" spellcheck="true"></textarea>
+<div class="actions"><button type="button" class="btn primary" id="show-answer">Voir la proposition de réponse →</button><button type="button" class="btn" id="back-to-mark">Modifier mes mots clés</button></div>
+</section>
+<section class="task" id="task-answer" aria-labelledby="answer-title" hidden>
+<h3 id="answer-title">4. Comparez et améliorez</h3><p>Relisez votre réponse, puis comparez-la à cette proposition. Elle n'est pas la seule formulation possible.</p>
+<div class="feedback"><strong>PROPOSITION DE RÉPONSE</strong><p id="model-answer"></p><p class="compare" id="model-note"></p></div>
+<div class="actions"><button type="button" class="btn primary" id="question-next">Question suivante →</button><button type="button" class="btn" id="edit-answer">Revoir ma réponse</button></div>
+</section>
+<p id="status" class="status" aria-live="polite"></p>
+<div class="guide-footer"><p>Votre travail reste dans ce navigateur.</p><button type="button" id="previous-question" class="btn ghost" hidden>← Question précédente</button></div>
+</aside>
+<article id="sourceText" class="article-card" aria-labelledby="article-title">
+<div class="article-header"><div class="rubric"><span>Document à lire · Entretien (extrait)</span><a class="article-jump" href="#question-panel">↑ Voir la question</a></div><h2 id="article-title">Sylvain, délit de faciès</h2><p>Texte de lecture transcrit d'après le document de cours. Les passages omis sont signalés par […].</p></div>
+<div id="read-instruction" class="read-instruction">Première étape : cliquez sur le numéro placé à gauche d'un passage pour indiquer où se trouve votre réponse.</div>
+<div class="paragraph-row" data-row="p1"><button class="locate-btn" type="button" data-pid="p1" aria-label="Choisir le passage 1">01</button><p class="passage" data-pid="p1">C'est à 27 ans que Sylvain se lance à corps perdu dans le tatouage et décide de faire de son corps […] un tableau vivant où la chair laisse bien vite place à l'encre. Aujourd'hui, âgé de 35 ans, « Freaky Hoody » est l'un des hommes les plus tatoués au monde. Problème pour ce professeur des écoles, certains parents d'élèves n'apprécient que peu cette apparence et les plaintes répétées lui interdisent désormais d'exercer auprès des maternelles dont il s'occupait avec une bienveillance reconnue de tous. Dans un pays républicain qui prône la tolérance, on peut légitimement s'étonner que notre système éducatif ait décidé de pointer du doigt un homme apprécié pour ses qualités professionnelles, prétextant une apparence physique supposée en inadéquation avec son activité.</p></div>
+<h3 class="quoted-question">Lorsque tu as commencé à te tatouer, à 27 ans, ta démarche allait-elle au-delà du simple ornement corporel ?</h3>
+<div class="paragraph-row" data-row="p2"><button class="locate-btn" type="button" data-pid="p2" aria-label="Choisir le passage 2">02</button><p class="passage" data-pid="p2">J'étais à cette époque à Londres pour travailler. […] Là-bas, en plus, les tatouages ne sont pas du tout perçus comme chez nous. En France, historiquement, les tatoués étaient souvent ceux qui étaient partis au bagne à Cayenne et revenaient avec de l'encre sur le corps pour signifier qu'ils avaient été prisonniers. […]</p></div>
+<h3 class="quoted-question">Aujourd'hui, tu es sous les feux des projecteurs car ton apparence physique t'interdit désormais d'enseigner auprès des maternelles. Tu peux nous expliquer le déroulement qui a conduit à cette décision ?</h3>
+<div class="paragraph-row" data-row="p3"><button class="locate-btn" type="button" data-pid="p3" aria-label="Choisir le passage 3">03</button><p class="passage" data-pid="p3">Cela fait douze ans que j'enseigne et trois ans que je fais des remplacements courts entre une demi-journée et trois semaines. […] L'année dernière [en 2019], après que je m'étais fait tatouer les yeux en noir, je suis allé me présenter à la directrice. Un élève m'aurait vu alors que je passais devant une classe et aurait eu peur. C'est ce que l'on m'a dit car je n'ai personnellement pas rencontré cet élève.</p></div>
+<div class="paragraph-row" data-row="p4"><button class="locate-btn" type="button" data-pid="p4" aria-label="Choisir le passage 4">04</button><p class="passage" data-pid="p4">Cet enfant aurait le soir même parlé de moi à ses parents et ces derniers ont écrit une lettre pour signifier leur mécontentement. Il y avait déjà eu des lettres de plaintes concernant mon apparence physique mais j'avais jusqu'alors toujours été soutenu par ma hiérarchie. La lettre des parents de cet élève était très véhémente. […]</p></div>
+<div class="paragraph-row" data-row="p5"><button class="locate-btn" type="button" data-pid="p5" aria-label="Choisir le passage 5">05</button><p class="passage" data-pid="p5">Pour la première fois, l'inspection m'a lâché et est immédiatement allée dans le sens des parents. J'ai été mis au placard pendant deux mois, de septembre à novembre 2019. […] Le fait d'être pointé du doigt et laissé de côté sans pouvoir enseigner n'a pas été très facile à vivre. Le 7 novembre 2019, j'ai eu un entretien à la DSDEN (Direction des Services Départementaux de l'Éducation Nationale) à la suite de quoi il a été décidé que je ne remplacerais plus qu'en classes élémentaires du CP au CM2 […].</p></div>
+<h3 class="quoted-question">Lorsque tu t'es lancé dans le tatouage alors que tu étais déjà professeur des écoles, tu ne t'es jamais dit que l'évolution de ton apparence physique allait, à terme, poser problème ?</h3>
+<div class="paragraph-row" data-row="p6"><button class="locate-btn" type="button" data-pid="p6" aria-label="Choisir le passage 6">06</button><p class="passage" data-pid="p6">Au moment où j'ai commencé à me faire tatouer, je n'ai égoïstement pensé qu'à moi ! Naïvement, je croyais qu'en 2020 l'apparence ne posait pas de problème particulier. En tant que fonctionnaire, j'avais une garantie de l'emploi et d'ailleurs, à l'entretien, je sentais bien que s'ils avaient pu se débarrasser de moi, ils l'auraient fait, mais cela leur était impossible.</p></div>
+<h3 class="quoted-question">La différence fait peur seulement quand on ne la connaît pas et que l'on ne tente pas de la comprendre !</h3>
+<div class="paragraph-row" data-row="p7"><button class="locate-btn" type="button" data-pid="p7" aria-label="Choisir le passage 7">07</button><p class="passage" data-pid="p7">Oui, c'est tout le principe de la xénophobie. On a peur de l'inconnu, de l'étranger. Sur Internet, comme je fais le buzz en ce moment, j'ai vu qu'il y avait à mon égard des références au diable, ce genre de trucs… Comment peut-on en être encore là ? Lorsque j'ai commencé à me faire tatouer, je n'étais pas dans une démarche où je souhaitais être le porte-parole de la tolérance. Si enseigner aux enfants peut leur permettre de moins s'attacher à l'apparence physique, il y aura, je l'espère, moins d'intolérance vis-à-vis de la différence. Aujourd'hui, si je peux aider à une certaine ouverture d'esprit, alors j'en suis heureux.</p></div>
+<div class="article-foot">D'après Nicolas Valiadis, « <em>Sylvain, délits de faciès</em> », <em>Agents d'entretiens</em>, 2020. <a href="https://www.agentsdentretiens.com/entretiens/sylvain-delits-de-facies/" target="_blank" rel="noopener noreferrer">Consulter l'entretien original</a> (version intégrale, plus longue que l'extrait étudié).
+<details><summary>Notes de vocabulaire présentes dans le document</summary><dl><dt>pointer du doigt</dt><dd>mettre en évidence (sens péjoratif)</dd><dt>être sous le feu des projecteurs</dt><dd>être le centre d'intérêt</dd><dt>être mis au placard</dt><dd>être mis à l'écart</dd><dt>faire le buzz</dt><dd>avoir un retentissement médiatique (familier)</dd><dt>ouverture d'esprit</dt><dd>tolérance</dd></dl></details></div>
+</article>
+</section>
+<section id="end" class="end-card" hidden><p class="eyebrow">Parcours terminé</p><h2>Vos réponses et vos repérages</h2><p class="intro-note">Vous avez parcouru les trois questions. Relisez vos réponses et vérifiez que chaque idée est appuyée sur le texte.</p><div id="result-answers"></div><div class="actions"><button type="button" class="btn primary" id="download-answers">Enregistrer mes réponses (.txt)</button><button type="button" class="btn" id="restart">Recommencer le parcours</button></div></section>
+</main><footer>《高级法语综合课》 · Inspire 4 · CE · Lecture guidée. Les réponses sont enregistrées uniquement dans ce navigateur ; aucun envoi à l'enseignante n'est effectué.</footer>
+</div>
+<script>
+(function(){
+'use strict';
+const questions=[
+{letter:'a',q:'Qu’apprend-on sur Sylvain ?',tip:'apprendre quelque chose sur quelqu’un = être informé de quelque chose sur quelqu’un.\nQue savez-vous sur Sylvain après la lecture ? Pensez à son âge, son métier, son surnom, son passé et sa situation au moment de l’entretien.',valid:['p1','p3','p5'],answer:'Au moment de l’entretien, Sylvain a 35 ans. Surnommé « Freaky Hoody » sur les réseaux sociaux, il est professeur des écoles. Il a commencé à se faire tatouer à 27 ans et enseigne depuis douze ans. À cause de plaintes liées à son apparence, il ne peut plus effectuer de remplacements en maternelle.',note:'Pour présenter une personne, réunissez des informations dispersées dans le texte : identité, parcours, profession et situation actuelle.'},
+{letter:'b',q:'Quel problème a-t-il rencontré ? Pourquoi ?',tip:'Il a rencontré un problème. Lequel ?\nPourquoi cela pose-t-il problème ?\nDistinguez l’événement, les réactions des parents et la décision prise.',valid:['p1','p3','p4','p5'],answer:'Il ne peut plus enseigner en maternelle et ne peut assurer des remplacements que dans les classes élémentaires. Cette décision a été prise à la suite de plaintes de parents : un élève aurait eu peur de son apparence très tatouée, et ses parents se sont plaints auprès de l’école.',note:'Votre réponse doit distinguer le problème (la restriction de ses fonctions) et sa cause (les plaintes au sujet de son apparence).'},
+{letter:'c',q:'Quel a été son sentiment face à la situation ? Justifiez.',tip:'Cherchez les mots qui expriment un sentiment ou une réaction.\nQuel effet cette mise à l’écart a-t-elle eu sur lui ? Appuyez votre interprétation sur une expression du texte.',valid:['p5'],answer:'Il a mal vécu cette mise à l’écart et s’est senti injustement jugé. Il explique que le fait d’être « pointé du doigt et laissé de côté sans pouvoir enseigner » n’a « pas été très facile à vivre ».',note:'Les mots du texte permettent de justifier une interprétation. Ne lui attribuez pas une émotion précise (comme la colère) sans preuve.'}
+];
+const key='inspire4.ce.u1.sylvain.lecture.v1';
+const fresh=()=>({mode:'preview',preview:0,q:0,steps:['locate','locate','locate'],locations:[[],[],[]],marks:[],answers:['','','']});
+let s=fresh();
+try{const v=JSON.parse(localStorage.getItem(key));if(v&&Array.isArray(v.steps)&&v.steps.length===3&&Array.isArray(v.locations)&&v.locations.length===3&&Array.isArray(v.marks)&&Array.isArray(v.answers)&&v.answers.length===3&&['preview','read','end'].includes(v.mode)){s={...fresh(),...v};s.q=Math.max(0,Math.min(2,+s.q||0));s.preview=Math.max(0,Math.min(2,+s.preview||0));}}catch(_e){}
+const $=id=>document.getElementById(id);
+const source={};document.querySelectorAll('.passage').forEach(p=>source[p.dataset.pid]=p.textContent);
+const stepOrder=['locate','highlight','write','answer'];
+function save(){try{localStorage.setItem(key,JSON.stringify(s));}catch(_e){}}
+function setStatus(msg,good=false){$('status').textContent=msg;$('status').className='status'+(good?' success':'');}
+function makeTip(tip){const wrap=document.createElement('div');wrap.className='hint-wrap';const btn=document.createElement('button');btn.type='button';btn.className='hint-btn';btn.textContent='● Indice de l’enseignante';btn.setAttribute('aria-expanded','false');const pop=document.createElement('div');pop.className='hint-popover';pop.role='tooltip';pop.textContent=tip;btn.addEventListener('click',()=>{wrap.classList.toggle('open');btn.setAttribute('aria-expanded',String(wrap.classList.contains('open')));});wrap.append(btn,pop);return wrap;}
+function renderPreview(){const target=$('preview-questions');target.replaceChildren();questions.slice(0,s.preview+1).forEach((q,i)=>{const card=document.createElement('div');card.className='prompt-card';const top=document.createElement('div');top.className='prompt-top';const tag=document.createElement('span');tag.className='prompt-label';tag.textContent='QUESTION '+q.letter.toUpperCase();top.append(tag,makeTip(q.tip));const prompt=document.createElement('p');prompt.className='prompt-question';prompt.textContent=q.q;card.append(top,prompt);target.append(card);});$('preview-count').textContent=(s.preview+1)+' / 3 questions';$('preview-next').hidden=s.preview===2;$('preview-start').hidden=s.preview!==2;}
+function renderMarks(){document.querySelectorAll('.passage').forEach(p=>{const pid=p.dataset.pid,text=source[pid];const marks=s.marks.filter(m=>m.pid===pid&&Number.isInteger(m.start)&&Number.isInteger(m.end)&&m.start>=0&&m.end<=text.length&&m.end>m.start);const bounds=[0,text.length,...marks.flatMap(m=>[m.start,m.end])].sort((a,b)=>a-b).filter((x,i,a)=>i===0||x!==a[i-1]);const frag=document.createDocumentFragment();for(let i=0;i<bounds.length-1;i++){const start=bounds[i],end=bounds[i+1];if(end<=start)continue;const chunk=text.slice(start,end);const active=marks.filter(m=>m.start<=start&&m.end>=end);if(!active.length){frag.append(document.createTextNode(chunk));continue;}const choice=active.find(m=>m.q===s.q)||active[active.length-1];const mark=document.createElement('mark');mark.textContent=chunk;mark.dataset.q=String(choice.q);mark.dataset.id=choice.id;mark.className=choice.q===s.q?'':'inactive-mark';mark.title='Cliquer pour supprimer ce surlignage';frag.append(mark);}p.replaceChildren(frag);});}
+function renderLocationButtons(){document.querySelectorAll('.locate-btn').forEach(b=>{const picked=s.locations[s.q].includes(b.dataset.pid);b.classList.toggle('picked',picked);b.parentElement.classList.toggle('picked',picked);b.disabled=s.steps[s.q]==='answer';b.setAttribute('aria-pressed',String(picked));b.title='Choisir le passage '+b.textContent;});}
+function renderChips(){const el=$('selected-keywords');el.replaceChildren();s.marks.filter(m=>m.q===s.q).forEach(m=>{const span=document.createElement('span');span.title='Mot clé relevé';span.textContent='« '+source[m.pid].slice(m.start,m.end).trim()+' »';el.append(span);});if(!el.children.length){const msg=document.createElement('span');msg.style.background='transparent';msg.style.border='1px dashed #dbcba5';msg.textContent='Aucun mot clé surligné pour le moment';el.append(msg);}}
+function renderRead(){const q=questions[s.q],step=s.steps[s.q];$('question-counter').textContent='QUESTION '+q.letter.toUpperCase()+' / 3';$('stage-counter').textContent='ÉTAPE '+(stepOrder.indexOf(step)+1)+' / 4';$('current-question').textContent=q.q;$('current-hint-text').textContent=q.tip;$('current-hint').classList.remove('open');$('current-hint').querySelector('.hint-btn').setAttribute('aria-expanded','false');const track=$('step-track');track.replaceChildren();['Repérer','Surligner','Répondre','Comparer'].forEach((lbl,i)=>{const span=document.createElement('span');span.className='step-chip'+(i<stepOrder.indexOf(step)?' done':i===stepOrder.indexOf(step)?' active':'');span.textContent=lbl;track.append(span);});for(const id of stepOrder){$('task-'+(id==='answer'?'answer':id)).hidden=step!==id;}
+$('student-answer').value=s.answers[s.q]||'';$('model-answer').textContent=q.answer;$('model-note').textContent=q.note;$('question-next').textContent=s.q===2?'Terminer le parcours →':'Question suivante →';$('previous-question').hidden=s.q===0;$('read-instruction').textContent=step==='locate'?'Repérez la réponse : cliquez sur le numéro à gauche d’un passage.':step==='highlight'?'Sélectionnez directement les mots pertinents du texte avec votre souris. Relâchez pour surligner.':step==='write'?'Les mots clés sont surlignés. Revenez à la question pour rédiger votre réponse.':'Comparez votre formulation avec la proposition de réponse. Vos surlignages restent visibles.';
+renderMarks();renderLocationButtons();renderChips();setStatus('');}
+function renderEnd(){const target=$('result-answers');target.replaceChildren();questions.forEach((q,i)=>{const el=document.createElement('div');el.className='result-row';const n=document.createElement('strong');n.textContent='QUESTION '+q.letter.toUpperCase();const h=document.createElement('h3');h.textContent=q.q;const p=document.createElement('p');p.textContent=s.answers[i]||'Aucune réponse rédigée';const m=document.createElement('p');m.className='small';m.textContent=s.marks.filter(a=>a.q===i).length+' sélection(s) surlignée(s)';el.append(n,h,p,m);target.append(el);});}
+function render(){ $('preview').hidden=s.mode!=='preview';$('workspace').hidden=s.mode!=='read';$('end').hidden=s.mode!=='end';if(s.mode==='preview')renderPreview();if(s.mode==='read')renderRead();if(s.mode==='end')renderEnd();save();}
+function goRead(){s.mode='read';render();$('workspace').scrollIntoView({behavior:'smooth',block:'start'});}
+$('preview-next').addEventListener('click',()=>{s.preview=Math.min(2,s.preview+1);renderPreview();save();});
+$('preview-start').addEventListener('click',goRead);
+document.querySelectorAll('.locate-btn').forEach(b=>b.addEventListener('click',()=>{if(s.mode!=='read')return;const pid=b.dataset.pid,q=questions[s.q];if(s.steps[s.q]!=='locate'&&s.steps[s.q]!=='highlight'){setStatus('Vous pouvez encore relire ce passage, mais votre repérage est terminé.');return;}if(!q.valid.includes(pid)){setStatus('Ce passage ne permet pas de répondre directement. Cherchez les informations demandées dans la question.');return;}if(!s.locations[s.q].includes(pid))s.locations[s.q].push(pid);s.steps[s.q]='highlight';renderRead();setStatus('Vous avez repéré un passage pertinent. Surlignez maintenant les mots clés.',true);save();if(window.matchMedia('(max-width:900px)').matches)$('question-panel').scrollIntoView({behavior:'smooth'}); }));
+function getPassage(node){const el=node?.nodeType===1?node:node?.parentElement;return el?.closest('.passage')||null;}
+function selectToMark(){if(s.mode!=='read'||s.steps[s.q]!=='highlight')return;const sel=window.getSelection();if(!sel||sel.isCollapsed||!sel.rangeCount)return;const range=sel.getRangeAt(0),a=getPassage(range.startContainer),b=getPassage(range.endContainer);if(!a||!b||a!==b){setStatus('Sélectionnez quelques mots à l’intérieur d’un seul passage.');return;}const pid=a.dataset.pid;const measure=document.createRange();measure.selectNodeContents(a);measure.setEnd(range.startContainer,range.startOffset);const start=measure.toString().length;measure.selectNodeContents(a);measure.setEnd(range.endContainer,range.endOffset);const end=measure.toString().length;if(end<=start||!source[pid].slice(start,end).trim())return;if(end-start>260){setStatus('La sélection est trop longue. Choisissez seulement les mots essentiels.');return;}const exists=s.marks.some(m=>m.q===s.q&&m.pid===pid&&m.start===start&&m.end===end);if(exists){sel.removeAllRanges();return;}s.marks.push({id:'k'+Date.now().toString(36)+Math.random().toString(36).slice(2,7),q:s.q,pid,start,end});sel.removeAllRanges();renderMarks();renderChips();save();setStatus(questions[s.q].valid.includes(pid)?'Mot clé surligné. Vous pouvez en sélectionner d’autres.':'Mot sélectionné. Cherchez également un mot clé dans le passage qui répond à la question.',questions[s.q].valid.includes(pid));}
+$('sourceText').addEventListener('mouseup',e=>{if(getPassage(e.target)&&s.mode==='read'&&s.steps[s.q]==='highlight')setTimeout(selectToMark,10);});
+$('sourceText').addEventListener('touchend',e=>{if(getPassage(e.target)&&s.mode==='read'&&s.steps[s.q]==='highlight')setTimeout(selectToMark,350);},{passive:true});
+$('mark-selection').addEventListener('click',selectToMark);
+$('sourceText').addEventListener('click',e=>{const mark=e.target.closest('mark[data-id]');if(!mark||s.mode!=='read'||s.steps[s.q]!=='highlight'||window.getSelection()?.toString().trim())return;const id=mark.dataset.id;const idx=s.marks.findIndex(m=>m.id===id&&m.q===s.q);if(idx<0)return;s.marks.splice(idx,1);renderMarks();renderChips();setStatus('Surlignage retiré.');save();});
+$('undo-mark').addEventListener('click',()=>{const idx=s.marks.findLastIndex(m=>m.q===s.q);if(idx===-1){setStatus('Aucun surlignage à annuler.');return;}s.marks.splice(idx,1);renderMarks();renderChips();save();setStatus('Dernier surlignage annulé.');});
+$('to-write').addEventListener('click',()=>{const marks=s.marks.filter(m=>m.q===s.q),good=marks.some(m=>questions[s.q].valid.includes(m.pid));if(!marks.length){setStatus('Surlignez au moins un mot ou groupe de mots avant de rédiger.');return;}if(!good){setStatus('Vos mots clés ne correspondent pas encore au passage principal. Relisez la question et sélectionnez une autre expression.');return;}s.steps[s.q]='write';renderRead();setStatus('Vos mots clés sont enregistrés. Rédigez maintenant votre réponse.',true);save();});
+$('back-to-mark').addEventListener('click',()=>{s.steps[s.q]='highlight';renderRead();save();});
+$('student-answer').addEventListener('input',e=>{s.answers[s.q]=e.target.value;save();});
+$('show-answer').addEventListener('click',()=>{if((s.answers[s.q]||'').trim().length<12){setStatus('Rédigez d’abord une réponse en français avant de consulter la correction.');$('student-answer').focus();return;}s.steps[s.q]='answer';renderRead();save();});
+$('edit-answer').addEventListener('click',()=>{s.steps[s.q]='write';renderRead();save();});
+$('question-next').addEventListener('click',()=>{if(s.q===2){s.mode='end';render();$('end').scrollIntoView({behavior:'smooth'});return;}s.q++;render();$('workspace').scrollIntoView({behavior:'smooth'});});
+$('previous-question').addEventListener('click',()=>{if(s.q>0){s.q--;render();$('workspace').scrollIntoView({behavior:'smooth'});}});
+$('restart').addEventListener('click',()=>{if(!confirm('Recommencer ? Vos surlignages et vos réponses actuelles seront effacés.'))return;s=fresh();render();window.scrollTo({top:0,behavior:'smooth'});});
+$('download-answers').addEventListener('click',()=>{const content=['LECTURE GUIDÉE : SYLVAIN, DÉLIT DE FACIÈS','',...questions.flatMap((q,i)=>[q.letter+') '+q.q,'Ma réponse : '+(s.answers[i]||''),'Mots clés : '+s.marks.filter(m=>m.q===i).map(m=>source[m.pid].slice(m.start,m.end)).join(' ; '),''])].join('\n');const blob=new Blob([content],{type:'text/plain;charset=utf-8'});const link=document.createElement('a');link.href=URL.createObjectURL(blob);link.download='lecture-sylvain-mes-reponses.txt';document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(link.href),1200);});
+render();
+})();
+</script>
+</body></html>
