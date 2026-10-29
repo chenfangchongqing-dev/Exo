@@ -8,12 +8,46 @@
   ],
   "cards": [
     {
-      "initial": "mais il peut aussi devenir une source de frustration parce qu’on ira peur de le perdre.",
-      "intent": "Vous semblez vouloir dire que la peur de perdre le bonheur peut elle-même provoquer de la frustration.",
+      "title": "Exprimer l’image du bonheur fragile",
+      "kind": "correction",
+      "initial": "une chose fragile que les personnes ne peuvent pas arrêter d’échapper.",
+      "intent": "Vous voulez rappeler que le bonheur est fragile et qu’il peut parfois nous échapper.",
+      "intentZh": "这里想说的是“幸福可能从我们身边溜走”，应该让 bonheur 成为 échapper 的主语。",
       "strategies": [
-        "Simplifier",
-        "Clarifier le lien de cause",
-        "Réutiliser le mot « frustration »"
+        "Corriger la proposition relative",
+        "Réutiliser « nous échapper »",
+        "Simplifier"
+      ],
+      "resources": [
+        [
+          "Les mots de l’unité",
+          "../../../Vocabulaire/U1/"
+        ]
+      ],
+      "proposals": [
+        {
+          "label": "Corriger la relative",
+          "text": "une chose fragile qui semble nous échapper",
+          "why": "« Qui » reprend « une chose fragile » et devient le sujet de « semble nous échapper ». La formule reste proche de l’image de la chanson.",
+          "whyZh": "直接复用课上已有的 « sembler nous échapper »，比在原句上继续叠加复杂结构更合适。"
+        },
+        {
+          "label": "Simplifier toute la phrase",
+          "text": "Dans la première chanson, le bonheur semble fragile et insaisissable.",
+          "why": "« Insaisissable » exprime en un mot l’idée d’un bonheur difficile à retenir. La phrase devient plus directe.",
+          "whyZh": "如果想突出“难以抓住”，可用学过的 « insaisissable »。"
+        }
+      ]
+    },
+    {
+      "title": "Préciser de qui vous parlez",
+      "kind": "amelioration",
+      "initial": "le monde cherche le bonheur",
+      "intent": "Parlez-vous de toutes les personnes ou de beaucoup de personnes ?",
+      "intentZh": "« le monde » 与 « tout le monde » 并不等同。还需要判断这是不是一个适用于所有人的普遍性命题。",
+      "strategies": [
+        "Choisir le sujet exact",
+        "Nuancer l’affirmation"
       ],
       "resources": [
         [
@@ -23,11 +57,95 @@
       ],
       "proposals": [
         {
-          "label": "Clarifier l’idée",
-          "text": "On cherche le bonheur, mais la peur de le perdre peut aussi provoquer de la frustration.",
-          "why": "La reformulation met clairement en relation la peur de perdre le bonheur et la frustration. Le sens reste proche de votre intention."
+          "label": "Affirmation générale",
+          "text": "Tout le monde cherche le bonheur.",
+          "why": "« Tout le monde » désigne toutes les personnes. Cette formulation correspond à une affirmation très générale.",
+          "whyZh": "如果你坚持普遍性判断，可以这样表达。"
+        },
+        {
+          "label": "Affirmation plus prudente",
+          "text": "Beaucoup de personnes cherchent le bonheur.",
+          "why": "Cette version ne suppose pas que toutes les personnes partagent exactement la même priorité.",
+          "whyZh": "这是利用限定范围来 nuancer ses propos。"
+        }
+      ]
+    },
+    {
+      "title": "Relier la peur à la frustration",
+      "kind": "correction",
+      "initial": "mais il peut aussi devenir une source de frustration parce qu’on ira peur de le perdre.",
+      "intent": "Vous voulez dire que l’on peut souffrir de ne pas réussir à garder un moment de bonheur.",
+      "intentZh": "先把 « on ira peur » 改成 « on a peur »；随后要思考“害怕失去”如何发展为“想留住却做不到的挫败”。",
+      "strategies": [
+        "Employer « avoir peur de »",
+        "Clarifier la relation de cause",
+        "Garder « source de frustration »"
+      ],
+      "resources": [
+        [
+          "Les mots de l’unité",
+          "../../../Vocabulaire/U1/"
+        ],
+        [
+          "Correction collective · Unité 1",
+          "../../../PE/U1/corrections/"
+        ]
+      ],
+      "proposals": [
+        {
+          "label": "Corriger la langue en gardant votre idée",
+          "text": "Le bonheur peut aussi devenir une source de frustration, car on a peur de le perdre.",
+          "why": "« On a peur » est la forme correcte. Mais cette phrase explique seulement la crainte de perdre le bonheur, pas encore le mécanisme de la frustration.",
+          "whyZh": "这一句解决的是语法错误。恐惧（peur）与挫败（frustration）仍须区分。"
+        },
+        {
+          "label": "Préciser le mécanisme",
+          "text": "Vouloir garder un moment de bonheur sans y parvenir peut devenir une source de frustration.",
+          "why": "La frustration vient ici d’un désir qui ne peut pas être satisfait : on voudrait prolonger un moment heureux, mais on n’y arrive pas.",
+          "whyZh": "把“愿望无法实现”这一环节说出来，论证关系就更明确。"
+        }
+      ]
+    },
+    {
+      "title": "Donner un exemple qui montre vraiment une frustration",
+      "kind": "raisonnement",
+      "initial": "le bonheur peut devenir une source de frustration",
+      "intent": "Votre note dans la marge montre que vous cherchez un exemple. Il faut préciser ce que quelqu’un veut garder et pourquoi cela lui est impossible.",
+      "intentZh": "你已经有 idée。例证应说明“幸福时刻→希望它持续→无法做到→产生挫败”，而不只是描写某人伤心。",
+      "strategies": [
+        "Idée → exemple → explication",
+        "Faire apparaître le désir et l’obstacle",
+        "Relier l’exemple à la conclusion"
+      ],
+      "resources": [
+        [
+          "Correction des PE · L’exemple de S12",
+          "../../../PE/U1/corrections/"
+        ],
+        [
+          "Production écrite · Unité 1",
+          "../../../PE/U1/"
+        ]
+      ],
+      "proposals": [
+        {
+          "label": "Une situation fictive à adapter",
+          "text": "Prenons l’exemple d’une étudiante qui passe une belle journée avec ses amis. Elle voudrait rester plus longtemps, mais elle doit rentrer. Elle se sent frustrée de ne pas pouvoir prolonger ce moment heureux.",
+          "why": "L’exemple donne un désir précis et un obstacle. Il s’agit d’une situation inventée pour vous aider à écrire, et non d’un fait raconté dans votre copie.",
+          "whyZh": "这是教师提供的假设情境，不是对学生原文的补写。它真正说明了“想留住却留不住”。"
+        },
+        {
+          "label": "Expliquer le lien avec votre idée",
+          "text": "Cet exemple montre que le désir de garder un bonheur qui ne dure pas peut provoquer de la frustration.",
+          "why": "La conclusion explique ce que l’exemple prouve, au lieu de répéter simplement qu’un moment heureux se termine.",
+          "whyZh": "结尾必须回到 frustration，而不仅仅停留在“幸福很短暂”。"
         }
       ]
     }
-  ]
+  ],
+  "overview": {
+    "strength": "Votre idée est déjà là : la peur de perdre un bonheur fragile peut se transformer en frustration. Votre difficulté, signalée dans la marge, concerne surtout le choix d’un exemple.",
+    "focus": "Exprimer cette idée dans une langue plus simple, distinguer peur et frustration, puis construire un exemple pertinent.",
+    "focusZh": "不是重新寻找观点，而是把“想留住快乐→做不到→感到挫败”这个逻辑说明白。保留学生提出的 « source de frustration »。"
+  }
 }
