@@ -6,11 +6,50 @@
   "sourceNotes": [],
   "cards": [
     {
-      "initial": "les mélodies qui sont captivant",
-      "intent": "Vous souhaitez dire que les mélodies retiennent l’attention et procurent du plaisir.",
+      "title": "Préciser ce que vous pensez du bonheur",
+      "kind": "correction",
+      "initial": "Pour ma part, je pense que le bonheur, c’est aussi que ça.",
+      "intent": "Vous semblez approuver l’idée que le bonheur se trouve dans les gestes simples. Voulez-vous dire « aussi » ou insister sur « surtout » ?",
+      "intentZh": "aussi 表示“这也是幸福的来源”，surtout 则突出“幸福主要在这些小事中”。两种态度不完全一样。",
+      "strategies": [
+        "Clarifier la prise de position",
+        "Choisir entre « aussi » et « surtout »"
+      ],
+      "resources": [
+        [
+          "Les mots de l’unité",
+          "../../../Vocabulaire/U1/"
+        ],
+        [
+          "Nuancer un propos",
+          "../../../Grammaire/U1/nuancer-un-propos.html"
+        ]
+      ],
+      "proposals": [
+        {
+          "label": "Dire « aussi »",
+          "text": "Pour ma part, je pense que le bonheur se trouve aussi dans les petits gestes du quotidien.",
+          "why": "La phrase garde l’idée d’une source de bonheur parmi d’autres. « C’est aussi que ça » n’est pas naturel dans ce contexte.",
+          "whyZh": "如果你想说“幸福也存在于日常小事中”，这一句更贴近原意。"
+        },
+        {
+          "label": "Insister avec « surtout »",
+          "text": "Pour moi, le bonheur se trouve surtout dans les petits plaisirs du quotidien.",
+          "why": "« Surtout » donne à ces petits plaisirs une place principale. Choisissez cette version seulement si elle correspond vraiment à votre position.",
+          "whyZh": "这比原句立场更强，不能只是因为表达更漂亮就直接采用。"
+        }
+      ]
+    },
+    {
+      "title": "Réemployer « captivant » dans une phrase complète",
+      "kind": "correction",
+      "initial": "Les rayons du soleil qui caressent mon épaule, les mélodies qui sont captivant, et notamment la compagnie de la famille et d’amis.",
+      "intent": "Vous voulez illustrer le bonheur par trois expériences concrètes : sentir le soleil, écouter de la musique et être avec vos proches.",
+      "intentZh": "你已经有了很好的具体素材。这里首先需要解决性数配合，再把这组列举放进完整句子。",
       "strategies": [
         "Employer un adjectif verbal",
-        "Vérifier l’accord"
+        "Vérifier le féminin pluriel",
+        "Transformer une énumération en phrase"
       ],
       "resources": [
         [
@@ -18,17 +57,105 @@
           "../../../Vocabulaire/formation-des-mots/adjectif-verbal-cours.html"
         ],
         [
-          "Exercices · L’adjectif verbal",
+          "L’adjectif verbal · Exercices",
           "../../../Vocabulaire/formation-des-mots/adjectif-verbal-exercices.html"
+        ],
+        [
+          "Les mots de l’unité",
+          "../../../Vocabulaire/U1/"
         ]
       ],
       "proposals": [
         {
-          "label": "Réutiliser un adjectif verbal",
-          "text": "des mélodies captivantes",
-          "why": "« Captivant » qualifie ici « mélodies », nom féminin pluriel : « captivantes ». On peut ainsi alléger la relative."
+          "label": "Corriger le groupe nominal",
+          "text": "les mélodies captivantes",
+          "why": "« Mélodies » est féminin pluriel. L’adjectif verbal « captivant » s’accorde avec ce nom et devient « captivantes ».",
+          "whyZh": "这正好可以复用课堂学过的 adjectif verbal：名词是复数阴性，词尾相应变化。"
+        },
+        {
+          "label": "Rendre l’énumération plus fluide",
+          "text": "Je trouve du bonheur dans les rayons du soleil qui caressent mon épaule, dans des mélodies captivantes et dans les moments passés avec ma famille et mes amis.",
+          "why": "Un verbe principal (« je trouve ») relie les trois exemples. La répétition de « dans » rend l’énumération claire, sans supprimer vos images personnelles.",
+          "whyZh": "不必舍弃原稿中的意象，只需为列举找到一个完整的句法框架。"
+        }
+      ]
+    },
+    {
+      "title": "Choisir une expression plus naturelle",
+      "kind": "correction",
+      "initial": "Le bonheur n’est pas intouchable. Contrairement, il remplit des vides de notre cœur.",
+      "intent": "Vous semblez dire que le bonheur est accessible et qu’il peut apporter du réconfort.",
+      "intentZh": "intouchable 常表示“不可触碰的”，此处如果想说“并非遥不可及”，inaccessible 更合适；后一句的比喻可以保留，也可以简化。",
+      "strategies": [
+        "Choisir un adjectif plus précis",
+        "Simplifier",
+        "Bien employer « contrairement à »"
+      ],
+      "resources": [
+        [
+          "Les mots de l’unité",
+          "../../../Vocabulaire/U1/"
+        ],
+        [
+          "Grammaire · Unité 1",
+          "../../../Grammaire/U1/"
+        ]
+      ],
+      "proposals": [
+        {
+          "label": "Dire les choses simplement",
+          "text": "Le bonheur n’est pas inaccessible. On peut le trouver dans les petits plaisirs du quotidien.",
+          "why": "« Inaccessible » correspond à l’idée de quelque chose qu’on ne peut pas atteindre. Les deux phrases se suivent naturellement sans connecteur supplémentaire.",
+          "whyZh": "不要机械地替换为 « Au contraire ». 上下句没有形成必须使用该连接词的直接对立。"
+        },
+        {
+          "label": "Conserver votre image",
+          "text": "Le bonheur est accessible et peut combler un vide dans notre cœur.",
+          "why": "« Combler un vide » est une expression idiomatique. Cette version garde votre image, mais met davantage l’accent sur le réconfort qu’apporte le bonheur.",
+          "whyZh": "保留隐喻是一种选择，不是必须。重点是它是否真正表达了你想说的意思。"
+        }
+      ]
+    },
+    {
+      "title": "Relier l’idée générale à la conclusion",
+      "kind": "amelioration",
+      "initial": "Personnes parfois poursuivent le bonheur très fort, au point d’oublier ce qu’ils veulent vraiment. Donc, il faut être satisfait.",
+      "intent": "Vous opposez la recherche excessive du bonheur à la capacité de savourer les petits plaisirs déjà présents dans la vie.",
+      "intentZh": "结尾的 « être satisfait » 需要补出“满足于什么”。前文的阳光、音乐和亲友恰好能成为结论的依据。",
+      "strategies": [
+        "Éviter une généralisation",
+        "Réemployer « courir après le bonheur »",
+        "Préciser la conclusion"
+      ],
+      "resources": [
+        [
+          "Les mots de l’unité",
+          "../../../Vocabulaire/U1/"
+        ],
+        [
+          "Production écrite · Unité 1",
+          "../../../PE/U1/"
+        ]
+      ],
+      "proposals": [
+        {
+          "label": "Mettre l’idée et la conclusion en relation",
+          "text": "Certaines personnes cherchent tellement le bonheur qu’elles oublient ce qu’elles veulent vraiment. Il vaut mieux apprendre à savourer les petits plaisirs du quotidien.",
+          "why": "« Certaines personnes » évite de parler de tout le monde. La conclusion explique enfin ce qu’il faudrait apprécier.",
+          "whyZh": "先指出过度追求的后果，再回到自己前面举过的日常例子，逻辑链才完整。"
+        },
+        {
+          "label": "Réemployer une expression de la leçon",
+          "text": "Certaines personnes courent après le bonheur au point d’oublier ce qu’elles veulent vraiment. Il faut donc apprendre à profiter des petits moments de la vie.",
+          "why": "« Courir après le bonheur » reprend une expression rencontrée dans l’unité. « Elles » assure l’accord avec « certaines personnes ».",
+          "whyZh": "利用熟悉的课文表达，而不是临时拼装更复杂的动词搭配。"
         }
       ]
     }
-  ]
+  ],
+  "overview": {
+    "strength": "Votre texte donne déjà des exemples sensibles et personnels du bonheur : le soleil, la musique et les moments avec les proches. Ce sont de bonnes idées à conserver.",
+    "focus": "Préciser votre point de vue, construire des phrases complètes et réutiliser l’adjectif verbal « captivant ».",
+    "focusZh": "保留原稿中阳光、音乐和亲友的具体画面，不必换成抽象的大词。改写重点是句子完整、词语准确，以及结尾回扣前面的例子。"
+  }
 }
