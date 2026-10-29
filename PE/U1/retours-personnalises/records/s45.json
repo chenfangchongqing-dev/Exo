@@ -8,12 +8,77 @@
   "sourceNotes": [],
   "cards": [
     {
-      "initial": "elle trouve sa bonheur dans le recherche scientifique, sans compter dans l’amour.",
-      "intent": "Vous souhaitez montrer que le bonheur peut aussi provenir d’une passion ou d’un travail, sans être réduit à l’amour.",
+      "title": "Corriger les formes sans perdre de vue le sens",
+      "kind": "correction",
+      "initial": "sa bonheur dans le recherche scientifique, sans compter dans l’amour.",
+      "intent": "Vous cherchez à parler du bonheur, de l’activité scientifique et de la place de l’amour.",
+      "intentZh": "原句有名词性别与介词搭配错误。但即使语言改对，也不能证明人物的私人感受。",
       "strategies": [
-        "Corriger les groupes nominaux",
-        "Nuancer ce que l’exemple prouve",
-        "Éviter une affirmation biographique non vérifiée"
+        "Vérifier le genre du nom",
+        "Corriger une préposition",
+        "Distinguer correction et preuve"
+      ],
+      "resources": [
+        [
+          "Les mots de l’unité",
+          "../../../Vocabulaire/U1/"
+        ]
+      ],
+      "proposals": [
+        {
+          "label": "Trois expressions à retenir",
+          "text": "son bonheur · la recherche scientifique · compter sur l’amour",
+          "why": "« Bonheur » est masculin, « recherche » est féminin, et « compter » se construit avec « sur ». Ces corrections ne prouvent pas que Marie Curie n’aurait pas eu besoin d’amour pour être heureuse.",
+          "whyZh": "只保留可以确认的语言形式：son bonheur / la recherche scientifique / compter sur。不要直接恢复原句的未经证实结论。"
+        }
+      ]
+    },
+    {
+      "title": "Conserver Marie Curie sans lui prêter des sentiments",
+      "kind": "raisonnement",
+      "initial": "Prenons l’exemple de Madame Curie : elle trouve sa bonheur dans le recherche scientifique, sans compter dans l’amour.",
+      "intent": "Vous souhaitez montrer qu’une passion pour un travail peut occuper une place importante dans la vie d’une personne.",
+      "intentZh": "居里夫人的科研生涯可以作为事例，但不能据此断言她“不需要爱情也很幸福”。",
+      "strategies": [
+        "Séparer faits et interprétations",
+        "Simplifier la phrase",
+        "Éviter une supposition biographique"
+      ],
+      "resources": [
+        [
+          "Correction des PE · Vérifier son exemple",
+          "../../../PE/U1/corrections/"
+        ],
+        [
+          "Nuancer un propos",
+          "../../../Grammaire/U1/nuancer-un-propos.html"
+        ]
+      ],
+      "proposals": [
+        {
+          "label": "Présenter un fait connu",
+          "text": "Prenons l’exemple de Marie Curie. Elle a consacré une grande partie de sa vie à la recherche scientifique.",
+          "why": "Cette reformulation décrit son activité professionnelle et n’attribue pas de sentiment privé à Marie Curie. « Marie Curie » convient naturellement dans ce texte.",
+          "whyZh": "保留人物和科学研究的事实层面，不擅自推断其爱情生活。"
+        },
+        {
+          "label": "Relier l’exemple au thème de la passion",
+          "text": "On peut citer Marie Curie pour montrer la place importante que la recherche scientifique a occupée dans sa vie.",
+          "why": "Cette version montre pourquoi vous évoquez son parcours, mais ne prétend pas connaître directement ses sources de bonheur.",
+          "whyZh": "这里说明“科研活动在人生中的重要地位”，而不是把科研成就直接等同于她的幸福。"
+        }
+      ]
+    },
+    {
+      "title": "Tirer une conclusion qui reste justifiée",
+      "kind": "amelioration",
+      "initial": "Cet exemple montre que le bonheur peut naître de sa passion et de ses réussites professionnelles.",
+      "intent": "Vous voulez élargir la conception du bonheur : l’amour n’est peut-être pas sa seule source.",
+      "intentZh": "避免让 « sa passion » 指代模糊，也不要把自己的幸福观表述为历史人物的确切感受。",
+      "strategies": [
+        "Préciser la conclusion",
+        "Nuancer son propos",
+        "Réemployer « non seulement… mais aussi… »"
       ],
       "resources": [
         [
@@ -27,16 +92,23 @@
       ],
       "proposals": [
         {
-          "label": "Séparer le fait de l’interprétation",
-          "text": "Marie Curie a consacré une grande partie de sa vie à la recherche scientifique.",
-          "why": "Cette formulation décrit une activité connue sans affirmer, sans preuve, qu’elle n’avait pas besoin d’amour pour être heureuse."
+          "label": "Conclure sur la place d’une passion",
+          "text": "Son parcours montre qu’une passion peut occuper une place importante dans une vie.",
+          "why": "Cette conclusion est liée à son parcours scientifique. Elle ne présente pas son bonheur personnel comme un fait démontré.",
+          "whyZh": "这句与例证的支持关系比较稳妥，但仍不能直接证明其爱情与幸福之间的关系。"
         },
         {
-          "label": "Interpréter l’exemple avec prudence",
-          "text": "Cet exemple peut illustrer l’importance d’une passion, mais il ne suffit pas à prouver que l’amour ne contribue pas au bonheur.",
-          "why": "La conclusion doit rester proportionnée à ce que l’exemple permet d’établir."
+          "label": "Revenir à votre propre conception du bonheur",
+          "text": "Pour ma part, je pense que le bonheur peut venir non seulement de l’amour, mais aussi d’une activité qui nous passionne.",
+          "why": "Vous exprimez votre opinion personnelle, tout en réutilisant « non seulement… mais aussi… ». Cette nuance évite une conclusion trop absolue.",
+          "whyZh": "这是学生自己的观点，而不是对居里夫人生活的事实判断。"
         }
       ]
     }
-  ]
+  ],
+  "overview": {
+    "strength": "Votre position est claire : « le bonheur peut exister sans relation amoureuse ». Vous avez aussi choisi une personne connue pour construire votre exemple.",
+    "focus": "Corriger les formes linguistiques, garder l’exemple de Marie Curie sans lui attribuer des sentiments invérifiables et nuancer la conclusion.",
+    "focusZh": "保留既有观点与居里夫人的例子，但要区分已知科研经历与对其私人幸福感的推断。语言订正不等于为事实背书。"
+  }
 }
