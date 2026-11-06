@@ -57,7 +57,7 @@ h1{font-size:clamp(30px,4.8vw,48px);line-height:1.12;letter-spacing:-.035em;marg
 <p class="intro">Avant de chercher la bonne phrase, prenons le temps de clarifier ton idée. Une question à la fois : c'est toi qui construis ton texte.</p>
 <div class="labels"><span>01 · Je choisis</span><span>02 · Je réfléchis</span><span>03 · J'illustre</span><span>04 · Je vérifie</span></div>
 </section>
-<div class="notice" id="modeNotice"><span aria-hidden="true">ⓘ</span><div><strong>Version d'essai · parcours guidé, sans modèle d'IA connecté.</strong> Cette première version permet de tester le dialogue pédagogique et l'alternance français/chinois. Elle ne comprend pas librement toutes les formulations ; un service d'IA sécurisé pourra être raccordé ultérieurement.</div></div>
+<div class="notice" id="modeNotice"><span aria-hidden="true">ⓘ</span><div><strong>Initialisation de l’accompagnement…</strong> Le site vérifie la configuration du serveur pédagogique. Si ce message persiste, recharge cette page sans cache.</div></div>
 <div class="access-box" id="accessPanel" hidden>
 <div><label for="classCode">Code d'accès · 课堂访问码</label><input id="classCode" type="password" autocomplete="off" maxlength="128" placeholder="Code remis par l'enseignante"><p class="access-status" id="accessHint" role="status">Le code est demandé pour la version connectée à GLM.</p></div>
 <button id="applyCode" type="button">Activer l'accès</button>
@@ -101,14 +101,16 @@ h1{font-size:clamp(30px,4.8vw,48px);line-height:1.12;letter-spacing:-.035em;marg
 <p class="privacy" id="privacyNote"><strong>Confidentialité :</strong> dans cette version, les messages restent dans la page ouverte. Ils ne sont pas envoyés à un modèle ni enregistrés automatiquement. Tu peux exporter ton dialogue si tu souhaites le conserver. N'entre pas d'informations personnelles sensibles.</p>
 </main>
 </div>
-<script src="./glm-config.js"></script>
+<script src="./glm-config.js?v=glm20261106"></script>
 <script>
 (function(){
 "use strict";
 var chat=document.getElementById("chat"),form=document.getElementById("messageForm"),input=document.getElementById("message"),suggestions=document.getElementById("suggestions"),stageName=document.getElementById("stageName"),progress=document.getElementById("progress");
 var PHASES=["topic","position","reason","example","interpretation","review"];
 var state={phase:"topic",lang:"fr",topic:"",stance:"",reason:"",example:"",interpretation:"",hint:0,history:[]};
-var GLM_ENDPOINT=(typeof window.INSPIRE4_GLM_ENDPOINT==="string"&&/^https:\/\//.test(window.INSPIRE4_GLM_ENDPOINT))?window.INSPIRE4_GLM_ENDPOINT.trim():"";
+// The backend URL is public, not a secret. Inlining a fallback avoids stale external config caches.
+var GLM_TEST_ENDPOINT="https://inspireompagnon-orzowiydrh.cn-hangzhou.fcapp.run/chat";
+var GLM_ENDPOINT=(typeof window.INSPIRE4_GLM_ENDPOINT==="string"&&/^https:\/\//.test(window.INSPIRE4_GLM_ENDPOINT))?window.INSPIRE4_GLM_ENDPOINT.trim():GLM_TEST_ENDPOINT;
 var CLASS_CODE="";
 if(GLM_ENDPOINT){
  document.getElementById("accessPanel").hidden=false;
