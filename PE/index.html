@@ -32,6 +32,27 @@ h1{font-size:clamp(34px,5vw,54px);line-height:1.08;letter-spacing:-.035em;margin
 .method span{border-radius:999px;background:#fff4d5;border:1px solid #f0dfb2;color:#78521f;font-size:13px;font-weight:700;padding:8px 12px}
 footer{margin:38px 0 35px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted);font-size:12px}
 @media(max-width:690px){.hero{padding:31px 22px}.section-head{display:block}.section-head p{margin-top:5px}.card{padding:22px}.top{padding:18px 0}.wrap{padding:0 16px}}
+
+/* Plume is the existing companion entry, not another PE exercise card. */
+.hero-with-companion{min-height:292px;padding-right:333px;overflow:visible}
+.hero-with-companion:after{z-index:0}
+.hero-with-companion>.overline,.hero-with-companion>h1,.hero-with-companion>.intro{position:relative;z-index:1}
+.hero-with-companion h1{max-width:620px}
+.hero-with-companion .intro{max-width:600px}
+.companion-pet-link{position:absolute;z-index:3;right:19px;top:-36px;width:285px;height:333px;display:block;text-decoration:none;border-radius:22px;transition:transform .2s ease}
+.companion-pet-link .pet-svg{display:block;width:100%;height:auto;filter:drop-shadow(0 8px 11px rgba(112,72,38,.13));pointer-events:none;transition:transform .2s ease;transform-origin:50% 82%}
+.companion-pet-link:hover .pet-svg,.companion-pet-link:focus-visible .pet-svg{transform:translateY(-6px) rotate(-2deg)}
+.companion-pet-link:focus-visible{outline:3px solid #ae7418;outline-offset:5px}
+.companion-pet-link .pet-tail{transform-origin:238px 207px;animation:plume-hello 3.6s ease-in-out infinite}
+.companion-pet-tag{position:absolute;z-index:4;left:18px;right:-3px;bottom:2px;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 13px;border:1px solid #e5c98e;border-radius:999px;background:#fffcf5;box-shadow:0 6px 20px rgba(86,63,28,.12);color:#7b4f1b;font-size:12px}
+.companion-pet-tag strong{font-weight:850}
+.companion-pet-tag small{font-size:11px;white-space:nowrap;color:#9b651e;font-weight:700}
+.companion-pet-link:hover .companion-pet-tag{border-color:#c99a44;background:#fff8e9}
+@keyframes plume-hello{0%,100%{transform:rotate(0)}45%{transform:rotate(6deg)}75%{transform:rotate(-3deg)}}
+@media(max-width:850px){.hero-with-companion{padding-right:280px}.companion-pet-link{width:238px;height:289px;right:11px;top:-22px}.companion-pet-tag{left:1px;right:0;font-size:11px}}
+@media(max-width:690px){.hero-with-companion{padding:31px 22px 160px;min-height:370px;margin-bottom:25px}.hero-with-companion .intro{max-width:100%;font-size:16px}.companion-pet-link{top:auto;right:8px;bottom:-27px;width:170px;height:198px}.companion-pet-tag{left:-77px;right:0;bottom:-7px;font-size:11px;padding:8px 12px}.companion-pet-tag small{font-size:10px}}
+@media(prefers-reduced-motion:reduce){.companion-pet-link .pet-tail{animation:none}.companion-pet-link,.companion-pet-link .pet-svg{transition:none}}
+
 </style>
 </head>
 <body>
@@ -41,10 +62,82 @@ footer{margin:38px 0 35px;padding-top:22px;border-top:1px solid var(--line);colo
 <a href="../index.html" class="small-link">← Accueil</a>
 </header>
 <main>
-<section class="hero" aria-labelledby="mainTitle">
+<section class="hero hero-with-companion" aria-labelledby="mainTitle">
 <div class="overline">Production écrite · PE</div>
 <h1 id="mainTitle">Exprimer son point de vue.</h1>
 <p class="intro">Une idée à discuter, un exemple concret à développer : entraînez-vous à argumenter en quelques phrases.</p>
+<a class="companion-pet-link" href="./compagnon-metacognitif/" aria-label="Ouvrir Mon compagnon métacognitif, mon assistant d'écriture">
+<svg class="pet-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 324" role="img" aria-label="Chat Plume, assistant d’écriture avec béret, lunettes et carnet">
+<defs>
+<linearGradient id="plume-fur" x1="0" y1="0" x2=".8" y2="1"><stop offset="0" stop-color="#ffe8b8"/><stop offset=".65" stop-color="#f9ca84"/><stop offset="1" stop-color="#da9764"/></linearGradient>
+<linearGradient id="plume-cream" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fffbeb"/><stop offset="1" stop-color="#f5dfc2"/></linearGradient>
+<linearGradient id="plume-beret" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#b65b47"/><stop offset="1" stop-color="#863b32"/></linearGradient>
+<filter id="plume-shadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#9b6d32" flood-opacity=".2"/></filter>
+</defs>
+<g stroke-linecap="round" stroke-linejoin="round" filter="url(#plume-shadow)">
+<!-- The tail curls above the right edge of the banner. -->
+<path class="pet-tail" d="M238 207 C277 190 292 209 295 179 C301 151 273 149 269 166 C270 183 258 186 236 184 Z" fill="#d8915a" stroke="#825139" stroke-width="3"/>
+<path d="M276 170 C288 165 294 175 289 185" fill="none" stroke="#f7d4a9" stroke-width="8"/>
+<!-- body and little paws -->
+<ellipse cx="183" cy="225" rx="91" ry="80" fill="url(#plume-fur)" stroke="#865a3b" stroke-width="3"/>
+<ellipse cx="185" cy="239" rx="62" ry="51" fill="#fff0d4"/>
+<!-- scarf -->
+<path d="M111 191 Q183 228 249 188 L251 214 Q189 247 119 219 Z" fill="#b55e50" stroke="#824b3c" stroke-width="2.5"/>
+<path d="M131 205 Q181 226 230 207 M146 211 L161 229 M190 222 L200 234" stroke="#f5e5cb" stroke-width="5" fill="none"/>
+<path d="M237 204 Q258 219 254 271 L240 291 L230 274 Q242 232 223 211 Z" fill="#b55e50" stroke="#824b3c" stroke-width="2.5"/>
+<path d="M239 227 L254 238 M239 244 L252 257" fill="none" stroke="#ffe8ca" stroke-width="5"/>
+<!-- ears behind head -->
+<path d="M114 102 L117 45 Q121 38 128 44 L159 83 Z" fill="url(#plume-fur)" stroke="#88563b" stroke-width="3"/>
+<path d="M126 56 L136 81 L120 90 Z" fill="#e9a396"/>
+<path d="M211 82 L244 41 Q250 35 256 46 L263 115 Z" fill="url(#plume-fur)" stroke="#88563b" stroke-width="3"/>
+<path d="M244 55 L226 90 L253 98 Z" fill="#e9a396"/>
+<!-- round head -->
+<path d="M105 110 Q111 67 168 68 Q231 63 255 112 Q268 175 235 208 Q210 233 178 234 Q136 237 111 209 Q89 181 105 110Z" fill="url(#plume-fur)" stroke="#86583b" stroke-width="3"/>
+<!-- forehead stripes -->
+<path d="M172 83 L177 108 M190 85 L189 103 M209 92 L202 109" stroke="#d58a4d" stroke-width="6" fill="none" opacity=".65"/>
+<!-- white cheeks and muzzle -->
+<path d="M114 165 Q126 151 146 168 Q162 182 178 171 Q190 156 211 165 Q233 151 247 165 Q250 206 218 219 Q178 243 139 215 Q111 205 114 165 Z" fill="url(#plume-cream)"/>
+<ellipse cx="173" cy="188" rx="17" ry="12" fill="#fff6e5"/><ellipse cx="193" cy="188" rx="17" ry="12" fill="#fff6e5"/>
+<!-- rosy cheeks -->
+<ellipse cx="128" cy="176" rx="18" ry="9" fill="#e6a799" opacity=".42"/><ellipse cx="229" cy="177" rx="18" ry="9" fill="#e6a799" opacity=".42"/>
+<!-- smiling eyes -->
+<path d="M126 153 Q143 140 159 155 M195 155 Q210 139 227 153" stroke="#634b3c" stroke-width="4" fill="none"/>
+<!-- glasses -->
+<circle cx="146" cy="150" r="30" fill="none" stroke="#93684c" stroke-width="3"/>
+<circle cx="213" cy="150" r="30" fill="none" stroke="#93684c" stroke-width="3"/>
+<path d="M175 144 Q181 138 183 143 M116 144 L104 140 M242 143 L258 139" fill="none" stroke="#93684c" stroke-width="3"/>
+<!-- face -->
+<path d="M174 174 Q183 168 192 174 L184 182 Z" fill="#cc8a82"/>
+<path d="M184 182 Q181 195 170 190 M184 182 Q189 195 199 190" stroke="#775244" stroke-width="2.5" fill="none"/>
+<path d="M122 182 L95 176 M122 189 L93 191 M233 181 L262 175 M234 189 L262 194" stroke="#91765c" stroke-width="1.8" fill="none"/>
+<!-- French literary beret -->
+<path d="M143 87 C137 54 156 26 198 27 C229 26 246 43 249 66 Q250 87 216 92 Z" fill="url(#plume-beret)" stroke="#77362f" stroke-width="3"/>
+<path d="M147 90 Q193 102 234 87" fill="none" stroke="#793b32" stroke-width="5"/>
+<path d="M206 31 C214 22 219 17 221 15" stroke="#793b32" stroke-width="6"/>
+<path d="M162 61 Q191 39 221 48" fill="none" stroke="#df9e7e" stroke-width="5" opacity=".6"/>
+<!-- book/notebook -->
+<g transform="rotate(-12 242 257)">
+<rect x="215" y="221" width="57" height="80" rx="7" fill="#7b4737" stroke="#67402d" stroke-width="3"/>
+<rect x="222" y="227" width="43" height="67" rx="4" fill="#a55c46" stroke="#f8e2bc" stroke-width="1.5"/>
+<path d="M232 245 Q243 232 254 245 Q243 258 232 245" fill="none" stroke="#f6dc9b" stroke-width="2"/>
+<path d="M234 273 H255" stroke="#efce9b" stroke-width="2.5"/>
+</g>
+<!-- arm carrying pencil -->
+<path d="M145 238 Q147 259 134 276 Q121 294 114 283 Q105 272 118 257 Z" fill="url(#plume-fur)" stroke="#82553b" stroke-width="3"/>
+<path d="M110 287 L150 227" stroke="#805c37" stroke-width="8"/>
+<path d="M113 280 L148 229" stroke="#f5cc66" stroke-width="5"/>
+<path d="M149 227 L156 213 L141 222 Z" fill="#b38a5a" stroke="#795940" stroke-width="1.6"/>
+<path d="M120 266 Q137 259 144 273 Q148 291 132 297 Q114 301 112 285Z" fill="#ffebc9" stroke="#895c42" stroke-width="2.5"/>
+<!-- other paw rests on a thin banner edge -->
+<ellipse cx="211" cy="283" rx="31" ry="19" fill="#fff1d9" stroke="#86573e" stroke-width="3"/>
+<path d="M204 282 L203 293 M215 282 L218 293" stroke="#d9b18f" stroke-width="2"/>
+</g>
+<!-- small poetic sparks -->
+<path d="M90 79 L85 66 M74 91 L62 85 M267 100 L282 93" stroke="#9f702a" stroke-width="3" stroke-linecap="round" fill="none" opacity=".75"/>
+<path d="M57 140 L62 129 L68 140 L62 151Z" fill="#e8a744" opacity=".75"/>
+</svg>
+<span class="companion-pet-tag"><strong>Mon compagnon</strong><small>Écrire avec moi <span aria-hidden="true">↗</span></small></span>
+</a>
 </section>
 <section class="section" aria-labelledby="u1">
 <div class="section-head"><h2 id="u1">Unité 1 · Le bonheur est-il utopique ?</h2><p>Leçon 2 · 10 min</p></div>
@@ -55,15 +148,7 @@ footer{margin:38px 0 35px;padding-top:22px;border-top:1px solid var(--line);colo
 <div class="action">Commencer à écrire →</div>
 </a>
 </section>
-<section class="section" aria-labelledby="compagnon-metacognitif">
-<div class="section-head"><h2 id="compagnon-metacognitif">Unité 1 · Accompagnement à l'écriture</h2><p>Atelier interactif · Version d'essai</p></div>
-<a class="card primary" href="./compagnon-metacognitif/">
-<div class="mark">APPRENDRE À ARGUMENTER · GUIDAGE MÉTACOGNITIF</div>
-<h3>Mon compagnon métacognitif</h3>
-<p>Une question à la fois pour clarifier mon avis, chercher un exemple et vérifier mon raisonnement. Parcours guidé en français, aide en chinois sur demande. Version d'essai sans IA connectée.</p>
-<div class="action">Commencer le dialogue →</div>
-</a>
-</section>
+
 <section class="section" aria-labelledby="u1-ex9">
 <div class="section-head"><h2 id="u1-ex9">Unité 1 · Exercice 9</h2><p>Production écrite · Réagir à une brève</p></div>
 <a class="card primary" href="./U1/mesurer-le-bonheur.html"><div class="mark">EXERCICE 9 · PRODUCTION ÉCRITE</div><h3>Mesurer le bonheur ?</h3><p>Faut-il mesurer le bonheur ? Lisez une brève sur un indicateur du bonheur et laissez votre avis sur un site d’information.</p><div class="action">Lire et rédiger mon commentaire →</div></a>
