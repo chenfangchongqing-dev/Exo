@@ -1,4 +1,6 @@
-// Public website configuration. Never put an API Key or classroom access code here.
-// Once the backend is deployed, paste only its HTTPS URL, ending with /chat.
-// Example: window.INSPIRE4_GLM_ENDPOINT = "https://YOUR-WORKER.YOUR-SUBDOMAIN.workers.dev/chat";
+// PE companion: the browser sees only a public HTTPS backend endpoint.
+// Recommended backend: Aliyun Function Compute (mainland region), code under ./backend/aliyun-fc/.
+// Never put GLM_API_KEY or CLASS_ACCESS_CODE in public GitHub Pages JavaScript.
+// Teacher testing: after Aliyun deployment, set the function URL + "/chat" here.
+// IMPORTANT: Aliyun default fcapp.run URLs are for TESTING ONLY, not production use.
 window.INSPIRE4_GLM_ENDPOINT = "";
