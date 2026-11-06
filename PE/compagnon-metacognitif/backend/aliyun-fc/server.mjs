@@ -60,7 +60,7 @@ async function route(req, res) {
     const request = new Request("http://localhost" + (req.url || "/"), {
       method: req.method || "GET",
       headers,
-      ...(body.byteLength ? { body } : {})
+      ...(body.byteLength ? { body: body.toString("utf8") } : {})
     });
     const reply = await teacherAgent.fetch(request, config);
     const outHeaders = Object.fromEntries(reply.headers.entries());
