@@ -233,13 +233,18 @@ async function handle(body,env){
         "Prenons un cas simple : un succès apporte du bonheur, mais cette joie peut dépendre des attentes qu'on place en lui. Veux-tu nuancer l'idée reçue à partir de ce cas ?",
         "给你一个具体情境：一个人实现目标后感到快乐，但快乐可能受他的期待影响。这个情境能否让你对原观点作出限定？")),phase,language,topic,meta);
     }
-    meta.lastStrategy="worked-example";meta.next="Réutiliser une phrase et passer à la rédaction";meta.difficulty="drafting";phase="writing";
-    return outcome(fear?pick(language,
-      "Je te donne une phrase de départ, puis passons à la rédaction : « Quand on est heureux avec quelqu'un, la peur de le perdre peut parfois empêcher de profiter pleinement du présent. » Tu peux maintenant écrire « Prenons l'exemple de… » en adaptant cette situation.",
-      "我们不再反复追问。给你一个起步句：« Quand on est heureux avec quelqu'un, la peur de le perdre peut parfois empêcher de profiter pleinement du présent. » 接下来直接写 « Prenons l'exemple de… »，把这个情境改成你的例子。")
-      :pick(language,
-      "Ne restons pas bloqués. Essaie cette base : « Pour ma part, je pense que cette idée reçue n'est pas toujours vraie, car… ». Complète seulement la raison ; je t'aiderai ensuite à la reformuler.",
-      "不再反复问了。先用这个句子起步：« Pour ma part, je pense que cette idée reçue n'est pas toujours vraie, car… »。只补一个理由，之后再一起修改。"),phase,language,topic,meta);
+    meta.lastStrategy="worked-example";meta.next="Choisir ou nuancer une position à partir de deux amorces";
+    if(fear){
+      phase="writing";meta.difficulty="drafting";
+      return outcome(pick(language,
+        "Je te donne une phrase de départ, puis passons à la rédaction : « Quand on est heureux avec quelqu'un, la peur de le perdre peut parfois empêcher de profiter pleinement du présent. » Tu peux maintenant écrire « Prenons l'exemple de… » en adaptant cette situation.",
+        "我们不再反复追问。给你一个起步句：« Quand on est heureux avec quelqu'un, la peur de le perdre peut parfois empêcher de profiter pleinement du présent. » 接下来直接写 « Prenons l'exemple de… »，把这个情境改成你的例子。"),phase,language,topic,meta);
+    }
+    // Never choose a position for a learner who has explicitly not decided.
+    meta.difficulty="planning";
+    return outcome(pick(language,
+      "Voici deux amorces possibles, sans décider à ta place : « Je suis plutôt d'accord, parce que certaines joies passent vite » ou « Je ne suis pas entièrement d'accord, car le bonheur peut aussi durer ». Tu peux en choisir une, les nuancer, ou proposer une autre idée.",
+      "我们不再重复追问，给你两个可选择的起步思路，但不替你决定立场：①“我倾向于赞同，因为某些快乐很短暂”；②“我不完全赞同，因为有些幸福能够持续”。你可以选择、加以限定，或者提出第三种看法。"),phase,language,topic,meta);
   }
   // An example from the learner deserves a relevance check, not automatic praise.
   if((isRelationship(s)||isSunset(s)) && (phase==="example"||phase==="interpretation"||phase==="reason"||meta.difficulty==="example")){
