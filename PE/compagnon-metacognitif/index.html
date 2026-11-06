@@ -37,6 +37,14 @@ h1{font-size:clamp(30px,4.8vw,48px);line-height:1.12;letter-spacing:-.035em;marg
 @media(max-width:820px){.layout{grid-template-columns:1fr}.sidebar{grid-template-columns:repeat(2,minmax(0,1fr))}.chat{max-height:440px}.wrap{padding:16px 13px 35px}.hero{padding:28px 21px}}
 @media(max-width:590px){.sidebar{grid-template-columns:1fr}.hero{border-radius:17px}.panel{border-radius:16px}.chat{padding:16px 13px;min-height:320px}.turn{max-width:94%}.bubble{font-size:14px}.composer{padding:12px;gap:8px}.send{padding:13px 15px}.stage,.suggestions{padding-left:13px;padding-right:13px}.chat-footer{padding:0 13px 13px}}
 @media(prefers-reduced-motion:reduce){.chat{scroll-behavior:auto}}
+
+/* Live GLM connector: hidden until a backend endpoint is explicitly configured */
+.access-box{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:#fffdf3;border:1px solid #e5cd98;border-radius:15px;padding:15px 17px;margin:0 0 20px}
+.access-box[hidden]{display:none!important}.access-box label{font-size:13px;font-weight:750;color:#6a4a19;display:block;margin-bottom:5px}
+.access-box input{padding:10px 12px;border:1px solid #d9bd88;border-radius:10px;min-height:43px;width:min(290px,100%);background:white;color:var(--ink)}
+.access-box button{background:#333029;color:#fff;border:0;border-radius:10px;padding:11px 14px;min-height:43px;font-weight:750}
+.access-box .access-status{color:#746a5a;font-size:12px;margin:5px 0 0}
+@media(max-width:590px){.access-box{display:block}.access-box input{width:100%;margin-bottom:7px}}
 </style>
 </head>
 <body>
@@ -49,7 +57,11 @@ h1{font-size:clamp(30px,4.8vw,48px);line-height:1.12;letter-spacing:-.035em;marg
 <p class="intro">Avant de chercher la bonne phrase, prenons le temps de clarifier ton idée. Une question à la fois : c'est toi qui construis ton texte.</p>
 <div class="labels"><span>01 · Je choisis</span><span>02 · Je réfléchis</span><span>03 · J'illustre</span><span>04 · Je vérifie</span></div>
 </section>
-<div class="notice"><span aria-hidden="true">ⓘ</span><div><strong>Version d'essai · parcours guidé, sans modèle d'IA connecté.</strong> Cette première version permet de tester le dialogue pédagogique et l'alternance français/chinois. Elle ne comprend pas librement toutes les formulations ; un service d'IA sécurisé pourra être raccordé ultérieurement.</div></div>
+<div class="notice" id="modeNotice"><span aria-hidden="true">ⓘ</span><div><strong>Version d'essai · parcours guidé, sans modèle d'IA connecté.</strong> Cette première version permet de tester le dialogue pédagogique et l'alternance français/chinois. Elle ne comprend pas librement toutes les formulations ; un service d'IA sécurisé pourra être raccordé ultérieurement.</div></div>
+<div class="access-box" id="accessPanel" hidden>
+<div><label for="classCode">Code d'accès · 课堂访问码</label><input id="classCode" type="password" autocomplete="off" maxlength="128" placeholder="Code remis par l'enseignante"><p class="access-status" id="accessHint" role="status">Le code est demandé pour la version connectée à GLM.</p></div>
+<button id="applyCode" type="button">Activer l'accès</button>
+</div>
 <div class="layout">
 <section class="panel chat-panel" aria-labelledby="chatTitle">
 <div class="panel-head"><h2 id="chatTitle">Un dialogue pour apprendre à argumenter</h2><small>ACCOMPAGNEMENT GUIDÉ</small></div>
@@ -86,15 +98,23 @@ h1{font-size:clamp(30px,4.8vw,48px);line-height:1.12;letter-spacing:-.035em;marg
 </section>
 </aside>
 </div>
-<p class="privacy"><strong>Confidentialité :</strong> dans cette version, les messages restent dans la page ouverte. Ils ne sont pas envoyés à un modèle ni enregistrés automatiquement. Tu peux exporter ton dialogue si tu souhaites le conserver. N'entre pas d'informations personnelles sensibles.</p>
+<p class="privacy" id="privacyNote"><strong>Confidentialité :</strong> dans cette version, les messages restent dans la page ouverte. Ils ne sont pas envoyés à un modèle ni enregistrés automatiquement. Tu peux exporter ton dialogue si tu souhaites le conserver. N'entre pas d'informations personnelles sensibles.</p>
 </main>
 </div>
+<script src="./glm-config.js"></script>
 <script>
 (function(){
 "use strict";
 var chat=document.getElementById("chat"),form=document.getElementById("messageForm"),input=document.getElementById("message"),suggestions=document.getElementById("suggestions"),stageName=document.getElementById("stageName"),progress=document.getElementById("progress");
 var PHASES=["topic","position","reason","example","interpretation","review"];
 var state={phase:"topic",lang:"fr",topic:"",stance:"",reason:"",example:"",interpretation:"",hint:0,history:[]};
+var GLM_ENDPOINT=(typeof window.INSPIRE4_GLM_ENDPOINT==="string"&&/^https:\/\//.test(window.INSPIRE4_GLM_ENDPOINT))?window.INSPIRE4_GLM_ENDPOINT.trim():"";
+var CLASS_CODE="";
+if(GLM_ENDPOINT){
+ document.getElementById("accessPanel").hidden=false;
+ document.getElementById("modeNotice").innerHTML='<span aria-hidden="true">ⓘ</span><div><strong>Mode GLM configuré · Accès enseignant / classe.</strong> Les messages sont transmis à un modèle externe via un serveur sécurisé lorsque le code de classe est validé. La connexion doit être testée avant toute utilisation en cours.</div>';
+ document.getElementById("privacyNote").innerHTML="<strong>Confidentialité :</strong> en mode GLM, tes messages et quelques réponses précédentes sont transmis au serveur pédagogique et à l'API GLM pour produire la réponse. N'entre aucune donnée personnelle sensible. Le dialogue n'est pas enregistré par ce site ; tu peux l'exporter.";
+}
 var TOPICS=["Il faut être en couple pour être heureux.","L'argent fait le bonheur.","Il faut toujours être heureux."];
 var STAGES={fr:["Choisir une idée reçue","Exprimer mon avis","Expliquer mon avis","Trouver un exemple","Examiner mon exemple","Relire mon raisonnement"],zh:["选择一个常见观念","表达自己的立场","解释自己的理由","寻找具体例子","检验例子的作用","回顾论证过程"]};
 function t(fr,zh){return state.lang==="zh"?zh:fr}
@@ -129,10 +149,44 @@ if(state.phase==="reason"){if(exampleNeed(s)){state.phase="example";state.hint=0
 if(state.phase==="example"){if(exampleNeed(s)||confused(s)){helpWithExample();return}state.example=s;state.phase="interpretation";state.hint=0;respond(t("Quel lien vois-tu entre cette situation et ton point de vue ? Qu'est-ce que ton exemple montre exactement ?","这个情境与你的观点有什么关系？这个例子具体说明了什么？"));return}
 if(state.phase==="interpretation"){if(confused(s)){state.hint++;respond(t("Reviens à ta position de départ. Quel détail de ton exemple la soutient vraiment ? Et quel détail reste à expliquer ?","回到最初的立场：例子里的哪个细节真正支持了你的观点？又有哪些地方还需要解释？"));return}state.interpretation=s;state.phase="review";state.hint=0;respond(t("Relis maintenant ton cheminement : ton exemple suffit-il à étayer ta position, ou faut-il préciser une nuance ? C'est à toi de décider de la révision.","现在回看你的思路：这个例子足以支持你的立场吗？还是需要增加一些限定？由你决定如何修改。"));return}
 if(state.phase==="review"){if(/reprendre|recommencer|nouveau|重新|重来|换一个/i.test(low)){restart();return}respond(t("Qu'aimerais-tu améliorer en priorité : la clarté de ton avis, le choix de l'exemple ou son interprétation ? Tu peux reprendre ta rédaction quand tu te sens prêt(e).","你想优先改进哪一部分：观点是否清楚、例子是否合适，还是解释是否充分？准备好了就可以回到自己的写作页面。"));return}}
-function sendText(value){var s=(value||"").trim();if(!s)return;addTurn("user",s);input.value="";answer(s);input.focus()}
+async function sendText(value){
+ var s=(value||"").trim();if(!s)return;
+ if(GLM_ENDPOINT&&!CLASS_CODE){
+   var hint=document.getElementById("accessHint");
+   hint.textContent="Saisis d'abord le code d'accès fourni par l'enseignante.";
+   document.getElementById("classCode").focus();return;
+ }
+ var previous=state.history.slice(-12);
+ addTurn("user",s);input.value="";
+ if(!GLM_ENDPOINT){answer(s);input.focus();return;}
+ var send=document.getElementById("send");send.disabled=true;send.textContent="En cours…";
+ suggestions.textContent="";
+ try{
+   var response=await fetch(GLM_ENDPOINT,{
+     method:"POST",
+     headers:{"Content-Type":"application/json","X-Class-Code":CLASS_CODE},
+     body:JSON.stringify({message:s,history:previous,phase:state.phase,topic:state.topic,language:state.lang,hint:state.hint})
+   });
+   var data=await response.json();
+   if(!response.ok||!data||typeof data.reply!=="string")throw new Error(data&&data.error?data.error:"Connexion indisponible (HTTP "+response.status+").");
+   if(PHASES.indexOf(data.phase)>=0)state.phase=data.phase;
+   if(data.language==="zh"||data.language==="fr")state.lang=data.language;
+   if(typeof data.topic==="string")state.topic=data.topic;
+   respond(data.reply);
+ }catch(error){addTurn("bot","[Connexion GLM] "+(error&&error.message?error.message:"Le service est indisponible.")+" Réessaie lorsque le service sera prêt.");update();}
+ finally{send.disabled=false;send.textContent="Envoyer";input.focus();}
+}
 function restart(){state={phase:"topic",lang:"fr",topic:"",stance:"",reason:"",example:"",interpretation:"",hint:0,history:[]};chat.textContent="";respond("Bonjour ! Choisis une idée reçue sur le bonheur, ou écris-en une avec tes propres mots. Nous commencerons par TON avis, sans chercher tout de suite un exemple ou une réponse modèle.");}
 form.addEventListener("submit",function(e){e.preventDefault();sendText(input.value)});
 input.addEventListener("keydown",function(e){if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();form.requestSubmit()}});
+document.getElementById("applyCode").addEventListener("click",function(){
+ var value=document.getElementById("classCode").value.trim();
+ if(value.length<8){document.getElementById("accessHint").textContent="Code trop court. Demande le code à l'enseignante.";return;}
+ CLASS_CODE=value;
+ document.getElementById("classCode").value="";
+ document.getElementById("accessHint").textContent="Code saisi pour cette session. L'accès sera vérifié lors du prochain message.";
+ input.focus();
+});
 document.getElementById("restart").addEventListener("click",function(){if(window.confirm("Recommencer le dialogue ? Le dialogue précédent ne sera pas conservé."))restart()});
 document.getElementById("export").addEventListener("click",function(){if(!state.history.length)return;var content=state.history.map(function(x){return(x.role==="bot"?"COMPAGNON":"MOI")+":\n"+x.text}).join("\n\n");var blob=new Blob([content],{type:"text/plain;charset=utf-8"});var url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="inspire4-compagnon-metacognitif-dialogue.txt";document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url)},1000)});
 restart();
