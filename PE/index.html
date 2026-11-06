@@ -33,22 +33,43 @@ h1{font-size:clamp(34px,5vw,54px);line-height:1.08;letter-spacing:-.035em;margin
 footer{margin:38px 0 35px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted);font-size:12px}
 @media(max-width:690px){.hero{padding:31px 22px}.section-head{display:block}.section-head p{margin-top:5px}.card{padding:22px}.top{padding:18px 0}.wrap{padding:0 16px}}
 
-/* Minimal writing gesture: pen + one flowing ink line, no person or head. */
-.hero-with-companion{padding-right:245px;overflow:visible;isolation:isolate}
+/* Small animated pen-and-ink companion. The chat pictogram alone is the action. */
+.hero-with-companion{padding-right:202px;overflow:visible;isolation:isolate}
 .hero-with-companion:after{z-index:-1}
 .hero-with-companion>.overline,.hero-with-companion>h1,.hero-with-companion>.intro{position:relative;z-index:1}
-.hero-with-companion .intro{max-width:670px}
-.companion-pet-link{position:absolute;z-index:3;right:20px;top:26px;width:206px;display:flex;flex-direction:column;align-items:center;gap:0;text-decoration:none;border-radius:14px;transition:transform .18s ease}
-.companion-pet-link .pet-svg{width:205px;height:90px;display:block;overflow:visible;transition:transform .2s ease}
-.companion-pet-link:hover .pet-svg,.companion-pet-link:focus-visible .pet-svg{transform:translateY(-3px)}
-.companion-pet-link:focus-visible{outline:2px solid #111;outline-offset:4px}
-.companion-pet-tag{display:inline-flex;align-items:center;justify-content:center;gap:9px;width:188px;min-height:38px;margin-top:-1px;border:0;border-radius:999px;padding:7px 12px;background:#e94543;color:#fff;box-shadow:0 3px 7px rgba(100,48,37,.12);font:600 13px/1.2 Arial,"Helvetica Neue",sans-serif;letter-spacing:.01em;white-space:nowrap}
-.companion-pet-tag .pet-arrow{font:normal 16px/1 Arial,sans-serif}
-.companion-pet-tag .pet-chat-icon{width:16px;height:16px;display:block;flex:none}
-.companion-pet-link:hover .companion-pet-tag{background:#d33735}
-@media(max-width:850px){.hero-with-companion{padding-right:230px}.companion-pet-link{right:12px;top:23px;width:197px}.companion-pet-link .pet-svg{width:195px;height:85px}.companion-pet-tag{width:183px;font-size:12px}}
-@media(max-width:690px){.hero-with-companion{padding:31px 22px 112px;margin-bottom:20px}.hero-with-companion .intro{max-width:100%}.companion-pet-link{top:auto;right:13px;bottom:-15px;width:167px}.companion-pet-link .pet-svg{width:165px;height:73px}.companion-pet-tag{width:156px;min-height:33px;padding:6px 10px;font-size:10.5px}.companion-pet-tag .pet-chat-icon{width:14px;height:14px}}
-@media(prefers-reduced-motion:reduce){.companion-pet-link,.companion-pet-link .pet-svg{transition:none}}
+.hero-with-companion .intro{max-width:680px}
+.companion-pet-link{position:absolute;z-index:3;right:23px;top:20px;width:170px;display:flex;flex-direction:column;align-items:center;gap:0;text-decoration:none;border-radius:14px;transition:transform .2s ease}
+.companion-pet-link .pet-svg{width:167px;height:73px;display:block;overflow:visible}
+.companion-pet-link:hover{transform:translateY(-2px)}
+.companion-pet-link:focus-visible{outline:2px solid #161616;outline-offset:5px}
+.companion-pet-tag{display:grid;place-items:center;width:40px;height:40px;margin-top:1px;padding:0;border:0;border-radius:50%;background:#e94543;color:#fff;box-shadow:0 4px 10px rgba(125,49,41,.18);transition:background .2s,transform .2s}
+.companion-pet-link:hover .companion-pet-tag{background:#d33735;transform:scale(1.07)}
+.companion-pet-tag .pet-chat-icon{display:block;width:21px;height:21px}
+.pet-ink-animated{stroke-dasharray:350;stroke-dashoffset:350;animation:pet-trace 6s ease-in-out infinite}
+.pet-pen{transform-box:view-box;transform-origin:68px 100px;animation:pet-write 6s ease-in-out infinite}
+.pet-sparks{animation:pet-sparkle 6s ease-in-out infinite}
+@keyframes pet-trace{
+0%,13%{stroke-dashoffset:350;opacity:1}
+67%,84%{stroke-dashoffset:0;opacity:1}
+96%,100%{stroke-dashoffset:0;opacity:0}
+}
+@keyframes pet-write{
+0%,12%{transform:translate(0,0) rotate(0)}
+20%{transform:translate(3px,-3px) rotate(-1deg)}
+30%{transform:translate(6px,-5px) rotate(1deg)}
+43%{transform:translate(9px,-2px) rotate(-1deg)}
+56%,67%{transform:translate(12px,-5px) rotate(1deg)}
+82%{transform:translate(12px,-5px) rotate(0);opacity:1}
+92%,100%{transform:translate(0,0);opacity:.65}
+}
+@keyframes pet-sparkle{
+0%,10%,100%{opacity:.25}
+22%,48%,70%{opacity:1}
+34%,58%,90%{opacity:.45}
+}
+@media(max-width:850px){.hero-with-companion{padding-right:188px}.companion-pet-link{right:15px;top:21px;width:157px}.companion-pet-link .pet-svg{width:155px;height:68px}.companion-pet-tag{width:38px;height:38px}}
+@media(max-width:690px){.hero-with-companion{padding:31px 22px 95px;margin-bottom:19px}.hero-with-companion .intro{max-width:100%}.companion-pet-link{top:auto;right:11px;bottom:-17px;width:135px}.companion-pet-link .pet-svg{width:133px;height:58px}.companion-pet-tag{width:36px;height:36px;margin-top:1px}.companion-pet-tag .pet-chat-icon{width:19px;height:19px}}
+@media(prefers-reduced-motion:reduce){.companion-pet-link,.companion-pet-tag{transition:none}.pet-ink-animated{animation:none;stroke-dashoffset:0;opacity:1}.pet-pen,.pet-sparks{animation:none;opacity:1}}
 
 </style>
 </head>
@@ -63,22 +84,24 @@ footer{margin:38px 0 35px;padding-top:22px;border-top:1px solid var(--line);colo
 <div class="overline">Production écrite · PE</div>
 <h1 id="mainTitle">Exprimer son point de vue.</h1>
 <p class="intro">Une idée à discuter, un exemple concret à développer : entraînez-vous à argumenter en quelques phrases.</p>
-<a class="companion-pet-link" href="./compagnon-metacognitif/" aria-label="Écrire avec moi — ouvrir l’assistant d’écriture">
-<svg class="pet-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 270 118" role="img" aria-label="Un stylo noir, une courbe d’encre et trois petits traits dorés">
+<a class="companion-pet-link" href="./compagnon-metacognitif/" title="Ouvrir l’assistant d’écriture" aria-label="Ouvrir l’assistant d’écriture">
+<svg class="pet-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 270 118" role="img" aria-label="Une plume écrit une ligne d’encre animée">
 <g stroke-linecap="round" stroke-linejoin="round">
-<!-- Three quiet ochre highlights. -->
-<path d="M42 51 L25 41 M52 41 L43 20 M31 64 L14 60" stroke="#d7ad83" stroke-width="5.5" fill="none"/>
-<!-- A black ink pen leaning towards the start of the written line. -->
+<!-- The three restrained ochre accents gently brighten during writing. -->
+<path class="pet-sparks" d="M42 51 L25 41 M52 41 L43 20 M31 64 L14 60" stroke="#d7ad83" stroke-width="5.5" fill="none"/>
+<!-- A quiet, lightly animated nib. -->
+<g class="pet-pen">
 <path d="M72 92 L116 14 Q119 10 123 13 Q126 15 123 19 L80 94 Z" fill="#161616"/>
 <path d="M72 92 L68 100 L80 94 Z" fill="#161616"/>
 <path d="M75 94 L80 94 L78 87 Z" fill="#fff4e0"/>
-<!-- A single undulating handwritten stroke. -->
-<path d="M13 104 Q44 89 68 100 C103 64 130 84 150 89 C179 97 193 68 222 66 Q245 63 262 72" fill="none" stroke="#161616" stroke-width="2.75"/>
+</g>
+<!-- A visible opening stroke, then the written line unfolds from the pen tip. -->
+<path d="M13 104 Q44 89 68 100" fill="none" stroke="#161616" stroke-width="2.75"/>
+<path class="pet-ink-animated" d="M68 100 C103 64 130 84 150 89 C179 97 193 68 222 66 Q245 63 262 72" fill="none" stroke="#161616" stroke-width="2.75"/>
 </g>
 </svg>
-<span class="companion-pet-tag">
-<svg class="pet-chat-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 11.5a8.5 8.5 0 0 1-8.5 8.5 9 9 0 0 1-3.2-.6L4 21l1.5-4.7a8.5 8.5 0 1 1 15-4.8Z"/><path d="M8 11.5h.01M12 11.5h.01M16 11.5h.01"/></svg>
-Écrire avec moi <span class="pet-arrow" aria-hidden="true">›</span>
+<span class="companion-pet-tag" aria-hidden="true">
+<svg class="pet-chat-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 11.5a8.5 8.5 0 0 1-8.5 8.5 9 9 0 0 1-3.2-.6L4 21l1.5-4.7a8.5 8.5 0 1 1 15-4.8Z"/><path d="M8 11.5h.01M12 11.5h.01M16 11.5h.01"/></svg>
 </span>
 </a>
 </section>
