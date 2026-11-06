@@ -1,0 +1,21 @@
+name: One-time Pages deployment recovery
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/pages-recovery.yml'
+
+permissions:
+  contents: read
+  pages: write
+
+jobs:
+  cancel-stale-pages-deployment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cancel orphaned Pages deployment blocking site updates
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh api --method POST repos/${{ github.repository }}/pages/deployments/bee38d3b5764b0d0f37daddfc7572b4b2ec987f0/cancel
