@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#FDBA12">
-<meta name="description" content="Inspire 4 · Production écrite : exprimer son point de vue et l'appuyer sur un exemple concret.">
-<title>Production écrite | Inspire 4</title>
+<meta name="theme-color" content="#ef4444">
+<meta name="description" content="Production écrite : exprimer son point de vue et l'appuyer sur un exemple concret.">
+<title>Production écrite</title>
 <style>
 :root{--bg:#faf8f2;--paper:#fff;--ink:#272923;--muted:#6d6d63;--line:#ece5d5;--sun:#fdba12;--orange:#e99517;--shadow:0 14px 36px rgba(72,58,24,.075);--max:1060px}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);font-family:Arial,"Helvetica Neue",system-ui,sans-serif;background:var(--bg);line-height:1.5}
@@ -56,14 +56,32 @@ footer{margin:38px 0 35px;padding-top:22px;border-top:1px solid var(--line);colo
 @media(max-width:690px){.hero-with-companion{padding:31px 22px 95px;margin-bottom:19px}.hero-with-companion .intro{max-width:100%}.companion-pet-link{top:auto;right:11px;bottom:-17px;width:135px}.companion-pet-link .pet-svg{width:133px;height:58px}.companion-pet-tag{width:36px;height:36px;margin-top:1px}.companion-pet-tag .pet-chat-icon{width:19px;height:19px}}
 @media(prefers-reduced-motion:reduce){.companion-pet-link,.companion-pet-tag{transition:none}.pet-pen{will-change:auto}}
 
+
+/* Module palette: aligned with the Accueil module card without changing course activities. */
+:root{--bg:#f7f7fb;--ink:#0f172a;--muted:#64748b;--line:#e5e7eb;--sun:#ef4444;--orange:#ef4444}
+body{background:var(--bg);color:var(--ink)}
+a:focus-visible{outline-color:#ef4444}
+.top .logo,.top .brand{color:var(--ink);font-weight:800;letter-spacing:.075em}
+.top .logo:hover,.top .brand:hover{text-decoration:underline}
+.hero{border-color:#fecaca;background:radial-gradient(960px 460px at -10% -20%,#fee2e2 0,transparent 58%),radial-gradient(850px 360px at 110% 10%,#fecaca 0,transparent 60%),linear-gradient(112deg,#fff1f2 0%,#fff 100%)}
+.hero:after{border-color:#fee2e2}
+.hero .overline,.hero .eyebrow,.hero .over{color:#b91c1c}
+.hero .intro,.hero .lead{color:#475569}
+.card:hover,.path:hover,.list-link:hover{border-color:#ef4444}
+.card .action,.action,.card .eyebrow,.card .tag,.tag,.path .steps,.type-label,.list-link .arr,.temporary-entry,.temporary-entry:hover{color:#b91c1c}
+.primary{background:#fff1f2;border-color:#fecaca}
+.primary .mark{background:#ef4444;color:#fff}
+.card p,.path p{color:#475569}
+.path{background:#fff;border-color:#fecaca}
+.list-link:hover{background:#fff1f2}
+.method span{background:#fee2e2;border-color:#fecaca;color:#b91c1c}
+.tag{background:#fee2e2;color:#b91c1c}
+
 </style>
 </head>
 <body>
 <div class="wrap">
-<header class="top">
-<a class="logo" href="../index.html">INSPIRE 4 <span style="color:#d48a06">↗</span></a>
-<a href="../index.html" class="small-link">← Accueil</a>
-</header>
+<header class="top"><a class="logo" href="../index.html">Accueil <span aria-hidden="true" style="color:#ef4444">↗</span></a></header>
 <main>
 <section class="hero hero-with-companion" aria-labelledby="mainTitle">
 <div class="overline">Production écrite · PE</div>
@@ -128,7 +146,7 @@ footer{margin:38px 0 35px;padding-top:22px;border-top:1px solid var(--line);colo
 </section>
 
 </main>
-<footer>© 《高级法语综合课》 · Inspire 4 · Production écrite</footer>
+<footer>© 《高级法语综合课》 · Production écrite</footer>
 </div>
 
 <script>
