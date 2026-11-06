@@ -33,20 +33,21 @@ h1{font-size:clamp(34px,5vw,54px);line-height:1.08;letter-spacing:-.035em;margin
 footer{margin:38px 0 35px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted);font-size:12px}
 @media(max-width:690px){.hero{padding:31px 22px}.section-head{display:block}.section-head p{margin-top:5px}.card{padding:22px}.top{padding:18px 0}.wrap{padding:0 16px}}
 
-/* Light ink-profile writing assistant — based on the user's preferred line-art silhouette, without a beret. */
-.hero-with-companion{padding-right:201px;overflow:visible;isolation:isolate}
+/* Minimal writing gesture: pen + one flowing ink line, no person or head. */
+.hero-with-companion{padding-right:245px;overflow:visible;isolation:isolate}
 .hero-with-companion:after{z-index:-1}
 .hero-with-companion>.overline,.hero-with-companion>h1,.hero-with-companion>.intro{position:relative;z-index:1}
-.hero-with-companion .intro{max-width:650px}
-.companion-pet-link{position:absolute;z-index:3;right:18px;top:2px;width:176px;display:flex;flex-direction:column;align-items:center;gap:0;text-decoration:none;color:#151515;border-radius:12px;transition:transform .2s ease}
-.companion-pet-link .pet-svg{width:173px;height:111px;display:block;overflow:visible;transition:transform .2s ease}
+.hero-with-companion .intro{max-width:670px}
+.companion-pet-link{position:absolute;z-index:3;right:20px;top:26px;width:206px;display:flex;flex-direction:column;align-items:center;gap:0;text-decoration:none;border-radius:14px;transition:transform .18s ease}
+.companion-pet-link .pet-svg{width:205px;height:90px;display:block;overflow:visible;transition:transform .2s ease}
 .companion-pet-link:hover .pet-svg,.companion-pet-link:focus-visible .pet-svg{transform:translateY(-3px)}
 .companion-pet-link:focus-visible{outline:2px solid #111;outline-offset:4px}
-.companion-pet-tag{display:inline-flex;align-items:center;gap:8px;justify-content:center;max-width:100%;margin-top:-1px;border-radius:999px;padding:7px 13px;background:#a54b41;color:#fffdfa;font:600 12px/1.2 Arial,"Helvetica Neue",sans-serif;letter-spacing:.015em;white-space:nowrap;box-shadow:0 2px 7px rgba(100,48,37,.1)}
-.companion-pet-tag .pet-arrow{font-size:13px;font-weight:500}
-.companion-pet-link:hover .companion-pet-tag{background:#8a3d35}
-@media(max-width:850px){.hero-with-companion{padding-right:191px}.companion-pet-link{right:13px;width:164px}.companion-pet-link .pet-svg{width:161px;height:104px}.companion-pet-tag{font-size:11px}}
-@media(max-width:690px){.hero-with-companion{padding:31px 22px 94px;margin-bottom:20px}.hero-with-companion .intro{max-width:100%}.companion-pet-link{top:auto;right:13px;bottom:-15px;width:135px}.companion-pet-link .pet-svg{width:132px;height:85px}.companion-pet-tag{font-size:10px;padding:6px 10px}}
+.companion-pet-tag{display:inline-flex;align-items:center;justify-content:center;gap:9px;width:188px;min-height:38px;margin-top:-1px;border:0;border-radius:999px;padding:7px 12px;background:#e94543;color:#fff;box-shadow:0 3px 7px rgba(100,48,37,.12);font:600 13px/1.2 Arial,"Helvetica Neue",sans-serif;letter-spacing:.01em;white-space:nowrap}
+.companion-pet-tag .pet-arrow{font:normal 16px/1 Arial,sans-serif}
+.companion-pet-tag .pet-chat-icon{width:16px;height:16px;display:block;flex:none}
+.companion-pet-link:hover .companion-pet-tag{background:#d33735}
+@media(max-width:850px){.hero-with-companion{padding-right:230px}.companion-pet-link{right:12px;top:23px;width:197px}.companion-pet-link .pet-svg{width:195px;height:85px}.companion-pet-tag{width:183px;font-size:12px}}
+@media(max-width:690px){.hero-with-companion{padding:31px 22px 112px;margin-bottom:20px}.hero-with-companion .intro{max-width:100%}.companion-pet-link{top:auto;right:13px;bottom:-15px;width:167px}.companion-pet-link .pet-svg{width:165px;height:73px}.companion-pet-tag{width:156px;min-height:33px;padding:6px 10px;font-size:10.5px}.companion-pet-tag .pet-chat-icon{width:14px;height:14px}}
 @media(prefers-reduced-motion:reduce){.companion-pet-link,.companion-pet-link .pet-svg{transition:none}}
 
 </style>
@@ -63,27 +64,22 @@ footer{margin:38px 0 35px;padding-top:22px;border-top:1px solid var(--line);colo
 <h1 id="mainTitle">Exprimer son point de vue.</h1>
 <p class="intro">Une idée à discuter, un exemple concret à développer : entraînez-vous à argumenter en quelques phrases.</p>
 <a class="companion-pet-link" href="./compagnon-metacognitif/" aria-label="Écrire avec moi — ouvrir l’assistant d’écriture">
-<svg class="pet-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 234 152" role="img" aria-label="Profil minimaliste d’une personne écrivant, coiffée d’un béret">
-<g fill="none" stroke="#111" stroke-linecap="round" stroke-linejoin="round">
-<!-- French beret: a single open, gently tilted silhouette with a tiny stem. -->
-<path d="M122 34 C127 20 153 17 172 27 C187 34 195 47 187 50 C181 54 167 46 152 40 C137 34 123 34 122 34Z" stroke-width="3.1"/>
-<path d="M165 25 C163 20 168 16 171 18 C172 22 168 25 168 27" stroke-width="2.5"/>
-<!-- The face begins beneath the hat. No head or hairline is drawn. -->
-<path d="M123 47 Q126 54 119 65 Q116 71 112 75 Q108 79 117 80 Q118 89 126 92 Q137 94 151 79" stroke-width="3.1"/>
-<path d="M126 62 Q131 68 136 62" stroke-width="2.6"/>
-<path d="M121 83 Q128 88 134 84" stroke-width="2.25"/>
-<!-- The silhouette bends into the act of writing. -->
-<path d="M151 83 C173 73 192 77 215 96" stroke-width="3.1"/>
-<path d="M146 84 C125 80 120 94 104 92 C92 91 88 83 77 88 Q65 92 53 103" stroke-width="3.0"/>
-<path d="M52 104 L88 51" stroke-width="3.45"/>
-<path d="M50 105 L58 102" stroke-width="2.3"/>
-<path d="M42 111 Q58 106 70 110" stroke-width="1.55"/>
-</g>
-<g stroke="#b78c70" stroke-width="2.9" stroke-linecap="round">
-<path d="M37 76 L26 65 M33 88 L18 83 M43 70 L38 56"/>
+<svg class="pet-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 270 118" role="img" aria-label="Un stylo noir, une courbe d’encre et trois petits traits dorés">
+<g stroke-linecap="round" stroke-linejoin="round">
+<!-- Three quiet ochre highlights. -->
+<path d="M42 51 L25 41 M52 41 L43 20 M31 64 L14 60" stroke="#d7ad83" stroke-width="5.5" fill="none"/>
+<!-- A black ink pen leaning towards the start of the written line. -->
+<path d="M72 92 L116 14 Q119 10 123 13 Q126 15 123 19 L80 94 Z" fill="#161616"/>
+<path d="M72 92 L68 100 L80 94 Z" fill="#161616"/>
+<path d="M75 94 L80 94 L78 87 Z" fill="#fff4e0"/>
+<!-- A single undulating handwritten stroke. -->
+<path d="M13 104 Q44 89 68 100 C103 64 130 84 150 89 C179 97 193 68 222 66 Q245 63 262 72" fill="none" stroke="#161616" stroke-width="2.75"/>
 </g>
 </svg>
-<span class="companion-pet-tag">Écrire avec moi <span class="pet-arrow" aria-hidden="true">↗</span></span>
+<span class="companion-pet-tag">
+<svg class="pet-chat-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 11.5a8.5 8.5 0 0 1-8.5 8.5 9 9 0 0 1-3.2-.6L4 21l1.5-4.7a8.5 8.5 0 1 1 15-4.8Z"/><path d="M8 11.5h.01M12 11.5h.01M16 11.5h.01"/></svg>
+Écrire avec moi <span class="pet-arrow" aria-hidden="true">›</span>
+</span>
 </a>
 </section>
 <section class="section" aria-labelledby="u1">
