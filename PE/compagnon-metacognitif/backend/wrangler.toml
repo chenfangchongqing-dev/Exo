@@ -7,3 +7,12 @@ workers_dev = true
 [vars]
 GLM_MODEL = "glm-4.7-flash"
 ALLOWED_ORIGIN = "https://chenfangchongqing-dev.github.io"
+
+# Cloudflare's approximate per-location limiter (not a strict billing cap).
+[[ratelimits]]
+name = "REQUEST_LIMITER"
+namespace_id = "247001"
+
+  [ratelimits.simple]
+  limit = 120
+  period = 60
