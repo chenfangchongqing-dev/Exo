@@ -26,6 +26,8 @@ function json(data, status, headers) {
   });
 }
 function langChange(s) {
+  // Asking how to EXPRESS something in French is a vocabulary request, not a language-change request.
+  if (/法语怎么说|怎么用法语表达|用法语如何表达|how (?:do|can) (?:i|we) say.*in french/i.test(s)) return null;
   if (/(?:用|说|讲|回答|解释|切换|改成|能|可以|请).{0,14}(?:中文|汉语)|(?:中文|汉语).{0,10}(?:回答|解释|交流|说|可以|行吗|好吗)|^(?:中文|汉语)[。！!？?]?$|en chinois|r[ée]ponds?.{0,15}chinois|parle.{0,15}chinois|chinese please|can you speak chinese/i.test(s)) return "zh";
   if (/(?:用|说|回答|切换|改成).{0,12}法语|(?:法语).{0,8}(?:回答|说)|^(?:法语)[。！!？?]?$|en fran[cç]ais|r[ée]ponds?.{0,15}fran[cç]ais|french please/i.test(s)) return "fr";
   return null;
@@ -46,8 +48,8 @@ function short(s) { return String(s || "").replace(/\s+/g, " ").trim().slice(0, 
 function fixed(reply, phase, language, topic) { return {reply, phase, language, topic, mode:"rule"}; }
 function sanitizeHistory(x) {
   if (!Array.isArray(x)) return [];
-  return x.slice(-12).filter(v => v && (v.role === "user" || v.role === "assistant") && typeof v.text === "string")
-    .map(v => ({ role: v.role, content: v.text.trim().slice(0, 1100) })).filter(v => v.content);
+  return x.slice(-12).filter(v => v && (v.role === "user" || v.role === "assistant" || v.role === "bot") && typeof v.text === "string")
+    .map(v => ({ role: v.role === "bot" ? "assistant" : v.role, content: v.text.trim().slice(0, 1100) })).filter(v => v.content);
 }
 function guide(phase, intent, language, topic) {
   const target = language === "zh" ? "中文" : "法语";
