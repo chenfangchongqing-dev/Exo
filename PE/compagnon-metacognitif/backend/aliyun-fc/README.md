@@ -13,20 +13,21 @@
 - 只包含少量教师自编表达作为语言提示；**尚未连接完整教材/学生习作的检索知识库**
 
 ## 代码和部署
-本文件夹的 `server.mjs` 和 `handler.mjs` 需位于ZIP压缩包根目录。
+可直接使用本目录已打包的 `inspire4-glm-aliyun-fc.zip`（ZIP根目录包含 `server.mjs`、`handler.mjs` 和 `package.json`），无需手动压缩。
 1. 打开阿里云函数计算控制台 https://fcnext.console.aliyun.com/ ，选择中国大陆地域（例如杭州，实际按账号和学生网络确定）。
 2. 创建 **Web函数**，使用 **自定义运行时**，上传这两个文件组成的ZIP压缩包。
-3. 启动命令：`node server.mjs`；监听端口：`9000`；请使用支持Node.js 20+的运行环境。
-4. 配置**环境变量**（不要写进ZIP、GitHub或网页）：
+3. 启动命令：`/var/fc/lang/nodejs20/bin/node server.mjs`；监听端口：`9000`。此命令直接指定自定义运行时 Debian 10 内置的 Node.js 20 可执行文件，避免默认 PATH 找不到 node。
+4. 初次教师测试请先把**最小实例数**设为 `0`（无请求时自动释放，避免常驻实例费用），单实例并发 `20`、超时 `60` 秒即可。
+5. 配置**环境变量**（不要写进ZIP、GitHub或网页）：
    - `GLM_API_KEY`：智谱标准模型API Key
    - `CLASS_ACCESS_CODE`：教师单独生成并分发的课堂访问码（建议至少16位）
    - `GLM_MODEL`：`glm-4.7-flash`
    - `ALLOWED_ORIGIN`：`https://chenfangchongqing-dev.github.io`
    - 可选 `REQUESTS_PER_MINUTE`：默认120
-5. 添加HTTP触发器，允许POST/OPTIONS/GET。测试版本允许匿名触发HTTP，但**程序内部仍必须验证课堂访问码**；这是教师原型，不是正式学生身份认证。
-6. 在阿里云控制台先用默认URL进行教师端调试，不要用于正式生产环境；长期开放给全班学生需要一个符合阿里云规则的正式自定义域名。中国大陆地域通常还需完成ICP备案或接入备案。
-7. 测试成功后，在 `PE/compagnon-metacognitif/glm-config.js` 中只填写 `https://你的后端域名/chat`，**不要**填模型API密钥。
-8. 验证GLM响应、浏览器CORS、并发、费用和国内网络；学生上课前再开放。
+6. 添加HTTP触发器，允许POST/OPTIONS/GET。测试版本允许匿名触发HTTP，但**程序内部仍必须验证课堂访问码**；这是教师原型，不是正式学生身份认证。
+7. 在阿里云控制台先用默认URL进行教师端调试，不要用于正式生产环境；长期开放给全班学生需要一个符合阿里云规则的正式自定义域名。中国大陆地域通常还需完成ICP备案或接入备案。
+8. 测试成功后，在 `PE/compagnon-metacognitif/glm-config.js` 中只填写 `https://你的后端域名/chat`，**不要**填模型API密钥。
+9. 验证GLM响应、浏览器CORS、并发、费用和国内网络；学生上课前再开放。
 
 ## 重要限制
 - `GET /health`只说明后端在运行，不证明GLM API Key有效或智谱模型一定可调用。
