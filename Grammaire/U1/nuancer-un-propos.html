@@ -83,6 +83,8 @@ textarea{display:block;width:100%;min-height:110px;padding:14px 17px;background:
 .corpus-item .corpus-effect-zh{font:15px/1.75 "KaiTi","Kaiti SC","STKaiti","Microsoft YaHei",serif;color:#625848;margin:3px 0 0}
 .corpus-intro-zh,.corpus-extra-zh{font:15px/1.75 "KaiTi","Kaiti SC","STKaiti","Microsoft YaHei",serif;color:#6b5b43}
 .corpus-intro-zh{margin:0 0 14px}.corpus-extra-zh{margin-top:7px!important}
+.model-zh{font:15px/1.75 "KaiTi","Kaiti SC","STKaiti","Microsoft YaHei",serif;color:#6b5b43;background:#fffdf5;padding:11px 13px;border-radius:9px;border-left:3px solid #d7a02b}
+.model-options{display:flex;flex-wrap:wrap;gap:8px;margin:13px 0 4px}
 </style>
 </head>
 <body><div class="shell">
@@ -218,7 +220,8 @@ textarea{display:block;width:100%;min-height:110px;padding:14px 17px;background:
 <textarea id="my-text" placeholder="L’argent ne rend pas nécessairement heureux, car…"></textarea>
 <div class="checks"><label><input type="checkbox" id="c-one"> La nuance correspond à ma pensée.</label><label><input type="checkbox" id="c-two"> Je donne une raison qui soutient mon propos.</label></div>
 <div class="actions"><button class="btn primary" type="button" id="model-show">Comparer avec une proposition</button><button class="btn" type="button" id="my-copy">Copier ma réponse</button><span class="status" id="my-status" role="status" aria-live="polite"></span></div>
-<div class="correction" id="model-correction" hidden><h4>Une proposition de réponse</h4><p class="french">L’argent ne rend <b>pas nécessairement</b> heureux, car la satisfaction matérielle ne suffit pas toujours à répondre aux besoins affectifs et sociaux.</p><p>Cette reformulation ne prétend pas que l’argent ne contribue jamais au bonheur. Elle évite de considérer ce lien comme automatique et donne une raison à l’appui.</p></div>
+<div class="correction" id="model-correction" role="region" aria-label="Proposition adaptée à la reformulation" aria-live="polite" hidden></div>
+<p class="small">Écrivez d’abord votre reformulation, même si vous êtes bloqué après « car… ». La proposition s’adaptera à l’adverbe que vous aurez choisi.</p>
 <p class="note"><strong>À retenir :</strong> un adverbe aide à ajuster la portée de l’affirmation ; il ne remplace ni l’argument ni l’exemple qui permet de la soutenir.</p>
 </div>
 <div class="links"><a href="../../PE/U1/">Réemployer dans mon texte · PE ↗</a><a href="../../PE/U1/mesurer-le-bonheur.html">Mesurer le bonheur ? · Ex. 9 ↗</a><a href="./index.html">Retour au parcours de l’unité ↗</a></div>
@@ -280,8 +283,74 @@ var effects=[
 {word:"pas entièrement",sentence:"Je ne suis pas entièrement satisfait de ma vie.",explain:"Limitation : le locuteur laisse entendre que certains aspects ne le satisfont pas."}
 ];var buttons=Array.prototype.slice.call(document.querySelectorAll("[data-effect]"));
 buttons.forEach(function(b){b.addEventListener("click",function(){var x=effects[Number(b.dataset.effect)];buttons.forEach(function(y){y.setAttribute("aria-pressed",String(y===b))});$("effect-sentence").textContent=x.sentence;$("effect-explain").textContent=x.explain})});
-var draft=$("my-text"),draftKey="inspire4-gram-u1-adverbes-draft-v2";draft.value=safeGet(draftKey)||"";draft.addEventListener("input",function(){safeSet(draftKey,draft.value);$("my-status").textContent=""});
-$("model-show").addEventListener("click",function(){if(!draft.value.trim()){$("my-status").textContent="Rédigez d’abord votre réponse.";draft.focus();return}$("model-correction").hidden=false;$("my-status").textContent="Comparez votre argument avec la proposition."});
+var draft=$("my-text"),draftKey="inspire4-gram-u1-adverbes-draft-v2",modelOutput=$("model-correction");
+var nuanceModels={
+ "parfois":{
+   label:"parfois",
+   model:"L’argent rend <b>parfois</b> heureux, car il peut nous permettre de réaliser un projet important, comme partir en vacances avec sa famille.",
+   explanation:"« Parfois » exprime une possibilité qui se réalise dans certains cas, mais pas systématiquement. La raison s’appuie sur une situation concrète.",
+   zh:"“有时候”强调这种结果只在某些情况下出现。这里用与家人度假的具体情境说明金钱如何带来幸福，而不是笼统断言。"
+ },
+ "rarement":{
+   label:"rarement",
+   model:"L’argent rend <b>rarement</b> heureux à lui seul, car acheter des objets peut procurer une satisfaction passagère sans répondre à tous nos besoins.",
+   explanation:"« Rarement » est une affirmation assez forte sur la fréquence. « À lui seul » précise que l’on parle de l’argent comme source unique de bonheur. Pour affirmer que cela est rare en général, il faudrait des éléments plus solides qu’un seul exemple.",
+   zh:"“很少”是一种较强的频率判断。例句增加 à lui seul（单靠金钱）来限定判断范围；如果要证明这种情况普遍“很少发生”，还需要更充分的论据。"
+ },
+ "souvent":{
+   label:"souvent",
+   model:"L’argent rend <b>souvent</b> heureux, car il peut réduire les inquiétudes matérielles et permettre à une famille de réaliser certains projets.",
+   explanation:"« Souvent » ne signifie pas « toujours » : le locuteur affirme que l’effet se produit fréquemment. Cette raison rend la position compréhensible, mais une affirmation générale sur la fréquence demanderait aussi des preuves.",
+   zh:"“经常”仍保留了例外，与 toujours 不同。例句从减轻经济压力和实现家庭计划来论证，但若要证明“多数情况下如此”，仍需相应证据。"
+ },
+ "pas necessairement":{
+   label:"pas nécessairement",
+   model:"L’argent ne rend <b>pas nécessairement</b> heureux, car on peut disposer de beaucoup de biens matériels et se sentir seul.",
+   explanation:"« Pas nécessairement » remet en cause le lien automatique entre argent et bonheur. Il suffit ici d’envisager un cas où l’argent ne garantit pas le bonheur, sans prétendre que l’argent ne sert jamais à rien.",
+   zh:"“不一定”否定的是金钱与幸福之间的必然联系，而不是否认金钱能带来任何快乐。一个合理的反例就能帮助说明这一点。"
+ }
+};
+function normalizedNuanceText(text){
+ return String(text||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[’ʼ]/g,"'").toLowerCase();
+}
+function inferNuance(text){
+ // Chercher la nuance dans l'affirmation, pas dans une justification introduite par « car ».
+ var first=normalizedNuanceText(text).split(/\b(?:car|parce que|puisque)\b|[.!?;\n]/)[0];
+ if(/\bpas\s+necessairement\b/.test(first))return "pas necessairement";
+ for(var key of ["parfois","rarement","souvent"]){if(new RegExp("\\b"+key+"\\b").test(first))return key}
+ return null;
+}
+function showNuanceModel(key){
+ var entry=nuanceModels[key];if(!entry)return;
+ modelOutput.innerHTML='<h4>Une proposition avec « '+entry.label+' »</h4>'+
+  '<p class="french">'+entry.model+'</p>'+
+  '<p>'+entry.explanation+'</p>'+
+  '<p lang="zh-CN" class="model-zh">'+entry.zh+'</p>'+
+  '<p class="small">Cette proposition est une piste de rédaction, pas une correction automatique de votre texte.</p>';
+ modelOutput.hidden=false;
+ $("my-status").textContent="Proposition affichée pour « "+entry.label+" ».";
+}
+draft.value=safeGet(draftKey)||"";
+draft.addEventListener("input",function(){
+ safeSet(draftKey,draft.value);$("my-status").textContent="";
+ modelOutput.hidden=true;modelOutput.replaceChildren();
+});
+$("model-show").addEventListener("click",function(){
+ if(!draft.value.trim()){$("my-status").textContent="Commencez par écrire votre affirmation, même sans justification.";draft.focus();return}
+ var key=inferNuance(draft.value);
+ if(key){showNuanceModel(key);return}
+ modelOutput.innerHTML='<h4>Quel adverbe souhaitez-vous utiliser ?</h4>'+
+ '<p>Je n’ai pas reconnu l’un des quatre adverbes proposés dans votre affirmation. Choisissez celui qui correspond à votre idée pour voir une proposition.</p>'+
+ '<div class="model-options">'+Object.entries(nuanceModels).map(function(pair){
+ return '<button type="button" data-model-key="'+pair[0]+'" class="btn">'+pair[1].label+'</button>'
+ }).join("")+'</div>';
+ modelOutput.hidden=false;
+ $("my-status").textContent="Choisissez un adverbe pour consulter une proposition.";
+});
+modelOutput.addEventListener("click",function(e){
+ var btn=e.target.closest("button[data-model-key]");
+ if(btn&&modelOutput.contains(btn))showNuanceModel(btn.getAttribute("data-model-key"));
+});
 $("my-copy").addEventListener("click",async function(){if(!draft.value.trim()){$("my-status").textContent="Aucun texte à copier.";return}try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(draft.value);$("my-status").textContent="Votre réponse a été copiée."}else{draft.select();$("my-status").textContent="Texte sélectionné : copiez-le avec le clavier."}}catch(e){draft.select();$("my-status").textContent="Texte sélectionné : copiez-le avec le clavier."}});
 })();
 </script>
