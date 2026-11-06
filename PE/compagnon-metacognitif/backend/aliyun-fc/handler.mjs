@@ -258,8 +258,8 @@ async function handle(body,env){
     if(isRelationship(s) && fear){
       phase="writing";meta.difficulty="drafting";meta.evidence=short(s);meta.stuck=0;meta.support=0;meta.next="Rédiger à partir d'un exemple pertinent";meta.lastStrategy="evidence-evaluation";
       return outcome(pick(language,
-        "Cet exemple est pertinent : la peur de la séparation peut empêcher de profiter d'un moment heureux. La peur entraîne d'abord de l'inquiétude ; si tu veux parler de « frustration », il faut montrer ce qu'elle empêche de vivre. Tu peux maintenant rédiger ta phrase avec « Prenons l'exemple de… ».",
-        "这个例子很贴近你的论点：担心分离，反而不能安心享受相处的快乐。但“害怕”首先引起的是焦虑；如果用 frustration，要说明它怎样妨碍了当下的幸福。可以直接开始写 « Prenons l'exemple de… » 这一句了。"),phase,language,topic,meta);
+        "Tu as trouvé un exemple pertinent en partant d'une relation concrète : c'est une stratégie que tu pourras réutiliser. La peur de la séparation peut empêcher de profiter du présent ; pour parler de « frustration », montre ce que cette peur empêche de vivre. Passons à ta phrase avec « Prenons l'exemple de… ».",
+        "你通过寻找人际关系中的具体情境，找到了更贴近论点的例子。这个策略以后还能复用：先找真实情境，再检查因果关系。注意，“害怕失去”首先带来忧虑；若写 frustration，还要说明它怎样妨碍了幸福体验。现在可以写 « Prenons l'exemple de… » 了。"),phase,language,topic,meta);
     }
     meta.evidence=short(s);meta.difficulty="reasoning";meta.stuck=0;meta.next="Relier le cas à l'argument";
     return outcome(pick(language,
@@ -275,8 +275,8 @@ async function handle(body,env){
       if(/avocats|n[ée]goci|律师|谈判/i.test(s)){
         meta.next="Évaluer ce que prouve mon exemple";
         return outcome(pick(language,
-          "Tu évoques des négociations exigeantes pour montrer que bonheur et stress peuvent coexister. Mais le fait de négocier sous pression prouve-t-il à lui seul que ces personnes y trouvent de la joie ? Vérifie la conclusion avant de corriger la langue.",
-          "你想用律师在压力下谈判的例子，说明压力与幸福可以并存。但“谈判很辛苦”本身能证明律师从中获得幸福吗？先检查这个推断，再决定如何修改法语表达。"),phase,language,topic,meta);
+          "Pour vérifier ton raisonnement, sépare le fait et l'interprétation : le fait est que des avocats négocient sous pression ; l'idée selon laquelle ils y trouvent du bonheur est une interprétation. Quel indice pourrait étayer cette interprétation ? Sinon, nuance ta conclusion avant de corriger la langue.",
+          "先用一个可以复用的检查策略：区分“事实”和“推断”。事实是律师在压力下进行谈判；“他们因此感到幸福”是你作出的推断。文章有什么证据支持它？如果没有，就补证据或收窄结论，再修改法语表达。"),phase,language,topic,meta);
       }
       return outcome(pick(language,
         "Tu as déjà rédigé un passage ; je ne vais pas te faire recommencer. Nous pouvons examiner le lien entre ta thèse et ton exemple, ou une difficulté de formulation. Quel point veux-tu travailler ?",
