@@ -203,9 +203,9 @@ textarea{display:block;width:100%;min-height:110px;padding:14px 17px;background:
 <div class="head"><span class="number">04</span><div><h2 id="employer-title">Nuancer un propos : de la règle à l’usage</h2><p>Choisir un mot pour exprimer précisément ce que l’on veut dire</p></div></div>
 <div class="panel">
 <div class="activity-top"><span class="tag">Observer l’effet produit</span><span class="small">Cliquez pour comparer</span></div>
-<h3>« Je suis … satisfait de ma vie. »</h3>
+<h3>Comment exprimer son degré de satisfaction ?</h3>
 <div class="active-model"><div class="choice-list" id="effect-choices">
-<button type="button" data-effect="0" aria-pressed="false">un peu</button><button type="button" data-effect="1" aria-pressed="true">plutôt</button><button type="button" data-effect="2" aria-pressed="false">très</button><button type="button" data-effect="3" aria-pressed="false">pleinement</button><button type="button" data-effect="4" aria-pressed="false">pas entièrement</button>
+<button type="button" data-effect="0" aria-pressed="false">pas très</button><button type="button" data-effect="1" aria-pressed="true">plutôt</button><button type="button" data-effect="2" aria-pressed="false">très</button><button type="button" data-effect="3" aria-pressed="false">pleinement</button><button type="button" data-effect="4" aria-pressed="false">pas entièrement</button>
 </div><div class="result-card" aria-live="polite"><div class="french" id="effect-sentence">Je suis plutôt satisfait de ma vie.</div><p id="effect-explain">Une appréciation globalement positive, mais mesurée. Le locuteur laisse une marge de réserve.</p></div></div>
 <p class="note">Nuancer ne signifie pas toujours atténuer : un adverbe peut aussi renforcer, préciser ou limiter une affirmation. Le choix dépend de l’intention et de la construction de la phrase.</p>
 </div>
@@ -273,7 +273,7 @@ var total=0;var list="";repl.forEach(function(x,i){var ok=normalize(fields[i].va
 replaceOut.innerHTML="<h4>Corrigé · "+total+" / 6 réponses attendues</h4><ul>"+list+"</ul><p><b>À retenir :</b> un mot proche par le sens peut introduire une appréciation différente. Il faut vérifier le sens en contexte, pas seulement chercher un synonyme.</p>";replaceOut.hidden=false;replaceStatus.textContent=total+" / 6 réponses attendues.";storeFields()});
 $("replace-reset").addEventListener("click",function(){fields.forEach(function(f){f.value="";f.classList.remove("correct","incorrect")});safeRemove(key);replaceOut.hidden=true;replaceStatus.textContent=""});
 var effects=[
-{word:"un peu",sentence:"Je suis un peu satisfait de ma vie.",explain:"Degré faible : le locuteur exprime une satisfaction limitée."},
+{word:"pas très",sentence:"Je ne suis pas très satisfait de ma vie.",explain:"Une satisfaction faible, exprimée de façon naturelle avec la négation « ne… pas très ». On dira plus volontiers « un peu déçu » que « un peu satisfait »."},
 {word:"plutôt",sentence:"Je suis plutôt satisfait de ma vie.",explain:"Une appréciation globalement positive, mais mesurée. Le locuteur laisse une marge de réserve."},
 {word:"très",sentence:"Je suis très satisfait de ma vie.",explain:"Degré élevé : le locuteur exprime une satisfaction forte."},
 {word:"pleinement",sentence:"Je suis pleinement satisfait de ma vie.",explain:"Satisfaction présentée comme complète, sans réserve importante."},
