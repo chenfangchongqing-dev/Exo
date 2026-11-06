@@ -38,8 +38,8 @@ footer{margin:38px 0 35px;padding-top:22px;border-top:1px solid var(--line);colo
 .hero-with-companion:after{z-index:-1}
 .hero-with-companion>.overline,.hero-with-companion>h1,.hero-with-companion>.intro{position:relative;z-index:1}
 .hero-with-companion .intro{max-width:660px}
-.companion-pet-link{position:absolute;z-index:3;right:22px;top:-9px;width:114px;display:flex;flex-direction:column;align-items:center;gap:0;text-decoration:none;color:#121212;border-radius:10px;transition:transform .18s ease}
-.companion-pet-link .pet-svg{display:block;width:114px;height:117px;overflow:visible;filter:none;transition:transform .22s ease}
+.companion-pet-link{position:absolute;z-index:3;right:22px;top:-9px;width:108px;display:flex;flex-direction:column;align-items:center;gap:0;text-decoration:none;color:#121212;border-radius:10px;transition:transform .18s ease}
+.companion-pet-link .pet-svg{display:block;width:108px;height:111px;overflow:visible;filter:none;transition:transform .22s ease}
 .companion-pet-link:hover .pet-svg,.companion-pet-link:focus-visible .pet-svg{transform:translateY(-4px)}
 .companion-pet-link:focus-visible{outline:2px solid #111;outline-offset:4px}
 .companion-pet-tag{display:block;color:#171717;text-align:center;background:none;border:0;box-shadow:none;padding:0;margin-top:-2px;font:italic 11px/1.25 Georgia,"Times New Roman",serif;white-space:nowrap;text-decoration:none}
@@ -63,21 +63,31 @@ footer{margin:38px 0 35px;padding-top:22px;border-top:1px solid var(--line);colo
 <h1 id="mainTitle">Exprimer son point de vue.</h1>
 <p class="intro">Une idée à discuter, un exemple concret à développer : entraînez-vous à argumenter en quelques phrases.</p>
 <a class="companion-pet-link" href="./compagnon-metacognitif/" aria-label="Écrire avec moi — ouvrir l’assistant d’écriture">
-<svg class="pet-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 163" role="img" aria-label="Chat dessiné en quelques traits noirs, avec un béret et un crayon">
-<g fill="none" stroke="#101010" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round">
-  <!-- A few long, confident curves, like a freehand ink sketch. -->
-  <path d="M38 76 Q32 58 40 34 L54 50 Q79 38 103 50 L119 33 Q127 53 121 75 Q131 93 115 106 Q100 117 80 114 Q56 117 42 104 Q28 92 38 76"/>
-  <path d="M48 52 Q49 25 79 22 Q106 20 115 44 Q92 57 48 52 M53 53 Q80 62 111 50 M91 23 L96 15"/>
-  <!-- The entire expression is just two eyelids, a nose, and a smile. -->
-  <path d="M50 82 Q60 73 70 82 M91 82 Q101 73 112 82"/>
-  <path d="M76 94 Q81 90 86 94 L81 97 M81 97 Q76 105 70 101 M81 97 Q87 104 92 100"/>
-  <path d="M45 95 L30 91 M45 101 L29 104 M116 95 L129 91 M115 100 L130 104" stroke-width="1.65"/>
-  <!-- One arm with a pencil; the body is suggested, not filled in. -->
-  <path d="M46 110 Q34 122 39 143 M113 111 Q126 123 121 144"/>
-  <path d="M51 133 Q57 144 69 138 M98 138 Q112 145 117 135"/>
-  <path d="M66 141 L100 116 L104 121 L71 146 L64 148 Z" stroke-width="1.85"/>
-  <path d="M125 130 Q150 124 147 99 Q145 89 139 93"/>
-  <path d="M29 149 Q78 146 131 150" stroke-width="1.5"/>
+<svg class="pet-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 163" role="img" aria-label="Évocation abstraite d'un chat qui écrit, quelques lignes noires">
+<g fill="none" stroke="#111" stroke-linecap="round" stroke-linejoin="round">
+<!-- A single, deliberately unfinished contour: feline gesture, not a portrait. -->
+<path d="M34 137
+ C43 116 38 91 48 67
+ L44 42
+ Q59 48 70 64
+ C86 57 102 58 111 63
+ Q123 45 131 41
+ L128 75
+ C138 91 133 108 116 119
+ C103 127 101 137 113 145"
+ stroke-width="3.0"/>
+<!-- A second loose sweep hints at the movement of writing. -->
+<path d="M49 117 Q59 134 77 131 Q94 129 105 111"
+ stroke-width="2.5"/>
+<!-- One descending pen mark: a thought becoming a sentence. -->
+<path d="M104 114 Q92 129 82 145"
+ stroke-width="2.6"/>
+<!-- The loose end of the line becomes a tail, then disappears. -->
+<path d="M114 145 Q140 156 151 133 Q157 117 149 111"
+ stroke-width="2.7"/>
+<!-- An open page, never a boxed-in cartoon. -->
+<path d="M22 151 Q46 145 69 150 T114 151 Q130 149 142 152"
+ stroke-width="1.7"/>
 </g>
 </svg>
 <span class="companion-pet-tag">Écrire avec moi <span class="pet-arrow" aria-hidden="true">↗</span></span>
