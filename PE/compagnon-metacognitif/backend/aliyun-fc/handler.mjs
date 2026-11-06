@@ -53,7 +53,7 @@ function extractGoal(s, history, original="") {
   if (fearFrustration(combined)) return "la peur de perdre le bonheur peut provoquer de la frustration (ou de l'inquiétude)";
   const m=combined.match(/(?:Le bonheur est fragile|Il faut être en couple pour être heureux|L.argent fait le bonheur|le bonheur peut devenir une source de frustration)/i);
   if (m) return m[0];
-  const line=short(s.split(/[\n。]/)[0],170);
+  const line=short(s.split(/[.!?。？！\n]/)[0],170);
   return topicOnly(line)?line:"";
 }
 function safeMeta(x) {
@@ -139,6 +139,7 @@ async function handle(body,env){
   }
   if(needLanguage(s)){
     meta=record(meta,{difficulty:"language",next:"Reformuler l'idée en français",lastStrategy:"language-transfer",previousIntent:"vocab",support:0});
+    if(phase==="topic" && (isDraft(s)||topicOnly(s)))phase="writing";
     const lower=(s+" "+meta.goal).toLowerCase();
     if(/consomm|argent|matériel|金钱|消费|物质/.test(lower)){
       return outcome(pick(language,
@@ -150,6 +151,11 @@ async function handle(body,env){
         "Ton idée est claire. Tu peux employer « craindre de perdre quelqu'un » ou « avoir peur de se séparer ». Essaie une phrase avec l'une de ces expressions ; nous vérifierons si elle montre bien le lien avec le bonheur.",
         "你已有清楚的意思，可以尝试 « craindre de perdre quelqu'un » 或 « avoir peur de se séparer »（这里是表达建议，并非声称出自教材）。选一个写成法语句子，我们再核对是否符合论点。"),phase,language,topic,meta);
     }
+    // When vocabulary is outside our small curated U1 resource set, ask GLM for a
+    // context-dependent short phrase. Never send learners back to the topic chooser.
+    const languageHelp=await generate({text:s,history,phase,language,goal:meta.goal||topic,difficulty:"language",support:0,intent:"vocab",meta},env);
+    if(languageHelp.error)return languageHelp;
+    return outcome(languageHelp.reply,phase,language,topic,meta,"glm");
   }
   const explicitExample=askExample(s),missingExample=noExample(s);
   const requestedModel=wantsModel(s);
@@ -261,9 +267,22 @@ async function handle(body,env){
   if(phase==="topic"){
     if(isDraft(s)){
       phase="review";meta.difficulty="reasoning";meta.next="Diagnostiquer un problème précis";meta.lastStrategy="existing-draft";meta.stuck=0;
+      if(/avocats|n[ée]goci|律师|谈判/i.test(s)){
+        meta.next="Évaluer ce que prouve mon exemple";
+        return outcome(pick(language,
+          "Tu évoques des négociations exigeantes pour montrer que bonheur et stress peuvent coexister. Mais le fait de négocier sous pression prouve-t-il à lui seul que ces personnes y trouvent de la joie ? Vérifie la conclusion avant de corriger la langue.",
+          "你想用律师在压力下谈判的例子，说明压力与幸福可以并存。但“谈判很辛苦”本身能证明律师从中获得幸福吗？先检查这个推断，再决定如何修改法语表达。"),phase,language,topic,meta);
+      }
       return outcome(pick(language,
         "Tu as déjà rédigé un passage ; je ne vais pas te faire recommencer. Nous pouvons examiner le lien entre ta thèse et ton exemple, ou une difficulté de formulation. Quel point veux-tu travailler ?",
         "你已经有初稿了，不需要重新选题。我们可以直接检查论点和例证的关系，或者处理具体表达困难。你要先解决哪个问题？"),phase,language,topic,meta);
+    }
+    if(isOpinion(s)&&topicOnly(s)){
+      meta.goal=extractGoal(s,history,topic)||short(s,170);
+      topic=short(s,170);phase="reason";meta.difficulty="reasoning";meta.next="Expliquer mon point de vue";meta.stuck=0;
+      return outcome(pick(language,
+        "Tu as déjà exprimé ton point de vue. Quelle raison principale voudrais-tu donner pour le défendre ?",
+        "你已经表达了自己的看法，不必重新选题。下一步可以给出一个主要理由。"),phase,language,topic,meta);
     }
     if(topicOnly(s)){
       topic=short(s);meta.goal=extractGoal(s,history,topic)||topic;phase="position";meta.difficulty="planning";meta.stuck=0;meta.support=0;meta.next="Prendre position";
