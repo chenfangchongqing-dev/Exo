@@ -33,7 +33,7 @@ h1{font-size:clamp(30px,4.8vw,48px);line-height:1.12;letter-spacing:-.035em;marg
 .sidebar{display:grid;gap:17px}.side-body{padding:16px 20px 20px}.side-body p{font-size:13px;line-height:1.65;margin:0 0 12px;color:#6f6558}.progress{list-style:none;padding:0;margin:0}.progress li{padding:10px 0;border-bottom:1px solid #eee6da;display:flex;gap:10px;align-items:flex-start;font-size:13px;color:#877d70}.progress li:last-child{border-bottom:0}.num{border:1px solid #dcd0ba;width:25px;height:25px;min-width:25px;display:grid;place-items:center;border-radius:50%;font-size:11px;font-weight:800;background:#fff}.progress li.active{color:#664516;font-weight:800}.progress li.active .num{background:#ffdfa0;border-color:#e9b955}.progress li.done .num{background:#e1f0e9;border-color:#afcbbd;color:#2c6b54}.progress li.done{color:#456e59}
 .resource{display:block;border:1px solid #e7dcc9;border-radius:11px;text-decoration:none;padding:11px 12px;margin:8px 0 0;background:#fff;color:#5d5140;font-weight:700;font-size:13px}.resource:hover{border-color:#d6a750;background:#fffaec}.resource span{display:block;color:#9c7133;font-weight:500;font-size:11px;margin-top:2px}
 .blockquote{font:17px/1.45 Georgia,"Times New Roman",serif;color:#58462e;margin:0 0 10px}
-.privacy{font-size:12px;color:#877c70;line-height:1.55;margin:18px 0 0;padding:0 3px}.privacy strong{color:#6a5840}
+.diagnosis{margin-top:15px;border-top:1px solid #eee6da;padding-top:15px}.diagnosis-title{font-size:12px;font-weight:800;letter-spacing:.04em;margin:0 0 8px;color:#765119}.diagnosis-line{font-size:12px;margin:7px 0;color:#665c4f;line-height:1.55}.diagnosis-label{display:inline-block;min-width:75px;font-weight:750;color:#897051}.diagnosis-help{font-size:11px;color:#97897b;margin:8px 0 0}.privacy{font-size:12px;color:#877c70;line-height:1.55;margin:18px 0 0;padding:0 3px}.privacy strong{color:#6a5840}
 @media(max-width:820px){.layout{grid-template-columns:1fr}.sidebar{grid-template-columns:repeat(2,minmax(0,1fr))}.chat{max-height:440px}.wrap{padding:16px 13px 35px}.hero{padding:28px 21px}}
 @media(max-width:590px){.sidebar{grid-template-columns:1fr}.hero{border-radius:17px}.panel{border-radius:16px}.chat{padding:16px 13px;min-height:320px}.turn{max-width:94%}.bubble{font-size:14px}.composer{padding:12px;gap:8px}.send{padding:13px 15px}.stage,.suggestions{padding-left:13px;padding-right:13px}.chat-footer{padding:0 13px 13px}}
 @media(prefers-reduced-motion:reduce){.chat{scroll-behavior:auto}}
@@ -85,7 +85,16 @@ h1{font-size:clamp(30px,4.8vw,48px);line-height:1.12;letter-spacing:-.035em;marg
 <li data-phase="reason"><span class="num">3</span><span>Je cherche pourquoi</span></li>
 <li data-phase="example"><span class="num">4</span><span>Je trouve un exemple</span></li>
 <li data-phase="interpretation"><span class="num">5</span><span>Je vérifie ce qu'il montre</span></li>
-</ol></div>
+<li data-phase="writing"><span class="num">6</span><span>Je rédige et je révise</span></li>
+<li data-phase="review"><span class="num">7</span><span>Je prends du recul</span></li>
+</ol>
+<div class="diagnosis" aria-label="Repères sur ma progression">
+<p class="diagnosis-title">MON POINT D'APPUI</p>
+<p class="diagnosis-line"><span class="diagnosis-label">Déjà là</span><span id="diagGoal">À préciser avec l'élève</span></p>
+<p class="diagnosis-line"><span class="diagnosis-label">Difficulté</span><span id="diagNeed">Pas encore identifiée</span></p>
+<p class="diagnosis-line"><span class="diagnosis-label">Prochain pas</span><span id="diagNext">Exprimer ou partager mon idée</span></p>
+<p class="diagnosis-help">Repères provisoires : tu peux les corriger dans la conversation.</p>
+</div></div>
 </section>
 <section class="panel">
 <div class="panel-head"><h2>Ressources du cours</h2><small>UNITÉ 1</small></div>
@@ -106,8 +115,8 @@ h1{font-size:clamp(30px,4.8vw,48px);line-height:1.12;letter-spacing:-.035em;marg
 (function(){
 "use strict";
 var chat=document.getElementById("chat"),form=document.getElementById("messageForm"),input=document.getElementById("message"),suggestions=document.getElementById("suggestions"),stageName=document.getElementById("stageName"),progress=document.getElementById("progress");
-var PHASES=["topic","position","reason","example","interpretation","review"];
-var state={phase:"topic",lang:"fr",topic:"",stance:"",reason:"",example:"",interpretation:"",hint:0,history:[]};
+var PHASES=["topic","position","reason","example","interpretation","writing","review"];
+var state={phase:"topic",lang:"fr",topic:"",stance:"",reason:"",example:"",interpretation:"",hint:0,history:[],meta:{}};
 // The backend URL is public, not a secret. Inlining a fallback avoids stale external config caches.
 var GLM_TEST_ENDPOINT="https://inspireompagnon-orzowiydrh.cn-hangzhou.fcapp.run/chat";
 var GLM_ENDPOINT=(typeof window.INSPIRE4_GLM_ENDPOINT==="string"&&/^https:\/\//.test(window.INSPIRE4_GLM_ENDPOINT))?window.INSPIRE4_GLM_ENDPOINT.trim():GLM_TEST_ENDPOINT;
@@ -118,7 +127,7 @@ if(GLM_ENDPOINT){
  document.getElementById("privacyNote").innerHTML="<strong>Confidentialité :</strong> en mode GLM, tes messages et quelques réponses précédentes sont transmis au serveur pédagogique et à l'API GLM pour produire la réponse. N'entre aucune donnée personnelle sensible. Le dialogue n'est pas enregistré par ce site ; tu peux l'exporter.";
 }
 var TOPICS=["Il faut être en couple pour être heureux.","L'argent fait le bonheur.","Il faut toujours être heureux."];
-var STAGES={fr:["Choisir une idée reçue","Exprimer mon avis","Expliquer mon avis","Trouver un exemple","Examiner mon exemple","Relire mon raisonnement"],zh:["选择一个常见观念","表达自己的立场","解释自己的理由","寻找具体例子","检验例子的作用","回顾论证过程"]};
+var STAGES={fr:["Choisir une idée reçue","Exprimer mon avis","Expliquer mon avis","Trouver un exemple","Examiner mon exemple","Passer à la rédaction","Relire mon raisonnement"],zh:["选择一个常见观念","表达自己的立场","解释自己的理由","寻找具体例子","检验例子的作用","进入写作","回顾论证过程"]};
 function t(fr,zh){return state.lang==="zh"?zh:fr}
 function normal(s){return s.toLowerCase().replace(/[\u2019\u2018]/g,"'").trim()}
 function requestChinese(s){return /(?:用|说|讲|回答|解释|切换|改成|能|可以|请).{0,14}(?:中文|汉语)|(?:中文|汉语).{0,10}(?:回答|解释|交流|说|可以|行吗|好吗)|en chinois|réponds?.{0,15}chinois|parle.{0,15}chinois|can you speak chinese|chinese please/i.test(s)}
@@ -131,9 +140,25 @@ function isDraft(s){return s.length>190||((s.match(/[.!?。？！]/g)||[]).lengt
 function topicish(s){return /bonheur|heureux|heureuse|couple|l'argent|argent|réussir|il faut|on doit|幸福|快乐|恋爱|金钱|成功/i.test(s)&&s.length>6}
 function addTurn(role,text){var el=document.createElement("div");el.className="turn "+role;var who=document.createElement("span");who.className="who";who.textContent=role==="bot"?"COMPAGNON":"MOI";var bubble=document.createElement("div");bubble.className="bubble";bubble.textContent=text;el.appendChild(who);el.appendChild(bubble);chat.appendChild(el);chat.scrollTop=chat.scrollHeight;state.history.push({role:role,text:text})}
 function phaseIndex(){return Math.max(0,PHASES.indexOf(state.phase))}
-function renderStage(){stageName.textContent=STAGES[state.lang][phaseIndex()];Array.prototype.forEach.call(progress.children,function(el,i){el.classList.toggle("active",i===Math.min(phaseIndex(),4));el.classList.toggle("done",i<Math.min(phaseIndex(),5))})}
+function renderStage(){
+ var phase=phaseIndex();
+ stageName.textContent=STAGES[state.lang][phase]||STAGES[state.lang][0];
+ Array.prototype.forEach.call(progress.children,function(el,i){el.classList.toggle("active",i===phase);el.classList.toggle("done",i<phase)});
+ var m=state.meta||{};
+ var labels={example:state.lang==="zh"?"需要具体例证":"Besoin d'un exemple",planning:state.lang==="zh"?"尚未确定立场":"Position à préciser",reasoning:state.lang==="zh"?"检查论证关系":"Lien argument–preuve",language:state.lang==="zh"?"法语表达":"Formulation en français",drafting:state.lang==="zh"?"正在组织写作":"Rédaction en cours"};
+ document.getElementById("diagGoal").textContent=m.goal||(state.lang==="zh"?"尚待明确":"Encore à préciser");
+ document.getElementById("diagNeed").textContent=labels[m.difficulty]||(state.lang==="zh"?"尚未确定":"Non encore précisée");
+ document.getElementById("diagNext").textContent=m.next||(state.lang==="zh"?"描述目前的想法或困难":"Présenter mon idée ou mon obstacle");
+}
 function addSuggestions(items){suggestions.textContent="";items.forEach(function(label){var b=document.createElement("button");b.className="chip";b.type="button";b.textContent=label;b.addEventListener("click",function(){sendText(label)});suggestions.appendChild(b)})}
-function suggested(){if(state.phase==="topic")return TOPICS;if(state.phase==="position")return state.lang==="zh"?["我赞同这个观点","我不赞同这个观点","我还没想好"]:["Je suis d'accord.","Je ne suis pas d'accord.","Je ne sais pas encore."];if(state.phase==="reason")return state.lang==="zh"?["我想不到理由","我不知道怎么用法语表达"]:["Je ne sais pas encore pourquoi.","Je cherche mes mots."];if(state.phase==="example")return state.lang==="zh"?["我想不出例子","给我一个找例子的提示"]:["Je n'arrive pas à trouver un exemple.","Donne-moi une piste."];if(state.phase==="interpretation")return state.lang==="zh"?["我不知道如何解释这个例子"]:["Je ne sais pas comment expliquer cet exemple."];return state.lang==="zh"?["我想重新思考观点"]:["Je voudrais reprendre mon idée."]}
+function suggested(){
+ if(state.phase==="topic")return TOPICS;
+ if(state.phase==="position")return state.lang==="zh"?["我倾向于赞同","我倾向于反对","我还没想好"]:["Je suis plutôt d'accord.","Je ne suis pas d'accord.","Je ne sais pas encore."];
+ if(state.phase==="reason")return state.lang==="zh"?["我想不出理由","我不知道法语怎么表达","先给我一个示范"]:["Je n'ai pas encore de raison.","Je cherche une expression.","Donne-moi une petite piste."];
+ if(state.phase==="example")return state.lang==="zh"?["我想不出例子","你帮我想一个具体例子","可以开始写作文了"]:["Je n'arrive pas à trouver un exemple.","Donne-moi un exemple concret.","Passons à la rédaction."];
+ if(state.phase==="writing")return state.lang==="zh"?["我不知道法语怎么表达","检查这个例子是否支持观点"]:["Je cherche une expression.","Vérifie si mon exemple soutient mon argument."];
+ return state.lang==="zh"?["检查我的论证","进入写作"]:["Vérifie mon raisonnement.","Passons à la rédaction."];
+}
 function update(){renderStage();addSuggestions(suggested())}
 function respond(text){addTurn("bot",text);update()}
 function chooseTopic(s){state.topic=s.replace(/^\s*["«]\s*|\s*["»]\s*$/g,"");state.phase="position";state.hint=0;respond(t('Tu as choisi cette idée reçue : « '+state.topic+' » Et toi, qu’en penses-tu ?','你选择了这个常见观念：“'+state.topic+'”。你自己怎么看？'))}
@@ -167,18 +192,19 @@ async function sendText(value){
    var response=await fetch(GLM_ENDPOINT,{
      method:"POST",
      headers:{"Content-Type":"application/json","X-Class-Code":CLASS_CODE},
-     body:JSON.stringify({message:s,history:previous,phase:state.phase,topic:state.topic,language:state.lang,hint:state.hint})
+     body:JSON.stringify({message:s,history:previous,phase:state.phase,topic:state.topic,language:state.lang,meta:state.meta})
    });
    var data=await response.json();
    if(!response.ok||!data||typeof data.reply!=="string")throw new Error(data&&data.error?data.error:"Connexion indisponible (HTTP "+response.status+").");
    if(PHASES.indexOf(data.phase)>=0)state.phase=data.phase;
    if(data.language==="zh"||data.language==="fr")state.lang=data.language;
    if(typeof data.topic==="string")state.topic=data.topic;
+   if(data.meta&&typeof data.meta==="object")state.meta=data.meta;
    respond(data.reply);
  }catch(error){addTurn("bot","[Connexion GLM] "+(error&&error.message?error.message:"Le service est indisponible.")+" Réessaie lorsque le service sera prêt.");update();}
  finally{send.disabled=false;send.textContent="Envoyer";input.focus();}
 }
-function restart(){state={phase:"topic",lang:"fr",topic:"",stance:"",reason:"",example:"",interpretation:"",hint:0,history:[]};chat.textContent="";respond("Bonjour ! Choisis une idée reçue sur le bonheur, ou écris-en une avec tes propres mots. Nous commencerons par TON avis, sans chercher tout de suite un exemple ou une réponse modèle.");}
+function restart(){state={phase:"topic",lang:"fr",topic:"",stance:"",reason:"",example:"",interpretation:"",hint:0,history:[],meta:{}};chat.textContent="";respond("Bonjour ! Tu peux choisir une idée reçue sur le bonheur, ou coller directement un brouillon en précisant ce qui te bloque. Nous partirons de ce que tu as déjà fait.");}
 form.addEventListener("submit",function(e){e.preventDefault();sendText(input.value)});
 input.addEventListener("keydown",function(e){if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();form.requestSubmit()}});
 document.getElementById("applyCode").addEventListener("click",function(){
