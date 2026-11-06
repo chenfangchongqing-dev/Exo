@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#FDBA12">
+<meta name="description" content="Compagnon métacognitif · Production écrite · Inspire 4. Parcours guidé pour penser, argumenter et réviser soi-même.">
+<title>Compagnon métacognitif | Inspire 4 · Production écrite</title>
+<style>
+:root{--bg:#faf8f3;--paper:#fffefa;--ink:#272720;--muted:#69695f;--line:#e9dfcd;--sun:#fdba12;--soft:#fff2d1;--orange:#996113;--green:#286d55;--shadow:0 16px 45px rgba(95,66,20,.075)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);background:var(--bg);font:15px/1.55 Arial,"Helvetica Neue",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+button,textarea{font:inherit}button{cursor:pointer}a{color:inherit}a:focus-visible,button:focus-visible,textarea:focus-visible{outline:3px solid #ba8225;outline-offset:3px}
+.wrap{max-width:1150px;margin:auto;padding:22px 22px 44px}
+header{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:27px}.brand{font-weight:850;letter-spacing:.11em;font-size:13px;text-decoration:none}.brand span{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--sun);margin-right:8px}.back{font-size:13px;text-decoration:none;color:var(--muted);font-weight:700}.back:hover{text-decoration:underline}
+.hero{background:linear-gradient(118deg,#ffcf59 0%,#ffebbc 68%,#fff8e9 100%);border:1px solid #ebd3a3;border-radius:23px;padding:34px clamp(22px,4.5vw,46px);margin:0 0 19px;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;width:240px;height:240px;border:55px solid rgba(255,255,255,.26);border-radius:50%;right:-120px;bottom:-175px;pointer-events:none}
+.overline{margin:0 0 8px;font-weight:800;letter-spacing:.15em;font-size:11px;color:#7a5316}
+h1{font-size:clamp(30px,4.8vw,48px);line-height:1.12;letter-spacing:-.035em;margin:0 0 10px;max-width:780px}
+.intro{max-width:750px;font:clamp(17px,2.1vw,21px)/1.48 Georgia,"Times New Roman",serif;color:#5d4c30;margin:0}
+.labels{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}.labels span{background:#fff9e9;border:1px solid rgba(155,106,22,.23);border-radius:30px;color:#744a11;font-size:12px;font-weight:750;padding:7px 11px}
+.notice{display:flex;gap:11px;align-items:flex-start;background:#fff;border:1px solid #eadbbe;border-radius:15px;padding:12px 16px;color:#675b49;margin:0 0 20px;font-size:13px}.notice strong{color:#745118}
+.layout{display:grid;grid-template-columns:minmax(0,1.67fr) minmax(275px,.85fr);gap:18px;align-items:start}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);overflow:hidden}
+.panel-head{padding:17px 21px;display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid var(--line);background:#fffaf0}
+.panel-head h2{margin:0;font-size:17px}.panel-head small{color:#996119;font-size:11px;font-weight:800;letter-spacing:.055em}
+.chat-panel{min-width:0}.chat{min-height:350px;max-height:510px;overflow-y:auto;padding:20px 20px 8px;scroll-behavior:smooth;display:flex;flex-direction:column;gap:16px}
+.turn{max-width:88%;display:flex;flex-direction:column;gap:4px}.turn.bot{align-self:flex-start}.turn.user{align-self:flex-end}.who{color:#888073;font-size:11px;font-weight:800;letter-spacing:.035em;padding:0 5px}.turn.user .who{text-align:right}
+.bubble{border-radius:15px;padding:13px 16px;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.6;font-size:15px}.bot .bubble{background:#f7f3eb;border:1px solid #ede4d4;border-top-left-radius:5px}.user .bubble{background:#fff0bd;border:1px solid #ebd8a1;border-top-right-radius:5px}
+.stage{padding:12px 20px 0;color:#796d5a;font-size:12px;display:flex;gap:7px;align-items:center}.stage b{color:#7f5418}
+.suggestions{padding:11px 20px 0;display:flex;flex-wrap:wrap;gap:8px}.chip{border:1px solid #decba9;background:#fffaf0;border-radius:999px;padding:8px 11px;color:#80591d;font-size:12px;max-width:100%;text-align:left}.chip:hover{background:#fff0c9;border-color:#c79a52}
+.composer{display:flex;gap:10px;padding:13px 20px 17px;align-items:flex-end}.composer textarea{width:100%;min-height:60px;max-height:130px;border:1.4px solid #dfd2bd;background:#fff;border-radius:12px;padding:12px 13px;resize:vertical;color:var(--ink)}.composer textarea:focus{border-color:#d2a04c}.send{border:none;border-radius:12px;padding:15px 18px;min-height:50px;background:#333029;color:#fff;font-weight:800;white-space:nowrap}.send:hover{background:#534832}.send:disabled{opacity:.45;cursor:not-allowed}
+.chat-footer{padding:0 20px 16px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}.muted{color:var(--muted);font-size:12px}.mini{border:0;background:transparent;color:#86611c;font-size:12px;font-weight:750;text-decoration:underline;text-underline-offset:2px;padding:4px}.mini:hover{color:#4c330b}
+.sidebar{display:grid;gap:17px}.side-body{padding:16px 20px 20px}.side-body p{font-size:13px;line-height:1.65;margin:0 0 12px;color:#6f6558}.progress{list-style:none;padding:0;margin:0}.progress li{padding:10px 0;border-bottom:1px solid #eee6da;display:flex;gap:10px;align-items:flex-start;font-size:13px;color:#877d70}.progress li:last-child{border-bottom:0}.num{border:1px solid #dcd0ba;width:25px;height:25px;min-width:25px;display:grid;place-items:center;border-radius:50%;font-size:11px;font-weight:800;background:#fff}.progress li.active{color:#664516;font-weight:800}.progress li.active .num{background:#ffdfa0;border-color:#e9b955}.progress li.done .num{background:#e1f0e9;border-color:#afcbbd;color:#2c6b54}.progress li.done{color:#456e59}
+.resource{display:block;border:1px solid #e7dcc9;border-radius:11px;text-decoration:none;padding:11px 12px;margin:8px 0 0;background:#fff;color:#5d5140;font-weight:700;font-size:13px}.resource:hover{border-color:#d6a750;background:#fffaec}.resource span{display:block;color:#9c7133;font-weight:500;font-size:11px;margin-top:2px}
+.blockquote{font:17px/1.45 Georgia,"Times New Roman",serif;color:#58462e;margin:0 0 10px}
+.privacy{font-size:12px;color:#877c70;line-height:1.55;margin:18px 0 0;padding:0 3px}.privacy strong{color:#6a5840}
+@media(max-width:820px){.layout{grid-template-columns:1fr}.sidebar{grid-template-columns:repeat(2,minmax(0,1fr))}.chat{max-height:440px}.wrap{padding:16px 13px 35px}.hero{padding:28px 21px}}
+@media(max-width:590px){.sidebar{grid-template-columns:1fr}.hero{border-radius:17px}.panel{border-radius:16px}.chat{padding:16px 13px;min-height:320px}.turn{max-width:94%}.bubble{font-size:14px}.composer{padding:12px;gap:8px}.send{padding:13px 15px}.stage,.suggestions{padding-left:13px;padding-right:13px}.chat-footer{padding:0 13px 13px}}
+@media(prefers-reduced-motion:reduce){.chat{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><a class="brand" href="../../PE/index.html"><span aria-hidden="true"></span> INSPIRE 4 · PE</a><a class="back" href="../index.html">← Production écrite</a></header>
+<main>
+<section class="hero">
+<p class="overline">UNITÉ 1 · ÉCRIRE EN RÉFLÉCHISSANT</p>
+<h1>Mon compagnon <em style="font-family:Georgia,serif;font-weight:400">métacognitif.</em></h1>
+<p class="intro">Avant de chercher la bonne phrase, prenons le temps de clarifier ton idée. Une question à la fois : c'est toi qui construis ton texte.</p>
+<div class="labels"><span>01 · Je choisis</span><span>02 · Je réfléchis</span><span>03 · J'illustre</span><span>04 · Je vérifie</span></div>
+</section>
+<div class="notice"><span aria-hidden="true">ⓘ</span><div><strong>Version d'essai · parcours guidé, sans modèle d'IA connecté.</strong> Cette première version permet de tester le dialogue pédagogique et l'alternance français/chinois. Elle ne comprend pas librement toutes les formulations ; un service d'IA sécurisé pourra être raccordé ultérieurement.</div></div>
+<div class="layout">
+<section class="panel chat-panel" aria-labelledby="chatTitle">
+<div class="panel-head"><h2 id="chatTitle">Un dialogue pour apprendre à argumenter</h2><small>ACCOMPAGNEMENT GUIDÉ</small></div>
+<div class="stage" aria-live="polite">Étape actuelle : <b id="stageName">Choisir une idée reçue</b></div>
+<div class="chat" id="chat" role="log" aria-live="polite" aria-relevant="additions"></div>
+<div id="suggestions" class="suggestions" aria-label="Propositions pour commencer"></div>
+<form id="messageForm" class="composer">
+<label for="message" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Votre message</label>
+<textarea id="message" rows="2" maxlength="4500" placeholder="Écris ici ton idée, une question ou une difficulté…" required></textarea>
+<button id="send" class="send" type="submit">Envoyer</button>
+</form>
+<div class="chat-footer"><span class="muted">Par défaut en français · 中文解释可按需请求</span><div><button id="export" class="mini" type="button">Exporter mon dialogue</button><button id="restart" class="mini" type="button">Recommencer</button></div></div>
+</section>
+<aside class="sidebar">
+<section class="panel">
+<div class="panel-head"><h2>Mon cheminement</h2><small>JE GARDE LA MAIN</small></div>
+<div class="side-body"><p>Tu peux réfléchir en plusieurs étapes sans être obligé de toutes les suivre.</p>
+<ol id="progress" class="progress">
+<li data-phase="topic"><span class="num">1</span><span>Je choisis une idée reçue</span></li>
+<li data-phase="position"><span class="num">2</span><span>Je prends position</span></li>
+<li data-phase="reason"><span class="num">3</span><span>Je cherche pourquoi</span></li>
+<li data-phase="example"><span class="num">4</span><span>Je trouve un exemple</span></li>
+<li data-phase="interpretation"><span class="num">5</span><span>Je vérifie ce qu'il montre</span></li>
+</ol></div>
+</section>
+<section class="panel">
+<div class="panel-head"><h2>Ressources du cours</h2><small>UNITÉ 1</small></div>
+<div class="side-body">
+<p>Si tu cherches tes mots, retourne aux expressions déjà travaillées. La ressource ne remplace pas ta réflexion.</p>
+<a class="resource" href="../../Vocabulaire/U1/index.html" target="_blank" rel="noopener">Vocabulaire · Le bonheur<span>Fiches et cartes de langue ↗</span></a>
+<a class="resource" href="../../Vocabulaire/U1/L2/phrases.html" target="_blank" rel="noopener">Expressions · Leçon 2<span>Réemploi en contexte ↗</span></a>
+<a class="resource" href="../U1/index.html">Une idée reçue sur le bonheur<span>Revenir à mon exercice d'écriture ↗</span></a>
+</div>
+</section>
+</aside>
+</div>
+<p class="privacy"><strong>Confidentialité :</strong> dans cette version, les messages restent dans la page ouverte. Ils ne sont pas envoyés à un modèle ni enregistrés automatiquement. Tu peux exporter ton dialogue si tu souhaites le conserver. N'entre pas d'informations personnelles sensibles.</p>
+</main>
+</div>
+<script>
+(function(){
+"use strict";
+var chat=document.getElementById("chat"),form=document.getElementById("messageForm"),input=document.getElementById("message"),suggestions=document.getElementById("suggestions"),stageName=document.getElementById("stageName"),progress=document.getElementById("progress");
+var PHASES=["topic","position","reason","example","interpretation","review"];
+var state={phase:"topic",lang:"fr",topic:"",stance:"",reason:"",example:"",interpretation:"",hint:0,history:[]};
+var TOPICS=["Il faut être en couple pour être heureux.","L'argent fait le bonheur.","Il faut toujours être heureux."];
+var STAGES={fr:["Choisir une idée reçue","Exprimer mon avis","Expliquer mon avis","Trouver un exemple","Examiner mon exemple","Relire mon raisonnement"],zh:["选择一个常见观念","表达自己的立场","解释自己的理由","寻找具体例子","检验例子的作用","回顾论证过程"]};
+function t(fr,zh){return state.lang==="zh"?zh:fr}
+function normal(s){return s.toLowerCase().replace(/[\u2019\u2018]/g,"'").trim()}
+function requestChinese(s){return /(?:用|说|讲|回答|解释|切换|改成|能|可以|请).{0,14}(?:中文|汉语)|(?:中文|汉语).{0,10}(?:回答|解释|交流|说|可以|行吗|好吗)|en chinois|réponds?.{0,15}chinois|parle.{0,15}chinois|can you speak chinese|chinese please/i.test(s)}
+function requestFrench(s){return /(?:用|说|回答|切换|改成).{0,12}法语|(?:法语).{0,8}(?:回答|说)|en fran[cç]ais|réponds?.{0,15}fran[cç]ais|french please/i.test(s)}
+function vocabNeed(s){return /comment dire|comment exprimer|je (ne )?sais pas (comment )?(le )?dire|chercher? (mes|les) mots|vocabulaire|une expression|traduire|词汇|法语怎么说|怎么表达|不会表达|表达不出来|找不到词|想不出法语/i.test(s)}
+function exampleNeed(s){return /pas d'exemple|trouve.{0,15}exemple|pas trouver d.exemple|quel exemple|donner un exemple|想不出例子|找不到例子|没有例子|不知道举什么例子|能给.*例子|举个例子/i.test(s)}
+function confused(s){return /je (ne )?sais pas|aucune idée|pas d'idée|je suis bloqu|不知道|没有想法|不清楚|想不到|没思路|不会/i.test(s)}
+function opinion(s){return /d'accord|pas d'accord|je pense|je crois|à mon avis|pour ma part|selon moi|je trouve|我觉得|我认为|我同意|我不同意|不赞同|赞同|我反对|不同意/i.test(s)}
+function isDraft(s){return s.length>190||((s.match(/[.!?。？！]/g)||[]).length>=3&&s.length>100)}
+function topicish(s){return /bonheur|heureux|heureuse|couple|l'argent|argent|réussir|il faut|on doit|幸福|快乐|恋爱|金钱|成功/i.test(s)&&s.length>6}
+function addTurn(role,text){var el=document.createElement("div");el.className="turn "+role;var who=document.createElement("span");who.className="who";who.textContent=role==="bot"?"COMPAGNON":"MOI";var bubble=document.createElement("div");bubble.className="bubble";bubble.textContent=text;el.appendChild(who);el.appendChild(bubble);chat.appendChild(el);chat.scrollTop=chat.scrollHeight;state.history.push({role:role,text:text})}
+function phaseIndex(){return Math.max(0,PHASES.indexOf(state.phase))}
+function renderStage(){stageName.textContent=STAGES[state.lang][phaseIndex()];Array.prototype.forEach.call(progress.children,function(el,i){el.classList.toggle("active",i===Math.min(phaseIndex(),4));el.classList.toggle("done",i<Math.min(phaseIndex(),5))})}
+function addSuggestions(items){suggestions.textContent="";items.forEach(function(label){var b=document.createElement("button");b.className="chip";b.type="button";b.textContent=label;b.addEventListener("click",function(){sendText(label)});suggestions.appendChild(b)})}
+function suggested(){if(state.phase==="topic")return TOPICS;if(state.phase==="position")return state.lang==="zh"?["我赞同这个观点","我不赞同这个观点","我还没想好"]:["Je suis d'accord.","Je ne suis pas d'accord.","Je ne sais pas encore."];if(state.phase==="reason")return state.lang==="zh"?["我想不到理由","我不知道怎么用法语表达"]:["Je ne sais pas encore pourquoi.","Je cherche mes mots."];if(state.phase==="example")return state.lang==="zh"?["我想不出例子","给我一个找例子的提示"]:["Je n'arrive pas à trouver un exemple.","Donne-moi une piste."];if(state.phase==="interpretation")return state.lang==="zh"?["我不知道如何解释这个例子"]:["Je ne sais pas comment expliquer cet exemple."];return state.lang==="zh"?["我想重新思考观点"]:["Je voudrais reprendre mon idée."]}
+function update(){renderStage();addSuggestions(suggested())}
+function respond(text){addTurn("bot",text);update()}
+function chooseTopic(s){state.topic=s.replace(/^\s*["«]\s*|\s*["»]\s*$/g,"");state.phase="position";state.hint=0;respond(t('Tu as choisi cette idée reçue : « '+state.topic+' » Et toi, qu’en penses-tu ?','你选择了这个常见观念：“'+state.topic+'”。你自己怎么看？'))}
+function languageChange(lang){state.lang=lang;respond(lang==="zh"?"当然可以。你需要中文帮助时，我会使用中文。我们继续刚才的思考；你可以用自己的话回答，不需要急着写出完整法语段落。":"Bien sûr, nous pouvons continuer en français. Je t'écoute : quelle est ta propre idée ?")}
+function helpWithVocab(s){state.hint++;var lower=normal(s+" "+state.reason+" "+state.topic);var related=/consomm|argent|matériel|acheter|achat|金钱|消费|物质|购买|奢侈/i.test(lower);if(related){respond(t("Pour parler du rapport à la consommation, essaie d'abord de retrouver une expression de la leçon 2. Te souviens-tu de « être poussé(e) à consommer » ou de « la philosophie du toujours plus » ? Laquelle correspond à ton idée ?","谈到消费与幸福，我们在第二课练习过 « être poussé(e) à consommer » 和 « la philosophie du toujours plus » 之类的表达。哪一个真正符合你想表达的意思？先由你判断。"));}else{respond(t("Avant de traduire toute ta phrase, quel est le mot ou le morceau d'idée qui te manque exactement ? Tu peux aussi consulter les fiches de vocabulaire de l'unité 1, puis essayer de reformuler.","先不要急着整句翻译。你具体卡在哪个词或哪层意思？可以先查看第一单元词汇卡，再试着自己组织法语。"))}}
+function helpWithExample(){state.hint++;if(state.hint===1){respond(t("Pense à une situation que tu as vécue, observée ou entendue. Laquelle pourrait illustrer TON idée ?","想想自己经历过、观察过或者听说过的事情：有没有某个情境能说明你自己的观点？"))}else if(state.hint===2){respond(t("Tu peux chercher avec trois repères : qui est concerné ? dans quelle situation ? que se passe-t-il concrètement ? Choisis seulement un cas.","可以用三个问题寻找例子：涉及谁？发生在什么情境？具体发生了什么？先选一个案例就好。"))}else{respond(t("Tu n'es pas obligé de trouver l'exemple parfait. Décris d'abord une situation simple en une phrase ; nous vérifierons ensuite si elle soutient ton idée.","不必一开始就找到完美例子。先用一句话描述一个简单情境，我们再一起判断它是否支持你的观点。"))}}
+function answer(raw){var s=raw.trim(),low=normal(s);if(!s)return;
+if(requestChinese(s)){languageChange("zh");return}
+if(requestFrench(s)){languageChange("fr");return}
+if(vocabNeed(s)){helpWithVocab(s);return}
+if(isDraft(s)&&state.phase==="topic"){respond(t("Tu as déjà un début de texte. Avant toute correction, quel point voudrais-tu examiner toi-même : ta position, la pertinence de ton exemple ou le lien entre les deux ?","你已经有一段初稿了。修改之前，你最想先检查哪一点：立场、例子的相关性，还是例子与观点之间的关系？"));return}
+if(state.phase==="topic"){if(topicish(s)){chooseTopic(s);return}respond(t("Pour commencer, choisis une idée reçue sur le bonheur, ou écris celle que tu souhaites discuter. Quelle affirmation veux-tu questionner ?","先选一个关于幸福的常见观念，或者自己写一个。你想讨论哪一种说法？"));return}
+if(state.phase==="position"){if(confused(s)){state.hint++;respond(t("Pas besoin d'une réponse parfaite. As-tu plutôt tendance à être d'accord, à ne pas être d'accord, ou cela dépend-il des situations ?","不需要完美答案。你倾向于赞同、不赞同，还是认为要看具体情况？"));return}state.stance=s;state.phase="reason";state.hint=0;respond(t("Qu'est-ce qui te fait penser cela ? Essaie d'exprimer une raison avec tes propres mots.","是什么让你这样想？试着用自己的话说出一个理由。"));return}
+if(state.phase==="reason"){if(exampleNeed(s)){state.phase="example";state.hint=0;helpWithExample();return}if(confused(s)){state.hint++;respond(state.hint===1?t("Qu'est-ce qui compte le plus dans cette question, selon toi : les relations, la liberté ou autre chose ? Choisis un aspect.","在这个问题上，你最看重哪一点：人与人的关系、个人自由，还是别的方面？选一个角度想想。"):t("Tu peux commencer très simplement : « Je pense cela parce que… » Quelle idée voudrais-tu placer après « parce que » ?","可以从最简单的一句开始：« Je pense cela parce que… »。你想在 parce que 后面说明什么？"));return}state.reason=s;state.phase="example";state.hint=0;respond(t("Tu as proposé une raison. Peux-tu penser à une situation concrète qui permettrait de la rendre plus convaincante ?","你已经提出了一个理由。能想到一件具体的事，让这个理由更有说服力吗？"));return}
+if(state.phase==="example"){if(exampleNeed(s)||confused(s)){helpWithExample();return}state.example=s;state.phase="interpretation";state.hint=0;respond(t("Quel lien vois-tu entre cette situation et ton point de vue ? Qu'est-ce que ton exemple montre exactement ?","这个情境与你的观点有什么关系？这个例子具体说明了什么？"));return}
+if(state.phase==="interpretation"){if(confused(s)){state.hint++;respond(t("Reviens à ta position de départ. Quel détail de ton exemple la soutient vraiment ? Et quel détail reste à expliquer ?","回到最初的立场：例子里的哪个细节真正支持了你的观点？又有哪些地方还需要解释？"));return}state.interpretation=s;state.phase="review";state.hint=0;respond(t("Relis maintenant ton cheminement : ton exemple suffit-il à étayer ta position, ou faut-il préciser une nuance ? C'est à toi de décider de la révision.","现在回看你的思路：这个例子足以支持你的立场吗？还是需要增加一些限定？由你决定如何修改。"));return}
+if(state.phase==="review"){if(/reprendre|recommencer|nouveau|重新|重来|换一个/i.test(low)){restart();return}respond(t("Qu'aimerais-tu améliorer en priorité : la clarté de ton avis, le choix de l'exemple ou son interprétation ? Tu peux reprendre ta rédaction quand tu te sens prêt(e).","你想优先改进哪一部分：观点是否清楚、例子是否合适，还是解释是否充分？准备好了就可以回到自己的写作页面。"));return}}
+function sendText(value){var s=(value||"").trim();if(!s)return;addTurn("user",s);input.value="";answer(s);input.focus()}
+function restart(){state={phase:"topic",lang:"fr",topic:"",stance:"",reason:"",example:"",interpretation:"",hint:0,history:[]};chat.textContent="";respond("Bonjour ! Choisis une idée reçue sur le bonheur, ou écris-en une avec tes propres mots. Nous commencerons par TON avis, sans chercher tout de suite un exemple ou une réponse modèle.");}
+form.addEventListener("submit",function(e){e.preventDefault();sendText(input.value)});
+input.addEventListener("keydown",function(e){if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();form.requestSubmit()}});
+document.getElementById("restart").addEventListener("click",function(){if(window.confirm("Recommencer le dialogue ? Le dialogue précédent ne sera pas conservé."))restart()});
+document.getElementById("export").addEventListener("click",function(){if(!state.history.length)return;var content=state.history.map(function(x){return(x.role==="bot"?"COMPAGNON":"MOI")+":\n"+x.text}).join("\n\n");var blob=new Blob([content],{type:"text/plain;charset=utf-8"});var url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="inspire4-compagnon-metacognitif-dialogue.txt";document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url)},1000)});
+restart();
+})();
+</script>
+</body>
+</html>
