@@ -68,7 +68,7 @@ function guide(phase, intent, language, topic) {
 }
 async function callGLM({text, history, language, phase, topic, intent}, env) {
   const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 23000);
+  const timer = setTimeout(() => controller.abort(), 48000);
   try {
     const payload = {
       model: env.GLM_MODEL || "glm-4.7-flash",
@@ -98,7 +98,7 @@ async function callGLM({text, history, language, phase, topic, intent}, env) {
     return {reply:result.slice(0,700),mode:"glm"};
   } catch (e) {
     console.warn("GLM call failure:",e?.name || "error");
-    return {error:"GLM 请求超时或连接失败，请稍后重试。",status:502};
+    return {error: e?.name === "AbortError" ? "GLM等待响应超过48秒，请稍后重试；尚不能据此判断余额或密钥是否有问题。" : "GLM 网络连接失败，请联系教师检查服务器网络。",status:502};
   } finally {clearTimeout(timer)}
 }
 async function handle(body, env) {
