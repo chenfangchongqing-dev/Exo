@@ -33,23 +33,21 @@ footer{margin:38px 0 35px;padding-top:22px;border-top:1px solid var(--line);colo
 @media(max-width:690px){.hero{padding:31px 22px}.grid{grid-template-columns:1fr}.section-head{display:block}.section-head p{margin-top:5px}.card{padding:22px}.top{padding:18px 0}.wrap{padding:0 16px}}
 .unit-card .action{display:inline-block;text-decoration:none}.unit-card .action:hover{text-decoration:underline}
 .unit-numbers{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:6px;margin-top:18px}
-.unit-number{display:flex;align-items:center;justify-content:center;min-width:0;aspect-ratio:1;border:1px solid #cbd5e1;border-radius:10px;background:#f8fafc;text-decoration:none;font-size:14px;font-weight:800;color:#64748b;transition:background .18s,color .18s,border-color .18s,transform .18s}
-.unit-number.unit-ready{background:#2563eb;border-color:#2563eb;color:#fff}
-.unit-number:hover{transform:translateY(-2px);background:#dbeafe;color:#1d4ed8;border-color:#93c5fd}
-.unit-number.unit-ready:hover{background:#1d4ed8;color:#fff;border-color:#1d4ed8}
+.unit-number{display:flex;align-items:center;justify-content:center;min-width:0;aspect-ratio:1;border:1px solid var(--unit-border,var(--unit-bg));border-radius:10px;background:var(--unit-bg);text-decoration:none;font-size:14px;font-weight:800;color:var(--unit-text);transition:filter .18s,transform .18s,box-shadow .18s}
+.unit-number:hover{transform:translateY(-2px);filter:brightness(.94);box-shadow:0 4px 10px rgba(15,23,42,.12)}
 .unit-number:focus-visible{outline:3px solid #2563eb;outline-offset:3px}
+.unit-number:nth-child(1),.unit-number:nth-child(5){--unit-bg:#ffb531;--unit-text:#443000}
+.unit-number:nth-child(2),.unit-number:nth-child(6){--unit-bg:#47c28e;--unit-text:#143f2d}
+.unit-number:nth-child(3),.unit-number:nth-child(7){--unit-bg:#d6291a;--unit-border:#ef2d1a;--unit-text:#fff}
+.unit-number:nth-child(4),.unit-number:nth-child(8){--unit-bg:#015a9c;--unit-text:#fff}
+.unit-number:nth-child(9){--unit-bg:#f4b84f;--unit-text:#443000}
 @media(max-width:900px){.unit-numbers{grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}.unit-number{min-height:40px;aspect-ratio:auto}}
 @media(max-width:690px){.unit-numbers{grid-template-columns:repeat(9,minmax(0,1fr));gap:5px}.unit-number{min-height:35px;aspect-ratio:1;font-size:13px}}
 @media(max-width:380px){.unit-numbers{grid-template-columns:repeat(5,minmax(0,1fr))}}
 @media(prefers-reduced-motion:reduce){.unit-number{transition:none}.unit-number:hover{transform:none}}
-/* Verified Guide pedagogique chapter colors: U1 p30, U2 p51, U3 p72.
-   U4-U9 stay neutral until exact official colors become available. */
-.unit-number.unit-ready[href="./U1/"]{background:#fbb900;border-color:#e4a400;color:#3f3000}
-.unit-number.unit-ready[href="./U1/"]:hover{background:#f9cc46;border-color:#e4a400;color:#3f3000}
-.unit-number.unit-ready[href="./U2/"]{background:#44b284;border-color:#26875f;color:#113b2a}
-.unit-number.unit-ready[href="./U2/"]:hover{background:#7accaa;border-color:#26875f;color:#113b2a}
-.unit-number.unit-future[href="./U3/"]{background:#fff1f1;border-color:#d41217;color:#ad1218}
-.unit-number.unit-future[href="./U3/"]:hover{background:#fbdcdd;border-color:#c11116;color:#961014}
+/* Palette sampled from the Livre de l'élève sommaire screenshots:
+   U1/U5 orange, U2/U6 green, U3/U7 red, U4/U8 blue, U9 golden orange.
+   Red tile fill is slightly darkened for readable white numeral. */
 </style></head><body><div class="wrap"><header class="top"><a class="logo" href="../index.html">Accueil <span style="color:#2563eb" aria-hidden="true">↗</span></a></header>
 <section class="hero"><div class="overline">LEXIQUE · APPRENTISSAGE</div><h1>Vocabulaire.</h1><p class="intro">Deux parcours complémentaires pour comprendre les mots, les organiser et les réutiliser dans vos productions.</p></section>
 <section class="section"><div class="section-head"><h2>Deux parcours pour apprendre</h2></div><div class="grid">
