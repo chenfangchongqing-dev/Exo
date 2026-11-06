@@ -15,7 +15,7 @@ const params=new URLSearchParams(location.search);const n=String(params.get('ex'
 for(const id of ['back','bottomBack'])document.getElementById(id).href='./index.html#'+anchor;
 document.getElementById('kicker').textContent='COMPRENDRE · ACTIVITÉ '+n;
 document.getElementById('title').textContent=a.title;document.getElementById('subtitle').textContent=a.subtitle;
-document.getElementById('visual').innerHTML=n==='1'?'<img class="photo-poster" src="./poster.svg" alt="Affiche complète de l’exposition « À la mode. L’art de paraître au 18e siècle »">':'';
+document.getElementById('visual').innerHTML=n==='1'?'<img class="photo-poster" src="https://baroquiades.com/storage/2025/02/a-la-mode-nantes.png" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src=&quot;./poster.svg&quot;" alt="Affiche complète de l’exposition « À la mode. L’art de paraître au 18e siècle »">':'';
 document.getElementById('questions').innerHTML=a.questions.map(([key,q,hint],i)=>'<label class="field"><span class="question"><small>'+key+'</small> '+q+'</span><textarea name="q'+i+'" placeholder="'+hint.replaceAll('"','&quot;')+'" aria-label="Réponse à la question '+key+'"></textarea></label>').join('');
 document.getElementById('answers').innerHTML=a.responses.map(([t,v])=>'<section class="solution"><h3>'+t+'</h3><p>'+v+'</p></section>').join('');
 document.getElementById('extension').innerHTML=a.extra;
