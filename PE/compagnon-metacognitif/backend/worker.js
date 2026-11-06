@@ -151,6 +151,11 @@ export default {
     if (!env.GLM_API_KEY || !env.CLASS_ACCESS_CODE) return json({error:"服务尚未配置，请联系教师。"},503,headers);
     const submitted = request.headers.get("X-Class-Code") || "";
     if (submitted !== env.CLASS_ACCESS_CODE) return json({error:"课堂访问码不正确。"},401,headers);
+    // Approximate per-IP protection; shared classroom IPs may need a higher threshold.
+    if (!env.REQUEST_LIMITER) return json({error:"限流服务未配置，请联系教师。"},503,headers);
+    const ip = request.headers.get("CF-Connecting-IP") || "unknown";
+    const limit = await env.REQUEST_LIMITER.limit({key:ip});
+    if (!limit.success) return json({error:"请求过于频繁，请稍后再试。"},429,headers);
     const size = Number(request.headers.get("Content-Length")||0);
     if (size > 20000) return json({error:"请求过大。"},413,headers);
     let body;
