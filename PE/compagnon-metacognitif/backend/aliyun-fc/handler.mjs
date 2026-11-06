@@ -132,9 +132,14 @@ async function handle(body,env){
   if(wantsWriting(s)){
     phase="writing";
     meta=record(meta,{difficulty:"drafting",next:pick(language,"Rédiger deux phrases à partir de mon idée.","从已有观点和例子开始动笔"),support:0,stuck:0,lastStrategy:"writing-frame",previousIntent:"writing"});
-    const reply=pick(language,
-      "Passons à l'écriture. Tu as déjà une idée : « "+(meta.goal||"ton point de vue")+" ». Commence par deux phrases : « Pour ma part, je pense que… » puis « Prenons l'exemple de… ». Écris-les ici ; nous vérifierons ensuite le lien entre l'exemple et ton idée.",
-      "可以，现在就开始写，不再重新选题。你已有的论点是：“"+(meta.goal||"你刚才提出的观点")+"”。先写两句：« Pour ma part, je pense que… » 和 « Prenons l'exemple de… »。写完发给我，我们只检查例子能否支持观点。");
+    const alreadyHasPosition=history.some(v=>v.role==="user"&&/pour ma part|je pense que|我认为|我觉得/i.test(v.content));
+    const reply=alreadyHasPosition
+      ?pick(language,
+        "Passons à l'écriture sans refaire ce que tu as déjà écrit. Ta position est posée. Ajoute maintenant seulement une phrase avec « Prenons l'exemple de… », puis une phrase expliquant ce qu'elle montre. Envoie-les et nous vérifierons leur pertinence.",
+        "直接进入写作，不用重写已经有的立场句。你现在只需要补上 « Prenons l'exemple de… » 的具体情境，再写一句说明它证明什么。把这两句发来，我们检查它们是否支持原观点。")
+      :pick(language,
+        "Passons à l'écriture. Tu as déjà une idée : « "+(meta.goal||"ton point de vue")+" ». Commence par deux phrases : « Pour ma part, je pense que… » puis « Prenons l'exemple de… ». Écris-les ici ; nous vérifierons ensuite le lien entre l'exemple et ton idée.",
+        "可以，现在就开始写，不再重新选题。你已有的论点是：“"+(meta.goal||"你刚才提出的观点")+"”。先写两句：« Pour ma part, je pense que… » 和 « Prenons l'exemple de… »。写完发给我，我们只检查例子能否支持观点。");
     return outcome(reply,phase,language,topic,meta);
   }
   if(needLanguage(s)){
