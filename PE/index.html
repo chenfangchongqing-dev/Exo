@@ -33,20 +33,20 @@ h1{font-size:clamp(34px,5vw,54px);line-height:1.08;letter-spacing:-.035em;margin
 footer{margin:38px 0 35px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted);font-size:12px}
 @media(max-width:690px){.hero{padding:31px 22px}.section-head{display:block}.section-head p{margin-top:5px}.card{padding:22px}.top{padding:18px 0}.wrap{padding:0 16px}}
 
-/* Pure black freehand line drawing, discreet interactive writing assistant. */
-.hero-with-companion{padding-right:157px;overflow:visible;isolation:isolate}
+/* Light ink-profile writing assistant — based on the user's preferred line-art silhouette, without a beret. */
+.hero-with-companion{padding-right:201px;overflow:visible;isolation:isolate}
 .hero-with-companion:after{z-index:-1}
 .hero-with-companion>.overline,.hero-with-companion>h1,.hero-with-companion>.intro{position:relative;z-index:1}
-.hero-with-companion .intro{max-width:660px}
-.companion-pet-link{position:absolute;z-index:3;right:22px;top:-9px;width:108px;display:flex;flex-direction:column;align-items:center;gap:0;text-decoration:none;color:#121212;border-radius:10px;transition:transform .18s ease}
-.companion-pet-link .pet-svg{display:block;width:108px;height:111px;overflow:visible;filter:none;transition:transform .22s ease}
-.companion-pet-link:hover .pet-svg,.companion-pet-link:focus-visible .pet-svg{transform:translateY(-4px)}
+.hero-with-companion .intro{max-width:650px}
+.companion-pet-link{position:absolute;z-index:3;right:18px;top:2px;width:176px;display:flex;flex-direction:column;align-items:center;gap:0;text-decoration:none;color:#151515;border-radius:12px;transition:transform .2s ease}
+.companion-pet-link .pet-svg{width:173px;height:111px;display:block;overflow:visible;transition:transform .2s ease}
+.companion-pet-link:hover .pet-svg,.companion-pet-link:focus-visible .pet-svg{transform:translateY(-3px)}
 .companion-pet-link:focus-visible{outline:2px solid #111;outline-offset:4px}
-.companion-pet-tag{display:block;color:#171717;text-align:center;background:none;border:0;box-shadow:none;padding:0;margin-top:-2px;font:italic 11px/1.25 Georgia,"Times New Roman",serif;white-space:nowrap;text-decoration:none}
-.companion-pet-tag .pet-arrow{font:normal 11px Arial,sans-serif}
-.companion-pet-link:hover .companion-pet-tag{text-decoration:underline;text-underline-offset:3px}
-@media(max-width:780px){.hero-with-companion{padding-right:150px}.companion-pet-link{right:13px;top:-8px;width:106px}.companion-pet-link .pet-svg{width:106px;height:109px}}
-@media(max-width:690px){.hero-with-companion{padding:31px 22px 79px;margin-bottom:18px}.hero-with-companion .intro{max-width:100%;font-size:16px}.companion-pet-link{top:auto;right:15px;bottom:-14px;width:90px}.companion-pet-link .pet-svg{width:90px;height:93px}.companion-pet-tag{font-size:10px}}
+.companion-pet-tag{display:inline-flex;align-items:center;gap:8px;justify-content:center;max-width:100%;margin-top:-1px;border-radius:999px;padding:7px 13px;background:#a54b41;color:#fffdfa;font:600 12px/1.2 Arial,"Helvetica Neue",sans-serif;letter-spacing:.015em;white-space:nowrap;box-shadow:0 2px 7px rgba(100,48,37,.1)}
+.companion-pet-tag .pet-arrow{font-size:13px;font-weight:500}
+.companion-pet-link:hover .companion-pet-tag{background:#8a3d35}
+@media(max-width:850px){.hero-with-companion{padding-right:191px}.companion-pet-link{right:13px;width:164px}.companion-pet-link .pet-svg{width:161px;height:104px}.companion-pet-tag{font-size:11px}}
+@media(max-width:690px){.hero-with-companion{padding:31px 22px 94px;margin-bottom:20px}.hero-with-companion .intro{max-width:100%}.companion-pet-link{top:auto;right:13px;bottom:-15px;width:135px}.companion-pet-link .pet-svg{width:132px;height:85px}.companion-pet-tag{font-size:10px;padding:6px 10px}}
 @media(prefers-reduced-motion:reduce){.companion-pet-link,.companion-pet-link .pet-svg{transition:none}}
 
 </style>
@@ -63,31 +63,24 @@ footer{margin:38px 0 35px;padding-top:22px;border-top:1px solid var(--line);colo
 <h1 id="mainTitle">Exprimer son point de vue.</h1>
 <p class="intro">Une idée à discuter, un exemple concret à développer : entraînez-vous à argumenter en quelques phrases.</p>
 <a class="companion-pet-link" href="./compagnon-metacognitif/" aria-label="Écrire avec moi — ouvrir l’assistant d’écriture">
-<svg class="pet-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 163" role="img" aria-label="Évocation abstraite d'un chat qui écrit, quelques lignes noires">
+<svg class="pet-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 234 152" role="img" aria-label="Silhouette épurée d’une personne qui écrit, sans béret">
 <g fill="none" stroke="#111" stroke-linecap="round" stroke-linejoin="round">
-<!-- A single, deliberately unfinished contour: feline gesture, not a portrait. -->
-<path d="M34 137
- C43 116 38 91 48 67
- L44 42
- Q59 48 70 64
- C86 57 102 58 111 63
- Q123 45 131 41
- L128 75
- C138 91 133 108 116 119
- C103 127 101 137 113 145"
- stroke-width="3.0"/>
-<!-- A second loose sweep hints at the movement of writing. -->
-<path d="M49 117 Q59 134 77 131 Q94 129 105 111"
- stroke-width="2.5"/>
-<!-- One descending pen mark: a thought becoming a sentence. -->
-<path d="M104 114 Q92 129 82 145"
- stroke-width="2.6"/>
-<!-- The loose end of the line becomes a tail, then disappears. -->
-<path d="M114 145 Q140 156 151 133 Q157 117 149 111"
- stroke-width="2.7"/>
-<!-- An open page, never a boxed-in cartoon. -->
-<path d="M22 151 Q46 145 69 150 T114 151 Q130 149 142 152"
- stroke-width="1.7"/>
+<!-- The head is defined by one loose ink contour; no hat or hair detail. -->
+<path d="M177 48 C164 31 149 23 135 26 C118 29 112 43 116 57 C118 63 115 69 111 74 C108 78 112 80 118 80 C119 88 126 94 134 92 Q145 89 152 79" stroke-width="3.35"/>
+<!-- Just an eyelid and a soft smile; nose is implied by the outline. -->
+<path d="M126 63 Q132 69 138 62" stroke-width="2.8"/>
+<path d="M121 83 Q129 88 134 84" stroke-width="2.35"/>
+<!-- Shoulder becomes a long pen-stroke, allowing the open space to complete the figure. -->
+<path d="M151 83 C173 73 192 77 215 96" stroke-width="3.2"/>
+<path d="M146 84 C125 80 120 94 104 92 C92 91 88 83 77 88 Q65 92 53 103" stroke-width="3.15"/>
+<!-- One pencil diagonal and one fine writing gesture. -->
+<path d="M52 104 L88 51" stroke-width="3.6"/>
+<path d="M50 105 L58 102" stroke-width="2.5"/>
+<path d="M42 111 Q58 106 70 110" stroke-width="1.65"/>
+</g>
+<!-- Three quiet sparks outside the black-line figure echo the selected reference. -->
+<g stroke="#b78c70" stroke-width="2.9" stroke-linecap="round">
+<path d="M37 76 L26 65 M33 88 L18 83 M43 70 L38 56"/>
 </g>
 </svg>
 <span class="companion-pet-tag">Écrire avec moi <span class="pet-arrow" aria-hidden="true">↗</span></span>
