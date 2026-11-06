@@ -46,7 +46,7 @@ function isDraft(s) { return s.length>170 || ((s.match(/[.!?。？！]/g)||[]).l
 function isOpinion(s) { return /\bje (?:ne )?(?:suis|pense|crois|trouve)\b|pour ma part|[àa] mon avis|d.accord|我觉得|我认为|我同意|我不赞同|我不同意|我反对|不同意|赞同/i.test(s); }
 function isRelationship(s) { return /ensemble|quitte|s[ée]par|amour|couple|relation|en couple|在一起|分开|分离|失去对方|分手|朋友|家人/i.test(s); }
 function isSunset(s) { return /coucher de soleil|soleil couchant|夕阳|日落|落日/i.test(s); }
-function fearFrustration(s) { return /source de frustration|peur de le perdre|peur de la perdre|crain.{0,30}perdre|害怕.{0,8}失去.{0,8}幸福|幸福.{0,15}挫败感|因.{0,8}失去.{0,8}焦虑/i.test(s); }
+function fearFrustration(s) { return /source de frustration|peur de le perdre|peur de la perdre|peur de perdre|crain.{0,30}perdre|fear of losing|害怕.{0,8}失去.{0,8}幸福|幸福.{0,15}挫败感|因.{0,8}失去.{0,8}焦虑/i.test(s); }
 function fearContext(s) { return /peur|crain|quitt|s[ée]par|害怕|担心|恐惧|分手|分离/i.test(s); }
 function extractGoal(s, history, original="") {
   const combined=[s,original,...history.filter(h=>h.role==="user").map(h=>h.content)].join("\n");
@@ -217,9 +217,15 @@ async function handle(body,env){
       return outcome(fear?pick(language,
         "Prenons une situation plus précise : une personne passe un bon moment avec quelqu'un qu'elle aime, mais redoute déjà le jour où ils devront se séparer. Elle n'arrive pas à profiter pleinement du présent. Cette piste convient-elle à ce que tu veux montrer ?",
         "换成一个具体情境：两个人在一起时很快乐，但其中一人不停担心将来会分开，因此无法安心享受现在。这个情况是否符合你要证明的观点？")
-        :pick(language,
+        :(/en couple|恋爱|结婚/i.test(meta.goal)?pick(language,
         "Pour débloquer la réflexion, compare deux cas : une personne heureuse seule et une autre heureuse en couple. Cela suffit-il pour conclure que le couple est indispensable au bonheur ?",
-        "给你两个可以比较的情境：一个人独处时很快乐，另一个人与伴侣相处时很快乐。这是否足以证明“幸福必须依赖恋爱关系”？"),phase,language,topic,meta);
+        "给你两个可以比较的情境：一个人独处时很快乐，另一个人与伴侣相处时很快乐。这是否足以证明“幸福必须依赖恋爱关系”？")
+        :/fragile|éphémère|脆弱|短暂/i.test(meta.goal)?pick(language,
+        "Compare deux situations : une joie qui disparaît rapidement et une relation qui reste précieuse malgré les difficultés. Qu'est-ce que cette comparaison t'apprend sur l'idée « le bonheur est fragile » ?",
+        "换成具体比较：一种快乐很快消失，一种关系经历困难却仍持续带来幸福。这两种情况能帮助你怎样判断“幸福是脆弱的”？")
+        :pick(language,
+        "Prenons un cas simple : un succès apporte du bonheur, mais cette joie peut dépendre des attentes qu'on place en lui. Veux-tu nuancer l'idée reçue à partir de ce cas ?",
+        "给你一个具体情境：一个人实现目标后感到快乐，但快乐可能受他的期待影响。这个情境能否让你对原观点作出限定？")),phase,language,topic,meta);
     }
     meta.lastStrategy="worked-example";meta.next="Réutiliser une phrase et passer à la rédaction";phase="writing";
     return outcome(fear?pick(language,
