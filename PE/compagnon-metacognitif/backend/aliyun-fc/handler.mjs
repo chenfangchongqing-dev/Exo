@@ -28,8 +28,8 @@ function text(s) { return typeof s === "string" ? s.trim() : ""; }
 function short(s, limit=230) { return text(s).replace(/\s+/g," ").slice(0,limit); }
 function langRequest(s) {
   if (/法语怎么说|怎么用法语表达|用法语如何表达|how (do|can) (i|we) say.+in french/i.test(s)) return null;
-  if (/(?:请|用|说|讲|回答|解释|切换|改成|可以|能).{0,14}(?:中文|汉语)|(?:中文|汉语).{0,10}(?:回答|解释|交流|说|可以|行吗|好吗)|^(?:中文|汉语)[。！!？?]?$|en chinois|r[ée]ponds?.{0,15}chinois|parle.{0,15}chinois|chinese please|can you speak chinese/i.test(s)) return "zh";
-  if (/(?:用|说|回答|切换|改成).{0,12}法语|(?:法语).{0,8}(?:回答|说)|^(?:法语)[。！!？?]?$|en fran[cç]ais|r[ée]ponds?.{0,15}fran[cç]ais|french please/i.test(s)) return "fr";
+  if (/(?:请|用|说|讲|回答|解释|切换|改成|可以|能).{0,14}(?:中文|汉语)|(?:中文|汉语).{0,10}(?:回答|解释|交流|说|可以|行吗|好吗)|^(?:中文|汉语)[。！!？?]?$|(?:r[ée]ponds?|parle|explique|continue|peux.tu r[ée]pondre).{0,20}(?:en )?chinois|chinese please|can you speak chinese/i.test(s)) return "zh";
+  if (/(?:用|说|回答|切换|改成).{0,12}法语|(?:法语).{0,8}(?:回答|说)|^(?:法语)[。！!？?]?$|(?:r[ée]ponds?|parle|explique|continue|peux.tu r[ée]pondre).{0,20}(?:en )?fran[cç]ais|french please/i.test(s)) return "fr";
   return null;
 }
 function noExample(s) { return /想不出例子|找不到例子|没有例子|举不出例子|不知道举什么例|后面想不出例子|pas d.exemple|ne (?:trouve|sais).{0,35}exemple|n.arrive pas.{0,40}exemple|no example/i.test(s); }
@@ -227,7 +227,7 @@ async function handle(body,env){
         "Prenons un cas simple : un succès apporte du bonheur, mais cette joie peut dépendre des attentes qu'on place en lui. Veux-tu nuancer l'idée reçue à partir de ce cas ?",
         "给你一个具体情境：一个人实现目标后感到快乐，但快乐可能受他的期待影响。这个情境能否让你对原观点作出限定？")),phase,language,topic,meta);
     }
-    meta.lastStrategy="worked-example";meta.next="Réutiliser une phrase et passer à la rédaction";phase="writing";
+    meta.lastStrategy="worked-example";meta.next="Réutiliser une phrase et passer à la rédaction";meta.difficulty="drafting";phase="writing";
     return outcome(fear?pick(language,
       "Je te donne une phrase de départ, puis passons à la rédaction : « Quand on est heureux avec quelqu'un, la peur de le perdre peut parfois empêcher de profiter pleinement du présent. » Tu peux maintenant écrire « Prenons l'exemple de… » en adaptant cette situation.",
       "我们不再反复追问。给你一个起步句：« Quand on est heureux avec quelqu'un, la peur de le perdre peut parfois empêcher de profiter pleinement du présent. » 接下来直接写 « Prenons l'exemple de… »，把这个情境改成你的例子。")
