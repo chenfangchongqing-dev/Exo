@@ -33,22 +33,21 @@ h1{font-size:clamp(34px,5vw,54px);line-height:1.08;letter-spacing:-.035em;margin
 footer{margin:38px 0 35px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted);font-size:12px}
 @media(max-width:690px){.hero{padding:31px 22px}.section-head{display:block}.section-head p{margin-top:5px}.card{padding:22px}.top{padding:18px 0}.wrap{padding:0 16px}}
 
-/* Minimal French line-art writing cat: a discreet link on the existing PE title card. */
-.hero-with-companion{padding-right:225px;overflow:visible;isolation:isolate}
+/* Pure black freehand line drawing, discreet interactive writing assistant. */
+.hero-with-companion{padding-right:157px;overflow:visible;isolation:isolate}
 .hero-with-companion:after{z-index:-1}
 .hero-with-companion>.overline,.hero-with-companion>h1,.hero-with-companion>.intro{position:relative;z-index:1}
-.hero-with-companion .intro{max-width:630px}
-.companion-pet-link{position:absolute;z-index:3;right:25px;top:-18px;width:158px;display:flex;flex-direction:column;align-items:center;gap:0;text-decoration:none;color:#86532e;border-radius:16px;transition:transform .2s ease}
-.companion-pet-link .pet-svg{display:block;width:152px;height:157px;overflow:visible;filter:none;transition:transform .23s ease}
-.companion-pet-link:hover .pet-svg,.companion-pet-link:focus-visible .pet-svg{transform:translateY(-4px) rotate(-3deg)}
-.companion-pet-link:focus-visible{outline:2px solid #9d672a;outline-offset:5px}
-.companion-pet-tag{display:inline-flex;align-items:center;justify-content:center;gap:6px;white-space:nowrap;padding:5px 11px;border-radius:999px;border:1px solid #d7b987;background:rgba(255,253,247,.96);font:600 11px/1.2 Georgia,"Times New Roman",serif;letter-spacing:.015em;box-shadow:0 3px 9px rgba(110,80,44,.09);color:#83552d}
-.companion-pet-tag .pet-arrow{font-family:Arial,sans-serif;font-size:12px;transition:transform .2s ease}
-.companion-pet-link:hover .companion-pet-tag{border-color:#b89055;background:#fffaf0}
-.companion-pet-link:hover .pet-arrow{transform:translateX(2px)}
-@media(max-width:850px){.hero-with-companion{padding-right:197px}.companion-pet-link{right:14px;top:-15px;width:141px}.companion-pet-link .pet-svg{width:132px;height:137px}.companion-pet-tag{font-size:10px}}
-@media(max-width:690px){.hero-with-companion{padding:31px 22px 96px;margin-bottom:22px}.hero-with-companion .intro{max-width:100%}.companion-pet-link{top:auto;right:12px;bottom:-15px;width:106px}.companion-pet-link .pet-svg{width:102px;height:106px}.companion-pet-tag{padding:5px 7px;font-size:9.5px}}
-@media(prefers-reduced-motion:reduce){.companion-pet-link,.companion-pet-link .pet-svg,.pet-arrow{transition:none}}
+.hero-with-companion .intro{max-width:660px}
+.companion-pet-link{position:absolute;z-index:3;right:22px;top:-9px;width:114px;display:flex;flex-direction:column;align-items:center;gap:0;text-decoration:none;color:#121212;border-radius:10px;transition:transform .18s ease}
+.companion-pet-link .pet-svg{display:block;width:114px;height:117px;overflow:visible;filter:none;transition:transform .22s ease}
+.companion-pet-link:hover .pet-svg,.companion-pet-link:focus-visible .pet-svg{transform:translateY(-4px)}
+.companion-pet-link:focus-visible{outline:2px solid #111;outline-offset:4px}
+.companion-pet-tag{display:block;color:#171717;text-align:center;background:none;border:0;box-shadow:none;padding:0;margin-top:-2px;font:italic 11px/1.25 Georgia,"Times New Roman",serif;white-space:nowrap;text-decoration:none}
+.companion-pet-tag .pet-arrow{font:normal 11px Arial,sans-serif}
+.companion-pet-link:hover .companion-pet-tag{text-decoration:underline;text-underline-offset:3px}
+@media(max-width:780px){.hero-with-companion{padding-right:150px}.companion-pet-link{right:13px;top:-8px;width:106px}.companion-pet-link .pet-svg{width:106px;height:109px}}
+@media(max-width:690px){.hero-with-companion{padding:31px 22px 79px;margin-bottom:18px}.hero-with-companion .intro{max-width:100%;font-size:16px}.companion-pet-link{top:auto;right:15px;bottom:-14px;width:90px}.companion-pet-link .pet-svg{width:90px;height:93px}.companion-pet-tag{font-size:10px}}
+@media(prefers-reduced-motion:reduce){.companion-pet-link,.companion-pet-link .pet-svg{transition:none}}
 
 </style>
 </head>
@@ -63,42 +62,23 @@ footer{margin:38px 0 35px;padding-top:22px;border-top:1px solid var(--line);colo
 <div class="overline">Production écrite · PE</div>
 <h1 id="mainTitle">Exprimer son point de vue.</h1>
 <p class="intro">Une idée à discuter, un exemple concret à développer : entraînez-vous à argumenter en quelques phrases.</p>
-<a class="companion-pet-link" href="./compagnon-metacognitif/" aria-label="Ouvrir Plume, l’assistant d’écriture">
-<svg class="pet-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 183" role="img" aria-label="Petit chat esquissé à la main, béret et crayon">
-<g fill="none" stroke="#86644c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-  <!-- Airy tail, peeking above the title card -->
-  <path d="M139 134 C168 125 175 100 159 92 C150 87 142 94 144 102" stroke="#a87a58"/>
-  <!-- Pointed ears and simple head -->
-  <path d="M47 75 L51 42 Q51 39 55 43 L72 55
-           Q93 48 110 56 L128 39 Q131 36 132 42 L137 77
-           Q143 96 132 115 Q119 133 91 134 Q59 136 44 118 Q32 102 47 75Z" fill="#fffaed"/>
-  <!-- ears -->
-  <path d="M54 68 L56 53 L64 62 M119 60 L128 50 L131 68" stroke="#d6a081" stroke-width="1.7"/>
-  <!-- soft eyebrows and happy closed eyes -->
-  <path d="M62 91 Q73 84 82 93 M101 92 Q112 84 122 91" stroke-width="2.6"/>
-  <!-- discreet circular glasses -->
-  <circle cx="73" cy="91" r="17" stroke="#a2785b" stroke-width="1.7"/>
-  <circle cx="111" cy="91" r="17" stroke="#a2785b" stroke-width="1.7"/>
-  <path d="M90 88 Q92 85 94 88" stroke="#a2785b" stroke-width="1.7"/>
-  <!-- nose / mouth / whiskers -->
-  <path d="M87 106 Q92 103 97 106 L92 110Z" fill="#c38e82" stroke="none"/>
-  <path d="M92 110 Q89 117 84 114 M92 110 Q96 117 101 113" stroke-width="1.8"/>
-  <path d="M60 109 L44 106 M60 114 L46 117 M121 109 L137 106 M121 114 L136 117" stroke-width="1.3"/>
-  <!-- a single fluid body curve and tiny scarf -->
-  <path d="M50 127 C41 146 47 161 65 166 M130 127 C141 139 140 158 130 166" stroke="#86644c"/>
-  <path d="M62 133 Q92 145 120 132 M70 138 Q87 148 111 139" stroke="#b25f50" stroke-width="2"/>
-  <!-- little paws lean over the card edge -->
-  <path d="M61 143 Q55 146 56 156 Q62 164 75 158 M109 158 Q124 164 130 155 Q131 145 124 143"/>
-  <path d="M69 157 L68 163 M120 157 L119 163" stroke-width="1.4"/>
-  <!-- a writing pencil and thin note outline -->
-  <path d="M83 159 L105 137 L110 142 L88 164 Z" fill="#f4e3bc" stroke="#a77c53" stroke-width="1.4"/>
-  <path d="M105 137 L115 132 L110 142" stroke-width="1.5"/>
-  <path d="M79 165 Q91 167 101 164" stroke="#a77c53" stroke-width="1.4"/>
+<a class="companion-pet-link" href="./compagnon-metacognitif/" aria-label="Écrire avec moi — ouvrir l’assistant d’écriture">
+<svg class="pet-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 163" role="img" aria-label="Chat dessiné en quelques traits noirs, avec un béret et un crayon">
+<g fill="none" stroke="#101010" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round">
+  <!-- A few long, confident curves, like a freehand ink sketch. -->
+  <path d="M38 76 Q32 58 40 34 L54 50 Q79 38 103 50 L119 33 Q127 53 121 75 Q131 93 115 106 Q100 117 80 114 Q56 117 42 104 Q28 92 38 76"/>
+  <path d="M48 52 Q49 25 79 22 Q106 20 115 44 Q92 57 48 52 M53 53 Q80 62 111 50 M91 23 L96 15"/>
+  <!-- The entire expression is just two eyelids, a nose, and a smile. -->
+  <path d="M50 82 Q60 73 70 82 M91 82 Q101 73 112 82"/>
+  <path d="M76 94 Q81 90 86 94 L81 97 M81 97 Q76 105 70 101 M81 97 Q87 104 92 100"/>
+  <path d="M45 95 L30 91 M45 101 L29 104 M116 95 L129 91 M115 100 L130 104" stroke-width="1.65"/>
+  <!-- One arm with a pencil; the body is suggested, not filled in. -->
+  <path d="M46 110 Q34 122 39 143 M113 111 Q126 123 121 144"/>
+  <path d="M51 133 Q57 144 69 138 M98 138 Q112 145 117 135"/>
+  <path d="M66 141 L100 116 L104 121 L71 146 L64 148 Z" stroke-width="1.85"/>
+  <path d="M125 130 Q150 124 147 99 Q145 89 139 93"/>
+  <path d="M29 149 Q78 146 131 150" stroke-width="1.5"/>
 </g>
-<!-- One tiny terracotta French beret as the only colored accent -->
-<path d="M66 60 Q69 32 97 28 Q120 27 130 47 Q119 62 91 60Z" fill="#bd7565" stroke="#8d5149" stroke-width="2" stroke-linejoin="round"/>
-<path d="M71 61 Q96 69 125 57" fill="none" stroke="#8d5149" stroke-width="2.3" stroke-linecap="round"/>
-<path d="M107 31 Q111 25 114 24" fill="none" stroke="#8d5149" stroke-width="3" stroke-linecap="round"/>
 </svg>
 <span class="companion-pet-tag">Écrire avec moi <span class="pet-arrow" aria-hidden="true">↗</span></span>
 </a>
