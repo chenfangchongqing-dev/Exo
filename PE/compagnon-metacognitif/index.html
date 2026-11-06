@@ -181,7 +181,7 @@ form.addEventListener("submit",function(e){e.preventDefault();sendText(input.val
 input.addEventListener("keydown",function(e){if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();form.requestSubmit()}});
 document.getElementById("applyCode").addEventListener("click",function(){
  var value=document.getElementById("classCode").value.trim();
- if(value.length<8){document.getElementById("accessHint").textContent="Code trop court. Demande le code à l'enseignante.";return;}
+ if(value.length<12){document.getElementById("accessHint").textContent="Code trop court. Demande le code à l'enseignante.";return;}
  CLASS_CODE=value;
  document.getElementById("classCode").value="";
  document.getElementById("accessHint").textContent="Code saisi pour cette session. L'accès sera vérifié lors du prochain message.";
