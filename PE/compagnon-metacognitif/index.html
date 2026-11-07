@@ -52,7 +52,7 @@ h1{font-size:clamp(30px,4.8vw,48px);line-height:1.12;letter-spacing:-.035em;marg
 <header><a class="brand" href="../../PE/index.html"><span aria-hidden="true"></span> INSPIRE 4 · PE</a><a class="back" href="../index.html">← Production écrite</a></header>
 <main>
 <section class="hero">
-<p class="overline">UNITÉ 1 · ÉCRIRE EN RÉFLÉCHISSANT</p>
+<p class="overline">PRODUCTION ÉCRITE · ÉCRIRE EN RÉFLÉCHISSANT</p>
 <h1>Mon compagnon <em style="font-family:Georgia,serif;font-weight:400">métacognitif.</em></h1>
 <p class="intro">Avant de chercher la bonne phrase, prenons le temps de clarifier ton idée. Une question à la fois : c'est toi qui construis ton texte.</p>
 <div class="labels"><span>01 · Je choisis</span><span>02 · Je réfléchis</span><span>03 · J'illustre</span><span>04 · Je vérifie</span></div>
@@ -64,8 +64,8 @@ h1{font-size:clamp(30px,4.8vw,48px);line-height:1.12;letter-spacing:-.035em;marg
 </div>
 <div class="layout">
 <section class="panel chat-panel" aria-labelledby="chatTitle">
-<div class="panel-head"><h2 id="chatTitle">Un dialogue pour apprendre à argumenter</h2><small>ACCOMPAGNEMENT GUIDÉ</small></div>
-<div class="stage" aria-live="polite">Étape actuelle : <b id="stageName">Choisir une idée reçue</b></div>
+<div class="panel-head"><h2 id="chatTitle">Un dialogue pour avancer dans mon écriture</h2><small>ACCOMPAGNEMENT GUIDÉ</small></div>
+<div class="stage" aria-live="polite">Étape actuelle : <b id="stageName">Présenter ma tâche</b></div>
 <div class="chat" id="chat" role="log" aria-live="polite" aria-relevant="additions"></div>
 <div id="suggestions" class="suggestions" aria-label="Propositions pour commencer"></div>
 <form id="messageForm" class="composer">
@@ -80,7 +80,7 @@ h1{font-size:clamp(30px,4.8vw,48px);line-height:1.12;letter-spacing:-.035em;marg
 <div class="panel-head"><h2>Mon cheminement</h2><small>JE GARDE LA MAIN</small></div>
 <div class="side-body"><p>Tu peux réfléchir en plusieurs étapes sans être obligé de toutes les suivre.</p>
 <ol id="progress" class="progress">
-<li data-phase="topic"><span class="num">1</span><span>Je choisis une idée reçue</span></li>
+<li data-phase="topic"><span class="num">1</span><span>Je présente ma tâche</span></li>
 <li data-phase="position"><span class="num">2</span><span>Je prends position</span></li>
 <li data-phase="reason"><span class="num">3</span><span>Je cherche pourquoi</span></li>
 <li data-phase="example"><span class="num">4</span><span>Je trouve un exemple</span></li>
@@ -92,7 +92,7 @@ h1{font-size:clamp(30px,4.8vw,48px);line-height:1.12;letter-spacing:-.035em;marg
 <p class="diagnosis-title">MON POINT D'APPUI</p>
 <p class="diagnosis-line"><span class="diagnosis-label">Déjà là</span><span id="diagGoal">À préciser avec l'élève</span></p>
 <p class="diagnosis-line"><span class="diagnosis-label">Difficulté</span><span id="diagNeed">Pas encore identifiée</span></p>
-<p class="diagnosis-line"><span class="diagnosis-label">Prochain pas</span><span id="diagNext">Exprimer ou partager mon idée</span></p>
+<p class="diagnosis-line"><span class="diagnosis-label">Prochain pas</span><span id="diagNext">Présenter ma tâche ou ma difficulté</span></p>
 <p class="diagnosis-help">Repères provisoires : tu peux les corriger dans la conversation.</p>
 </div></div>
 </section>
@@ -126,8 +126,8 @@ if(GLM_ENDPOINT){
  document.getElementById("modeNotice").innerHTML='<span aria-hidden="true">ⓘ</span><div><strong>Mode GLM configuré · Accès enseignant / classe.</strong> Les messages sont transmis à un modèle externe via un serveur sécurisé lorsque le code de classe est validé. La connexion doit être testée avant toute utilisation en cours.</div>';
  document.getElementById("privacyNote").innerHTML="<strong>Confidentialité :</strong> en mode GLM, tes messages et quelques réponses précédentes sont transmis au serveur pédagogique et à l'API GLM pour produire la réponse. N'entre aucune donnée personnelle sensible. Le dialogue n'est pas enregistré par ce site ; tu peux l'exporter.";
 }
-var TOPICS=["Il faut être en couple pour être heureux.","L'argent fait le bonheur.","Il faut toujours être heureux."];
-var STAGES={fr:["Choisir une idée reçue","Exprimer mon avis","Expliquer mon avis","Trouver un exemple","Examiner mon exemple","Passer à la rédaction","Relire mon raisonnement"],zh:["选择一个常见观念","表达自己的立场","解释自己的理由","寻找具体例子","检验例子的作用","进入写作","回顾论证过程"]};
+var STARTERS=["Je voudrais commencer un texte.","J’ai déjà un brouillon.","Je bloque sur une idée ou une formulation."];
+var STAGES={fr:["Présenter ma tâche","Exprimer mon avis","Expliquer mon avis","Trouver un exemple","Examiner mon exemple","Passer à la rédaction","Relire mon raisonnement"],zh:["说明写作任务","表达自己的立场","解释自己的理由","寻找具体例子","检验例子的作用","进入写作","回顾论证过程"]};
 function t(fr,zh){return state.lang==="zh"?zh:fr}
 function normal(s){return s.toLowerCase().replace(/[\u2019\u2018]/g,"'").trim()}
 function requestChinese(s){return /(?:用|说|讲|回答|解释|切换|改成|能|可以|请).{0,14}(?:中文|汉语)|(?:中文|汉语).{0,10}(?:回答|解释|交流|说|可以|行吗|好吗)|en chinois|réponds?.{0,15}chinois|parle.{0,15}chinois|can you speak chinese|chinese please/i.test(s)}
@@ -148,11 +148,11 @@ function renderStage(){
  var labels={example:state.lang==="zh"?"需要具体例证":"Besoin d'un exemple",planning:state.lang==="zh"?"尚未确定立场":"Position à préciser",reasoning:state.lang==="zh"?"检查论证关系":"Lien argument–preuve",language:state.lang==="zh"?"法语表达":"Formulation en français",drafting:state.lang==="zh"?"正在组织写作":"Rédaction en cours"};
  document.getElementById("diagGoal").textContent=m.goal||(state.lang==="zh"?"尚待明确":"Encore à préciser");
  document.getElementById("diagNeed").textContent=labels[m.difficulty]||(state.lang==="zh"?"尚未确定":"Non encore précisée");
- document.getElementById("diagNext").textContent=m.next||(state.lang==="zh"?"描述目前的想法或困难":"Présenter mon idée ou mon obstacle");
+ document.getElementById("diagNext").textContent=m.next||(state.lang==="zh"?"描述目前的想法或困难":"Présenter ma tâche ou ma difficulté");
 }
 function addSuggestions(items){suggestions.textContent="";items.forEach(function(label){var b=document.createElement("button");b.className="chip";b.type="button";b.textContent=label;b.addEventListener("click",function(){sendText(label)});suggestions.appendChild(b)})}
 function suggested(){
- if(state.phase==="topic")return TOPICS;
+ if(state.phase==="topic")return STARTERS;
  if(state.phase==="position")return state.lang==="zh"?["我倾向于赞同","我倾向于反对","我还没想好"]:["Je suis plutôt d'accord.","Je ne suis pas d'accord.","Je ne sais pas encore."];
  if(state.phase==="reason")return state.lang==="zh"?["我想不出理由","我不知道法语怎么表达","先给我一个示范"]:["Je n'ai pas encore de raison.","Je cherche une expression.","Donne-moi une petite piste."];
  if(state.phase==="example")return state.lang==="zh"?["我想不出例子","你帮我想一个具体例子","可以开始写作文了"]:["Je n'arrive pas à trouver un exemple.","Donne-moi un exemple concret.","Passons à la rédaction."];
@@ -170,7 +170,7 @@ if(requestChinese(s)){languageChange("zh");return}
 if(requestFrench(s)){languageChange("fr");return}
 if(vocabNeed(s)){helpWithVocab(s);return}
 if(isDraft(s)&&state.phase==="topic"){respond(t("Tu as déjà un début de texte. Avant toute correction, quel point voudrais-tu examiner toi-même : ta position, la pertinence de ton exemple ou le lien entre les deux ?","你已经有一段初稿了。修改之前，你最想先检查哪一点：立场、例子的相关性，还是例子与观点之间的关系？"));return}
-if(state.phase==="topic"){if(topicish(s)){chooseTopic(s);return}respond(t("Pour commencer, choisis une idée reçue sur le bonheur, ou écris celle que tu souhaites discuter. Quelle affirmation veux-tu questionner ?","先选一个关于幸福的常见观念，或者自己写一个。你想讨论哪一种说法？"));return}
+if(state.phase==="topic"){if(topicish(s)){chooseTopic(s);return}respond(t("Pour commencer, présente-moi le sujet de ton travail, sa consigne ou la difficulté que tu rencontres. Que souhaites-tu travailler ?","我们可以从你的具体写作任务开始。你可以告诉我题目、要求，或者你现在遇到的困难。"));return}
 if(state.phase==="position"){if(confused(s)){state.hint++;respond(t("Pas besoin d'une réponse parfaite. As-tu plutôt tendance à être d'accord, à ne pas être d'accord, ou cela dépend-il des situations ?","不需要完美答案。你倾向于赞同、不赞同，还是认为要看具体情况？"));return}state.stance=s;state.phase="reason";state.hint=0;respond(t("Qu'est-ce qui te fait penser cela ? Essaie d'exprimer une raison avec tes propres mots.","是什么让你这样想？试着用自己的话说出一个理由。"));return}
 if(state.phase==="reason"){if(exampleNeed(s)){state.phase="example";state.hint=0;helpWithExample();return}if(confused(s)){state.hint++;respond(state.hint===1?t("Qu'est-ce qui compte le plus dans cette question, selon toi : les relations, la liberté ou autre chose ? Choisis un aspect.","在这个问题上，你最看重哪一点：人与人的关系、个人自由，还是别的方面？选一个角度想想。"):t("Tu peux commencer très simplement : « Je pense cela parce que… » Quelle idée voudrais-tu placer après « parce que » ?","可以从最简单的一句开始：« Je pense cela parce que… »。你想在 parce que 后面说明什么？"));return}state.reason=s;state.phase="example";state.hint=0;respond(t("Tu as proposé une raison. Peux-tu penser à une situation concrète qui permettrait de la rendre plus convaincante ?","你已经提出了一个理由。能想到一件具体的事，让这个理由更有说服力吗？"));return}
 if(state.phase==="example"){if(exampleNeed(s)||confused(s)){helpWithExample();return}state.example=s;state.phase="interpretation";state.hint=0;respond(t("Quel lien vois-tu entre cette situation et ton point de vue ? Qu'est-ce que ton exemple montre exactement ?","这个情境与你的观点有什么关系？这个例子具体说明了什么？"));return}
@@ -204,7 +204,7 @@ async function sendText(value){
  }catch(error){addTurn("bot","[Connexion GLM] "+(error&&error.message?error.message:"Le service est indisponible.")+" Réessaie lorsque le service sera prêt.");update();}
  finally{send.disabled=false;send.textContent="Envoyer";input.focus();}
 }
-function restart(){state={phase:"topic",lang:"fr",topic:"",stance:"",reason:"",example:"",interpretation:"",hint:0,history:[],meta:{}};chat.textContent="";respond("Bonjour ! Tu peux choisir une idée reçue sur le bonheur, ou coller directement un brouillon en précisant ce qui te bloque. Nous partirons de ce que tu as déjà fait.");}
+function restart(){state={phase:"topic",lang:"fr",topic:"",stance:"",reason:"",example:"",interpretation:"",hint:0,history:[],meta:{}};chat.textContent="";respond("Bonjour ! Que souhaites-tu travailler aujourd’hui ? Tu peux me présenter la consigne, une idée ou un passage déjà rédigé, ou expliquer ce qui te pose problème. Nous partirons de ce que tu as déjà fait.");}
 form.addEventListener("submit",function(e){e.preventDefault();sendText(input.value)});
 input.addEventListener("keydown",function(e){if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();form.requestSubmit()}});
 document.getElementById("applyCode").addEventListener("click",function(){
