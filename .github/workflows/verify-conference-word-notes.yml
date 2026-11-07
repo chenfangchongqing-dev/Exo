@@ -1,0 +1,60 @@
+name: Verify conference Word notes and theory dots
+on:
+  push:
+    paths:
+      - 'Events/2026-fle-metacognition/notes.html'
+      - 'Events/2026-fle-metacognition/theory-bridge.js'
+      - 'Events/2026-fle-metacognition/index.html'
+      - 'Events/2026-fle-metacognition/part02.html'
+      - 'Events/2026-fle-metacognition/part03.html'
+      - 'Events/2026-fle-metacognition/closing.html'
+      - '.github/workflows/verify-conference-word-notes.yml'
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install local DOM harness
+        run: npm install --no-save --no-package-lock jsdom@24
+      - name: Check notes archive and red-dot interactions
+        run: |
+          node --check Events/2026-fle-metacognition/theory-bridge.js
+          node --input-type=module <<'NODE'
+          import fs from "node:fs";
+          import assert from "node:assert/strict";
+          import {JSDOM} from "jsdom";
+          const base="Events/2026-fle-metacognition/";
+          const bridge=fs.readFileSync(base+"theory-bridge.js","utf8");
+          const notes=fs.readFileSync(base+"notes.html","utf8");
+          for(const phrase of ["Word互动研讨讲稿","S45","S26","S52","吴红云","刘润清","AI介入写作的案例分析"]){
+            assert.ok(notes.includes(phrase),"Missing imported Word concept: "+phrase);
+          }
+          const nd=new JSDOM(notes,{url:"https://example.org/notes.html",runScripts:"outside-only"});
+          const script=notes.match(/<script>([\s\S]*?)<\/script>/);
+          assert.ok(script,"notes script absent");nd.window.eval(script[1]);
+          const chip=nd.window.document.querySelector(".dot-chip");
+          assert.ok(chip,"theory chip missing");chip.click();
+          assert.ok(nd.window.document.querySelector("#theoryRef").textContent.includes("理论线索"));
+          assert.ok(nd.window.document.querySelectorAll(".chapter").length>=5);
+          nd.window.close();
+          for(const [name,minimum] of [["index.html",0],["part02.html",2],["part03.html",2],["closing.html",1],["s09-demo.html",0]]){
+            const html=fs.readFileSync(base+name,"utf8");
+            assert.ok(html.includes('src="./theory-bridge.js'),"missing resource link on "+name);
+            const dom=new JSDOM(html,{url:"https://example.org/"+name,runScripts:"outside-only"});
+            dom.window.eval(bridge);
+            const document=dom.window.document;
+            assert.ok(document.querySelector(".bridge-toolbar a").getAttribute("href").includes("notes.html"));
+            assert.ok(document.querySelectorAll(".bridge-inline-dot").length>=minimum,"not enough theory marks in "+name);
+            document.querySelector(".bridge-red").click();
+            assert.equal(document.querySelector(".bridge-drawer").hidden,false,"drawer not opening "+name);
+            assert.ok(document.querySelector("#bridgeFocus").textContent.includes("理论线索"));
+            document.querySelector(".bridge-close").click();
+            assert.equal(document.querySelector(".bridge-drawer").hidden,true);
+            dom.window.close();
+          }
+          console.log("PASS Word full-text import, theory dots, speaker notes link and mobile-safe drawer");
+          NODE
