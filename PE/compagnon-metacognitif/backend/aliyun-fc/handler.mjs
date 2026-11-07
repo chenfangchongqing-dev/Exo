@@ -35,7 +35,7 @@ function langRequest(s) {
 function noExample(s) { return /想不出例子|找不到例子|没有例子|举不出例子|不知道举什么例|后面想不出例子|pas d.exemple|ne (?:trouve|sais).{0,35}exemple|n.arrive pas.{0,40}exemple|no example/i.test(s); }
 function askExample(s) { return /帮我想.{0,6}例子|给我.{0,8}例子|帮我举例|你帮我想例子|我就只是要个例子|donne.moi un exemple|propose.{0,15}exemple|give me an example|exemple concret,? s.il te pla[iî]t/i.test(s); }
 function unclear(s) { return /(?:^|\s)je (ne )?sais pas|je n.ai aucune id[ée]e|je suis bloqu|aucune id[ée]e|我(?:还)?没想好|不知道|不懂|听不懂|没有思路|没思路|就是不知道|不清楚|想不到|不会|aucune id[ée]e|i don.t know/i.test(s); }
-function needLanguage(s) { return /comment dire|comment exprimer|chercher? (mes|les) mots|vocabulaire|une expression|traduire|词汇|法语怎么说|怎么表达|不会表达|表达不出来|找不到词|想不出法语|不知道法语怎么写|不知道法语怎么说/i.test(s); }
+function needLanguage(s) { return /comment dire|comment exprimer|chercher? (mes|les) mots|vocabulaire|une expression|traduire|词汇|法语怎么说|怎么表达|不会表达|表达不出来|找不到词|想不出法语|不知道法语怎么写|不知道法语怎么说|不知道.{0,6}法语.{0,10}(?:写|表达)|不会.{0,6}写法语|不会写法语|法语(?:句子)?写不出来|用法语(?:写|说)不出来|je ne sais pas [ée]crire en fran[cç]ais|je n.arrive pas [àa] [ée]crire en fran[cç]ais/i.test(s); }
 function wantsCompleteDraft(s){
  const v=String(s||"").trim();
  const cVerb=/(?:你|请|帮我|替我|给我|为我|直接|能不能|可不可以).{0,20}(?:写|代写|生成|完成|写完|写好)/i;
@@ -107,7 +107,7 @@ function modelInstructions({phase,language,goal,difficulty,support,intent,meta})
   return [
     "你是高校法语B1-B2写作伴学助手，在教师规约下提供帮助。当前优先测试 Unité 1 的三种教学困难，但不得预设学生正在讨论幸福、某项题目或特定立场。先读学生真实的任务与求助，再用"+l+"回复。学生输入可能含中文与法文。",
     "本轮任务："+(meta.task||"尚需明确")+"。学生已经表达的内容（不是你替他补出的观点）："+target+"。当前支架类别："+difficulty+"；当前阶段："+phase+"；本轮求助："+intent+"；强度："+support+"。",
-    "严格区分认知支持与元认知支持：认知支持要给足必要的例子、句型、推理解释或演示；元认知支持只在策略选择、困难诊断、检查是否支持论点及迁移时简短出现。不要每轮问学生为什么不知道，也不要提无穷无尽的问题。",
+    "严格区分认知支持与元认知支持：认知支持要给足必要的例子、句型、推理解释或演示；元认知支持只在策略选择、困难诊断、检查是否支持论点及迁移时简短出现。不要每轮问学生为什么不知道，也不要提无穷无尽的问题。学生已提供中文论述而法语表达受阻时，不得反复询问题目；先分解一个意义单位，给可调用的词汇、句架和一个局部示范，随后检查学生自行试写的句子以及迁移。",
     "先承认学生已经做到的具体一步，不评价人格；困难必须基于学生提供的事实，不能猜测学习心理。明确下一步要做什么，不能倒回要求重选观点。若学生说准备写作，立即转入写作，不再问选哪一方面。",
     "支架不能机械按‘选题—表态—理由—例子’排列。根据本轮真实困难选择：构思给具体线索；语言阻断给短语/局部句式并让学生尝试；论证缺口区分事实、推断与证据；学生已提出有界限的结论时承认其判断并进入写作。帮助不足时再升级，学生能前进就及时撤除。",
     "进行语义检验时以学生文本为依据。若学生讨论‘害怕幸福结束’，区分忧虑和挫败感；若讨论‘职业压力与幸福’，区分工作事实、可能自豪与有证据的幸福感；若讨论‘社交媒体刺激消费’，不要擅自补入消费动机、经历或课文原话。这些只是识别原则，不是强制每轮使用的主题。",
@@ -173,6 +173,30 @@ function clearWorkGoal(s) {
 function preexistingStudentWork(s) {
   return isDraft(s)||/\bmon exemple\b|j.ai une id[ée]e sur|je pense que|je voudrais garder l.id[ée]e|j.ai d[ée]j[àa] un brouillon|已有初稿|我已经写了|我认为/i.test(s);
 }
+// Recognise an existing mixed Chinese/French draft and its continuing language block.
+function s09Mixed(v) {
+  return (v.match(/[\u3400-\u9fff]/g)||[]).length>=45 &&
+    (v.match(/[A-Za-z\u00c0-\u024f]/g)||[]).length>=75;
+}
+function s09Topic(v) {
+  return (/(?:r[ée]seaux sociaux|社交媒体|网络分享)/i.test(v) &&
+    /(?:酒店|h[ôo]tel|拼团|轮流拍照|模仿|高品质|奢华|luxueux|luxe|物质生活)/i.test(v))
+    || /拼团.{0,16}酒店|轮流拍照/i.test(v);
+}
+function s09Draft(v,history) {
+  if(s09Mixed(v)&&s09Topic(v))return v;
+  return history.filter(t=>t.role==="user").map(t=>t.content).reverse()
+    .find(t=>s09Mixed(t)&&s09Topic(t))||"";
+}
+function s09FrenchSentence(v){
+  return !/[\u3400-\u9fff]/.test(v) && !needLanguage(v) &&
+    (v.match(/[A-Za-z\u00c0-\u024f]{2,}/g)||[]).length>=7 &&
+    /r[ée]seaux|envie|lux|imit|h[ôo]tel|impression|satisfaction/i.test(v);
+}
+function s09FullTranslation(v) {
+  return /(?:把|将|帮我).{0,18}(?:整段|全部|整篇|全文).{0,10}(?:翻译|写成法语)|(?:整段|全文).{0,8}(?:翻译|法语)/i.test(v);
+}
+
 async function handle(body,env){
   const s=text(body.message);
   if(!s||s.length>2500)return {error:"请输入1至2500个字符。",status:400};
@@ -228,6 +252,46 @@ async function handle(body,env){
       "Nous pouvons avancer sans rédiger tout le texte : présente la consigne ou une idée déjà préparée, puis nous traiterons une difficulté à la fois.",
       "我们先不生成整篇文章。请告诉我写作要求或已经形成的想法，我们从你最需要帮助的一步开始。",
       phase,{difficulty:"planning",next:"Définir le prochain petit pas",support:1,lastStrategy:"task-diagnosis",previousIntent:"whole-text-request"});
+  }
+
+  // S09: honour the student's already-developed idea before offering graded language support.
+  const draft09=s09Draft(s,history);
+  if(draft09 && (s09Mixed(s)||newNeedLanguage(s)||s09FrenchSentence(s)||
+      s09FullTranslation(s)||(previousDifficulty==="language"&&s.length<35))){
+    const first=s09Mixed(s)&&s09Topic(s);
+    const attempting=s09FrenchSentence(s);
+    const support=meta.difficulty==="language"?meta.support:0;
+    if(!meta.goal){const z=draft09.match(/[\u3400-\u9fff][\s\S]{35,}/);meta.goal=short(z?z[0]:draft09,190);}
+    meta.task="argumenter";
+    if(/[\u3400-\u9fff]/.test(s))language="zh";
+    if(attempting){
+      const result=await generate({text:s,history,phase:"writing",language,goal:meta.goal,
+        difficulty:"language",support:0,intent:"check-meaning-and-transfer",meta:
+        record(meta,{lastStrategy:"learner-french-attempt"})},env);
+      if(result.error)return result;
+      return outcome(result.reply,"writing",language,topic,record(meta,{difficulty:"language",
+        next:"Réemployer une expression pour présenter l'exemple de l'hôtel",support:0,
+        stuck:0,lastStrategy:"transfer-after-feedback",previousIntent:"language-transfer"}),result.mode);
+    }
+    if(first){
+      return reply(
+        "Tu as déjà un avis et un exemple : les images d'une vie luxueuse suscitent l'envie ; certaines personnes imitent cette vie pour une satisfaction passagère. Exprimons d'abord la première idée avec « susciter l'envie de » ou « un mode de vie luxueux ». Essaie une phrase, puis nous vérifierons le sens.",
+        "你已经写出法语开头，也有完整的中文观点和例子。我们先拆成三层：①社交媒体的奢华生活引发向往；②有人拼团订豪华酒店拍照模仿；③由此得到短暂满足。先尝试第①层，可用 « susciter l'envie de »、« un mode de vie luxueux »，自己写一句法语。",
+        "writing",{difficulty:"language",next:"Formuler la première idée en français",support:1,
+          lastStrategy:"meaning-split",previousIntent:"language-first-attempt"});
+    }
+    if(support<2 && !s09FullTranslation(s)){
+      return reply(
+        "Tu as déjà donné le sens. Voici un début à compléter : « Sur les réseaux sociaux, les images d'un mode de vie luxueux peuvent ... ». Pour dire « éveiller le désir », essaie « susciter l'envie de + infinitif ». Complète cette seule phrase.",
+        "不用再解释题目或观点。先借用一个句架：« Sur les réseaux sociaux, les images d'un mode de vie luxueux peuvent ... »。表达“引发向往”可选 « susciter l'envie de + infinitif »。请先补全这一句，不必翻译整段。",
+        "writing",{difficulty:"language",next:"Compléter la phrase avec susciter l'envie",support:2,
+          lastStrategy:"sentence-frame",previousIntent:"language-guided-attempt"});
+    }
+    return reply(
+      "Voici une phrase modèle courte, pas une traduction de ton paragraphe : « Les images de vies luxueuses sur les réseaux sociaux peuvent susciter l'envie de mener une vie semblable. » Maintenant, réutilise « imiter un mode de vie » ou « donner l'impression de » pour raconter l'exemple de l'hôtel avec tes mots.",
+      "这里给一句局部示范，不整段代写：« Les images de vies luxueuses sur les réseaux sociaux peuvent susciter l'envie de mener une vie semblable. » 接着，请自己选择 « imiter un mode de vie » 或 « donner l'impression de »，写出拼团订酒店拍照的细节。这是语言资源向新句子的迁移。",
+      "writing",{difficulty:"language",next:"Réemployer l'expression dans l'exemple de l'hôtel",support:3,
+        lastStrategy:"model-and-transfer",previousIntent:"language-adaptation"});
   }
 
   // A student's explicit request is more important than the old phase.
