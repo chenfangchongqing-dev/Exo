@@ -3,6 +3,8 @@ on:
   push:
     paths:
       - 'PE/compagnon-metacognitif/backend/aliyun-fc/**'
+      - 'PE/compagnon-metacognitif/language-scaffold.js'
+      - 'PE/compagnon-metacognitif/index.html'
       - '.github/workflows/verify-companion-pedagogy.yml'
   workflow_dispatch:
 jobs:
@@ -17,3 +19,7 @@ jobs:
         run: node --check PE/compagnon-metacognitif/backend/aliyun-fc/handler.mjs
       - name: Regression scenarios (mock GLM only)
         run: node PE/compagnon-metacognitif/backend/aliyun-fc/tests/regression.mjs
+      - name: Browser fallback syntax and simulation checks
+        run: |
+          node --check PE/compagnon-metacognitif/language-scaffold.js
+          node PE/compagnon-metacognitif/backend/aliyun-fc/tests/client-scaffold.cjs
