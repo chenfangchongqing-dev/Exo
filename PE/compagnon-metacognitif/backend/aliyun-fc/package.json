@@ -1,9 +1,9 @@
 {
   "name": "inspire4-glm-ali-fc",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "private": true,
   "type": "module",
-  "description": "Teacher-regulated GLM writing coach with full-essay request interception and output guard",
+  "description": "Teacher-regulated GLM writing coach with S09 adaptive language retrieval, transfer and full-essay guard",
   "engines": {
     "node": ">=20"
   }
