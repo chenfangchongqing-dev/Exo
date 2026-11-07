@@ -1,9 +1,9 @@
 {
   "name": "inspire4-glm-ali-fc",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "private": true,
   "type": "module",
-  "description": "Teacher-regulated adaptive cognitive and metacognitive GLM writing coach for Aliyun FC",
+  "description": "Teacher-regulated GLM writing coach with full-essay request interception and output guard",
   "engines": {
     "node": ">=20"
   }

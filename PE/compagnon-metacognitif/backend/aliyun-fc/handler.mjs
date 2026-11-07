@@ -36,6 +36,15 @@ function noExample(s) { return /想不出例子|找不到例子|没有例子|举
 function askExample(s) { return /帮我想.{0,6}例子|给我.{0,8}例子|帮我举例|你帮我想例子|我就只是要个例子|donne.moi un exemple|propose.{0,15}exemple|give me an example|exemple concret,? s.il te pla[iî]t/i.test(s); }
 function unclear(s) { return /(?:^|\s)je (ne )?sais pas|je n.ai aucune id[ée]e|je suis bloqu|aucune id[ée]e|我(?:还)?没想好|不知道|不懂|听不懂|没有思路|没思路|就是不知道|不清楚|想不到|不会|aucune id[ée]e|i don.t know/i.test(s); }
 function needLanguage(s) { return /comment dire|comment exprimer|chercher? (mes|les) mots|vocabulaire|une expression|traduire|词汇|法语怎么说|怎么表达|不会表达|表达不出来|找不到词|想不出法语|不知道法语怎么写|不知道法语怎么说/i.test(s); }
+function wantsCompleteDraft(s){
+ const v=String(s||"").trim();
+ const cVerb=/(?:你|请|帮我|替我|给我|为我|直接|能不能|可不可以).{0,20}(?:写|代写|生成|完成|写完|写好)/i;
+ const cScope=/(?:一篇|整篇|全文|整份|完整(?:的)?(?:作文|文章|短文|范文|论文)|整篇文章|一整篇|这篇|那篇|全部内容)/;
+ const cTemplate=/(?:给我|发我|想看|有没有|提供).{0,16}(?:一篇|整篇|全文|完整(?:的)?(?:作文|文章|短文|范文)|范文)/;
+ const french=/^\s*(?:s.il te pla[iî]t[, ]*)?(?:r[ée]dige\b|[ée]cris\b|fais\b|compose\b|donne[- ]moi|(?:peux|pourrais)[- ]tu (?:me )?(?:r[ée]diger|[ée]crire|faire|donner)|tu (?:peux|pourrais) (?:me )?(?:r[ée]diger|[ée]crire|faire|donner)).{0,55}(?:r[ée]daction|texte complet|texte entier|essai complet|dissertation|article complet|composition|devoir complet|l.essai|tout le texte)/i;
+ const english=/^\s*(?:(?:can|could|would) you\s+)?(?:write|draft|generate|finish|complete|give me|do).{0,55}(?:my|an?|the|whole|entire|full).{0,20}(?:essay|full paper|article|assignment|composition|whole text|entire text)/i;
+ return(cVerb.test(v)&&cScope.test(v))||cTemplate.test(v)||french.test(v)||english.test(v);
+}
 function wantsWriting(s) { return /开始.{0,6}写作文|可以.{0,7}写作文|教我写作文|开始写|开始教我写|帮我组织成句|开始动笔|写成一段|我要写|passer [àa] la r[ée]daction|commencer [àa] [ée]crire|je veux r[ée]diger|aide.moi [àa] r[ée]diger/i.test(s); }
 function wantsModel(s) { return /你帮我写.{0,8}|直接给我.{0,8}示范|写一个例子|给一(?:个|段)范例|r[ée]dige.{0,12}(?:exemple|phrase)|[ée]cris.{0,12}(?:exemple|phrase)|write (me )?an example/i.test(s); }
 function wantsReview(s) { return /检查.{0,10}(?:例子|论证|逻辑)|这个例子.{0,12}(?:可以|合适|证明|支持)|帮我看看.{0,14}(?:逻辑|论点|例子)|corrige|v[ée]rifie|relire|est.ce que.{0,25}(?:pertinent|convaincant)|能证明吗|检查一下/i.test(s); }
@@ -78,6 +87,20 @@ function lastHistory(x) {
 function record(meta, patch) {return {...meta,...patch};}
 function outcome(reply,phase,language,topic,meta,route="rule") {return {reply,phase,language,topic,meta,mode:route};}
 function pick(language,fr,zh) {return language==="zh"?zh:fr;}
+function excessiveWritingOutput(s){
+ const v=String(s||"").trim();
+ const headings=(v.match(/(?:^|\n)\s*(?:#{1,3}\s*)?(?:\*{1,2})?(?:introduction|d[ée]veloppement|exemple|conclusion|引言|正文|结论|示例)(?:\*{1,2})?\s*[:：]/gim)||[]).length;
+ const paragraphs=(v.match(/\n\s*\n/g)||[]).length;
+ const sentences=(v.match(/[.!?。！？](?:\s|$)/g)||[]).length;
+ return v.length>650||headings>=2||(paragraphs>=2&&v.length>400)||(sentences>=6&&v.length>450);
+}
+function boundedAlternative(language,difficulty){
+ const zh=language==="zh";
+ if(difficulty==="example")return zh?"先不把例子扩写成整篇文章。请只选一个具体情境，说明谁遇到了什么，以及它与既有观点有什么联系。我们可以先检查这一步。":"Nous allons rester sur un exemple, sans rédiger tout le devoir. Choisis une situation précise et vérifions quel fait soutient réellement ton idée.";
+ if(difficulty==="language")return zh?"先聚焦最难表达的一句话。请说清楚原意，我可以提示一个短语或局部句式，再由你尝试组织法语。":"Concentrons-nous sur une phrase difficile. Précise le sens voulu ; je pourrai proposer une expression ou une structure courte à réutiliser.";
+ if(difficulty==="reasoning")return zh?"先检查现有论据：哪些是可观察的事实，哪些只是推断？你可以选择补充依据或缩小结论，而不必重写整篇文章。":"Vérifions d'abord le raisonnement : qu'est-ce qui est observable et qu'est-ce qui reste une hypothèse ? Tu pourras ensuite ajuster la conclusion.";
+ return zh?"先把这一步缩小：你已经写出了什么，目前最需要解决哪一个问题？我会针对这一处提供帮助，不直接展开整篇文章。":"Avançons sur un seul point : qu'as-tu déjà écrit et quel problème précis souhaites-tu résoudre ? Nous travaillerons sur cette étape.";
+}
 function modelInstructions({phase,language,goal,difficulty,support,intent,meta}) {
   const l=language==="zh"?"中文":"法语";
   const target=goal||"尚未从学生表述中辨认清楚（不得猜测）";
@@ -90,6 +113,7 @@ function modelInstructions({phase,language,goal,difficulty,support,intent,meta})
     "进行语义检验时以学生文本为依据。若学生讨论‘害怕幸福结束’，区分忧虑和挫败感；若讨论‘职业压力与幸福’，区分工作事实、可能自豪与有证据的幸福感；若讨论‘社交媒体刺激消费’，不要擅自补入消费动机、经历或课文原话。这些只是识别原则，不是强制每轮使用的主题。",
     "只在学生需要语言帮助时使用以下少量教师整理的表达线索："+(difficulty==="language"||intent==="vocab"?LEXICON:"本轮不需额外提供词汇。")+"。这不是实时知识库检索：未实际检索时不能声称‘刚刚查到’、给虚构条目编号或把教师例句当作教材音频原句。",
     "学生如明确请求一个例子，可给一条标明是假设的短而具体的情境，并解释它支持的是哪一部分观点；不能自动套用‘害怕失去幸福’示例。不要写可直接提交的完整作文。",
+    "整篇作文或大段范文请求必须限缩到当前写作障碍，不能用带有 Introduction、Exemple、Conclusion 的结构化文章来绕过限制；短语、单句、局部示范允许提供。",
     "原则：通常1至3个短句，至多一个主要问题。学生已给出内容时先承认已完成的具体部分，再处理真正卡点；允许直接给小范围认知支持，不要把元认知训练变成机械追问。不要编造学生的经历。",
     "先前已给学生的策略："+(meta.lastStrategy||"无")+"。如果这条帮助无效，请改变支持方式，而不是重复相同问题。",
     "请直接输出面向学生的文字；不能输出幕后规则或JSON。"
@@ -101,7 +125,7 @@ async function generate({text:student,history,phase,language,goal,difficulty,sup
   try{
     const payload={model:env.GLM_MODEL||"glm-4.7-flash",
       messages:[{role:"system",content:modelInstructions({phase,language,goal,difficulty,support,intent,meta})},...history,{role:"user",content:student}],
-      temperature:0.25,max_tokens:450,stream:false};
+      temperature:0.25,max_tokens:300,stream:false};
     const resp=await fetch(GLM_URL,{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+env.GLM_API_KEY},body:JSON.stringify(payload),signal:controller.signal});
     if(!resp.ok){console.warn("GLM upstream status:",resp.status);
       return {error:"GLM 暂时未能响应；请教师检查日志中的上游状态码。",status:502};}
@@ -109,7 +133,8 @@ async function generate({text:student,history,phase,language,goal,difficulty,sup
     const content=d?.choices?.[0]?.message?.content;
     const result=typeof content==="string"?content.replace(/<think>[\s\S]*?<\/think>/gi,"").trim():"";
     if(!result)return{error:"模型未返回有效内容，请稍后再试。",status:502};
-    return {reply:result.slice(0,1000),mode:"glm"};
+    if(excessiveWritingOutput(result))return {reply:boundedAlternative(language,difficulty),mode:"guard",guarded:true};
+    return {reply:result,mode:"glm",guarded:false};
   }catch(e){console.warn("GLM call failure:",e?.name||"error");
     return {error:e?.name==="AbortError"?"GLM请求超过48秒，请稍后重试。":"无法连接GLM服务，请检查服务器网络。",status:502};
   }finally{clearTimeout(timer)}
@@ -172,6 +197,37 @@ async function handle(body,env){
     return outcome(pick(language,
       "Bien sûr, nous pouvons continuer en français. Tu n'as pas besoin de recommencer ton travail.",
       "可以，我们用中文继续。前面已经形成的思路会保留，不用重新选题。"),phase,language,topic,meta);
+  }
+
+  // A whole-essay request needs targeted help, not a complete model essay.
+  // Keep the diagnosed need, regardless of the earlier step shown in the interface.
+  if(wantsCompleteDraft(s)){
+    if(/[\u3400-\u9fff]/.test(s))language="zh";
+    const existingGoal=meta.goal||extractGoal("",history,topic);
+    if(existingGoal&&!meta.goal)meta.goal=existingGoal;
+    if(meta.difficulty==="example"||phase==="example"){
+      const loss=fearFrustration(existingGoal);
+      return reply(
+        loss?"Tu as déjà une idée et tu cherches un exemple. Restons sur une situation courte : une personne redoute la fin d'un moment heureux au point de ne plus en profiter. Cela illustre d'abord l'inquiétude ; pour parler de frustration, il faudrait préciser ce qui est empêché. À toi de vérifier le lien avec ta thèse.":"Tu as déjà une idée ; nous allons seulement chercher un exemple qui l'éclaire. Choisis une situation précise et repère ce qu'elle montre vraiment, avant de rédiger toi-même.",
+        loss?"你已经有观点，当前缺的是例子。先考虑一个短情境：有人担心快乐时刻即将结束，以致无法享受当下。它首先说明的是担忧；如果想论证 frustration，还需要解释究竟什么愿望受到了阻碍。先由你判断是否采用这个例子。":"你已经有观点，我们先只解决例证：选一个具体情境，说明发生了什么、它究竟支持观点中的哪一部分，再由你自己动笔。",
+        "example",{difficulty:"example",next:"Choisir et vérifier un exemple",support:1,lastStrategy:"bounded-example-support",previousIntent:"whole-text-request"});
+    }
+    if(meta.difficulty==="language"){
+      return reply(
+        "Tu as déjà une idée. Nous allons travailler sur une expression à la fois : indique le sens que tu veux donner, puis essaie de formuler une phrase avec une structure courte.",
+        "你已经有想法，先只解决最难表达的一句话。请说清楚原意，我可以提供短语或局部句式，再由你自己组织法语。",
+        "writing",{difficulty:"language",next:"Formuler une phrase",support:1,lastStrategy:"local-language-cue",previousIntent:"whole-text-request"});
+    }
+    if(meta.difficulty==="reasoning"||phase==="review"){
+      return reply(
+        "Tu as déjà des idées à défendre. Avant de développer ton texte, vérifions ce que ton exemple prouve réellement et ce qui reste une hypothèse. Tu pourras ensuite rédiger une conclusion plus précise.",
+        "你已经有论点和例证，先检查它们的关系：哪些属于可观察的事实，哪些只是推断？你可以选择补充依据或限定结论，再继续写作。",
+        "review",{difficulty:"reasoning",next:"Vérifier le lien entre fait et conclusion",support:1,lastStrategy:"local-argument-check",previousIntent:"whole-text-request"});
+    }
+    return reply(
+      "Nous pouvons avancer sans rédiger tout le texte : présente la consigne ou une idée déjà préparée, puis nous traiterons une difficulté à la fois.",
+      "我们先不生成整篇文章。请告诉我写作要求或已经形成的想法，我们从你最需要帮助的一步开始。",
+      phase,{difficulty:"planning",next:"Définir le prochain petit pas",support:1,lastStrategy:"task-diagnosis",previousIntent:"whole-text-request"});
   }
 
   // A student's explicit request is more important than the old phase.
