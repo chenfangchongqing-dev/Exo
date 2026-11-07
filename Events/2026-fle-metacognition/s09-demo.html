@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>S09 · AI助教教学模拟｜法语年会</title>
+<title>S09 · 从表达困难到写作完成｜AI教学支架模拟</title>
 <meta name="description" content="S09法语写作AI助教支架教学模拟与理论关照，非真实GLM对话。">
 <style>
 :root{--navy:#143d69;--blue:#255c93;--blue2:#3b78ab;--light:#ecf4fc;--paper:#fff;--muted:#69829c;--line:#d8e5f2;--red:#d33b3c;--softred:#fff4f2;--ink:#243c56;--shadow:0 15px 45px rgba(33,76,120,.085)}
@@ -30,6 +30,7 @@ body{background:#eaf1f8}button,textarea{font:inherit}button{cursor:pointer}butto
 @media(max-width:1040px){.shell{height:auto;min-height:calc(100vh - 72px)}.main{grid-template-columns:1fr}.chatbox{min-height:590px;max-height:70vh}.theorybox{max-height:none}.theorybody{overflow:visible}.message{font-size:16px}.prompt-row{position:static}}
 @media(max-width:680px){.top{padding:10px 15px}.brand strong{font-size:15px}.brand small{font-size:10px}.brand img{width:37px;height:37px}.actions{gap:5px}.action{padding:7px 9px;font-size:12px}.shell{padding:15px}.page-heading h1{font-size:25px}.page-heading{align-items:flex-start;flex-wrap:wrap}.demo-tag{font-size:11px}.chat-body{padding:12px}.turn{gap:6px}.avatar{flex-basis:28px;width:28px;height:28px;font-size:13px}.message{max-width:calc(100% - 35px);padding:11px 12px;font-size:15px}.red-dot{margin-top:38px;width:27px;height:27px;flex-basis:27px}.theory-header{padding:14px}.theorybody{padding:12px}.boundaries .pair{grid-template-columns:1fr}.prompt-controls{flex-wrap:wrap}.prompt-row textarea{flex:1 1 100%}.prompt-controls button{flex:1}.below{padding:8px 0}}
 @media(prefers-reduced-motion:reduce){.chat-body{scroll-behavior:auto}.red-dot{transition:none}}
+.finish-inline{cursor:pointer;font-weight:800}.step-label{display:inline-block;border-radius:100px;color:#245982;background:#e0eefb;font-weight:800;padding:6px 10px;margin:0 10px 4px 0}.nav-buttons{display:flex;align-items:center;gap:7px;flex-wrap:wrap}.light-action{color:#285985;background:#fff;border-color:#c1d7e8}.final-text{font:clamp(18px,1.5vw,23px)/1.9 Georgia,"Times New Roman",serif;background:#f1f6fc;border:1px solid #d4e4f2;border-radius:13px;padding:19px 21px;color:#163d66;white-space:normal!important}.final-caveat{font:14px/1.65 Arial,system-ui,sans-serif!important;color:#668096}.final-link{display:inline-block;border-radius:10px;padding:11px 15px;background:#245c95;color:white;text-decoration:none;font-weight:750}
 </style>
 </head>
 <body>
@@ -38,12 +39,12 @@ body{background:#eaf1f8}button,textarea{font:inherit}button{cursor:pointer}butto
   <nav class="actions"><a class="action" href="index.html#s09-ai">← 返回S09分析</a><a class="action" href="index.html#s02-case">继续 S02 →</a><a class="action" href="https://chenfangchongqing-dev.github.io/Exo/PE/compagnon-metacognitif/" target="_blank" rel="noopener noreferrer">真实语伴系统 ↗</a><button class="action" id="fullscreenBtn" type="button">全屏</button></nav>
 </header>
 <div class="shell">
-  <div class="page-heading"><div class="title-wrap"><h1>S09｜AI助教交互展示</h1><p class="sub">写作教学 × 语言教学：已有论证内容，法语表达受阻；AI按教师规约提供分层支持</p></div><span class="demo-tag">教学模拟 · 预设反馈 · 非GLM真实对话</span></div>
+  <div class="page-heading"><div class="title-wrap"><h1>S09｜从语言表达困难到完成写作</h1><p class="sub">写作教学 × 语言教学：逐轮展示意义拆分、语言调用、论证衔接与自主修订</p></div><span class="demo-tag">教学模拟 · 预设反馈 · 非GLM真实对话</span></div>
   <main class="main">
     <section class="chatbox" aria-label="模拟学生与AI助教对话">
-      <div class="box-header"><h2>学生与AI助教 · 逐轮交互</h2><button id="showOriginal" type="button" class="action" style="color:#30638c;border-color:#ccdeef;background:#fff">查看完整S09原稿 ↗</button></div>
+      <div class="box-header"><h2>学生原稿与AI助教 · 完整交互路径</h2><button id="showOriginal" type="button" class="action" style="color:#30638c;border-color:#ccdeef;background:#fff">查看完整S09原稿 ↗</button></div>
       <div class="chat-body" id="chatBody" aria-live="polite"><div class="thread" id="thread"></div></div>
-      <div class="prompt-row"><div class="prompt-controls"><textarea id="composer" placeholder="本轮先观察AI如何诊断困难……" disabled aria-label="学生模拟输入"></textarea><button id="sampleText" type="button" disabled>填入示范句</button><button class="primary" id="sendBtn" type="button" disabled>发送</button></div><div class="prompt-mini"><span id="inputHint">点击“开始演示”，逐轮展开支架</span><span>可输入自己的法语句子；后续反馈为预设脚本</span></div></div>
+      <div class="prompt-row"><div class="prompt-controls"><textarea id="composer" placeholder="本轮先观察AI如何诊断困难……" disabled aria-label="学生模拟输入"></textarea><button id="sampleText" type="button" disabled>填入试写示例</button><button class="primary" id="sendBtn" type="button" disabled>发送</button></div><div class="prompt-mini"><span id="inputHint">点击“开始演示”，逐轮展开支架</span><span>可体验试写；模拟页不智能评价输入内容</span></div></div>
     </section>
     <aside class="theorybox" aria-label="AI介入下的元认知教学策略理论关照">
       <div class="theory-header"><h2>AI介入下的元认知教学策略理论关照</h2><small>点击对话旁的红点，查看相应的教师教学意图</small></div>
@@ -53,69 +54,23 @@ body{background:#eaf1f8}button,textarea{font:inherit}button{cursor:pointer}butto
       </div>
     </aside>
   </main>
-  <div class="below"><div><strong>发言提示：</strong>红点标记的是教学设计的关键介入，不是学生元认知能力已提升的证据。</div><div><button id="restartBtn" class="action" style="color:#285985;background:#fff;border-color:#c1d7e8">↺ 重新开始</button> <button id="nextBtn" class="action" style="color:#fff;background:#235f96;border-color:#235f96;min-width:148px;font-weight:750">开始演示 →</button></div></div>
+  <div class="below"><div><span id="stepLabel" class="step-label">原稿 · 准备开始</span><strong>发言提示：</strong>真实材料仅为S09原稿，其余对话为教学情境模拟，红点对应教师规约与理论关照。</div><div class="nav-buttons">
+<button id="restartBtn" class="action light-action" type="button">↺ 重新开始</button>
+<button id="prevBtn" class="action light-action" type="button">← 上一步</button>
+<button id="boundaryBtn" class="action light-action" type="button">测试教师规约</button>
+<button id="showFinal" class="action light-action" type="button" hidden>查看示范成稿</button>
+<button id="nextBtn" class="action" style="color:#fff;background:#235f96;border-color:#235f96;min-width:148px;font-weight:750" type="button">开始演示 →</button>
+</div></div>
 </div>
 <div id="originalModal" class="modal-bg" hidden role="dialog" aria-modal="true" aria-labelledby="originalTitle"><div class="modal"><button type="button" class="topclose" id="closeOriginal">关闭 ×</button><h2 id="originalTitle">S09 · 学生原稿（转写保留原貌）</h2><p id="originalText"></p><p class="footnote">说明：保留学生原文的中法混写、句法错误和表达中断。</p></div></div>
-<script>
-(function(){
-'use strict';
-const french='On entend souvent dire que la course sans fin au bonheur matériel. Pour ma part, je pense que c’est vrai. Il y a objets luxuriante dont on peut jouir et nous pouvons les voir sur les réseaux sociaux, donc nous ne pouvons pas restreindre';
-const chinese='我们因为看到别人分享出来的更高品质的生活而无法遏制自己的向往和贪欲。比如，有许多人拼团订一间豪华酒店的房间，轮流拍照以模仿那些真正有能力承担这种生活的人。这样的例子展示出人对物质生活的追求是无法停止的——哪怕实际上享受不了，也要假装自己有，哪怕一秒钟，从而得到精神上的满足与快乐';
-const theories=[
-{id:1,title:'诊断表达困难',brief:'写作过程监控',desc:'学生已提出立场，也有酒店摆拍的具体例子。先辨认困难发生在语言表达，而不是重新生成论据，才能选择恰当的支持方式。',teacher:'教师期待：先确认学生已有成果，避免重复追问“你想写什么”。',ref:'Flavell（1979）：元认知知识与监控。'},
-{id:2,title:'拆分意义单位',brief:'按需提供认知支架',desc:'把中文中的“社交媒体展示→欲望被激发”拆成两个较小的意义单位，降低一次组织复杂法语句子的负担。',teacher:'教师期待：先帮助看清语义结构，再让学生决定先写哪一层。',ref:'van de Pol、Volman & Beishuizen（2010）：适应性支架。'},
-{id:3,title:'调取语言资源',brief:'语言知识服务写作',desc:'围绕写作所需意义，提示数量有限的词汇和句式；学生需要选择、组合并尝试表达。语言知识的主动调用由此嵌入论证写作。',teacher:'教师期待：允许词语解释和一句局部示范，不直接翻译完整中文段落。',ref:'Flower & Hayes（1981）：写作过程；van de Pol 等（2010）：按需支持。'},
-{id:4,title:'核对原意与调节',brief:'学生保留修订权',desc:'学生先写法语句子，再对照原来的中文意图，判断意义是否保留、论证是否推进，并决定要不要继续写酒店摆拍的例子。',teacher:'教师期待：AI帮助学生自查，而不是替学生评价所有句子并作最终决定。',ref:'Flavell（1979）；Hattie & Timperley（2007）：自我调节层面的反馈。'},
-{id:5,title:'教师规约生效',brief:'对代写请求的边界',desc:'学生要求整段翻译时，助教提供拆句、词汇或一句短示范等可执行支持，不直接交出可提交的完整作文。',teacher:'教师期待：支架强度随需求变化；当学生能继续表达时逐步撤除帮助。',ref:'van de Pol 等（2010）：支架渐退与责任移交。'}
-];
-const $=id=>document.getElementById(id);
-const chat=$('thread'),box=$('chatBody'),composer=$('composer');
-let phase=0,shown=0,selected=null,attempt='';
-const esc=s=>String(s).replace(/[&<>"']/g, x=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[x]));
-function add(role,markup,num){
- const row=document.createElement('div');row.className='turn '+role;
- const av=document.createElement('div');av.className='avatar';av.textContent=role==='bot'?'AI':'学';
- const msg=document.createElement('div');msg.className='message';msg.innerHTML='<span class="who">'+(role==='bot'?'AI助教 · 教师规约下的预设反馈':'学生 · 情境模拟')+'</span>'+markup;
- row.append(av,msg);
- if(num){const b=document.createElement('button');b.type='button';b.className='red-dot';b.setAttribute('aria-label','查看第 '+num+' 处理论关照');b.dataset.theory=num;b.textContent=num;b.addEventListener('click',()=>focusTheory(num));row.append(b);shown=Math.max(num,shown);}
- chat.append(row);box.scrollTop=box.scrollHeight;requestAnimationFrame(()=>{box.scrollTop=box.scrollHeight});refreshMap();
- if(num)focusTheory(num);
-}
-function focusTheory(n){selected=n;const t=theories[n-1];if(!t)return;
- $('theoryDetail').innerHTML='<div class="theory-title"><span class="num">'+n+'</span>'+esc(t.title)+'</div><p>'+esc(t.desc)+'</p><div class="teacher">'+esc(t.teacher)+'</div><p class="cite">理论线索：'+esc(t.ref)+'</p>';
- chat.querySelectorAll('.red-dot').forEach(b=>b.classList.toggle('active',Number(b.dataset.theory)===n));
- refreshMap();
-}
-function refreshMap(){const nav=$('theoryMap');nav.innerHTML=theories.map(t=>'<button type="button" class="mapbtn '+(selected===t.id?'active':'')+'" data-n="'+t.id+'" '+(t.id>shown?'disabled':'')+'><b>'+t.id+'</b>'+esc(t.brief)+'</button>').join('');nav.querySelectorAll('button:not([disabled])').forEach(b=>b.addEventListener('click',()=>focusTheory(Number(b.dataset.n))));}
-function reset(){phase=0;shown=0;selected=null;attempt='';chat.innerHTML='';add('user','<p class="fr">'+esc(french)+'</p><p>'+esc(chinese)+'</p>');$('theoryDetail').innerHTML='<div class="theory-title" style="color:#315b80">从学生的原稿出发</div><p>这份原稿有法语开头，随后转用中文展开具体事例。点击“开始演示”，观察AI如何在写作需要与语言学习之间提供分层支持。</p><div class="teacher">教学聚焦：不是替学生找新观点，而是帮助她把已有内容转换为可用的法语表达。</div>';
- composer.value='';composer.disabled=true;$('sampleText').disabled=true;$('sendBtn').disabled=true;$('nextBtn').disabled=false;$('nextBtn').textContent='开始演示 →';$('inputHint').textContent='点击“开始演示”，逐轮展开支架';refreshMap();}
-function next(){
- if(phase===0){add('bot','<p>我看到你已经有了具体的中文论述。<strong>困难更像是法语表达受阻</strong>，不是缺乏例子。</p><p>我们先选一层意思来写：社交媒体展示的奢华生活，怎样影响人们的欲望？</p>',1);phase=1;$('nextBtn').textContent='继续：拆分意思 →';return;}
- if(phase===1){add('user','<p>我先写社交媒体上的照片如何让人产生新的欲望。</p>');add('bot','<p><strong>先拆成两个意思：</strong>① 在社交媒体上看到别人的奢华生活；② 这种展示会激发新的欲望。</p><p>你可以先表达其中一个意思，再把它们联系起来。</p>',2);phase=2;$('nextBtn').textContent='继续：调用语言资源 →';return;}
- if(phase===2){add('user','<p>我知道想表达什么，但不确定怎么用法语写出来。有没有能用的表达？</p>');add('bot','<p>可以从几个词语与结构里挑选：</p><p class="loc"><span class="word">sur les réseaux sociaux</span><span class="word">susciter des envies</span><span class="word">avoir envie de</span></p><p class="hintline">必要时可以看一句局部示范：<span class="fr">Ces images suscitent de nouvelles envies.</span></p><p>接下来请你<strong>自己尝试造一句</strong>，不用一次写完整段落。</p>',3);phase=3;$('nextBtn').disabled=true;$('nextBtn').textContent='等待学生试写…';composer.disabled=false;$('sampleText').disabled=false;$('sendBtn').disabled=false;composer.placeholder='例如：Ces images suscitent de nouvelles envies.';$('inputHint').textContent='在对话框中尝试一句法语，或点击“填入示范句”再发送';composer.focus();return;}
- if(phase===4){add('user','<p>那你能直接把我中文那段全部翻译成法语吗？</p>');add('bot','<p>我可以解释搭配、给你可用的句式，也可以示范一句。但这次练习的目标包括<strong>自己组织法语表达</strong>，所以我不直接给出整段可提交的译文。</p><p>你可以先续写酒店摆拍的例子；如果卡在一句话上，我们再一起拆分或示范那一句。</p>',5);phase=5;$('nextBtn').textContent='演示完成 ✓';$('nextBtn').disabled=true;$('inputHint').textContent='模拟对话结束：可重新开始，或继续报告中的S02案例';return;}
-}
-function send(){if(phase!==3)return;const s=composer.value.trim();if(!s){composer.focus();return;}attempt=s;
- add('user','<p class="fr">'+esc(attempt)+'</p>');
- add('bot','<p>你已经尝试把中文意思转成法语了。现在请对照原意检查：<strong>这一句有没有表达“社交媒体的展示会激发新的欲望”？</strong></p><p>如果还不准确，可以先围绕一个核心句式修改；是否继续加入酒店摆拍的细节，留给你依据论证重点决定。</p><p class="muted">此处为教学模拟：反馈是固定脚本，不会自动评判刚才输入的句子。</p>',4);
- phase=4;composer.value='';composer.disabled=true;$('sampleText').disabled=true;$('sendBtn').disabled=true;$('nextBtn').disabled=false;$('nextBtn').textContent='测试边界：请求整段翻译 →';$('inputHint').textContent='下一轮将测试教师规约下“整段代写”的反馈边界';
-}
-$('nextBtn').addEventListener('click',next);
-$('sendBtn').addEventListener('click',send);
-$('sampleText').addEventListener('click',()=>{composer.value='Les images sur les réseaux sociaux suscitent de nouvelles envies.';composer.focus()});
-composer.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send();}});
-$('restartBtn').addEventListener('click',reset);
-$('showOriginal').addEventListener('click',()=>{$('originalText').textContent=french+'\n\n'+chinese;$('originalModal').hidden=false});
-$('closeOriginal').addEventListener('click',()=>{$('originalModal').hidden=true});
-$('originalModal').addEventListener('click',e=>{if(e.target===$('originalModal'))$('originalModal').hidden=true});
-$('fullscreenBtn').addEventListener('click',()=>{if(document.fullscreenElement)document.exitFullscreen?.();else document.documentElement.requestFullscreen?.()});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('originalModal').hidden){$('originalModal').hidden=true;return;}if(['textarea','input','select'].includes(e.target.tagName.toLowerCase()))return;
- if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){if(phase!==3&&phase!==5){e.preventDefault();next();}}
- if(e.key.toLowerCase()==='r'){reset()}if(e.key.toLowerCase()==='f'){$('fullscreenBtn').click()}
- if(/^[1-5]$/.test(e.key)&&Number(e.key)<=shown){focusTheory(Number(e.key))}
-});
-reset();
-})();
-</script>
+<div id="finalModal" class="modal-bg" hidden role="dialog" aria-modal="true" aria-labelledby="finalTitle"><div class="modal">
+<button type="button" class="topclose" id="closeFinal">返回交互 ×</button>
+<h2 id="finalTitle">S09 · 从试写到示范成稿</h2>
+<p class="final-caveat">教学模拟：本段依据预设的学生试写与修改选择组合，不是S09真实后测文本，也不是GLM真实输出。</p>
+<p class="final-text" id="finalText"></p>
+<p class="final-caveat">观察重点：语言资源在写作任务中被调用、复用和修订；对例证与主张关系的解释由学习者完成。</p>
+<a class="final-link" href="index.html#s02-case">继续 S02 案例 →</a>
+</div></div>
+<script src="./s09-parcours.js?v=conference-20261107-final"></script>
 </body>
 </html>
