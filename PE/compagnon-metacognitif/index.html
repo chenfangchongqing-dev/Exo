@@ -111,6 +111,7 @@ h1{font-size:clamp(30px,4.8vw,48px);line-height:1.12;letter-spacing:-.035em;marg
 </main>
 </div>
 <script src="./glm-config.js?v=glm20261107-adaptive"></script>
+<script src="./language-scaffold.js?v=s09-20261107-r1"></script>
 <script>
 (function(){
 "use strict";
@@ -185,6 +186,16 @@ async function sendText(value){
  }
  var previous=state.history.slice(-12);
  addTurn("user",s);input.value="";
+ // Teacher-regulated, clearly labeled fallback for the S09 mixed-language draft.
+ // A learner's French attempt still goes to the live GLM backend.
+ var local=window.COMPAGNON_S09_SUPPORT?window.COMPAGNON_S09_SUPPORT(s,previous,state.meta):null;
+ if(local){
+   state.phase=local.phase||"writing";
+   state.lang=local.language||state.lang;
+   state.meta=Object.assign({},state.meta,local.meta);
+   respond(local.reply+"\n\n〔教师预设规则支架 · 本轮未调用 GLM〕");
+   input.focus();return;
+ }
  if(!GLM_ENDPOINT){answer(s);input.focus();return;}
  var send=document.getElementById("send");send.disabled=true;send.textContent="En cours…";
  suggestions.textContent="";
