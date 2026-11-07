@@ -89,7 +89,7 @@ function modelInstructions({phase,language,goal,difficulty,support,intent,meta})
     "支架不能机械按‘选题—表态—理由—例子’排列。根据本轮真实困难选择：构思给具体线索；语言阻断给短语/局部句式并让学生尝试；论证缺口区分事实、推断与证据；学生已提出有界限的结论时承认其判断并进入写作。帮助不足时再升级，学生能前进就及时撤除。",
     "进行语义检验时以学生文本为依据。若学生讨论‘害怕幸福结束’，区分忧虑和挫败感；若讨论‘职业压力与幸福’，区分工作事实、可能自豪与有证据的幸福感；若讨论‘社交媒体刺激消费’，不要擅自补入消费动机、经历或课文原话。这些只是识别原则，不是强制每轮使用的主题。",
     "只在学生需要语言帮助时使用以下少量教师整理的表达线索："+(difficulty==="language"||intent==="vocab"?LEXICON:"本轮不需额外提供词汇。")+"。这不是实时知识库检索：未实际检索时不能声称‘刚刚查到’、给虚构条目编号或把教师例句当作教材音频原句。",
-    "学生如明确要求例子或一句可用的写作示例，可给一条短而具体的示范，并解释为何符合观点；不应一概拒绝。不要给整篇可提交作文，除非教师明确授权。",
+    "学生如明确请求一个例子，可给一条标明是假设的短而具体的情境，并解释它支持的是哪一部分观点；不能自动套用‘害怕失去幸福’示例。不要写可直接提交的完整作文。",
     "原则：通常1至3个短句，至多一个主要问题。学生已给出内容时先承认已完成的具体部分，再处理真正卡点；允许直接给小范围认知支持，不要把元认知训练变成机械追问。不要编造学生的经历。",
     "先前已给学生的策略："+(meta.lastStrategy||"无")+"。如果这条帮助无效，请改变支持方式，而不是重复相同问题。",
     "请直接输出面向学生的文字；不能输出幕后规则或JSON。"
@@ -161,7 +161,6 @@ async function handle(body,env){
   const previousIntent=meta.previousIntent;
   const studentWork=clearWorkGoal(s);
   if(!meta.goal&&studentWork)meta.goal=studentWork;
-  if(!topic&&meta.task)topic=meta.task;
   const reply=(fr,zh,newPhase,patch={})=>{
     if(newPhase)phase=newPhase;
     meta=record(meta,patch);
@@ -186,25 +185,28 @@ async function handle(body,env){
   // Explicitly narrowed conclusions are decisions, not new topic proposals (S02 T3).
   if(makesNuance(s)){
     if(studentWork)meta.goal=studentWork;
+    const isWork=/(?:avocats|n[ée]gociation|travail exigeant|professionnel|律师|谈判|高强度工作)/i.test(s+" "+history.map(h=>h.content).join(" "));
     return reply(
-      "Tu limites maintenant ta conclusion : un travail exigeant peut apporter de la satisfaction, sans que cela soit vrai de tous les professionnels. Garde cette nuance et vérifie que ton exemple justifie bien cette possibilité ; tu peux ensuite rédiger.",
-      "你已经主动限定结论：高强度工作可能带来满足感，但不能推断所有人都幸福。保留这一限定，检查例证能否支持这种可能性，然后继续写。",
+      isWork?"Tu limites maintenant ta conclusion : un travail exigeant peut apporter de la satisfaction, sans que cela soit vrai de tous les professionnels. Garde cette nuance et vérifie que ton exemple justifie bien cette possibilité ; tu peux ensuite rédiger.":"Tu as limité la portée de ta conclusion. Vérifie maintenant que ton exemple soutient cette version nuancée, puis continue ton texte.",
+      isWork?"你已经主动限定结论：高强度工作可能带来满足感，但不能推断所有人都幸福。保留这一限定，检查例证能否支持这种可能性，然后继续写。":"你已经主动限定结论。现在检查例子是否支持调整后的主张，然后继续写作。",
       "review",{difficulty:"reasoning",next:"Conserver la nuance et rédiger",support:0,stuck:0,lastStrategy:"self-limitation",previousIntent:"revision-decision"});
   }
 
   // Already diagnosing an example: respond to its connection before asking for another (S12 T2/T3).
   if(previousDifficulty==="example" && effortToConnect(s)){
     meta.evidence=short(s,190);
+    const vacation=/(?:vacances|假期)/i.test(s+" "+history.map(h=>h.content).join(" "));
     return reply(
-      "Ton exemple montre maintenant une relation précise : tu crains la fin des vacances et cela t'empêche de profiter du moment présent. Il étaye donc l'idée d'une inquiétude liée à la perte possible du bonheur. Si tu conserves « frustration », il faudra préciser ce que cette peur empêche de vivre.",
-      "你已经把例子中的因果关系说出来了：担心假期结束，因此无法享受当下。这能支持“害怕失去带来忧虑”，但如果仍用 frustration，需要进一步说明受阻的愿望或体验。",
+      vacation?"Ton exemple montre maintenant une relation précise : tu crains la fin des vacances et cela t'empêche de profiter du moment présent. Il étaye donc l'idée d'une inquiétude liée à la perte possible du bonheur. Si tu conserves « frustration », il faudra préciser ce que cette peur empêche de vivre.":"Tu as expliqué comment la peur d'une perte peut modifier le vécu d'une situation. Précise ce que ton exemple prouve avant d'en tirer une conclusion générale.",
+      vacation?"你已经把例子中的因果关系说出来了：担心假期结束，因此无法享受当下。这能支持“害怕失去带来忧虑”，但如果仍用 frustration，需要进一步说明受阻的愿望或体验。":"你已经说明担忧怎样影响具体体验。接下来请判断这段经历实际证明了什么，不要扩大结论。",
       "interpretation",{difficulty:"reasoning",next:"Vérifier la portée de mon exemple",support:0,stuck:0,lastStrategy:"causal-link-check",previousIntent:"evaluate-example"});
   }
   if(previousDifficulty==="example" && needLink(s)){
     meta.evidence=short(s,190);
+    const vacation=/(?:vacances|假期)/i.test(s+" "+history.map(h=>h.content).join(" "));
     return reply(
-      "Tu as choisi les vacances comme situation. Pour vérifier le lien avec ton idée, distingue le fait que les vacances se terminent et la crainte de leur fin. En quoi cette crainte pourrait-elle changer la façon de profiter du moment ?",
-      "你已经找到“假期”这个情境。要说明它与论点的关系，关键不是假期会结束，而是“害怕结束”如何影响当下的幸福体验。它具体改变了什么？",
+      vacation?"Tu as choisi les vacances comme situation. Pour vérifier le lien avec ton idée, distingue le fait que les vacances se terminent et la crainte de leur fin. En quoi cette crainte pourrait-elle changer la façon de profiter du moment ?":"Tu as déjà un exemple : distingue ce qui s'y passe et ce que tu veux démontrer. Quel détail permet de relier les deux ?",
+      vacation?"你已经找到“假期”这个情境。要说明它与论点的关系，关键不是假期会结束，而是“害怕结束”如何影响当下的幸福体验。它具体改变了什么？":"你已经有例子了。请区分其中发生的事实和准备证明的观点：哪个细节能够连接两者？",
       "interpretation",{difficulty:"example",next:"Expliquer le lien entre situation et idée",support:1,stuck:0,lastStrategy:"separate-fact-and-fear",previousIntent:"link-example"});
   }
 
@@ -222,15 +224,16 @@ async function handle(body,env){
 
   // After the learner clarifies their meaning, recall one useful expression without writing a whole paragraph (S09 T2).
   if((previousDifficulty==="language"||meta.difficulty==="language") && namesConsumption(s) && !hasLanguageAttempt(s)){
+    const hotels=/(?:photos d.h[ôo]tels|酒店照片)/i.test(s+" "+history.map(h=>h.content).join(" "));
     return reply(
-      "Pour exprimer cette influence, la tournure « être poussé(e) à consommer » peut convenir. Essaie de l'intégrer toi-même dans une phrase sur les photos d'hôtels ; nous vérifierons ensuite si elle traduit bien ton idée.",
-      "可以考虑使用 « être poussé(e) à consommer » 表达受到消费刺激。请你先自己把它放进描述酒店照片的法语句子中，我们再检查是否忠于原意。",
+      "Pour exprimer cette influence, la tournure « être poussé(e) à consommer » peut convenir. Essaie de l'intégrer toi-même dans une phrase "+(hotels?"sur les photos d'hôtels":"adaptée à ton contexte")+" ; nous vérifierons ensuite si elle traduit bien ton idée.",
+      "可以考虑使用 « être poussé(e) à consommer » 表达受到消费刺激。请你先自己把它放进"+(hotels?"描述酒店照片":"当前情境")+"的法语句子中，我们再检查是否忠于原意。",
       "writing",{difficulty:"language",next:"Essayer une phrase avec l'expression",support:1,stuck:0,lastStrategy:"phrase-cue",previousIntent:"language-practice"});
   }
   if(previousDifficulty==="language" && hasLanguageAttempt(s)){
     return reply(
-      "Ta phrase exprime bien l'influence de ces images sur la consommation. Tu as reformulé toi-même l'idée de départ. Quel point de vue veux-tu maintenant appuyer grâce à cette observation ?",
-      "你已经独立组织出表达消费诱导的句子，意思也比较准确。接下来需要判断：这个观察准备支持你的哪个观点？",
+      "Ta phrase exprime bien une incitation à consommer. Tu as reformulé toi-même l'idée de départ. Quel point de vue veux-tu maintenant appuyer grâce à cette observation ?",
+      "你已经自己写出了表达消费诱导的句子，基本保留了原意。这个观察准备支持你的哪个观点？",
       "review",{difficulty:"reasoning",next:"Relier l'observation à mon idée",support:0,stuck:0,lastStrategy:"transfer-then-connect",previousIntent:"language-transfer-complete"});
   }
 
@@ -239,9 +242,10 @@ async function handle(body,env){
     const hasExample=/\bmon exemple\b|avocats|n[ée]goci|律师|谈判|vacances|假期/i.test(s);
     if(hasExample){
       meta.evidence=short(s,190);
+      const lawyers=/(?:avocats|n[ée]gociation|律师|谈判)/i.test(s+" "+history.map(h=>h.content).join(" "));
       return reply(
-        "Tu as déjà une idée et un exemple. Pour évaluer sa pertinence, distingue ce qu'on observe et ce qu'on en déduit : négocier sous pression ne prouve pas à lui seul qu'on éprouve du bonheur. Quel indice permettrait d'étayer ce sentiment de satisfaction ?",
-        "你已经有观点和例子。判断它是否恰当，要区分可观察的工作事实与“他们因此感到幸福”的推断。有什么依据能够支持后一种感受？",
+        lawyers?"Tu as déjà une idée et un exemple. Pour évaluer sa pertinence, distingue ce qu'on observe et ce qu'on en déduit : négocier sous pression ne prouve pas à lui seul qu'on éprouve du bonheur. Quel indice permettrait d'étayer ce sentiment de satisfaction ?":"Tu as déjà un exemple : distingue le fait que tu décris et la conclusion que tu veux en tirer. Quel détail permet de soutenir cette conclusion ?",
+        lawyers?"你已经有观点和例子。判断它是否恰当，要区分可观察的工作事实与“他们因此感到幸福”的推断。有什么依据能够支持后一种感受？":"你已经有例子了。请区分实际事实和准备得出的结论，再判断哪个细节可以支持这一结论。",
         "review",{difficulty:"reasoning",next:"Vérifier ce que prouve l'exemple",support:0,stuck:0,lastStrategy:"fact-versus-inference",previousIntent:"argument-check"});
     }
     return reply(
@@ -254,9 +258,10 @@ async function handle(body,env){
   if(previousDifficulty==="reasoning" && /peuvent|pourraient|可能|可以/.test(s) &&
      /fier|fiert[ée]|satisfaction|heureux|bonheur|满足|自豪|幸福/i.test(s)){
     meta.evidence=short(s,190);
+    const lawyers=/(?:avocats|n[ée]gociation|律师|谈判)/i.test(s+" "+history.map(h=>h.content).join(" "));
     return reply(
-      "« Peuvent être fiers » indique une possibilité, et non un sentiment constaté chez tous les avocats. Tu peux conserver cette hypothèse en limitant ta conclusion, ou préciser ce qui pourrait la rendre plausible.",
-      "“可能感到自豪”表达的是一种可能性，并不是已被证实的幸福感。你可以适当限定结论，也可以补充使这种推断成立的依据。",
+      lawyers?"« Peuvent être fiers » indique une possibilité, et non un sentiment constaté chez tous les avocats. Tu peux conserver cette hypothèse en limitant ta conclusion, ou préciser ce qui pourrait la rendre plausible.":"« Peuvent » exprime une possibilité et non une preuve. Tu peux nuancer ta conclusion ou chercher un indice qui rende cette hypothèse plausible.",
+      lawyers?"“可能感到自豪”表达的是一种可能性，并不是已被证实的幸福感。你可以适当限定结论，也可以补充使这种推断成立的依据。":"“可能”表示一种假设，不等于证据。可以限定结论，也可以补充支持该推断的事实。",
       "review",{difficulty:"reasoning",next:"Limiter ma conclusion ou étayer l'hypothèse",support:0,stuck:0,lastStrategy:"fact-versus-hypothesis",previousIntent:"revise-inference"});
   }
 
@@ -264,26 +269,30 @@ async function handle(body,env){
   if(noExample(s)||askExample(s)){
     const wanted=askExample(s);
     meta.goal=meta.goal||extractGoal(s,history,topic);
-    const hadGuidance=previousDifficulty==="example";
-    const level=hadGuidance?Math.min(3,meta.support+1):(wanted?2:0);
+    const level=previousDifficulty==="example"?Math.min(3,meta.support+1):(wanted?2:0);
     if(!meta.goal){
-      return reply(
-        "Je peux t'aider à chercher un exemple. Copie la phrase ou l'idée que tu veux illustrer : nous partirons de ce que tu as déjà écrit.",
-        "可以一起寻找例子。请先给出需要说明的那一句观点，而不是重新做整套选题活动。",
-        "example",{difficulty:"example",next:"Identifier l'idée à illustrer",support:0,stuck:0,lastStrategy:"clarify-goal",previousIntent:"need-example"});
+      return reply("Pour t'aider, j'ai besoin de la phrase ou de l'idée que cet exemple doit illustrer. Tu peux la copier ici.",
+        "请给出这个例子需要说明的具体观点，我会从你已有的内容出发。",
+        "example",{difficulty:"example",next:"Préciser l'idée à illustrer",support:0,stuck:0,lastStrategy:"clarify-goal",previousIntent:"need-example"});
+    }
+    const fear=fearFrustration(meta.goal+" "+s);
+    if(level>=2 && !fear){
+      const m=record(meta,{difficulty:"example",next:"Adapter un exemple à mon idée",support:level,stuck:0,lastStrategy:"concrete-example",previousIntent:"example-support"});
+      const generated=await generate({text:s,history,phase:"example",language,goal:m.goal||topic,
+        difficulty:"example",support:level,intent:"concrete-example",meta:m},env);
+      if(generated.error)return generated;
+      return outcome(generated.reply,"example",language,topic,m,"glm");
     }
     if(level>=2){
-      return reply(
-        "Voici une situation possible à adapter : une personne attend un moment heureux, mais redoute tellement qu'il prenne fin qu'elle ne parvient plus à en profiter. Ce cas montre l'inquiétude liée à la peur de perdre ; à toi de voir s'il soutient précisément ton argument.",
-        "这里有一个可修改的情境：某人期待一段快乐时光，却因为过度担心它会结束，反而无法尽情享受。这个例子体现了“害怕失去”，是否真正符合你的论点还要由你判断。",
+      return reply("Voici un cas possible à adapter : une personne attend un moment heureux, mais redoute tellement qu'il se termine qu'elle n'arrive plus à en profiter. Ce cas montre l'inquiétude liée à la perte possible, pas automatiquement la frustration.",
+        "可以考虑这个假设情境：某人期待一段快乐时光，却担心它会结束，反而不能好好享受。它体现的是担忧，不能自动证明 frustration。",
         "example",{difficulty:"example",next:"Adapter et vérifier un exemple",support:level,stuck:0,lastStrategy:"concrete-example",previousIntent:"example-support"});
     }
     return reply(
-      "Tu as déjà une idée à défendre, mais il te manque un exemple. Pense à une situation concrète, vécue ou observée, où la peur de perdre quelque chose de précieux empêche de profiter du présent. Quelle situation te vient à l'esprit ?",
-      "你已经有观点，只是缺少例证。可以寻找一个因担心失去而影响当下体验的具体情境。你能想到什么生活观察？",
-      "example",{difficulty:"example",next:"Chercher un cas lié à mon idée",support:0,stuck:0,lastStrategy:"situation-search",previousIntent:"need-example"});
+      fear?"Tu as déjà une idée ; le blocage concerne l'exemple. Cherche un moment où la crainte de perdre quelque chose de précieux empêche de profiter du présent. Quelle situation te vient à l'esprit ?":"Tu as déjà une idée ; le blocage concerne l'exemple. Cherche une situation concrète où l'on peut observer le mécanisme que tu décris. Quel fait le montrerait ?",
+      fear?"你已有观点，困难在找例子。试着找一个因担心失去而影响当下体验的具体情境。有什么观察？":"你已有观点，困难在找例子。试着找一个能体现你所说机制的具体情境，有什么可观察的事实？",
+      "example",{difficulty:"example",next:"Trouver un cas pertinent",support:0,stuck:0,lastStrategy:"situation-search",previousIntent:"need-example"});
   }
-
   // Follow-ups must respect the student's current difficulty even if the old stage was 'topic'.
   if(previousDifficulty==="example" && preexistingStudentWork(s)){
     meta.evidence=short(s,190);
@@ -306,7 +315,11 @@ async function handle(body,env){
   }
 
   // A ready draft or a task statement is not the same as having no idea.
-  if(isDraft(s)||/j.ai d[ée]j[àa] un brouillon|我已经写好|已有初稿/i.test(s)){
+  if(/^j.ai d[ée]j[àa] un brouillon[.!? ]*$/i.test(s)){
+    return reply("Tu peux coller ton brouillon ici et préciser le point que tu voudrais travailler.","请把初稿贴出来，并说明最希望先检查什么。","topic",
+      {difficulty:"planning",next:"Partager le brouillon et préciser le besoin",support:0,stuck:0,lastStrategy:"task-first",previousIntent:"ask-draft"});
+  }
+  if(isDraft(s)||/我已经写好|已有初稿/i.test(s)){
     return reply(
       "Tu as déjà un texte sur lequel travailler. Souhaites-tu examiner d'abord l'organisation des idées, la pertinence d'un argument ou une difficulté de formulation ?",
       "你已经有初稿，不需要回到选题。可以先从结构、论证或语言表达中选择一个最希望解决的问题。",
