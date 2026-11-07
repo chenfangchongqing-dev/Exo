@@ -84,6 +84,36 @@ try{
   const notEssay=await ask({message:"Je dois rédiger une rédaction pour demain, mais je n’ai pas d’exemple."});
   assert.equal(notEssay.meta.difficulty,"example","Describing an assignment must not be treated as demanding an essay");
 
+
+  // Reproduce the classroom screenshot: a developed Chinese argument, then two
+  // increasingly explicit requests for French formulation support.
+  const mixedS09="On entend souvent dire que la course sans fin au bonheur matériel. Pour ma part, je pense que c’est vrai. Il y a objets luxuriante dont on peut jouir et nous pouvons les voir sur les réseaux sociaux, donc nous ne pouvons pas restreindre\n我们因为看到别人分享出来的更高品质的生活而无法遏制自己的向往和贪欲。比如，有许多人拼团订一间豪华酒店的房间，轮流拍照以模仿那些真正有能力承担这种生活的人。这样的例子展示出人对物质生活的追求是无法停止的。";
+  const first09=await ask({message:mixedS09});
+  assert.equal(first09.phase,"writing");
+  assert.equal(first09.meta.difficulty,"language");
+  assert.equal(first09.meta.support,1);
+  assert.ok(first09.reply.includes("susciter l'envie"));
+  const h1=[{role:"user",text:mixedS09},{role:"bot",text:first09.reply}];
+  const second09=await ask({message:"不知道法语要怎么写？",
+    language:first09.language,phase:first09.phase,meta:first09.meta,history:h1});
+  assert.equal(second09.meta.difficulty,"language");
+  assert.equal(second09.meta.support,2);
+  assert.ok(second09.reply.includes("句架"));
+  const h2=[...h1,{role:"user",text:"不知道法语要怎么写？"},{role:"bot",text:second09.reply}];
+  const third09=await ask({message:"不会写法语",language:second09.language,
+    phase:second09.phase,meta:second09.meta,history:h2});
+  assert.equal(third09.meta.support,3);
+  assert.ok(third09.reply.includes("局部示范"));
+  assert.ok(third09.reply.includes("迁移"));
+  const h3=[...h2,{role:"user",text:"不会写法语"},{role:"bot",text:third09.reply}];
+  const beforeTransfer=modelCalls;
+  const transferred=await ask({message:"Les réseaux sociaux suscitent l'envie de mener une vie plus luxueuse.",
+    language:third09.language,phase:third09.phase,meta:third09.meta,history:h3});
+  assert.equal(transferred.phase,"writing");
+  assert.equal(transferred.meta.previousIntent,"language-transfer");
+  assert.equal(modelCalls,beforeTransfer+1,
+    "Learner-authored French must be sent to GLM for genuine contextual feedback");
+  console.log("PASS S09 escalation: mixed draft -> sentence frame -> short model -> learner transfer (model mocked)");
   console.log("PASS 8 model-mocked scenarios: S12, S09, S02, full Chinese/French essay requests, limited example, guard, assignment description");
 }finally{
   globalThis.fetch=realFetch;
