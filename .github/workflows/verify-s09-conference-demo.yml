@@ -33,3 +33,38 @@ jobs:
           assert.ok(js.includes('教学模拟'));
           console.log("S09: linked page, step navigation, final text, theory, boundary and attribution verified.");
           NODE
+      - name: Simulate dialogue, theory markers, final paragraph, navigation
+        run: |
+          npm install --no-save --no-package-lock jsdom@24
+          node --input-type=module <<'NODE'
+          import fs from "node:fs";
+          import assert from "node:assert/strict";
+          import { JSDOM } from "jsdom";
+          const html=fs.readFileSync("Events/2026-fle-metacognition/s09-demo.html","utf8");
+          const js=fs.readFileSync("Events/2026-fle-metacognition/s09-parcours.js","utf8");
+          const dom=new JSDOM(html,{url:"https://chenfangchongqing-dev.github.io/Exo/Events/2026-fle-metacognition/s09-demo.html",runScripts:"outside-only",pretendToBeVisual:true});
+          const {window}=dom;
+          window.eval(js);
+          const $=id=>window.document.getElementById(id);
+          assert.equal($("thread").querySelectorAll(".turn").length,1);
+          for(let i=0;i<7;i++)$("nextBtn").click();
+          assert.ok($("stepLabel").textContent.includes("7 / 7"));
+          assert.equal($("thread").querySelectorAll(".red-dot").length,7);
+          assert.equal($("nextBtn").disabled,true);
+          assert.equal($("showFinal").hidden,false);
+          $("showFinal").click();
+          assert.equal($("finalModal").hidden,false);
+          assert.ok($("finalText").textContent.includes("course au bonheur matériel est sans fin"));
+          $("closeFinal").click();
+          assert.equal($("finalModal").hidden,true);
+          $("boundaryBtn").click();
+          assert.equal($("thread").querySelectorAll(".red-dot").length,8);
+          assert.ok($("theoryDetail").textContent.includes("教师规约"));
+          $("prevBtn").click();
+          assert.equal($("thread").querySelectorAll(".red-dot").length,6);
+          $("showOriginal").click();
+          assert.equal($("originalModal").hidden,false);
+          $("closeOriginal").click();
+          assert.equal($("originalModal").hidden,true);
+          console.log("PASS: seven steps, 8 theory markers, completed paragraph and back/continue controls.");
+          NODE
