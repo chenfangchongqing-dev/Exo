@@ -1,0 +1,35 @@
+name: Verify S09 conference interaction page
+on:
+  push:
+    paths:
+      - 'Events/2026-fle-metacognition/s09-demo.html'
+      - 'Events/2026-fle-metacognition/s09-parcours.js'
+      - '.github/workflows/verify-s09-conference-demo.yml'
+  workflow_dispatch:
+jobs:
+  s09-standalone:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: JavaScript syntax
+        run: node --check Events/2026-fle-metacognition/s09-parcours.js
+      - name: Verify projection links and interaction controls
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from "node:fs";
+          import assert from "node:assert/strict";
+          const html=fs.readFileSync("Events/2026-fle-metacognition/s09-demo.html","utf8");
+          const js=fs.readFileSync("Events/2026-fle-metacognition/s09-parcours.js","utf8");
+          for(const id of ["thread","chatBody","theoryDetail","theoryMap","nextBtn","prevBtn","showFinal","finalModal","finalText","closeFinal","boundaryBtn","stepLabel","restartBtn","showOriginal","originalModal","closeOriginal","composer","sendBtn","sampleText","fullscreenBtn"]) {
+            assert.ok(html.includes('id="'+id+'"'),"Missing control: "+id);
+          }
+          assert.ok(html.includes('src="./s09-parcours.js'));
+          assert.ok(html.includes('href="index.html#s09-ai"'));
+          assert.ok(html.includes('href="index.html#s02-case"'));
+          assert.ok(js.includes('finalText') && js.includes('const steps=[') && js.includes('function showBoundary()'));
+          assert.ok(js.includes('教学模拟'));
+          console.log("S09: linked page, step navigation, final text, theory, boundary and attribution verified.");
+          NODE
