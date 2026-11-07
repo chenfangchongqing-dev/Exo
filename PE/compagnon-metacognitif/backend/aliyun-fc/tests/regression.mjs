@@ -70,8 +70,8 @@ try{
     goal:"Le travail peut apporter de la satisfaction",difficulty:"example"
   }});
   shortResponse(example);
-  assert.equal(modelCalls,before+1,"A request for one concrete example must remain allowed");
-  assert.equal(example.reply,nextModelReply);
+  assert.equal(example.meta.difficulty,"example");
+  assert.equal(modelCalls,before,"A short example may be handled by teacher rules without calling GLM");
 
   nextModelReply="---\n\n**Introduction :**\nLe bonheur semble merveilleux et inspire de grandes ambitions.\n\n**Exemple :**\nPrenons le cas d'un personnage inventé qui gagne beaucoup d'argent et vit dans le luxe.\n\n**Conclusion :**\nLe bonheur est un phénomène complexe.";
   const guarded=await ask({message:"Merci, je voudrais approfondir ce point.",phase:"writing",meta:{
@@ -79,7 +79,7 @@ try{
   }});
   shortResponse(guarded);
   assert.ok(!guarded.reply.includes("Le bonheur semble merveilleux"));
-  assert.equal(modelCalls,before+2,"Output checks apply after the model call");
+  assert.equal(modelCalls,before+1,"Output checks apply after a generated model reply");
 
   const notEssay=await ask({message:"Je dois rédiger une rédaction pour demain, mais je n’ai pas d’exemple."});
   assert.equal(notEssay.meta.difficulty,"example","Describing an assignment must not be treated as demanding an essay");
