@@ -57,3 +57,12 @@
 - van de Pol, J., Volman, M., & Beishuizen, J. (2010). *Scaffolding in teacher–student interaction: A decade of research*. *Educational Psychology Review*, 22, 271–296. https://doi.org/10.1007/s10648-010-9127-6
 - Hattie, J., & Timperley, H. (2007). *The power of feedback*. *Review of Educational Research*, 77(1), 81–112. https://doi.org/10.3102/003465430298487
 - Education Endowment Foundation. (2025). *Metacognition and Self-Regulated Learning*, 2nd ed. https://educationendowmentfoundation.org.uk/education-evidence/guidance-reports/metacognition
+
+
+## 2026-11-07 · 任务优先、按困难分流（v3 教师端测试）
+
+这一轮先用 S12、S09、S02 验证，不声称支持所有写作任务。学生开始对话时无须从“选择 idée reçue”开始；先记录已写内容、实际任务和当前困难，选择对应支架。S12：观点已有而缺具体例子，找情境并核验因果链；S09：中文构思已有而法语表达受阻，先确认原意，再给一条可迁移的表达线索，由学生造句；S02：有事例但推断不足，区分事实、可能性与幸福结论，认可学生主动缩小结论。每轮只处理最有价值的一步，不因阶段标签返回选题。
+
+前端“Mon travail en cours”仅标识当前可用的支持方向，不表示前面项目均已完成。课程词汇仅是教师整理的有限线索：未完成真实知识库检索时不能声称查到某条教材资源。网页版和阿里云云函数是独立部署；本次 GitHub 代码更新不会自动替换阿里云运行中的 handler，实际 GLM 测试须重新打包并部署 `server.mjs` 与最新 `handler.mjs`。
+
+本次对三种情形各运行三轮纯代码分支回归（加通用开场、中文切换、立即写作三项），验证分流和上下文延续。此测试不涉及在线 GLM API，**不构成真实模型行为或教学效果证据**。

@@ -48,3 +48,10 @@
 - https://help.aliyun.com/zh/functioncompute/the-default-public-network-domain-name-of-function-compute-is-not-allowed-in-the-production-environment
 - https://help.aliyun.com/zh/functioncompute/configure-custom-domain-names
 - https://docs.bigmodel.cn/cn/guide/models/free/glm-4.7-flash
+
+
+## 2026-11-07 · v3 自适应支架更新
+
+已将网页上的入口阶段改为“说明任务／当前困难”，不再强制选幸福观念；`handler.mjs` 改为优先识别例证困难（S12）、语言阻断（S09）、论证证据缺口（S02），再进入相应的帮助路径。更新同时修复了测试案例中重复回到选题、把可能性当作事实、语言帮助过早代写的倾向。
+
+**部署警告：仓库里先前打包的 ZIP 不包含本次修改，不能直接用它覆盖新版代码。** 需要使用最新的 `server.mjs`、`handler.mjs` 和 `package.json` 重打包为 ZIP（根目录放这些文件），在阿里云点击“部署代码”后才能真实验证 GLM。GitHub Pages 更新不会自动同步云函数。本轮 12 项纯分支测试不涉及在线模型调用，仍要通过教师访问码进行真实对话测试。

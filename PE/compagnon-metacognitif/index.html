@@ -54,8 +54,8 @@ h1{font-size:clamp(30px,4.8vw,48px);line-height:1.12;letter-spacing:-.035em;marg
 <section class="hero">
 <p class="overline">PRODUCTION ÉCRITE · ÉCRIRE EN RÉFLÉCHISSANT</p>
 <h1>Mon compagnon <em style="font-family:Georgia,serif;font-weight:400">métacognitif.</em></h1>
-<p class="intro">Avant de chercher la bonne phrase, prenons le temps de clarifier ton idée. Une question à la fois : c'est toi qui construis ton texte.</p>
-<div class="labels"><span>01 · Je choisis</span><span>02 · Je réfléchis</span><span>03 · J'illustre</span><span>04 · Je vérifie</span></div>
+<p class="intro">Un point de départ différent selon ton travail : une idée à développer, une formulation à chercher ou un argument à vérifier. Tu gardes les décisions d’écriture.</p>
+<div class="labels"><span>01 · Je précise mon besoin</span><span>02 · Je choisis une stratégie</span><span>03 · J’essaie</span><span>04 · J’évalue</span></div>
 </section>
 <div class="notice" id="modeNotice"><span aria-hidden="true">ⓘ</span><div><strong>Initialisation de l’accompagnement…</strong> Le site vérifie la configuration du serveur pédagogique. Si ce message persiste, recharge cette page sans cache.</div></div>
 <div class="access-box" id="accessPanel" hidden>
@@ -64,7 +64,7 @@ h1{font-size:clamp(30px,4.8vw,48px);line-height:1.12;letter-spacing:-.035em;marg
 </div>
 <div class="layout">
 <section class="panel chat-panel" aria-labelledby="chatTitle">
-<div class="panel-head"><h2 id="chatTitle">Un dialogue pour avancer dans mon écriture</h2><small>ACCOMPAGNEMENT GUIDÉ</small></div>
+<div class="panel-head"><h2 id="chatTitle">Un dialogue adapté à mon travail</h2><small>ACCOMPAGNEMENT GUIDÉ</small></div>
 <div class="stage" aria-live="polite">Étape actuelle : <b id="stageName">Présenter ma tâche</b></div>
 <div class="chat" id="chat" role="log" aria-live="polite" aria-relevant="additions"></div>
 <div id="suggestions" class="suggestions" aria-label="Propositions pour commencer"></div>
@@ -77,16 +77,16 @@ h1{font-size:clamp(30px,4.8vw,48px);line-height:1.12;letter-spacing:-.035em;marg
 </section>
 <aside class="sidebar">
 <section class="panel">
-<div class="panel-head"><h2>Mon cheminement</h2><small>JE GARDE LA MAIN</small></div>
-<div class="side-body"><p>Tu peux réfléchir en plusieurs étapes sans être obligé de toutes les suivre.</p>
+<div class="panel-head"><h2>Mon travail en cours</h2><small>JE GARDE LA MAIN</small></div>
+<div class="side-body"><p>Le compagnon s'adapte à ce que tu as déjà fait. Ces repères ne sont pas des étapes obligatoires.</p>
 <ol id="progress" class="progress">
-<li data-phase="topic"><span class="num">1</span><span>Je présente ma tâche</span></li>
-<li data-phase="position"><span class="num">2</span><span>Je prends position</span></li>
-<li data-phase="reason"><span class="num">3</span><span>Je cherche pourquoi</span></li>
-<li data-phase="example"><span class="num">4</span><span>Je trouve un exemple</span></li>
-<li data-phase="interpretation"><span class="num">5</span><span>Je vérifie ce qu'il montre</span></li>
-<li data-phase="writing"><span class="num">6</span><span>Je rédige et je révise</span></li>
-<li data-phase="review"><span class="num">7</span><span>Je prends du recul</span></li>
+<li data-phase="topic"><span class="num">1</span><span>Je précise mon travail</span></li>
+<li data-phase="position"><span class="num">2</span><span>Je clarifie une idée</span></li>
+<li data-phase="reason"><span class="num">3</span><span>Je développe une raison</span></li>
+<li data-phase="example"><span class="num">4</span><span>Je cherche un exemple</span></li>
+<li data-phase="interpretation"><span class="num">5</span><span>Je vérifie la pertinence</span></li>
+<li data-phase="writing"><span class="num">6</span><span>Je travaille l'expression</span></li>
+<li data-phase="review"><span class="num">7</span><span>Je fais un choix de révision</span></li>
 </ol>
 <div class="diagnosis" aria-label="Repères sur ma progression">
 <p class="diagnosis-title">MON POINT D'APPUI</p>
@@ -110,7 +110,7 @@ h1{font-size:clamp(30px,4.8vw,48px);line-height:1.12;letter-spacing:-.035em;marg
 <p class="privacy" id="privacyNote"><strong>Confidentialité :</strong> dans cette version, les messages restent dans la page ouverte. Ils ne sont pas envoyés à un modèle ni enregistrés automatiquement. Tu peux exporter ton dialogue si tu souhaites le conserver. N'entre pas d'informations personnelles sensibles.</p>
 </main>
 </div>
-<script src="./glm-config.js?v=glm20261106"></script>
+<script src="./glm-config.js?v=glm20261107-adaptive"></script>
 <script>
 (function(){
 "use strict";
@@ -127,7 +127,7 @@ if(GLM_ENDPOINT){
  document.getElementById("privacyNote").innerHTML="<strong>Confidentialité :</strong> en mode GLM, tes messages et quelques réponses précédentes sont transmis au serveur pédagogique et à l'API GLM pour produire la réponse. N'entre aucune donnée personnelle sensible. Le dialogue n'est pas enregistré par ce site ; tu peux l'exporter.";
 }
 var STARTERS=["Je voudrais commencer un texte.","J’ai déjà un brouillon.","Je bloque sur une idée ou une formulation."];
-var STAGES={fr:["Présenter ma tâche","Exprimer mon avis","Expliquer mon avis","Trouver un exemple","Examiner mon exemple","Passer à la rédaction","Relire mon raisonnement"],zh:["说明写作任务","表达自己的立场","解释自己的理由","寻找具体例子","检验例子的作用","进入写作","回顾论证过程"]};
+var STAGES={fr:["Préciser mon travail","Clarifier une idée","Développer une raison","Chercher un exemple","Vérifier la pertinence","Travailler mon expression","Décider d’une révision"],zh:["说明当前任务","明确已有想法","展开理由","寻找例子","检查例证相关性","解决表达问题","决定如何修改"]};
 function t(fr,zh){return state.lang==="zh"?zh:fr}
 function normal(s){return s.toLowerCase().replace(/[\u2019\u2018]/g,"'").trim()}
 function requestChinese(s){return /(?:用|说|讲|回答|解释|切换|改成|能|可以|请).{0,14}(?:中文|汉语)|(?:中文|汉语).{0,10}(?:回答|解释|交流|说|可以|行吗|好吗)|en chinois|réponds?.{0,15}chinois|parle.{0,15}chinois|can you speak chinese|chinese please/i.test(s)}
@@ -143,9 +143,9 @@ function phaseIndex(){return Math.max(0,PHASES.indexOf(state.phase))}
 function renderStage(){
  var phase=phaseIndex();
  stageName.textContent=STAGES[state.lang][phase]||STAGES[state.lang][0];
- Array.prototype.forEach.call(progress.children,function(el,i){el.classList.toggle("active",i===phase);el.classList.toggle("done",i<phase)});
+ Array.prototype.forEach.call(progress.children,function(el,i){el.classList.toggle("active",i===phase);el.classList.remove("done")});
  var m=state.meta||{};
- var labels={example:state.lang==="zh"?"需要具体例证":"Besoin d'un exemple",planning:state.lang==="zh"?"尚未确定立场":"Position à préciser",reasoning:state.lang==="zh"?"检查论证关系":"Lien argument–preuve",language:state.lang==="zh"?"法语表达":"Formulation en français",drafting:state.lang==="zh"?"正在组织写作":"Rédaction en cours"};
+ var labels={example:state.lang==="zh"?"需要具体例证":"Exemple à trouver",planning:state.lang==="zh"?"需要明确任务或求助":"Tâche ou besoin à préciser",reasoning:state.lang==="zh"?"检查论证关系":"Lien argument–preuve",language:state.lang==="zh"?"法语表达困难":"Formulation en français",drafting:state.lang==="zh"?"正在组织或修改":"Rédaction ou révision"};
  document.getElementById("diagGoal").textContent=m.goal||(state.lang==="zh"?"尚待明确":"Encore à préciser");
  document.getElementById("diagNeed").textContent=labels[m.difficulty]||(state.lang==="zh"?"尚未确定":"Non encore précisée");
  document.getElementById("diagNext").textContent=m.next||(state.lang==="zh"?"描述目前的想法或困难":"Présenter ma tâche ou ma difficulté");
