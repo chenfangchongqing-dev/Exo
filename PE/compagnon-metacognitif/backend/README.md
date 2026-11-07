@@ -4,7 +4,7 @@
 
 [国内云函数部署说明](./aliyun-fc/README.md) · [运行代码](./aliyun-fc/server.mjs) · [教学规约/GLM请求处理](./aliyun-fc/handler.mjs)
 
-GitHub Pages 的PE网页位于 `PE/compagnon-metacognitif/index.html`，`glm-config.js` 的后端地址目前保持为空，所以目前仍是预设互动版。
+GitHub Pages 的PE网页位于 `PE/compagnon-metacognitif/index.html`，`glm-config.js` 现在含阿里云 FC 测试接口地址，但 GitHub 代码更新不会自动同步运行中的云函数；教师必须上传最新版 ZIP 并部署代码，才能验证实时 GLM 的新交互规则。
 
 **注意：**当前只提供可部署源代码，不代表已经创建了阿里云函数，也没有获取/使用用户的智谱API Key。阿里云部署后应先教师端试用；默认公网域名不应用于正式生产环境，国内长期部署需准备备案/接入备案的自定义域名。
 
