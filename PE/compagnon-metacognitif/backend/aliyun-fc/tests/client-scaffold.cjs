@@ -1,0 +1,21 @@
+// Teacher-rule browser fallback tests (not a model evaluation).
+const assert=require("node:assert/strict");
+const scaffold=require("../../../language-scaffold.js");
+const original="On entend souvent dire que la course sans fin au bonheur matériel. Pour ma part, je pense que c’est vrai. Il y a objets luxuriante dont on peut jouir et nous pouvons les voir sur les réseaux sociaux, donc nous ne pouvons pas restreindre\n我们因为看到别人分享出来的更高品质的生活而无法遏制自己的向往和贪欲。比如，有许多人拼团订一间豪华酒店的房间，轮流拍照以模仿那些真正有能力承担这种生活的人。";
+const first=scaffold(original,[],{});
+assert.equal(first.phase,"writing");
+assert.equal(first.meta.difficulty,"language");
+assert.equal(first.meta.support,1);
+assert.ok(first.reply.includes("susciter l'envie"));
+const h1=[{role:"user",text:original},{role:"bot",text:first.reply}];
+const second=scaffold("不知道法语要怎么写？",h1,first.meta);
+assert.equal(second.meta.support,2);
+assert.ok(second.reply.includes("句架"));
+const h2=[...h1,{role:"user",text:"不知道法语要怎么写？"},{role:"bot",text:second.reply}];
+const third=scaffold("不会写法语",h2,second.meta);
+assert.equal(third.meta.support,3);
+assert.ok(third.reply.includes("局部示范"));
+const french=scaffold("Les réseaux sociaux suscitent l'envie de mener une vie plus luxueuse.",h2,third.meta);
+assert.equal(french,null,"Learner French attempt must go to live GLM");
+assert.equal(scaffold("我没有例子",h1,first.meta),null,"Unrelated example requests must not be hijacked");
+console.log("PASS S09 browser scaffold: mixed draft -> sentence frame -> limited model -> live French transfer");
