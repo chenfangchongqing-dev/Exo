@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="2026年11月7日S09角色语伴真实系统测试记录：保留27条原始输入与回复，并以红点独立标注元认知教学策略。">
+<title>S09｜真实语伴交互 · 元认知教学策略</title>
+<style>
+:root{--ink:#2e302c;--muted:#847f74;--line:#e8deca;--cream:#fffbf4;--paper:#f6f2e9;--gold:#c1882b;--goldsoft:#fff0b9;--red:#d44542;--redsoft:#fff1ef;--blue:#325f88}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}body{margin:0;background:#f7f6f2;color:var(--ink);font:16px/1.65 Arial,"PingFang SC","Microsoft YaHei",sans-serif}
+button,a{font:inherit}button{cursor:pointer}button:focus-visible,a:focus-visible{outline:3px solid #b57a20;outline-offset:3px}a{color:inherit}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:13px clamp(18px,3vw,45px);background:#fcf9f2;border-bottom:1px solid #e6dccb}
+.back{font-size:14px;text-decoration:none;color:#74572c;font-weight:750}.back:hover{text-decoration:underline}.topbar .identity{color:#95601b;font-size:12px;font-weight:800;letter-spacing:.1em}
+.wrap{max-width:1700px;margin:0 auto;padding:21px clamp(15px,2.3vw,35px) 26px}
+.heading{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;margin-bottom:13px}
+h1{font-size:clamp(29px,2.7vw,41px);letter-spacing:-.025em;line-height:1.26;margin:0 0 8px}h1 span{color:#a56a1c}.lead{margin:0;color:#766f63;font-size:15px}
+.stamp{white-space:nowrap;border:1px solid #e3bc7c;background:#fff5dd;border-radius:13px;padding:8px 15px;color:#895b1c;font-weight:800;text-align:center;font-size:13px}.stamp small{display:block;font-size:11px;letter-spacing:.04em;font-weight:600}
+.context{background:#fffdf8;border:1px solid #e9dec7;border-radius:12px;color:#665c4b;font-size:13px;line-height:1.65;padding:11px 16px;margin:0 0 14px}
+.context strong{color:#a15f18}
+.layout{display:grid;grid-template-columns:minmax(0,1.62fr) minmax(340px,.81fr);gap:16px;min-height:0;height:calc(100vh - 260px);min-height:560px}
+.card{border:1px solid var(--line);border-radius:21px;background:white;overflow:hidden;box-shadow:0 10px 32px #4a3b2311}
+.chat{display:flex;flex-direction:column;min-height:0}.chathead{display:flex;align-items:center;justify-content:space-between;background:#fffaf0;border-bottom:1px solid var(--line);gap:10px;padding:16px 20px}
+.chathead strong{font-size:19px}.counter{font-size:13px;font-weight:750;color:#9d702c}
+.stream{overflow-y:auto;min-height:0;flex:1;padding:21px 25px 24px;scrollbar-color:#d2c7b7 transparent;scrollbar-width:thin}
+.thread{display:flex;flex-direction:column;gap:18px}
+.turn{display:flex;flex-direction:column;gap:5px;align-items:flex-start}.turn.mine{align-items:flex-end}
+.who{color:#8e887f;font-weight:800;font-size:13px;letter-spacing:.04em}.bubbleline{display:flex;align-items:flex-start;gap:9px;max-width:94%}.mine .bubbleline{flex-direction:row-reverse}
+.bubble{padding:17px 21px;border-radius:18px;background:var(--paper);border:1px solid #e7dcca;color:#2d2d29;font-size:clamp(15px,1.15vw,19px);line-height:1.68;min-width:145px;overflow-wrap:anywhere}
+.mine .bubble{background:#fff1ba;border-color:#e9cf85}
+.msg-text{white-space:pre-wrap}
+.note-dot{margin-top:15px;border:0;width:30px;height:30px;min-width:30px;border-radius:50%;background:var(--red);box-shadow:0 3px 9px #d4454240;color:#fff;font-weight:850;font-size:13px}.note-dot:hover,.note-dot.on{box-shadow:0 0 0 4px #f9d5d3,0 3px 9px #d4454240;transform:scale(1.03)}
+.player{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;background:#fffdfa;border-top:1px solid #ece1d0;padding:13px 18px}
+.player span{font-size:12px;color:#8b7b69}.controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.btn{border:1px solid #d9bd8e;background:#fffdf6;color:#82571d;font-weight:750;font-size:13px;padding:9px 13px;border-radius:9px}.btn:hover{background:#fff2d4}.btn.primary{background:#9e651e;color:white;border-color:#9e651e}.btn.primary:hover{background:#865214}.btn:disabled{opacity:.38;cursor:default}
+.aside{display:flex;flex-direction:column;min-height:0}.asidetop{background:#fcf5e8;border-bottom:1px solid var(--line);padding:17px 21px}
+.asidetop h2{font-size:19px;margin:0 0 4px}.asidetop p{margin:0;color:#756758;font-size:12px}
+.guide{padding:17px 18px;overflow:auto;display:flex;flex-direction:column;gap:13px}
+.guide .note-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.jump{border:1px solid #e6d8bf;border-radius:10px;background:#fffdf9;padding:8px 5px;font-size:12px;color:#855c2d;font-weight:750;line-height:1.3;min-height:57px}.jump b{display:inline-grid;place-items:center;background:var(--red);color:white;width:21px;height:21px;border-radius:50%;margin-right:4px;font-size:11px}
+.jump.current{border-color:#d64b48;background:#fff3f1}.jump:hover{border-color:#ce8e7c}
+.detail{border:1px solid #ecd9bd;border-radius:14px;padding:17px;background:#fffdfa}.detail .kicker{color:#a76031;font-size:12px;font-weight:800;letter-spacing:.04em;margin-bottom:4px}
+.detail h3{margin:0;font-size:20px;color:#5d472b;line-height:1.35}.detail .d-obs{font-size:15px;line-height:1.7;margin:12px 0 8px}
+.detail .teacher{background:#f6f2ea;color:#5e584c;padding:11px 13px;border-radius:10px;font-size:14px;margin:9px 0}
+.detail .ref{font-size:12px;color:#887c6b;margin:9px 0 0}
+.boundary{background:#f8fafb;border:1px solid #dfe7ec;border-radius:11px;padding:12px 14px;font-size:13px;color:#526879;line-height:1.65}.boundary strong{display:block;color:#2f5777;font-size:14px;margin-bottom:3px}
+.note{margin:8px 0 0;font-size:12px;color:#807569}
+.footer{font-size:12px;color:#81776a;margin-top:13px;display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap}
+.footer a{color:#8e5d1c}
+@media(max-width:1050px){.layout{height:auto;display:flex;flex-direction:column}.chat{height:72vh;min-height:560px}.aside{height:auto}.guide{overflow:visible}.stamp{white-space:normal}}
+@media(max-width:560px){.heading{flex-wrap:wrap}.wrap{padding:13px}.bubble{padding:12px 14px;font-size:15px}.stream{padding:14px 10px}.bubbleline{max-width:100%}.guide .note-list{grid-template-columns:repeat(2,minmax(0,1fr))}.player{padding:10px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media print{.layout{height:auto;display:block}.stream{overflow:visible}.player,.note-dot,.note-list,.topbar{display:none}.aside{margin-top:20px}.chat{height:auto}.bubble{font-size:12px}.wrap{max-width:none}}
+</style>
+</head>
+<body>
+<header class="topbar"><a href="index.html#s09-ai" class="back">← 返回年会报告 S09 案例</a><div class="identity">ÉCRIRE EN RÉFLÉCHISSANT · S09</div></header>
+<div class="wrap">
+  <div class="heading"><div><h1>S09｜<span>真实语伴交互</span></h1><p class="lead">从中法混写原稿、词汇与句架求助，到检验模型错误、修订论证结论与完成法语段落</p></div><div class="stamp">2026.11.07 · 实测记录<small>27条原始消息 · 非模拟对话</small></div></div>
+  <div class="context"><strong>材料性质：</strong>研究者以 S09 角色操作真实网页语伴所得的会话记录，并非 S09 学生本人实际使用 AI 的课堂数据。学生角色的输入、网页语伴的回复均按页面可见文本保留；前端教师预设规则支架与其他回复并存。红点处为<strong>后加的教师教学分析</strong>，不是模型原话。过程中出现的语法误判、任务失配及重复回复均不作修饰。</div>
+  <main class="layout">
+    <section class="card chat" aria-label="S09真实对话完整记录">
+      <header class="chathead"><strong>Un dialogue adapté à mon travail</strong><span id="count" class="counter">3 / 27 条消息</span></header>
+      <div class="stream" id="stream"><div class="thread" id="history"></div></div>
+      <div class="player"><span>依次展开真实消息 · 点击红点查看元认知教学支点</span><div class="controls">
+        <button id="prev" type="button" class="btn">← 上一轮</button><button id="next" type="button" class="btn primary">下一轮 →</button>
+        <button id="all" type="button" class="btn">显示全部</button><button id="finish" type="button" class="btn">查看成稿</button>
+      </div></div>
+    </section>
+    <aside class="card aside" aria-label="元认知教学策略理论关照">
+      <div class="asidetop"><h2><span style="color:#d44542">●</span> 元认知教学策略点</h2><p>红点关联真实会话中的可观察行动；点击可跳转相应回合</p></div>
+      <div class="guide">
+        <nav id="jumps" class="note-list" aria-label="教学支点导航"></nav>
+        <section id="detail" class="detail" aria-live="polite"></section>
+        <div class="boundary"><strong>教学边界｜不能把“文本写得更好”直接等同于“元认知能力提高”</strong>可观察的是角色如何识别求助需要、核查模型反馈、选择更易掌握的句式及限制论证结论。要证明真实学生学会独立调节，还需课堂过程数据和后续迁移任务。</div>
+        <p class="note">教学概念参照：Flavell（1979）、Flower & Hayes（1981）、Toulmin（1958）、van de Pol 等（2010）。理论说明独立于右侧原始消息，不视为模型真实输出。</p>
+      </div>
+    </aside>
+  </main>
+  <div class="footer"><span>来源：本次测试仍打开的「Mon compagnon métacognitif」会话页面。记录保留界面文本，非再生成的AI回答。</span><span><a href="../../PE/compagnon-metacognitif/" target="_blank" rel="noopener">打开语伴系统 ↗</a>　·　<a href="s09-demo.html">查看原有教学模拟 ↗</a></span></div>
+</div>
+<script>
+"use strict";
+const MESSAGES=[{"role":"COMPAGNON","text":"Bonjour ! Que souhaites-tu travailler aujourd’hui ? Tu peux me présenter la consigne, une idée ou un passage déjà rédigé, ou expliquer ce qui te pose problème. Nous partirons de ce que tu as déjà fait."},{"role":"MOI","text":"我是S09。我已经有一份中法混写的原稿：\n\nOn entend souvent dire que la course sans fin au bonheur matériel. Pour ma part, je pense que c’est vrai. Il y a objets luxuriante dont on peut jouir et nous pouvons les voir sur les réseaux sociaux, donc nous ne pouvons pas restreindre\n\n我们因为看到别人分享出来的更高品质的生活而无法遏制自己的向往和贪欲。比如，有许多人拼团订一间豪华酒店的房间，轮流拍照以模仿那些真正有能力承担这种生活的人。这样的例子展示出人对物质生活的追求是无法停止的——哪怕实际上享受不了，也要假装自己有，哪怕一秒钟，从而得到精神上的满足与快乐\n\n我的问题是：我知道自己想说什么，但写到这里就不知道法语要怎么写了。请用中文帮助我，法语表达还是用法语。"},{"role":"COMPAGNON","text":"你已经有法语开头和完整的中文构思。问题在语言表达，而不是缺少观点或例子。\n先拆成三层：①看到网络上更高品质的生活，引发向往；②拼团订豪华酒店、拍照模仿；③得到短暂满足。\n先表达第①层。可以尝试调用 « susciter l'envie de » 和 « un mode de vie luxueux »，自己写一句法语。\n\n〔教师预设规则支架 · 本轮未调用 GLM〕"},{"role":"MOI","text":"这两个词组我看懂了，但是还是不知道法语句子怎么写。能给我一个句架，让我先试着写第一层意思吗？"},{"role":"COMPAGNON","text":"你刚才的中文已经说清楚意思，不需要再解释一遍。先借用这个法语句架：\n« Sur les réseaux sociaux, les images d'un mode de vie luxueux peuvent ... »\n要表达“引发向往”，可调用 « susciter l'envie de + infinitif »。请只补全这一句，不必整段翻译。\n\n〔教师预设规则支架 · 本轮未调用 GLM〕"},{"role":"MOI","text":"Sur les réseaux sociaux, les images d’un mode de vie luxueux peuvent susciter l’envie de vivre la même vie.\n我想说的是：看到这些图片以后，也想过这样的生活。这样写可以吗？"},{"role":"COMPAGNON","text":"可以。这个句子准确地表达了第一层意思，语法和词汇都恰当。很好！\n\n现在，请尝试用类似的方式，表达第二层意思：看到别人拼团住豪华酒店、拍照模仿。可以参考这个句架：\n« Par exemple, certains personnes [动词变位] pour imiter les personnes qui peuvent vraiment se le permettre. »\n\n先试着写这一句。"},{"role":"MOI","text":"Par exemple, certains personnes réservent ensemble une chambre d’hôtel de luxe et prennent des photos à tour de rôle pour imiter les personnes qui peuvent vraiment se le permettre.\n我想表达的是假装自己也过着这种生活，这句话准确吗？"},{"role":"COMPAGNON","text":"先聚焦最难表达的一句话。请说清楚原意，我可以提示一个短语或局部句式，再由你尝试组织法语。"},{"role":"MOI","text":"我想表达“让人以为自己过着奢华生活”。“假装”用哪个短语合适？另外，personnes前面应该是certains还是certaines？"},{"role":"COMPAGNON","text":"\"假装\"可以用短语 **\"faire croire que\"** 或 **\"se donner une apparence de\"**。选择哪个取决于你想强调的侧重点。\n\n关于 `personnes` 的性数配合：\n- 如果泛指一些人，`certains` (阳性复数) 是更常用的选择，因为它涵盖男女。\n- 如果你想特别指代那些参与模仿行为的人（通常是女性居多？），可以用 `certaines` (阴性复数)。\n\n假设你想用 **\"faire croire que\"**，并且用 **`certains`**，可以尝试这个句式：\n« [主语] [动词变位] pour faire croire qu'ils vivent une vie luxueuse. »\n\n请尝试补全这个句子。"},{"role":"MOI","text":"可是personne不是阴性名词吗？即使指男性，不也应该写certaines personnes吗？我只想说“一些人”，并没有说女性更多。请再检查一下。"},{"role":"COMPAGNON","text":"先区分例子实际说明的事实与自己希望得出的结论，再检查两者之间是否存在推理缺口。你想检验哪一个联系？"},{"role":"MOI","text":"我只问法语表达和语法。我改成：Certaines personnes réservent à plusieurs une chambre d’hôtel de luxe pour faire croire qu’elles mènent une vie luxueuse. 这里的性数配合对吗？"},{"role":"COMPAGNON","text":"你已经补充了论证思路。请保留例子真正支持的部分，对尚未证实的推断作限定，然后尝试写出更准确的句子。"},{"role":"MOI","text":"我保留certaines personnes，继续写下一句。我想表达“虽然不能真正过上奢华生活，至少也能从这种形象中获得短暂满足”。“获得短暂满足”法语怎么说？我需要词汇帮助。"},{"role":"COMPAGNON","text":"你已经有想法了，困难主要在法语表达。先用自己的话说明想表达的准确意思，也可以暂时用中文；我会据此提供适量的语言线索。"},{"role":"MOI","text":"意思是：别人以为自己很有钱、过着奢华生活，因此自己觉得满足，但这种感觉维持不久。我只缺一个表达“短暂满足”的法语词组。"},{"role":"COMPAGNON","text":"表达“短暂满足”可以用短语 **\"satisfaction éphémère\"**。这个词组直接对应你的意思。\n\n你可以尝试将这个短语加入到你的句子中，例如：\n« Bien que ne pouvant vraiment vivre une vie luxueuse, elles obtiennent une [短语] de cette image. »\n\n请尝试用这个短语完成句子。"},{"role":"MOI","text":"我用更简单的句式试写：Même si elles ne peuvent pas vraiment mener une vie luxueuse, elles peuvent tirer une satisfaction éphémère de cette image. 这样是否保留了我的原意？"},{"role":"COMPAGNON","text":"是的，这个句子很好地表达了你的原意。它清晰地说明了即使不能真正过上奢华生活，也能从这种形象中获得短暂的满足感。\n\n现在，请继续思考如何将这个例子与你的主要论点联系起来，并尝试写出连接句。"},{"role":"MOI","text":"Cet exemple suggère que la recherche du bonheur matériel peut passer par l’apparence, même sans posséder réellement ce qu’on montre.\n我觉得这个例子不能证明“没有止境”，所以把结论缩小。这样连接合适吗？"},{"role":"COMPAGNON","text":"先区分例子实际说明的事实与自己希望得出的结论，再检查两者之间是否存在推理缺口。你想检验哪一个联系？"},{"role":"MOI","text":"我想检验的是：酒店摆拍只能说明有人追求奢华生活的形象，并从中获得短暂满足，不能证明所有人的物质欲望都没有止境。我决定保留这个例子，把结论限定在“追求物质幸福可能表现为追求这种形象”。"},{"role":"COMPAGNON","text":"先区分例子实际说明的事实与自己希望得出的结论，再检查两者之间是否存在推理缺口。你想检验哪一个联系？"},{"role":"MOI","text":"我把已经试写的句子合成了这一段，并修正开头缺谓语的问题。我保留certaines personnes，也把原来的绝对判断改成了有范围的结论。这是我的成稿：\n\nOn entend souvent dire que la recherche du bonheur matériel est sans fin. Pour ma part, je nuancerais cette idée. Sur les réseaux sociaux, les images de luxe suscitent de nouvelles envies. Certaines personnes réservent à plusieurs une chambre d’hôtel de luxe pour prendre des photos et faire croire qu’elles sont riches. Elles en tirent une satisfaction éphémère. Cet exemple suggère que le bonheur matériel peut être recherché dans l’apparence, mais ne prouve pas que cette quête soit sans fin."},{"role":"COMPAGNON","text":"你已经有法语开头和完整的中文构思。问题在语言表达，而不是缺少观点或例子。\n先拆成三层：①看到网络上更高品质的生活，引发向往；②拼团订豪华酒店、拍照模仿；③得到短暂满足。\n先表达第①层。可以尝试调用 « susciter l'envie de » 和 « un mode de vie luxueux »，自己写一句法语。\n\n〔教师预设规则支架 · 本轮未调用 GLM〕"}];
+const NOTES=[{"at":2,"title":"诊断语言障碍，而非代替构思","type":"困难识别 · 任务评估","observe":"从中法混写原稿与角色自述出发，区分“已经有论点和例子”与“缺少法语资源”。支架的第一步不是直接翻译中文段落。","teaching":"教师提示：先让学习者确认卡在词汇、句法还是论证。对困难的辨认是元认知监控的线索，但仅凭原稿不能推定其策略能力。","ref":"Flavell（1979）；Flower & Hayes（1981）"},{"at":4,"title":"句架支持与支架的适度调整","type":"策略选择 · 适应性支架","observe":"角色已获得词组，仍明确表示不会组织句子，于是语伴提供可补全的局部句架，并要求只完成一句，而不是整段翻译。","teaching":"教师提示：把任务从“翻译整段”缩小到一个可完成的句子；如学习者仍受阻，再增加支持程度，随后逐步撤除。","ref":"van de Pol 等（2010）"},{"at":11,"title":"核验 AI 的语法判断","type":"外部反馈监控 · 错误识别","observe":"语伴先给出“certains personnes”，又将泛指一些人误解释为阳性复数，并无根据地加入“通常女性居多”推测；角色指出 personnes 是阴性名词，要求核查。","teaching":"教师提示：正确形式是 certaines personnes，即使所指群体包括男性也须与阴性复数名词 personnes 保持一致。对模型反馈提出有根据的异议，比照单全收更值得观察。","ref":"Flavell（1979）；Hattie & Timperley（2007）"},{"at":14,"title":"任务识别失配也是教学证据","type":"反馈边界 · 策略匹配","observe":"角色明确要求法语性数配合检查，系统却转向“论证是否成立”，没有回答当前的语法问题。后续又出现同类重复反馈。","teaching":"教师提示：语言知识缺口应允许直接解释。不能把一切求助强制塞回论证追问；真实系统失配应如实记录，而非当成成功的元认知引导。","ref":"适应性反馈与支架设计：van de Pol 等（2010）"},{"at":18,"title":"精准索取所缺的语言资源","type":"资源调用 · 求助调节","observe":"角色反复明确需求：只缺“短暂满足”对应的法语词组。语伴随后给出 satisfaction éphémère 及局部句式。","teaching":"教师提示：让学生说清楚自己需要的是词块还是整句结构，避免语言支持越界成为代写。","ref":"Flavell（1979）；Flower & Hayes（1981）"},{"at":19,"title":"放弃复杂句式，选择自己的表达","type":"自主试写 · 意义监控","observe":"语伴给出 bien que ... 的局部框架；角色主动改用更熟悉的 même si...，并追问是否保留原意。这个选择属于写作过程中的策略调整。","teaching":"教师提示：评估的不只是法语是否正确，还要看学生为何采用较简洁的句式、如何核查语义是否改变。","ref":"Flower & Hayes（1981）；Flavell（1979）"},{"at":23,"title":"检验证据能支持多大的结论","type":"论证监控 · 修订决策","observe":"角色明确指出酒店摆拍只能说明对奢华形象的追求，不能证明“所有人的物质欲望都没有止境”，决定主动收窄结论。语伴仍重复模板提问。","teaching":"教师提示：区分例证事实、可合理推断的判断与超出证据范围的绝对结论。这里的修订决定由写作者作出。","ref":"Toulmin（1958）；Flavell（1979）"},{"at":25,"title":"文本成稿与学习效果不能画等号","type":"自主整合 · 迁移证据边界","observe":"角色将已有试写整合成法语段落，修正开头缺谓语，保留 certaines personnes，并将原来的绝对判断改成有限结论。","teaching":"教师提示：此处展示的是研究者扮演 S09 的一次真实系统测试，不能作为原学生元认知能力提升的证据。若要检验迁移，仍需观察下一次独立写作。","ref":"Flower & Hayes（1981）；van de Pol 等（2010）"},{"at":26,"title":"最终回复再次回到起点","type":"系统局限 · 教师校准","observe":"完成段落后，语伴没有评价成稿，而是再次输出最初的三层拆分提示，并标注“本轮未调用GLM”。这是真实记录的一部分。","teaching":"教师提示：系统状态追踪与任务结束识别仍需改进。教学现场应避免将重复模板呈现为有效诊断。","ref":"教师教学设计检验：过程证据与适应性反馈"}];
+const byId = id => document.getElementById(id);
+let shown=3, active=0;
+function noteFor(index){return NOTES.findIndex(n=>n.at===index);}
+function openNote(n,focus){
+  active=n;
+  const v=NOTES[n],box=byId("detail");
+  box.replaceChildren();
+  const k=document.createElement("div");k.className="kicker";k.textContent="红点 "+String(n+1).padStart(2,"0")+" · "+v.type;
+  const h=document.createElement("h3");h.textContent=v.title;
+  const p=document.createElement("p");p.className="d-obs";p.textContent=v.observe;
+  const t=document.createElement("div");t.className="teacher";t.textContent=v.teaching;
+  const ref=document.createElement("p");ref.className="ref";ref.textContent="理论关照："+v.ref;
+  box.append(k,h,p,t,ref);
+  byId("jumps").querySelectorAll("button").forEach((b,i)=>b.classList.toggle("current",i===n));
+  byId("history").querySelectorAll(".note-dot").forEach(b=>b.classList.toggle("on",+b.dataset.note===n));
+  if(focus){
+    if(shown<=v.at){shown=Math.min(MESSAGES.length,Math.max(3,v.at+1));render(false);}
+    const target=byId("msg-"+v.at);
+    if(target)target.scrollIntoView({behavior:"smooth",block:"center"});
+  }
+}
+function makeTurn(m,i){
+  const row=document.createElement("div");row.id="msg-"+i;row.className="turn "+(m.role==="MOI"?"mine":"assistant");
+  const label=document.createElement("div");label.className="who";label.textContent=m.role;
+  const line=document.createElement("div");line.className="bubbleline";
+  const bubble=document.createElement("div");bubble.className="bubble";
+  const txt=document.createElement("div");txt.className="msg-text";txt.textContent=m.text;
+  bubble.appendChild(txt);line.appendChild(bubble);
+  const n=noteFor(i);
+  if(n>=0){const dot=document.createElement("button");dot.className="note-dot"+(active===n?" on":"");dot.type="button";dot.textContent=n+1;dot.dataset.note=n;dot.title=NOTES[n].title;dot.setAttribute("aria-label","查看第"+(n+1)+"个教学支点："+NOTES[n].title);dot.addEventListener("click",()=>openNote(n,false));line.appendChild(dot);}
+  row.append(label,line);return row;
+}
+function render(scrollNew=true){
+  const history=byId("history");const frag=document.createDocumentFragment();
+  for(let i=0;i<shown;i++)frag.appendChild(makeTurn(MESSAGES[i],i));
+  history.replaceChildren(frag);byId("count").textContent=shown+" / "+MESSAGES.length+" 条消息";
+  byId("prev").disabled=shown<=3;byId("next").disabled=shown>=MESSAGES.length;
+  byId("next").textContent=shown>=MESSAGES.length?"已到最后一轮":"下一轮 →";
+  byId("all").textContent=shown===MESSAGES.length?"收起至开场":"显示全部";
+  if(scrollNew&&shown>3){const target=byId("msg-"+(shown-1));if(target)target.scrollIntoView({behavior:"smooth",block:"end"});}
+}
+byId("next").addEventListener("click",()=>{shown=Math.min(MESSAGES.length,shown+2);render();});
+byId("prev").addEventListener("click",()=>{shown=Math.max(3,shown-2);render();});
+byId("all").addEventListener("click",()=>{shown=shown===MESSAGES.length?3:MESSAGES.length;render(shown>3);});
+byId("finish").addEventListener("click",()=>{shown=MESSAGES.length;render(false);openNote(7,false);byId("msg-25").scrollIntoView({behavior:"smooth",block:"center"});});
+NOTES.forEach((n,i)=>{
+  const b=document.createElement("button");b.type="button";b.className="jump";
+  const number=document.createElement("b");number.textContent=i+1;
+  const label=document.createElement("span");label.textContent=n.title;
+  b.append(number,label);b.addEventListener("click",()=>openNote(i,true));byId("jumps").appendChild(b);
+});
+render(false);openNote(0,false);
+document.addEventListener("keydown",e=>{if(e.target&&["INPUT","TEXTAREA"].includes(e.target.tagName))return;if(e.key==="ArrowRight")byId("next").click();if(e.key==="ArrowLeft")byId("prev").click();});
+</script>
+</body></html>
