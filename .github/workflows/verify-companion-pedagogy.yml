@@ -1,0 +1,19 @@
+name: Verify metacognitive writing companion
+on:
+  push:
+    paths:
+      - 'PE/compagnon-metacognitif/backend/aliyun-fc/**'
+      - '.github/workflows/verify-companion-pedagogy.yml'
+  workflow_dispatch:
+jobs:
+  teacher-rules:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Syntax check
+        run: node --check PE/compagnon-metacognitif/backend/aliyun-fc/handler.mjs
+      - name: Regression scenarios (mock GLM only)
+        run: node PE/compagnon-metacognitif/backend/aliyun-fc/tests/regression.mjs
