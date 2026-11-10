@@ -42,7 +42,7 @@
 
 ## 保护范围
 
-中间件允许匿名读取 **`/` 和 `/index.html` 两个首页地址**；所有具体板块、页面、脚本、音频、图片等其他路径在 Cloudflare 上均需有效会话。教师资源路径至少包括 `/Events/` 与 `/PE/qualite/activites/`。其他未来需要教师专用的目录，可以增加到 `staffRoute` 函数。
+中间件允许匿名读取 **`/` 和 `/index.html` 两个首页地址**；所有具体板块、页面、脚本、音频、图片等其他路径在 Cloudflare 上均需有效会话。教师资源路径包括 `/Events/`、`/PE/qualite/` 教学质量周主页面、`/PE/qualite/activites/` 活动目录、`/PE/qualite/deux-chaines/` 双链学习法和 `/PE/qualite/ai-demo/` AI 互动示范。`/PE/qualite/reflection/` 为学生写作过程自我诊断表，`/PE/qualite/copies/` 的匿名原稿图片被学生订正页复用，二者仍按学生统一密码访问。原有 `PE/U1/corrections/` 仍是面向学生的订正资源，不改变其学生访问权限。
 
 这是一种共享口令方案，不记录个人学生身份，也不能阻止知道口令的人转发口令。建议按学期更换访问码，妥善保管教师码。如要单独撤销某个学生的权限，需要以后升级为个人账号。
 
