@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#FDBA12">
-<meta name="description" content="Compagnon métacognitif · Production écrite · Inspire 4. Parcours guidé pour penser, argumenter et réviser soi-même.">
+<meta name="description" content="Idée · Compagnon métacognitif de production écrite B2. Révision autonome, ressources du cours et soutien linguistique adapté.">
 <title>Compagnon métacognitif | Inspire 4 · Production écrite</title>
 <style>
 :root{--bg:#faf8f3;--paper:#fffefa;--ink:#272720;--muted:#69695f;--line:#e9dfcd;--sun:#fdba12;--soft:#fff2d1;--orange:#996113;--green:#286d55;--shadow:0 16px 45px rgba(95,66,20,.075)}
@@ -54,7 +54,7 @@ h1{font-size:clamp(30px,4.8vw,48px);line-height:1.12;letter-spacing:-.035em;marg
 <section class="hero">
 <p class="overline">PRODUCTION ÉCRITE · ÉCRIRE EN RÉFLÉCHISSANT</p>
 <h1>Mon compagnon <em style="font-family:Georgia,serif;font-weight:400">métacognitif.</em></h1>
-<p class="intro">Un point de départ différent selon ton travail : une idée à développer, une formulation à chercher ou un argument à vérifier. Tu gardes les décisions d’écriture.</p>
+<p class="intro">Tu peux préparer, réviser ou améliorer un texte, seul puis avec les retours de ton enseignante. Idée t’aide à trouver des pistes et des expressions adaptées, sans écrire à ta place.</p>
 <div class="labels"><span>01 · Je précise mon besoin</span><span>02 · Je choisis une stratégie</span><span>03 · J’essaie</span><span>04 · J’évalue</span></div>
 </section>
 <div class="notice" id="modeNotice"><span aria-hidden="true">ⓘ</span><div><strong>Initialisation de l’accompagnement…</strong> Le site vérifie la configuration du serveur pédagogique. Si ce message persiste, recharge cette page sans cache.</div></div>
@@ -70,7 +70,7 @@ h1{font-size:clamp(30px,4.8vw,48px);line-height:1.12;letter-spacing:-.035em;marg
 <div id="suggestions" class="suggestions" aria-label="Propositions pour commencer"></div>
 <form id="messageForm" class="composer">
 <label for="message" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Votre message</label>
-<textarea id="message" rows="2" maxlength="4500" placeholder="Écris ici ton idée, une question ou une difficulté…" required></textarea>
+<textarea id="message" rows="2" maxlength="4500" placeholder="Présente ton sujet, ton brouillon, le retour reçu ou une difficulté…" required></textarea>
 <button id="send" class="send" type="submit">Envoyer</button>
 </form>
 <div class="chat-footer"><span class="muted">Par défaut en français · 中文解释可按需请求</span><div><button id="export" class="mini" type="button">Exporter mon dialogue</button><button id="restart" class="mini" type="button">Recommencer</button></div></div>
@@ -93,16 +93,16 @@ h1{font-size:clamp(30px,4.8vw,48px);line-height:1.12;letter-spacing:-.035em;marg
 <p class="diagnosis-line"><span class="diagnosis-label">Déjà là</span><span id="diagGoal">À préciser avec l'élève</span></p>
 <p class="diagnosis-line"><span class="diagnosis-label">Difficulté</span><span id="diagNeed">Pas encore identifiée</span></p>
 <p class="diagnosis-line"><span class="diagnosis-label">Prochain pas</span><span id="diagNext">Présenter ma tâche ou ma difficulté</span></p>
-<p class="diagnosis-help">Repères provisoires : tu peux les corriger dans la conversation.</p>
+<p class="diagnosis-help">Repères provisoires : tu peux les corriger dans la conversation. Tu décides des modifications à retenir.</p>
 </div></div>
 </section>
 <section class="panel">
-<div class="panel-head"><h2>Ressources du cours</h2><small>UNITÉ 1</small></div>
+<div class="panel-head"><h2>Ressources du cours</h2><small>RÉEMPLOI · B2</small></div>
 <div class="side-body">
-<p>Si tu cherches tes mots, retourne aux expressions déjà travaillées. La ressource ne remplace pas ta réflexion.</p>
-<a class="resource" href="../../Vocabulaire/U1/index.html" target="_blank" rel="noopener">Vocabulaire · Le bonheur<span>Fiches et cartes de langue ↗</span></a>
-<a class="resource" href="../../Vocabulaire/U1/L2/phrases.html" target="_blank" rel="noopener">Expressions · Leçon 2<span>Réemploi en contexte ↗</span></a>
-<a class="resource" href="../U1/index.html">Une idée reçue sur le bonheur<span>Revenir à mon exercice d'écriture ↗</span></a>
+<p>Tu peux réutiliser des expressions étudiées dans différentes unités. Si elles ne conviennent pas, demande à Idée une formulation naturelle de niveau B2, avec un exemple et une explication.</p>
+<a class="resource" href="../../Vocabulaire/index.html" target="_blank" rel="noopener">Les mots de toutes les unités<span>Parcourir les ressources disponibles ↗</span></a>
+<a class="resource" href="../../Vocabulaire/U1/index.html" target="_blank" rel="noopener">Unité 1 · Le bonheur<span>Réutiliser des expressions en contexte ↗</span></a>
+<a class="resource" href="../../Vocabulaire/U2/index.html" target="_blank" rel="noopener">Unité 2 · L’apparence<span>Élargir et nuancer son expression ↗</span></a>
 </div>
 </section>
 </aside>
@@ -127,7 +127,7 @@ if(GLM_ENDPOINT){
  document.getElementById("modeNotice").innerHTML='<span aria-hidden="true">ⓘ</span><div><strong>Mode GLM configuré · Accès enseignant / classe.</strong> Les messages sont transmis à un modèle externe via un serveur sécurisé lorsque le code de classe est validé. La connexion doit être testée avant toute utilisation en cours.</div>';
  document.getElementById("privacyNote").innerHTML="<strong>Confidentialité :</strong> en mode GLM, tes messages et quelques réponses précédentes sont transmis au serveur pédagogique et à l'API GLM pour produire la réponse. N'entre aucune donnée personnelle sensible. Le dialogue n'est pas enregistré par ce site ; tu peux l'exporter.";
 }
-var STARTERS=["Je voudrais commencer un texte.","J’ai déjà un brouillon.","Je bloque sur une idée ou une formulation."];
+var STARTERS=["Je veux réviser mon brouillon avant le retour de l’enseignante.","J’ai reçu les remarques de mon enseignante : je voudrais réviser.","Je cherche une expression juste, éventuellement de niveau B2.","Je voudrais commencer un texte."];
 var STAGES={fr:["Préciser mon travail","Clarifier une idée","Développer une raison","Chercher un exemple","Vérifier la pertinence","Travailler mon expression","Décider d’une révision"],zh:["说明当前任务","明确已有想法","展开理由","寻找例子","检查例证相关性","解决表达问题","决定如何修改"]};
 function t(fr,zh){return state.lang==="zh"?zh:fr}
 function normal(s){return s.toLowerCase().replace(/[\u2019\u2018]/g,"'").trim()}
