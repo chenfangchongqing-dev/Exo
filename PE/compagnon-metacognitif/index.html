@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#FDBA12">
 <meta name="description" content="Idée · Compagnon métacognitif de production écrite B2. Révision autonome, ressources du cours et soutien linguistique adapté.">
-<title>Compagnon métacognitif | Inspire 4 · Production écrite</title>
+<title>Idée | Production écrite</title>
 <style>
 :root{--bg:#faf8f3;--paper:#fffefa;--ink:#272720;--muted:#69695f;--line:#e9dfcd;--sun:#fdba12;--soft:#fff2d1;--orange:#996113;--green:#286d55;--shadow:0 16px 45px rgba(95,66,20,.075)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);background:var(--bg);font:15px/1.55 Arial,"Helvetica Neue",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
@@ -78,7 +78,7 @@ h1{font-size:clamp(30px,4.8vw,48px);line-height:1.12;letter-spacing:-.035em;marg
 <aside class="sidebar">
 <section class="panel">
 <div class="panel-head"><h2>Mon travail en cours</h2><small>JE GARDE LA MAIN</small></div>
-<div class="side-body"><p>Le compagnon s'adapte à ce que tu as déjà fait. Ces repères ne sont pas des étapes obligatoires.</p>
+<div class="side-body"><p>Idée s'adapte à ce que tu as déjà fait. Ces repères ne sont pas des étapes obligatoires.</p>
 <ol id="progress" class="progress">
 <li data-phase="topic"><span class="num">1</span><span>Je précise mon travail</span></li>
 <li data-phase="position"><span class="num">2</span><span>Je clarifie une idée</span></li>
@@ -139,7 +139,7 @@ function confused(s){return /je (ne )?sais pas|aucune idée|pas d'idée|je suis 
 function opinion(s){return /d'accord|pas d'accord|je pense|je crois|à mon avis|pour ma part|selon moi|je trouve|我觉得|我认为|我同意|我不同意|不赞同|赞同|我反对|不同意/i.test(s)}
 function isDraft(s){return s.length>190||((s.match(/[.!?。？！]/g)||[]).length>=3&&s.length>100)}
 function topicish(s){return /bonheur|heureux|heureuse|couple|l'argent|argent|réussir|il faut|on doit|幸福|快乐|恋爱|金钱|成功/i.test(s)&&s.length>6}
-function addTurn(role,text){var el=document.createElement("div");el.className="turn "+role;var who=document.createElement("span");who.className="who";who.textContent=role==="bot"?"COMPAGNON":"MOI";var bubble=document.createElement("div");bubble.className="bubble";bubble.textContent=text;el.appendChild(who);el.appendChild(bubble);chat.appendChild(el);chat.scrollTop=chat.scrollHeight;state.history.push({role:role,text:text})}
+function addTurn(role,text){var el=document.createElement("div");el.className="turn "+role;var who=document.createElement("span");who.className="who";who.textContent=role==="bot"?"Idée":"MOI";var bubble=document.createElement("div");bubble.className="bubble";bubble.textContent=text;el.appendChild(who);el.appendChild(bubble);chat.appendChild(el);chat.scrollTop=chat.scrollHeight;state.history.push({role:role,text:text})}
 function phaseIndex(){return Math.max(0,PHASES.indexOf(state.phase))}
 function renderStage(){
  var phase=phaseIndex();
@@ -227,7 +227,7 @@ document.getElementById("applyCode").addEventListener("click",function(){
  input.focus();
 });
 document.getElementById("restart").addEventListener("click",function(){if(window.confirm("Recommencer le dialogue ? Le dialogue précédent ne sera pas conservé."))restart()});
-document.getElementById("export").addEventListener("click",function(){if(!state.history.length)return;var content=state.history.map(function(x){return(x.role==="bot"?"COMPAGNON":"MOI")+":\n"+x.text}).join("\n\n");var blob=new Blob([content],{type:"text/plain;charset=utf-8"});var url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="inspire4-compagnon-metacognitif-dialogue.txt";document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url)},1000)});
+document.getElementById("export").addEventListener("click",function(){if(!state.history.length)return;var content=state.history.map(function(x){return(x.role==="bot"?"Idée":"MOI")+":\n"+x.text}).join("\n\n");var blob=new Blob([content],{type:"text/plain;charset=utf-8"});var url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="inspire4-compagnon-metacognitif-dialogue.txt";document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url)},1000)});
 restart();
 })();
 </script>
