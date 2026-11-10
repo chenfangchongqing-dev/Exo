@@ -24,6 +24,12 @@
 
 > **不要把教师密码设为字面值 `prof`。** 这是容易猜中的口令。建议把 `prof` 仅作为“教师身份/入口”的名称。
 
+## 启用前必须选择 Fail closed
+
+在 Cloudflare 控制台打开 Workers & Pages → exo-fr → Settings → Runtime → Fail open / closed，选择 **Fail closed** 并保存。免费 Pages Functions 配额耗尽时，Fail open 会让静态文件绕过鉴权；Fail closed 则返回错误，不会公开受保护的内容。这个后台选项无法仅通过仓库 JavaScript 代码保证，必须手动确认。
+
+根目录 `_routes.json` 指定所有具体学习页面、附件与教师活动都经过验证，同时将 `/` 和 `/index.html` 作为完全公开的主页排除在函数调用外。
+
 ## 发布顺序
 
 1. 原 GitHub Pages 继续可用，不要先删除。
