@@ -8,7 +8,13 @@ function staffRoute(path){
   let p=path;
   for(let i=0;i<3;i++){try{const d=decodeURIComponent(p);if(d===p)break;p=d;}catch(_){return true;}}
   p=p.replace(/\/+/g,"/").toLowerCase();
-  return p==="/events"||p.startsWith("/events/")||p==="/pe/qualite/activites"||p.startsWith("/pe/qualite/activites/");
+  // Teacher-facing teaching quality week, strategy demonstrations and activity hub.
+  // The /PE/qualite/reflection/ student self-diagnostic and /PE/qualite/copies/
+  // anonymized images used by public-to-students corrections remain course-only.
+  if(p==="/events"||p.startsWith("/events/"))return true;
+  if(p==="/pe/qualite"||p==="/pe/qualite/"||p==="/pe/qualite/index.html")return true;
+  return ["/pe/qualite/activites","/pe/qualite/deux-chaines","/pe/qualite/ai-demo"]
+    .some(root=>p===root||p.startsWith(root+"/"));
 }
 function safeNext(p,teacher){
   if(typeof p!=="string"||!p.startsWith("/")||p.startsWith("//")||p.length>600||
