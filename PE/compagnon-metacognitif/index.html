@@ -158,6 +158,8 @@ function suggested(){
  if(state.phase==="reason")return state.lang==="zh"?["我想不出理由","我不知道法语怎么表达","先给我一个示范"]:["Je n'ai pas encore de raison.","Je cherche une expression.","Donne-moi une petite piste."];
  if(state.phase==="example")return state.lang==="zh"?["我想不出例子","你帮我想一个具体例子","可以开始写作文了"]:["Je n'arrive pas à trouver un exemple.","Donne-moi un exemple concret.","Passons à la rédaction."];
  if(state.phase==="writing")return state.lang==="zh"?["我不知道法语怎么表达","检查这个例子是否支持观点"]:["Je cherche une expression.","Vérifie si mon exemple soutient mon argument."];
+ if(state.phase==="review"&&state.meta&&state.meta.previousIntent==="reader-comment")return state.lang==="zh"?["我想先看文章结构","我想检查论证和例子","我需要法语表达帮助"]:["L’organisation des idées.","La pertinence de mon argument ou de mon exemple.","La formulation en français."];
+ if(state.phase==="review"&&state.meta&&state.meta.reviewFocus)return state.lang==="zh"?["我想尝试修改这一处","请检查我的修改"]:["Je voudrais essayer une modification.","Peux-tu vérifier ma nouvelle version ?"];
  return state.lang==="zh"?["检查我的论证","进入写作"]:["Vérifie mon raisonnement.","Passons à la rédaction."];
 }
 function update(){renderStage();addSuggestions(suggested())}
