@@ -1,4 +1,5 @@
-// Cloudflare Pages middleware: server-validated student and teacher access.
+// Cloudflare Pages middleware: public homepage + password-protected modules and teacher area.
+// COURSE_ACCESS_CODE is a module password independent of Idée's own GLM class code.
 // Configure encrypted secrets COURSE_ACCESS_CODE, PROF_ACCESS_CODE,
 // SESSION_SIGNING_KEY in the exo-fr Pages project before deployment.
 const LOGIN="/_class-access", COOKIE="__Host-exo_access", MAX_AGE=28800;
@@ -17,7 +18,7 @@ function safeNext(p,teacher){
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 function page(mode,next,error){
   const t=mode==="prof",title=t?"Espace enseignant":"高级法语综合课";
-  const label=t?"教师访问码 · Code enseignant":"课堂访问码 · Code d’accès";
+  const label=t?"临时活动访问密码 · Accès enseignant":"板块统一访问密码 · Code d’accès";
   return ['<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>',
    esc(title),' | Exo</title><style>',
    '*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;background:#f7f7fb;color:#17233d;padding:20px;font:16px/1.5 Arial,system-ui,sans-serif}',
@@ -27,7 +28,7 @@ function page(mode,next,error){
    'button{width:100%;border:0;border-radius:10px;background:#27364f;color:#fff;padding:13px;font:inherit;font-weight:bold;cursor:pointer}',
    '.error{padding:10px 12px;border:1px solid #fecdd3;border-radius:8px;background:#fff1f2;color:#9f1239;margin-bottom:13px}.back{display:block;text-align:center;margin-top:19px;color:#64748b;text-decoration:none;font-size:13px}',
    '</style></head><body><main class="panel"><div class="overline">EXO · FRANÇAIS</div><h1>',esc(title),'</h1><p>',
-   t?'教学研讨与临时活动 · 教师专用':'法语学习平台 · 课堂访问','</p>',
+   t?'教学研讨与临时活动 · 教师专用':'进入学习板块前请输入统一访问密码','</p>',
    error?'<div role="alert" class="error">'+esc(error)+'</div>':'',
    '<form method="post" action="',LOGIN,'"><input type="hidden" name="mode" value="',t?'prof':'student',
    '"><input type="hidden" name="next" value="',esc(next),'"><label for="code">',label,
@@ -83,7 +84,10 @@ async function equals(a,b){
 }
 export async function onRequest(ctx){
  const {request,env}=ctx,url=new URL(request.url),path=url.pathname;
- // Never bypass protection when the configuration is absent.
+ // The homepage remains public even without configured secrets. Every module
+ // and teacher-only file is checked below, including direct asset URLs.
+ if(request.method==="GET" && (path==="/" || path==="/index.html")) return ctx.next();
+ // Never bypass protection for protected resources when the configuration is absent.
  if(!env||typeof env.COURSE_ACCESS_CODE!=="string"||env.COURSE_ACCESS_CODE.length<12||
     typeof env.PROF_ACCESS_CODE!=="string"||env.PROF_ACCESS_CODE.length<12||
     typeof env.SESSION_SIGNING_KEY!=="string"||env.SESSION_SIGNING_KEY.length<32||
