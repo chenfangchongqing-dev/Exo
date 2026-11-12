@@ -36,6 +36,18 @@
 .test-events ul{margin:0;padding-left:19px;color:#526a59;font:13px/1.65 Arial,sans-serif;max-height:130px;overflow:auto}
 .test-privacy{margin-top:18px;padding:13px 15px;border:1px solid #ecdfbf;border-radius:11px;background:#fdfaf0;color:#67573a;font-size:13px;line-height:1.65}
 .test-privacy strong{color:#664d23}
+.choice-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.choice-row>div{min-width:0}
+.select-box{appearance:auto}
+.test-pedagogy{border:1px solid #cee2d3;background:#f5faf6;border-radius:12px;padding:16px 18px;margin:2px 0 15px}
+.test-pedagogy h2{margin:0 0 7px;font-size:17px}
+.test-pedagogy p{margin:4px 0;color:#526b5d;font-size:14px}
+.test-pedagogy code{color:#2c7454}
+.test-scenarios{margin-top:16px;border:1px solid #d8e8da;background:#fbfdfb;border-radius:12px;padding:13px 16px}
+.test-scenarios summary{font-size:14px;color:#286949;font-weight:800;cursor:pointer}
+.test-scenarios p{font-size:14px;color:#4e6658;margin:10px 0}
+@media(max-width:530px){.choice-row{grid-template-columns:1fr}}
+
 #timer{font-variant-numeric:tabular-nums;color:#53665b;font-weight:800;font-size:13px;margin-top:12px}
 @media(max-width:530px){.test-card{padding:20px;margin-top:14px}.test-actions button{flex:1 1 100%}.test-card h1{font-size:25px}}
 </style>
@@ -48,10 +60,38 @@
 <img class="echo-img" src="../../echo-logo.svg" alt="Écho." width="185" height="126">
 <span class="teacher-tag">Essai enseignant</span>
 </div>
-<p class="kicker">Connexion WebRTC · Test de fonctionnement</p>
-<h1>Premier dialogue avec Écho</h1>
-<p class="test-desc">Un court essai en français pour vérifier la connexion au modèle vocal. Ce test est limité à 90 secondes et ne figure pas dans les activités destinées aux étudiants.</p>
+<p class="kicker">Conversation orale · Test pédagogique et WebRTC</p>
+<h1>Écho · Accompagnement métacognitif</h1>
+<p class="test-desc">Choisissez un mode et un niveau, puis essayez de parler naturellement avec Écho. Les consignes métacognitives sont transmises au modèle vocal au début de chaque séance. Durée maximale : 90 secondes.</p>
+<div class="test-pedagogy">
+<h2>Ce qu’Écho doit faire</h2>
+<p>Écouter avant de guider, laisser l’apprenant développer son propos, proposer un étayage adapté lorsqu’une difficulté apparaît, et accompagner un bilan réflexif si l’apprenant le souhaite.</p>
+</div>
 <form id="setup" autocomplete="off">
+<div class="choice-row">
+<div>
+<label class="test-label" for="mode">Type d’échange</label>
+<select id="mode" class="test-input select-box">
+<option value="libre">Conversation libre</option>
+<option value="guidee">Conversation guidée</option>
+</select>
+</div>
+<div>
+<label class="test-label" for="level">Niveau initial</label>
+<select id="level" class="test-input select-box">
+<option value="B2">B2</option>
+<option value="B2+">B2+</option>
+<option value="C1">C1</option>
+</select>
+</div>
+</div>
+<label class="test-label" for="topic">Sujet éventuel (facultatif)</label>
+<input class="test-input" id="topic" type="text" maxlength="200" list="suggested-topics" placeholder="Laisser vide pour discuter librement">
+<datalist id="suggested-topics">
+<option value="Les vêtements et l’image de soi"></option>
+<option value="L’uniforme à l’école"></option>
+</datalist>
+<p class="test-note" id="modeHelp">En mode libre, aucun sujet n’est nécessaire. Écho peut engager la conversation et s’adapter à vos réponses.</p>
 <label class="test-label" for="endpoint">Adresse HTTPS de la fonction</label>
 <input class="test-input" id="endpoint" inputmode="url" type="url" required value="https://echo-realtime-xzxxauvfwu.cn-beijing.fcapp.run" spellcheck="false">
 <p class="test-note">Adresse de la fonction <code>echo-realtime</code> (région Pékin). Modifiez-la uniquement si l’adresse indiquée dans votre console est différente.</p>
@@ -76,10 +116,18 @@
 <h2>Étapes de la connexion</h2>
 <ul id="steps"><li>En attente du début de l’essai</li></ul>
 </section>
-<p class="test-privacy"><strong>Protection :</strong> l’enregistrement ne reste pas sur cette page. Lors d’un essai réussi, le microphone transmet votre voix au service de modèle externe via WebRTC. Le modèle peut consommer des jetons gratuits pendant la session. Ne communiquez pas ce lien ni le code aux étudiants avant validation de la sécurité et des plafonds d’usage.</p>
+<details class="test-scenarios">
+<summary>Idées pour tester les stratégies pédagogiques</summary>
+<p><strong>Conversation libre :</strong> « Salut, je veux seulement discuter, je n’ai pas de sujet. » Écho doit engager une conversation naturelle, sans exiger de tâche.</p>
+<p><strong>Conversation guidée :</strong> choisissez « L’uniforme à l’école », puis dites « Je n’ai pas d’idée ». Écho doit proposer des pistes, plutôt que réclamer un texte.</p>
+<p><strong>Difficulté lexicale :</strong> « Je n’arrive pas à trouver le mot. » Écho doit offrir une aide brève, puis vous redonner la parole.</p>
+<p><strong>Retour réflexif :</strong> avant de terminer, dites « Écho, faisons un petit bilan ». Écho doit commencer par votre propre appréciation, puis proposer un retour concret sans note.</p>
+</details>
+<p class="test-privacy"><strong>Protection :</strong> l’enregistrement ne reste pas sur cette page. Lors d’un essai réussi, le microphone transmet votre voix au service de modèle externe via WebRTC. Le modèle peut consommer des jetons gratuits pendant la session. Les instructions pédagogiques de ce test sont visibles dans le code du navigateur et ne constituent pas encore une configuration sécurisée pour les étudiants. Ne communiquez pas ce lien ni le code avant validation de la sécurité et des plafonds d’usage.</p>
 </main>
 <footer>© 《高级法语综合课》 · Écho · Test technique réservé à l’enseignante</footer>
 </div>
+<script src="../echo-pedagogy.js?v=20261113-1"></script>
 <script>
 (()=>{
 "use strict";
@@ -88,8 +136,13 @@ const FORM=document.getElementById("setup"),START=document.getElementById("start
 const STATE=document.getElementById("state"),DOT=document.getElementById("dot"),STEPS=document.getElementById("steps");
 const REMOTE=document.getElementById("remoteAudio"),TIMER=document.getElementById("timer");
 const ACCESS=document.getElementById("access"),ENDPOINT=document.getElementById("endpoint");
+const MODE=document.getElementById("mode"),LEVEL=document.getElementById("level"),TOPIC=document.getElementById("topic"),MODE_HELP=document.getElementById("modeHelp");
 let current=null;
-const INSTRUCTIONS="Tu es Écho, un partenaire de conversation francophone pour des apprenants de niveau B2, B2+ ou C1. Pour ce premier essai, parle uniquement en français et engage une conversation naturelle. Écoute l'apprenant, réponds à ce qu'il dit, pose une seule question à la fois. Ne corrige pas chaque erreur. Si la personne manque d'idées, suggère un sujet simple. Privilégie des tours de parole assez courts, et n'impose pas d'exercice scolaire.";
+MODE.addEventListener("change",()=>{
+ MODE_HELP.textContent=MODE.value==="libre"
+  ?"En mode libre, aucun sujet n’est nécessaire. Écho peut engager la conversation et s’adapter à vos réponses."
+  :"En mode guidé, Écho adapte ses relances à votre objectif. Vous pouvez préciser un sujet ci-dessus, par exemple l’apparence ou l’uniforme.";
+});
 function show(text,kind=""){STATE.textContent=text;DOT.className="status-dot "+kind}
 function log(text){
  const li=document.createElement("li");li.textContent=text;
@@ -144,9 +197,9 @@ function maybeInit(s){
  if(s.stopped||s.updateSent||!s.created||s.pc.connectionState!=="connected"||s.eventChannel?.readyState!=="open")return;
  s.updateSent=sendEvent(s,{
   event_id:"event_"+crypto.randomUUID(),type:"session.update",
-  session:{modalities:["text","audio"],voice:"Tina",instructions:INSTRUCTIONS,turn_detection:{type:"server_vad"}}
+  session:{modalities:["text","audio"],voice:"Tina",instructions:s.instructions,turn_detection:{type:"server_vad"}}
  });
- if(s.updateSent){show("已连接，正在初始化法语语伴……","connecting");log("已发送 session.update");}
+ if(s.updateSent){show("已连接，正在初始化法语语伴……","connecting");log("已发送 session.update（含元认知教学指令）");}
 }
 async function onEvent(s,msg,ch){
  if(s.stopped)return;
@@ -195,8 +248,13 @@ async function start(event){
  }
  const code=ACCESS.value.trim();
  if(code.length<12){show("请输入正确的教师测试访问码。","error");return}
- let s={pc:null,localStream:null,remoteStream:new MediaStream(),channels:new Set(),abort:new AbortController(),stopped:false,created:false,updateSent:false,modelReady:false,eventChannel:null,transceiver:null,deadline:null,interval:null};
- current=s;START.disabled=true;STOP.disabled=false;STEPS.replaceChildren();show("正在请求麦克风权限……","connecting");log("开始连接测试");
+ if(!window.ECHO_PEDAGOGY||typeof window.ECHO_PEDAGOGY.build!=="function"){
+  show("教学指令未加载。请刷新页面后重试。","error");return;
+ }
+ const selectedMode=MODE.value,selectedLevel=LEVEL.value,selectedTopic=TOPIC.value.trim();
+ const instructions=window.ECHO_PEDAGOGY.build({mode:selectedMode,level:selectedLevel,topic:selectedTopic});
+ let s={pc:null,localStream:null,remoteStream:new MediaStream(),channels:new Set(),abort:new AbortController(),stopped:false,created:false,updateSent:false,modelReady:false,eventChannel:null,transceiver:null,deadline:null,interval:null,instructions:instructions};
+ current=s;START.disabled=true;STOP.disabled=false;STEPS.replaceChildren();show("正在请求麦克风权限……","connecting");log("测试模式："+(selectedMode==="libre"?"自由交谈":"课程任务")+" · 起始难度："+selectedLevel);log("准备发送元认知教学指令 v"+window.ECHO_PEDAGOGY.version);
  s.started=Date.now();
  s.interval=setInterval(()=>{
    if(current!==s)return;
