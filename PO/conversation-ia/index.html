@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#247c57">
-<meta name="description" content="Conversation avec l’IA : parcours de préparation, interaction orale en français et bilan métacognitif, en cours de mise en place.">
+<meta name="description" content="Écho, partenaire de conversation orale B2 à C1 : discuter librement ou travailler un sujet de cours, avec accompagnement métacognitif.">
 <title>Conversation avec l’IA · Expression orale</title>
 <link rel="stylesheet" href="../espaces.css">
 <style>
@@ -12,6 +12,32 @@
 .masthead:after{z-index:-1}
 .masthead h1{font-size:clamp(27px,4.1vw,39px);letter-spacing:-.025em;margin-bottom:10px}
 @media(max-width:650px){.echo-logo-hero{width:min(100%,320px);margin-bottom:16px}}
+
+/* Two equally valid ways to converse: free talk or course-based practice. */
+.entry-panel{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.93fr);gap:18px}
+.mode-buttons{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:11px 0 16px}
+.mode-option{appearance:none;cursor:pointer;text-align:left;font:inherit;border:1px solid #d2e7d8;background:#f9fcfa;border-radius:13px;padding:15px 17px;color:var(--ink)}
+.mode-option[aria-pressed="true"]{border-color:#369268;background:#e9f7ef;box-shadow:inset 0 0 0 1px #369268}
+.mode-option strong{display:block;font-size:16px;color:#1c6043;margin:0 0 3px;line-height:1.4}
+.mode-option small{display:block;color:#577264;font-size:13px;line-height:1.45}
+.mode-option:hover{border-color:#78b696}
+.entry-field label,.level-label{display:block;color:#355844;font-weight:800;font-size:14px;margin:12px 0 7px}
+.entry-field input,.entry-field select{font:15px/1.5 Arial,sans-serif;color:#1a3b29;padding:11px 13px;border:1px solid #bbd8c8;border-radius:9px;background:#fff;width:100%;min-height:43px}
+.entry-field input:focus-visible,.entry-field select:focus-visible,.level-button:focus-visible,.mode-option:focus-visible{outline:3px solid #56ac81;outline-offset:2px}
+.entry-hint{font-size:13px;color:#637c6b;margin:7px 0 0}
+.level-options{display:flex;flex-wrap:wrap;gap:8px}
+.level-button{border:1px solid #c7dfd0;border-radius:9px;background:#fff;color:#3c6c50;font:800 14px Arial,sans-serif;padding:9px 16px;cursor:pointer}
+.level-button[aria-pressed="true"]{border-color:#32865e;background:#267953;color:#fff}
+.ready-panel{border-radius:14px;background:#f1f8f4;border:1px solid #c9e3d2;padding:20px 22px;align-self:stretch}
+.ready-panel .badge-lab{font-size:12px;font-weight:850;letter-spacing:.1em;color:#317855;text-transform:uppercase;margin:0 0 9px}
+.ready-panel h3{font-size:22px;line-height:1.25;margin:0 0 12px}
+.ready-panel p{font-size:15px;color:#445c4e;margin:9px 0}
+.ready-panel .detail-preview{font:18px/1.55 "Times New Roman",Georgia,serif;color:#204734;border-top:1px solid #ccdfd1;padding-top:13px;margin-top:17px}
+.ready-panel .not-live{font-size:12px;color:#657b6d;margin-top:17px;padding-top:13px;border-top:1px solid #d9e9de}
+#course-fields[hidden],#free-fields[hidden]{display:none}
+@media(max-width:800px){.entry-panel{grid-template-columns:1fr}}
+@media(max-width:450px){.mode-buttons{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -23,30 +49,71 @@
 <img class="echo-logo-hero" src="../echo-logo.svg" alt="Écho." width="410" height="123">
 <h1>Conversation avec l’IA</h1>
 <p class="lead">S’exprimer, interagir et progresser.</p>
-<div class="chips"><span>Parcours par unité</span><span>Dialogue en français</span><span>Bilan après l’échange</span></div>
+<div class="chips"><span>Conversation libre</span><span>Pratique par unité</span><span>B2 · B2+ · C1</span></div>
 <p class="meta-line">Espace en préparation · La conversation vocale n’est pas encore activée.</p>
 </header>
 
+<section class="section" aria-labelledby="choisir">
+<div class="section-head"><h2 id="choisir">Comment veux-tu parler aujourd’hui ?</h2><p>Tu peux commencer sans sujet précis</p></div>
+<div class="paper entry-panel">
+<div>
+<p class="desc">Choisis simplement ce qui te convient. Tu pourras changer d’idée pendant l’échange.</p>
+<div class="mode-buttons" role="group" aria-label="Type de conversation">
+<button type="button" class="mode-option" data-mode="libre" aria-pressed="true"><strong>Conversation libre</strong><small>Discuter, raconter, découvrir un sujet… sans consigne.</small></button>
+<button type="button" class="mode-option" data-mode="guidee" aria-pressed="false"><strong>Conversation guidée</strong><small>Travailler un thème, une tâche ou une difficulté précise.</small></button>
+</div>
+<div id="free-fields" class="entry-field">
+<label for="free-topic">Une envie de sujet ? <span class="muted">(facultatif)</span></label>
+<input id="free-topic" type="text" maxlength="160" placeholder="Aucune idée ? Aucun problème !">
+<p class="entry-hint">Si tu n’as pas de sujet, Écho pourra lancer une conversation naturellement.</p>
+</div>
+<div id="course-fields" class="entry-field" hidden>
+<label for="course-topic">Sujet ou tâche <span class="muted">(facultatif)</span></label>
+<select id="course-topic">
+<option value="unite2-vetements">Unité 2 · Les vêtements et l’image de soi</option>
+<option value="unite2-uniforme">Unité 2 · L’uniforme à l’école</option>
+<option value="autre">Une autre tâche / un autre sujet</option>
+</select>
+<label for="other-topic">Ma consigne ou mon objectif <span class="muted">(facultatif)</span></label>
+<input id="other-topic" type="text" maxlength="220" placeholder="Je souhaite m’entraîner à…">
+</div>
+<p class="level-label">Niveau de départ <span class="muted">(adaptable pendant l’échange)</span></p>
+<div class="level-options" role="group" aria-label="Niveau de langue initial">
+<button class="level-button" type="button" data-level="B2" aria-pressed="true">B2</button>
+<button class="level-button" type="button" data-level="B2+" aria-pressed="false">B2+</button>
+<button class="level-button" type="button" data-level="C1" aria-pressed="false">C1</button>
+</div>
+</div>
+<div class="ready-panel" aria-live="polite" aria-atomic="true">
+<p class="badge-lab">Ma prochaine conversation</p>
+<h3 id="preview-title">Conversation libre · B2</h3>
+<p id="preview-description">Aucun sujet n’est nécessaire. Écho pourra commencer à discuter avec toi, puis suivre le fil de tes idées.</p>
+<p class="detail-preview" id="preview-opening">« Salut ! Ça te dit de discuter un peu ? Comment s’est passée ta journée ? »</p>
+<p class="not-live">Préparation uniquement : la connexion au modèle vocal sera activée après configuration du service. Aucune donnée ni aucun enregistrement n’est envoyé depuis ce formulaire.</p>
+</div>
+</div>
+</section>
+
 <section class="section" aria-labelledby="etapes">
-<div class="section-head"><h2 id="etapes">Votre parcours de conversation</h2><p>Se préparer · Interagir · Réfléchir</p></div>
+<div class="section-head"><h2 id="etapes">Un échange qui s’adapte à toi</h2><p>Prendre la parole · Interagir · Faire le point</p></div>
 <div class="process">
 <article class="step">
-<span class="step-no">01</span><h3>Avant · Préparer</h3>
-<p>Identifiez le sujet, choisissez ce que vous voulez exprimer et repérez une difficulté à travailler pendant l’échange.</p>
+<span class="step-no">01</span><h3>Avant · Commencer</h3>
+<p>Tu peux parler librement, sans préparation. Si tu as un objectif précis, Écho le prendra en compte.</p>
 </article>
 <article class="step">
 <span class="step-no">02</span><h3>Pendant · Échanger</h3>
-<p>Exprimez votre point de vue. Votre partenaire virtuel vous pose des questions, demande des précisions et vous laisse développer vos idées.</p>
+<p>Écho réagit à ce que tu dis, te laisse développer tes idées et propose une aide seulement si elle est utile.</p>
 </article>
 <article class="step">
 <span class="step-no">03</span><h3>Après · Faire le point</h3>
-<p>Repérez une réussite, une difficulté et une stratégie que vous pourriez essayer lors du prochain échange.</p>
+<p>Si tu le souhaites, prends un moment pour repérer une réussite, une difficulté et une stratégie à essayer la prochaine fois.</p>
 </article>
 </div>
 </section>
 
 <section class="section" aria-labelledby="taches">
-<div class="section-head"><h2 id="taches">Parcours de l’unité 2</h2><p>Sommes-nous prisonniers de notre apparence ?</p></div>
+<div class="section-head"><h2 id="taches">Des sujets du cours, si tu en as envie</h2><p>Unité 2 · Sommes-nous prisonniers de notre apparence ?</p></div>
 <div class="cards">
 <article class="topic" id="apparence">
 <span class="unit">Unité 2 · Leçon 7 · Premier parcours</span>
@@ -80,26 +147,63 @@
 </section>
 
 <section class="section" aria-labelledby="principes">
-<div class="section-head"><h2 id="principes">Comment l’IA accompagnera l’échange</h2><p>Dialogue guidé · Niveau B2</p></div>
+<div class="section-head"><h2 id="principes">Comment Écho accompagnera l’échange</h2><p>Conversation libre ou guidée · B2 à C1</p></div>
 <div class="paper">
-<p>Votre partenaire de conversation vous aidera à faire progresser l’échange avec des questions adaptées à vos réponses. Il pourra vous demander de justifier une idée, de donner un exemple ou de reformuler une phrase si elle reste difficile à comprendre.</p>
-<p>La correction linguistique ne doit pas interrompre chaque prise de parole. À la fin, un court bilan vous aidera à mieux comprendre votre manière de communiquer.</p>
+<p>Écho pourra discuter librement avec toi ou accompagner une tâche choisie. Il suivra les sujets que tu proposes, réagira à tes propos et adaptera progressivement son langage entre B2, B2+ et C1. Il ne transformera pas une simple conversation en exercice d’argumentation.</p>
+<p>Pendant l’échange, Écho laissera du temps pour chercher tes mots. Il pourra demander une précision, reformuler ou suggérer une expression si tu en as besoin, sans corriger chaque phrase. À la fin, un bilan facultatif t’aidera à identifier une difficulté et la stratégie qui t’a permis d’avancer.</p>
 <div class="cards" style="margin-top:18px">
-<div class="box-muted"><h3>Quelques relances possibles</h3>
+<div class="box-muted"><h3>Quelques relances possibles, selon l’échange</h3>
 <p class="qa"><strong>Pourquoi ?</strong></p>
 <p class="qa"><strong>Peux-tu donner un exemple ?</strong></p>
-<p class="qa"><strong>Que répondrais-tu à quelqu’un qui n’est pas d’accord ?</strong></p></div>
+<p class="qa"><strong>Qu’est-ce qui t’a marqué récemment ?</strong></p></div>
 <div class="box-muted"><h3>Le bilan après l’échange</h3>
 <p class="qa">Qu’ai-je réussi à exprimer ?</p>
 <p class="qa">À quel moment ai-je hésité ?</p>
 <p class="qa">Qu’est-ce que je pourrais essayer la prochaine fois ?</p></div>
 </div>
-<p class="info-line"><strong>État actuel :</strong> le parcours et les consignes pédagogiques sont prêts. Le microphone, la connexion au modèle vocal et la génération du bilan ne sont pas encore activés sur cette page. Aucune conversation n’est enregistrée ni transmise à un service d’IA depuis cet espace.</p>
+<p class="info-line"><strong>État actuel :</strong> tu peux choisir le mode de conversation et le niveau souhaité. La connexion vocale à Écho et le bilan personnalisé seront activés après le raccordement au service sécurisé. Aucune conversation n’est pour l’instant enregistrée ni transmise à un modèle d’IA depuis cette page.</p>
 </div>
 </section>
 <div class="crossnav"><a href="../">← Retour à Expression orale</a><a href="../discussion/">Découvrir Discussion orale ↗</a></div>
 </main>
 <footer>© 《高级法语综合课》 · PO · Conversation avec l’IA</footer>
 </div>
+
+<script>
+(function(){
+"use strict";
+var mode="libre",level="B2";
+var buttons=document.querySelectorAll("[data-mode]"),levels=document.querySelectorAll("[data-level]");
+var freeFields=document.getElementById("free-fields"),courseFields=document.getElementById("course-fields");
+var freeTopic=document.getElementById("free-topic"),courseTopic=document.getElementById("course-topic"),otherTopic=document.getElementById("other-topic");
+var title=document.getElementById("preview-title"),description=document.getElementById("preview-description"),opening=document.getElementById("preview-opening");
+var tasks={
+ "unite2-vetements":"Les vêtements et l’image de soi",
+ "unite2-uniforme":"L’uniforme à l’école",
+ "autre":"Une tâche choisie par l’apprenant"
+};
+function render(){
+ buttons.forEach(function(b){b.setAttribute("aria-pressed",String(b.dataset.mode===mode))});
+ levels.forEach(function(b){b.setAttribute("aria-pressed",String(b.dataset.level===level))});
+ freeFields.hidden=mode!=="libre";courseFields.hidden=mode!=="guidee";
+ title.textContent=(mode==="libre"?"Conversation libre":"Conversation guidée")+" · "+level;
+ if(mode==="libre"){
+  var topic=freeTopic.value.trim();
+  description.textContent=topic?"Tu pourras parler de « "+topic+" » et changer de sujet quand tu le voudras.":"Aucun sujet n’est nécessaire. Écho pourra commencer à discuter avec toi, puis suivre le fil de tes idées.";
+  opening.textContent=topic?"« Tu avais envie de parler de "+topic+" : qu’est-ce qui t’intéresse dans ce sujet ? »":"« Salut ! Ça te dit de discuter un peu ? Comment s’est passée ta journée ? »";
+ }else{
+  var task=otherTopic.value.trim()||tasks[courseTopic.value]||"ton sujet";
+  description.textContent="Écho pourra travailler avec toi sur « "+task+" », en s’adaptant à ce que tu sais déjà faire et à tes difficultés.";
+  opening.textContent="« Qu’aimerais-tu essayer aujourd’hui à propos de "+task+" ? »";
+ }
+}
+buttons.forEach(function(b){b.addEventListener("click",function(){mode=b.dataset.mode;render()})});
+levels.forEach(function(b){b.addEventListener("click",function(){level=b.dataset.level;render()})});
+freeTopic.addEventListener("input",render);
+courseTopic.addEventListener("change",render);
+otherTopic.addEventListener("input",render);
+render();
+})();
+</script>
 </body>
 </html>
