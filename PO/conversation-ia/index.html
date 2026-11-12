@@ -132,12 +132,7 @@
 <p id="preview-description">Aucun sujet n’est nécessaire. Écho pourra commencer à discuter avec toi, puis suivre le fil de tes idées.</p>
 <p class="detail-preview" id="preview-opening">« Salut ! Ça te dit de discuter un peu ? Comment s’est passée ta journée ? »</p>
 <form class="student-voice-form" id="student-setup" autocomplete="off">
-<label for="student-duration">Durée de la conversation</label>
-<select id="student-duration" aria-label="Durée de la conversation">
-<option value="3">3 minutes</option>
-<option value="5" selected>5 minutes · conseillé</option>
-<option value="10">10 minutes</option>
-</select>
+<p class="voice-helper">Aucune durée n’est imposée. Tu peux terminer la conversation quand tu le souhaites.</p>
 <label for="student-access">Code d’accès à l’essai</label>
 <input id="student-access" type="password" minlength="12" maxlength="128" autocomplete="off" required placeholder="Code communiqué par l’enseignante">
 <p class="voice-helper">Le code permet d’accéder à cette version d’essai. Il n’est pas enregistré dans le navigateur.</p>
@@ -149,7 +144,7 @@
 <span class="voice-light" id="student-dot"></span>
 <span id="student-status">Prêt à commencer. Tu peux parler dès que la connexion est établie.</span>
 </div>
-<p class="voice-timer" id="student-timer">Durée de l’essai : 05:00</p>
+<p class="voice-timer" id="student-timer">Durée de la conversation : 00:00</p>
 <audio class="student-audio" id="student-audio" autoplay controls playsinline aria-label="Voix d’Écho"></audio>
 <p class="audio-caption">Si tu n’entends pas Écho, appuie sur Lecture. Utilise de préférence des écouteurs.</p>
 </form>
@@ -158,7 +153,7 @@
 <p>Qu’as-tu réussi à exprimer ? À quel moment as-tu hésité ? Que pourrais-tu essayer lors de ta prochaine conversation ?</p>
 <p>Tu peux garder ces questions pour toi, ou relancer une conversation pour en parler à Écho.</p>
 </div>
-<p class="test-phase">Version d’essai encadrée. Le code d’accès est nécessaire avant chaque conversation. Les fonctionnalités et les limites d’usage pourront évoluer avant l’ouverture à toute la classe.</p>
+<p class="test-phase">Version d’essai encadrée. Le code d’accès est nécessaire avant chaque conversation. Ce pilote reste accessible uniquement avec un code d’essai. Une gestion sécurisée des accès et des quotas est prévue avant l’ouverture à toute la classe.</p>
 </div>
 </div>
 </section>
