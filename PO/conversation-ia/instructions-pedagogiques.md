@@ -1,6 +1,6 @@
 # Écho. — Consignes pédagogiques pour le partenaire oral
 
-Version de conception — destinée à être intégrée ultérieurement aux instructions serveur du modèle vocal. Ce fichier ne contient aucune clé API ni configuration privée. Le service de conversation vocale n'est pas encore connecté.
+Version pédagogique de référence — le test enseignant WebRTC fonctionne désormais et transmet une version opérationnelle de ces consignes au modèle vocal lors de chaque `session.update`. Les règles du test sont maintenues dans `echo-pedagogy.js`. Cette intégration côté navigateur sert aux essais pédagogiques ; elle n'est pas encore l'autorité sécurisée d'une version accessible aux étudiants. Aucune clé API ni configuration privée n'est contenue dans ce document.
 
 ## Identité et finalité
 
@@ -55,4 +55,16 @@ Si le message n'est pas compris, dis ce qui manque de façon simple et invite l'
 
 ## Conditions de déploiement
 
-Cette consigne doit être appliquée côté serveur lors du raccordement de Qwen Realtime. Le navigateur ne doit pas contenir la clé API permanente. Le lancement d'une séance et l'envoi d'audio restent désactivés tant que le serveur, le contrôle d'accès, les plafonds d'usage et les règles de confidentialité ne sont pas opérationnels.
+Le test technique est connecté : `PO/conversation-ia/essai-enseignant/` charge `echo-pedagogy.js` et transmet les consignes en `session.update`, avec le mode choisi (libre ou guidé), le niveau de départ (B2, B2+, C1) et un éventuel sujet. Le service `echo-realtime` et son échange SDP n'ont pas été modifiés.
+
+Avant d'ouvrir l'outil aux étudiants, appliquer les consignes de référence de manière protégée côté serveur, et imposer des mesures de contrôle d'accès, d'usage, de conservation des données et de coûts au niveau du service. Une limite de 90 secondes côté navigateur n'est pas une protection suffisante contre les abus. La page publique `PO/conversation-ia/` reste pour le moment une présentation pédagogique sans connexion vocale.
+
+### Scénarios de vérification humaine
+
+1. **Libre, B2, sans sujet** — tester la spontanéité : Écho devrait converser sans demander de tâche ou de plan.
+2. **Guidé, B2+, uniforme scolaire** — demander une opinion puis dire « Je n'ai pas d'idée ». Écho devrait aider progressivement, sans rédiger la réponse à la place de l'apprenant.
+3. **Libre, C1** — demander un échange plus nuancé puis passer à un sujet quotidien : vérifier l'adaptation et l'absence de rigidité.
+4. **Blocage lexical** — « Je cherche mes mots » : vérifier une seule aide ciblée puis le retour à la conversation.
+5. **Retour réflexif** — dire « Faisons un petit bilan » avant d'arrêter le micro : observer l'autoévaluation, puis le retour fondé sur la conversation sans notation.
+
+Ces scénarios doivent être essayés avec la réponse réelle du modèle. La validation syntaxique du JavaScript et des instructions ne garantit pas à elle seule la conformité des réponses orales.
