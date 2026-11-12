@@ -9,7 +9,7 @@
    type:"function",
    function:{
      name:"publish_language_toolbox",
-     description:"Publie une boîte à outils de FLE individualisée à la demande de bilan de l'apprenant. NE PAS appeler pendant une conversation ordinaire. Sélectionne 3 à 6 expressions ou structures liées aux propos effectivement échangés. Une expression dite par l'apprenant doit être distinguée d'une suggestion nouvelle. Ne pas inventer de citations, d'erreurs ou de réussites. Ensuite, après le résultat de cet outil, fais un bref bilan à l'oral en français sans lire toute la liste.",
+     description:"Publie une boîte à outils de FLE individualisée quand l'apprenant dit exactement « Écho, on fait le point ? » ou déclenche le bouton « Faire le point ». NE PAS appeler pendant une conversation ordinaire. Sélectionne 3 à 6 expressions ou structures liées aux propos effectivement échangés. Une expression dite par l'apprenant doit être distinguée d'une suggestion nouvelle. Ne pas inventer de citations, d'erreurs ou de réussites. Ensuite, après le résultat de cet outil, fais un bref bilan à l'oral en français sans lire toute la liste.",
      parameters:{
        type:"object",
        properties:{
@@ -53,7 +53,7 @@
      data=null;theme.textContent="";strength.textContent="";
      list.replaceChildren();strategy.textContent="";
      content.hidden=true;
-     state.textContent="Demande « Faisons un bilan » à Écho pour recevoir une boîte à outils liée à ton échange.";
+     state.textContent="Dis « Écho, on fait le point ? » pour obtenir un bilan oral et ta boîte à outils.";
      copy.disabled=true;download.disabled=true;
    }
    function waiting(){state.textContent="Écho prépare les expressions à retenir…";}
