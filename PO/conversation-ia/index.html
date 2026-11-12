@@ -69,6 +69,28 @@
 .topic-action button{border:1px solid #b5dcc6;background:#f1faf4;color:#246d4b;cursor:pointer;padding:10px 13px;font:800 14px Arial,sans-serif;border-radius:10px}
 .topic-action button:hover{border-color:#5cae7f;background:#e6f5eb}
 #student-reflection[hidden]{display:none}
+/* Transcription accessible à la demande pendant l'oral et après l'appel. */
+.transcript-panel{margin-top:16px;padding:14px 16px;border:1px solid #cfe3d6;border-radius:13px;background:#fff}
+.transcript-head{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}
+.transcript-head h4{font-size:16px;color:#285b42;margin:0}
+.transcript-toggle{border:1px solid #b1d9be;border-radius:9px;padding:8px 13px;background:#eff8f1;font-weight:800;font-size:13px;color:#226d49;cursor:pointer}
+.transcript-content{padding-top:13px;border-top:1px solid #e3eee6;margin-top:13px}
+.transcript-content[hidden]{display:none}
+.transcript-intro,.transcript-notice{color:#607568;font-size:12px;line-height:1.5;margin:0 0 12px}
+.transcript-lines{display:flex;flex-direction:column;gap:11px;max-height:355px;overflow:auto;padding:3px 2px 9px}
+.transcript-turn{border:1px solid #d5e4d9;padding:11px 13px;border-radius:12px;background:#f5faf6}
+.transcript-turn.from-echo{background:#faf9f4;border-color:#e9e1cd}
+.transcript-turn[hidden]{display:none}
+.transcript-speaker{display:flex;align-items:center;justify-content:space-between;gap:10px;color:#2b6e4d;font-size:13px}
+.transcript-turn.from-echo .transcript-speaker{color:#765b30}
+.transcript-speaker span{font-size:11px;color:#84938a}
+.transcript-utterance{font:16px/1.55 "Times New Roman",Georgia,serif!important;color:#2b4335!important;margin:5px 0 0!important;white-space:pre-wrap;overflow-wrap:anywhere}
+.transcript-turn.provisional .transcript-utterance{opacity:.75}
+.transcript-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:11px}
+.transcript-actions button{border:1px solid #bfd7c5;background:#f4faf6;color:#2b6948;border-radius:9px;padding:8px 12px;font:800 13px Arial,sans-serif;cursor:pointer}
+.transcript-actions button:disabled{opacity:.45;cursor:default}
+.transcript-notice{margin:10px 0 0}
+
 #student-setup{scroll-margin-top:36px}
 .quick-voice-entry{display:inline-flex;align-items:center;gap:10px;justify-content:center;padding:12px 19px;background:#247c57;color:#fff;border:1px solid #247c57;border-radius:999px;font-weight:800;text-decoration:none;line-height:1.4;box-shadow:0 5px 16px rgba(24,105,68,.14)}
 .quick-voice-entry:hover{background:#176545;color:#fff}
@@ -148,6 +170,22 @@
 <audio class="student-audio" id="student-audio" autoplay controls playsinline aria-label="Voix d’Écho"></audio>
 <p class="audio-caption">Si tu n’entends pas Écho, appuie sur Lecture. Utilise de préférence des écouteurs.</p>
 </form>
+<section class="transcript-panel" aria-labelledby="transcript-title">
+<div class="transcript-head">
+<h4 id="transcript-title">Transcription de l’échange</h4>
+<button class="transcript-toggle" type="button" id="transcript-toggle" aria-controls="transcript-content" aria-expanded="false">Afficher la transcription</button>
+</div>
+<div class="transcript-content" id="transcript-content" hidden>
+<p class="transcript-intro">Tes paroles et les réponses d’Écho apparaissent ici en français. Le texte peut s’afficher progressivement pendant l’échange.</p>
+<div class="transcript-lines" id="transcript-lines" role="log" aria-live="off" aria-label="Transcription de la conversation"></div>
+<div class="transcript-actions">
+<button type="button" id="transcript-copy" disabled>Copier le texte</button>
+<button type="button" id="transcript-download" disabled>Télécharger (.txt)</button>
+</div>
+<p class="transcript-notice" id="transcript-note">Transcription indicative : la reconnaissance vocale peut comporter des erreurs.</p>
+<p class="transcript-notice">Le texte reste dans cette page pendant la séance. Il n’est pas sauvegardé automatiquement ; télécharge-le si tu souhaites le garder.</p>
+</div>
+</section>
 <div id="student-reflection" class="student-reflection" hidden>
 <h4>Et maintenant, un petit bilan ?</h4>
 <p>Qu’as-tu réussi à exprimer ? À quel moment as-tu hésité ? Que pourrais-tu essayer lors de ta prochaine conversation ?</p>
@@ -282,6 +320,7 @@ document.querySelectorAll("[data-open-topic]").forEach(function(button){
 })();
 </script>
 <script src="./echo-pedagogy.js?v=20261113-1"></script>
-<script src="./student-voice.js?v=20261113-1"></script>
+<script src="./echo-transcription.js?v=20261113-1"></script>
+<script src="./student-voice.js?v=20261113-2"></script>
 </body>
 </html>
