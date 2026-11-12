@@ -244,7 +244,8 @@
         cache:"no-store"
       });
       if(!res.ok){
-        if(res.status===401 || res.status===403) throw Object.assign(new Error("access denied"),{publicMessage:"Code d’accès invalide ou non autorisé."});
+        if(res.status===401) throw Object.assign(new Error("access denied"),{publicMessage:"Code d’essai Écho incorrect (HTTP 401). Ce code est différent du mot de passe des rubriques du site."});
+        if(res.status===403) throw Object.assign(new Error("origin or trigger denied"),{publicMessage:"Accès au service refusé (HTTP 403). Ouvre Écho sur exo-fr.pages.dev et contacte l’enseignante si le problème persiste."});
         if(res.status===429) throw Object.assign(new Error("limited"),{publicMessage:"La limite d’essais est atteinte. Réessaie plus tard."});
         throw new Error("SDP exchange failed");
       }
