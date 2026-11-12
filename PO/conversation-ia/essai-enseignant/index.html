@@ -99,6 +99,50 @@
 .bilan-help-pop strong{color:#205c3e}
 .bilan-help-pop p{margin:8px 0 0!important;font-size:13px!important;line-height:1.6!important;color:#4a6654!important}
 .toolbox-status:empty{display:none}
+ 
+/* Écho toolbox modal — no permanent empty card beneath the transcript. */
+.test-actions .teacher-bilan-row .teacher-toolbox-open{
+ flex:0 0 36px!important;width:36px!important;height:36px!important;
+ min-width:36px!important;min-height:36px!important;padding:0!important;
+ display:grid;place-items:center;background:#fff!important;
+ color:#247c57!important;border:1px solid #94c9ae!important;
+ border-radius:50%!important;font:700 25px/1 Arial,sans-serif!important;
+ box-shadow:none;transition:background-color .15s,border-color .15s;
+}
+.test-actions .teacher-bilan-row .teacher-toolbox-open:hover{
+ background:#e5f5eb!important;border-color:#489b6d!important;
+}
+.test-actions .teacher-bilan-row .teacher-toolbox-open.has-content{
+ background:#e5f5eb!important;border-color:#247c57!important;
+ box-shadow:0 0 0 3px rgba(36,124,87,.09);
+}
+.teacher-toolbox-dialog{
+ box-sizing:border-box;width:min(690px,calc(100vw - 32px));
+ max-width:calc(100vw - 32px);max-height:min(84dvh,760px);
+ overflow:auto;border:1px solid #bddfc9;border-radius:19px;
+ padding:0;margin:auto;background:#fff;color:#203d2c;
+ box-shadow:0 22px 70px rgba(11,55,29,.24);
+}
+.teacher-toolbox-dialog::backdrop{background:rgba(10,31,22,.49)}
+.teacher-toolbox-dialog .toolbox-panel{
+ margin:0!important;border:0!important;border-radius:19px;
+ background:transparent;padding:24px 26px 27px;
+}
+.toolbox-modal-heading{display:flex;align-items:center;justify-content:space-between;gap:15px}
+.teacher-toolbox-dialog .toolbox-modal-heading h2{margin:0;color:#255b40;font-size:23px}
+.teacher-toolbox-close{
+ appearance:none;border:1px solid #d0dfd5;border-radius:50%;
+ width:37px;height:37px;flex:none;background:#f5faf7;color:#366c4d;
+ cursor:pointer;font:normal 26px/1 Arial,sans-serif;padding:0;
+}
+.teacher-toolbox-close:hover{background:#eaf5ef}
+.toolbox-empty{font-size:14px;line-height:1.65;color:#587260;margin:15px 0 0}
+.toolbox-empty[hidden]{display:none}
+.teacher-toolbox-dialog .toolbox-status{font-size:14px;line-height:1.6;margin:11px 0;color:#49725a}
+@media(max-width:530px){
+ .teacher-toolbox-dialog .toolbox-panel{padding:20px 17px 23px}
+ .teacher-bilan-row{gap:7px}
+}
 </style>
 </head>
 <body>
@@ -156,6 +200,7 @@
 <button class="end" id="stop" type="button" disabled>Terminer</button>
 <div class="teacher-bilan-row">
 <button class="end teacher-bilan" id="teacher-bilan" type="button" disabled>✨ Faire le point</button>
+<button id="teacher-toolbox-open" class="teacher-toolbox-open" type="button" aria-haspopup="dialog" aria-controls="teacher-toolbox-dialog" aria-label="Ouvrir Ma boîte à outils" title="Ouvrir Ma boîte à outils">＋</button>
 <details class="bilan-help">
 <summary aria-label="Comment utiliser Faire le point ?" title="Comment utiliser Faire le point ?">?</summary>
 <div class="bilan-help-pop" role="note">
@@ -200,9 +245,14 @@
 <p class="transcript-notice" id="transcript-note">Transcription indicative : la reconnaissance vocale peut comporter des erreurs.</p>
 </div>
 </section>
+<dialog id="teacher-toolbox-dialog" class="teacher-toolbox-dialog" aria-labelledby="toolbox-title">
 <section class="teacher-feature toolbox-panel" id="toolbox-panel" aria-labelledby="toolbox-title">
+<div class="toolbox-modal-heading">
 <h2 id="toolbox-title">Ma boîte à outils</h2>
-<p class="toolbox-status" id="toolbox-status"></p>
+<button id="teacher-toolbox-close" class="teacher-toolbox-close" type="button" aria-label="Fermer Ma boîte à outils" title="Fermer">×</button>
+</div>
+<p id="teacher-toolbox-empty" class="toolbox-empty">La boîte à outils apparaîtra ici après le bilan. Pendant la conversation, dites « Écho, on fait le point ? » ou cliquez sur « Faire le point ».</p>
+<p class="toolbox-status" id="toolbox-status" role="status" aria-live="polite"></p>
 <div class="toolbox-content" id="toolbox-content" hidden>
 <h3 class="toolbox-subhead">Notre sujet</h3><p class="toolbox-theme" id="toolbox-theme"></p>
 <h3 class="toolbox-subhead">Ce que j’ai réussi à exprimer</h3><p class="toolbox-text" id="toolbox-strength"></p>
@@ -212,13 +262,14 @@
 <p>Ces propositions restent indicatives. Vérifier les expressions avant de les réemployer.</p>
 </div>
 </section>
+</dialog>
 <p class="test-privacy"><strong>Essai technique :</strong> cette page ne demande plus de code de connexion. Le microphone transmet la voix au service de modèle via WebRTC pendant une séance. La version anonyme du relais FC doit être déployée pour que le dialogue fonctionne. Les quotas d’essai par instance restent limités et ne remplacent pas un plafond global de facturation ; conservez un accès restreint aux testeurs avant une ouverture générale.</p>
 </main>
 <footer>© 《高级法语综合课》 · Écho · Test technique réservé à l’enseignante</footer>
 </div>
 <script src="../echo-pedagogy.js?v=20261113-3"></script>
 <script src="../echo-transcription.js?v=20261113-2"></script>
-<script src="../echo-toolbox.js?v=20261113-3"></script>
+<script src="../echo-toolbox.js?v=20261113-4"></script>
 <script src="../echo-pilot-features.js?v=20261113-3"></script>
 <script>
 (()=>{
@@ -231,6 +282,32 @@ const ENDPOINT=document.getElementById("endpoint"),DURATION=document.getElementB
 const MODE=document.getElementById("mode"),LEVEL=document.getElementById("level"),TOPIC=document.getElementById("topic"),MODE_HELP=document.getElementById("modeHelp");
 let current=null;
 const FEATURES=window.ECHO_PILOT_FEATURES?.create({log:message=>log(message),onBilanContinue:()=>show("Écho prépare le bilan oral…","connecting")})||null;
+const TOOLBOX_DIALOG=document.getElementById("teacher-toolbox-dialog");
+const TOOLBOX_OPEN=document.getElementById("teacher-toolbox-open");
+const TOOLBOX_CLOSE=document.getElementById("teacher-toolbox-close");
+const TOOLBOX_CONTENT=document.getElementById("toolbox-content");
+const TOOLBOX_EMPTY=document.getElementById("teacher-toolbox-empty");
+function syncToolboxPopup(){
+ const isReady=!TOOLBOX_CONTENT.hidden;
+ TOOLBOX_EMPTY.hidden=isReady;
+ TOOLBOX_OPEN.classList.toggle("has-content",isReady);
+ const hint=isReady?"Ma boîte à outils est prête · Ouvrir":"Ouvrir Ma boîte à outils";
+ TOOLBOX_OPEN.title=hint;
+ TOOLBOX_OPEN.setAttribute("aria-label",hint);
+}
+TOOLBOX_OPEN.addEventListener("click",()=>{
+ if(!TOOLBOX_DIALOG.open)TOOLBOX_DIALOG.showModal();
+ syncToolboxPopup();
+});
+TOOLBOX_CLOSE.addEventListener("click",()=>TOOLBOX_DIALOG.close());
+TOOLBOX_DIALOG.addEventListener("click",event=>{
+ if(event.target!==TOOLBOX_DIALOG)return;
+ const bounds=TOOLBOX_DIALOG.getBoundingClientRect();
+ if(event.clientX<bounds.left||event.clientX>bounds.right||
+    event.clientY<bounds.top||event.clientY>bounds.bottom)TOOLBOX_DIALOG.close();
+});
+new MutationObserver(syncToolboxPopup).observe(TOOLBOX_CONTENT,{attributes:true,attributeFilter:["hidden"]});
+syncToolboxPopup();
 MODE.addEventListener("change",()=>{
  MODE_HELP.textContent=MODE.value==="libre"
   ?"En mode libre, aucun sujet n’est nécessaire. Écho peut engager la conversation et s’adapter à vos réponses."
