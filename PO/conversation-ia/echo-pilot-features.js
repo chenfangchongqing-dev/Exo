@@ -1,128 +1,193 @@
-/* Écho · shared optional transcription + metacognitive toolbox.
-   Used by BOTH the student pilot and the teacher WebRTC debugging page.
-   WebRTC media and SDP exchange remain unchanged.
-   Model events are delivered via existing oai-events DataChannel.
-   No transcript or toolbox is sent to any extra external endpoint.
+/* Écho — shared features for the student pilot and teacher debugging page.
+   WebRTC and the teacher's existing SDP relay stay unchanged.
+   Controls and AI captions flow over the oai-events DataChannel.
+   No extra transcript storage, external post-call model, or embedded API key.
 */
 (function(root){
  "use strict";
- const EXTRA_RULES=[
+ const TRIGGER="Écho, on fait le point ?";
+ const PROMPT=[
    "",
-   "RÉCAPITULATIF ORAL ET BOÎTE À OUTILS",
-   "Si l'apprenant demande explicitement un bilan, une récapitulation ou une boîte à outils, prépare une boîte à outils personnalisée en appelant l'outil publish_language_toolbox une fois dans cette séquence.",
-   "L'outil doit produire de 3 à 6 expressions, collocations ou structures réellement utiles pour les propos de l'apprenant : expression française, rôle dans son idée, exemple français court, catégorie, origine.",
-   "Ne marque deja_utilisee que lorsqu'une expression a réellement été prononcée par l'apprenant. Une suggestion, une correction ou une expression prononcée uniquement par Écho doit être marquée a_reemployer.",
-   "Ne fabrique jamais de citation, d'erreur attribuée à l'apprenant, de diagnostic CECRL ou d'appréciation infondée. Si le dialogue a été trop bref, reste prudent.",
-   "Après l'appel de l'outil et son résultat, poursuis avec un bilan ORAL court : commence par demander à l'apprenant ce qui lui a semblé facile ou difficile, puis propose une réussite observable et une stratégie concrète. Ne lis pas à haute voix toute la boîte à outils affichée sur la page.",
-   "N'appelle pas l'outil pendant une conversation ordinaire si aucun bilan n'a été demandé. L'apprenant est libre de refuser le bilan."
+   "BILAN MÉTACOGNITIF — DÉCLENCHEUR UNIQUE",
+   "Le signal conventionnel est exactement « Écho, on fait le point ? ».",
+   "Lorsque tu entends cette phrase, prépare une boîte à outils grâce à l'outil publish_language_toolbox. Ne demande pas une consigne supplémentaire à l'apprenant.",
+   "Retiens 3 à 6 ressources réellement utiles au regard de ce qu'il a essayé d'exprimer : vocabulaire thématique, collocations, expressions ou structures adaptées, avec un exemple de réemploi relié à ses propos.",
+   "Tu ne dois marquer deja_utilisee que si tu as véritablement entendu l'apprenant utiliser l'expression. Toute proposition nouvelle ou reformulation est a_reemployer.",
+   "Ne fabrique jamais d'erreur, de citation ou de réussite attribuée à l'apprenant. Si les observations sont insuffisantes, reste prudent et limite le nombre de ressources.",
+   "Après l'exécution de l'outil, poursuis avec un retour ORAL bref et naturel. Demande d'abord à l'apprenant ce qui lui a paru facile ou difficile, puis mentionne un point observé et une stratégie de réemploi.",
+   "Le texte de la boîte à outils apparaît sur la page : ne lis pas cette liste à voix haute.",
+   "Aucun bilan automatique pendant une conversation ordinaire. N'exécute pas l'outil sans demande expresse ou sans déclenchement du bouton « Faire le point »."
  ].join("\n");
-
+ const FORCE_SUFFIX="\nL'apprenant vient d'activer explicitement « Écho, on fait le point ? ». Ton action immédiate doit être d'appeler publish_language_toolbox pour fournir les ressources écrites, puis tu fais un bref bilan oral. Il ne faut pas demander au préalable un sujet ou une consigne.";
+ function normalized(value){
+   return String(value||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g," ").trim();
+ }
+ function isTrigger(text){
+   return normalized(text)==="echo on fait le point";
+ }
  function create(options){
    const opt=options||{};
    const captions=root.ECHO_TRANSCRIPTION?.create?.()||null;
    const toolbox=root.ECHO_TOOLBOX?.create?.()||null;
-   const pending=[];
-   const handled=new Set();
+   let pending=[];
+   let handled=new Set();
    let toolCount=0;
-   const MAX_TOOL_CALLS_PER_SESSION=4;
-
-   function logger(msg){
-     if(typeof opt.log==="function")try{opt.log(msg);}catch{}
-   }
+   let promptBase="";
+   let requested=false;
+   let toolCalled=false;
+   let forceAttempts=0;
+   let forcePending=false;
+   let awaitingUpdate=false;
+   let responseInProgress=false;
+   let sessionRef=null;
+   const MAX_CALLS=3;
+   function log(message){if(typeof opt.log==="function")try{opt.log(message);}catch{}}
    function configure(instructions){
+     promptBase=String(instructions||"")+"\n"+PROMPT;
      return {
        input_audio_transcription:{model:"qwen3-asr-flash-realtime"},
-       instructions:String(instructions||"")+"\n"+EXTRA_RULES,
-       tools:toolbox ? [root.ECHO_TOOLBOX.definition] : []
+       instructions:promptBase,
+       tools:root.ECHO_TOOLBOX?.definition?[root.ECHO_TOOLBOX.definition]:[]
      };
    }
    function reset(){
-     pending.length=0;handled.clear();toolCount=0;
+     pending=[];
+     handled=new Set();
+     toolCount=0;requested=false;toolCalled=false;
+     forceAttempts=0;forcePending=false;awaitingUpdate=false;
+     responseInProgress=false;sessionRef=null;
      captions?.reset?.();
      toolbox?.clear?.();
    }
    function finish(){
      captions?.finish?.();
-     if(pending.length>0){pending.length=0;toolbox?.setUnavailable?.();}
+     if(requested&&!toolCalled)toolbox?.setUnavailable?.();
+     pending=[];
    }
-   function send(session,body){
-     const ch=session?.eventChannel;
-     if(!session||session.stopped||!ch||ch.readyState!=="open")return false;
-     ch.send(JSON.stringify(body));
-     return true;
+   function send(session,event){
+     const channel=session?.eventChannel;
+     if(!session||session.stopped||!channel||channel.readyState!=="open")return false;
+     try{channel.send(JSON.stringify(event));return true}catch{return false}
    }
-   function processToolCalls(session){
-     if(!pending.length||session.stopped)return false;
-     let processed=0;
-     while(pending.length && processed<MAX_TOOL_CALLS_PER_SESSION){
+   function updateForBilan(session){
+     if(!session||session.stopped||awaitingUpdate||forceAttempts>=2||toolCalled)return false;
+     if(responseInProgress){forcePending=true;return true;}
+     forcePending=false;
+     forceAttempts++;
+     awaitingUpdate=send(session,{
+       event_id:"event_"+crypto.randomUUID(),
+       type:"session.update",
+       session:{instructions:promptBase+FORCE_SUFFIX}
+     });
+     if(awaitingUpdate){
+       log("Rappel du bilan envoyé au modèle");
+       toolbox?.waiting?.();
+     }else{
+       toolbox?.setUnavailable?.();
+     }
+     return awaitingUpdate;
+   }
+   function requestBilan(session){
+     if(!session||session.stopped||!session.connected||!session.eventChannel)return false;
+     if(requested&&toolCalled)return false;
+     requested=true;
+     toolbox?.waiting?.();
+     return updateForBilan(session);
+   }
+   function doPending(session){
+     if(!pending.length)return false;
+     let count=0;
+     while(pending.length && count<MAX_CALLS){
        const call=pending.shift();
-       if(!call||handled.has(call.call_id))continue;
-       handled.add(call.call_id);processed++;
+       if(!call?.call_id||handled.has(call.call_id))continue;
+       handled.add(call.call_id);
+       count++;toolCount++;
        let ok=false;
-       if(call.name==="publish_language_toolbox" && toolbox && toolCount<MAX_TOOL_CALLS_PER_SESSION){
-         toolCount++;
+       if(call.name==="publish_language_toolbox" && toolbox && toolCount<=MAX_CALLS){
          try{
-           const parsed=JSON.parse(call.arguments||"{}");
+           const args=JSON.parse(call.arguments||"{}");
            const observed=captions?.getStudentTranscript?.()||"";
-           ok=toolbox.receive(parsed,observed);
-           logger(ok?"Boîte à outils personnalisée affichée":"Boîte à outils reçue, mais données insuffisantes");
-         }catch(e){
-           logger("Boîte à outils : paramètres non valides");
+           ok=toolbox.receive(args,observed);
+           toolCalled=ok;
+           requested=true;
+           log(ok?"Boîte à outils prête":"Outil appelé sans ressources exploitables");
+         }catch{
            toolbox?.setUnavailable?.();
+           log("Écho a renvoyé un format de boîte à outils non valide");
          }
        }
-       const output=JSON.stringify({
-         success:ok,
-         displayed:ok,
-         information:ok
-           ?"La boîte à outils est affichée sur la page. Fais maintenant le bilan oral sans lire la liste."
-           :"L'outil n'a pas pu afficher de ressources pertinentes. Donne un bilan oral prudent."
-       });
-       const sent=send(session,{
-         event_id:"event_"+crypto.randomUUID(),
-         type:"conversation.item.create",
-         item:{type:"function_call_output",call_id:call.call_id,output}
-       });
-       if(!sent){toolbox?.setUnavailable?.();return false}
+       if(!send(session,{
+         event_id:"event_"+crypto.randomUUID(),type:"conversation.item.create",
+         item:{type:"function_call_output",call_id:call.call_id,output:JSON.stringify({
+           success:ok,
+           message:ok
+             ?"La boîte à outils est visible sur la page. Réponds maintenant à l'oral avec un bilan bref et naturel, sans lire les expressions."
+             :"La boîte à outils n'a pas pu être affichée. Fais un bilan oral bref et prudent."
+         })}
+       }))return false;
      }
-     if(processed>0){
-       const continued=send(session,{
-         event_id:"event_"+crypto.randomUUID(),
-         type:"response.create",
+     if(count>0){
+       const ok=send(session,{
+         event_id:"event_"+crypto.randomUUID(),type:"response.create",
          response:{modalities:["text","audio"]}
        });
-       if(continued){
-         logger("Le modèle reprend le bilan oral après l'outil");
-         if(typeof opt.onBilanContinue==="function")try{opt.onBilanContinue();}catch{}
-       }
-       return continued;
+       if(ok){log("Reprise du bilan oral après la boîte à outils");opt.onBilanContinue?.();}
+       return ok;
      }
      return false;
    }
    function onEvent(session,message){
      if(!session||session.stopped||!message)return false;
+     sessionRef=session;
      try{captions?.onEvent?.(message);}catch{}
      switch(message.type){
+       case "conversation.item.input_audio_transcription.completed":
+         if(isTrigger(message.transcript)&&!requested){
+           requested=true;
+           toolbox?.waiting?.();
+           log("Phrase « Écho, on fait le point ? » reconnue dans la parole");
+         }
+         return false;
+       case "session.updated":
+         if(awaitingUpdate){
+           awaitingUpdate=false;
+           const ok=send(session,{
+             event_id:"event_"+crypto.randomUUID(),type:"response.create",
+             response:{modalities:["text","audio"]}
+           });
+           if(ok){log("Déclenchement du bilan à la demande");return true}
+           toolbox?.setUnavailable?.();
+         }
+         return false;
+       case "response.created":
+         responseInProgress=true;
+         return false;
        case "response.function_call_arguments.done":{
-         const callId=String(message.call_id||"");
-         if(!callId||handled.has(callId)||pending.some(x=>x.call_id===callId))return true;
-         pending.push({
-           call_id:callId,
-           name:String(message.name||""),
-           arguments:String(message.arguments||"").slice(0,150000)
-         });
+         const cid=String(message.call_id||"");
+         if(!cid||handled.has(cid)||pending.some(x=>x.call_id===cid))return true;
+         pending.push({call_id:cid,name:String(message.name||""),arguments:String(message.arguments||"").slice(0,120000)});
+         requested=true;
          toolbox?.waiting?.();
-         logger("Appel de l'outil : "+String(message.name||"inconnu"));
+         log("Préparation de Ma boîte à outils");
          return true;
        }
        case "response.done":
-         if(pending.length>0)return processToolCalls(session);
+         responseInProgress=false;
+         if(pending.length)return doPending(session);
+         if(toolCalled)return false;
+         if(requested&&!awaitingUpdate){
+           if(forceAttempts<1)return updateForBilan(session);
+           toolbox?.setUnavailable?.();
+         }
+         if(forcePending)return updateForBilan(session);
          return false;
-       default:
+       case "error":
+         if(awaitingUpdate){awaitingUpdate=false;toolbox?.setUnavailable?.();}
          return false;
+       default:return false;
      }
    }
-   return Object.freeze({configure,reset,finish,onEvent,transcript:captions,toolbox});
+   return Object.freeze({configure,reset,finish,requestBilan,onEvent,transcript:captions,toolbox,trigger:TRIGGER});
  }
- root.ECHO_PILOT_FEATURES=Object.freeze({create,version:"2026-11-13.1"});
+ root.ECHO_PILOT_FEATURES=Object.freeze({create,isTrigger,trigger:TRIGGER,version:"2026-11-13.2"});
 })(typeof window!=="undefined"?window:globalThis);
