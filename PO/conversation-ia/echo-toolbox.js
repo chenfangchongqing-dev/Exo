@@ -53,7 +53,7 @@
      data=null;theme.textContent="";strength.textContent="";
      list.replaceChildren();strategy.textContent="";
      content.hidden=true;
-     state.textContent="Dis « Écho, on fait le point ? » pour obtenir un bilan oral et ta boîte à outils.";
+     state.textContent=""; // Instructions are beside the Faire le point button.
      copy.disabled=true;download.disabled=true;
    }
    function waiting(){state.textContent="Écho prépare les expressions à retenir…";}
