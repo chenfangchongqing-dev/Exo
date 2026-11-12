@@ -1,14 +1,13 @@
 /* Écho – student-facing pilot WebRTC client.
    This page is a restricted functional test, not the general student rollout.
-   It never embeds or saves DASHSCOPE_API_KEY or ECHO_ACCESS_CODE.
-   Server-side student credentials, quota limits and protected prompts
-   must be added before inviting an entire class.
+   It never embeds DASHSCOPE_API_KEY. This no-code pilot requires the
+   guest SDP relay v0.2 to be deployed; browser Origin alone is not authentication.
+   Durable per-user and billing controls are needed before broad rollout.
 */
 (() => {
   "use strict";
   const ENDPOINT = "https://echo-realtime-xzxxauvfwu.cn-beijing.fcapp.run";
   const form = document.getElementById("student-setup");
-  const codeField = document.getElementById("student-access");
   const startButton = document.getElementById("student-start");
   const stopButton = document.getElementById("student-stop");
   const bilanButton = document.getElementById("student-bilan");
@@ -71,7 +70,6 @@
     remoteAudio.pause();
     remoteAudio.srcObject = null;
     features?.finish?.();
-    codeField.value = "";
     if(active === session) active = null;
     lockOptions(false);
     clock.textContent = "Durée de la conversation : " + formatTime(Date.now()-session.started);
@@ -192,8 +190,6 @@
       status("Ce navigateur ne prend pas en charge la conversation vocale. Essaie Chrome ou Safari récent.","error");
       return;
     }
-    const code = codeField.value.trim();
-    if(code.length<12) {status("Saisis le code d’accès reçu pour cet essai.","error");return;}
     const selection=choices();
     const session={
       pc:null,channels:new Set(),eventChannel:null,localStream:null,remoteStream:new MediaStream(),
@@ -238,14 +234,14 @@
       if(session.stopped)return;
       const res=await fetch(ENDPOINT+"/api/realtime/sdp",{
         method:"POST",
-        headers:{"Content-Type":"application/sdp","X-Echo-Access-Code":code},
+        headers:{"Content-Type":"application/sdp"},
         body:session.pc.localDescription.sdp,
         signal:session.abort.signal,
         cache:"no-store"
       });
       if(!res.ok){
-        if(res.status===401) throw Object.assign(new Error("access denied"),{publicMessage:"Code d’essai Écho incorrect (HTTP 401). Ce code est différent du mot de passe des rubriques du site."});
-        if(res.status===403) throw Object.assign(new Error("origin or trigger denied"),{publicMessage:"Accès au service refusé (HTTP 403). Ouvre Écho sur exo-fr.pages.dev et contacte l’enseignante si le problème persiste."});
+        if(res.status===401) throw Object.assign(new Error("old deployment"),{publicMessage:"Le service Écho utilise encore l’ancienne version. L’enseignante doit déployer le relais v0.2."});
+        if(res.status===403) throw Object.assign(new Error("old deployment or origin denied"),{publicMessage:"Accès refusé (HTTP 403). Vérifie l’adresse du site ; si le problème persiste, demander le déploiement du service Écho v0.2."});
         if(res.status===429) throw Object.assign(new Error("limited"),{publicMessage:"La limite d’essais est atteinte. Réessaie plus tard."});
         throw new Error("SDP exchange failed");
       }
