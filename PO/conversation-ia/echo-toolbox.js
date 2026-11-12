@@ -102,7 +102,10 @@
      content.hidden=false;
      state.textContent="Ta boîte à outils est prête. Tu peux la relire, la copier ou l’enregistrer.";
      copy.disabled=false;download.disabled=false;
-     panel.scrollIntoView({behavior:"smooth",block:"nearest"});
+     // A teacher-side modal may be closed when the tool finishes. Never scroll the
+     // underlying page to a hidden dialog; keep the student inline behaviour.
+     const ownerDialog=panel.closest("dialog");
+     if(!ownerDialog||ownerDialog.open)panel.scrollIntoView({behavior:"smooth",block:"nearest"});
      return true;
    }
    function getText(){
