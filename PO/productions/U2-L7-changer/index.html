@@ -88,6 +88,37 @@ footer{font-size:12px;color:#74817a;margin-top:35px;padding-top:20px;border-top:
 .recap-list li:before{content:"–";position:absolute;left:2px;color:#29936b;font-weight:850}
 @media(max-width:650px){.recap-trigger{padding:14px;gap:10px}.recap-action{font-size:12px}.recap-symbol{width:34px;height:34px}.recap-dialog{padding:18px 18px 23px}.recap-list li{padding-left:19px}}
 @media(prefers-reduced-motion:reduce){.recap-trigger{transition:none}.recap-trigger:hover{transform:none}}
+
+/* Oral language resources: optional scaffolding, kept separate from model answer. */
+.toolbox{margin:0 0 12px 48px;border:1px solid #b3dfc8;border-radius:13px;background:#f3faf6;overflow:hidden}
+.toolbox>summary{list-style:none;display:flex;align-items:center;gap:12px;padding:15px 17px;cursor:pointer;color:#185f43}
+.toolbox>summary::-webkit-details-marker{display:none}
+.toolbox>summary:hover{background:#e8f6ee}
+.toolbox>summary .toolbox-mark{display:grid;place-items:center;width:35px;height:35px;flex:none;background:#d8f0e3;border-radius:9px;color:#218864;font-size:22px}
+.toolbox>summary strong{display:block;font-size:16px;font-weight:850}
+.toolbox>summary small{display:block;color:#527969;font-size:12px;letter-spacing:.02em;margin-top:3px}
+.toolbox>summary:after{content:"＋";font-size:23px;line-height:1;margin-left:auto;color:#298864}
+.toolbox[open]>summary:after{content:"－"}
+.toolbox-content{padding:1px 19px 22px;background:#fff}
+.toolbox-intro{color:#52695c;font-size:14px;margin:14px 0 20px}
+.toolbox-part{border-top:1px solid #e3eee7;padding:19px 0 17px}
+.toolbox-part-head{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.toolbox-part-head h3{font-size:18px;line-height:1.32;color:#235c43;margin:0}
+.step-no{font-size:12px;font-weight:850;color:#298a60;letter-spacing:.06em}
+.vocab-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.vocab-grid>div,.phrases-grid>div{display:flex;flex-direction:column;gap:2px;padding:9px 11px;background:#f7fbf8;border:1px solid #e6efe8;border-radius:9px}
+.vocab-grid strong,.phrases-grid strong{color:#243f31;font-size:15px;font-weight:760;line-height:1.45}
+.vocab-grid span,.phrases-grid span{color:#667c6c;font-size:13px;line-height:1.5}
+.phrases-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.toolbox-example{margin:12px 0 0;padding:10px 12px;border-left:3px solid #56b88c;background:#f7fbf8;border-radius:0 7px 7px 0}
+.toolbox-example span{display:block;font-size:15px;line-height:1.52}
+.toolbox-example span[lang]{font-size:13px;color:#57705f;margin-top:4px}
+.toolbox-note{color:#627d6b;font-size:12px;margin:11px 0 0;line-height:1.6}
+.toolbox-question{font:italic 17px/1.5 Georgia,"Times New Roman",serif;color:#2e7454;background:#f1f8f3;padding:12px 15px;border-radius:9px;margin:15px 0 0}
+.toolbox-prompts{border-top:1px solid #e3eee7;padding:17px 0 0;color:#2b5740;font-size:14px}
+.toolbox-prompts ol{margin:9px 0 0;padding-left:21px}
+.toolbox-prompts li{margin:5px 0;line-height:1.55}
+@media(max-width:700px){.toolbox{margin-left:35px}.toolbox-content{padding:0 13px 17px}.vocab-grid,.phrases-grid{grid-template-columns:1fr}.toolbox>summary{padding:13px 12px}.toolbox-part-head h3{font-size:16px}}
 </style>
 </head>
 <body><div class="wrap">
@@ -122,6 +153,56 @@ footer{font-size:12px;color:#74817a;margin-top:35px;padding-top:20px;border-top:
 <div class="exercise discussion">
 <div class="qrow"><span class="qletter">c.</span><p class="qtext">Et vous, quelle est votre relation avec les vêtements ?</p></div>
 <p class="conversation">Échangez avec un camarade. Appuyez-vous sur un exemple de votre vie quotidienne.</p>
+<details class="toolbox">
+<summary><span class="toolbox-mark" aria-hidden="true">✦</span><span><strong>Boîte à outils pour parler</strong><small>Style · Choix · Image de soi</small></span></summary>
+<div class="toolbox-content">
+<p class="toolbox-intro">Choisissez les expressions qui correspondent à votre expérience. Il n’est pas nécessaire de toutes les utiliser.</p>
+<section class="toolbox-part" aria-labelledby="oral-style"><div class="toolbox-part-head"><span class="step-no">01</span><h3 id="oral-style">Décrire son style vestimentaire</h3></div>
+<div class="vocab-grid" role="list">
+<div role="listitem"><strong>décontracté(e)</strong><span lang="zh-CN">休闲、随性</span></div>
+<div role="listitem"><strong>chic</strong><span lang="zh-CN">时髦而得体</span></div>
+<div role="listitem"><strong>élégant(e)</strong><span lang="zh-CN">优雅</span></div>
+<div role="listitem"><strong>classique</strong><span lang="zh-CN">经典、传统</span></div>
+<div role="listitem"><strong>sportif / sportive</strong><span lang="zh-CN">运动风格</span></div>
+<div role="listitem"><strong>simple</strong><span lang="zh-CN">简约</span></div>
+<div role="listitem"><strong>discret / discrète</strong><span lang="zh-CN">低调</span></div>
+<div role="listitem"><strong>original(e)</strong><span lang="zh-CN">有个性</span></div>
+<div role="listitem"><strong>à la mode</strong><span lang="zh-CN">时髦</span></div>
+<div role="listitem"><strong>soigné(e)</strong><span lang="zh-CN">讲究、得体</span></div>
+</div>
+<p class="toolbox-example"><span>J’ai un style plutôt décontracté.</span><span lang="zh-CN">我的穿衣风格比较休闲。</span></p>
+<p class="toolbox-note">un style décontracté / une tenue décontractée · un style chic / une tenue chic (<em>chic</em> est invariable).</p>
+</section>
+<section class="toolbox-part" aria-labelledby="oral-choices"><div class="toolbox-part-head"><span class="step-no">02</span><h3 id="oral-choices">Expliquer ses choix vestimentaires</h3></div>
+<div class="phrases-grid">
+<div><strong>être à l’aise dans ses vêtements</strong><span lang="zh-CN">穿着舒适自在</span></div>
+<div><strong>privilégier le confort</strong><span lang="zh-CN">优先考虑舒适</span></div>
+<div><strong>suivre la mode / les tendances</strong><span lang="zh-CN">追随时尚、潮流</span></div>
+<div><strong>préférer A à B</strong><span lang="zh-CN">相比 B 更喜欢 A</span></div>
+<div><strong>adapter sa tenue à la situation</strong><span lang="zh-CN">根据场合选择着装</span></div>
+<div><strong>faire attention à son apparence</strong><span lang="zh-CN">注重个人形象</span></div>
+</div>
+<p class="toolbox-example"><span>Pour moi, le confort passe avant l’apparence.</span><span lang="zh-CN">对我来说，舒适比外表更重要。</span></p>
+<p class="toolbox-example"><span>Je ne m’habille pas de la même manière pour aller en cours et pour un entretien d’embauche.</span><span lang="zh-CN">上课和参加求职面试时，我的穿着方式不一样。</span></p>
+</section>
+<section class="toolbox-part" aria-labelledby="oral-meaning"><div class="toolbox-part-head"><span class="step-no">03</span><h3 id="oral-meaning">Dire ce que les vêtements représentent pour soi</h3></div>
+<div class="phrases-grid">
+<div><strong>exprimer sa personnalité</strong><span lang="zh-CN">表达个性</span></div>
+<div><strong>donner une bonne impression</strong><span lang="zh-CN">给人留下好印象</span></div>
+<div><strong>se sentir bien dans sa peau</strong><span lang="zh-CN">对自己感到自在、自信</span></div>
+<div><strong>faire attention au regard des autres</strong><span lang="zh-CN">在意他人的目光</span></div>
+<div><strong>respecter certains codes vestimentaires</strong><span lang="zh-CN">遵守某些着装规范</span></div>
+<div><strong>renvoyer une certaine image de soi</strong><span lang="zh-CN">向他人展现某种个人形象</span></div>
+</div>
+<p class="toolbox-question">Est-ce que mes vêtements reflètent ma personnalité ou l’image que je souhaite donner aux autres ?</p>
+</section>
+<div class="toolbox-prompts"><strong>Pour préparer votre réponse</strong>
+<ol><li>Comment vous habillez-vous habituellement ?</li>
+<li>Qu’est-ce qui compte le plus pour vous quand vous choisissez vos vêtements ?</li>
+<li>Votre façon de vous habiller change-t-elle selon les situations ? Pourquoi ?</li></ol>
+</div>
+</div>
+</details>
 <details class="answer"><summary>Voir un exemple de prise de parole</summary><div class="answer-body"><p>Pour moi, les vêtements servent surtout à me sentir à l’aise. Je m’habille simplement pour aller en cours, mais je choisis une tenue plus soignée pour une occasion importante. Je pense que les vêtements peuvent donner une première impression, mais qu’ils ne disent pas tout de notre personnalité.</p></div></details>
 </div>
 </section>
