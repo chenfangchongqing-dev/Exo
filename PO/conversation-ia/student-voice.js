@@ -7,10 +7,8 @@
 (() => {
   "use strict";
   const ENDPOINT = "https://echo-realtime-xzxxauvfwu.cn-beijing.fcapp.run";
-  const ALLOWED_MINUTES = Object.freeze([3,5,10]);
   const form = document.getElementById("student-setup");
   const codeField = document.getElementById("student-access");
-  const durationField = document.getElementById("student-duration");
   const startButton = document.getElementById("student-start");
   const stopButton = document.getElementById("student-stop");
   const statusText = document.getElementById("student-status");
@@ -55,7 +53,6 @@
   }
   function lockOptions(locked) {
     for (const el of inputControls) el.disabled = locked;
-    durationField.disabled = locked;
     startButton.disabled = locked;
     stopButton.disabled = !locked;
   }
@@ -64,7 +61,6 @@
     session.stopped = true;
     session.abort.abort();
     clearInterval(session.interval);
-    clearTimeout(session.deadline);
     for(const channel of session.channels) try { channel.close(); } catch {}
     if(session.localStream) for(const track of session.localStream.getTracks()) track.stop();
     if(session.remoteStream) for(const track of session.remoteStream.getTracks()) track.stop();
@@ -74,7 +70,7 @@
     codeField.value = "";
     if(active === session) active = null;
     lockOptions(false);
-    clock.textContent = "Durée de l’essai : " + formatTime(Number(durationField.value)*60000);
+    clock.textContent = "Durée de la conversation : " + formatTime(Date.now()-session.started);
   }
   function endWithError(session,message) {
     if(active !== session) return;
@@ -187,32 +183,21 @@
       return;
     }
     const code = codeField.value.trim();
-    const durationMinutes = Number(durationField.value);
     if(code.length<12) {status("Saisis le code d’accès reçu pour cet essai.","error");return;}
-    if(!ALLOWED_MINUTES.includes(durationMinutes)){status("Choisis une durée valide.","error");return;}
     const selection=choices();
     const session={
       pc:null,channels:new Set(),eventChannel:null,localStream:null,remoteStream:new MediaStream(),
-      transceiver:null,abort:new AbortController(),interval:null,deadline:null,
+      transceiver:null,abort:new AbortController(),interval:null,
       stopped:false,modelCreated:false,initialized:false,microphoneStarted:false,connected:false,
-      instructions:window.ECHO_PEDAGOGY.build(selection),durationMinutes
+      instructions:window.ECHO_PEDAGOGY.build(selection)
     };
     active=session;
     lockOptions(true);
     status("Autorise l’accès au microphone pour commencer…","connecting");
     session.started=Date.now();
-    const limitMs=durationMinutes*60000;
     session.interval=setInterval(()=>{
-      if(active===session)clock.textContent="Temps restant : "+formatTime(limitMs-(Date.now()-session.started));
+      if(active===session)clock.textContent="Durée de la conversation : "+formatTime(Date.now()-session.started);
     },500);
-    session.deadline=setTimeout(()=>{
-      if(active===session){
-        const worked=session.connected;
-        shutdown(session);
-        status("Le temps de conversation est terminé. Le microphone est coupé.","waiting");
-        reflection.hidden=!worked;
-      }
-    },limitMs);
     try {
       session.pc=new RTCPeerConnection({iceServers:[]});
       session.transceiver=session.pc.addTransceiver("audio",{direction:"sendrecv"});
@@ -268,9 +253,6 @@
     shutdown(s);
     status("Conversation terminée. Tu peux recommencer quand tu veux.","waiting");
     reflection.hidden=!worked;
-  });
-  durationField.addEventListener("change",()=>{
-    if(!active)clock.textContent="Durée de l’essai : "+formatTime(Number(durationField.value)*60000);
   });
   window.addEventListener("pagehide",()=>{if(active)shutdown(active);});
 })();
