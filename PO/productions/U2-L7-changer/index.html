@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#36b58b">
+<meta name="description" content="Unité 2 · Leçon 7 · Comprendre un récit : extrait de Changer : Méthode d’Édouard Louis, éléments implicites et activité orale.">
+<title>Comprendre un récit · Changer : Méthode · PO</title>
+<style>
+:root{color-scheme:light;--green:#34ae80;--green-dark:#1d7156;--green-light:#eaf8f0;--green-line:#b7e1ce;--ink:#1f2933;--muted:#63746e;--bg:#f5f9f6;--max:1080px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.62 Arial,"Helvetica Neue",sans-serif}
+a{color:var(--green-dark)}
+button{font:inherit}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #218966;outline-offset:3px}
+.wrap{max-width:var(--max);padding:0 24px 46px;margin:0 auto}
+.nav{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;padding:24px 0;font-size:14px;font-weight:750}
+.nav a{text-decoration:none}.nav a:hover{text-decoration:underline}
+.hero{padding:36px clamp(22px,4vw,47px) 39px;border:1px solid #b7e1ce;border-radius:23px;background:radial-gradient(720px 310px at -10% -55%,#b3ebcf 0%,transparent 75%),linear-gradient(125deg,#ecf9f1,#fff);position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;right:-55px;bottom:-126px;width:265px;height:265px;border:50px solid #dcf3e6;border-radius:50%;opacity:.65;pointer-events:none}
+.hero>*{position:relative;z-index:1}
+.eyebrow{margin:0 0 10px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:850;color:var(--green-dark)}
+.hero h1{font-size:clamp(31px,4.8vw,49px);line-height:1.14;letter-spacing:-.025em;margin:0 0 11px}
+.hero p:last-child{margin:0;font-size:18px;color:#4b635b}
+.section{margin-top:26px}
+.panel{background:white;border:1px solid #d9e7df;border-radius:20px;padding:clamp(20px,3.8vw,38px);box-shadow:0 11px 31px #204b3010}
+.panel h2{font-size:clamp(22px,2.5vw,27px);line-height:1.25;margin:0 0 17px;letter-spacing:-.018em}
+.hint{font-size:14px;color:#526c61;margin:0 0 22px;padding:11px 15px;background:#f0f9f4;border-left:3px solid #51b58d;border-radius:0 8px 8px 0}
+.doc-bar{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:20px;padding-bottom:15px;border-bottom:1px solid #e4ede7}
+.doc-label{display:inline-flex;align-items:center;gap:9px;font-size:14px;font-weight:850;color:#18754f;letter-spacing:.06em}
+.doc-mark{display:grid;place-items:center;width:44px;height:44px;border-radius:11px 23px 11px 11px;color:white;background:#35b98b;font-size:15px;font-weight:900}
+.doc-title{font-size:13px;color:#657a6f;font-weight:750}
+.reading{max-width:900px;margin:0 auto;font:clamp(20px,2.27vw,26px)/1.66 "Times New Roman",Georgia,serif;color:#2b2b2b}
+.reading p{margin:0 0 23px;text-align:justify;text-indent:1.15em;hyphens:none}
+.annot{font:inherit;letter-spacing:inherit;line-height:inherit;display:inline;color:inherit;text-decoration:none;background:#ecf8ef;border:0;border-bottom:2px dotted #2f9c73;padding:0 2px;cursor:pointer;text-align:inherit;white-space:normal}
+.annot:hover{background:#d7f1e3}
+.annot:after{content:"◦";font:800 14px Arial,sans-serif;color:#288864;vertical-align:super;margin-left:2px}
+.credit{font:italic 16px/1.5 "Times New Roman",Georgia,serif;color:#737773;text-align:right;margin:9px 0 0}
+.implicit-legend{font-size:13px;color:#507968;margin:13px 0 0}
+.questions-intro{font-size:15px;color:#52665d;margin:-4px 0 22px}
+.exercise{padding:22px 0 24px;border-top:1px solid #e7ede9}
+.exercise:first-of-type{border-top:0;padding-top:3px}
+.qrow{display:grid;grid-template-columns:36px minmax(0,1fr);gap:12px}
+.qletter{color:#26a578;font-weight:900;font-size:26px;line-height:1.3}
+.qtext{font-size:19px;font-weight:730;line-height:1.48;margin:0 0 15px}
+.answer{margin-left:48px;border-radius:12px;border:1px solid #cce9d8;background:#f8fcf9;overflow:hidden}
+.answer summary{display:flex;align-items:center;gap:12px;cursor:pointer;padding:13px 17px;font-size:14px;font-weight:800;color:#1b7151;list-style:none}
+.answer summary::-webkit-details-marker{display:none}
+.answer summary:before{content:"＋";font-size:20px;font-weight:600;line-height:1}
+.answer[open] summary:before{content:"－"}
+.answer summary:hover{background:#eaf8f0}
+.answer .answer-body{padding:0 19px 17px 20px;font-size:16px;line-height:1.68;color:#344f41}
+.answer .answer-body p{margin:4px 0 0}
+.answer .answer-body p+p{margin-top:10px}
+.discussion{border-top:1px solid #e7ede9;padding-top:24px}
+.discussion .qtext{font-size:21px}
+.discussion .conversation{font-size:15px;color:#5b6d65;margin:0 0 18px 48px}
+.return{display:inline-block;margin-top:23px;font-size:14px;font-weight:800;text-decoration:none}
+.return:hover{text-decoration:underline}
+footer{font-size:12px;color:#74817a;margin-top:35px;padding-top:20px;border-top:1px solid #dbe9e0}
+.pop{position:fixed;z-index:60;width:min(420px,calc(100vw - 28px));max-height:calc(100dvh - 22px);overflow-y:auto;background:white;border:1px solid #8dcfaf;border-top:5px solid #33ad80;box-shadow:0 16px 43px #0b453038;border-radius:14px;padding:15px 20px 20px}
+.pop[hidden]{display:none}
+.pop-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.pop-kicker{font-size:11px;color:#21845d;text-transform:uppercase;font-weight:850;letter-spacing:.1em}
+.pop-close{flex:0 0 auto;width:31px;height:31px;background:#edf7f1;border:0;border-radius:7px;color:#236948;font-weight:850;cursor:pointer}
+.pop h3{margin:4px 0 10px;font-size:20px;line-height:1.3;color:#185f43}
+.pop p{font-size:15px;line-height:1.65;margin:0;color:#3d5145}
+.pop .cn{color:#657669;font-size:13px;margin-top:10px;padding-top:10px;border-top:1px solid #e7eee9}
+@media(max-width:700px){body{font-size:16px}.wrap{padding:0 15px 35px}.nav{padding:16px 0}.hero{padding:27px 22px}.panel{padding:20px 18px}.reading{font-size:21px;line-height:1.65}.reading p{text-align:left}.qrow{grid-template-columns:27px minmax(0,1fr);gap:8px}.qletter{font-size:23px}.qtext{font-size:18px}.answer,.discussion .conversation{margin-left:35px}.doc-title{font-size:12px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body><div class="wrap">
+<nav class="nav" aria-label="Navigation"><a href="../">← Mes productions orales</a><a href="../../../">Accueil ↗</a></nav>
+<main>
+<header class="hero"><p class="eyebrow">Unité 2 · Leçon 7 · Expression orale</p><h1>Comprendre un récit</h1><p>Édouard Louis, <cite>Changer : Méthode</cite></p></header>
+<section class="section panel" aria-labelledby="reading-title">
+<div class="doc-bar"><span class="doc-label"><span class="doc-mark">04</span> DOC. 4 · EXTRAIT LITTÉRAIRE</span><span class="doc-title" id="reading-title">Lire et comprendre</span></div>
+<p class="hint">Lisez l’extrait. Les expressions discrètement soulignées donnent accès aux <strong>éléments implicites</strong> du récit : cliquez dessus pour les découvrir.</p>
+<div class="reading" lang="fr">
+<p>Un jour, je suis allé dans un grand magasin de vêtements et j’y ai acheté des habits et des chaussures. Je voulais me débarrasser de mes vêtements de sport, de mes <button type="button" class="annot" data-implicit="jogging" aria-label="Explication implicite : vêtements de jogging">vêtements de jogging</button>, et acheter des jeans, des polos, des chemises, compatibles avec ma <button type="button" class="annot" data-implicit="manieres" aria-label="Explication implicite : nouvelle façon de rire et de parler">nouvelle façon de rire et de parler</button>, un long manteau noir qui m’arrivait jusqu’aux genoux, des chaussures que dans notre famille on appelait des chaussures de ville, noires, à talonnettes, qui avaient l’apparence du daim.</p>
+<p>J’avais une <button type="button" class="annot" data-implicit="voix" aria-label="Explication implicite : nouvelle voix">nouvelle voix</button>, <button type="button" class="annot" data-implicit="accent" aria-label="Explication implicite : sans accent">sans accent</button> – du moins c’est ce que je croyais – un nouveau rire, une nouvelle apparence. Je contemplais mon reflet dans le miroir et je pensais : tu es quelqu’un d’autre. Elena participait à ma transformation, elle m’avait appris à faire des nœuds de cravate, les nœuds Windsor, qu’elle trouvait les plus beaux, et je les portais pour aller au lycée. Le soir où Nadya m’a vu avec une cravate, elle a presque sursauté : eh bien Eddy, <button type="button" class="annot" data-implicit="bourgeois" aria-label="Explication implicite : vous vous embourgeoisez">vous vous embourgeoisez</button>. Elle ne savait pas que c’était la plus belle phrase qu’elle aurait pu me dire, et les jours d’après, je me la suis répétée jusqu’à la folie.</p>
+</div>
+<p class="credit"><cite>Changer : Méthode</cite>, Édouard Louis, © Éditions du Seuil, 2021.</p>
+<p class="implicit-legend">◦ 5 annotations sur les éléments implicites de ce récit.</p>
+</section>
+<section class="section panel" aria-labelledby="questions-title">
+<h2 id="questions-title">8 · Comprendre et échanger</h2>
+<p class="questions-intro">Réfléchissez aux questions, puis ouvrez les propositions de réponse pour comparer vos idées.</p>
+<div class="exercise">
+<div class="qrow"><span class="qletter">a.</span><p class="qtext">À quoi Édouard Louis associe-t-il les vêtements ? Comparez avec la chronique (Doc. 3).</p></div>
+<details class="answer"><summary>Voir une proposition de réponse</summary><div class="answer-body"><p>Pour Édouard Louis, les vêtements sont liés à la manière de se comporter et à la place que l’on occupe dans la société. Il souhaite porter des vêtements plus élégants, en accord avec sa nouvelle façon de parler et de rire.</p><p>Dans la chronique (Doc. 3), le jogging est associé au confort, notamment chez soi, tandis que d’autres tenues semblent nécessaires pour se présenter aux autres. Les deux documents montrent que les vêtements ont une signification sociale. L’extrait d’Édouard Louis insiste particulièrement sur le changement de statut social.</p></div></details>
+</div>
+<div class="exercise">
+<div class="qrow"><span class="qletter">b.</span><p class="qtext">Pourquoi Édouard Louis veut-il changer de vêtements ?</p></div>
+<details class="answer"><summary>Voir une proposition de réponse</summary><div class="answer-body"><p>Il veut que son apparence corresponde à la personne qu’il cherche à devenir. Il espère ainsi changer le regard des autres sur lui et s’éloigner de son milieu social d’origine. Quand Nadya lui dit « vous vous embourgeoisez », il est heureux : cette remarque lui donne l’impression que sa transformation est visible.</p></div></details>
+</div>
+<div class="exercise discussion">
+<div class="qrow"><span class="qletter">c.</span><p class="qtext">Et vous, quelle est votre relation avec les vêtements ?</p></div>
+<p class="conversation">Échangez avec un camarade. Appuyez-vous sur un exemple de votre vie quotidienne.</p>
+<details class="answer"><summary>Voir un exemple de prise de parole</summary><div class="answer-body"><p>Pour moi, les vêtements servent surtout à me sentir à l’aise. Je m’habille simplement pour aller en cours, mais je choisis une tenue plus soignée pour une occasion importante. Je pense que les vêtements peuvent donner une première impression, mais qu’ils ne disent pas tout de notre personnalité.</p></div></details>
+</div>
+</section>
+<a class="return" href="../">← Retour à Mes productions orales</a>
+</main>
+<footer>© 《高级法语综合课》 · Production orale · Unité 2 · Leçon 7</footer>
+</div>
+<div class="pop" id="implicit-pop" role="dialog" aria-label="Éléments implicites" aria-modal="false" hidden>
+<div class="pop-top"><span class="pop-kicker">Éléments implicites</span><button type="button" id="close-pop" class="pop-close" aria-label="Fermer l’explication">×</button></div>
+<h3 id="implicit-title"></h3><p id="implicit-text"></p><p class="cn" id="implicit-zh"></p>
+</div>
+<script>
+(function(){
+  "use strict";
+  var notes={
+    jogging:{title:"Les vêtements de jogging",text:"Dans le contexte du récit, le jogging est associé à un milieu social modeste. C’est une représentation sociale que le narrateur cherche à fuir, et non une caractéristique de toutes les personnes qui portent ce vêtement.",zh:"这里的运动裤暗含社会阶层的刻板印象，是叙述者试图摆脱的一种身份标签。"},
+    manieres:{title:"Une nouvelle façon de rire et de parler",text:"Le narrateur cherche à adopter un rire perçu comme plus discret et une manière de parler moins familière, plus standard, voire soutenue. Il tente ainsi de correspondre aux codes d’un autre milieu social.",zh:"笑声与说话方式也是社会交往中的隐性规范，叙述者有意识地改变自己的举止。"},
+    voix:{title:"Une nouvelle voix",text:"Il cherche notamment à prendre une voix plus grave. Sa transformation concerne aussi sa façon de s’exprimer et de se présenter aux autres.",zh:"新的嗓音可能暗示更低沉的声线，说明改变并不限于着装。"},
+    accent:{title:"« Sans accent »",text:"Il pense avoir perdu les particularités de son accent d’origine et parler de façon plus standard. Mais « du moins c’est ce que je croyais » souligne qu’il s’agit de sa propre perception.",zh:"他说自己“没有口音”，其实是认为原有的地域或社会口音不那么明显了；作者也对这一判断保留了距离。"},
+    bourgeois:{title:"« Vous vous embourgeoisez »",text:"S’embourgeoiser signifie adopter les manières ou les signes extérieurs d’un milieu bourgeois. Pour Eddy, la remarque de Nadya confirme qu’il paraît appartenir à un milieu social plus favorisé.",zh:"“变得像资产阶级了”，在这段叙述中意味着外表和行为方式所传达的社会身份发生变化。"}
+  };
+  var pop=document.getElementById("implicit-pop"), close=document.getElementById("close-pop"), last=null;
+  function dismiss(restore){pop.hidden=true;if(restore&&last){last.focus()}last=null}
+  function position(el){
+    var rect=el.getBoundingClientRect(),width=pop.offsetWidth,height=pop.offsetHeight,pad=12;
+    var left=Math.max(pad,Math.min(rect.left,window.innerWidth-width-pad));
+    var y=rect.bottom+12;
+    if(y+height>window.innerHeight-pad){y=Math.max(pad,rect.top-height-12)}
+    if(y+height>window.innerHeight-pad){y=Math.max(pad,window.innerHeight-height-pad)}
+    pop.style.left=left+"px";pop.style.top=y+"px";
+  }
+  document.querySelectorAll("[data-implicit]").forEach(function(button){
+    button.addEventListener("click",function(){
+      var note=notes[button.dataset.implicit];
+      if(!note)return;
+      if(!pop.hidden&&last===button){dismiss(false);return}
+      last=button;
+      document.getElementById("implicit-title").textContent=note.title;
+      document.getElementById("implicit-text").textContent=note.text;
+      document.getElementById("implicit-zh").textContent=note.zh;
+      pop.hidden=false;position(button);close.focus({preventScroll:true});
+    });
+  });
+  close.addEventListener("click",function(){dismiss(true)});
+  document.addEventListener("pointerdown",function(e){if(!pop.hidden&&!pop.contains(e.target)&&!e.target.closest("[data-implicit]"))dismiss(false)});
+  document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!pop.hidden){e.preventDefault();dismiss(true)}});
+  window.addEventListener("resize",function(){if(!pop.hidden&&last)position(last)});
+  window.addEventListener("scroll",function(){if(!pop.hidden&&last)position(last)},true);
+})();
+</script>
+</body>
+</html>
