@@ -136,6 +136,54 @@
 .bilan-help-pop strong{color:#205c3e}
 .bilan-help-pop p{margin:8px 0 0!important;font-size:13px!important;line-height:1.6!important;color:#4a6654!important}
 .toolbox-status:empty{display:none}
+
+/* Étudiant · Ma boîte à outils dans une fenêtre accessible avec le bouton +. */
+.voice-actions .bilan-row .student-toolbox-open{
+ flex:0 0 36px!important;width:36px!important;height:36px!important;
+ min-width:36px!important;min-height:36px!important;padding:0!important;
+ display:grid;place-items:center;background:#fff!important;
+ color:#247c57!important;border:1px solid #94c9ae!important;
+ border-radius:50%!important;font:700 25px/1 Arial,sans-serif!important;
+ box-shadow:none;transition:background-color .15s,border-color .15s;
+}
+.voice-actions .bilan-row .student-toolbox-open:hover{
+ background:#e5f5eb!important;border-color:#489b6d!important;
+}
+.voice-actions .bilan-row .student-toolbox-open.has-content{
+ background:#e5f5eb!important;border-color:#247c57!important;
+ box-shadow:0 0 0 3px rgba(36,124,87,.09);
+}
+.student-toolbox-dialog{
+ box-sizing:border-box;width:min(690px,calc(100vw - 32px));
+ max-width:calc(100vw - 32px);max-height:min(84dvh,760px);
+ overflow:auto;border:1px solid #bddfc9;border-radius:19px;
+ padding:0;margin:auto;background:#fff;color:#203d2c;
+ box-shadow:0 22px 70px rgba(11,55,29,.24);
+}
+.student-toolbox-dialog::backdrop{background:rgba(10,31,22,.49)}
+.student-toolbox-dialog .toolbox-panel{
+ margin:0!important;border:0!important;border-radius:19px;
+ background:transparent;padding:24px 26px 27px;
+}
+.toolbox-modal-heading{display:flex;align-items:center;justify-content:space-between;gap:15px}
+.student-toolbox-dialog .toolbox-modal-heading h4{
+ margin:0;color:#255b40;font-size:23px;line-height:1.4
+}
+.student-toolbox-close{
+ appearance:none;border:1px solid #d0dfd5;border-radius:50%;
+ width:37px;height:37px;flex:none;background:#f5faf7;color:#366c4d;
+ cursor:pointer;font:normal 26px/1 Arial,sans-serif;padding:0;
+}
+.student-toolbox-close:hover{background:#eaf5ef}
+.toolbox-empty{font-size:14px;line-height:1.65;color:#587260;margin:15px 0 0}
+.toolbox-empty[hidden]{display:none}
+.student-toolbox-dialog .toolbox-status{
+ font-size:14px;line-height:1.6;margin:11px 0;color:#49725a
+}
+@media(max-width:470px){
+ .student-toolbox-dialog .toolbox-panel{padding:20px 17px 23px}
+ .bilan-row{gap:7px}
+}
 </style>
 </head>
 <body>
@@ -195,6 +243,7 @@
 <button id="student-stop" type="button" disabled>Terminer</button>
 <div class="bilan-row">
 <button id="student-bilan" class="bilan-action" type="button" disabled>✨ Faire le point</button>
+<button id="student-toolbox-open" class="student-toolbox-open" type="button" aria-haspopup="dialog" aria-controls="student-toolbox-dialog" aria-label="Ouvrir Ma boîte à outils" title="Ouvrir Ma boîte à outils">＋</button>
 <details class="bilan-help">
 <summary aria-label="Comment faire le point ?" title="Comment faire le point ?">?</summary>
 <div class="bilan-help-pop" role="note">
@@ -229,9 +278,14 @@
 <p class="transcript-notice">Le texte reste dans cette page pendant la séance. Il n’est pas sauvegardé automatiquement ; télécharge-le si tu souhaites le garder.</p>
 </div>
 </section>
+<dialog id="student-toolbox-dialog" class="student-toolbox-dialog" aria-labelledby="toolbox-title">
 <section id="toolbox-panel" class="toolbox-panel" aria-labelledby="toolbox-title">
-<h4 id="toolbox-title">Ma boîte à outils · Les mots pour mieux dire</h4>
-<p class="toolbox-status" id="toolbox-status"></p>
+<div class="toolbox-modal-heading">
+<h4 id="toolbox-title">Ma boîte à outils</h4>
+<button id="student-toolbox-close" class="student-toolbox-close" type="button" aria-label="Fermer Ma boîte à outils" title="Fermer">×</button>
+</div>
+<p id="student-toolbox-empty" class="toolbox-empty">Ta boîte à outils apparaîtra ici après le bilan. Pendant la conversation, dis « Écho, on fait le point ? » ou clique sur « Faire le point ».</p>
+<p class="toolbox-status" id="toolbox-status" role="status" aria-live="polite"></p>
 <div id="toolbox-content" class="toolbox-content" hidden>
 <h5 class="toolbox-subhead">Notre sujet</h5>
 <p class="toolbox-theme" id="toolbox-theme"></p>
@@ -248,6 +302,7 @@
 <p class="transcript-notice">Les expressions sont proposées à partir de l’échange et peuvent comporter des approximations. Vérifie-les avant de les réutiliser.</p>
 </div>
 </section>
+</dialog>
 <div id="student-reflection" class="student-reflection" hidden>
 <h4>Et maintenant, un petit bilan ?</h4>
 <p>Qu’as-tu réussi à exprimer ? À quel moment as-tu hésité ? Que pourrais-tu essayer lors de ta prochaine conversation ?</p>
@@ -383,8 +438,40 @@ document.querySelectorAll("[data-open-topic]").forEach(function(button){
 </script>
 <script src="./echo-pedagogy.js?v=20261113-3"></script>
 <script src="./echo-transcription.js?v=20261113-2"></script>
-<script src="./echo-toolbox.js?v=20261113-3"></script>
+<script src="./echo-toolbox.js?v=20261113-4"></script>
 <script src="./echo-pilot-features.js?v=20261113-3"></script>
 <script src="./student-voice.js?v=20261113-6"></script>
+<script>
+(()=>{
+"use strict";
+const dialog=document.getElementById("student-toolbox-dialog");
+const open=document.getElementById("student-toolbox-open");
+const close=document.getElementById("student-toolbox-close");
+const content=document.getElementById("toolbox-content");
+const empty=document.getElementById("student-toolbox-empty");
+if(!dialog||!open||!close||!content||!empty)return;
+function syncToolbox(){
+ const ready=!content.hidden;
+ empty.hidden=ready;
+ open.classList.toggle("has-content",ready);
+ const title=ready?"Ma boîte à outils est prête · Ouvrir":"Ouvrir Ma boîte à outils";
+ open.title=title;
+ open.setAttribute("aria-label",title);
+}
+open.addEventListener("click",()=>{
+ if(!dialog.open)dialog.showModal();
+ syncToolbox();
+});
+close.addEventListener("click",()=>dialog.close());
+dialog.addEventListener("click",event=>{
+ if(event.target!==dialog)return;
+ const bounds=dialog.getBoundingClientRect();
+ if(event.clientX<bounds.left||event.clientX>bounds.right||
+    event.clientY<bounds.top||event.clientY>bounds.bottom)dialog.close();
+});
+new MutationObserver(syncToolbox).observe(content,{attributes:true,attributeFilter:["hidden"]});
+syncToolbox();
+})();
+</script>
 </body>
 </html>
