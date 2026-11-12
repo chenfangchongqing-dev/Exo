@@ -57,7 +57,11 @@ Si le message n'est pas compris, dis ce qui manque de façon simple et invite l'
 
 Le test technique est connecté : `PO/conversation-ia/essai-enseignant/` charge `echo-pedagogy.js` et transmet les consignes en `session.update`, avec le mode choisi (libre ou guidé), le niveau de départ (B2, B2+, C1) et un éventuel sujet. Le service `echo-realtime` et son échange SDP n'ont pas été modifiés.
 
-Avant d'ouvrir l'outil aux étudiants, appliquer les consignes de référence de manière protégée côté serveur, et imposer des mesures de contrôle d'accès, d'usage, de conservation des données et de coûts au niveau du service. Une limite de 3, 5 ou 10 minutes appliquée côté navigateur (5 minutes par défaut pour les essais enseignants) n'est pas une protection suffisante contre les abus. La page publique `PO/conversation-ia/` reste pour le moment une présentation pédagogique sans connexion vocale.
+La page `PO/conversation-ia/` propose désormais une **expérience vocale de test, côté étudiant**, avec les mêmes consignes métacognitives en `session.update` et un accès conditionné par un code de test. Le client `PO/conversation-ia/student-voice.js` offre les modes libre/guidé, les niveaux B2/B2+/C1 et les durées 3/5/10 minutes. La page `PO/conversation-ia/essai-enseignant/` est conservée indépendamment, sans modification, pour le travail de réglage pédagogique et la vérification des échanges WebRTC.
+
+**Important :** ce pilote n'est pas encore une ouverture générale aux étudiants. L'actuelle fonction n'a qu'un seul secret `ECHO_ACCESS_CODE` destiné au test enseignant ; la page élève ne stocke pas ce code et ne le publie pas, mais demander aux étudiants de saisir le code enseignant reviendrait à le partager. Avant de diffuser l'accès à une classe, créer une authentification étudiant distincte, appliquer les consignes de référence de manière protégée côté serveur et imposer des plafonds d'usage, de durée et de coût au niveau du service. Une durée de 3, 5 ou 10 minutes contrôlée côté navigateur n'est pas une protection suffisante contre les abus. Les tests enseignants et étudiants utilisent actuellement le même endpoint SDP, sans modification du service `echo-realtime`.
+
+La page élève présente en fin de séance trois questions facultatives d'autoréflexion, mais ne conserve ni transcription ni notes de bilan. Pour obtenir un bilan oral personnalisé du modèle, l'apprenant doit le lui demander **avant** d'arrêter le microphone.
 
 ### Scénarios de vérification humaine
 
