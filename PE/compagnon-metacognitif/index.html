@@ -120,6 +120,19 @@ h1{font-size:clamp(30px,4.8vw,48px);line-height:1.12;letter-spacing:-.035em;marg
 <p class="privacy" id="privacyNote"><strong>Confidentialité :</strong> dans cette version, les messages restent dans la page ouverte. Ils ne sont pas envoyés à un modèle ni enregistrés automatiquement. Tu peux exporter ton dialogue si tu souhaites le conserver. N'entre pas d'informations personnelles sensibles.</p>
 </main>
 </div>
+<dialog id="accessDialog" class="access-dialog" aria-labelledby="accessDialogTitle">
+<form id="accessDialogForm" class="access-dialog-form">
+<h2 id="accessDialogTitle">Code d’accès</h2>
+<p>Entre le code de classe pour envoyer ton message à Idée.</p>
+<label for="accessDialogCode">Code de classe</label>
+<input type="password" id="accessDialogCode" autocomplete="off" maxlength="128" required>
+<p id="accessDialogError" role="alert" class="access-dialog-error"></p>
+<div class="access-dialog-actions">
+<button id="accessCancel" type="button">Annuler</button>
+<button type="submit">Continuer</button>
+</div>
+</form>
+</dialog>
 <script src="./glm-config.js?v=glm20261107-adaptive"></script>
 <script src="./language-scaffold.js?v=s09-20261107-r1"></script>
 <script>
@@ -252,18 +265,6 @@ restart();
 })();
 </script>
 
-<dialog id="accessDialog" class="access-dialog" aria-labelledby="accessDialogTitle">
-<form id="accessDialogForm" class="access-dialog-form">
-<h2 id="accessDialogTitle">Code d’accès</h2>
-<p>Entre le code de classe pour envoyer ton message à Idée.</p>
-<label for="accessDialogCode">Code de classe</label>
-<input type="password" id="accessDialogCode" autocomplete="off" maxlength="128" required>
-<p id="accessDialogError" role="alert" class="access-dialog-error"></p>
-<div class="access-dialog-actions">
-<button id="accessCancel" type="button">Annuler</button>
-<button type="submit">Continuer</button>
-</div>
-</form>
-</dialog>
+
 </body>
 </html>
