@@ -50,6 +50,42 @@
 
 #timer{font-variant-numeric:tabular-nums;color:#53665b;font-weight:800;font-size:13px;margin-top:12px}
 @media(max-width:530px){.test-card{padding:20px;margin-top:14px}.test-actions button{flex:1 1 100%}.test-card h1{font-size:25px}}
+
+.teacher-feature{margin-top:16px;border:1px solid #d1e4d8;border-radius:13px;background:#fff;padding:16px 18px}
+.teacher-feature h2{font-size:18px;margin:0 0 7px;color:#265b40}
+.teacher-feature p{font-size:13px;color:#586f5f;line-height:1.65;margin:8px 0}
+.teacher-feature .feature-button{border:1px solid #b8dcc5;background:#eff9f2;color:#28704c;border-radius:9px;padding:9px 13px;font-weight:800;cursor:pointer}
+.teacher-feature .feature-button[aria-expanded=true]{background:#e0f3e6}
+.teacher-feature .feature-button:disabled{opacity:.45}
+.teacher-feature .feature-body[hidden]{display:none}
+.teacher-feature .feature-body{padding-top:10px}
+.transcript-lines{display:grid;gap:9px;max-height:350px;overflow:auto}
+.transcript-turn{background:#f6faf6;border:1px solid #dae9dd;border-radius:10px;padding:11px 12px}
+.transcript-turn.from-echo{background:#fcfaf5;border-color:#e9e0cc}
+.transcript-turn[hidden]{display:none}
+.transcript-speaker{display:flex;justify-content:space-between;gap:10px;font-size:12px;color:#2d6c4b}
+.transcript-speaker span{color:#6e8274}
+.transcript-utterance{font:16px/1.5 "Times New Roman",serif;color:#304a39;margin:5px 0;white-space:pre-wrap;overflow-wrap:anywhere}
+.transcript-turn.provisional .transcript-utterance{opacity:.75}
+.transcript-actions,.toolbox-buttons{display:flex;flex-wrap:wrap;gap:8px;margin-top:11px}
+.transcript-actions button,.toolbox-buttons button{border:1px solid #bbddca;background:#f1faf4;color:#216b46;border-radius:9px;padding:8px 12px;font:800 13px Arial,sans-serif;cursor:pointer}
+.transcript-actions button:disabled,.toolbox-buttons button:disabled{opacity:.45;cursor:default}
+.toolbox-panel{margin-top:17px}
+.toolbox-status{color:#547160}
+.toolbox-content[hidden]{display:none}
+.toolbox-content{border-top:1px solid #e0eae3;padding-top:12px}
+.toolbox-subhead{font-size:14px;font-weight:800;color:#2a6c4a;margin:13px 0 4px}
+.toolbox-theme{font:20px/1.4 "Times New Roman",serif;color:#285139}
+.toolbox-text{color:#4c6554;line-height:1.6}
+.toolbox-items{padding:0;list-style:none;display:grid;gap:10px}
+.toolbox-item{border-radius:10px;background:#f7faf7;border:1px solid #d9e8dc;padding:12px}
+.toolbox-item-head{display:flex;gap:8px;justify-content:space-between}
+.toolbox-item-head strong{color:#2c6047}
+.toolbox-kind{font-size:11px;font-weight:800;background:#e2f2e7;color:#26734a;padding:4px 9px;border-radius:99px}
+.toolbox-item p{font-size:13px;color:#506555;margin:7px 0}
+.toolbox-item p.toolbox-example{font:15px/1.55 "Times New Roman",serif;color:#294a34}
+.teacher-bilan{background:#eaf5ee!important;color:#206e4b!important;border-color:#add5bb!important}
+.teacher-bilan:disabled{opacity:.45}
 </style>
 </head>
 <body>
@@ -108,6 +144,7 @@
 <div class="test-actions">
 <button id="start" type="submit">🎙 Commencer l’essai</button>
 <button class="end" id="stop" type="button" disabled>Terminer</button>
+<button class="end teacher-bilan" id="teacher-bilan" type="button" disabled>✨ Faire le point</button>
 </div>
 </form>
 <div class="test-status" role="status" aria-live="polite">
@@ -130,11 +167,39 @@
 <p><strong>Difficulté lexicale :</strong> « Je n’arrive pas à trouver le mot. » Écho doit offrir une aide brève, puis vous redonner la parole.</p>
 <p><strong>Retour réflexif :</strong> avant de terminer, dites « Écho, faisons un petit bilan ». Écho doit commencer par votre propre appréciation, puis proposer un retour concret sans note.</p>
 </details>
+<section class="teacher-feature" aria-labelledby="transcript-title">
+<h2 id="transcript-title">Transcription de l’échange</h2>
+<p>Transcription en direct de tes paroles et de celles d’Écho. Cliquer pour consulter le texte, puis le copier ou le sauvegarder.</p>
+<button class="feature-button" id="transcript-toggle" type="button" aria-expanded="false" aria-controls="transcript-content">Afficher la transcription</button>
+<div class="feature-body transcript-content" id="transcript-content" hidden>
+<div class="transcript-lines" id="transcript-lines" role="log" aria-live="off"></div>
+<div class="transcript-actions">
+<button type="button" id="transcript-copy" disabled>Copier</button>
+<button type="button" id="transcript-download" disabled>Télécharger (.txt)</button>
+</div>
+<p class="transcript-notice" id="transcript-note">Transcription indicative : la reconnaissance vocale peut comporter des erreurs.</p>
+</div>
+</section>
+<section class="teacher-feature toolbox-panel" id="toolbox-panel" aria-labelledby="toolbox-title">
+<h2 id="toolbox-title">Ma boîte à outils</h2>
+<p class="toolbox-status" id="toolbox-status">Dis « Écho, on fait le point ? » pour obtenir un bilan oral et ta boîte à outils.</p>
+<div class="toolbox-content" id="toolbox-content" hidden>
+<h3 class="toolbox-subhead">Notre sujet</h3><p class="toolbox-theme" id="toolbox-theme"></p>
+<h3 class="toolbox-subhead">Ce que j’ai réussi à exprimer</h3><p class="toolbox-text" id="toolbox-strength"></p>
+<h3 class="toolbox-subhead">Lexique et expressions à réemployer</h3><ul class="toolbox-items" id="toolbox-items"></ul>
+<h3 class="toolbox-subhead">Pour une prochaine conversation</h3><p class="toolbox-text" id="toolbox-strategy"></p>
+<div class="toolbox-buttons"><button id="toolbox-copy" type="button" disabled>Copier</button><button id="toolbox-download" type="button" disabled>Télécharger (.txt)</button></div>
+<p>Ces propositions restent indicatives. Vérifier les expressions avant de les réemployer.</p>
+</div>
+</section>
 <p class="test-privacy"><strong>Protection :</strong> l’enregistrement ne reste pas sur cette page. Lors d’un essai réussi, le microphone transmet votre voix au service de modèle externe via WebRTC. Le modèle peut consommer des jetons gratuits pendant la session. Les instructions pédagogiques de ce test sont visibles dans le code du navigateur et ne constituent pas encore une configuration sécurisée pour les étudiants. Ne communiquez pas ce lien ni le code avant validation de la sécurité et des plafonds d’usage.</p>
 </main>
 <footer>© 《高级法语综合课》 · Écho · Test technique réservé à l’enseignante</footer>
 </div>
 <script src="../echo-pedagogy.js?v=20261113-1"></script>
+<script src="../echo-transcription.js?v=20261113-1"></script>
+<script src="../echo-toolbox.js?v=20261113-1"></script>
+<script src="../echo-pilot-features.js?v=20261113-2"></script>
 <script>
 (()=>{
 "use strict";
