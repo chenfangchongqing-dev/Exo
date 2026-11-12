@@ -57,7 +57,7 @@ Si le message n'est pas compris, dis ce qui manque de façon simple et invite l'
 
 Le test technique est connecté : `PO/conversation-ia/essai-enseignant/` charge `echo-pedagogy.js` et transmet les consignes en `session.update`, avec le mode choisi (libre ou guidé), le niveau de départ (B2, B2+, C1) et un éventuel sujet. Le service `echo-realtime` et son échange SDP n'ont pas été modifiés.
 
-Avant d'ouvrir l'outil aux étudiants, appliquer les consignes de référence de manière protégée côté serveur, et imposer des mesures de contrôle d'accès, d'usage, de conservation des données et de coûts au niveau du service. Une limite de 90 secondes côté navigateur n'est pas une protection suffisante contre les abus. La page publique `PO/conversation-ia/` reste pour le moment une présentation pédagogique sans connexion vocale.
+Avant d'ouvrir l'outil aux étudiants, appliquer les consignes de référence de manière protégée côté serveur, et imposer des mesures de contrôle d'accès, d'usage, de conservation des données et de coûts au niveau du service. Une limite de 3, 5 ou 10 minutes appliquée côté navigateur (5 minutes par défaut pour les essais enseignants) n'est pas une protection suffisante contre les abus. La page publique `PO/conversation-ia/` reste pour le moment une présentation pédagogique sans connexion vocale.
 
 ### Scénarios de vérification humaine
 
