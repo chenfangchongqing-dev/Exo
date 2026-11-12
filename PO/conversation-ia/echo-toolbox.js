@@ -58,15 +58,23 @@
    }
    function waiting(){state.textContent="Écho prépare les expressions à retenir…";}
    function setUnavailable(){if(!data)state.textContent="La boîte à outils n’a pas été produite pendant cet essai. Tu peux demander le bilan à voix haute, ou réessayer lors d’une autre conversation.";}
-   function receive(payload){
+   function normalize(input){
+     return String(input||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLocaleLowerCase("fr").replace(/[^a-z0-9]+/g," ").trim();
+   }
+   function receive(payload,studentTranscript=""){
+     const studentWords=" "+normalize(studentTranscript)+" ";
      const items=Array.isArray(payload?.items)?payload.items.slice(0,6):[];
-     const rows=items.map(item=>({
-       expression:safe(item?.expression,180),
-       role:safe(item?.role,330),
-       exemple:safe(item?.exemple,300),
-       categorie:["lexique","expression","structure"].includes(item?.categorie)?item.categorie:"expression",
-       origine:item?.origine==="deja_utilisee"?"deja_utilisee":"a_reemployer"
-     })).filter(item=>item.expression && item.exemple && item.role);
+     const rows=items.map(item=>{
+       const expression=safe(item?.expression,180);
+       const confirmed=!!expression && studentWords.includes(" "+normalize(expression)+" ");
+       return {
+         expression,
+         role:safe(item?.role,330),
+         exemple:safe(item?.exemple,300),
+         categorie:["lexique","expression","structure"].includes(item?.categorie)?item.categorie:"expression",
+         origine:confirmed && item?.origine==="deja_utilisee"?"deja_utilisee":"a_reemployer"
+       };
+     }).filter(item=>item.expression && item.exemple && item.role);
      if(!rows.length){setUnavailable();return false;}
      data={
        theme:safe(payload.theme,150),
