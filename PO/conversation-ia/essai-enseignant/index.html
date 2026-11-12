@@ -62,7 +62,7 @@
 </div>
 <p class="kicker">Conversation orale · Test pédagogique et WebRTC</p>
 <h1>Écho · Accompagnement métacognitif</h1>
-<p class="test-desc">Choisissez un mode et un niveau, puis essayez de parler naturellement avec Écho. Les consignes métacognitives sont transmises au modèle vocal au début de chaque séance. Durée maximale : 90 secondes.</p>
+<p class="test-desc">Choisissez un mode et un niveau, puis essayez de parler naturellement avec Écho. Les consignes métacognitives sont transmises au modèle vocal au début de chaque séance. Choisissez une durée de 3, 5 ou 10 minutes avant de commencer.</p>
 <div class="test-pedagogy">
 <h2>Ce qu’Écho doit faire</h2>
 <p>Écouter avant de guider, laisser l’apprenant développer son propos, proposer un étayage adapté lorsqu’une difficulté apparaît, et accompagner un bilan réflexif si l’apprenant le souhaite.</p>
@@ -85,6 +85,13 @@
 </select>
 </div>
 </div>
+<label class="test-label" for="duration">Durée de l’essai</label>
+<select class="test-input select-box" id="duration" aria-describedby="durationHelp">
+<option value="3">3 minutes · rapide</option>
+<option value="5" selected>5 minutes · conseillé</option>
+<option value="10">10 minutes · échange approfondi</option>
+</select>
+<p class="test-note" id="durationHelp">Le décompte commence lorsque vous cliquez sur « Commencer l’essai ». Le bouton « Terminer » reste disponible à tout moment. Cette limite est appliquée dans le navigateur, uniquement pour les essais enseignants.</p>
 <label class="test-label" for="topic">Sujet éventuel (facultatif)</label>
 <input class="test-input" id="topic" type="text" maxlength="200" list="suggested-topics" placeholder="Laisser vide pour discuter librement">
 <datalist id="suggested-topics">
@@ -106,7 +113,7 @@
 <div class="test-status" role="status" aria-live="polite">
 <span class="status-dot" id="dot"></span><span class="status-msg" id="state">Prêt pour un essai.</span>
 </div>
-<p id="timer">Temps maximum par essai : 01:30</p>
+<p id="timer">Temps maximum par essai : 05:00</p>
 <div class="audio-box">
 <label class="test-label" for="remoteAudio">Voix d’Écho</label>
 <audio id="remoteAudio" controls autoplay playsinline></audio>
@@ -131,11 +138,11 @@
 <script>
 (()=>{
 "use strict";
-const LIMIT_MS=90000;
+const ALLOWED_MINUTES=Object.freeze([3,5,10]);
 const FORM=document.getElementById("setup"),START=document.getElementById("start"),STOP=document.getElementById("stop");
 const STATE=document.getElementById("state"),DOT=document.getElementById("dot"),STEPS=document.getElementById("steps");
 const REMOTE=document.getElementById("remoteAudio"),TIMER=document.getElementById("timer");
-const ACCESS=document.getElementById("access"),ENDPOINT=document.getElementById("endpoint");
+const ACCESS=document.getElementById("access"),ENDPOINT=document.getElementById("endpoint"),DURATION=document.getElementById("duration");
 const MODE=document.getElementById("mode"),LEVEL=document.getElementById("level"),TOPIC=document.getElementById("topic"),MODE_HELP=document.getElementById("modeHelp");
 let current=null;
 MODE.addEventListener("change",()=>{
@@ -168,7 +175,8 @@ function end(s){
  if(current===s)current=null;
  START.disabled=false;STOP.disabled=true;
  ACCESS.value="";
- TIMER.textContent="Temps maximum par essai : 01:30";
+ DURATION.disabled=false;
+ TIMER.textContent="Temps maximum par essai : "+String(Number(DURATION.value)).padStart(2,"0")+":00";
 }
 function normalizeSdp(s){return String(s).trim().replace(/\r?\n/g,"\r\n")+"\r\n"}
 function waitForIce(s){
@@ -252,16 +260,19 @@ async function start(event){
   show("教学指令未加载。请刷新页面后重试。","error");return;
  }
  const selectedMode=MODE.value,selectedLevel=LEVEL.value,selectedTopic=TOPIC.value.trim();
+ const durationMinutes=Number(DURATION.value);
+ if(!ALLOWED_MINUTES.includes(durationMinutes)){show("请选择有效的测试时长。","error");return;}
+ const limitMs=durationMinutes*60*1000;
  const instructions=window.ECHO_PEDAGOGY.build({mode:selectedMode,level:selectedLevel,topic:selectedTopic});
- let s={pc:null,localStream:null,remoteStream:new MediaStream(),channels:new Set(),abort:new AbortController(),stopped:false,created:false,updateSent:false,modelReady:false,eventChannel:null,transceiver:null,deadline:null,interval:null,instructions:instructions};
- current=s;START.disabled=true;STOP.disabled=false;STEPS.replaceChildren();show("正在请求麦克风权限……","connecting");log("测试模式："+(selectedMode==="libre"?"自由交谈":"课程任务")+" · 起始难度："+selectedLevel);log("准备发送元认知教学指令 v"+window.ECHO_PEDAGOGY.version);
+ let s={pc:null,localStream:null,remoteStream:new MediaStream(),channels:new Set(),abort:new AbortController(),stopped:false,created:false,updateSent:false,modelReady:false,eventChannel:null,transceiver:null,deadline:null,interval:null,instructions:instructions,limitMs:limitMs,durationMinutes:durationMinutes};
+ current=s;START.disabled=true;STOP.disabled=false;DURATION.disabled=true;STEPS.replaceChildren();show("正在请求麦克风权限……","connecting");log("测试模式："+(selectedMode==="libre"?"自由交谈":"课程任务")+" · 起始难度："+selectedLevel+" · 时长："+durationMinutes+" 分钟");log("准备发送元认知教学指令 v"+window.ECHO_PEDAGOGY.version);
  s.started=Date.now();
  s.interval=setInterval(()=>{
    if(current!==s)return;
-   const remain=Math.max(0,LIMIT_MS-(Date.now()-s.started));
+   const remain=Math.max(0,s.limitMs-(Date.now()-s.started));
    TIMER.textContent="剩余时间："+String(Math.floor(remain/60000)).padStart(2,"0")+":"+String(Math.floor((remain%60000)/1000)).padStart(2,"0");
  },500);
- s.deadline=setTimeout(()=>{if(current===s){log("90 秒测试时间结束");end(s);show("测试结束，麦克风已关闭。");}},LIMIT_MS);
+ s.deadline=setTimeout(()=>{if(current===s){log(durationMinutes+" 分钟测试时间结束");end(s);show("测试结束，麦克风已关闭。");}},s.limitMs);
  try{
   s.pc=new RTCPeerConnection({iceServers:[]});
   s.transceiver=s.pc.addTransceiver("audio",{direction:"sendrecv"});
@@ -306,6 +317,10 @@ async function start(event){
   fail(errorText,s);
  }
 }
+DURATION.addEventListener("change",()=>{
+ if(current)return;
+ TIMER.textContent="Temps maximum par essai : "+String(Number(DURATION.value)).padStart(2,"0")+":00";
+});
 FORM.addEventListener("submit",start);
 STOP.addEventListener("click",()=>{if(current){log("教师手动结束通话");end(current);show("已结束，麦克风已关闭。");}});
 window.addEventListener("pagehide",()=>{if(current)end(current)});
