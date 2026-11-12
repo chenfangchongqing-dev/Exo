@@ -203,6 +203,7 @@ function setupQuiz(prefix){
 setupQuiz("speaker");setupQuiz("function");
 const audio=document.getElementById("piste28"),audioError=document.getElementById("audio-error");
 audio.addEventListener("error",()=>audioError.hidden=false);
+const audioSource=audio.querySelector("source");if(audioSource)audioSource.addEventListener("error",()=>audioError.hidden=false);
 audio.addEventListener("loadedmetadata",()=>audioError.hidden=true);
 const start=document.getElementById("start-rec"),stop=document.getElementById("stop-rec"),time=document.getElementById("timer"),recordError=document.getElementById("record-error");
 const preview=document.getElementById("audio-preview"),player=document.getElementById("preview-player"),down=document.getElementById("download"),importInput=document.getElementById("import-audio"),previewTitle=document.getElementById("preview-title");
