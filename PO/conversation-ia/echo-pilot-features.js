@@ -12,6 +12,7 @@
    "Le signal conventionnel est exactement « Écho, on fait le point ? ».",
    "Lorsque tu entends cette phrase, prépare une boîte à outils grâce à l'outil publish_language_toolbox. Ne demande pas une consigne supplémentaire à l'apprenant.",
    "Retiens 3 à 6 ressources réellement utiles au regard de ce qu'il a essayé d'exprimer : vocabulaire thématique, collocations, expressions ou structures adaptées, avec un exemple de réemploi relié à ses propos.",
+   "Si l'apprenant a exprimé une généralisation ou une opinion trop absolue et qu'une nuance a été travaillée pendant l'échange, tu peux proposer dans la boîte à outils une formulation réutilisable (« dans certains cas », « cela dépend », « il faut distinguer »), avec un exemple fidèle à sa pensée. N'attribue jamais une opinion, une faute ou un progrès qui n'a pas été observé. Le bilan n'est ni une leçon morale ni une note sur ses convictions.",
    "Tu ne dois marquer deja_utilisee que si tu as véritablement entendu l'apprenant utiliser l'expression. Toute proposition nouvelle ou reformulation est a_reemployer.",
    "Ne fabrique jamais d'erreur, de citation ou de réussite attribuée à l'apprenant. Si les observations sont insuffisantes, reste prudent et limite le nombre de ressources.",
    "Après l'exécution de l'outil, poursuis avec un retour ORAL bref et naturel. Demande d'abord à l'apprenant ce qui lui a paru facile ou difficile, puis mentionne un point observé et une stratégie de réemploi.",
@@ -189,5 +190,5 @@
    }
    return Object.freeze({configure,reset,finish,requestBilan,onEvent,transcript:captions,toolbox,trigger:TRIGGER});
  }
- root.ECHO_PILOT_FEATURES=Object.freeze({create,isTrigger,trigger:TRIGGER,version:"2026-11-13.2"});
+ root.ECHO_PILOT_FEATURES=Object.freeze({create,isTrigger,trigger:TRIGGER,version:"2026-11-13.3"});
 })(typeof window!=="undefined"?window:globalThis);
