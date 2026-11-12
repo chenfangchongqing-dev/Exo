@@ -44,6 +44,24 @@ Si le message n'est pas compris, dis ce qui manque de façon simple et invite l'
 - Parle normalement en français. Si l'apprenant demande une explication en chinois pour débloquer un point, donne-la brièvement puis reviens au français lorsqu'il est prêt.
 - Respecte le souhait de terminer la conversation, de changer de sujet ou de refuser une activité.
 
+## Sécurité des échanges — première couche active
+
+Les consignes communes de `echo-pedagogy.js` incluent désormais un **cadre de dialogue sûr** appliqué à la version élève et au banc d'essai enseignant. Il s'agit d'une stratégie d'intervention pédagogique du modèle, **pas d'un service d'audit en temps réel indépendant**.
+
+- Les sujets sensibles étudiés à l'université (violence conjugale, droit pénal, discrimination, histoire, conflits, institutions) restent accessibles lorsqu'ils sont abordés dans une perspective descriptive, documentaire, critique ou juridique.
+- Face aux insultes ou aux attaques visant des personnes ou des groupes, Écho invite à reformuler de manière respectueuse, sans humilier l'apprenant. Des provocations répétées peuvent conduire à proposer un changement de sujet ou une clôture, sans prétendre que le modèle commande le réseau.
+- Face aux demandes visant à causer un préjudice concret, Écho ne fournit pas de méthodes ni d'instructions pratiques et suggère, lorsque cela convient, un cadre préventif ou juridique.
+- Une détresse ou un risque suicidaire exprimé par l'apprenant appelle une réponse de soutien et une orientation vers une aide humaine appropriée, plutôt qu'une simple mise au silence.
+- Une transcription ASR isolée peut être inexacte ; éviter toute accusation ou sanction automatique fondée sur un mot ou une phrase sans contexte.
+
+### Limites et prochaine étape technique
+
+La fonction `echo-realtime` actuelle relaie **uniquement l'Offer/Answer SDP**. Une fois WebRTC établi, l'audio est transmis directement au service de modèle ; la fonction ne reçoit pas les paroles ni les segments audio. Les consignes du modèle peuvent orienter sa réponse, mais **elles ne garantissent ni l'interception d'une phrase avant son traitement par le modèle, ni le filtrage de l'audio de sortie**.
+
+Pour une modération indépendante, brancher une analyse de la **transcription confirmée** dans le flux de données, avec des décisions dépendant du contexte et un contrôle des faux positifs. Une analyse effectuée après la transcription peut interrompre la suite d'un échange, mais la phrase a déjà été transmise au modèle. L'interception *avant* traitement exigerait une architecture de média intermédiaire ou un pipeline ASR → modération → modèle → modération → voix. Les services de contrôle textuel multilingue (dont le français) et de modération audio d'Alibaba Cloud sont des pistes à valider selon le protocole et la région. Ne pas activer par supposition le service générique `X-DashScope-DataInspection` pour une session WebRTC : la documentation des garde-fous automatiques porte actuellement sur les modèles texte et image, pas sur la protection certifiée de ce flux audio.
+
+Avant un déploiement général : définir les niveaux de gravité, tester les cas de discours rapporté, de discussion légale, de menace, d'insulte et de détresse, puis documenter le consentement, l'absence d'enregistrement audio par défaut et les règles de durée de conservation pour tout journal de modération.
+
 ## Quelques situations à tester avant publication
 
 1. « Salut, je veux juste discuter, je n'ai pas de sujet. » → Salutation naturelle et une ouverture conversationnelle ; aucun choix de thème exigé.
