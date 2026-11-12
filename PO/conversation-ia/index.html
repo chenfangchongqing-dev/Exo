@@ -123,6 +123,19 @@
 .student-voice-form:target{outline:3px solid #80cda4;outline-offset:9px;border-radius:10px}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 @media(max-width:470px){.voice-actions{flex-direction:column}.voice-actions button{flex:auto!important;width:100%}}
+
+/* A compact help popover anchored next to Faire le point; no layout expansion. */
+.bilan-row{flex:1 1 100%;display:flex;align-items:center;justify-content:center;gap:10px;min-width:0;position:relative;z-index:5}
+.voice-actions .bilan-row .bilan-action{flex:1 1 auto!important;width:auto!important;min-width:0}
+.bilan-help{position:relative;display:block;flex:0 0 32px;overflow:visible;border:0;background:transparent;border-radius:0}
+.bilan-help summary{display:grid;place-items:center;width:32px;height:32px;border:1px solid #94c9ae!important;border-radius:50%;background:#fff;color:#27714c;cursor:pointer;list-style:none;padding:0!important;font:800 17px Arial,sans-serif}
+.bilan-help summary:before{content:none!important}
+.bilan-help summary::-webkit-details-marker{display:none}
+.bilan-help[open] summary{background:#e2f3e9;border:1px solid #6ab991!important}
+.bilan-help-pop{position:absolute;right:0;bottom:calc(100% + 10px);z-index:50;width:min(320px,calc(100vw - 40px));padding:14px 16px;background:#fff;border:1px solid #b3d9c1;border-radius:13px;box-shadow:0 15px 35px rgba(25,80,48,.17);color:#355b43;font-size:13px;line-height:1.65;text-align:left}
+.bilan-help-pop strong{color:#205c3e}
+.bilan-help-pop p{margin:8px 0 0!important;font-size:13px!important;line-height:1.6!important;color:#4a6654!important}
+.toolbox-status:empty{display:none}
 </style>
 </head>
 <body>
@@ -177,14 +190,20 @@
 <p id="preview-description">Aucun sujet n’est nécessaire. Écho pourra commencer à discuter avec toi, puis suivre le fil de tes idées.</p>
 <p class="detail-preview" id="preview-opening">« Salut ! Ça te dit de discuter un peu ? Comment s’est passée ta journée ? »</p>
 <form class="student-voice-form" id="student-setup" autocomplete="off">
-<p class="voice-helper">Aucune durée n’est imposée. Tu peux terminer la conversation quand tu le souhaites.</p>
-<label for="student-access">Code d’accès à l’essai</label>
-<input id="student-access" type="password" minlength="12" maxlength="128" autocomplete="off" required placeholder="Code communiqué par l’enseignante">
-<p class="voice-helper">Utilise le code d’essai Écho, différent du mot de passe des rubriques du site. Il n’est pas enregistré dans le navigateur.</p>
 <div class="voice-actions">
 <button id="student-start" type="submit" aria-label="Commencer à parler avec Écho">🎙 Parler avec Écho</button>
 <button id="student-stop" type="button" disabled>Terminer</button>
+<div class="bilan-row">
 <button id="student-bilan" class="bilan-action" type="button" disabled>✨ Faire le point</button>
+<details class="bilan-help">
+<summary aria-label="Comment faire le point ?" title="Comment faire le point ?">?</summary>
+<div class="bilan-help-pop" role="note">
+<strong>Faire le point</strong>
+<p>Dis simplement « Écho, on fait le point ? » ou clique sur le bouton. Écho t’aide à revenir sur ta conversation et prépare une <em>boîte à outils</em> avec des expressions à réemployer.</p>
+<p>Demande ce bilan <strong>avant</strong> de terminer l’appel.</p>
+</div>
+</details>
+</div>
 </div>
 <div class="voice-status" role="status" aria-live="polite">
 <span class="voice-light" id="student-dot"></span>
@@ -212,7 +231,7 @@
 </section>
 <section id="toolbox-panel" class="toolbox-panel" aria-labelledby="toolbox-title">
 <h4 id="toolbox-title">Ma boîte à outils · Les mots pour mieux dire</h4>
-<p class="toolbox-status" id="toolbox-status">Dis « Écho, on fait le point ? » pour obtenir un bilan oral et ta boîte à outils.</p>
+<p class="toolbox-status" id="toolbox-status"></p>
 <div id="toolbox-content" class="toolbox-content" hidden>
 <h5 class="toolbox-subhead">Notre sujet</h5>
 <p class="toolbox-theme" id="toolbox-theme"></p>
@@ -234,7 +253,7 @@
 <p>Qu’as-tu réussi à exprimer ? À quel moment as-tu hésité ? Que pourrais-tu essayer lors de ta prochaine conversation ?</p>
 <p>Tu peux garder ces questions pour toi, ou demander à Écho un bilan oral avant de terminer. Sa boîte à outils apparaît ci-dessus lorsqu’elle est disponible.</p>
 </div>
-<p class="test-phase">Version d’essai encadrée. Le code d’accès est nécessaire avant chaque conversation. Ce pilote reste accessible uniquement avec un code d’essai. Une gestion sécurisée des accès et des quotas est prévue avant l’ouverture à toute la classe.</p>
+<p class="test-phase">Version d’essai en accès libre. Les conversations sollicitent un modèle externe et peuvent entraîner des frais. Des quotas provisoires s’appliquent côté serveur, sans constituer un plafond global de facturation.</p>
 </div>
 </div>
 </section>
@@ -306,7 +325,7 @@
 <p class="qa">À quel moment ai-je hésité ?</p>
 <p class="qa">Qu’est-ce que je pourrais essayer la prochaine fois ?</p></div>
 </div>
-<p class="info-line"><strong>Version d’essai :</strong> cette page permet une véritable conversation vocale avec Écho, sous réserve de disposer d’un code d’accès. Ton microphone transmet la voix au service de modèle durant la séance ; aucune copie audio n’est enregistrée par cette page. Pour obtenir un bilan oral et la boîte à outils écrite, dis « Écho, on fait le point ? » avant de cliquer sur « Terminer ».</p>
+<p class="info-line"><strong>Version d’essai :</strong> cette page permet de converser avec Écho sans saisir de code. Le microphone transmet la voix au service de modèle durant la séance ; aucune copie audio n’est enregistrée par cette page. Le bilan oral et les expressions utiles peuvent être demandés avec « Écho, on fait le point ? » avant de cliquer sur « Terminer ».</p>
 </div>
 </section>
 <div class="crossnav"><a href="../">← Retour à Expression orale</a><a href="../discussion/">Découvrir Discussion orale ↗</a></div>
@@ -364,8 +383,8 @@ document.querySelectorAll("[data-open-topic]").forEach(function(button){
 </script>
 <script src="./echo-pedagogy.js?v=20261113-1"></script>
 <script src="./echo-transcription.js?v=20261113-2"></script>
-<script src="./echo-toolbox.js?v=20261113-2"></script>
+<script src="./echo-toolbox.js?v=20261113-3"></script>
 <script src="./echo-pilot-features.js?v=20261113-2"></script>
-<script src="./student-voice.js?v=20261113-5"></script>
+<script src="./student-voice.js?v=20261113-6"></script>
 </body>
 </html>
