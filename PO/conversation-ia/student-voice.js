@@ -11,6 +11,7 @@
   const codeField = document.getElementById("student-access");
   const startButton = document.getElementById("student-start");
   const stopButton = document.getElementById("student-stop");
+  const bilanButton = document.getElementById("student-bilan");
   const statusText = document.getElementById("student-status");
   const statusDot = document.getElementById("student-dot");
   const clock = document.getElementById("student-timer");
@@ -25,6 +26,7 @@
   }
 
   let active = null;
+  const features = window.ECHO_PILOT_FEATURES?.create() || null;
   function formatTime(ms) {
     const secs = Math.max(0,Math.ceil(ms/1000));
     return String(Math.floor(secs/60)).padStart(2,"0") + ":" + String(secs%60).padStart(2,"0");
@@ -55,6 +57,7 @@
     for (const el of inputControls) el.disabled = locked;
     startButton.disabled = locked;
     stopButton.disabled = !locked;
+    if(bilanButton)bilanButton.disabled=!locked||!active?.connected;
   }
   function shutdown(session) {
     if(!session || session.stopped) return;
@@ -67,6 +70,7 @@
     if(session.pc) try { session.pc.close(); } catch {}
     remoteAudio.pause();
     remoteAudio.srcObject = null;
+    features?.finish?.();
     codeField.value = "";
     if(active === session) active = null;
     lockOptions(false);
@@ -86,6 +90,7 @@
   }
   function onModelEvent(session,message,channel) {
     if(session.stopped) return;
+    const featureHandled=features?.onEvent?.(session,message) || false;
     switch(message.type) {
       case "session.created":
         session.modelCreated = true;
@@ -101,6 +106,7 @@
           await session.transceiver.sender.replaceTrack(track);
           if(session.stopped) return;
           session.connected = true;
+          if(bilanButton)bilanButton.disabled=false;
           status("Écho t’écoute. À toi de parler !","live");
         }).catch(()=>endWithError(session,"Le microphone n’a pas pu démarrer. Réessaie."));
         break;
@@ -111,7 +117,7 @@
         if(session.connected) status("Écho te répond…","live");
         break;
       case "response.done":
-        if(session.connected) status("À toi de continuer !","live");
+        if(session.connected&&!featureHandled) status("À toi de continuer !","live");
         break;
       case "error":
         endWithError(session,"Écho a rencontré un problème pendant l’échange. Tu peux réessayer.");
@@ -140,13 +146,16 @@
       session.pc.connectionState!=="connected" ||
       session.eventChannel?.readyState!=="open") return;
     try {
+      const cfg=features?.configure?.(session.instructions)||{instructions:session.instructions,tools:[]};
       session.eventChannel.send(JSON.stringify({
         event_id:"event_"+crypto.randomUUID(),
         type:"session.update",
         session:{
           modalities:["text","audio"],
           voice:"Tina",
-          instructions:session.instructions,
+          instructions:cfg.instructions,
+          input_audio_transcription:cfg.input_audio_transcription,
+          tools:cfg.tools,
           turn_detection:{type:"server_vad"}
         }
       }));
@@ -178,6 +187,7 @@
     e.preventDefault();
     if(active)return;
     reflection.hidden = true;
+    features?.reset?.();
     if(!window.RTCPeerConnection || !navigator.mediaDevices?.getUserMedia){
       status("Ce navigateur ne prend pas en charge la conversation vocale. Essaie Chrome ou Safari récent.","error");
       return;
@@ -247,6 +257,12 @@
     }
   }
   form.addEventListener("submit",start);
+  if(bilanButton)bilanButton.addEventListener("click",()=>{
+    if(!active||!active.connected)return;
+    const ok=features?.requestBilan?.(active);
+    if(ok)status("Écho prépare ton bilan oral et ta boîte à outils…","connecting");
+    else status("Dis « Écho, on fait le point ? » pour lancer le bilan.","live");
+  });
   stopButton.addEventListener("click",()=>{
     if(!active)return;
     const s=active,worked=s.connected;
