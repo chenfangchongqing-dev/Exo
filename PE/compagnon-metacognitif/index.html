@@ -135,6 +135,7 @@ h1{font-size:clamp(30px,4.8vw,48px);line-height:1.12;letter-spacing:-.035em;marg
 </dialog>
 <script src="./glm-config.js?v=glm20261107-adaptive"></script>
 <script src="./language-scaffold.js?v=s09-20261107-r1"></script>
+<script src="./ideation-scaffold.js?v=ideation-20261113-r1"></script>
 <script>
 (function(){
 "use strict";
@@ -160,7 +161,7 @@ function confused(s){return /je (ne )?sais pas|aucune idée|pas d'idée|je suis 
 function opinion(s){return /d'accord|pas d'accord|je pense|je crois|à mon avis|pour ma part|selon moi|je trouve|我觉得|我认为|我同意|我不同意|不赞同|赞同|我反对|不同意/i.test(s)}
 function isDraft(s){return s.length>190||((s.match(/[.!?。？！]/g)||[]).length>=3&&s.length>100)}
 function topicish(s){return /bonheur|heureux|heureuse|couple|l'argent|argent|réussir|il faut|on doit|幸福|快乐|恋爱|金钱|成功/i.test(s)&&s.length>6}
-function addTurn(role,text){var el=document.createElement("div");el.className="turn "+role;var who=document.createElement("span");who.className="who";who.textContent=role==="bot"?"Idée":"MOI";var bubble=document.createElement("div");bubble.className="bubble";bubble.textContent=text;el.appendChild(who);el.appendChild(bubble);chat.appendChild(el);chat.scrollTop=chat.scrollHeight;state.history.push({role:role,text:text})}
+function addTurn(role,text,sourceLabel){var el=document.createElement("div");el.className="turn "+role;var who=document.createElement("span");who.className="who";who.textContent=role==="bot"?(sourceLabel||"Idée"):"MOI";var bubble=document.createElement("div");bubble.className="bubble";bubble.textContent=text;el.appendChild(who);el.appendChild(bubble);chat.appendChild(el);chat.scrollTop=chat.scrollHeight;state.history.push({role:role,text:text})}
 function phaseIndex(){return Math.max(0,PHASES.indexOf(state.phase))}
 function renderStage(){
  var phase=phaseIndex();
@@ -175,6 +176,14 @@ function renderStage(){
 function addSuggestions(items){suggestions.textContent="";items.forEach(function(label){var b=document.createElement("button");b.className="chip";b.type="button";b.textContent=label;b.addEventListener("click",function(){sendText(label)});suggestions.appendChild(b)})}
 function suggested(){
  if(state.phase==="topic")return STARTERS;
+ if(state.meta&&state.meta.difficulty==="ideation"&&state.phase==="position"){
+  var m=state.meta,appearance=m.ideaTheme==="apparence",bonheur=m.ideaTheme==="bonheur",planete=m.ideaTheme==="planete";
+  if(state.lang==="zh")return ["我更赞同第一个思路","我更赞同第二个思路","能给我一个具体情境吗？"];
+  return appearance?["Les vêtements peuvent exprimer une personnalité.","On s'habille aussi selon le regard des autres.","Je voudrais un exemple concret."]:
+         bonheur?["Le bonheur vient parfois des relations.","Le bonheur peut venir d'une passion.","Je voudrais un exemple concret."]:
+         planete?["Nos habitudes comptent.","Les décisions collectives comptent aussi.","Je voudrais un exemple concret."]:
+         ["Je préfère la première piste.","Je préfère la deuxième piste.","Je voudrais un exemple concret."];
+ }
  if(state.phase==="position")return state.lang==="zh"?["我倾向于赞同","我倾向于反对","我还没想好"]:["Je suis plutôt d'accord.","Je ne suis pas d'accord.","Je ne sais pas encore."];
  if(state.phase==="reason")return state.lang==="zh"?["我想不出理由","我不知道法语怎么表达","先给我一个示范"]:["Je n'ai pas encore de raison.","Je cherche une expression.","Donne-moi une petite piste."];
  if(state.phase==="example")return state.lang==="zh"?["我想不出例子","你帮我想一个具体例子","可以开始写作文了"]:["Je n'arrive pas à trouver un exemple.","Donne-moi un exemple concret.","Passons à la rédaction."];
@@ -208,6 +217,17 @@ async function sendText(value){
  }
  var previous=state.history.slice(-12);
  addTurn("user",s);input.value="";
+ // Progressive course resource: the learner has explicitly asked for help finding an idea.
+ // This does not call or impersonate GLM; the next learner turn still uses the live model.
+ var ideaLocal=window.COMPAGNON_IDEATION_SUPPORT?window.COMPAGNON_IDEATION_SUPPORT(s,previous,state.meta):null;
+ if(ideaLocal){
+   state.phase=ideaLocal.phase||"position";
+   state.lang=ideaLocal.language||state.lang;
+   if(ideaLocal.topic)state.topic=ideaLocal.topic;
+   state.meta=Object.assign({},state.meta,ideaLocal.meta||{});
+   addTurn("bot",ideaLocal.reply,ideaLocal.source||"Pistes de réflexion · ressource du cours");
+   update();input.focus();return;
+ }
  // Teacher-regulated, clearly labeled fallback for the S09 mixed-language draft.
  // A learner's French attempt still goes to the live GLM backend.
  var local=window.COMPAGNON_S09_SUPPORT?window.COMPAGNON_S09_SUPPORT(s,previous,state.meta):null;
