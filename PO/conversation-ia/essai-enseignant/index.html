@@ -204,12 +204,13 @@
 (()=>{
 "use strict";
 const ALLOWED_MINUTES=Object.freeze([3,5,10]);
-const FORM=document.getElementById("setup"),START=document.getElementById("start"),STOP=document.getElementById("stop");
+const FORM=document.getElementById("setup"),START=document.getElementById("start"),STOP=document.getElementById("stop"),BILAN=document.getElementById("teacher-bilan");
 const STATE=document.getElementById("state"),DOT=document.getElementById("dot"),STEPS=document.getElementById("steps");
 const REMOTE=document.getElementById("remoteAudio"),TIMER=document.getElementById("timer");
 const ACCESS=document.getElementById("access"),ENDPOINT=document.getElementById("endpoint"),DURATION=document.getElementById("duration");
 const MODE=document.getElementById("mode"),LEVEL=document.getElementById("level"),TOPIC=document.getElementById("topic"),MODE_HELP=document.getElementById("modeHelp");
 let current=null;
+const FEATURES=window.ECHO_PILOT_FEATURES?.create({log:message=>log(message),onBilanContinue:()=>show("Écho prépare le bilan oral…","connecting")})||null;
 MODE.addEventListener("change",()=>{
  MODE_HELP.textContent=MODE.value==="libre"
   ?"En mode libre, aucun sujet n’est nécessaire. Écho peut engager la conversation et s’adapter à vos réponses."
@@ -237,8 +238,9 @@ function end(s){
  if(s.remoteStream)s.remoteStream.getTracks().forEach(t=>t.stop());
  if(s.pc)try{s.pc.close()}catch{}
  REMOTE.pause();REMOTE.srcObject=null;
+ FEATURES?.finish?.();
  if(current===s)current=null;
- START.disabled=false;STOP.disabled=true;
+ START.disabled=false;STOP.disabled=true;BILAN.disabled=true;
  ACCESS.value="";
  DURATION.disabled=false;
  TIMER.textContent="Temps maximum par essai : "+String(Number(DURATION.value)).padStart(2,"0")+":00";
@@ -268,14 +270,16 @@ function sendEvent(s,data){
 }
 function maybeInit(s){
  if(s.stopped||s.updateSent||!s.created||s.pc.connectionState!=="connected"||s.eventChannel?.readyState!=="open")return;
+ const cfg=FEATURES?.configure?.(s.instructions)||{instructions:s.instructions,tools:[]};
  s.updateSent=sendEvent(s,{
   event_id:"event_"+crypto.randomUUID(),type:"session.update",
-  session:{modalities:["text","audio"],voice:"Tina",instructions:s.instructions,turn_detection:{type:"server_vad"}}
+  session:{modalities:["text","audio"],voice:"Tina",instructions:cfg.instructions,input_audio_transcription:cfg.input_audio_transcription,tools:cfg.tools,turn_detection:{type:"server_vad"}}
  });
  if(s.updateSent){show("已连接，正在初始化法语语伴……","connecting");log("已发送 session.update（含元认知教学指令）");}
 }
 async function onEvent(s,msg,ch){
  if(s.stopped)return;
+ const featureHandled=FEATURES?.onEvent?.(s,msg)||false;
  if(msg.type==="session.created"){
   s.created=true;s.eventChannel=ch;log("模型会话已创建");maybeInit(s);
  }else if(msg.type==="session.updated"&&s.updateSent){
@@ -286,6 +290,7 @@ async function onEvent(s,msg,ch){
   await sender.replaceTrack(track);
   if(s.stopped)return;
   log("麦克风已连接，可用法语开始说话");
+  s.connected=true;BILAN.disabled=false;
   show("连接成功！现在可以直接用法语说话。","live");
  }else if(msg.type==="error"){
   const code=String(msg.error?.code||msg.error?.type||"unknown");
@@ -295,7 +300,7 @@ async function onEvent(s,msg,ch){
  }else if(msg.type==="response.created"){
   show("Écho 正在准备回答……","live");
  }else if(msg.type==="response.done"){
-  show("可以继续交流。","live");
+  if(!featureHandled)show("可以继续交流。","live");
  }
 }
 function bindChannel(s,ch){
@@ -329,8 +334,9 @@ async function start(event){
  if(!ALLOWED_MINUTES.includes(durationMinutes)){show("请选择有效的测试时长。","error");return;}
  const limitMs=durationMinutes*60*1000;
  const instructions=window.ECHO_PEDAGOGY.build({mode:selectedMode,level:selectedLevel,topic:selectedTopic});
+ FEATURES?.reset?.();
  let s={pc:null,localStream:null,remoteStream:new MediaStream(),channels:new Set(),abort:new AbortController(),stopped:false,created:false,updateSent:false,modelReady:false,eventChannel:null,transceiver:null,deadline:null,interval:null,instructions:instructions,limitMs:limitMs,durationMinutes:durationMinutes};
- current=s;START.disabled=true;STOP.disabled=false;DURATION.disabled=true;STEPS.replaceChildren();show("正在请求麦克风权限……","connecting");log("测试模式："+(selectedMode==="libre"?"自由交谈":"课程任务")+" · 起始难度："+selectedLevel+" · 时长："+durationMinutes+" 分钟");log("准备发送元认知教学指令 v"+window.ECHO_PEDAGOGY.version);
+ current=s;START.disabled=true;STOP.disabled=false;BILAN.disabled=true;DURATION.disabled=true;STEPS.replaceChildren();show("正在请求麦克风权限……","connecting");log("测试模式："+(selectedMode==="libre"?"自由交谈":"课程任务")+" · 起始难度："+selectedLevel+" · 时长："+durationMinutes+" 分钟");log("准备发送元认知教学指令 v"+window.ECHO_PEDAGOGY.version);
  s.started=Date.now();
  s.interval=setInterval(()=>{
    if(current!==s)return;
@@ -387,6 +393,11 @@ DURATION.addEventListener("change",()=>{
  TIMER.textContent="Temps maximum par essai : "+String(Number(DURATION.value)).padStart(2,"0")+":00";
 });
 FORM.addEventListener("submit",start);
+BILAN.addEventListener("click",()=>{
+ if(!current||!current.connected)return;
+ if(FEATURES?.requestBilan?.(current))show("Écho prépare le bilan et la boîte à outils…","connecting");
+ else show("Prononcez « Écho, on fait le point ? » pour demander le bilan.","live");
+});
 STOP.addEventListener("click",()=>{if(current){log("教师手动结束通话");end(current);show("已结束，麦克风已关闭。");}});
 window.addEventListener("pagehide",()=>{if(current)end(current)});
 })();
