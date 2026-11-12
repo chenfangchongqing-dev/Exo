@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="theme-color" content="#247c57">
+<title>Écho · Essai enseignant</title>
+<link rel="stylesheet" href="../../espaces.css">
+<style>
+.test-card{max-width:760px;margin:25px auto 0;background:#fff;border:1px solid #d5e7db;border-radius:19px;padding:25px;box-shadow:0 14px 40px rgba(25,65,40,.07)}
+.test-card h1{font-size:29px;margin:4px 0 12px}
+.test-card h2{font-size:19px;margin:0 0 10px}
+.test-card .echo-img{width:185px;max-width:85%;display:block;margin-bottom:8px}
+.test-top{display:flex;justify-content:space-between;gap:15px;align-items:center}
+.teacher-tag{font-size:12px;border-radius:20px;background:#eef7f0;color:#296f4b;padding:6px 11px;font-weight:800}
+.test-desc{font:17px/1.55 "Times New Roman",Georgia,serif;color:#496352;margin:0 0 23px}
+.test-label{display:block;color:#304f3d;font-weight:750;font-size:14px;margin:16px 0 7px}
+.test-input{display:block;width:100%;box-sizing:border-box;padding:12px;border:1px solid #bfd9c7;border-radius:11px;font:15px/1.4 Arial,sans-serif;background:#fff;color:#203a29}
+.test-input:focus-visible{outline:3px solid #8acbac;outline-offset:2px}
+.test-note{font-size:13px;color:#617869;margin:8px 0 0}
+.test-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+.test-actions button{border:1px solid #247c57;background:#247c57;color:#fff;font:800 16px Arial,sans-serif;padding:12px 19px;border-radius:11px;cursor:pointer}
+.test-actions button.end{background:#fff;color:#296848}
+.test-actions button:disabled{cursor:not-allowed;opacity:.45}
+.test-status{display:flex;align-items:center;gap:12px;background:#f1f8f3;border:1px solid #d2e6d8;padding:14px 17px;border-radius:12px;margin-top:18px;min-height:48px}
+.status-dot{width:12px;height:12px;flex:none;border-radius:50%;background:#a3b8aa}
+.status-dot.live{background:#16865a}
+.status-dot.error{background:#c66536}
+.status-dot.connecting{background:#ca9847}
+.status-msg{font-weight:700;color:#294a39;font-size:15px}
+.audio-box{margin:18px 0 0}
+.audio-box audio{width:100%;min-height:42px}
+.test-events{background:#f7faf8;border:1px solid #ddebe0;border-radius:13px;padding:14px 17px;margin-top:20px}
+.test-events h2{font-size:15px;margin:0 0 10px}
+.test-events ul{margin:0;padding-left:19px;color:#526a59;font:13px/1.65 Arial,sans-serif;max-height:130px;overflow:auto}
+.test-privacy{margin-top:18px;padding:13px 15px;border:1px solid #ecdfbf;border-radius:11px;background:#fdfaf0;color:#67573a;font-size:13px;line-height:1.65}
+.test-privacy strong{color:#664d23}
+#timer{font-variant-numeric:tabular-nums;color:#53665b;font-weight:800;font-size:13px;margin-top:12px}
+@media(max-width:530px){.test-card{padding:20px;margin-top:14px}.test-actions button{flex:1 1 100%}.test-card h1{font-size:25px}}
+</style>
+</head>
+<body>
+<div class="container">
+<nav class="topnav" aria-label="Navigation"><a href="../">← Conversation avec l’IA</a><a href="../../../">Accueil ↗</a></nav>
+<main class="test-card">
+<div class="test-top">
+<img class="echo-img" src="../../echo-logo.svg" alt="Écho." width="185" height="126">
+<span class="teacher-tag">Essai enseignant</span>
+</div>
+<p class="kicker">Connexion WebRTC · Test de fonctionnement</p>
+<h1>Premier dialogue avec Écho</h1>
+<p class="test-desc">Un court essai en français pour vérifier la connexion au modèle vocal. Ce test est limité à 90 secondes et ne figure pas dans les activités destinées aux étudiants.</p>
+<form id="setup" autocomplete="off">
+<label class="test-label" for="endpoint">Adresse HTTPS de la fonction</label>
+<input class="test-input" id="endpoint" inputmode="url" type="url" required value="https://echo-realtime-xzxxauvfwu.cn-beijing.fcapp.run" spellcheck="false">
+<p class="test-note">Adresse de la fonction <code>echo-realtime</code> (région Pékin). Modifiez-la uniquement si l’adresse indiquée dans votre console est différente.</p>
+<label class="test-label" for="access">Code d’essai Écho</label>
+<input class="test-input" id="access" type="password" required minlength="12" maxlength="128" placeholder="Code ECHO_ACCESS_CODE" autocomplete="off">
+<p class="test-note">Utilisez votre code de test, jamais la clé API de Bailian. Le code n’est pas conservé dans le navigateur.</p>
+<div class="test-actions">
+<button id="start" type="submit">🎙 Commencer l’essai</button>
+<button class="end" id="stop" type="button" disabled>Terminer</button>
+</div>
+</form>
+<div class="test-status" role="status" aria-live="polite">
+<span class="status-dot" id="dot"></span><span class="status-msg" id="state">Prêt pour un essai.</span>
+</div>
+<p id="timer">Temps maximum par essai : 01:30</p>
+<div class="audio-box">
+<label class="test-label" for="remoteAudio">Voix d’Écho</label>
+<audio id="remoteAudio" controls autoplay playsinline></audio>
+<p class="test-note">Si votre navigateur bloque la lecture automatique, appuyez sur Lecture dans le lecteur ci-dessus.</p>
+</div>
+<section class="test-events">
+<h2>Étapes de la connexion</h2>
+<ul id="steps"><li>En attente du début de l’essai</li></ul>
+</section>
+<p class="test-privacy"><strong>Protection :</strong> l’enregistrement ne reste pas sur cette page. Lors d’un essai réussi, le microphone transmet votre voix au service de modèle externe via WebRTC. Le modèle peut consommer des jetons gratuits pendant la session. Ne communiquez pas ce lien ni le code aux étudiants avant validation de la sécurité et des plafonds d’usage.</p>
+</main>
+<footer>© 《高级法语综合课》 · Écho · Test technique réservé à l’enseignante</footer>
+</div>
+<script>
+(()=>{
+"use strict";
+const LIMIT_MS=90000;
+const FORM=document.getElementById("setup"),START=document.getElementById("start"),STOP=document.getElementById("stop");
+const STATE=document.getElementById("state"),DOT=document.getElementById("dot"),STEPS=document.getElementById("steps");
+const REMOTE=document.getElementById("remoteAudio"),TIMER=document.getElementById("timer");
+const ACCESS=document.getElementById("access"),ENDPOINT=document.getElementById("endpoint");
+let current=null;
+const INSTRUCTIONS="Tu es Écho, un partenaire de conversation francophone pour des apprenants de niveau B2, B2+ ou C1. Pour ce premier essai, parle uniquement en français et engage une conversation naturelle. Écoute l'apprenant, réponds à ce qu'il dit, pose une seule question à la fois. Ne corrige pas chaque erreur. Si la personne manque d'idées, suggère un sujet simple. Privilégie des tours de parole assez courts, et n'impose pas d'exercice scolaire.";
+function show(text,kind=""){STATE.textContent=text;DOT.className="status-dot "+kind}
+function log(text){
+ const li=document.createElement("li");li.textContent=text;
+ if(STEPS.children.length===1&&STEPS.firstElementChild.textContent==="En attente du début de l’essai")STEPS.replaceChildren();
+ STEPS.append(li);while(STEPS.children.length>10)STEPS.firstChild.remove();
+ STEPS.scrollTop=STEPS.scrollHeight;
+}
+function fail(message,s){
+ if(current!==s)return;
+ log(message);end(s);show(message,"error");
+}
+function end(s){
+ if(!s||s.stopped)return;
+ s.stopped=true;
+ s.abort.abort();
+ if(s.interval)clearInterval(s.interval);
+ if(s.deadline)clearTimeout(s.deadline);
+ for(const ch of s.channels){try{ch.close()}catch{}}
+ if(s.localStream)s.localStream.getTracks().forEach(t=>t.stop());
+ if(s.remoteStream)s.remoteStream.getTracks().forEach(t=>t.stop());
+ if(s.pc)try{s.pc.close()}catch{}
+ REMOTE.pause();REMOTE.srcObject=null;
+ if(current===s)current=null;
+ START.disabled=false;STOP.disabled=true;
+ ACCESS.value="";
+ TIMER.textContent="Temps maximum par essai : 01:30";
+}
+function normalizeSdp(s){return String(s).trim().replace(/\r?\n/g,"\r\n")+"\r\n"}
+function waitForIce(s){
+ return new Promise((resolve,reject)=>{
+  if(s.pc.iceGatheringState==="complete"){resolve();return}
+  let finished=false;
+  const timeout=setTimeout(()=>done(new Error("ICE 收集超时，请重新尝试")),20000);
+  const onIce=()=>{if(s.pc.iceGatheringState==="complete")done()};
+  const onAbort=()=>done(new Error("会话已结束"));
+  function done(error){
+   if(finished)return;finished=true;clearTimeout(timeout);
+   s.pc.removeEventListener("icegatheringstatechange",onIce);
+   s.abort.signal.removeEventListener("abort",onAbort);
+   if(error)reject(error);else resolve();
+  }
+  s.pc.addEventListener("icegatheringstatechange",onIce);
+  s.abort.signal.addEventListener("abort",onAbort,{once:true});
+  onIce();
+ });
+}
+function sendEvent(s,data){
+ if(s.stopped||!s.eventChannel||s.eventChannel.readyState!=="open")return false;
+ s.eventChannel.send(JSON.stringify(data));return true;
+}
+function maybeInit(s){
+ if(s.stopped||s.updateSent||!s.created||s.pc.connectionState!=="connected"||s.eventChannel?.readyState!=="open")return;
+ s.updateSent=sendEvent(s,{
+  event_id:"event_"+crypto.randomUUID(),type:"session.update",
+  session:{modalities:["text","audio"],voice:"Tina",instructions:INSTRUCTIONS,turn_detection:{type:"server_vad"}}
+ });
+ if(s.updateSent){show("已连接，正在初始化法语语伴……","connecting");log("已发送 session.update");}
+}
+async function onEvent(s,msg,ch){
+ if(s.stopped)return;
+ if(msg.type==="session.created"){
+  s.created=true;s.eventChannel=ch;log("模型会话已创建");maybeInit(s);
+ }else if(msg.type==="session.updated"&&s.updateSent){
+  if(s.modelReady)return;s.modelReady=true;log("模型确认语言设置成功");
+  const sender=s.transceiver.sender;
+  const track=s.localStream?.getAudioTracks()[0];
+  if(!track)throw new Error("麦克风轨道不可用");
+  await sender.replaceTrack(track);
+  if(s.stopped)return;
+  log("麦克风已连接，可用法语开始说话");
+  show("连接成功！现在可以直接用法语说话。","live");
+ }else if(msg.type==="error"){
+  const code=String(msg.error?.code||msg.error?.type||"unknown");
+  fail("模型返回错误："+code,s);
+ }else if(msg.type==="input_audio_buffer.speech_started"){
+  show("Écho 正在倾听……","live");
+ }else if(msg.type==="response.created"){
+  show("Écho 正在准备回答……","live");
+ }else if(msg.type==="response.done"){
+  show("可以继续交流。","live");
+ }
+}
+function bindChannel(s,ch){
+ s.channels.add(ch);
+ ch.onopen=()=>{log("数据通道已打开");maybeInit(s)};
+ ch.onmessage=event=>{
+  let data;try{data=JSON.parse(event.data)}catch{return}
+  Promise.resolve(onEvent(s,data,ch)).catch(e=>fail("数据通道处理失败："+e.message,s));
+ };
+ ch.onclose=()=>{s.channels.delete(ch);if(s.eventChannel===ch&&!s.stopped)fail("模型数据通道已关闭",s)};
+ ch.onerror=()=>log("数据通道发生错误");
+ if(ch.readyState==="open")ch.onopen();
+}
+async function start(event){
+ event.preventDefault();
+ if(current)return;
+ if(!window.RTCPeerConnection||!navigator.mediaDevices?.getUserMedia){
+  show("此浏览器不支持所需的麦克风或 WebRTC 功能。","error");return;
+ }
+ const base=ENDPOINT.value.trim().replace(/\/+$/,"");
+ if(!/^https:\/\/[a-z0-9-]+\.cn-beijing\.fcapp\.run$/i.test(base)){
+  show("请填写北京地域的阿里云 FC HTTPS 公网域名。","error");return;
+ }
+ const code=ACCESS.value.trim();
+ if(code.length<12){show("请输入正确的教师测试访问码。","error");return}
+ let s={pc:null,localStream:null,remoteStream:new MediaStream(),channels:new Set(),abort:new AbortController(),stopped:false,created:false,updateSent:false,modelReady:false,eventChannel:null,transceiver:null,deadline:null,interval:null};
+ current=s;START.disabled=true;STOP.disabled=false;STEPS.replaceChildren();show("正在请求麦克风权限……","connecting");log("开始连接测试");
+ s.started=Date.now();
+ s.interval=setInterval(()=>{
+   if(current!==s)return;
+   const remain=Math.max(0,LIMIT_MS-(Date.now()-s.started));
+   TIMER.textContent="剩余时间："+String(Math.floor(remain/60000)).padStart(2,"0")+":"+String(Math.floor((remain%60000)/1000)).padStart(2,"0");
+ },500);
+ s.deadline=setTimeout(()=>{if(current===s){log("90 秒测试时间结束");end(s);show("测试结束，麦克风已关闭。");}},LIMIT_MS);
+ try{
+  s.pc=new RTCPeerConnection({iceServers:[]});
+  s.transceiver=s.pc.addTransceiver("audio",{direction:"sendrecv"});
+  s.pc.ondatachannel=e=>bindChannel(s,e.channel);
+  s.pc.ontrack=e=>{
+   if(s.stopped||e.track.kind!=="audio")return;
+   s.remoteStream.addTrack(e.track);REMOTE.srcObject=s.remoteStream;
+   REMOTE.play().catch(()=>log("请手动点击下方音频播放器的播放按钮"));
+  };
+  s.pc.onconnectionstatechange=()=>{
+   if(s.stopped)return;
+   log("WebRTC："+s.pc.connectionState);
+   if(s.pc.connectionState==="connected")maybeInit(s);
+   if(["failed","disconnected","closed"].includes(s.pc.connectionState))fail("WebRTC 连接已断开",s);
+  };
+  bindChannel(s,s.pc.createDataChannel("oai-events"));
+  s.localStream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true},video:false});
+  if(s.stopped)return;
+  log("已允许使用麦克风（尚未开始发送）");
+  show("正在连接百炼实时模型……","connecting");
+  const offer=await s.pc.createOffer();
+  await s.pc.setLocalDescription(offer);
+  await waitForIce(s);
+  if(s.stopped)return;
+  log("SDP 已准备好，发送至 echo-realtime 云函数");
+  const response=await fetch(base+"/api/realtime/sdp",{
+   method:"POST",headers:{"Content-Type":"application/sdp","X-Echo-Access-Code":code},
+   body:s.pc.localDescription.sdp,signal:s.abort.signal,cache:"no-store"
+  });
+  if(!response.ok){
+   let detail="HTTP "+response.status;
+   try{const data=await response.json();detail+=" · "+(data.error||"请求失败")+(data.upstream_status?" ("+data.upstream_status+")":"")}catch{}
+   throw new Error("SDP 交换失败："+detail);
+  }
+  const answer=normalizeSdp(await response.text());
+  if(s.stopped)return;
+  await s.pc.setRemoteDescription({type:"answer",sdp:answer});
+  log("收到百炼 Answer SDP，等待 WebRTC 与模型初始化");
+ }catch(error){
+  if(s.stopped)return;
+  const errorText=error?.name==="NotAllowedError"?"未获得麦克风权限":String(error?.message||error);
+  fail(errorText,s);
+ }
+}
+FORM.addEventListener("submit",start);
+STOP.addEventListener("click",()=>{if(current){log("教师手动结束通话");end(current);show("已结束，麦克风已关闭。");}});
+window.addEventListener("pagehide",()=>{if(current)end(current)});
+})();
+</script>
+</body>
+</html>
