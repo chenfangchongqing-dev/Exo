@@ -56,8 +56,38 @@ a:focus-visible{outline-color:#475569}
 .hero:after{z-index:0}
 .hero>.overline,.hero>h1,.hero>.intro{position:relative;z-index:1}
 .hero>.intro{max-width:700px}
+
+/* Two independent oral-interaction spaces; existing course activities remain unchanged. */
+.exchange-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.exchange-card{display:flex;flex-direction:column;gap:9px;text-decoration:none;color:#1a3430;background:linear-gradient(140deg,#ecf9f1,#fff);border:1px solid #bcdccc;border-radius:19px;padding:27px 26px;min-height:205px;box-shadow:var(--shadow);transition:border-color .2s,transform .2s,box-shadow .2s}
+.exchange-card:hover{border-color:#63b28a;transform:translateY(-2px);box-shadow:0 17px 31px #1e594017}
+.exchange-card:focus-visible{outline:3px solid #32855b;outline-offset:3px}
+.exchange-card .exchange-top{display:flex;align-items:center;gap:12px;font-weight:800;color:#286f4d;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.exchange-card .exchange-symbol{width:36px;height:36px;border-radius:11px;background:#d8f1e2;display:grid;place-items:center;font-size:20px;line-height:1;flex:none;letter-spacing:0}
+.exchange-card h3{font-size:25px;letter-spacing:-.025em;line-height:1.2;margin:7px 0 0}
+.exchange-card .tagline{color:#346c52;font:18px/1.4 "Times New Roman",Georgia,serif;margin:0}
+.exchange-card .description{font-size:14px;line-height:1.6;color:#52685b;margin:5px 0 6px}
+.exchange-card .action{margin-top:auto;color:#217851;font-size:14px;font-weight:800}
+.exchange-card.ai{background:linear-gradient(140deg,#f0f4f9,#fff);border-color:#ccd7e4}
+.exchange-card.ai .exchange-top,.exchange-card.ai .action{color:#375675}
+.exchange-card.ai .exchange-symbol{background:#e0eaf4}
+.exchange-card.ai .tagline{color:#4b647a}
+.exchange-card.ai:hover{border-color:#8ba4c0}
+@media(max-width:690px){.exchange-grid{grid-template-columns:1fr}.exchange-card{min-height:0;padding:23px 22px}}
 </style></head><body><div class="wrap"><header class="top"><a class="logo" href="../index.html">Accueil <span aria-hidden="true" style="color:#475569">↗</span></a></header>
 <section class="hero"><div class="overline">Expression orale · PO</div><h1>Expression orale.</h1><p class="intro">S’entraîner à prendre la parole, exprimer son point de vue et échanger dans des situations variées.</p></section>
+<section class="section" aria-labelledby="spaces-title">
+<div class="section-head"><h2 id="spaces-title">Échanger et progresser</h2><p>Deux espaces complémentaires · En préparation</p></div>
+<div class="exchange-grid">
+<a class="exchange-card" href="./discussion/"><div class="exchange-top"><span class="exchange-symbol" aria-hidden="true">♫</span><span>ÉCHANGER ENTRE ÉTUDIANTS</span></div>
+<h3>Discussion orale</h3><p class="tagline">Écouter, s’exprimer et réagir</p>
+<p class="description">Des discussions par thème : déposer un message vocal, écouter les autres et leur répondre. Les premiers sujets de l’unité 2 sont prêts.</p>
+<span class="action">Découvrir l’espace →</span></a>
+<a class="exchange-card ai" href="./conversation-ia/"><div class="exchange-top"><span class="exchange-symbol" aria-hidden="true">◉</span><span>S’ENTRAÎNER AVEC L’IA</span></div>
+<h3>Conversation avec l’IA</h3><p class="tagline">S’exprimer, interagir et progresser</p>
+<p class="description">Un parcours de conversation en français : préparer son objectif, répondre aux relances et faire le point sur sa manière de communiquer.</p>
+<span class="action">Découvrir le parcours →</span></a>
+</div></section>
 <section class="section"><div class="section-head"><h2>Mes productions orales</h2><p>S'entraîner · s'enregistrer · progresser</p></div><div class="grid po-grid"><a class="card primary" href="./productions/"><div class="mark">NOUVEAU · PO</div><div class="eyebrow">Par unité et par leçon</div><h3>Mes productions orales</h3><p>Réviser les outils de langue, préparer sa prise de parole et s'enregistrer.</p><div class="action">Accéder aux activités →</div></a><a class="card" href="./productions/U1-L2/"><div class="eyebrow">Unité 1 · Leçon 2</div><h3>Décrire et interpréter un tableau</h3><p>De l'observation à l'interprétation : L'Absinthe, Edgar Degas.</p><div class="action">Commencer l'activité →</div></a><a class="card u2" href="./productions/U2-L7-changer/"><div class="eyebrow">Unité 2 · Leçon 7 · Doc. 4</div><h3>Comprendre un récit</h3><p>Édouard Louis, <i>Changer : Méthode</i> · Éléments implicites et échange autour des vêtements.</p><div class="action">Lire et échanger →</div></a></div></section>
 <section class="section"><div class="section-head"><h2>Travail à la maison</h2><p>Écouter · observer · prendre la parole</p></div><div class="grid po-grid"><a class="card u2" href="./productions/U2-L8-discussion/"><div class="eyebrow">Unité 2 · Leçon 8 · Piste 028</div><h3>Participer à une discussion</h3><p>Écoutez quatre extraits, repérez les expressions utiles pour échanger, puis préparez une intervention sur l’uniforme à l’école.</p><div class="action">Écouter et s’entraîner →</div></a></div></section>
 <section class="section"><div class="section-head"><h2>Ateliers de communication</h2><p>Observer · comprendre · réagir</p></div><a class="card" href="./atelier-interculturel/"><div class="eyebrow">Atelier vidéo · 5 situations</div><h3>Malentendus du quotidien</h3><p>Compliment, fatigue, invitation, cadeau et brocante.</p><div class="action">Voir les vidéos →</div></a></section>
