@@ -138,9 +138,6 @@
 <label class="test-label" for="endpoint">Adresse HTTPS de la fonction</label>
 <input class="test-input" id="endpoint" inputmode="url" type="url" required value="https://echo-realtime-xzxxauvfwu.cn-beijing.fcapp.run" spellcheck="false">
 <p class="test-note">Adresse de la fonction <code>echo-realtime</code> (région Pékin). Modifiez-la uniquement si l’adresse indiquée dans votre console est différente.</p>
-<label class="test-label" for="access">Code d’essai Écho</label>
-<input class="test-input" id="access" type="password" required minlength="12" maxlength="128" placeholder="Code ECHO_ACCESS_CODE" autocomplete="off">
-<p class="test-note">Utilisez votre code de test, jamais la clé API de Bailian. Le code n’est pas conservé dans le navigateur.</p>
 <div class="test-actions">
 <button id="start" type="submit">🎙 Commencer l’essai</button>
 <button class="end" id="stop" type="button" disabled>Terminer</button>
@@ -192,7 +189,7 @@
 <p>Ces propositions restent indicatives. Vérifier les expressions avant de les réemployer.</p>
 </div>
 </section>
-<p class="test-privacy"><strong>Protection :</strong> l’enregistrement ne reste pas sur cette page. Lors d’un essai réussi, le microphone transmet votre voix au service de modèle externe via WebRTC. Le modèle peut consommer des jetons gratuits pendant la session. Les instructions pédagogiques de ce test sont visibles dans le code du navigateur et ne constituent pas encore une configuration sécurisée pour les étudiants. Ne communiquez pas ce lien ni le code avant validation de la sécurité et des plafonds d’usage.</p>
+<p class="test-privacy"><strong>Essai technique :</strong> cette page ne demande plus de code de connexion. Le microphone transmet la voix au service de modèle via WebRTC pendant une séance. La version anonyme du relais FC doit être déployée pour que le dialogue fonctionne. Les quotas d’essai par instance restent limités et ne remplacent pas un plafond global de facturation ; conservez un accès restreint aux testeurs avant une ouverture générale.</p>
 </main>
 <footer>© 《高级法语综合课》 · Écho · Test technique réservé à l’enseignante</footer>
 </div>
@@ -207,7 +204,7 @@ const ALLOWED_MINUTES=Object.freeze([3,5,10]);
 const FORM=document.getElementById("setup"),START=document.getElementById("start"),STOP=document.getElementById("stop"),BILAN=document.getElementById("teacher-bilan");
 const STATE=document.getElementById("state"),DOT=document.getElementById("dot"),STEPS=document.getElementById("steps");
 const REMOTE=document.getElementById("remoteAudio"),TIMER=document.getElementById("timer");
-const ACCESS=document.getElementById("access"),ENDPOINT=document.getElementById("endpoint"),DURATION=document.getElementById("duration");
+const ENDPOINT=document.getElementById("endpoint"),DURATION=document.getElementById("duration");
 const MODE=document.getElementById("mode"),LEVEL=document.getElementById("level"),TOPIC=document.getElementById("topic"),MODE_HELP=document.getElementById("modeHelp");
 let current=null;
 const FEATURES=window.ECHO_PILOT_FEATURES?.create({log:message=>log(message),onBilanContinue:()=>show("Écho prépare le bilan oral…","connecting")})||null;
@@ -241,7 +238,6 @@ function end(s){
  FEATURES?.finish?.();
  if(current===s)current=null;
  START.disabled=false;STOP.disabled=true;BILAN.disabled=true;
- ACCESS.value="";
  DURATION.disabled=false;
  TIMER.textContent="Temps maximum par essai : "+String(Number(DURATION.value)).padStart(2,"0")+":00";
 }
@@ -324,8 +320,6 @@ async function start(event){
  if(!/^https:\/\/[a-z0-9-]+\.cn-beijing\.fcapp\.run$/i.test(base)){
   show("请填写北京地域的阿里云 FC HTTPS 公网域名。","error");return;
  }
- const code=ACCESS.value.trim();
- if(code.length<12){show("请输入正确的教师测试访问码。","error");return}
  if(!window.ECHO_PEDAGOGY||typeof window.ECHO_PEDAGOGY.build!=="function"){
   show("教学指令未加载。请刷新页面后重试。","error");return;
  }
@@ -370,7 +364,7 @@ async function start(event){
   if(s.stopped)return;
   log("SDP 已准备好，发送至 echo-realtime 云函数");
   const response=await fetch(base+"/api/realtime/sdp",{
-   method:"POST",headers:{"Content-Type":"application/sdp","X-Echo-Access-Code":code},
+   method:"POST",headers:{"Content-Type":"application/sdp"},
    body:s.pc.localDescription.sdp,signal:s.abort.signal,cache:"no-store"
   });
   if(!response.ok){
