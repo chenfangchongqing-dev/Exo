@@ -70,6 +70,29 @@
 .topic-action button:hover{border-color:#5cae7f;background:#e6f5eb}
 #student-reflection[hidden]{display:none}
 /* Transcription accessible à la demande pendant l'oral et après l'appel. */
+
+/* Post-conversation personalised language resources. */
+.voice-actions .bilan-action{flex:1 1 100%;background:#f0faf3;border:1px solid #8cc6a5;color:#246d4d}
+.voice-actions .bilan-action:hover{background:#e4f5e9}
+.toolbox-panel{margin-top:16px;border:1px solid #c3dfce;border-radius:13px;background:#fff;padding:16px}
+.toolbox-panel h4{color:#255b40;font-size:17px;line-height:1.4;margin:0 0 8px}
+.toolbox-panel .toolbox-status{font-size:13px;line-height:1.6;color:#576b5d;margin:5px 0}
+.toolbox-content{margin-top:13px;padding-top:12px;border-top:1px solid #e2eee6}
+.toolbox-content[hidden]{display:none}
+.toolbox-theme{font:19px/1.45 "Times New Roman",Georgia,serif;color:#235539;margin:2px 0 13px}
+.toolbox-subhead{font-size:14px;font-weight:800;color:#29684a;margin:13px 0 6px}
+.toolbox-text{font-size:14px;color:#455e4d;line-height:1.65;margin:5px 0}
+.toolbox-items{padding:0;margin:12px 0;list-style:none;display:grid;gap:9px}
+.toolbox-item{background:#f7faf7;border:1px solid #d8e9dc;border-radius:11px;padding:12px 13px}
+.toolbox-item-head{display:flex;gap:8px;justify-content:space-between;align-items:start;flex-wrap:wrap}
+.toolbox-item-head strong{font:800 16px/1.4 Arial,sans-serif;color:#1e6043}
+.toolbox-kind{font-size:11px;padding:3px 8px;border-radius:30px;color:#286c4b;background:#e5f3e8;font-weight:800;white-space:nowrap}
+.toolbox-item p{margin:6px 0;font-size:13px;color:#52685b;line-height:1.55}
+.toolbox-item p.toolbox-example{font:15px/1.5 "Times New Roman",Georgia,serif;color:#2a4634;margin-top:9px}
+.toolbox-buttons{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.toolbox-buttons button{background:#eaf7ef;border:1px solid #badac6;color:#276a4b;border-radius:9px;padding:9px 12px;font:800 13px Arial,sans-serif;cursor:pointer}
+.toolbox-buttons button:disabled{opacity:.5;cursor:default}
+@media(max-width:470px){.toolbox-buttons button{flex:1 1 100%}}
 .transcript-panel{margin-top:16px;padding:14px 16px;border:1px solid #cfe3d6;border-radius:13px;background:#fff}
 .transcript-head{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}
 .transcript-head h4{font-size:16px;color:#285b42;margin:0}
@@ -161,6 +184,7 @@
 <div class="voice-actions">
 <button id="student-start" type="submit" aria-label="Commencer à parler avec Écho">🎙 Parler avec Écho</button>
 <button id="student-stop" type="button" disabled>Terminer</button>
+<button id="student-bilan" class="bilan-action" type="button" disabled>✨ Faire le point · Ma boîte à outils</button>
 </div>
 <div class="voice-status" role="status" aria-live="polite">
 <span class="voice-light" id="student-dot"></span>
@@ -186,10 +210,29 @@
 <p class="transcript-notice">Le texte reste dans cette page pendant la séance. Il n’est pas sauvegardé automatiquement ; télécharge-le si tu souhaites le garder.</p>
 </div>
 </section>
+<section id="toolbox-panel" class="toolbox-panel" aria-labelledby="toolbox-title">
+<h4 id="toolbox-title">Ma boîte à outils · Les mots pour mieux dire</h4>
+<p class="toolbox-status" id="toolbox-status">Demande « Faisons un bilan » à Écho pour recevoir une boîte à outils liée à ton échange.</p>
+<div id="toolbox-content" class="toolbox-content" hidden>
+<h5 class="toolbox-subhead">Notre sujet</h5>
+<p class="toolbox-theme" id="toolbox-theme"></p>
+<h5 class="toolbox-subhead">Ce que j’ai réussi à exprimer</h5>
+<p class="toolbox-text" id="toolbox-strength"></p>
+<h5 class="toolbox-subhead">Lexique et expressions à réemployer</h5>
+<ul id="toolbox-items" class="toolbox-items"></ul>
+<h5 class="toolbox-subhead">Pour ma prochaine conversation</h5>
+<p class="toolbox-text" id="toolbox-strategy"></p>
+<div class="toolbox-buttons">
+<button type="button" id="toolbox-copy" disabled>Copier ma boîte à outils</button>
+<button type="button" id="toolbox-download" disabled>Télécharger (.txt)</button>
+</div>
+<p class="transcript-notice">Les expressions sont proposées à partir de l’échange et peuvent comporter des approximations. Vérifie-les avant de les réutiliser.</p>
+</div>
+</section>
 <div id="student-reflection" class="student-reflection" hidden>
 <h4>Et maintenant, un petit bilan ?</h4>
 <p>Qu’as-tu réussi à exprimer ? À quel moment as-tu hésité ? Que pourrais-tu essayer lors de ta prochaine conversation ?</p>
-<p>Tu peux garder ces questions pour toi, ou relancer une conversation pour en parler à Écho.</p>
+<p>Tu peux garder ces questions pour toi, ou demander à Écho un bilan oral avant de terminer. Sa boîte à outils apparaît ci-dessus lorsqu’elle est disponible.</p>
 </div>
 <p class="test-phase">Version d’essai encadrée. Le code d’accès est nécessaire avant chaque conversation. Ce pilote reste accessible uniquement avec un code d’essai. Une gestion sécurisée des accès et des quotas est prévue avant l’ouverture à toute la classe.</p>
 </div>
@@ -321,6 +364,7 @@ document.querySelectorAll("[data-open-topic]").forEach(function(button){
 </script>
 <script src="./echo-pedagogy.js?v=20261113-1"></script>
 <script src="./echo-transcription.js?v=20261113-1"></script>
-<script src="./student-voice.js?v=20261113-2"></script>
+<script src="./echo-toolbox.js?v=20261113-1"></script>
+<script src="./student-voice.js?v=20261113-3"></script>
 </body>
 </html>
