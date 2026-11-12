@@ -45,6 +45,21 @@ h1{font-size:clamp(30px,4.8vw,48px);line-height:1.12;letter-spacing:-.035em;marg
 .access-box button{background:#333029;color:#fff;border:0;border-radius:10px;padding:11px 14px;min-height:43px;font-weight:750}
 .access-box .access-status{color:#746a5a;font-size:12px;margin:5px 0 0}
 @media(max-width:590px){.access-box{display:block}.access-box input{width:100%;margin-bottom:7px}}
+
+/* Access code appears only when the learner first sends a message. */
+.access-dialog{max-width:min(420px,calc(100vw - 32px));width:100%;border:1px solid #e6d4ad;border-radius:17px;background:#fffdf7;box-shadow:0 22px 65px rgba(34,24,11,.2);padding:0;color:var(--ink)}
+.access-dialog::backdrop{background:rgba(33,34,30,.44)}
+.access-dialog-form{padding:24px;display:flex;flex-direction:column;gap:11px}
+.access-dialog-form h2{margin:0;font-size:22px}
+.access-dialog-form p{margin:0;color:#6c604d;font-size:14px}
+.access-dialog-form label{font-size:14px;font-weight:750;color:#654b22}
+.access-dialog-form input{font:inherit;border:1px solid #d5bf8d;border-radius:10px;min-height:43px;padding:10px 12px;width:100%;background:#fff}
+.access-dialog-form input:focus-visible{outline:3px solid #bb8626;outline-offset:2px}
+.access-dialog-form .access-dialog-error{min-height:17px;color:#ae3d35;font-size:12px}
+.access-dialog-actions{display:flex;justify-content:end;gap:9px}
+.access-dialog-actions button{font:inherit;font-weight:700;border-radius:9px;border:1px solid #dec99a;padding:10px 15px;background:#fff;cursor:pointer}
+.access-dialog-actions button[type="submit"]{background:#73521d;border-color:#73521d;color:#fff}
+
 </style>
 </head>
 <body>
@@ -57,11 +72,6 @@ h1{font-size:clamp(30px,4.8vw,48px);line-height:1.12;letter-spacing:-.035em;marg
 <p class="intro">Tu peux préparer, réviser ou améliorer un texte, seul puis avec les retours de ton enseignante. Idée t’aide à trouver des pistes et des expressions adaptées, sans écrire à ta place.</p>
 <div class="labels"><span>01 · Je précise mon besoin</span><span>02 · Je choisis une stratégie</span><span>03 · J’essaie</span><span>04 · J’évalue</span></div>
 </section>
-<div class="notice" id="modeNotice"><span aria-hidden="true">ⓘ</span><div><strong>Initialisation de l’accompagnement…</strong> Le site vérifie la configuration du serveur pédagogique. Si ce message persiste, recharge cette page sans cache.</div></div>
-<div class="access-box" id="accessPanel" hidden>
-<div><label for="classCode">Code d'accès · 课堂访问码</label><input id="classCode" type="password" autocomplete="off" maxlength="128" placeholder="Code remis par l'enseignante"><p class="access-status" id="accessHint" role="status">Le code est demandé pour la version connectée à GLM.</p></div>
-<button id="applyCode" type="button">Activer l'accès</button>
-</div>
 <div class="layout">
 <section class="panel chat-panel" aria-labelledby="chatTitle">
 <div class="panel-head"><h2 id="chatTitle">Un dialogue adapté à mon travail</h2><small>ACCOMPAGNEMENT GUIDÉ</small></div>
@@ -123,8 +133,6 @@ var GLM_TEST_ENDPOINT="https://inspireompagnon-orzowiydrh.cn-hangzhou.fcapp.run/
 var GLM_ENDPOINT=(typeof window.INSPIRE4_GLM_ENDPOINT==="string"&&/^https:\/\//.test(window.INSPIRE4_GLM_ENDPOINT))?window.INSPIRE4_GLM_ENDPOINT.trim():GLM_TEST_ENDPOINT;
 var CLASS_CODE="";
 if(GLM_ENDPOINT){
- document.getElementById("accessPanel").hidden=false;
- document.getElementById("modeNotice").innerHTML='<span aria-hidden="true">ⓘ</span><div><strong>Mode GLM configuré · Accès enseignant / classe.</strong> Les messages sont transmis à un modèle externe via un serveur sécurisé lorsque le code de classe est validé. La connexion doit être testée avant toute utilisation en cours.</div>';
  document.getElementById("privacyNote").innerHTML="<strong>Confidentialité :</strong> en mode GLM, tes messages et quelques réponses précédentes sont transmis au serveur pédagogique et à l'API GLM pour produire la réponse. N'entre aucune donnée personnelle sensible. Le dialogue n'est pas enregistré par ce site ; tu peux l'exporter.";
 }
 var STARTERS=["Je veux réviser mon brouillon avant le retour de l’enseignante.","J’ai reçu les remarques de mon enseignante : je voudrais réviser.","Je cherche une expression juste, éventuellement de niveau B2.","Je voudrais commencer un texte."];
@@ -182,9 +190,8 @@ if(state.phase==="review"){if(/reprendre|recommencer|nouveau|重新|重来|换�
 async function sendText(value){
  var s=(value||"").trim();if(!s)return;
  if(GLM_ENDPOINT&&!CLASS_CODE){
-   var hint=document.getElementById("accessHint");
-   hint.textContent="Saisis d'abord le code d'accès fourni par l'enseignante.";
-   document.getElementById("classCode").focus();return;
+   // Keep the access challenge out of the page layout; ask only when the first message is sent.
+   openAccessDialog();return;
  }
  var previous=state.history.slice(-12);
  addTurn("user",s);input.value="";
@@ -220,18 +227,43 @@ async function sendText(value){
 function restart(){state={phase:"topic",lang:"fr",topic:"",stance:"",reason:"",example:"",interpretation:"",hint:0,history:[],meta:{}};chat.textContent="";respond("Bonjour ! Que souhaites-tu travailler aujourd’hui ? Tu peux me présenter la consigne, une idée ou un passage déjà rédigé, ou expliquer ce qui te pose problème. Nous partirons de ce que tu as déjà fait.");}
 form.addEventListener("submit",function(e){e.preventDefault();sendText(input.value)});
 input.addEventListener("keydown",function(e){if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();form.requestSubmit()}});
-document.getElementById("applyCode").addEventListener("click",function(){
- var value=document.getElementById("classCode").value.trim();
- if(value.length<12){document.getElementById("accessHint").textContent="Code trop court. Demande le code à l'enseignante.";return;}
+var accessDialog=document.getElementById("accessDialog");
+var accessInput=document.getElementById("accessDialogCode");
+var accessError=document.getElementById("accessDialogError");
+function openAccessDialog(){
+ accessError.textContent="";
+ accessInput.value="";
+ if(typeof accessDialog.showModal==="function"){accessDialog.showModal();accessInput.focus();}
+ else {accessError.textContent="Le navigateur ne prend pas en charge cette fenêtre. Réessaie dans un navigateur à jour.";}
+}
+document.getElementById("accessDialogForm").addEventListener("submit",function(e){
+ e.preventDefault();
+ var value=accessInput.value.trim();
+ if(value.length<12){accessError.textContent="Code trop court. Demande le code à l'enseignante.";return;}
  CLASS_CODE=value;
- document.getElementById("classCode").value="";
- document.getElementById("accessHint").textContent="Code saisi pour cette session. L'accès sera vérifié lors du prochain message.";
- input.focus();
+ accessInput.value="";
+ accessDialog.close();
+ sendText(input.value);
 });
+document.getElementById("accessCancel").addEventListener("click",function(){accessInput.value="";accessDialog.close();input.focus();});
 document.getElementById("restart").addEventListener("click",function(){if(window.confirm("Recommencer le dialogue ? Le dialogue précédent ne sera pas conservé."))restart()});
 document.getElementById("export").addEventListener("click",function(){if(!state.history.length)return;var content=state.history.map(function(x){return(x.role==="bot"?"Idée":"MOI")+":\n"+x.text}).join("\n\n");var blob=new Blob([content],{type:"text/plain;charset=utf-8"});var url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="inspire4-compagnon-metacognitif-dialogue.txt";document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url)},1000)});
 restart();
 })();
 </script>
+
+<dialog id="accessDialog" class="access-dialog" aria-labelledby="accessDialogTitle">
+<form id="accessDialogForm" class="access-dialog-form">
+<h2 id="accessDialogTitle">Code d’accès</h2>
+<p>Entre le code de classe pour envoyer ton message à Idée.</p>
+<label for="accessDialogCode">Code de classe</label>
+<input type="password" id="accessDialogCode" autocomplete="off" maxlength="128" required>
+<p id="accessDialogError" role="alert" class="access-dialog-error"></p>
+<div class="access-dialog-actions">
+<button id="accessCancel" type="button">Annuler</button>
+<button type="submit">Continuer</button>
+</div>
+</form>
+</dialog>
 </body>
 </html>
