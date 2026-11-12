@@ -38,6 +38,38 @@
 @media(max-width:800px){.entry-panel{grid-template-columns:1fr}}
 @media(max-width:450px){.mode-buttons{grid-template-columns:1fr}}
 
+
+/* Élève · interface de conversation vocale, distincte du banc d'essai enseignant. */
+.ready-panel{align-self:start}
+.ready-panel .detail-preview{margin:11px 0 10px}
+.student-voice-form{padding-top:13px;border-top:1px solid #cfe3d7;margin-top:17px}
+.student-voice-form label{display:block;font-size:13px;font-weight:800;color:#355e48;margin:13px 0 5px}
+.student-voice-form input,.student-voice-form select{width:100%;box-sizing:border-box;background:#fff;border:1px solid #b9d8c6;color:#1e422f;border-radius:10px;font:15px/1.45 Arial,sans-serif;padding:10px 12px;min-height:45px}
+.student-voice-form input:focus-visible,.student-voice-form select:focus-visible{outline:3px solid #7abf9a;outline-offset:2px}
+.student-voice-form .voice-helper{margin:4px 0 2px;font-size:12px;line-height:1.5;color:#61786a}
+.voice-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:19px}
+.voice-actions button{font:800 15px Arial,sans-serif;border-radius:12px;padding:12px 16px;min-height:48px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}
+.voice-actions button:first-child{flex:1 1 180px;border:1px solid #227852;color:#fff;background:#247c57}
+.voice-actions button:last-child{flex:0 1 auto;border:1px solid #a9d6bd;color:#276e4c;background:#fff}
+.voice-actions button:disabled{opacity:.48;cursor:default}
+.voice-status{display:flex;align-items:center;gap:10px;padding:12px 13px;border:1px solid #cadece;background:#fff;border-radius:11px;margin-top:15px;color:#284936;font-size:14px;font-weight:750;line-height:1.45;min-height:52px}
+.voice-light{width:11px;height:11px;flex:0 0 11px;border-radius:50%;background:#9aafa1}
+.voice-light.connecting{background:#d29843}
+.voice-light.live{background:#188a58;box-shadow:0 0 0 5px rgba(34,153,94,.13)}
+.voice-light.error{background:#cc6f47}
+.voice-timer{font-size:13px;margin:8px 0 0!important;font-variant-numeric:tabular-nums;color:#526e5a;font-weight:750}
+.student-audio{display:block;width:100%;height:38px;margin-top:9px}
+.audio-caption{font-size:12px;color:#647b6b;margin:6px 0 0}
+.student-reflection{margin-top:18px;border-top:1px solid #cfdfd4;padding-top:14px}
+.student-reflection h4{font-size:16px;color:#296a4c;margin:0 0 5px}
+.student-reflection p{margin:8px 0;font-size:14px}
+.test-phase{font-size:13px;line-height:1.55;color:#677b6d;margin-top:15px;padding-top:13px;border-top:1px solid #d9e9de}
+.student-voice-note{margin-top:16px;padding:14px 17px;border-radius:12px;background:#f8fbf9;border:1px solid #dae9de;font-size:13px;line-height:1.65;color:#4d6858}
+.topic-action{margin-top:18px;padding-top:12px;border-top:1px solid #e4eee7}
+.topic-action button{border:1px solid #b5dcc6;background:#f1faf4;color:#246d4b;cursor:pointer;padding:10px 13px;font:800 14px Arial,sans-serif;border-radius:10px}
+.topic-action button:hover{border-color:#5cae7f;background:#e6f5eb}
+#student-reflection[hidden]{display:none}
+@media(max-width:470px){.voice-actions{flex-direction:column}.voice-actions button{flex:auto!important;width:100%}}
 </style>
 </head>
 <body>
@@ -50,14 +82,14 @@
 <h1>Conversation avec l’IA</h1>
 <p class="lead">S’exprimer, interagir et progresser.</p>
 <div class="chips"><span>Conversation libre</span><span>Pratique par unité</span><span>B2 · B2+ · C1</span></div>
-<p class="meta-line">Espace en préparation · La conversation vocale n’est pas encore activée.</p>
+<p class="meta-line">Accès d’essai sur invitation · Conversation vocale active pour les tests encadrés.</p>
 </header>
 
 <section class="section" aria-labelledby="choisir">
 <div class="section-head"><h2 id="choisir">Comment veux-tu parler aujourd’hui ?</h2><p>Tu peux commencer sans sujet précis</p></div>
 <div class="paper entry-panel">
 <div>
-<p class="desc">Choisis simplement ce qui te convient. Tu pourras changer d’idée pendant l’échange.</p>
+<p class="desc">Choisis ce qui te convient. Tu peux commencer sans idée précise et changer de sujet pendant l’échange.</p>
 <div class="mode-buttons" role="group" aria-label="Type de conversation">
 <button type="button" class="mode-option" data-mode="libre" aria-pressed="true"><strong>Conversation libre</strong><small>Discuter, raconter, découvrir un sujet… sans consigne.</small></button>
 <button type="button" class="mode-option" data-mode="guidee" aria-pressed="false"><strong>Conversation guidée</strong><small>Travailler un thème, une tâche ou une difficulté précise.</small></button>
@@ -84,12 +116,39 @@
 <button class="level-button" type="button" data-level="C1" aria-pressed="false">C1</button>
 </div>
 </div>
-<div class="ready-panel" aria-live="polite" aria-atomic="true">
+<div class="ready-panel" id="student-call">
 <p class="badge-lab">Ma prochaine conversation</p>
 <h3 id="preview-title">Conversation libre · B2</h3>
 <p id="preview-description">Aucun sujet n’est nécessaire. Écho pourra commencer à discuter avec toi, puis suivre le fil de tes idées.</p>
 <p class="detail-preview" id="preview-opening">« Salut ! Ça te dit de discuter un peu ? Comment s’est passée ta journée ? »</p>
-<p class="not-live">Préparation uniquement : la connexion au modèle vocal sera activée après configuration du service. Aucune donnée ni aucun enregistrement n’est envoyé depuis ce formulaire.</p>
+<form class="student-voice-form" id="student-setup" autocomplete="off">
+<label for="student-duration">Durée de la conversation</label>
+<select id="student-duration" aria-label="Durée de la conversation">
+<option value="3">3 minutes</option>
+<option value="5" selected>5 minutes · conseillé</option>
+<option value="10">10 minutes</option>
+</select>
+<label for="student-access">Code d’accès à l’essai</label>
+<input id="student-access" type="password" minlength="12" maxlength="128" autocomplete="off" required placeholder="Code communiqué par l’enseignante">
+<p class="voice-helper">Le code permet d’accéder à cette version d’essai. Il n’est pas enregistré dans le navigateur.</p>
+<div class="voice-actions">
+<button id="student-start" type="submit" aria-label="Commencer à parler avec Écho">🎙 Parler avec Écho</button>
+<button id="student-stop" type="button" disabled>Terminer</button>
+</div>
+<div class="voice-status" role="status" aria-live="polite">
+<span class="voice-light" id="student-dot"></span>
+<span id="student-status">Prêt à commencer. Tu peux parler dès que la connexion est établie.</span>
+</div>
+<p class="voice-timer" id="student-timer">Durée de l’essai : 05:00</p>
+<audio class="student-audio" id="student-audio" autoplay controls playsinline aria-label="Voix d’Écho"></audio>
+<p class="audio-caption">Si tu n’entends pas Écho, appuie sur Lecture. Utilise de préférence des écouteurs.</p>
+</form>
+<div id="student-reflection" class="student-reflection" hidden>
+<h4>Et maintenant, un petit bilan ?</h4>
+<p>Qu’as-tu réussi à exprimer ? À quel moment as-tu hésité ? Que pourrais-tu essayer lors de ta prochaine conversation ?</p>
+<p>Tu peux garder ces questions pour toi, ou relancer une conversation pour en parler à Écho.</p>
+</div>
+<p class="test-phase">Version d’essai encadrée. Le code d’accès est nécessaire avant chaque conversation. Les fonctionnalités et les limites d’usage pourront évoluer avant l’ouverture à toute la classe.</p>
 </div>
 </div>
 </section>
@@ -127,7 +186,7 @@
 <p>Peut-on juger une personne d’après ses vêtements ? Pourquoi ?</p>
 <p>Essayez d’utiliser : <em>à mon avis</em>, <em>cela dépend</em>, <em>par exemple</em>.</p>
 </div></details>
-<div class="related"><a href="../productions/U2-L7-changer/">Revoir l’activité « Comprendre un récit » ↗</a></div>
+<div class="topic-action"><button type="button" data-open-topic="unite2-vetements">Parler de ce sujet avec Écho ↗</button></div><div class="related"><a href="../productions/U2-L7-changer/">Revoir l’activité « Comprendre un récit » ↗</a></div>
 </article>
 <article class="topic" id="uniforme">
 <span class="unit">Unité 2 · Leçon 8 · Parcours suivant</span>
@@ -141,16 +200,16 @@
 <p>Est-ce une règle juste pour tous les élèves ?</p>
 <p>Essayez d’utiliser : <em>certes…, mais…</em>, <em>en revanche</em>, <em>pourtant</em>.</p>
 </div></details>
-<div class="related"><a href="../productions/U2-L8-discussion/">Réviser les expressions de discussion ↗</a></div>
+<div class="topic-action"><button type="button" data-open-topic="unite2-uniforme">Parler de ce sujet avec Écho ↗</button></div><div class="related"><a href="../productions/U2-L8-discussion/">Réviser les expressions de discussion ↗</a></div>
 </article>
 </div>
 </section>
 
 <section class="section" aria-labelledby="principes">
-<div class="section-head"><h2 id="principes">Comment Écho accompagnera l’échange</h2><p>Conversation libre ou guidée · B2 à C1</p></div>
+<div class="section-head"><h2 id="principes">Comment Écho accompagne l’échange</h2><p>Conversation libre ou guidée · B2 à C1</p></div>
 <div class="paper">
-<p>Écho pourra discuter librement avec toi ou accompagner une tâche choisie. Il suivra les sujets que tu proposes, réagira à tes propos et adaptera progressivement son langage entre B2, B2+ et C1. Il ne transformera pas une simple conversation en exercice d’argumentation.</p>
-<p>Pendant l’échange, Écho laissera du temps pour chercher tes mots. Il pourra demander une précision, reformuler ou suggérer une expression si tu en as besoin, sans corriger chaque phrase. À la fin, un bilan facultatif t’aidera à identifier une difficulté et la stratégie qui t’a permis d’avancer.</p>
+<p>Écho discute librement avec toi ou accompagne une tâche choisie. Il suit les sujets que tu proposes, réagit à tes propos et adapte progressivement son langage entre B2, B2+ et C1. Une conversation libre reste une conversation, sans exercice imposé.</p>
+<p>Pendant l’échange, Écho te laisse du temps pour chercher tes mots. Il peut demander une précision, reformuler ou suggérer une expression si tu en as besoin, sans corriger chaque phrase. Si tu veux faire un bilan avec lui, demande-le <strong>avant</strong> de terminer la conversation.</p>
 <div class="cards" style="margin-top:18px">
 <div class="box-muted"><h3>Quelques relances possibles, selon l’échange</h3>
 <p class="qa"><strong>Pourquoi ?</strong></p>
@@ -161,7 +220,7 @@
 <p class="qa">À quel moment ai-je hésité ?</p>
 <p class="qa">Qu’est-ce que je pourrais essayer la prochaine fois ?</p></div>
 </div>
-<p class="info-line"><strong>État actuel :</strong> tu peux choisir le mode de conversation et le niveau souhaité. La connexion vocale à Écho et le bilan personnalisé seront activés après le raccordement au service sécurisé. Aucune conversation n’est pour l’instant enregistrée ni transmise à un modèle d’IA depuis cette page.</p>
+<p class="info-line"><strong>Version d’essai :</strong> cette page permet une véritable conversation vocale avec Écho, sous réserve de disposer d’un code d’accès. Ton microphone transmet la voix au service de modèle durant la séance ; aucune copie audio n’est enregistrée par cette page. Si tu souhaites un bilan oral personnalisé, demande-le à Écho avant de cliquer sur « Terminer ».</p>
 </div>
 </section>
 <div class="crossnav"><a href="../">← Retour à Expression orale</a><a href="../discussion/">Découvrir Discussion orale ↗</a></div>
@@ -203,7 +262,21 @@ freeTopic.addEventListener("input",render);
 courseTopic.addEventListener("change",render);
 otherTopic.addEventListener("input",render);
 render();
+document.querySelectorAll("[data-open-topic]").forEach(function(button){
+ button.addEventListener("click",function(){
+  if(button.disabled)return;
+  var b=document.querySelector('[data-mode="guidee"]');
+  if(b.disabled)return;
+  mode="guidee";
+  courseTopic.value=button.dataset.openTopic;
+  otherTopic.value="";
+  render();
+  document.getElementById("choisir").scrollIntoView({behavior:"smooth",block:"start"});
+ });
+});
 })();
 </script>
+<script src="./echo-pedagogy.js?v=20261113-1"></script>
+<script src="./student-voice.js?v=20261113-1"></script>
 </body>
 </html>
