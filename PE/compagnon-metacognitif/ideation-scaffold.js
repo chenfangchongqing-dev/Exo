@@ -10,7 +10,7 @@
     var s=norm(raw);
     if(/pas d'exemple|aucun exemple|找不到例子|没例子|想不出例子/.test(s))return false;
     if(/comment (le|la|l')? dire|comment (l')?écrire|word|vocabulaire|表达|词汇/.test(s))return false;
-    if(/\b(?:une |la |premi[eè]re )?piste\b|\b(?:des |une |d')?id[ée]es?\b|aucune id[ée]e|je (?:ne )?sais pas quoi (?:dire|[ée]crire)|je (?:ne )?sais pas par o[uù] commencer|je suis (?:compl[eè]tement )?bloqu[ée]|quel angle|comment commencer|我没(?:有)?思路|没(?:有)?想法|想不出|不知道写什么|给.*(?:思路|角度)|找不到思路/.test(s))return true;
+    if(/\b(?:une |des |premi[eè]re )?pistes?\b|je cherche (?:une |des )?id[ée]es?|je n'ai pas d'id[ée]es?|j'ai pas d'id[ée]es?|pas d'id[ée]es?|aucune id[ée]e|pas la moindre id[ée]e|je (?:ne )?sais pas quoi (?:dire|[ée]crire)|je (?:ne )?sais pas par o[uù] commencer|je suis (?:compl[eè]tement )?bloqu[ée]|quel angle|comment commencer|我没(?:有)?思路|没(?:有)?想法|想不出|不知道写什么|给.*(?:思路|角度)|找不到思路/.test(s))return true;
     if(meta&&meta.difficulty==="ideation"&&/^(?:je (?:ne )?sais pas|toujours pas|aucune|non|还是没有|我还是不知道|没想法|不知道|je voudrais un exemple|donne.moi un exemple)/.test(s))return true;
     return false;
   }
