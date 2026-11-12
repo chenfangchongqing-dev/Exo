@@ -83,6 +83,9 @@
    function getTranscript(){
      return entries.filter(e=>e.text.trim()).map(e=>(e.role==="student"?"Moi":"Écho")+" : "+e.text.trim()).join("\n\n");
    }
+   function getStudentTranscript(){
+     return entries.filter(e=>e.role==="student" && e.final && e.text.trim()).map(e=>e.text.trim()).join("\n");
+   }
    function onEvent(event){
      if(!event || typeof event.type!=="string")return;
      const type=event.type, key=event.item_id||event.response_id||"";
@@ -134,7 +137,7 @@
      setTimeout(()=>URL.revokeObjectURL(url),1000);
    });
    reset();
-   return Object.freeze({reset,onEvent,finish,getTranscript});
+   return Object.freeze({reset,onEvent,finish,getTranscript,getStudentTranscript});
  }
  root.ECHO_TRANSCRIPTION=Object.freeze({create,version:"2026-11-13.1"});
 })(typeof window!=="undefined"?window:globalThis);
