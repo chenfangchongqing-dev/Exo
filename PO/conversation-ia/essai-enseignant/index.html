@@ -469,7 +469,22 @@ async function start(event){
   });
   if(!response.ok){
    let detail="HTTP "+response.status;
-   try{const data=await response.json();detail+=" · "+(data.error||"请求失败")+(data.upstream_status?" ("+data.upstream_status+")":"")}catch{}
+   let reason="";
+   try{
+    const data=await response.json();
+    reason=String(data?.error||"");
+    detail+=" · "+(reason||"请求失败")+(data?.upstream_status?" (upstream HTTP "+data.upstream_status+")":"");
+   }catch{}
+   if(response.status===429){
+    const retryAfter=response.headers.get("Retry-After");
+    const seconds=Number(retryAfter);
+    const wait=retryAfter
+     ?" · Retry-After: "+retryAfter+" 秒"+(Number.isFinite(seconds)&&seconds>0?"（约 "+Math.ceil(seconds/60)+" 分钟）":"")
+     :" · 未提供 Retry-After";
+    const cause=reason==="guest_busy"?"当前准入请求较多":reason==="guest_quota_reached"?"测试连接次数已达到临时上限":"服务暂时限制连接";
+    detail="HTTP 429 · "+cause+" · error: "+(reason||"unknown")+wait;
+    log("限流诊断："+detail);
+   }
    throw new Error("SDP 交换失败："+detail);
   }
   const answer=normalizeSdp(await response.text());
