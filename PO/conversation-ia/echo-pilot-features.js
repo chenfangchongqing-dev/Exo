@@ -1,6 +1,7 @@
 /* Écho — shared features for the student pilot and teacher debugging page.
    WebRTC and the teacher's existing SDP relay stay unchanged.
    Controls and AI captions flow over the oai-events DataChannel.
+   Continuous ASR is disabled. The Faire le point button initiates the bilan directly.
    No extra transcript storage, external post-call model, or embedded API key.
 */
 (function(root){
@@ -28,7 +29,7 @@
  }
  function create(options){
    const opt=options||{};
-   const captions=null; // Continuous transcription disabled.
+   const captions=null; // Continuous ASR disabled; the model keeps its conversational context.
    const toolbox=root.ECHO_TOOLBOX?.create?.()||null;
    let pending=[];
    let handled=new Set();
@@ -142,13 +143,6 @@
      sessionRef=session;
      try{captions?.onEvent?.(message);}catch{}
      switch(message.type){
-       case "conversation.item.input_audio_transcription.completed":
-         if(isTrigger(message.transcript)&&!requested){
-           requested=true;
-           toolbox?.waiting?.();
-           log("Phrase « Écho, on fait le point ? » reconnue dans la parole");
-         }
-         return false;
        case "session.updated":
          if(awaitingUpdate){
            awaitingUpdate=false;
@@ -190,5 +184,5 @@
    }
    return Object.freeze({configure,reset,finish,requestBilan,onEvent,transcript:captions,toolbox,trigger:TRIGGER});
  }
- root.ECHO_PILOT_FEATURES=Object.freeze({create,isTrigger,trigger:TRIGGER,version:"2026-11-13.3"});
+ root.ECHO_PILOT_FEATURES=Object.freeze({create,isTrigger,trigger:TRIGGER,version:"2026-11-13.4"});
 })(typeof window!=="undefined"?window:globalThis);
