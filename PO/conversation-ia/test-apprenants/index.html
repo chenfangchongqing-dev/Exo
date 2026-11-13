@@ -82,14 +82,14 @@ dialog h2{font-size:17px;margin:0 0 6px}
 <header class="hero">
 <p class="kicker">Écho · Retour d’expérience · Tour 1</p>
 <h1>学习者体验清单</h1>
-<p class="lead">法语语言难度感知 · 与 Écho 交流的难易程度</p>
-<p class="intro">分别尝试一次自由聊天和指定话题聊天。体验过的项目就勾选；然后评价你实际感受到的语言难度和对话顺畅程度。这里没有正确答案，也不是法语能力测评。</p>
+<p class="lead">法语语言难度感知 · 互动难易程度 · Bilan 的帮助程度</p>
+<p class="intro">分别尝试一次自由聊天和指定话题聊天。体验过的项目就勾选；然后评价实际感受到的语言难度、对话顺畅程度，以及 Écho 提供的 Bilan 是否有帮助。这里没有正确答案，也不是法语能力测评。</p>
 <a class="echo-link" href="../">🎙 打开 Écho 对话页面 ↗</a>
 <label class="name">姓名或代号（选填）<input id="nickname" maxlength="60" autocomplete="off" placeholder="例如学号后四位"></label>
 </header>
 <section class="meter" aria-label="体验进度">
-<div class="meter-line"><strong>体验清单进度</strong><output id="progress-label" aria-live="polite">0 / 12</output></div>
-<progress id="progress" max="12" value="0" aria-label="已体验项目数"></progress>
+<div class="meter-line"><strong>体验清单进度</strong><output id="progress-label" aria-live="polite">0 / 13</output></div>
+<progress id="progress" max="13" value="0" aria-label="已体验项目数"></progress>
 <p class="hint">学习者的勾选表示“尝试过这项体验”；即使觉得难、没有成功，也可以勾选，真实感受请在下方选择。</p>
 </section>
 <details class="section" open>
@@ -134,6 +134,18 @@ dialog h2{font-size:17px;margin:0 0 6px}
 </div>
 </div>
 </details>
+<details class="section" open>
+<summary><span class="num">03</span><span class="section-label"><strong>Bilan · 对话反馈</strong><small>Écho 的对话总结对你是否有帮助？</small></span></summary>
+<div class="section-body">
+<p class="section-intro">完成对话后，查看 Écho 给出的 Bilan，看看它是否帮助你认识自己的口语表现，以及接下来可以改进的地方。</p>
+<label class="task"><input type="checkbox" data-task="bilan-1"><span><strong>查看 Écho 提供的 Bilan</strong><small>勾选仅表示已查看，不代表你认为它有用。</small></span></label>
+<div class="perception">
+<h3>我对 Bilan 的真实评价</h3>
+<fieldset class="rating"><legend>Écho 提供的 Bilan，对我来说……</legend><div class="choices" data-rating="bilan-useful"></div><p>请考虑反馈是否具体、容易理解，以及是否能帮助你改进口语表达；如果没有看到 Bilan，也可以如实选择。</p></fieldset>
+<label class="note-label">Bilan 中哪条建议最有帮助？或者你觉得它还缺少什么？（选填）<textarea data-field="bilan-note" maxlength="1000" rows="3" placeholder="可以用中文或法语简单描述。"></textarea></label>
+</div>
+</div>
+</details>
 <div class="actions">
 <button id="copy" type="button">复制体验记录</button>
 <button id="download" class="secondary" type="button">下载记录 .txt</button>
@@ -155,13 +167,14 @@ dialog h2{font-size:17px;margin:0 0 6px}
 const STORE="echo_learner_experience_20261113_round1_v1";
 const lang=[["easy","太简单"],["suitable","比较合适"],["hard","有些难"],["very-hard","很难"]];
 const talk=[["very-easy","很顺畅"],["mostly-easy","基本顺畅"],["hard","有点费劲"],["very-hard","难以继续"]];
-const ratings=["free-language","free-interaction","guided-language","guided-interaction"];
+const useful=[["very-useful","非常有帮助"],["somewhat-useful","有一些帮助"],["little-useful","帮助不大"],["not-useful","没有帮助"],["not-seen","没有看到 Bilan"]];
+const ratings=["free-language","free-interaction","guided-language","guided-interaction","bilan-useful"];
 const textIds=["nickname","free-level","guided-level","guided-topic"];
 const taskNodes=[...document.querySelectorAll("[data-task]")];
 const $=id=>document.getElementById(id);
 for(const key of ratings){
  const group=document.querySelector('[data-rating="'+key+'"]');
- const variants=key.endsWith("-language")?lang:talk;
+ const variants=key==="bilan-useful"?useful:(key.endsWith("-language")?lang:talk);
  for(const [value,label] of variants){
   const el=document.createElement("label");
   const input=document.createElement("input");input.type="radio";input.name=key;input.value=value;input.setAttribute("aria-label",label);
@@ -176,6 +189,7 @@ for(const mode of ["free","guided"]){
  const field=document.querySelector('[data-field="'+mode+'-note"]');
  if(typeof old[mode+"-note"]==="string")field.value=old[mode+"-note"];
 }
+if(typeof old["bilan-note"]==="string")document.querySelector('[data-field="bilan-note"]').value=old["bilan-note"];
 for(const key of ratings){
  const oldValue=old.ratings?.[key];
  if(oldValue){const option=[...document.querySelectorAll('input[name="'+key+'"]')].find(x=>x.value===oldValue);if(option)option.checked=true}
@@ -184,6 +198,7 @@ function read(){
  const data={checked:taskNodes.filter(x=>x.checked).map(x=>x.dataset.task),ratings:{}};
  for(const id of textIds)data[id]=$(id).value.trim();
  for(const mode of ["free","guided"])data[mode+"-note"]=document.querySelector('[data-field="'+mode+'-note"]').value.trim();
+ data["bilan-note"]=document.querySelector('[data-field="bilan-note"]').value.trim();
  for(const key of ratings)data.ratings[key]=document.querySelector('input[name="'+key+'"]:checked')?.value||"";
  return data;
 }
@@ -195,7 +210,7 @@ function showProgress(){
 function save(){try{localStorage.setItem(STORE,JSON.stringify(read()))}catch{}showProgress()}
 function val(key,value){
  if(!value)return"未选择";
- return (key.endsWith("-language")?lang:talk).find(x=>x[0]===value)?.[1]||"未选择";
+ return (key==="bilan-useful"?useful:(key.endsWith("-language")?lang:talk)).find(x=>x[0]===value)?.[1]||"未选择";
 }
 function report(){
  const d=read();
@@ -212,6 +227,11 @@ function report(){
   out.push("交流难易程度："+val(mode+"-interaction",d.ratings[mode+"-interaction"]));
   out.push("体验补充："+(d[mode+"-note"]||"无"),"");
  }
+ out.push("【Bilan · 对话反馈】");
+ const bilanItem=document.querySelector('[data-task="bilan-1"]');
+ out.push((bilanItem.checked?"☑":"☐")+" 查看 Écho 提供的 Bilan");
+ out.push("Bilan 帮助程度："+val("bilan-useful",d.ratings["bilan-useful"]));
+ out.push("Bilan 补充评价："+(d["bilan-note"]||"无"),"");
  out.push("尝试项目："+d.checked.length+" / "+taskNodes.length);
  return out.join("\n");
 }
