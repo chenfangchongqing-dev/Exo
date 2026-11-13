@@ -232,19 +232,6 @@
 <p><strong>Difficulté lexicale :</strong> « Je n’arrive pas à trouver le mot. » Écho doit offrir une aide brève, puis vous redonner la parole.</p>
 <p><strong>Retour réflexif :</strong> avant de terminer, dites « Écho, on fait le point ? ». Écho doit commencer par votre propre appréciation, puis proposer un retour concret sans note.</p>
 </details>
-<section class="teacher-feature" aria-labelledby="transcript-title">
-<h2 id="transcript-title">Transcription de l’échange</h2>
-<p>Transcription en direct de tes paroles et de celles d’Écho. Cliquer pour consulter le texte, puis le copier ou le sauvegarder.</p>
-<button class="feature-button" id="transcript-toggle" type="button" aria-expanded="false" aria-controls="transcript-content">Afficher la transcription</button>
-<div class="feature-body transcript-content" id="transcript-content" hidden>
-<div class="transcript-lines" id="transcript-lines" role="log" aria-live="off"></div>
-<div class="transcript-actions">
-<button type="button" id="transcript-copy" disabled>Copier</button>
-<button type="button" id="transcript-download" disabled>Télécharger (.txt)</button>
-</div>
-<p class="transcript-notice" id="transcript-note">Transcription indicative : la reconnaissance vocale peut comporter des erreurs.</p>
-</div>
-</section>
 <dialog id="teacher-toolbox-dialog" class="teacher-toolbox-dialog" aria-labelledby="toolbox-title">
 <section class="teacher-feature toolbox-panel" id="toolbox-panel" aria-labelledby="toolbox-title">
 <div class="toolbox-modal-heading">
@@ -268,9 +255,8 @@
 <footer>© 《高级法语综合课》 · Écho · Test technique réservé à l’enseignante</footer>
 </div>
 <script src="../echo-pedagogy.js?v=20261113-3"></script>
-<script src="../echo-transcription.js?v=20261113-2"></script>
 <script src="../echo-toolbox.js?v=20261113-4"></script>
-<script src="../echo-pilot-features.js?v=20261113-3"></script>
+<script src="../echo-pilot-features.js?v=20261113-4"></script>
 <script>
 (()=>{
 "use strict";
@@ -369,7 +355,7 @@ function maybeInit(s){
  const cfg=FEATURES?.configure?.(s.instructions)||{instructions:s.instructions,tools:[]};
  s.updateSent=sendEvent(s,{
   event_id:"event_"+crypto.randomUUID(),type:"session.update",
-  session:{modalities:["text","audio"],voice:"Tina",instructions:cfg.instructions,input_audio_transcription:cfg.input_audio_transcription,tools:cfg.tools,turn_detection:{type:"server_vad"}}
+  session:{modalities:["text","audio"],voice:"Tina",instructions:cfg.instructions,input_audio_transcription:null,tools:cfg.tools,turn_detection:{type:"server_vad"}}
  });
  if(s.updateSent){show("已连接，正在初始化法语语伴……","connecting");log("已发送 session.update（含元认知教学指令）");}
 }
