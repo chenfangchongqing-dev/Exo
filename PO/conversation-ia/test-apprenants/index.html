@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#277451">
+<title>Écho · 学习者体验清单（第一轮）</title>
+<style>
+:root{--ink:#293c30;--green:#287651;--line:#d7e8dc;--bg:#f6f9f6;--muted:#657a6c}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 Arial,"PingFang SC","Microsoft YaHei",system-ui,sans-serif}
+button,input,textarea,select{font:inherit}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid #8bcd9c;outline-offset:3px}
+.page{max-width:820px;margin:auto;padding:23px 17px 55px}
+.back{color:#337052;text-decoration:none;font-weight:750;font-size:14px;display:inline-block;margin:0 0 17px}
+.back:hover{text-decoration:underline}
+.hero{border:1px solid var(--line);background:linear-gradient(125deg,#eaf5ec,#fff 78%);border-radius:20px;padding:28px clamp(20px,4vw,34px)}
+.kicker{font-size:12px;font-weight:850;letter-spacing:.1em;color:#2b7e52;margin:0 0 9px}
+h1{font-size:clamp(24px,5vw,34px);line-height:1.23;margin:0 0 8px}
+.lead{font-size:16px;color:#456a53;margin:0}
+.intro{color:#5d7566;font-size:14px;line-height:1.7;margin:14px 0 0}
+.echo-link{display:inline-block;text-decoration:none;color:#fff;background:#287651;border-radius:11px;font-weight:800;padding:10px 15px;margin-top:17px}
+.echo-link:hover{background:#1f5d40}
+.name{display:block;color:#3a5f48;font-size:13px;font-weight:750;margin-top:16px}
+.name input{display:block;width:min(310px,100%);background:#fff;border:1px solid #bad6c3;color:#243c2e;border-radius:9px;padding:9px 11px;min-height:43px;margin-top:5px}
+.meter{background:#fff;border:1px solid var(--line);border-radius:14px;padding:17px 18px;margin:17px 0}
+.meter-line{display:flex;justify-content:space-between;gap:10px;align-items:center}
+.meter strong{font-size:14px}
+.meter output{color:#277751;font-weight:850;font-size:16px;font-variant-numeric:tabular-nums}
+progress{width:100%;height:10px;accent-color:#29885b;display:block;margin-top:9px}
+.meter .hint{color:var(--muted);font-size:12px;margin:8px 0 0}
+.section{margin-top:15px;border:1px solid var(--line);border-radius:16px;background:#fff;overflow:hidden}
+.section>summary{display:flex;align-items:center;gap:12px;padding:18px 19px;list-style:none;cursor:pointer}
+.section>summary::-webkit-details-marker{display:none}
+.section>summary:after{content:"⌄";font-size:23px;color:#5a9772;margin-left:auto}
+.section[open]>summary:after{transform:rotate(180deg)}
+.num{display:grid;place-items:center;width:36px;height:36px;flex:none;border-radius:10px;background:#e6f3e8;color:#28764f;font-size:15px;font-weight:850}
+.section-label strong{display:block;font-size:18px;line-height:1.35}
+.section-label small{display:block;font-size:12px;color:#718375}
+.section-body{padding:0 19px 22px}
+.section-intro{color:#536d5d;font-size:14px;margin:0 0 15px}
+.fields{display:flex;flex-wrap:wrap;gap:12px;margin:0 0 16px}
+.fields label{flex:1 1 200px;font-size:13px;font-weight:750;color:#3d6149}
+.fields select,.fields input{display:block;background:#fff;color:#284532;border:1px solid #bad6c3;padding:10px 11px;border-radius:9px;min-height:43px;width:100%;margin-top:5px}
+.group-heading{font-size:14px;color:#2c7150;font-weight:850;margin:16px 0 9px}
+.task{display:flex;align-items:flex-start;gap:10px;border:1px solid #e0eae2;background:#fcfdfc;padding:11px 12px;border-radius:10px;margin:8px 0;cursor:pointer}
+.task:has(input:checked){background:#edf8ef;border-color:#abd4b7}
+.task input{width:19px;height:19px;flex:0 0 19px;accent-color:#2a7d54;margin:2px 0 0}
+.task strong{display:block;font-size:14px;font-weight:740}
+.task small{display:block;font-size:12px;color:#697e6e;margin-top:2px}
+.perception{background:#f1f8f3;border:1px solid #d3e8d8;border-radius:13px;padding:15px 17px;margin-top:17px}
+.perception h3{font-size:16px;margin:0 0 11px;color:#2a714d}
+.rating{border:0;padding:0;margin:13px 0 18px;min-width:0}
+.rating legend{font-size:14px;font-weight:800;padding:0;margin-bottom:8px}
+.rating p{font-size:12px;color:#6c806e;margin:6px 0 0}
+.choices{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
+.choices label{position:relative;cursor:pointer}
+.choices input{position:absolute;opacity:0;width:1px;height:1px}
+.choices span{display:grid;place-items:center;min-height:48px;text-align:center;background:#fff;color:#3e654d;border:1px solid #bad8c4;padding:6px 7px;border-radius:9px;font-size:13px;font-weight:750}
+.choices input:checked+span{color:#fff;background:#2b7953;border-color:#2b7953}
+.choices input:focus-visible+span{outline:3px solid #8bcd9c;outline-offset:2px}
+.note-label{display:block;color:#45664f;font-size:13px;font-weight:750}
+.note-label textarea{background:#fff;color:#22382a;border:1px solid #b8d4c3;border-radius:10px;padding:11px;margin-top:6px;width:100%;resize:vertical;min-height:76px;font-weight:400}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin:22px 0 8px}
+.actions button{background:#287951;color:white;border:1px solid #287951;border-radius:10px;padding:11px 17px;font-size:14px;font-weight:800}
+.actions .secondary{background:#fff;color:#28724d;border-color:#b2d4be}
+.actions .danger{color:#a05a4a}
+.notice{font-size:12px;color:#687d6e;margin:12px 0;line-height:1.7}
+#notice{min-height:20px;color:#277851;font-size:13px;font-weight:750}
+dialog{width:min(650px,calc(100vw - 26px));max-width:calc(100vw - 26px);border-radius:15px;border:1px solid #c4deca;padding:20px}
+dialog::backdrop{background:#14291e7b}
+dialog textarea{width:100%;min-height:230px;resize:vertical;border:1px solid #c4dcca;border-radius:9px;padding:11px;font:13px/1.5 ui-monospace,Consolas,monospace}
+dialog h2{font-size:17px;margin:0 0 6px}
+.footer{text-align:center;color:#8b998f;font-size:12px;margin-top:26px}
+@media(max-width:480px){.page{padding:13px 10px 35px}.hero{padding:22px 17px}.section>summary{padding:15px 12px}.section-body{padding:0 12px 18px}.choices{grid-template-columns:repeat(2,minmax(0,1fr))}.perception{padding:12px}.task{padding:11px 9px}}
+</style>
+</head>
+<body>
+<main class="page">
+<a class="back" href="../">← 返回 Écho 对话页面</a>
+<header class="hero">
+<p class="kicker">Écho · Retour d’expérience · Tour 1</p>
+<h1>学习者体验清单</h1>
+<p class="lead">法语语言难度感知 · 与 Écho 交流的难易程度</p>
+<p class="intro">分别尝试一次自由聊天和指定话题聊天。体验过的项目就勾选；然后评价你实际感受到的语言难度和对话顺畅程度。这里没有正确答案，也不是法语能力测评。</p>
+<a class="echo-link" href="../">🎙 打开 Écho 对话页面 ↗</a>
+<label class="name">姓名或代号（选填）<input id="nickname" maxlength="60" autocomplete="off" placeholder="例如学号后四位"></label>
+</header>
+<section class="meter" aria-label="体验进度">
+<div class="meter-line"><strong>体验清单进度</strong><output id="progress-label" aria-live="polite">0 / 12</output></div>
+<progress id="progress" max="12" value="0" aria-label="已体验项目数"></progress>
+<p class="hint">学习者的勾选表示“尝试过这项体验”；即使觉得难、没有成功，也可以勾选，真实感受请在下方选择。</p>
+</section>
+<details class="section" open>
+<summary><span class="num">01</span><span class="section-label"><strong>Conversation libre · 自由聊天</strong><small>没有任务要求，想聊什么就聊什么</small></span></summary>
+<div class="section-body">
+<p class="section-intro">从简单的问题聊起，例如 « Comment s’est passée ta journée ? »。试着自然接话、提出自己的话题，不必提前准备。</p>
+<div class="fields"><label>对话起始难度（选填）<select id="free-level"><option value="">请选择</option><option>B2</option><option>B2+</option><option>C1</option><option value="不记得">不记得</option></select></label></div>
+<h3 class="group-heading">语言理解体验</h3>
+<label class="task"><input type="checkbox" data-task="free-1"><span><strong>听懂 Écho 提出的问题</strong><small>注意句子长度、词汇和提问方式。</small></span></label>
+<label class="task"><input type="checkbox" data-task="free-2"><span><strong>感受语速和停顿</strong><small>它说话的速度对你来说是否合适？</small></span></label>
+<label class="task"><input type="checkbox" data-task="free-3"><span><strong>听不懂时请求它重述</strong><small>试试 « Tu peux répéter plus lentement ? »</small></span></label>
+<h3 class="group-heading">口语互动体验</h3>
+<label class="task"><input type="checkbox" data-task="free-4"><span><strong>主动开口并接话</strong><small>不用提前准备完整发言。</small></span></label>
+<label class="task"><input type="checkbox" data-task="free-5"><span><strong>犹豫、找不到词时继续交流</strong><small>观察它会不会等你、帮助你表达。</small></span></label>
+<label class="task"><input type="checkbox" data-task="free-6"><span><strong>尝试转换话题或调整语言难度</strong><small>例如 « On peut parler d&#39;autre chose ? »</small></span></label>
+<div class="perception">
+<h3>这次对话，我的真实感受</h3>
+<fieldset class="rating"><legend>Écho 使用的法语，对我来说……</legend><div class="choices" data-rating="free-language"></div><p>请考虑语速、词汇、句子长度和理解难度。</p></fieldset>
+<fieldset class="rating"><legend>与 Écho 交流，对我来说……</legend><div class="choices" data-rating="free-interaction"></div><p>请考虑是否容易接话、表达想法、回应问题和维持对话。</p></fieldset>
+<label class="note-label">有没有特别容易或特别困难的时刻？（选填）<textarea data-field="free-note" maxlength="1000" rows="3" placeholder="可以用中文或法语简单描述。"></textarea></label>
+</div>
+</div>
+</details>
+<details class="section" open>
+<summary><span class="num">02</span><span class="section-label"><strong>Conversation guidée · 指定话题／作业</strong><small>带着具体题目与 Écho 交谈</small></span></summary>
+<div class="section-body">
+<p class="section-intro">可以选择服装与个人形象、学校制服等话题，试着陈述观点、说明理由并回应追问。</p>
+<div class="fields"><label>对话起始难度（选填）<select id="guided-level"><option value="">请选择</option><option>B2</option><option>B2+</option><option>C1</option><option value="不记得">不记得</option></select></label><label>话题（选填）<input id="guided-topic" maxlength="160" placeholder="如 L’uniforme à l’école"></label></div>
+<h3 class="group-heading">语言理解体验</h3>
+<label class="task"><input type="checkbox" data-task="guided-1"><span><strong>听懂与指定话题有关的问题</strong><small>是否清楚 Écho 希望你回应什么？</small></span></label>
+<label class="task"><input type="checkbox" data-task="guided-2"><span><strong>感受讨论中使用的词汇和句式</strong><small>是否符合你目前的语言学习程度？</small></span></label>
+<label class="task"><input type="checkbox" data-task="guided-3"><span><strong>理解它的追问或不同意见</strong><small>能否把握问题中的意思和逻辑？</small></span></label>
+<h3 class="group-heading">口语互动体验</h3>
+<label class="task"><input type="checkbox" data-task="guided-4"><span><strong>尝试表达观点并说明理由</strong><small>不必追求无错误，只要说出自己的意思。</small></span></label>
+<label class="task"><input type="checkbox" data-task="guided-5"><span><strong>在困难时请求一点帮助</strong><small>例如找不到词、没思路、听不懂。</small></span></label>
+<label class="task"><input type="checkbox" data-task="guided-6"><span><strong>回应追问时保持自己的思路</strong><small>交流有没有越来越容易或越来越困难？</small></span></label>
+<div class="perception">
+<h3>这次对话，我的真实感受</h3>
+<fieldset class="rating"><legend>Écho 使用的法语，对我来说……</legend><div class="choices" data-rating="guided-language"></div><p>请考虑语速、词汇、句子长度和理解难度。</p></fieldset>
+<fieldset class="rating"><legend>与 Écho 交流，对我来说……</legend><div class="choices" data-rating="guided-interaction"></div><p>请考虑是否容易接话、表达想法、回应问题和维持对话。</p></fieldset>
+<label class="note-label">有没有特别容易或特别困难的时刻？（选填）<textarea data-field="guided-note" maxlength="1000" rows="3" placeholder="可以用中文或法语简单描述。"></textarea></label>
+</div>
+</div>
+</details>
+<div class="actions">
+<button id="copy" type="button">复制体验记录</button>
+<button id="download" class="secondary" type="button">下载记录 .txt</button>
+<button id="reset" class="secondary danger" type="button">清空重填</button>
+</div>
+<div id="notice" role="status" aria-live="polite"></div>
+<p class="notice">你的勾选和体验感受仅保存在当前浏览器，不会自动上传或同步给教师。完成后，可以复制记录发给教师或下载文本。无需提供真实姓名，也请避免填写敏感个人信息。</p>
+<p class="footer">Écho · 第一轮学习者体验 · 《高级法语综合课》</p>
+</main>
+<dialog id="copy-dialog" aria-labelledby="copy-title">
+<h2 id="copy-title">体验记录</h2>
+<p class="notice">若浏览器无法自动复制，可长按下方内容后复制。</p>
+<textarea id="copy-text" readonly></textarea>
+<div class="actions"><button id="select" type="button">全选</button><button id="close" class="secondary" type="button">关闭</button></div>
+</dialog>
+<script>
+(()=>{
+"use strict";
+const STORE="echo_learner_experience_20261113_round1_v1";
+const lang=[["easy","太简单"],["suitable","比较合适"],["hard","有些难"],["very-hard","很难"]];
+const talk=[["very-easy","很顺畅"],["mostly-easy","基本顺畅"],["hard","有点费劲"],["very-hard","难以继续"]];
+const ratings=["free-language","free-interaction","guided-language","guided-interaction"];
+const textIds=["nickname","free-level","guided-level","guided-topic"];
+const taskNodes=[...document.querySelectorAll("[data-task]")];
+const $=id=>document.getElementById(id);
+for(const key of ratings){
+ const group=document.querySelector('[data-rating="'+key+'"]');
+ const variants=key.endsWith("-language")?lang:talk;
+ for(const [value,label] of variants){
+  const el=document.createElement("label");
+  const input=document.createElement("input");input.type="radio";input.name=key;input.value=value;input.setAttribute("aria-label",label);
+  const span=document.createElement("span");span.textContent=label;el.append(input,span);group.append(el);
+ }
+}
+let old={};
+try{old=JSON.parse(localStorage.getItem(STORE)||"{}")||{}}catch{}
+for(const node of taskNodes)node.checked=!!old.checked?.includes(node.dataset.task);
+for(const id of textIds)if(typeof old[id]==="string")$(id).value=old[id];
+for(const mode of ["free","guided"]){
+ const field=document.querySelector('[data-field="'+mode+'-note"]');
+ if(typeof old[mode+"-note"]==="string")field.value=old[mode+"-note"];
+}
+for(const key of ratings){
+ const oldValue=old.ratings?.[key];
+ if(oldValue){const option=[...document.querySelectorAll('input[name="'+key+'"]')].find(x=>x.value===oldValue);if(option)option.checked=true}
+}
+function read(){
+ const data={checked:taskNodes.filter(x=>x.checked).map(x=>x.dataset.task),ratings:{}};
+ for(const id of textIds)data[id]=$(id).value.trim();
+ for(const mode of ["free","guided"])data[mode+"-note"]=document.querySelector('[data-field="'+mode+'-note"]').value.trim();
+ for(const key of ratings)data.ratings[key]=document.querySelector('input[name="'+key+'"]:checked')?.value||"";
+ return data;
+}
+function showProgress(){
+ const n=taskNodes.filter(x=>x.checked).length;
+ $("progress-label").textContent=n+" / "+taskNodes.length;
+ $("progress").max=taskNodes.length;$("progress").value=n;
+}
+function save(){try{localStorage.setItem(STORE,JSON.stringify(read()))}catch{}showProgress()}
+function val(key,value){
+ if(!value)return"未选择";
+ return (key.endsWith("-language")?lang:talk).find(x=>x[0]===value)?.[1]||"未选择";
+}
+function report(){
+ const d=read();
+ const out=["Écho · 学习者体验清单（第一轮）","姓名或代号："+(d.nickname||"未填写"),""];
+ for(const [mode,title] of [["free","自由聊天"],["guided","指定话题／作业"]]){
+  out.push("【"+title+"】","起始难度："+(d[mode+"-level"]||"未填写"));
+  if(mode==="guided")out.push("话题："+(d["guided-topic"]||"未填写"));
+  for(let i=1;i<=6;i++){
+   const item=document.querySelector('[data-task="'+mode+"-"+i+'"]');
+   const label=item.closest(".task").querySelector("strong").textContent;
+   out.push((item.checked?"☑":"☐")+" "+label);
+  }
+  out.push("感知语言难度："+val(mode+"-language",d.ratings[mode+"-language"]));
+  out.push("交流难易程度："+val(mode+"-interaction",d.ratings[mode+"-interaction"]));
+  out.push("体验补充："+(d[mode+"-note"]||"无"),"");
+ }
+ out.push("尝试项目："+d.checked.length+" / "+taskNodes.length);
+ return out.join("\n");
+}
+document.addEventListener("change",event=>{if(event.target.closest('input,select,textarea'))save()});
+document.addEventListener("input",event=>{if(event.target.closest('input,select,textarea'))save()});
+$("copy").addEventListener("click",async()=>{
+ const text=report();
+ let success=false;
+ try{await navigator.clipboard.writeText(text);success=true}catch{}
+ if(success){$("notice").textContent="已复制体验记录，可以粘贴发给教师。";return}
+ $("copy-text").value=text;$("copy-dialog").showModal();$("notice").textContent="浏览器限制自动复制，可以在弹窗中手动复制。";
+});
+$("download").addEventListener("click",()=>{
+ const blob=new Blob([report()],{type:"text/plain;charset=utf-8"});
+ const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download="Echo-学习者体验-第一轮.txt";
+ document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+ $("notice").textContent="已生成体验记录文件。";
+});
+$("reset").addEventListener("click",()=>{
+ if(!confirm("确定清空勾选和个人体验记录吗？"))return;
+ for(const node of taskNodes)node.checked=false;
+ for(const id of textIds)$(id).value="";
+ for(const textarea of document.querySelectorAll("[data-field]"))textarea.value="";
+ for(const input of document.querySelectorAll(".choices input"))input.checked=false;
+ try{localStorage.removeItem(STORE)}catch{}
+ showProgress();$("notice").textContent="已清空，可以重新填写。";
+});
+$("select").addEventListener("click",()=>$("copy-text").select());
+$("close").addEventListener("click",()=>$("copy-dialog").close());
+showProgress();
+})();
+</script>
+</body>
+</html>
