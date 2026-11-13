@@ -83,15 +83,15 @@ dialog .actions{margin:12px 0 0}
 <header>
 <div class="kicker">Écho · Tour 1 / Premier essai</div>
 <h1>教师测试任务清单</h1>
-<p class="sub">Liste de vérification · 功能验证（已测试打勾）</p>
-<p class="intro">请在 Écho 教师测试页依次体验两种对话模式。<strong>每完成一项测试，就勾选“已测试”</strong>；无需填写评分或详细报告。</p>
+<p class="sub">Liste de vérification · 功能验证（符合预期才勾选）</p>
+<p class="intro">请在 Écho 教师测试页依次体验两种对话模式。<strong>只有该项表现符合预期，才勾选“通过”</strong>。如果尚未测试或结果不理想，请暂时不勾选。</p>
 <a class="link" href="../../PO/conversation-ia/essai-enseignant/" target="_blank" rel="noopener noreferrer">打开 Écho 教师测试页 ↗</a>
 <div class="meta"><label>测试教师（选填）<input id="tester" type="text" autocomplete="name" maxlength="32" placeholder="姓名或代号"></label></div>
 </header>
-<section class="meter" aria-label="测试完成进度">
-<div class="meterline"><strong>本轮测试进度</strong><output id="progress-count" aria-live="polite">0 / 14</output></div>
-<div class="track" role="progressbar" aria-label="已测试项目占比" aria-valuemin="0" aria-valuemax="14" aria-valuenow="0" id="progressbar"><div class="fill" id="progress-fill"></div></div>
-<p class="tip">勾选仅表示<strong>已经尝试测试</strong>，不表示 Écho 表现合格。每位教师的勾选只保存在自己的浏览器里，不会自动同步给群内其他人。</p>
+<section class="meter" aria-label="测试通过进度">
+<div class="meterline"><strong>本轮测试通过情况</strong><output id="progress-count" aria-live="polite">0 / 14</output></div>
+<div class="track" role="progressbar" aria-label="符合预期的测试项目占比" aria-valuemin="0" aria-valuemax="14" aria-valuenow="0" id="progressbar"><div class="fill" id="progress-fill"></div></div>
+<p class="tip"><strong>勾选＝本项测试通过。</strong>尚未测试或测试结果不符合预期的项目请保持未勾选。记录只保存在本机浏览器，不会自动同步给其他教师。</p>
 </section>
 <div id="checklist"></div>
 <div class="actions">
@@ -128,10 +128,10 @@ const groups=[
 ]}]},
 {key:"B",title:"Bilan 与语言工具包",subtitle:"两种模式分别检验 FLE 适切性",desc:"请在结束通话前说 « Écho, on fait le point ? » 或点击 Faire le point，再点旁边的 ＋ 查看 Ma boîte à outils。关注表达与实际对话的对应关系、法语自然度、例句可迁移性，以及是否虚构学生说过的话。",modes:[
 {label:"自由聊天",tag:"libre",items:[
-["B-L-1","已测试 bilan 与工具包的 pertinence","检查是否贴合自然聊天内容，词汇建议是否正确、适用并具有复用价值。","Écho, on fait le point ?"]
+["B-L-1","bilan 与工具包符合 FLE 教学要求","检查是否贴合自然聊天内容，词汇建议是否正确、适用并具有复用价值。","Écho, on fait le point ?"]
 ]},
 {label:"指定话题／作业",tag:"guidée",items:[
-["B-G-1","已测试 bilan 与工具包的 pertinence","检查是否服务于指定任务，语言支架和复用例句是否符合 FLE 教学目标。","Écho, on fait le point ?"]
+["B-G-1","bilan 与工具包符合 FLE 教学要求","检查是否服务于指定任务，语言支架和复用例句是否符合 FLE 教学目标。","Écho, on fait le point ?"]
 ]}]},
 {key:"C",title:"教学策略接入",subtitle:"只测试指定话题／作业模式",desc:"以具体口语任务观察元认知支架和批判性思维引导。重点是提问适度、帮助学生自行表达，避免直接给答案或把有争议的观点一律判错。",modes:[
 {label:"指定话题／作业",tag:"guidée",items:[
@@ -142,7 +142,7 @@ const groups=[
 ]}]}
 ];
 const total=groups.reduce((a,g)=>a+g.modes.reduce((b,m)=>b+m.items.length,0),0);
-const STORE="echo_enseignants_todo_20261113_round1_v1";
+const STORE="echo_enseignants_todo_20261113_round1_pass_v2";
 const lookup=new Map(groups.flatMap(g=>g.modes.flatMap(m=>m.items.map(item=>[item[0],item]))));
 const list=document.getElementById("checklist");
 const $=id=>document.getElementById(id);
@@ -193,7 +193,7 @@ $("tester").addEventListener("input",save);
 function report(){
  const name=$("tester").value.trim()||"未填写";
  const date=new Intl.DateTimeFormat("zh-CN",{year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());
- const lines=["Écho · 教师测试记录（第一轮）","测试教师："+name,"日期："+date,"已测试："+checked.size+" / "+total,"说明：勾选仅代表已测试，不等于测试通过。",""];
+ const lines=["Écho · 教师测试记录（第一轮）","测试教师："+name,"日期："+date,"测试通过："+checked.size+" / "+total,"说明：☑ 测试通过；☐ 未勾选（未测试或未达预期）。",""];
  for(const g of groups){
   lines.push("【"+g.title+"】");
   for(const mode of g.modes){
