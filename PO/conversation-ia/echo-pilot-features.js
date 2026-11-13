@@ -28,7 +28,7 @@
  }
  function create(options){
    const opt=options||{};
-   const captions=root.ECHO_TRANSCRIPTION?.create?.()||null;
+   const captions=null; // Continuous transcription disabled.
    const toolbox=root.ECHO_TOOLBOX?.create?.()||null;
    let pending=[];
    let handled=new Set();
@@ -46,7 +46,7 @@
    function configure(instructions){
      promptBase=String(instructions||"")+"\n"+PROMPT;
      return {
-       input_audio_transcription:{model:"qwen3-asr-flash-realtime"},
+       input_audio_transcription:null,
        instructions:promptBase,
        tools:root.ECHO_TOOLBOX?.definition?[root.ECHO_TOOLBOX.definition]:[]
      };
@@ -107,7 +107,7 @@
        if(call.name==="publish_language_toolbox" && toolbox && toolCount<=MAX_CALLS){
          try{
            const args=JSON.parse(call.arguments||"{}");
-           const observed=captions?.getStudentTranscript?.()||"";
+           const observed=""; // No verified student transcript.
            ok=toolbox.receive(args,observed);
            toolCalled=ok;
            requested=true;
