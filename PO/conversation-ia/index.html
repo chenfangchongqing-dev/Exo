@@ -266,22 +266,6 @@
 <audio class="student-audio" id="student-audio" autoplay controls playsinline aria-label="Voix d’Écho"></audio>
 <p class="audio-caption">Si tu n’entends pas Écho, appuie sur Lecture. Utilise de préférence des écouteurs.</p>
 </form>
-<section class="transcript-panel" aria-labelledby="transcript-title">
-<div class="transcript-head">
-<h4 id="transcript-title">Transcription de l’échange</h4>
-<button class="transcript-toggle" type="button" id="transcript-toggle" aria-controls="transcript-content" aria-expanded="false">Afficher la transcription</button>
-</div>
-<div class="transcript-content" id="transcript-content" hidden>
-<p class="transcript-intro">Tes paroles et les réponses d’Écho apparaissent ici en français. Le texte peut s’afficher progressivement pendant l’échange.</p>
-<div class="transcript-lines" id="transcript-lines" role="log" aria-live="off" aria-label="Transcription de la conversation"></div>
-<div class="transcript-actions">
-<button type="button" id="transcript-copy" disabled>Copier le texte</button>
-<button type="button" id="transcript-download" disabled>Télécharger (.txt)</button>
-</div>
-<p class="transcript-notice" id="transcript-note">Transcription indicative : la reconnaissance vocale peut comporter des erreurs.</p>
-<p class="transcript-notice">Le texte reste dans cette page pendant la séance. Il n’est pas sauvegardé automatiquement ; télécharge-le si tu souhaites le garder.</p>
-</div>
-</section>
 <dialog id="student-toolbox-dialog" class="student-toolbox-dialog" aria-labelledby="toolbox-title">
 <section id="toolbox-panel" class="toolbox-panel" aria-labelledby="toolbox-title">
 <div class="toolbox-modal-heading">
@@ -442,9 +426,8 @@ document.querySelectorAll("[data-open-topic]").forEach(function(button){
 })();
 </script>
 <script src="./echo-pedagogy.js?v=20261113-3"></script>
-<script src="./echo-transcription.js?v=20261113-2"></script>
 <script src="./echo-toolbox.js?v=20261113-4"></script>
-<script src="./echo-pilot-features.js?v=20261113-3"></script>
+<script src="./echo-pilot-features.js?v=20261113-4"></script>
 <script src="./student-voice.js?v=20261113-7"></script>
 <script>
 (()=>{
