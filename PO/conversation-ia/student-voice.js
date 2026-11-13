@@ -242,7 +242,20 @@
       if(!res.ok){
         if(res.status===401) throw Object.assign(new Error("old deployment"),{publicMessage:"Le service Écho utilise encore l’ancienne version. L’enseignante doit déployer le relais v0.2."});
         if(res.status===403) throw Object.assign(new Error("old deployment or origin denied"),{publicMessage:"Accès refusé (HTTP 403). Vérifie l’adresse du site ; si le problème persiste, demander le déploiement du service Écho v0.2."});
-        if(res.status===429) throw Object.assign(new Error("limited"),{publicMessage:"La limite d’essais est atteinte. Réessaie plus tard."});
+        if(res.status===429) {
+          let reason="";
+          try{const payload=await res.json();reason=String(payload?.error||"")}catch{}
+          const retrySeconds=Number(res.headers.get("Retry-After"));
+          const wait=Number.isFinite(retrySeconds)&&retrySeconds>0
+            ?" Réessaie dans environ "+(retrySeconds>=60?Math.ceil(retrySeconds/60)+" minute(s)":Math.ceil(retrySeconds)+" seconde(s)")+"."
+            :" Réessaie plus tard.";
+          const publicMessage=reason==="guest_busy"
+            ?"Le service Écho reçoit trop de demandes en ce moment."+wait
+            :reason==="guest_quota_reached"
+            ?"Le nombre de connexions autorisées pour cette phase de test est atteint."+wait
+            :"Le service Écho limite temporairement les nouvelles connexions."+wait;
+          throw Object.assign(new Error(reason||"limited"),{publicMessage});
+        }
         throw new Error("SDP exchange failed");
       }
       const answer=(await res.text()).trim().replace(/\r?\n/g,"\r\n")+"\r\n";
