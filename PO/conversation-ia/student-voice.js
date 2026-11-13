@@ -152,7 +152,7 @@
           modalities:["text","audio"],
           voice:"Tina",
           instructions:cfg.instructions,
-          input_audio_transcription:cfg.input_audio_transcription,
+          input_audio_transcription:null,
           tools:cfg.tools,
           turn_detection:{type:"server_vad"}
         }
