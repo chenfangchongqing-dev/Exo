@@ -1,70 +1,97 @@
-<!doctype html>
-<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#16a34a"><meta name="description" content="exercices de grammaire, à l’oral et à l’écrit."><title>Grammaire</title><style>
-:root{--bg:#faf8f2;--paper:#fff;--ink:#272923;--muted:#6d6d63;--line:#ece5d5;--sun:#fdba12;--orange:#e99517;--shadow:0 14px 36px rgba(72,58,24,.075);--max:1060px}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);font-family:Arial,"Helvetica Neue",system-ui,sans-serif;background:var(--bg);line-height:1.5}
-a{color:inherit}a:focus-visible{outline:3px solid #a86402;outline-offset:3px}
-.wrap{max-width:var(--max);padding:0 23px;margin:auto}
-.top{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:24px 0}
-.logo{font-weight:800;letter-spacing:.075em;text-decoration:none;font-size:15px}
-.small-link{color:var(--muted);text-decoration:none;font-size:14px}.small-link:hover{text-decoration:underline}
-.hero{border:1px solid #e9d9ab;border-radius:24px;background:linear-gradient(122deg,#ffcf51 0%,#ffebba 65%,#fff7e5 100%);padding:43px clamp(24px,5vw,58px);margin-top:12px;position:relative;overflow:hidden}
-.hero:after{content:"";display:block;position:absolute;right:-62px;bottom:-146px;width:345px;height:345px;border:70px solid #fff5d588;border-radius:50%;pointer-events:none}
-.overline{color:#6b4909;font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;margin:0 0 11px}
-h1{font-size:clamp(34px,5vw,54px);line-height:1.08;letter-spacing:-.035em;margin:0 0 16px;font-weight:800;max-width:750px}
-.intro{max-width:700px;font-size:clamp(16px,2vw,19px);color:#544a33;margin:0}
-.section{margin:34px 0 0}.section-head{display:flex;justify-content:space-between;gap:12px;align-items:end;margin:0 0 16px}
-.section-head h2{font-size:21px;letter-spacing:-.015em;margin:0}.section-head p{margin:0;color:var(--muted);font-size:13px}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
-.card{display:block;border:1px solid var(--line);border-radius:17px;background:white;box-shadow:var(--shadow);padding:24px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s}
-.card:hover{transform:translateY(-3px);box-shadow:0 20px 40px rgba(78,54,20,.12);border-color:#e7bd5c}
-.card .eyebrow{font-size:11px;letter-spacing:.12em;font-weight:800;color:#a96908;text-transform:uppercase;margin-bottom:11px}
-.card h3{font-size:22px;margin:0 0 10px;line-height:1.2}
-.card p{color:#625f57;margin:0 0 15px;font-size:15px}
-.card .action{font-weight:750;color:#a76500;font-size:14px}
-.primary{background:#fffdf6;border-color:#eed7a4}
-.primary .mark{background:var(--sun);display:inline-flex;padding:6px 11px;border-radius:999px;font-size:12px;font-weight:800;letter-spacing:.06em;margin-bottom:15px;color:#513807}
-.list{display:grid;gap:12px}
-.list-link{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:17px 20px;background:white;border:1px solid var(--line);border-radius:13px;text-decoration:none;transition:background .2s,border-color .2s}
-.list-link:hover{background:#fffaee;border-color:#e1bf79}
-.list-link strong{display:block;font-size:16px}.list-link span{display:block;color:var(--muted);font-size:13px;margin-top:3px}
-.list-link .arr{font-size:20px;color:#bb7a0b;flex:none}
-.note{font-size:13px;color:var(--muted);line-height:1.7}
-footer{margin:38px 0 35px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted);font-size:12px}
-@media(max-width:690px){.hero{padding:31px 22px}.grid{grid-template-columns:1fr}.section-head{display:block}.section-head p{margin-top:5px}.card{padding:22px}.top{padding:18px 0}.wrap{padding:0 16px}}
-
-/* Module palette: aligned with the Accueil module card without changing course activities. */
-:root{--bg:#f7f7fb;--ink:#0f172a;--muted:#64748b;--line:#e5e7eb;--sun:#16a34a;--orange:#16a34a}
-body{background:var(--bg);color:var(--ink)}
-a:focus-visible{outline-color:#16a34a}
-.top .logo,.top .brand{color:var(--ink);font-weight:800;letter-spacing:.075em}
-.top .logo:hover,.top .brand:hover{text-decoration:underline}
-.hero{border-color:#bbf7d0;background:radial-gradient(960px 460px at -10% -20%,#dcfce7 0,transparent 58%),radial-gradient(850px 360px at 110% 10%,#bbf7d0 0,transparent 60%),linear-gradient(112deg,#f0fdf4 0%,#fff 100%)}
-.hero:after{border-color:#dcfce7}
-.hero .overline,.hero .eyebrow,.hero .over{color:#15803d}
-.hero .intro,.hero .lead{color:#475569}
-.card:hover,.path:hover,.list-link:hover{border-color:#16a34a}
-.card .action,.action,.card .eyebrow,.card .tag,.tag,.path .steps,.type-label,.list-link .arr,.temporary-entry,.temporary-entry:hover{color:#15803d}
-.primary{background:#f0fdf4;border-color:#bbf7d0}
-.primary .mark{background:#16a34a;color:#fff}
-.card p,.path p{color:#475569}
-.path{background:#fff;border-color:#bbf7d0}
-.list-link:hover{background:#f0fdf4}
-.method span{background:#dcfce7;border-color:#bbf7d0;color:#15803d}
-.tag{background:#dcfce7;color:#15803d}
-
-</style></head><body><div class="wrap"><header class="top"><a class="logo" href="../index.html">Accueil <span aria-hidden="true" style="color:#16a34a">↗</span></a></header>
-<section class="hero"><div class="overline">Grammaire · Pratique</div><h1>La grammaire<br>en pratique.</h1><p class="intro">Des activités pour s’entraîner à l’oral et à l’écrit, au fil des leçons.</p></section>
-<section class="section"><div class="section-head"><h2>Unité 1 · Grammaire, style et argumentation</h2><p>Révisions transversales</p></div><div class="grid"><a class="card primary" href="./U1/"><div class="mark">PARCOURS · UNITÉ 1</div><div class="eyebrow">GRAMMAIRE DU TEXTE · ADÉQUATION SOCIOLINGUISTIQUE</div><h3>La grammaire au service du discours</h3><p>De la forme à l’usage : interrogation, registre, style et nuance, en lien avec les productions écrites et orales.</p><span class="action">Explorer le parcours ↗</span></a><a class="card" href="./U1/registre-de-langue.html"><div class="eyebrow">UNITÉ 1 · ACTIVITÉ INTERACTIVE</div><h3>Le registre de langue</h3><p>Choisir et reformuler selon la situation et le destinataire, puis consulter le corrigé.</p><span class="action">Commencer ↗</span></a><a class="card" href="./U1/nuancer-un-propos.html"><div class="eyebrow">UNITÉ 1 · ARGUMENTATION</div><h3>Nuancer un propos</h3><p>Des adverbes pour préciser le sens de ses affirmations et mieux argumenter.</p><span class="action">S’entraîner ↗</span></a></div></section>
-<section class="section"><div class="section-head"><h2>Unité 1 · Leçon 1</h2><p>Le bonheur</p></div><div class="grid"><a class="card primary" href="./U1/la-question-avec-inversion.html"><div class="mark">EXERCICES 7 · 8 · 9</div><div class="eyebrow">GRAMMAIRE · À L’ORAL</div><h3>La question avec inversion</h3><p>22 questions à reconstituer, transformer ou compléter. Répondre à voix haute et envoyer l’enregistrement.</p><span class="action">Ouvrir les exercices ↗</span></a></div></section>
-<section class="section" aria-labelledby="u2l7-grammar"><div class="section-head"><h2 id="u2l7-grammar">Unité 2 · Sommes-nous prisonniers de notre apparence ?</h2><p>Leçon 7 · Parler de son apparence</p></div><div class="grid">
-<a class="card grammar-u2" href="./U2/opposition-concession.html" style="border-color:#b6dfc9;background:linear-gradient(130deg,#eefaf3,#fff)">
-<div class="eyebrow" style="color:#237b59">GRAMMAIRE · UNITÉ 2 · LEÇON 7</div>
-<h3>L’opposition et la concession</h3>
-<p>Comparez deux faits, exprimez une contradiction inattendue et choisissez la bonne construction : alors que, pourtant, malgré, bien que, même si…</p>
-<span class="action" style="color:#237b59">Comprendre et s’entraîner ↗</span>
-</a></div></section>
-<section class="section"><div class="section-head"><h2>Révisions précédentes</h2><p>Passé composé et imparfait</p></div><div class="list">
-<a class="list-link" href="./U2/passe-imparfait.html"><div><strong>Imparfait ou passé composé ?</strong><span>Un bel exemple de solidarité</span></div><div class="arr">↗</div></a>
-<a class="list-link" href="./U2/passe-imparfait2.html"><div><strong>Imparfait ou passé composé ? (2)</strong><span>Le témoignage de Sessou</span></div><div class="arr">↗</div></a>
-<a class="list-link" href="./U2/temoignage-engagement.html"><div><strong>Raconter un engagement</strong><span>Imparfait et passé composé dans le récit</span></div><div class="arr">↗</div></a></div></section>
-<footer>Révisions de grammaire</footer></div></body></html>
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f8fafb"><title>Grammaire en réseau · EXO</title><meta name="description" content="Explorer la grammaire par le verbe, le sens, les unités et la recherche.">
+<style>
+:root{--ink:#1d3440;--muted:#617681;--green:#23795c;--line:#dce6e4;--bg:#f8fafb}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Arial,Helvetica,sans-serif}a{color:inherit}button,input{font:inherit}button{cursor:pointer}[hidden]{display:none!important}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid #23865e;outline-offset:3px}
+.wrap{max-width:1150px;padding:0 23px;margin:auto}
+header{display:flex;align-items:center;justify-content:space-between;padding:20px 0;border-bottom:1px solid var(--line)}
+header a{text-decoration:none;font-weight:750;font-size:13px}header .brand{color:var(--green);letter-spacing:.13em}header .home{color:var(--muted)}
+.hero{padding:50px 0 34px}.hero .overline,.overline{color:var(--green);font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+h1{font:normal clamp(40px,5.5vw,62px)/1.15 Georgia,'Times New Roman',serif;letter-spacing:-.035em;margin:12px 0 17px}
+.hero .lead{font-size:18px;color:#425e6b;margin:0;max-width:780px}.hero .cn{color:#85949b;font-size:14px;margin:6px 0 0}
+nav{overflow-x:auto;border-bottom:1px solid var(--line);scrollbar-width:thin}
+nav .tabs{display:flex;align-items:stretch;gap:29px;min-width:max-content}
+nav a{display:inline-flex;align-items:center;gap:9px;white-space:nowrap;padding:15px 0 17px;color:#516a75;border-bottom:3px solid transparent;margin-bottom:-1px;font-size:15px;font-weight:750;text-decoration:none}
+nav a:hover,nav a[aria-selected=true]{color:var(--green)}nav a[aria-selected=true]{border-bottom-color:var(--green)}
+svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+main{padding:35px 0 65px}
+.layout{display:grid;grid-template-columns:minmax(230px,285px) minmax(0,1fr);gap:clamp(25px,6vw,70px)}
+aside>svg{color:var(--green);width:32px;height:32px;margin-bottom:14px}
+aside h2{font:normal clamp(28px,3.3vw,36px)/1.22 Georgia,'Times New Roman',serif;letter-spacing:-.03em;margin:13px 0 15px}
+aside p{font-size:15px;color:var(--muted);margin:0 0 14px}
+aside p.cn{font-size:13px;color:#85939a;padding-top:15px;margin-top:20px;border-top:1px solid var(--line)}
+.group{margin:0 0 28px;padding:0 0 22px;border-bottom:1px solid var(--line)}.group:last-child{border:0;margin:0}
+.group h3{font-size:20px;line-height:1.35;letter-spacing:-.015em;margin:0 0 14px}.group h3 small{display:inline;font-weight:400;color:#85949d;margin-left:10px;font-size:13px;letter-spacing:0}
+.resources{list-style:none;padding:0;margin:0}
+.resources li{border-top:1px solid #e3eaea}.resources li:last-child{border-bottom:1px solid #e3eaea}
+.resources a{display:flex;align-items:center;justify-content:space-between;gap:12px;text-decoration:none;padding:13px 4px;min-height:67px}
+.resources a:hover{color:var(--green);background:linear-gradient(90deg,#eef7f2,transparent)}
+.resources strong{font-size:15.5px;display:block;line-height:1.4}.resources small{display:block;color:#85949b;font-size:12.5px;margin-top:4px}
+.arr{font-size:20px;color:#94a4a1}
+.search-label{display:block;font-weight:750;margin:0 0 11px}
+.searchbar{display:flex;gap:14px;align-items:center;border:1px solid #b8cac4;background:white;border-radius:10px;padding:0 16px}
+.searchbar:focus-within{border-color:var(--green);box-shadow:0 0 0 3px #287a6122}.searchbar svg{color:var(--green)}
+.searchbar input{width:100%;min-height:58px;border:0;background:transparent;outline:none;box-shadow:none;font-size:16px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:13px 0 25px}.chips span{color:var(--muted);font-size:12px}
+.chips button{background:transparent;border:1px solid #d5e3df;border-radius:30px;padding:4px 12px;font-size:12px;color:#4f7967}.chips button:hover{background:#ebf6f0}
+#search-status{color:var(--muted);font-size:13px;margin-bottom:9px}#search-empty{display:none;color:var(--muted);padding:15px}
+footer{border-top:1px solid var(--line);padding:21px 0 32px;color:#84939b;display:flex;justify-content:space-between;gap:16px;font-size:12px}
+@media(max-width:780px){.wrap{padding:0 16px}.hero{padding:35px 0 28px}.layout{display:block}aside{padding-bottom:14px;border-bottom:1px solid var(--line);margin-bottom:23px}aside h2{font-size:30px;margin:8px 0}aside p.cn{margin-top:12px;padding-top:10px}nav .tabs{gap:25px}nav a{font-size:14px;padding:13px 0}main{padding-top:25px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style></head><body><div class="wrap">
+<header><a class="brand" href="./">EXO / GRAMMAIRE</a><a class="home" href="../index.html">Accueil ↗</a></header>
+<div class="hero"><div class="overline">Explorer · Comprendre · Réemployer</div><h1>Grammaire en réseau</h1><p class="lead">Comprendre les formes, construire le sens.<br>Un même point de grammaire, plusieurs chemins pour l'explorer.</p><p class="cn" lang="zh-CN">从动词出发理解结构，从表达意图探索语法，也可以按单元复习。</p></div>
+<nav aria-label="Parcours de grammaire"><div role="tablist" aria-label="Parcours de grammaire" class="tabs"><a role="tab" id="tab-verbe" data-target="verbe" href="#verbe" aria-controls="verbe" aria-selected="true" tabindex="0"><svg viewBox="0 0 24 24"><circle cx="6" cy="3" r="2"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="6" r="3"/><path d="M6 5v10M6 7a6 6 0 0 0 6 6h3a3 3 0 0 0 3-3V9"/></svg><span>À partir du verbe</span></a><a role="tab" id="tab-sens" data-target="sens" href="#sens" aria-controls="sens" aria-selected="false" tabindex="-1"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.5 8.5 0 0 1-12.3 7.6L3 21l1.9-5.7a8.5 8.5 0 0 1 7.6-12.3 8.5 8.5 0 0 1 8.5 8.5z"/></svg><span>À partir du sens</span></a><a role="tab" id="tab-unites" data-target="unites" href="#unites" aria-controls="unites" aria-selected="false" tabindex="-1"><svg viewBox="0 0 24 24"><path d="M12 7v14M3 18V4a1 1 0 0 1 1-1h5a3 3 0 0 1 3 3 3 3 0 0 1 3-3h5a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-5a3 3 0 0 0-3 2 3 3 0 0 0-3-2H4a1 1 0 0 1-1-1z"/></svg><span>Au fil des unités</span></a><a role="tab" id="tab-chercher" data-target="chercher" href="#chercher" aria-controls="chercher" aria-selected="false" tabindex="-1"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><span>Rechercher</span></a></div></nav>
+<main id="contenu">
+<section class="pane" id="verbe" role="tabpanel" aria-labelledby="tab-verbe"><div class="layout"><aside><svg viewBox="0 0 24 24"><circle cx="6" cy="3" r="2"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="6" r="3"/><path d="M6 5v10M6 7a6 6 0 0 0 6 6h3a3 3 0 0 0 3-3V9"/></svg><div class="overline">01 · Axe structurel</div><h2>Le verbe au centre</h2><p>Comment le verbe organise-t-il la phrase ? Comment peut-on situer un événement dans le temps et le relier à d'autres événements ?</p><p class="cn">动词与构式、时态、语式及句子之间的联系。</p></aside><div class="contents"><section class="group"><h3>Le verbe dans la phrase <small>动词与句子结构</small></h3><ul class="resources"><li><a href="./U1/la-question-avec-inversion.html"><span><strong>La question avec inversion</strong><small>Unité 1 · Leçon 1</small></span><span aria-hidden="true" class="arr">↗</span></a></li></ul></section><section class="group"><h3>Temps et aspect <small>时间与事件呈现</small></h3><ul class="resources"><li><a href="./U2/passe-imparfait.html"><span><strong>Imparfait ou passé composé ?</strong><small>Révision · Solidarité</small></span><span aria-hidden="true" class="arr">↗</span></a></li><li><a href="./U2/passe-imparfait2.html"><span><strong>Imparfait ou passé composé ? (2)</strong><small>Révision · Témoignage de Sessou</small></span><span aria-hidden="true" class="arr">↗</span></a></li><li><a href="./U2/temoignage-engagement.html"><span><strong>Raconter un engagement</strong><small>Révision · Récit au passé</small></span><span aria-hidden="true" class="arr">↗</span></a></li></ul></section><section class="group"><h3>Le verbe dans les propositions <small>动词与从句</small></h3><ul class="resources"><li><a href="./U2/opposition-concession.html"><span><strong>L'opposition et la concession</strong><small>Unité 2 · Leçon 7</small></span><span aria-hidden="true" class="arr">↗</span></a></li></ul></section></div></div></section>
+<section class="pane" id="sens" role="tabpanel" aria-labelledby="tab-sens" hidden><div class="layout"><aside><svg viewBox="0 0 24 24"><path d="M21 11.5a8.5 8.5 0 0 1-12.3 7.6L3 21l1.9-5.7a8.5 8.5 0 0 1 7.6-12.3 8.5 8.5 0 0 1 8.5 8.5z"/></svg><div class="overline">02 · Axe fonctionnel</div><h2>La grammaire pour dire</h2><p>Quelles formes grammaticales permettent de construire un sens et de répondre à une intention de communication ?</p><p class="cn">从意义和表达意图出发，认识不同形式的使用条件与语用效果。</p></aside><div class="contents"><section class="group"><h3>Nuancer une affirmation <small>调整判断的程度</small></h3><ul class="resources"><li><a href="./U1/nuancer-un-propos.html"><span><strong>Les adverbes pour nuancer un propos</strong><small>Unité 1 · Argumentation</small></span><span aria-hidden="true" class="arr">↗</span></a></li></ul></section><section class="group"><h3>Opposer et concéder <small>表达对立与让步</small></h3><ul class="resources"><li><a href="./U2/opposition-concession.html"><span><strong>L'opposition et la concession</strong><small>Unité 2 · Leçon 7</small></span><span aria-hidden="true" class="arr">↗</span></a></li></ul></section><section class="group"><h3>Interroger et adapter sa manière de dire <small>提问与语体选择</small></h3><ul class="resources"><li><a href="./U1/la-question-avec-inversion.html"><span><strong>La question avec inversion</strong><small>Unité 1 · Leçon 1</small></span><span aria-hidden="true" class="arr">↗</span></a></li><li><a href="./U1/registre-de-langue.html"><span><strong>Le registre de langue</strong><small>Unité 1 · Reformulation</small></span><span aria-hidden="true" class="arr">↗</span></a></li></ul></section><section class="group"><h3>Raconter des événements passés <small>叙述过去事件</small></h3><ul class="resources"><li><a href="./U2/passe-imparfait.html"><span><strong>Imparfait ou passé composé ?</strong><small>Révision · Solidarité</small></span><span aria-hidden="true" class="arr">↗</span></a></li><li><a href="./U2/passe-imparfait2.html"><span><strong>Imparfait ou passé composé ? (2)</strong><small>Révision · Témoignage de Sessou</small></span><span aria-hidden="true" class="arr">↗</span></a></li><li><a href="./U2/temoignage-engagement.html"><span><strong>Raconter un engagement</strong><small>Révision · Récit au passé</small></span><span aria-hidden="true" class="arr">↗</span></a></li></ul></section></div></div></section>
+<section class="pane" id="unites" role="tabpanel" aria-labelledby="tab-unites" hidden><div class="layout"><aside><svg viewBox="0 0 24 24"><path d="M12 7v14M3 18V4a1 1 0 0 1 1-1h5a3 3 0 0 1 3 3 3 3 0 0 1 3-3h5a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-5a3 3 0 0 0-3 2 3 3 0 0 0-3-2H4a1 1 0 0 1-1-1z"/></svg><div class="overline">03 · Parcours du cours</div><h2>Au fil des unités</h2><p>Retrouver les leçons et activités de grammaire selon la progression du cours.</p><p class="cn">单元导航保留全部原有资源，练习内容不作修改。</p></aside><div class="contents"><section class="group"><h3>Unité 1 <small>Le bonheur est-il utopique ?</small></h3><ul class="resources"><li><a href="./U1/"><span><strong>La grammaire au service du discours</strong><small>Unité 1 · Parcours transversal</small></span><span aria-hidden="true" class="arr">↗</span></a></li><li><a href="./U1/la-question-avec-inversion.html"><span><strong>La question avec inversion</strong><small>Unité 1 · Leçon 1</small></span><span aria-hidden="true" class="arr">↗</span></a></li><li><a href="./U1/nuancer-un-propos.html"><span><strong>Les adverbes pour nuancer un propos</strong><small>Unité 1 · Argumentation</small></span><span aria-hidden="true" class="arr">↗</span></a></li><li><a href="./U1/registre-de-langue.html"><span><strong>Le registre de langue</strong><small>Unité 1 · Reformulation</small></span><span aria-hidden="true" class="arr">↗</span></a></li></ul></section><section class="group"><h3>Unité 2 <small>Sommes-nous prisonniers de notre apparence ?</small></h3><ul class="resources"><li><a href="./U2/opposition-concession.html"><span><strong>L'opposition et la concession</strong><small>Unité 2 · Leçon 7</small></span><span aria-hidden="true" class="arr">↗</span></a></li><li><a href="./U2/passe-imparfait.html"><span><strong>Imparfait ou passé composé ?</strong><small>Révision · Solidarité</small></span><span aria-hidden="true" class="arr">↗</span></a></li><li><a href="./U2/passe-imparfait2.html"><span><strong>Imparfait ou passé composé ? (2)</strong><small>Révision · Témoignage de Sessou</small></span><span aria-hidden="true" class="arr">↗</span></a></li><li><a href="./U2/temoignage-engagement.html"><span><strong>Raconter un engagement</strong><small>Révision · Récit au passé</small></span><span aria-hidden="true" class="arr">↗</span></a></li></ul></section></div></div></section>
+<section class="pane" id="chercher" role="tabpanel" aria-labelledby="tab-chercher" hidden><div class="layout"><aside><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><div class="overline">04 · Recherche</div><h2>Rechercher</h2><p>Retrouver les activités par leur titre, une notion grammaticale ou une intention de communication.</p><p class="cn">搜索支持法语及中文关键词，当前涵盖 Grammaire 已有的八个页面。</p></aside><div class="contents"><label class="search-label" for="grammar-search">Que souhaitez-vous travailler ?</label><div class="searchbar"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input id="grammar-search" type="search" autocomplete="off" placeholder="Ex. imparfait, concession, 过去时, 让步…"></div><div class="chips"><span>Exemples</span><button type="button" data-query="imparfait">imparfait</button><button type="button" data-query="concession">concession</button><button type="button" data-query="nuancer">nuancer</button><button type="button" data-query="疑问">疑问</button></div><div id="search-status" role="status" aria-live="polite">8 ressources disponibles</div><ul class="resources" id="search-results"></ul><div id="search-empty">Aucune ressource trouvée. Essayez un autre mot-clé.</div></div></div></section>
+</main><footer><span>Grammaire en réseau · EXO</span><span>La carte des relations grammaticales sera progressivement enrichie.</span></footer></div>
+<script>
+(function(){
+"use strict";
+const resources=[["La grammaire au service du discours","U1/","Unité 1 · Parcours transversal","grammaire du texte 语法 语篇 style discours 论证"],["La question avec inversion","U1/la-question-avec-inversion.html","Unité 1 · Leçon 1","question interrogation sujet verbe inversion 疑问 倒装 提问"],["Les adverbes pour nuancer un propos","U1/nuancer-un-propos.html","Unité 1 · Argumentation","nuance adverbe degré intensité jugement 论证 细化 副词 程度"],["Le registre de langue","U1/registre-de-langue.html","Unité 1 · Reformulation","registre formel familier style politesse 语体 礼貌 改写"],["L'opposition et la concession","U2/opposition-concession.html","Unité 2 · Leçon 7","opposition concession bien que subjonctif même si pourtant malgré 对立 让步 虚拟式"],["Imparfait ou passé composé ?","U2/passe-imparfait.html","Révision · Solidarité","passé imparfait passé composé récit aspect 过去时 复合过去时 未完成过去时"],["Imparfait ou passé composé ? (2)","U2/passe-imparfait2.html","Révision · Témoignage de Sessou","passé imparfait passé composé témoignage récit 过去时 复合过去时 未完成过去时"],["Raconter un engagement","U2/temoignage-engagement.html","Révision · Récit au passé","raconter narration engagement passé composé imparfait 讲述 叙述 过去时"]];
+const tabs=Array.from(document.querySelectorAll('[role="tab"]'));
+const panes=Array.from(document.querySelectorAll('[role="tabpanel"]'));
+const input=document.getElementById('grammar-search');
+const result=document.getElementById('search-results');
+const status=document.getElementById('search-status');
+const empty=document.getElementById('search-empty');
+const ids=tabs.map(t=>t.dataset.target);
+function show(which,focus){
+ if(!ids.includes(which))which='verbe';
+ for(const tab of tabs){const active=tab.dataset.target===which;tab.setAttribute('aria-selected',String(active));tab.tabIndex=active?0:-1;}
+ for(const pane of panes)pane.hidden=pane.id!==which;
+ if(focus&&which==='chercher')input.focus();
+}
+function open(which,focus){if(location.hash!=='#'+which)history.pushState(null,'','#'+which);show(which,focus);}
+tabs.forEach((t,index)=>{
+ t.addEventListener('click',e=>{e.preventDefault();open(t.dataset.target,t.dataset.target==='chercher');});
+ t.addEventListener('keydown',e=>{
+  const keys=['ArrowRight','ArrowLeft','Home','End'];if(!keys.includes(e.key))return;
+  e.preventDefault();let n=e.key==='Home'?0:e.key==='End'?tabs.length-1:e.key==='ArrowRight'?(index+1)%tabs.length:(index+tabs.length-1)%tabs.length;
+  tabs[n].focus();open(tabs[n].dataset.target,false);
+ });
+});
+window.addEventListener('hashchange',()=>show(location.hash.slice(1),false));
+window.addEventListener('popstate',()=>show(location.hash.slice(1),false));
+function normalize(s){return String(s).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[’']/g,' ');}
+function render(){
+ const tokens=normalize(input.value.trim()).split(/\s+/).filter(Boolean);
+ const matches=resources.filter(item=>tokens.every(t=>normalize(item.join(' ')).includes(t)));
+ result.replaceChildren();
+ matches.forEach(item=>{
+  const li=document.createElement('li');const a=document.createElement('a');a.href='./'+item[1];
+  const span=document.createElement('span');const strong=document.createElement('strong');strong.textContent=item[0];const small=document.createElement('small');small.textContent=item[2];span.append(strong,small);
+  const arrow=document.createElement('span');arrow.className='arr';arrow.textContent='↗';arrow.setAttribute('aria-hidden','true');a.append(span,arrow);li.append(a);result.append(li);
+ });
+ status.textContent=matches.length+' ressource'+(matches.length===1?'':'s')+(tokens.length?' trouvée'+(matches.length===1?'':'s'):' disponible'+(matches.length===1?'':'s'));
+ empty.style.display=matches.length?'none':'block';
+}
+input.addEventListener('input',render);
+document.querySelectorAll('[data-query]').forEach(b=>b.addEventListener('click',()=>{input.value=b.dataset.query;render();input.focus();}));
+document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();open('chercher',true);}});
+show(location.hash.slice(1),false);render();
+})();
+</script></body></html>
