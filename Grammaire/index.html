@@ -136,6 +136,110 @@ footer span:first-child{font-weight:750;letter-spacing:.06em;color:#4f7b68}
  footer{padding-bottom:25px}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* Grammaire méthodique: atlas index and editorial reading pane. */
+nav .tabs{grid-template-columns:1.27fr 1fr 1fr 1fr 125px;min-width:960px}
+nav a{gap:10px;padding:16px 13px;font-size:14px}
+nav svg{width:27px;height:27px}
+nav a:last-child svg{width:20px;height:20px}
+nav .tab-text small{font-size:11px}
+.atlas-lede{display:flex;align-items:flex-end;justify-content:space-between;gap:34px;margin:0 0 37px}
+.atlas-kicker{font-size:11px;color:#3b8263;text-transform:uppercase;letter-spacing:.16em;font-weight:800}
+.atlas-lede h2{font:400 clamp(34px,4.3vw,53px)/1.12 Georgia,"Times New Roman",serif;letter-spacing:-.045em;color:#204740;margin:12px 0 17px}
+.atlas-lede h2 em{color:#46876d;font-weight:400}
+.atlas-lede p{max-width:620px;margin:0;color:#62736f;font-size:15px;line-height:1.7}
+.atlas-signature{display:grid;grid-template-columns:auto 80px;gap:3px 11px;align-items:end;min-width:150px;color:#55786d}
+.atlas-signature strong{font:400 44px/.92 Georgia,serif;color:#2d7257}
+.atlas-signature span{font-size:10px;letter-spacing:.12em;font-weight:800}
+.atlas-signature i{grid-column:1/3;height:1px;background:#cbd9d0;margin:13px 0}
+.atlas-progress{display:flex;align-items:center;gap:15px;border-top:1px solid #a4c4b1;border-bottom:1px solid #dae5dc;padding:11px 0;margin:0 0 37px;font-size:10px;letter-spacing:.13em;font-weight:800;color:#5b8472}
+.atlas-tick{height:1px;width:47px;background:#c6d7c9;position:relative}
+.atlas-tick:after{content:"";position:absolute;right:0;top:-2px;width:5px;height:5px;transform:rotate(45deg);border-right:1px solid #87ab97;border-top:1px solid #87ab97}
+.atlas-shell{display:grid;grid-template-columns:minmax(250px,315px) minmax(0,1fr);gap:38px;align-items:start}
+.atlas-small{margin:0 0 14px;color:#7c9186;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.10em}
+.atlas-small span{font:400 12px KaiTi,"STKaiti","Kaiti SC",serif;letter-spacing:0;margin-left:7px;text-transform:none}
+.atlas-index{border-top:1px solid #cbdacf}
+.atlas-part{display:flex;align-items:center;width:100%;border:0;border-bottom:1px solid #d5e1d9;background:transparent;text-align:left;padding:21px 13px 20px 6px;gap:17px;color:#325a4f;transition:background .18s,padding-left .18s}
+.atlas-part:hover{background:#e8f0e9;padding-left:12px}
+.atlas-part[aria-pressed="true"]{background:#e4efe5;box-shadow:inset 3px 0 #2e7b59;padding-left:15px}
+.atlas-part-number{font:400 33px/1 Georgia,serif;color:#8caa9a;width:34px;text-align:center;flex:none}
+.atlas-part[aria-pressed="true"] .atlas-part-number{color:#327e5d}
+.atlas-part-text{display:block;min-width:0;flex:1}
+.atlas-part-text strong{font-size:15px;line-height:1.3;font-weight:750;display:block}
+.atlas-part-text small{display:block;margin-top:5px;font:400 12px/1.4 KaiTi,"STKaiti","Kaiti SC",serif;color:#87988c}
+.atlas-part-chevron{font-size:20px;color:#99aba0}
+.atlas-part[aria-pressed="true"] .atlas-part-chevron{color:#3e8666}
+.atlas-reader{min-width:0;min-height:420px;border-top:3px solid #397e60;padding:18px 0 0}
+.atlas-reader-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;border-bottom:1px solid #d6e4d9;padding-bottom:22px}
+.atlas-reader-eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.13em;font-weight:800;color:#38775e}
+.atlas-reader-head h3{margin:10px 0 9px;font:400 clamp(30px,3.2vw,40px)/1.1 Georgia,"Times New Roman",serif;letter-spacing:-.03em;color:#204a41}
+.atlas-reader-head p{font-size:14px;color:#728a7a;margin:0;line-height:1.65}
+.atlas-count{flex:none;background:#e5f0e7;color:#3d8060;min-width:49px;text-align:center;padding:7px 6px 8px;border-radius:6px}
+.atlas-count strong{display:block;font:400 23px/1 Georgia,serif}
+.atlas-count span{font-size:9px;font-weight:800;text-transform:uppercase}
+.atlas-chapters{display:grid;grid-template-columns:1fr;gap:0;margin:5px 0 0}
+.atlas-chapter{border-bottom:1px solid #e0e8e1}
+.atlas-chapter summary{display:flex;align-items:center;gap:12px;padding:15px 4px;cursor:pointer;list-style:none;min-height:66px}
+.atlas-chapter summary::-webkit-details-marker{display:none}
+.atlas-chapter summary:hover{background:#edf4ee}
+.atlas-chapter[open] summary{background:#eef5ee}
+.atlas-chapter.is-core summary{border-left:2px solid #9dbda6;padding-left:10px}
+.atlas-chapter .roman{font:400 18px Georgia,serif;color:#5d8a75;width:32px;flex:none}
+.atlas-chapter .chapter-name{display:block;min-width:0;flex:1}
+.atlas-chapter .chapter-name strong{display:block;font-size:15px;font-weight:700;line-height:1.4;color:#2f4e48}
+.atlas-chapter .chapter-name small{display:block;font-size:12px;color:#8d9b8c;margin-top:4px}
+.atlas-chapter .chapter-state{font-size:11px;color:#94a39a;white-space:nowrap;flex:none}
+.atlas-chapter.has-resource .chapter-state{color:#337d59;font-weight:750}
+.atlas-chapter .toggle{font-size:20px;color:#90a89b;line-height:1;flex:none}
+.atlas-chapter[open] .toggle{transform:rotate(45deg);color:#2d7855}
+.atlas-chapter-body{padding:4px 24px 18px 47px;color:#5d7167;font-size:14px;line-height:1.6}
+.atlas-chapter-body p{margin:0 0 11px}
+.atlas-chapter-body .pending{font-size:12px;color:#95a19b;font-style:italic}
+.atlas-chapter-body a{display:flex;align-items:center;justify-content:space-between;padding:10px 0;text-decoration:none;color:#2d7555;font-size:14px;font-weight:750;border-top:1px solid #dae8df;gap:10px}
+.atlas-chapter-body a:hover{text-decoration:underline}
+.atlas-bottom{display:flex;align-items:start;gap:16px;border-top:1px solid #b9d0c1;border-bottom:1px solid #d1ded4;padding:19px 3px;margin:38px 0 18px}
+.atlas-bottom-mark{font:400 27px Georgia,serif;color:#2b8060}
+.atlas-bottom p{font-size:14px;color:#5d766b;line-height:1.7;max-width:790px;margin:0}
+.atlas-bottom strong{font-weight:750;color:#2d7857}
+.atlas-source{font-size:11px;color:#96a49a;line-height:1.6;margin:0}
+.search-chapter{display:flex;width:100%;align-items:center;justify-content:space-between;gap:12px;border:0;background:transparent;text-align:left;padding:13px 4px;min-height:65px;border-bottom:1px solid #e3eaea;color:#28483c}
+.search-chapter:hover{background:#e8f3e9}
+.search-chapter strong{display:block;font-size:15.5px}
+.search-chapter small{display:block;color:#85958b;font-size:12px;margin-top:4px}
+.search-chapter .arr{width:31px;height:31px}
+.search-type{display:inline-block;font-size:10px;color:#3c8a64;font-weight:800;letter-spacing:.07em;margin-right:5px}
+@media(max-width:1050px){
+ nav .tabs{min-width:1020px;grid-template-columns:1.25fr 1fr 1fr 1fr 130px}
+ .atlas-shell{grid-template-columns:minmax(225px,260px) 1fr;gap:25px}
+}
+@media(max-width:800px){
+ nav .tabs{min-width:975px}
+ nav a{min-height:72px}
+ .atlas-lede{margin-bottom:27px}
+ .atlas-signature{min-width:120px;grid-template-columns:auto 64px}
+ .atlas-signature strong{font-size:35px}
+ .atlas-shell{grid-template-columns:1fr;gap:25px}
+ .atlas-index{display:grid;grid-template-columns:1fr 1fr;border-left:1px solid #d5e1d9}
+ .atlas-part{border-right:1px solid #d5e1d9;gap:12px;padding:15px 10px}
+ .atlas-part-number{font-size:26px;width:25px}
+ .atlas-part-text strong{font-size:14px}
+ .atlas-reader{min-height:0}
+}
+@media(max-width:540px){
+ .atlas-lede{align-items:start;gap:12px}
+ .atlas-lede h2{font-size:36px}
+ .atlas-lede p{font-size:14px}
+ .atlas-signature{display:none}
+ .atlas-progress{gap:8px;font-size:9px}
+ .atlas-tick{width:21px}
+ .atlas-index{display:block}
+ .atlas-part{border-right:1px solid #d5e1d9;min-height:67px}
+ .atlas-part-text strong{font-size:15px}
+ .atlas-reader-head h3{font-size:31px}
+ .atlas-chapter .chapter-state{display:none}
+ .atlas-chapter-body{padding-left:16px}
+ .atlas-chapter .roman{width:30px}
+}
 </style></head><body><div class="wrap">
 <header><a class="brand" href="./"><span class="brand-mark" aria-hidden="true">G.</span><span>EXO <span class="brand-slash">/</span> GRAMMAIRE</span></a><a class="home" href="../index.html">Accueil <span aria-hidden="true">↗</span></a></header>
 <div class="hero"><div class="hero-copy"><div class="overline">Un atlas pour explorer la langue</div><h1>Grammaire<br><em>en contexte.</em></h1><p class="lead">Comprendre les formes, construire le sens.</p><p class="cn" lang="zh-CN">理解语法形式，探索意义表达。</p></div><div class="hero-art"><svg viewBox="0 0 500 350" role="img" aria-label="Trois parcours convergent vers la grammaire">
@@ -148,62 +252,171 @@ footer span:first-child{font-weight:750;letter-spacing:.06em;color:#4f7b68}
 <text class="core-small" x="260" y="153">FORMES &amp; SENS</text><text class="core-label" x="260" y="179">GRAMMAIRE</text>
 <circle class="minor" cx="29" cy="190" r="3"/><circle class="accent" cx="472" cy="254" r="4"/>
 </svg></div></div>
-<nav aria-label="Parcours de grammaire"><div class="tabs" role="tablist" aria-label="Parcours de grammaire">
-<a role="tab" id="tab-verbe" data-target="verbe" href="#verbe" aria-controls="verbe" aria-selected="true" tabindex="0"><svg viewBox="0 0 24 24"><circle cx="6" cy="3" r="2"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="6" r="3"/><path d="M6 5v10M6 7a6 6 0 0 0 6 6h3a3 3 0 0 0 3-3V9"/></svg><span class="tab-text"><span>À partir du verbe</span><small lang="zh-CN">从动词出发</small></span></a>
+<nav aria-label="Parcours de grammaire"><div class="tabs" role="tablist" aria-label="Parcours de grammaire"><a role="tab" id="tab-atlas" data-target="atlas" href="#atlas" aria-controls="atlas" aria-selected="true" tabindex="0"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h7v15H4zM13 5h7v15h-7z"/><path d="M7.5 9h0M16.5 9h0M7.5 13h0M16.5 13h0"/></svg><span class="tab-text"><span>Explorer la grammaire</span><small lang="zh-CN">五大领域 · 24 个知识主题</small></span></a>
+<a role="tab" id="tab-verbe" data-target="verbe" href="#verbe" aria-controls="verbe" aria-selected="false" tabindex="-1"><svg viewBox="0 0 24 24"><circle cx="6" cy="3" r="2"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="6" r="3"/><path d="M6 5v10M6 7a6 6 0 0 0 6 6h3a3 3 0 0 0 3-3V9"/></svg><span class="tab-text"><span>À partir du verbe</span><small lang="zh-CN">从动词出发</small></span></a>
 <a role="tab" id="tab-sens" data-target="sens" href="#sens" aria-controls="sens" aria-selected="false" tabindex="-1"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.5 8.5 0 0 1-12.3 7.6L3 21l1.9-5.7a8.5 8.5 0 0 1 7.6-12.3 8.5 8.5 0 0 1 8.5 8.5z"/></svg><span class="tab-text"><span>À partir du sens</span><small lang="zh-CN">从意义出发</small></span></a>
 <a role="tab" id="tab-unites" data-target="unites" href="#unites" aria-controls="unites" aria-selected="false" tabindex="-1"><svg viewBox="0 0 24 24"><path d="M12 7v14M3 18V4a1 1 0 0 1 1-1h5a3 3 0 0 1 3 3 3 3 0 0 1 3-3h5a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-5a3 3 0 0 0-3 2 3 3 0 0 0-3-2H4a1 1 0 0 1-1-1z"/></svg><span class="tab-text"><span>Au fil des unités</span><small lang="zh-CN">按单元探索</small></span></a>
 <a role="tab" id="tab-chercher" data-target="chercher" href="#chercher" aria-controls="chercher" aria-selected="false" tabindex="-1"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><span class="tab-text"><span>Rechercher</span></span></a>
 </div></nav>
-<main id="contenu">
-<section class="pane" id="verbe" role="tabpanel" aria-labelledby="tab-verbe"><div class="layout"><aside><svg viewBox="0 0 24 24"><circle cx="6" cy="3" r="2"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="6" r="3"/><path d="M6 5v10M6 7a6 6 0 0 0 6 6h3a3 3 0 0 0 3-3V9"/></svg><div class="overline">01 · Axe structurel</div><h2>Le verbe au centre</h2><p>Comment le verbe organise-t-il la phrase ? Comment peut-on situer un événement dans le temps et le relier à d'autres événements ?</p><p class="cn">动词与构式、时态、语式及句子之间的联系。</p></aside><div class="contents"><section class="group"><h3>Le verbe dans la phrase <small>动词与句子结构</small></h3><ul class="resources"><li><a href="./U1/la-question-avec-inversion.html"><span><strong>La question avec inversion</strong><small>Unité 1 · Leçon 1</small></span><span aria-hidden="true" class="arr">↗</span></a></li></ul></section><section class="group"><h3>Temps et aspect <small>时间与事件呈现</small></h3><ul class="resources"><li><a href="./U2/passe-imparfait.html"><span><strong>Imparfait ou passé composé ?</strong><small>Révision · Solidarité</small></span><span aria-hidden="true" class="arr">↗</span></a></li><li><a href="./U2/passe-imparfait2.html"><span><strong>Imparfait ou passé composé ? (2)</strong><small>Révision · Témoignage de Sessou</small></span><span aria-hidden="true" class="arr">↗</span></a></li><li><a href="./U2/temoignage-engagement.html"><span><strong>Raconter un engagement</strong><small>Révision · Récit au passé</small></span><span aria-hidden="true" class="arr">↗</span></a></li></ul></section><section class="group"><h3>Le verbe dans les propositions <small>动词与从句</small></h3><ul class="resources"><li><a href="./U2/opposition-concession.html"><span><strong>L'opposition et la concession</strong><small>Unité 2 · Leçon 7</small></span><span aria-hidden="true" class="arr">↗</span></a></li></ul></section></div></div></section>
+<main id="contenu"><section class="pane" id="atlas" role="tabpanel" aria-labelledby="tab-atlas">
+<div class="atlas-lede">
+ <div><span class="atlas-kicker">Sommaire général · Vue d'ensemble</span>
+ <h2>Une grammaire,<br><em>cinq domaines.</em></h2>
+ <p>Des formes de la langue à l’interprétation et aux usages : explorez l’ensemble de la grammaire, puis suivez vos propres chemins.</p></div>
+ <div class="atlas-signature"><strong>05</strong><span>DOMAINES</span><i></i><strong>24</strong><span>CHAPITRES</span></div>
+</div>
+<div class="atlas-progress" aria-hidden="true"><span>FORMES</span><span class="atlas-tick"></span><span>STRUCTURES</span><span class="atlas-tick"></span><span>SENS &amp; USAGES</span></div>
+<div class="atlas-shell">
+  <div class="atlas-index-wrap">
+  <p class="atlas-small">Choisir un domaine <span>选择知识领域</span></p>
+  <div class="atlas-index" id="atlas-index" aria-label="Cinq domaines de la grammaire"></div>
+  </div>
+  <div class="atlas-reader" id="atlas-reader" aria-live="polite"></div>
+</div>
+<div class="atlas-bottom"><span class="atlas-bottom-mark">↗</span><p>Le sommaire donne une vue d’ensemble. Les trois parcours ci-dessus permettent d’explorer les mêmes ressources <strong>par le verbe, par le sens ou par les unités</strong>.</p></div>
+<p class="atlas-source">Structure de référence : Riegel, Pellat et Rioul, <em>Grammaire méthodique du français</em>. Adaptation pédagogique pour le FLE ; les ressources sont publiées progressivement.</p>
+</section>
+<section class="pane" id="verbe" role="tabpanel" aria-labelledby="tab-verbe" hidden><div class="layout"><aside><svg viewBox="0 0 24 24"><circle cx="6" cy="3" r="2"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="6" r="3"/><path d="M6 5v10M6 7a6 6 0 0 0 6 6h3a3 3 0 0 0 3-3V9"/></svg><div class="overline">01 · Axe structurel</div><h2>Le verbe au centre</h2><p>Comment le verbe organise-t-il la phrase ? Comment peut-on situer un événement dans le temps et le relier à d'autres événements ?</p><p class="cn">动词与构式、时态、语式及句子之间的联系。</p></aside><div class="contents"><section class="group"><h3>Le verbe dans la phrase <small>动词与句子结构</small></h3><ul class="resources"><li><a href="./U1/la-question-avec-inversion.html"><span><strong>La question avec inversion</strong><small>Unité 1 · Leçon 1</small></span><span aria-hidden="true" class="arr">↗</span></a></li></ul></section><section class="group"><h3>Temps et aspect <small>时间与事件呈现</small></h3><ul class="resources"><li><a href="./U2/passe-imparfait.html"><span><strong>Imparfait ou passé composé ?</strong><small>Révision · Solidarité</small></span><span aria-hidden="true" class="arr">↗</span></a></li><li><a href="./U2/passe-imparfait2.html"><span><strong>Imparfait ou passé composé ? (2)</strong><small>Révision · Témoignage de Sessou</small></span><span aria-hidden="true" class="arr">↗</span></a></li><li><a href="./U2/temoignage-engagement.html"><span><strong>Raconter un engagement</strong><small>Révision · Récit au passé</small></span><span aria-hidden="true" class="arr">↗</span></a></li></ul></section><section class="group"><h3>Le verbe dans les propositions <small>动词与从句</small></h3><ul class="resources"><li><a href="./U2/opposition-concession.html"><span><strong>L'opposition et la concession</strong><small>Unité 2 · Leçon 7</small></span><span aria-hidden="true" class="arr">↗</span></a></li></ul></section></div></div></section>
 <section class="pane" id="sens" role="tabpanel" aria-labelledby="tab-sens" hidden><div class="layout"><aside><svg viewBox="0 0 24 24"><path d="M21 11.5a8.5 8.5 0 0 1-12.3 7.6L3 21l1.9-5.7a8.5 8.5 0 0 1 7.6-12.3 8.5 8.5 0 0 1 8.5 8.5z"/></svg><div class="overline">02 · Axe fonctionnel</div><h2>La grammaire pour dire</h2><p>Quelles formes grammaticales permettent de construire un sens et de répondre à une intention de communication ?</p><p class="cn">从意义和表达意图出发，认识不同形式的使用条件与语用效果。</p></aside><div class="contents"><section class="group"><h3>Nuancer une affirmation <small>调整判断的程度</small></h3><ul class="resources"><li><a href="./U1/nuancer-un-propos.html"><span><strong>Les adverbes pour nuancer un propos</strong><small>Unité 1 · Argumentation</small></span><span aria-hidden="true" class="arr">↗</span></a></li></ul></section><section class="group"><h3>Opposer et concéder <small>表达对立与让步</small></h3><ul class="resources"><li><a href="./U2/opposition-concession.html"><span><strong>L'opposition et la concession</strong><small>Unité 2 · Leçon 7</small></span><span aria-hidden="true" class="arr">↗</span></a></li></ul></section><section class="group"><h3>Interroger et adapter sa manière de dire <small>提问与语体选择</small></h3><ul class="resources"><li><a href="./U1/la-question-avec-inversion.html"><span><strong>La question avec inversion</strong><small>Unité 1 · Leçon 1</small></span><span aria-hidden="true" class="arr">↗</span></a></li><li><a href="./U1/registre-de-langue.html"><span><strong>Le registre de langue</strong><small>Unité 1 · Reformulation</small></span><span aria-hidden="true" class="arr">↗</span></a></li></ul></section><section class="group"><h3>Raconter des événements passés <small>叙述过去事件</small></h3><ul class="resources"><li><a href="./U2/passe-imparfait.html"><span><strong>Imparfait ou passé composé ?</strong><small>Révision · Solidarité</small></span><span aria-hidden="true" class="arr">↗</span></a></li><li><a href="./U2/passe-imparfait2.html"><span><strong>Imparfait ou passé composé ? (2)</strong><small>Révision · Témoignage de Sessou</small></span><span aria-hidden="true" class="arr">↗</span></a></li><li><a href="./U2/temoignage-engagement.html"><span><strong>Raconter un engagement</strong><small>Révision · Récit au passé</small></span><span aria-hidden="true" class="arr">↗</span></a></li></ul></section></div></div></section>
 <section class="pane" id="unites" role="tabpanel" aria-labelledby="tab-unites" hidden><div class="layout"><aside><svg viewBox="0 0 24 24"><path d="M12 7v14M3 18V4a1 1 0 0 1 1-1h5a3 3 0 0 1 3 3 3 3 0 0 1 3-3h5a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-5a3 3 0 0 0-3 2 3 3 0 0 0-3-2H4a1 1 0 0 1-1-1z"/></svg><div class="overline">03 · Parcours du cours</div><h2>Au fil des unités</h2><p>Retrouver les leçons et activités de grammaire selon la progression du cours.</p><p class="cn">单元导航保留全部原有资源，练习内容不作修改。</p></aside><div class="contents"><section class="group"><h3>Unité 1 <small>Le bonheur est-il utopique ?</small></h3><ul class="resources"><li><a href="./U1/"><span><strong>La grammaire au service du discours</strong><small>Unité 1 · Parcours transversal</small></span><span aria-hidden="true" class="arr">↗</span></a></li><li><a href="./U1/la-question-avec-inversion.html"><span><strong>La question avec inversion</strong><small>Unité 1 · Leçon 1</small></span><span aria-hidden="true" class="arr">↗</span></a></li><li><a href="./U1/nuancer-un-propos.html"><span><strong>Les adverbes pour nuancer un propos</strong><small>Unité 1 · Argumentation</small></span><span aria-hidden="true" class="arr">↗</span></a></li><li><a href="./U1/registre-de-langue.html"><span><strong>Le registre de langue</strong><small>Unité 1 · Reformulation</small></span><span aria-hidden="true" class="arr">↗</span></a></li></ul></section><section class="group"><h3>Unité 2 <small>Sommes-nous prisonniers de notre apparence ?</small></h3><ul class="resources"><li><a href="./U2/opposition-concession.html"><span><strong>L'opposition et la concession</strong><small>Unité 2 · Leçon 7</small></span><span aria-hidden="true" class="arr">↗</span></a></li><li><a href="./U2/passe-imparfait.html"><span><strong>Imparfait ou passé composé ?</strong><small>Révision · Solidarité</small></span><span aria-hidden="true" class="arr">↗</span></a></li><li><a href="./U2/passe-imparfait2.html"><span><strong>Imparfait ou passé composé ? (2)</strong><small>Révision · Témoignage de Sessou</small></span><span aria-hidden="true" class="arr">↗</span></a></li><li><a href="./U2/temoignage-engagement.html"><span><strong>Raconter un engagement</strong><small>Révision · Récit au passé</small></span><span aria-hidden="true" class="arr">↗</span></a></li></ul></section></div></div></section>
 <section class="pane" id="chercher" role="tabpanel" aria-labelledby="tab-chercher" hidden><div class="layout"><aside><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><div class="overline">04 · Recherche</div><h2>Rechercher</h2><p>Retrouver les activités par leur titre, une notion grammaticale ou une intention de communication.</p><p class="cn">搜索支持法语及中文关键词，当前涵盖 Grammaire 已有的八个页面。</p></aside><div class="contents"><label class="search-label" for="grammar-search">Que souhaitez-vous travailler ?</label><div class="searchbar"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input id="grammar-search" type="search" autocomplete="off" placeholder="Ex. imparfait, concession, 过去时, 让步…"></div><div class="chips"><span>Exemples</span><button type="button" data-query="imparfait">imparfait</button><button type="button" data-query="concession">concession</button><button type="button" data-query="nuancer">nuancer</button><button type="button" data-query="疑问">疑问</button></div><div id="search-status" role="status" aria-live="polite">8 ressources disponibles</div><ul class="resources" id="search-results"></ul><div id="search-empty">Aucune ressource trouvée. Essayez un autre mot-clé.</div></div></div></section>
-</main><footer><span>Grammaire en contexte · EXO</span><span>La carte des relations grammaticales sera progressivement enrichie.</span></footer></div>
+</main><footer><span>Grammaire en contexte · EXO</span><span>Un sommaire de référence, plusieurs parcours d’apprentissage.</span></footer></div>
 <script>
 (function(){
 "use strict";
 const resources=[["La grammaire au service du discours","U1/","Unité 1 · Parcours transversal","grammaire du texte 语法 语篇 style discours 论证"],["La question avec inversion","U1/la-question-avec-inversion.html","Unité 1 · Leçon 1","question interrogation sujet verbe inversion 疑问 倒装 提问"],["Les adverbes pour nuancer un propos","U1/nuancer-un-propos.html","Unité 1 · Argumentation","nuance adverbe degré intensité jugement 论证 细化 副词 程度"],["Le registre de langue","U1/registre-de-langue.html","Unité 1 · Reformulation","registre formel familier style politesse 语体 礼貌 改写"],["L'opposition et la concession","U2/opposition-concession.html","Unité 2 · Leçon 7","opposition concession bien que subjonctif même si pourtant malgré 对立 让步 虚拟式"],["Imparfait ou passé composé ?","U2/passe-imparfait.html","Révision · Solidarité","passé imparfait passé composé récit aspect 过去时 复合过去时 未完成过去时"],["Imparfait ou passé composé ? (2)","U2/passe-imparfait2.html","Révision · Témoignage de Sessou","passé imparfait passé composé témoignage récit 过去时 复合过去时 未完成过去时"],["Raconter un engagement","U2/temoignage-engagement.html","Révision · Récit au passé","raconter narration engagement passé composé imparfait 讲述 叙述 过去时"]];
+const parts=[{"key":"I","title":"Les formes de l’écrit et de l’oral","short":"L’oral et l’écrit","zh":"口语与书面语的形式","sub":"Observer la matière sonore et graphique de la langue.","chapters":[["I","L’oral et l’écrit","口语与书面语","Comparer les propriétés des formes orales et écrites.","oral écrit code prononciation transcription",[]],["II","Les sons du français : phonétique et phonologie","语音与音系","Étudier la production et l’organisation des sons du français.","phonétique phonologie syllabe liaison prononciation",[]],["III","L’orthographe française","法语拼写系统","Comprendre les conventions graphiques et leurs régularités.","orthographe accents graphies accord écriture",[]],["IV","La ponctuation","标点符号","Observer comment la ponctuation structure l’écrit et oriente la lecture.","ponctuation virgule point tiret",[]],["V","Le système du vers français","法语诗行与韵律","Découvrir les contraintes de rythme et de versification.","vers versification poésie rythme",[]]]},{"key":"II","title":"Syntaxe de la phrase simple","short":"La phrase simple","zh":"简单句的句法结构","sub":"Comprendre les groupes, leurs fonctions et les valeurs des formes verbales.","chapters":[["VI","Les structures de la phrase","句子的基本结构","Identifier les constituants et les relations qui organisent la phrase.","syntaxe sujet prédicat fonctions ordre",[]],["VII","Le groupe nominal","名词词组","Étudier les déterminants, les noms, les pronoms et la référence nominale.","nom déterminant article pronom groupe nominal",[]],["VIII","Le groupe verbal","动词词组","Comprendre le verbe, ses constructions et les relations avec ses compléments.","verbe valence transitif intransitif objet complément construction",[]],["IX","La morphologie verbale","动词形态","Observer la formation des temps, des modes et des formes verbales.","conjugaison auxiliaire participe accord formes verbales",[]],["X","La sémantique des formes verbales","动词形式的意义","Explorer les valeurs des modes, des temps et des aspects.","imparfait passé composé futur subjonctif conditionnel mode temps aspect",[5,6,7]],["XI","L’adjectif et le groupe adjectival","形容词及形容词词组","Étudier l’adjectif, ses fonctions et ses degrés.","adjectif qualification épithète attribut comparaison",[]],["XII","La préposition et le groupe prépositionnel","介词及介词词组","Observer la construction et la fonction des groupes prépositionnels.","préposition à de avec par complément",[]],["XIII","L’adverbe","副词","Comprendre les emplois des adverbes et les nuances qu’ils apportent.","adverbe nuancer intensité modalité degré",[2]],["XIV","Les types de phrases","句子的类型","Comparer les phrases déclaratives, interrogatives et injonctives.","interrogation question inversion exclamation négation impératif",[1]]]},{"key":"III","title":"Syntaxe de la phrase complexe","short":"La phrase complexe","zh":"复合句的句法结构","sub":"Relier les propositions et construire les rapports entre idées.","chapters":[["XV","La phrase complexe : juxtaposition, coordination et subordination","复合句的组织","Différencier les liens entre propositions.","phrase complexe proposition coordination subordination juxtaposition",[]],["XVI","Les relatives","关系从句","Étudier les subordonnées relatives et les pronoms relatifs.","relative qui que dont où lequel",[]],["XVII","Les complétives","补语从句","Observer les subordonnées complétives et les constructions en que.","complétive que si infinitif subjonctif",[]],["XVIII","Les circonstancielles","状语从句","Étudier les liens de temps, de cause, de condition, d’opposition et de concession.","circonstancielle concession bien que même si alors que condition cause opposition",[4]],["XIX","Juxtaposition et coordination","并置与并列","Analyser la mise en relation de propositions autonomes.","coordination juxtaposition mais ou et donc car",[]]]},{"key":"IV","title":"Grammaire et lexique","short":"Grammaire et lexique","zh":"语法与词汇","sub":"Mettre en relation la formation des mots et leurs significations.","chapters":[["XX","Morphologie grammaticale et lexicale","语法形态与词汇形态","Observer les phénomènes de flexion, de dérivation et de composition.","morphologie dérivation nominalisation flexion composition",[]],["XXI","Sémantique lexicale et grammaticale","词汇与语法语义","Comparer les sens lexicaux et les valeurs grammaticales.","sémantique sens lexical sens grammatical polysémie",[]]]},{"key":"V","title":"Grammaire et communication","short":"Grammaire et communication","zh":"语法与交际","sub":"Interpréter les formes dans la situation et dans le discours.","chapters":[["XXII","La référence","指称","Comprendre comment les expressions renvoient à des objets ou à des situations.","référence déterminant deixis anaphore désignation",[]],["XXIII","L’énonciation","言说与说话者立场","Étudier les marques du locuteur, la modalité et les actes de langage.","énonciation discours rapporté registre politesse attitude modalité",[3]],["XXIV","Texte et discours","语篇与话语","Observer la cohérence, la progression thématique et les enchaînements.","texte discours cohérence cohésion argumentation",[0]]]}];
 const tabs=Array.from(document.querySelectorAll('[role="tab"]'));
 const panes=Array.from(document.querySelectorAll('[role="tabpanel"]'));
 const input=document.getElementById('grammar-search');
-const result=document.getElementById('search-results');
+const results=document.getElementById('search-results');
 const status=document.getElementById('search-status');
 const empty=document.getElementById('search-empty');
+const atlasIndex=document.getElementById('atlas-index');
+const atlasReader=document.getElementById('atlas-reader');
 const ids=tabs.map(t=>t.dataset.target);
-function show(which,focus){
- if(!ids.includes(which))which='verbe';
- for(const tab of tabs){const active=tab.dataset.target===which;tab.setAttribute('aria-selected',String(active));tab.tabIndex=active?0:-1;}
- for(const pane of panes)pane.hidden=pane.id!==which;
- if(focus&&which==='chercher')input.focus();
+let selectedPart=1;
+function show(id,focus){
+ if(!ids.includes(id))id="atlas";
+ tabs.forEach(t=>{const on=t.dataset.target===id;t.setAttribute("aria-selected",String(on));t.tabIndex=on?0:-1;});
+ panes.forEach(p=>p.hidden=p.id!==id);
+ if(focus && id==="chercher")input.focus();
 }
-function open(which,focus){if(location.hash!=='#'+which)history.pushState(null,'','#'+which);show(which,focus);}
-tabs.forEach((t,index)=>{
- t.addEventListener('click',e=>{e.preventDefault();open(t.dataset.target,t.dataset.target==='chercher');});
- t.addEventListener('keydown',e=>{
-  const keys=['ArrowRight','ArrowLeft','Home','End'];if(!keys.includes(e.key))return;
-  e.preventDefault();let n=e.key==='Home'?0:e.key==='End'?tabs.length-1:e.key==='ArrowRight'?(index+1)%tabs.length:(index+tabs.length-1)%tabs.length;
-  tabs[n].focus();open(tabs[n].dataset.target,false);
+function open(id,focus){if(location.hash!=="#"+id)history.pushState(null,"","#"+id);show(id,focus);}
+tabs.forEach((tab,i)=>{
+ tab.addEventListener("click",e=>{e.preventDefault();open(tab.dataset.target,tab.dataset.target==="chercher");});
+ tab.addEventListener("keydown",e=>{
+  let n;
+  if(e.key==="ArrowRight")n=(i+1)%tabs.length;
+  else if(e.key==="ArrowLeft")n=(i+tabs.length-1)%tabs.length;
+  else if(e.key==="Home")n=0;
+  else if(e.key==="End")n=tabs.length-1;
+  else return;
+  e.preventDefault();tabs[n].focus();open(tabs[n].dataset.target,false);
  });
 });
-window.addEventListener('hashchange',()=>show(location.hash.slice(1),false));
-window.addEventListener('popstate',()=>show(location.hash.slice(1),false));
-function normalize(s){return String(s).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[’']/g,' ');}
-function render(){
- const tokens=normalize(input.value.trim()).split(/\s+/).filter(Boolean);
- const matches=resources.filter(item=>tokens.every(t=>normalize(item.join(' ')).includes(t)));
- result.replaceChildren();
- matches.forEach(item=>{
-  const li=document.createElement('li');const a=document.createElement('a');a.href='./'+item[1];
-  const span=document.createElement('span');const strong=document.createElement('strong');strong.textContent=item[0];const small=document.createElement('small');small.textContent=item[2];span.append(strong,small);
-  const arrow=document.createElement('span');arrow.className='arr';arrow.textContent='↗';arrow.setAttribute('aria-hidden','true');a.append(span,arrow);li.append(a);result.append(li);
- });
- status.textContent=matches.length+' ressource'+(matches.length===1?'':'s')+(tokens.length?' trouvée'+(matches.length===1?'':'s'):' disponible'+(matches.length===1?'':'s'));
- empty.style.display=matches.length?'none':'block';
+window.addEventListener("popstate",()=>show(location.hash.slice(1),false));
+window.addEventListener("hashchange",()=>show(location.hash.slice(1),false));
+function make(tag,text,cls){
+ const node=document.createElement(tag);
+ if(text!=null)node.textContent=text;
+ if(cls)node.className=cls;
+ return node;
 }
-input.addEventListener('input',render);
-document.querySelectorAll('[data-query]').forEach(b=>b.addEventListener('click',()=>{input.value=b.dataset.query;render();input.focus();}));
-document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();open('chercher',true);}});
-show(location.hash.slice(1),false);render();
+function resourceLink(id){
+ const row=resources[id];
+ const a=make("a");a.href="./"+row[1];
+ a.append(make("span",row[0]),make("span","↗"));
+ return a;
+}
+function renderAtlas(index){
+ selectedPart=index;
+ const part=parts[index];
+ atlasIndex.replaceChildren();
+ parts.forEach((p,i)=>{
+  const btn=make("button",null,"atlas-part");
+  btn.type="button";btn.setAttribute("aria-pressed",String(index===i));
+  btn.append(make("span",p.key,"atlas-part-number"));
+  const words=make("span",null,"atlas-part-text");
+  words.append(make("strong",p.short),make("small",p.zh));
+  btn.append(words,make("span","›","atlas-part-chevron"));
+  btn.addEventListener("click",()=>renderAtlas(i));
+  atlasIndex.append(btn);
+ });
+ atlasReader.replaceChildren();
+ const head=make("div",null,"atlas-reader-head");
+ const text=make("div");
+ text.append(make("span","PARTIE "+part.key+" / "+part.title,"atlas-reader-eyebrow"));
+ text.append(make("h3",part.short),make("p",part.sub));
+ const count=make("div",null,"atlas-count");
+ count.append(make("strong",String(part.chapters.length).padStart(2,"0")),make("span","chapitres"));
+ head.append(text,count);atlasReader.append(head);
+ const chapters=make("div",null,"atlas-chapters");
+ part.chapters.forEach(ch=>{
+  const [roman,title,zh,description,keywords,linked]=ch;
+  const item=make("details",null,"atlas-chapter"+(linked.length?" has-resource":"")+
+    (["VIII","IX","X"].includes(roman)?" is-core":""));
+  item.dataset.roman=roman;
+  const summary=make("summary");
+  summary.append(make("span",roman,"roman"));
+  const names=make("span",null,"chapter-name");
+  names.append(make("strong",title),make("small",zh));summary.append(names);
+  summary.append(make("span",linked.length?(linked.length+" activité"+(linked.length>1?"s":"")):"À développer","chapter-state"),make("span","+","toggle"));
+  item.append(summary);
+  const body=make("div",null,"atlas-chapter-body");
+  body.append(make("p",description));
+  if(linked.length)linked.forEach(k=>body.append(resourceLink(k)));
+  else body.append(make("p","Les activités de cette rubrique seront ajoutées progressivement.","pending"));
+  item.append(body);chapters.append(item);
+ });
+ atlasReader.append(chapters);
+}
+const normalize=s=>String(s||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[’']/g," ");
+function goToChapter(partNo,roman){
+ open("atlas",false);renderAtlas(partNo);
+ const el=Array.from(atlasReader.querySelectorAll("details")).find(x=>x.dataset.roman===roman);
+ if(el){el.open=true;el.scrollIntoView({behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"center"});}
+}
+function renderSearch(){
+ const tokens=normalize(input.value.trim()).split(/\s+/).filter(Boolean);
+ const rows=resources.map((item,i)=>({type:"resource",data:item,id:i})).filter(obj=>{
+  const hay=normalize(obj.data.join(" "));
+  return tokens.every(t=>hay.includes(t));
+ });
+ const chapters=tokens.length?parts.flatMap((part,partNo)=>part.chapters.map(ch=>({type:"chapter",partNo,data:ch}))).filter(obj=>{
+  const ch=obj.data;
+  const hay=normalize([ch[1],ch[2],ch[3],ch[4],parts[obj.partNo].title,parts[obj.partNo].short].join(" "));
+  return tokens.every(t=>hay.includes(t));
+ }):[];
+ results.replaceChildren();
+ rows.forEach(o=>{
+  const item=o.data,li=make("li"),a=make("a");a.href="./"+item[1];
+  const left=make("span");left.append(make("strong",item[0]),make("small",item[2]));
+  const arrow=make("span","↗","arr");arrow.setAttribute("aria-hidden","true");
+  a.append(left,arrow);li.append(a);results.append(li);
+ });
+ chapters.forEach(o=>{
+  const ch=o.data,li=make("li"),b=make("button",null,"search-chapter");b.type="button";
+  const left=make("span");left.append(make("strong",ch[0]+" · "+ch[1]),make("small","Notion du sommaire · "+ch[2]));
+  b.append(left,make("span","↗","arr"));
+  b.addEventListener("click",()=>goToChapter(o.partNo,ch[0]));
+  li.append(b);results.append(li);
+ });
+ const total=rows.length+chapters.length;
+ status.textContent=total+" résultat"+(total===1?"":"s")+(tokens.length?"":" · 8 ressources disponibles");
+ empty.style.display=total?"none":"block";
+}
+input.addEventListener("input",renderSearch);
+document.querySelectorAll("[data-query]").forEach(b=>b.addEventListener("click",()=>{
+ input.value=b.dataset.query;renderSearch();input.focus();
+}));
+document.addEventListener("keydown",e=>{
+ if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="k"){
+  e.preventDefault();open("chercher",true);
+ }
+});
+renderAtlas(1);
+show(location.hash.slice(1),false);
+renderSearch();
 })();
 </script></body></html>
