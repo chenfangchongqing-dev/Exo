@@ -46,7 +46,7 @@
 <canvas id="world" aria-label="Scène 3D interactive d'un café parisien"></canvas>
 <div class="colorwash"></div><div class="grain"></div>
 <div id="crosshair"></div>
-<header id="topbar"><div class="brand"><div class="small">UNE AVENTURE EN FRANÇAIS</div><div class="main">CAFÉ DE FLORE</div><div class="sub">SAINT-GERMAIN-DES-PRÉS · PARIS · LEÇON 16</div></div><div class="topactions"><div class="stat">✦ &nbsp; Culture <strong id="cultureCount">0/3</strong></div><div class="stat">Parcours <strong id="stageCount">0/5</strong></div><button class="iconbtn" id="soundBtn" title="Activer ou désactiver la voix" aria-label="Son">♫</button><button class="iconbtn" id="voiceSettingsBtn" title="Régler les voix françaises" aria-label="Choisir les voix">🎧</button><button class="iconbtn" id="helpBtn" title="Mode d’emploi" aria-label="Aide">?</button></div></header>
+<header id="topbar"><div class="brand"><div class="small">UNE AVENTURE EN FRANÇAIS</div><div class="main">CAFÉ DE FLORE</div><div class="sub">SAINT-GERMAIN-DES-PRÉS · PARIS · LEÇON 16</div></div><div class="topactions"><div class="stat">✦ &nbsp; Culture <strong id="cultureCount">0/3</strong></div><div class="stat">Parcours <strong id="stageCount">0/5</strong></div><button class="iconbtn" id="soundBtn" title="Voix activée · touchez pour couper" aria-label="Couper la voix" aria-pressed="true">🔊</button><button class="iconbtn" id="voiceSettingsBtn" title="Régler les voix françaises" aria-label="Choisir les voix">🎧</button><button class="iconbtn" id="helpBtn" title="Mode d’emploi" aria-label="Aide">?</button></div></header>
 <div id="hud"><div class="quest"><div class="eyebrow">Votre mission</div><div class="questTitle">Un moment au Flore</div><div id="questLines"></div></div><div class="hint">Avancer <span class="kbd">Z</span><span class="kbd">Q</span><span class="kbd">S</span><span class="kbd">D</span> / WASD &nbsp; · &nbsp; Regarder : glisser la souris &nbsp; · &nbsp; Interagir : cliquer</div></div>
 <div id="hotspots"></div>
 <div id="mobileNav"><button class="movebtn" data-move="left" aria-label="Gauche">◀</button><button class="movebtn" data-move="forward" aria-label="Avancer">▲</button><button class="movebtn" data-move="back" aria-label="Reculer">▼</button><button class="movebtn" data-move="right" aria-label="Droite">▶</button></div>
@@ -118,10 +118,20 @@ u.rate=job.who==='learner'?.94:job.who==='customer'?1.00:.97;
 const distinct=voiceList.length>1 && getRoleVoice('server')?.voiceURI!==getRoleVoice('customer')?.voiceURI;
 u.pitch=distinct?1:(job.who==='server'?.93:job.who==='customer'?1.11:1.03);
 u.volume=1;voiceBusy=true;u.onend=u.onerror=()=>{if(gen!==voiceSerial)return;voiceBusy=false;drainVoices()};try{window.speechSynthesis.resume();window.speechSynthesis.speak(u)}catch(_){voiceBusy=false;drainVoices()}}
-function speak(txt,who='server',replace=false){if(replace)stopSpeech();if(!state.sound||!txt||!('speechSynthesis'in window))return;voiceQueue.push({text:txt,who});drainVoices();}
+function speak(txt,who='server',replace=false){
+  if(!state.sound||!txt||!('speechSynthesis'in window))return;
+  // On mobile Safari, cancelling immediately before speaking can silently
+  // discard the new utterance. Only cancel when there is actual speech to replace.
+  if(replace && (voiceBusy || window.speechSynthesis.speaking || window.speechSynthesis.pending)){
+    stopSpeech();
+    setTimeout(()=>{if(state.sound){voiceQueue.push({text:txt,who});drainVoices()}},100);
+    return;
+  }
+  voiceQueue.push({text:txt,who});drainVoices();
+}
 if('speechSynthesis'in window){window.speechSynthesis.addEventListener?.('voiceschanged',updateVoiceChoices);setTimeout(updateVoiceChoices,0);setTimeout(updateVoiceChoices,900)}
 function hideDialog(){state.dialogOpen=false;$('#dialogPanel').style.display='none'}
-function showDialog({name='Luc',role='LE SERVEUR',avatar='L',text,trans='',choices=[]}){closeMenu();const who=name==='Vous'?'learner':name==='Élise'?'customer':'server';state.dialogSpeaker=who;$('#dialogName').textContent=name;$('#dialogRole').textContent=role;$('#dialogPortrait').textContent=avatar;$('#dialogText').textContent=text;$('#dialogTranslate').textContent=trans;$('#dialogTranslate').style.display=trans?'block':'none';$('#dialogChoices').replaceChildren();choices.forEach(opt=>{const b=document.createElement('button');b.className='choice';const span=document.createElement('span');span.textContent=opt.label;const arrow=document.createElement('span');arrow.className='arrow';arrow.textContent='↗';b.append(span,arrow);b.addEventListener('click',()=>{stopSpeech();if(opt.say)speak(opt.say,'learner');else if(opt.label&&!opt.nospeak)speak(opt.label,'learner');opt.run()});$('#dialogChoices').append(b)});$('#dialogPanel').style.display='block';state.dialogOpen=true;state.dialogText=text;speak(text,who);}
+function showDialog({name='Luc',role='LE SERVEUR',avatar='L',text,trans='',choices=[]}){closeMenu();const who=name==='Vous'?'learner':name==='Élise'?'customer':'server';state.dialogSpeaker=who;$('#dialogName').textContent=name;$('#dialogRole').textContent=role;$('#dialogPortrait').textContent=avatar;$('#dialogText').textContent=text;$('#dialogTranslate').textContent=trans;$('#dialogTranslate').style.display=trans?'block':'none';$('#dialogChoices').replaceChildren();choices.forEach(opt=>{const b=document.createElement('button');b.className='choice';const span=document.createElement('span');span.textContent=opt.label;const arrow=document.createElement('span');arrow.className='arrow';arrow.textContent='↗';b.append(span,arrow);b.addEventListener('click',()=>{if(opt.say)speak(opt.say,'learner');else if(opt.label&&!opt.nospeak)speak(opt.label,'learner');opt.run()});$('#dialogChoices').append(b)});$('#dialogPanel').style.display='block';state.dialogOpen=true;state.dialogText=text;speak(text,who);}
 function openWelcome(){state.phase='welcome';showDialog({text:'Bonjour ! Bienvenue au Café de Flore. Vous êtes combien ?',trans:'您好！欢迎来到光影咖啡馆。请问几位？',choices:[{label:'Une table pour une personne, s’il vous plaît.',run:()=>acceptTable()},{label:'Une table pour deux personnes, s’il vous plaît.',run:()=>acceptTable()}]});}
 function acceptTable(){mark('greet');state.phase='seated';state.targetCam={x:.1,z:5.25,yaw:-.06,duration:1.0};showDialog({text:'Très bien ! Installez-vous près de la fenêtre. Voici la carte.',trans:'好的！请在窗边坐。给您菜单。',choices:[{label:'Merci ! Je voudrais voir la carte.',run:openMenu},{label:'Je regarde un peu autour de moi.',run:()=>{hideDialog();toast('Cliquez sur « La carte » pour commander.')}}]});}
 function prepareFood(){state.phase='awaitDish';showDialog({text:'Très bien ! Je vous apporte votre commande tout de suite.',trans:'好的！马上为您送上点的餐。',choices:[{label:'Merci beaucoup !',run:()=>{showDialog({text:'Votre commande arrive !',trans:'您的餐点来了！',choices:[{label:'Recevoir ma commande →',run:serveFood}]})}},{label:'Recevoir ma commande →',nospeak:true,run:serveFood}]});}
@@ -138,12 +148,33 @@ function openCulture(id){hideDialog();closeMenu();const c=culture[id];if(!c)retu
 function closeCulture(){state.modal=false;$('#cultureOverlay').classList.remove('open')}
 function openNeighbor(){showDialog({name:'Élise',role:'UNE CLIENTE PARISIENNE',avatar:'É',text:'Vous aimez les cafés ? Pour moi, c’est un lieu pour discuter, lire et retrouver des amis.',trans:'您喜欢咖啡馆吗？对我来说，这里是聊天、阅读和朋友相聚的地方。',choices:[{label:'Pourquoi les cafés sont-ils importants ?',run:()=>openCulture('flore')},{label:'Parlez-moi des bonnes manières.',run:()=>openCulture('manieres')},{label:'Merci pour cette conversation !',run:hideDialog}]});}
 function restart(){state.done.clear();state.culture.clear();state.answered.clear();state.cart=[];state.endSeen=false;state.phase='intro';state.cam={x:.18,y:1.7,z:22.1,yaw:0,pitch:-.045};state.targetCam=null;renderQuest();closeCulture();hideDialog();closeMenu();$('#end').classList.remove('open');$('#intro').classList.add('open');}
-$('#startBtn').addEventListener('click',()=>{state.started=true;$('#intro').classList.remove('open');state.targetCam={x:.25,z:20.0,yaw:0,duration:1.4};setTimeout(()=>{if(state.phase==='intro')openWelcome()},1050);toast('Bienvenue ! · Approchez de l’entrée et cliquez sur les bulles pour interagir.');});
+$('#startBtn').addEventListener('click',()=>{
+  state.started=true;$('#intro').classList.remove('open');state.targetCam={x:.25,z:20.0,yaw:0,duration:1.4};
+  updateVoiceChoices();
+  // Start the first real French utterance synchronously during the tap.
+  // iOS WebKit may block synthesis started later in a timeout.
+  openWelcome();
+  toast('Bienvenue ! · Touchez « Écouter en français » pour réécouter Luc.');
+});
 $('#dialogClose').onclick=$('#dialogHide').onclick=hideDialog;$('#repeatBtn').onclick=()=>speak(state.dialogText,state.dialogSpeaker||'server',true);
 $('#menuClose').onclick=closeMenu;$$('.menuTab').forEach(b=>b.onclick=()=>{state.tab=b.dataset.tab;renderMenu()});$('#clearOrder').onclick=()=>{state.cart=[];refreshBasket()};$('#listenOrder').onclick=()=>speak(orderSentence(),'learner',true);$('#confirmOrder').onclick=()=>{if(!state.cart.length)return;const phrase=orderSentence();closeMenu();mark('order');state.phase='ordered';showDialog({name:'Vous',role:'VOTRE COMMANDE',avatar:'V',text:phrase,trans:'请向服务员说出这句话。',choices:[{label:'Envoyer ma commande au serveur →',run:prepareFood},{label:'Modifier ma commande',nospeak:true,run:openMenu}]});};
 $('#cultureClose').onclick=$('#cultureDone').onclick=closeCulture;$('#cultureOverlay').addEventListener('click',e=>{if(e.target.id==='cultureOverlay')closeCulture()});
 $('#helpBtn').onclick=()=>$('#help').classList.add('open');$('#helpClose').onclick=$('#helpDone').onclick=()=>$('#help').classList.remove('open');
-$('#soundBtn').onclick=()=>{state.sound=!state.sound;$('#soundBtn').textContent=state.sound?'♫':'♪̸';toast(state.sound?'Voix activée':'Voix désactivée');if(!state.sound)stopSpeech()};
+function refreshSoundButton(){
+ const b=$('#soundBtn');b.textContent=state.sound?'🔊':'🔇';
+ b.title=state.sound?'Voix activée · touchez pour couper':'Voix désactivée · touchez pour écouter';
+ b.setAttribute('aria-label',state.sound?'Couper la voix':'Activer la voix');
+ b.setAttribute('aria-pressed',String(state.sound));
+}
+refreshSoundButton();
+$('#soundBtn').onclick=()=>{
+ state.sound=!state.sound;refreshSoundButton();
+ if(!state.sound){stopSpeech();toast('Voix désactivée');return;}
+ updateVoiceChoices();
+ // The user explicitly tapped sound ON, so initiate playback in that gesture.
+ speak(state.dialogOpen?state.dialogText:roleSamples.server,state.dialogOpen?(state.dialogSpeaker||'server'):'server');
+ toast('Voix activée · Vérifiez le volume du téléphone si vous n’entendez rien.');
+};
 $('#voiceSettingsBtn').onclick=()=>{updateVoiceChoices();$('#voiceOverlay').classList.add('open');state.modal=true;stopSpeech()};
 function closeVoiceSettings(){state.modal=false;$('#voiceOverlay').classList.remove('open');stopSpeech()}
 $('#voiceClose').onclick=$('#voiceDone').onclick=closeVoiceSettings;
