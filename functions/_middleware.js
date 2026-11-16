@@ -1,4 +1,4 @@
-// Cloudflare Pages middleware: public homepage + password-protected modules and teacher area.
+// Cloudflare Pages middleware: public homepage and Café de Flore demo; password-protected modules and teacher area.
 // COURSE_ACCESS_CODE is a module password independent of Idée's own GLM class code.
 // Configure encrypted secrets COURSE_ACCESS_CODE, PROF_ACCESS_CODE,
 // SESSION_SIGNING_KEY in the exo-fr Pages project before deployment.
@@ -93,6 +93,15 @@ export async function onRequest(ctx){
  // The homepage remains public even without configured secrets. Every module
  // and teacher-only file is checked below, including direct asset URLs.
  if(request.method==="GET" && (path==="/" || path==="/index.html")) return ctx.next();
+ // Public Café de Flore game: allow only this exact page (and its canonical aliases).
+ // Other /Events/ resources remain teacher-password protected.
+ const publicCafePaths=new Set([
+   "/events/au-cafe-de-flore",
+   "/events/au-cafe-de-flore/",
+   "/events/au-cafe-de-flore/index.html"
+ ]);
+ if((request.method==="GET"||request.method==="HEAD") && publicCafePaths.has(path.toLowerCase()))
+  return ctx.next();
  // Never bypass protection for protected resources when the configuration is absent.
  if(!env||typeof env.COURSE_ACCESS_CODE!=="string"||env.COURSE_ACCESS_CODE.length<12||
     typeof env.PROF_ACCESS_CODE!=="string"||env.PROF_ACCESS_CODE.length<12||
