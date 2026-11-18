@@ -267,7 +267,7 @@ function prepareFood(){
   ]});
 }
 function waitForOrder(){
-  state.phase='waiting';state.targetCam={x:3.2,z:8.2,yaw:0,pitch:-.18,duration:1.3};
+  state.phase='waiting';state.targetCam={x:3.04,y:1.99,z:7.94,yaw:0,pitch:-.23,duration:1.3};
   showDialog({text:'Voilà, votre commande arrive !',trans:'Luc 正端着您点的餐点走来。',choices:[
     {label:'Je reçois ma commande. →',run:serveFood}
   ]});
@@ -275,7 +275,7 @@ function waitForOrder(){
 function serveFood(){
   if(!state.cart.length)return;
   state.phase='serving';state.servingVisible=true;state.servingVerified.clear();
-  state.targetCam={x:3.2,z:8.2,yaw:0,pitch:-.18,duration:1.0};
+  state.targetCam={x:3.04,y:1.99,z:7.94,yaw:0,pitch:-.23,duration:1.0};
   rebuildServingMesh();
   showDialog({text:'Et voilà votre commande : '+friendlyList(orderParts())+' ! Bon appétit !',trans:'您的餐点来了：'+orderSummaryCN()+'。请慢用！',choices:[
     {label:'Je vais vérifier ma commande.',run:openDelivery},
@@ -420,8 +420,8 @@ function makeSignage(){// backing for procedural canvas signage
  B(-.5,3.84,5.90,1.4,.20,.12,C.brass);
 }
 function chair(x,z,ang=0){const ca=Math.cos(ang),sa=Math.sin(ang),r=(dx,dz)=>[x+dx*ca+dz*sa,z-dx*sa+dz*ca];let p=r(0,0);CY(p[0],.59,p[1],.34,.34,.14,C.wine);for(let dx of [-.23,.23])for(let dz of [-.21,.21]){const pt=r(dx,dz);CY(pt[0],.29,pt[1],.033,.034,.58,C.woodDark)}const back=r(0,.34);RL([back[0]-.29,.60,back[1]],[back[0]-.29,1.47,back[1]],.037,C.woodDark);RL([back[0]+.29,.60,back[1]],[back[0]+.29,1.47,back[1]],.037,C.woodDark);RL([back[0]-.29,1.47,back[1]],[back[0]+.29,1.47,back[1]],.048,C.woodDark);B(back[0],1.2,back[1],.6,.20,.075,C.wine,ang)}
-function table(x,z,style='plain'){CY(x,.78,z,.058,.056,1.40,C.woodDark);CY(x,.16,z,.42,.40,.11,C.woodDark);CY(x,1.52,z,.79,.79,.08,style==='marble'?C.cream:C.woodLite,16);CY(x,1.57,z,.76,.76,.035,style==='marble'?C.white:C.woodLite,16);CY(x+.20,1.69,z-.14,.115,.13,.21,C.cream,10);CY(x+.20,1.66,z-.14,.075,.075,.03,C.coffee);CY(x+.20,1.587,z-.14,.18,.18,.035,C.cream);B(x-.28,1.61,z+.05,.48,.08,.30,C.cream,.18);B(x-.28,1.657,z+.05,.45,.02,.29,C.woodLite,.18);chair(x+.72,z+.69,.72);chair(x-.62,z-.67,Math.PI+.4)}
-function makeTables(){table(2.1,-4.2,'marble');table(3.8,.95,'marble');table(-3.0,3.10,'plain');table(3.2,6.15,'plain'); // extra cafe details
+function table(x,z,style='plain'){CY(x,.78,z,.058,.056,1.40,C.woodDark);CY(x,.16,z,.42,.40,.11,C.woodDark);CY(x,1.52,z,.79,.79,.08,style==='marble'?C.cream:C.woodLite,16);CY(x,1.57,z,.76,.76,.035,style==='marble'?C.white:C.woodLite,16);if(style!=='service'){CY(x+.20,1.69,z-.14,.115,.13,.21,C.cream,10);CY(x+.20,1.66,z-.14,.075,.075,.03,C.coffee);CY(x+.20,1.587,z-.14,.18,.18,.035,C.cream);B(x-.28,1.61,z+.05,.48,.08,.30,C.cream,.18);B(x-.28,1.657,z+.05,.45,.02,.29,C.woodLite,.18);}chair(x+.72,z+.69,.72);chair(x-.62,z-.67,Math.PI+.4)}
+function makeTables(){table(2.1,-4.2,'marble');table(3.8,.95,'marble');table(-3.0,3.10,'plain');table(3.2,6.15,'service'); // extra cafe details
  for(const [x,z] of [[2.1,-4.2],[3.8,.95],[-3.0,3.1]]){CY(x-.1,1.74,z+.09,.035,.035,.33,C.brass);SP(x-.1,1.92,z+.09,.105,[.88,.64,.36],6,10)}
 }
 function makePerson(x,z,kind='server',dir=0){const cloth=kind==='server'?C.white:kind==='woman'?C.velvet:[.40,.34,.31],skin=kind==='woman'?C.skin2:C.skin,hair=kind==='woman'?[.18,.105,.080]:C.hair;const rot=(dx,dz)=>[x+dx*Math.cos(dir)+dz*Math.sin(dir),z-dx*Math.sin(dir)+dz*Math.cos(dir)];function b(dx,y,dz,w,h,d,col){const p=rot(dx,dz);B(p[0],y,p[1],w,h,d,col,dir)}function sp(dx,y,dz,r,col,rx=1,ry=1,rz=1){const p=rot(dx,dz);SP(p[0],y,p[1],r,col,7,11,rx,ry,rz)}function rail(dx1,y1,dz1,dx2,y2,dz2,r,col){const a=rot(dx1,dz1),b=rot(dx2,dz2);RL([a[0],y1,a[1]],[b[0],y2,b[1]],r,col)}
@@ -562,41 +562,47 @@ function clearServingMesh(){
   servingMeshGpu=null;
 }
 function rebuildServingMesh(){
-  clearServingMesh();if(!gl||!state.cart.length)return;
-  const m=new MeshBuilder();const xx=3.2,zz=6.15;
-  // Golden-rimmed serving tray above the existing café table.
-  m.cyl(xx,1.755,zz,.70,.70,.085,C.woodDark,24);
-  m.cyl(xx,1.804,zz,.675,.675,.022,C.brass,24);
-  m.cyl(xx,1.817,zz,.642,.642,.018,C.woodLite,24);
-  const chosen=state.cart.slice(0,9),cols=Math.min(3,Math.ceil(Math.sqrt(chosen.length))),rows=Math.ceil(chosen.length/cols);
-  const small=chosen.length>=7?.68:chosen.length>=4?.80:1;
-  const baseY=1.855;
-  chosen.forEach((id,i)=>{
+  clearServingMesh();
+  if(!gl||!state.cart.length)return;
+  const m=new MeshBuilder(),centerX=3.2,centerZ=6.15;
+  // The original table top is y=1.5875. No additional tray/table surface.
+  // Only individual porcelain saucers, cups and pastries appear on this table.
+  const orders=state.cart.slice(0,16),n=orders.length;
+  const cols=Math.min(4,Math.ceil(Math.sqrt(n))),rows=Math.ceil(n/cols);
+  const spacing=n>=12?.252:n>=7?.285:n>=4?.31:.34;
+  const small=n>=12?.66:n>=7?.79:n>=4?.87:1;
+  const plateY=1.604;
+  orders.forEach((id,i)=>{
     const col=i%cols,row=Math.floor(i/cols);
-    const x=xx+(col-(cols-1)/2)*.39;
-    const z=zz+(row-(rows-1)/2)*.37;
-    const r=.13*small,plateY=baseY;
-    m.cyl(x,plateY,z,r*1.24,r*1.24,.025,C.cream,14);
+    const x=centerX+(col-(cols-1)/2)*spacing;
+    const z=centerZ+(row-(rows-1)/2)*spacing;
+    const plateRadius=.132*small;
+    // Small dish touching the existing tabletop, not a second table.
+    m.cyl(x,plateY,z,plateRadius,plateRadius,.025,C.cream,14);
+    m.cyl(x,plateY+.014,z,plateRadius*.79,plateRadius*.79,.005,C.white,14);
+    const surface=plateY+.016;
     if(['exp','creme','the','choc','jus'].includes(id)){
       const glass=id==='jus',tea=id==='the';
-      const tall=glass||tea, rr=tall?.083*small:.098*small, hh=tall?.26*small:.17*small;
-      m.cyl(x,baseY+.045+hh/2,z,rr*.94,rr,hh,glass?C.glass:tea?C.brass:C.cream,12);
+      const rr=(glass?.076:tea?.079:.086)*small;
+      const hh=(glass?.19:tea?.17:id==='creme'?.145:.125)*small;
+      const bottom=surface+.002;
+      m.cyl(x,bottom+hh/2,z,rr*.93,rr,hh,glass?C.glass:tea?C.brass:C.cream,12);
       const drink=id==='jus'?[.94,.42,.08]:id==='the'?[.52,.27,.09]:id==='choc'?C.coffee:id==='creme'?[.62,.39,.23]:[.20,.105,.05];
-      m.cyl(x,baseY+.053+hh,z,rr*.90,rr*.90,.018*small,drink,12);
-      if(id==='creme'||id==='choc')m.sphere(x,baseY+.063+hh,z,.036*small,C.cream,6,9);
-      if(glass)m.rail([x+.04*small,baseY+.08+hh,z],[x+.075*small,baseY+.24+hh,z],.008*small,C.cream,7);
+      m.cyl(x,bottom+hh+.004,z,rr*.88,rr*.88,.008*small,drink,12);
+      if(id==='creme'||id==='choc')m.sphere(x,bottom+hh+.013,z,.026*small,C.cream,6,9);
+      if(glass)m.rail([x+.034*small,bottom+hh*.32,z],[x+.058*small,bottom+hh*1.25,z],.007*small,C.cream,7);
     }else if(id==='croissant'){
       const crust=[.85,.51,.18];
-      for(let j=-2;j<=2;j++)m.sphere(x+j*.038*small,baseY+.085+Math.cos(j*.53)*.035*small,z+Math.abs(j)*.01*small,(.069-Math.abs(j)*.009)*small,crust,6,10,1,.8,1);
+      for(let j=-2;j<=2;j++)m.sphere(x+j*.035*small,surface+.046*small+Math.cos(j*.53)*.022*small,z+Math.abs(j)*.01*small,(.063-Math.abs(j)*.008)*small,crust,6,10,1,.8,1);
     }else if(id==='chocolatine'){
-      m.box(x,baseY+.105,z,.21*small,.11*small,.15*small,[.68,.37,.14]);
-      for(const d of [-.05,.05])m.box(x+d*small,baseY+.166,z,.017*small,.012*small,.145*small,C.coffee);
+      m.box(x,surface+.048*small,z,.20*small,.093*small,.14*small,[.68,.37,.14]);
+      for(const d of [-.05,.05])m.box(x+d*small,surface+.099*small,z,.017*small,.012*small,.14*small,C.coffee);
     }else if(id==='tarte'){
-      m.cyl(x,baseY+.071,z,.105*small,.105*small,.056*small,[.74,.46,.19],12);
-      for(let j=0;j<5;j++){const a=j*Math.PI*2/5;m.sphere(x+Math.cos(a)*.057*small,baseY+.108,z+Math.sin(a)*.058*small,.044*small,[.94,.67,.32],5,7)}
+      m.cyl(x,surface+.030*small,z,.10*small,.10*small,.055*small,[.74,.46,.19],12);
+      for(let j=0;j<5;j++){const a=j*Math.PI*2/5;m.sphere(x+Math.cos(a)*.054*small,surface+.067*small,z+Math.sin(a)*.054*small,.04*small,[.94,.67,.32],5,7)}
     }else if(id==='eclair'){
-      m.sphere(x,baseY+.085,z,.096*small,[.78,.49,.26],6,12,1.3,.53,.72);
-      m.sphere(x,baseY+.124,z,.086*small,C.coffee,5,12,1.26,.22,.64);
+      m.sphere(x,surface+.048*small,z,.086*small,[.78,.49,.26],6,12,1.3,.53,.72);
+      m.sphere(x,surface+.083*small,z,.079*small,C.coffee,5,12,1.26,.22,.64);
     }
   });
   servingMeshGpu={p:createBuffer(m.p),n:createBuffer(m.n),c:createBuffer(m.c),count:m.p.length/3};
@@ -639,7 +645,7 @@ const hotspotData=[
 function buildHotspots(){const e=$('#hotspots');hotspotData.forEach(h=>{const b=document.createElement('button');b.className='hotspot hidden';b.id='spot-'+h.id;b.innerHTML=`<span class="bubble">${h.emoji}</span><span class="tx">${h.title}<small>${h.sub}</small></span>`;b.onclick=h.click;e.appendChild(b);h.el=b})}
 function updateHotspots(b){if(!state.started||state.modal||state.menuOpen||$('#intro').classList.contains('open')){hotspotData.forEach(h=>h.el.classList.add('hidden'));return}const tan=Math.tan(68*Math.PI/360),aspect=innerWidth/innerHeight;for(const h of hotspotData){const [x,y,z]=h.pos,c=state.cam,rel=[x-c.x,y-c.y,z-c.z],depth=rel[0]*b.front[0]+rel[1]*b.front[1]+rel[2]*b.front[2],dist=Math.hypot(...rel),enable=(h.id!=='pay'||state.done.has('serve'))&&(h.id!=='menu'||(state.done.has('greet')&&!state.orderLocked))&&(h.id!=='delivery'||state.phase==='serving')&&(h.id!=='server'||state.phase!=='finished');if(!enable||depth<.5||dist>17){h.el.classList.add('hidden');continue}const xx=(rel[0]*b.right[0]+rel[1]*b.right[1]+rel[2]*b.right[2])/(depth*tan*aspect),yy=(rel[0]*b.up[0]+rel[1]*b.up[1]+rel[2]*b.up[2])/(depth*tan);if(Math.abs(xx)>1.02||Math.abs(yy)>.88){h.el.classList.add('hidden');continue}h.el.classList.remove('hidden');h.el.style.left=(50+xx*50)+'%';h.el.style.top=(50-yy*50)+'%';h.el.style.opacity=String(Math.min(1,Math.max(.57,(15-dist)/7)));}
 }
-function animateCam(dt){const t=state.targetCam;if(t){const c=state.cam;const alpha=Math.min(1,dt*2.15);c.x+=(t.x-c.x)*alpha;c.z+=(t.z-c.z)*alpha;let d=t.yaw-c.yaw;c.yaw+=d*alpha;if(Number.isFinite(t.pitch))c.pitch+=(t.pitch-c.pitch)*alpha;if(Math.abs(c.z-t.z)<.06&&Math.abs(c.x-t.x)<.05){c.x=t.x;c.z=t.z;c.yaw=t.yaw;state.targetCam=null;if(t.onDone)t.onDone()}}else if(state.started&&!state.modal&&!state.menuOpen&&!state.dialogOpen&&!$('#help').classList.contains('open')&&!$('#end').classList.contains('open')){const k=state.walk,mb=state.mobileDown;const f=!!(k.w||k.z||k.arrowup||mb.forward),back=!!(k.s||k.arrowdown||mb.back),left=!!(k.a||k.q||k.arrowleft||mb.left),right=!!(k.d||k.arrowright||mb.right);const speed=dt*3.15;const a=state.cam.yaw;let movx=(f?Math.sin(a):0)-(back?Math.sin(a):0)-(left?Math.cos(a):0)+(right?Math.cos(a):0);let movz=-(f?Math.cos(a):0)+(back?Math.cos(a):0)-(left?Math.sin(a):0)+(right?Math.sin(a):0);const mag=Math.hypot(movx,movz);if(mag){movx/=mag;movz/=mag;state.cam.x=Math.max(-5.4,Math.min(5.4,state.cam.x+movx*speed));state.cam.z=Math.max(-8.8,Math.min(23.7,state.cam.z+movz*speed));state.cam.y=1.69+Math.sin(performance.now()*.011)*.035}else state.cam.y+=(1.70-state.cam.y)*.09;}}
+function animateCam(dt){const t=state.targetCam;if(t){const c=state.cam;const alpha=Math.min(1,dt*2.15);c.x+=(t.x-c.x)*alpha;c.z+=(t.z-c.z)*alpha;if(Number.isFinite(t.y))c.y+=(t.y-c.y)*alpha;let d=t.yaw-c.yaw;c.yaw+=d*alpha;if(Number.isFinite(t.pitch))c.pitch+=(t.pitch-c.pitch)*alpha;if(Math.abs(c.z-t.z)<.06&&Math.abs(c.x-t.x)<.05){c.x=t.x;c.z=t.z;if(Number.isFinite(t.y))c.y=t.y;c.yaw=t.yaw;if(Number.isFinite(t.pitch))c.pitch=t.pitch;state.targetCam=null;if(t.onDone)t.onDone()}}else if(state.started&&!state.modal&&!state.menuOpen&&!state.dialogOpen&&!$('#help').classList.contains('open')&&!$('#end').classList.contains('open')){const k=state.walk,mb=state.mobileDown;const f=!!(k.w||k.z||k.arrowup||mb.forward),back=!!(k.s||k.arrowdown||mb.back),left=!!(k.a||k.q||k.arrowleft||mb.left),right=!!(k.d||k.arrowright||mb.right);const speed=dt*3.15;const a=state.cam.yaw;let movx=(f?Math.sin(a):0)-(back?Math.sin(a):0)-(left?Math.cos(a):0)+(right?Math.cos(a):0);let movz=-(f?Math.cos(a):0)+(back?Math.cos(a):0)-(left?Math.sin(a):0)+(right?Math.sin(a):0);const mag=Math.hypot(movx,movz);if(mag){movx/=mag;movz/=mag;state.cam.x=Math.max(-5.4,Math.min(5.4,state.cam.x+movx*speed));state.cam.z=Math.max(-8.8,Math.min(23.7,state.cam.z+movz*speed));state.cam.y=1.69+Math.sin(performance.now()*.011)*.035}else state.cam.y+=(1.70-state.cam.y)*.09;}}
 function loop(ts){const dt=Math.min(.22,(ts-(state.prevTime||ts))/1000);state.prevTime=ts;animateCam(dt);drawWorld();requestAnimationFrame(loop)}
 renderQuest();buildHotspots();if(gl){setupGraphics();requestAnimationFrame(loop)}
 </script>
