@@ -118,7 +118,8 @@ export async function exoAccountRouter(ctx){
       if(path.endsWith("/create")){
         const raw=formField(f,"usernames",5000);
         if(!raw)return error("请输入学生账号",400);
-        const names=raw.split(/[\n\r,;]+/).map(s=>safeUser(s)).filter(Boolean);
+        const entries=raw.split(/[\n\r,;]+/).map(s=>s.trim()).filter(Boolean);const names=entries.map(s=>safeUser(s));
+        if(names.some(n=>!n))return error("存在无效的用户名；请使用 4–32 位以字母开头的字母/数字/._- 组合",400);
         if(names.length<1||names.length>15||new Set(names).size!==names.length)return error("每次输入 1–15 个有效且不重复的学生用户名",400);
         const rows=[],credentials=[];
         for(const username of names){const initial=b64(rbytes(15));const p=await passRecord(initial);
@@ -154,5 +155,10 @@ export async function exoAccountRouter(ctx){
     p==="/pe/qualite"||p==="/pe/qualite/"||p==="/pe/qualite/index.html"||
     ["/pe/qualite/activites","/pe/qualite/deux-chaines","/pe/qualite/ai-demo"].some(x=>p===x||p.startsWith(x+"/"));
   if(teacher&&person.role!=="teacher")return error("该内容仅限教师账号访问",403);
-  return ctx.next();
+  const response=await ctx.next();
+  const secured=new Response(response.body,response);
+  secured.headers.set("Cache-Control","private, no-store");
+  secured.headers.set("Vary","Cookie");
+  secured.headers.set("X-Content-Type-Options","nosniff");
+  return secured;
 }
