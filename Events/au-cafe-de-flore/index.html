@@ -25,6 +25,7 @@
   .overlay{position:fixed;inset:0;background:rgba(19,11,8,.5);z-index:8;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(5px)}.overlay.open{display:flex}.modal{background:#fffaf0;color:var(--ink);width:min(650px,100%);max-height:min(90vh,840px);overflow:auto;border-radius:21px;box-shadow:0 25px 100px rgba(0,0,0,.45);border:1px solid rgba(238,204,160,.7);padding:30px}.modal .eyebrow{color:#9a694f}.modal h2{font:700 36px/1.05 Georgia,serif;margin:10px 0 12px}.modal .lead{color:#887367;font-size:13px;line-height:1.7;margin:0 0 18px}.culturetext{color:#4b3930;font:18px/1.75 Georgia,serif;background:#f7efe3;padding:22px;border-radius:12px;margin:20px 0}.gloss{font-size:12px;line-height:1.65;color:#906e56;margin-top:10px}.question{font-size:14px;font-weight:800;color:#5c4038;margin-bottom:11px}.answers{display:grid;gap:8px}.answer{border:1px solid #ddc9b0;background:white;border-radius:9px;padding:12px 14px;text-align:left;color:#533a31;font-size:13px}.answer:hover{border-color:#b98367;background:#fff2e2}.answer.correct{background:#e0efe1;border-color:#7aa782;color:#28543b}.answer.wrong{background:#f7e0d8;border-color:#d08979;color:#8a3f30}.feedback{font-size:12px;color:#4b7954;margin:12px 0 0;min-height:18px}.cultureBtns{display:flex;align-items:center;justify-content:space-between;margin-top:16px;gap:10px}.cultureBtns .small{font-size:12px;color:#9b7964}
   #intro{display:none;background:radial-gradient(ellipse at 25% 48%,rgba(24,11,8,.2),rgba(13,7,6,.55) 68%);backdrop-filter:none;align-items:center;justify-content:flex-start}#intro.open{display:flex}.introbox{margin-left:clamp(30px,10vw,160px);max-width:560px;color:#fff8eb;text-shadow:0 2px 16px rgba(0,0,0,.25)}.introbox .brow{letter-spacing:.32em;font-size:12px;font-weight:800;color:#eec59a;display:flex;align-items:center;gap:14px}.introbox .brow:before{content:'';height:1px;width:40px;background:#eec59a}.introbox h1{font:500 clamp(57px,8vw,112px)/.97 Georgia,serif;letter-spacing:-.045em;margin:20px 0 12px}.introbox h1 i{font-weight:400;color:#f0ce94}.introbox .ch{font-size:17px;color:#ffeed6;margin:0 0 20px;letter-spacing:.07em}.introbox .desc{font-size:14px;line-height:1.9;max-width:440px;color:#e8d5c3;margin:0 0 31px}.introbox .enter{background:#f2d4a5;color:#57312d;padding:15px 26px;font-weight:800;border-radius:11px;border:0;font-size:14px;box-shadow:0 8px 30px rgba(0,0,0,.2)}.introbox .enter:hover{background:#fff0ce}.introfoot{font-size:11px;margin-top:20px;letter-spacing:.12em;color:#ead7bd}
   #toast{position:fixed;z-index:15;top:83px;left:50%;transform:translate(-50%,-15px);background:#fff6e5;color:#6b3d35;border:1px solid #e7cda8;border-radius:12px;padding:12px 18px;box-shadow:0 7px 30px rgba(26,12,7,.25);font-size:13px;font-weight:700;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;max-width:min(500px,90vw);text-align:center}#toast.show{opacity:1;transform:translate(-50%,0)}
+  #voiceAlert{position:fixed;z-index:16;top:76px;left:50%;transform:translateX(-50%);width:min(540px,calc(100vw - 24px));max-height:40vh;overflow:auto;display:flex;align-items:center;gap:10px;padding:12px 15px;background:#fff6e5;color:#683e31;border:1px solid #c9a777;border-radius:12px;box-shadow:0 7px 30px rgba(26,12,7,.25);font-size:12px;line-height:1.5}#voiceAlert[hidden],#voiceRetry[hidden]{display:none}#voiceAlertText{flex:1}#voiceRetry{flex:none;min-height:44px}#voicePlayback{font-weight:700;color:#315c48}
   #help .modal{width:min(510px,100%)}#help p,#help li{font-size:13px;line-height:1.85;color:#72584c}#help ul{padding-left:21px}#help h2{font-size:30px}
   #end .modal{text-align:center;width:min(510px,100%)}.seal{font-size:45px;margin-bottom:8px}.endwords{font:italic 19px/1.5 Georgia,serif;color:#683a35;margin:18px 0 15px}.endcount{background:#f3e6d3;border-radius:11px;padding:12px;margin:14px 0;font-size:13px}
   #mobileNav{display:none;position:fixed;z-index:5;left:14px;bottom:21px;gap:8px;pointer-events:auto}.movebtn{background:rgba(37,24,21,.7);color:white;border:1px solid #94775d;width:45px;height:45px;border-radius:50%;font-size:21px;backdrop-filter:blur(8px)}
@@ -54,10 +55,11 @@
 <aside id="menuPanel" class="panel"><div class="menuTop"><div class="panelhead"><div><div class="eyebrow">Café de Flore · Paris</div><div class="menuTitle">La carte</div><div class="menuSub">Choisissez ce que vous souhaitez commander. · Prix fictifs pour l’activité.</div></div><button class="close" id="menuClose" aria-label="Fermer">×</button></div><div class="menuTabs"><button class="menuTab active" data-tab="boissons">☕ Les boissons</button><button class="menuTab" data-tab="patisseries">🥐 À manger</button></div></div><div class="menuScroll" id="menuItems"></div><div class="menuBottom"><div class="basketlabel"><strong>Votre commande <span id="cartQty">(0)</span></strong><strong id="cartTotal">0,00 €</strong></div><div class="basketItems" id="cartItems">Touchez + pour choisir un produit.</div><div class="eyebrow" style="margin-top:10px;font-size:9px">Ma phrase en français</div><div class="sentence" id="orderSentence">Je voudrais …, s'il vous plaît.</div><div class="menubuttons"><button class="smallbtn" id="listenOrder" title="Écouter ma phrase">♫</button><button class="smallbtn" id="clearOrder" title="Vider la commande">↺</button><button class="primary" id="confirmOrder" disabled>Commander →</button></div></div></aside>
 <div class="overlay" id="cultureOverlay"><article class="modal" role="dialog" aria-modal="true" aria-labelledby="cultureTitle"><div class="panelhead"><div><div class="eyebrow" id="cultureKicker">CULTURE · LECTURE</div><h2 id="cultureTitle"></h2></div><button class="close" id="cultureClose" aria-label="Fermer">×</button></div><p class="lead" id="cultureLead"></p><div class="culturetext" id="cultureText"></div><div class="gloss" id="cultureGloss"></div><div style="height:1px;background:#e7d9ca;margin:21px 0"></div><div class="question" id="cultureQuestion"></div><div class="answers" id="cultureAnswers"></div><div class="feedback" id="cultureFeedback"></div><div class="cultureBtns"><span class="small" id="cultureFoot">Leçon 16 · Au café · Café de Flore</span><button class="secondary" id="cultureDone">Retour au café ↗</button></div></article></div>
 <div class="overlay" id="help"><article class="modal" role="dialog" aria-modal="true" aria-label="Mode d’emploi"><div class="panelhead"><div><div class="eyebrow">COMMENT JOUER</div><h2>Bienvenue au café !</h2></div><button class="close" id="helpClose" aria-label="Fermer">×</button></div><p>Vous êtes dans une reconstitution pédagogique stylisée du Café de Flore à Paris. Admirez la terrasse, puis explorez la salle et cliquez sur les bulles pour parler aux personnages ou découvrir la culture.</p><ul><li><b>Ordinateur :</b> glissez la souris pour regarder autour de vous ; utilisez ZQSD, WASD ou les flèches pour marcher.</li><li><b>Téléphone :</b> glissez le doigt sur la scène pour tourner la tête ; utilisez les quatre flèches en bas.</li><li><b>Votre mission :</b> saluer, choisir une table, commander, recevoir votre commande et payer.</li><li><b>Culture :</b> découvrez trois cartes de lecture, chacune avec une mini-question.</li><li><b>Voix :</b> touchez ♫ pour écouter les phrases françaises (si votre navigateur prend en charge la synthèse vocale).</li></ul><p>Les personnages, le mobilier et les façades sont générés par code, sans images ni modèles externes. Cette reconstitution pédagogique n’est pas un relevé architectural exact. Les prix sont fictifs et les voix dépendent de votre navigateur.</p><button class="primary" id="helpDone">Compris !</button></article></div>
-<div class="overlay" id="voiceOverlay"><article class="modal voiceModal" role="dialog" aria-modal="true" aria-labelledby="voiceTitle"><div class="panelhead"><div><div class="eyebrow">ÉCOUTER · PARLER · INTERAGIR</div><h2 id="voiceTitle">Les voix du café</h2></div><button class="close" id="voiceClose" aria-label="Fermer">×</button></div><p class="lead">Attribuez une voix française à chaque personnage. Les voix disponibles dépendent de votre ordinateur et de votre navigateur. Les voix « Premium », « Natural » ou « Enhanced » offrent souvent une meilleure prosodie.</p><div class="voiceGrid"><label class="voiceRow"><span><b>Luc</b><small>Le serveur · service</small></span><select id="voiceServer" aria-label="Voix du serveur"></select><button class="secondary" data-testvoice="server" type="button">Écouter</button></label><label class="voiceRow"><span><b>Élise</b><small>La cliente · culture</small></span><select id="voiceCustomer" aria-label="Voix de la cliente"></select><button class="secondary" data-testvoice="customer" type="button">Écouter</button></label><label class="voiceRow"><span><b>Vous</b><small>Votre phrase · apprentissage</small></span><select id="voiceLearner" aria-label="Voix de l’apprenant"></select><button class="secondary" data-testvoice="learner" type="button">Écouter</button></label></div><p class="voiceNote" id="voiceNote">Recherche des voix françaises installées…</p><div class="voiceActions"><button class="primary" id="voiceDone" type="button">Retour au café ↗</button></div></article></div>
+<div class="overlay" id="voiceOverlay"><article class="modal voiceModal" role="dialog" aria-modal="true" aria-labelledby="voiceTitle"><div class="panelhead"><div><div class="eyebrow">ÉCOUTER · PARLER · INTERAGIR</div><h2 id="voiceTitle">Les voix du café</h2></div><button class="close" id="voiceClose" aria-label="Fermer">×</button></div><p class="lead">Attribuez une voix française à chaque personnage. Les voix disponibles dépendent de votre appareil et de votre navigateur. Le choix automatique privilégie les voix locales. Touchez Écouter pour essayer une voix et activer le son.</p><div class="voiceGrid"><label class="voiceRow"><span><b>Luc</b><small>Le serveur · service</small></span><select id="voiceServer" aria-label="Voix du serveur"></select><button class="secondary" data-testvoice="server" type="button">Écouter</button></label><label class="voiceRow"><span><b>Élise</b><small>La cliente · culture</small></span><select id="voiceCustomer" aria-label="Voix de la cliente"></select><button class="secondary" data-testvoice="customer" type="button">Écouter</button></label><label class="voiceRow"><span><b>Vous</b><small>Votre phrase · apprentissage</small></span><select id="voiceLearner" aria-label="Voix de l’apprenant"></select><button class="secondary" data-testvoice="learner" type="button">Écouter</button></label></div><p class="voiceNote" id="voiceNote">Recherche des voix françaises installées…</p><p class="voiceNote" id="voicePlayback" role="status" aria-live="polite">Touchez Écouter pour tester la voix.</p><p class="voiceNote">Une lecture annoncée ne garantit pas un son audible. Si vous n’entendez rien, vérifiez le volume et la sortie audio (haut-parleur ou Bluetooth). Sur iPhone, essayez directement dans Safari. Vérifiez les voix françaises dans Réglages → Accessibilité → Contenu énoncé / Lire et énoncer → Voix (le nom varie selon iOS), puis revenez tester.</p><div class="voiceActions"><button class="primary" id="voiceDone" type="button">Retour au café ↗</button></div></article></div>
 <div class="overlay open" id="intro"><section class="introbox"><div class="brow">LE FRANÇAIS EN SITUATION</div><h1>Au <i>café.</i></h1><p class="ch">走进巴黎花神咖啡馆 · 第一视角互动体验</p><p class="desc">Une petite table, un café, quelques mots en français… 走进花神咖啡馆，与服务员交谈，选择你喜欢的饮品，探索藏在店里的法国文化。</p><button class="enter" id="startBtn">Commencer la visite &nbsp; ↗</button><div class="introfoot">☕ A1–A2 &nbsp; · &nbsp; INTERACTION · CULTURE · COMPRÉHENSION</div></section></div>
 <div class="overlay" id="end"><article class="modal" role="dialog" aria-modal="true" aria-labelledby="endTitle"><div class="seal">✦ ☕ ✦</div><div class="eyebrow">MISSION ACCOMPLIE</div><h2 id="endTitle">Bravo, et à bientôt !</h2><p style="font-size:13px;line-height:1.8;color:#7a6256">Vous avez réussi votre première visite dans un café français. Vous savez saluer, commander, remercier et payer.</p><div class="endwords" id="endQuote">« Je voudrais un café, s'il vous plaît. »</div><div class="endcount" id="endSummary"></div><button class="primary" id="restartBtn">Recommencer la visite ↗</button><button class="secondary" id="endExplore" style="margin-left:7px">Continuer à explorer</button></article></div>
 <div id="toast"></div>
+<div id="voiceAlert" hidden><span id="voiceAlertText" role="status" aria-live="polite"></span><button class="secondary" id="voiceRetry" type="button" hidden>Réessayer</button></div>
 <div id="webglError"><h2>La scène 3D n'a pas pu démarrer.</h2><p>Essayez d'ouvrir ce fichier dans une version récente de Chrome, Firefox, Safari ou Edge avec l'accélération graphique activée.</p></div>
 <script>
 'use strict';
@@ -99,10 +101,13 @@ let toastTimer;function toast(txt){const e=$('#toast');e.textContent=txt;e.class
 /* Each character has an independent voice preference. If only one French
    voice is installed, the interface honestly presents this limitation. */
 const voicePrefs={server:'auto',customer:'auto',learner:'auto'};
+const speechSupported=!!window.speechSynthesis && typeof window.speechSynthesis.speak==='function' && typeof window.SpeechSynthesisUtterance==='function';
 let voiceList=[],voiceQueue=[],voiceBusy=false,voiceSerial=0;
+let activeUtterance=null,activeVoiceJob=null,lastVoiceJob=null,voiceBlocked=false,voiceStarted=false;
+let voiceStartTimer=null,voiceEndTimer=null,voiceReplayTimer=null;
 const roleSamples={server:'Bonjour ! Bienvenue au Café de Flore. Vous êtes combien ?',customer:'Pour moi, un café, c’est un lieu pour retrouver des amis.',learner:'Je voudrais un chocolat chaud et un croissant, s’il vous plaît.'};
-function frenchVoiceList(){return ('speechSynthesis'in window?window.speechSynthesis.getVoices():[]).filter(v=>/^fr([_-]|$)/i.test(v.lang));}
-function voiceRank(v,role){const name=(v.name||'').toLowerCase(),lang=(v.lang||'').toLowerCase();let n=lang==='fr-fr'?50:25;if(/natural|premium|enhanced|neural|online|amelior|amélior/.test(name))n+=60; if(v.localService)n+=5;
+function frenchVoiceList(){try{return (speechSupported?window.speechSynthesis.getVoices():[]).filter(v=>/^fr([_-]|$)/i.test(v.lang))}catch(_){return []}}
+function voiceRank(v,role){const name=(v.name||'').toLowerCase(),lang=(v.lang||'').toLowerCase();let n=lang==='fr-fr'?50:25;if(/natural|premium|enhanced|neural|online|amelior|amélior/.test(name))n+=60; if(v.localService)n+=200;
 const feminine=/am[eé]lie|audrey|marie|denise|celine|c[eé]line|hortense|julie|lea|l[eé]a|virginie|sylvie|female|femme|alice|aurelie|aur[eé]lie|aude|elo[dï]e|[ée]lodie/i.test(name);
 const masculine=/thomas|henri|nicolas|paul|mathieu|remy|r[eé]my|male|homme|pierre|antoine|jean|arnaud|hugo|florian|alain|lo[iï]c|louis/i.test(name);
 if(role==='server'){if(masculine)n+=25;if(feminine)n-=18;}else{if(feminine)n+=25;if(masculine)n-=18;}
@@ -110,26 +115,102 @@ return n;}
 function autoVoice(role){if(!voiceList.length)return null;const sorted=[...voiceList].sort((a,b)=>voiceRank(b,role)-voiceRank(a,role));if(role==='learner'&&sorted.length>=3){const customer=autoVoice('customer');const server=autoVoice('server');return sorted.find(v=>v.voiceURI!==customer?.voiceURI && v.voiceURI!==server?.voiceURI)||sorted[0]}return sorted[0]}
 function getRoleVoice(role){const p=voicePrefs[role]||'auto';return voiceList.find(v=>v.voiceURI===p)||autoVoice(role)}
 function updateVoiceChoices(){voiceList=frenchVoiceList();for(const [role,id] of [['server','#voiceServer'],['customer','#voiceCustomer'],['learner','#voiceLearner']]){const select=$(id),old=voicePrefs[role];select.replaceChildren();let opt=document.createElement('option');opt.value='auto';const auto=autoVoice(role);opt.textContent=auto?'Automatique · '+auto.name:'Automatique · fr-FR';select.appendChild(opt);for(const v of voiceList){let o=document.createElement('option');o.value=v.voiceURI;o.textContent=v.name+' · '+v.lang;select.appendChild(o)}select.value=old==='auto'||voiceList.some(v=>v.voiceURI===old)?old:'auto';}
-$('#voiceNote').textContent=voiceList.length>1?`${voiceList.length} voix françaises détectées. Choisissez des voix différentes pour Luc et Élise. Les voix « Natural » ou « Premium » sont à privilégier.`:voiceList.length===1?'Une seule voix française est disponible sur cet appareil. Les personnages utilisent des réglages vocaux légèrement différents, mais la qualité ne peut pas être améliorée sans ajouter une autre voix ou des enregistrements.':'Aucune voix française installée n’a été détectée. Le navigateur tentera la lecture en français, sans garantie de qualité. Installez des voix françaises dans les réglages de votre appareil.';}
-function stopSpeech(){voiceSerial++;voiceQueue=[];voiceBusy=false;if('speechSynthesis'in window)try{window.speechSynthesis.cancel()}catch(_){}}
-function drainVoices(){if(voiceBusy||!voiceQueue.length||!state.sound||!('speechSynthesis'in window))return;const job=voiceQueue.shift();const gen=voiceSerial;const u=new SpeechSynthesisUtterance(job.text);u.lang='fr-FR';const picked=getRoleVoice(job.who);if(picked)u.voice=picked;
-// Less artificial than forcing every voice to 0.83 speed.
-u.rate=job.who==='learner'?.94:job.who==='customer'?1.00:.97;
-const distinct=voiceList.length>1 && getRoleVoice('server')?.voiceURI!==getRoleVoice('customer')?.voiceURI;
-u.pitch=distinct?1:(job.who==='server'?.93:job.who==='customer'?1.11:1.03);
-u.volume=1;voiceBusy=true;u.onend=u.onerror=()=>{if(gen!==voiceSerial)return;voiceBusy=false;drainVoices()};try{window.speechSynthesis.resume();window.speechSynthesis.speak(u)}catch(_){voiceBusy=false;drainVoices()}}
-function speak(txt,who='server',replace=false){
-  if(!state.sound||!txt||!('speechSynthesis'in window))return;
-  // On mobile Safari, cancelling immediately before speaking can silently
-  // discard the new utterance. Only cancel when there is actual speech to replace.
-  if(replace && (voiceBusy || window.speechSynthesis.speaking || window.speechSynthesis.pending)){
-    stopSpeech();
-    setTimeout(()=>{if(state.sound){voiceQueue.push({text:txt,who});drainVoices()}},100);
-    return;
-  }
-  voiceQueue.push({text:txt,who});drainVoices();
+$('#voiceNote').textContent=!speechSupported?'La synthèse vocale est indisponible dans ce navigateur. Ouvrez cette page dans Safari ou un navigateur récent.':voiceList.length>1?`${voiceList.length} voix françaises détectées. Le choix automatique privilégie les voix locales pour limiter les problèmes de connexion. Vous pouvez choisir une autre voix.`:voiceList.length===1?'Une seule voix française est détectée. Les personnages partagent cette voix avec des réglages légèrement différents.':'Aucune voix française détectée pour le moment. La liste peut être en cours de chargement ou masquée par le navigateur. Un essai en fr-FR reste possible, sans garantie de son. Vérifiez les voix françaises dans les réglages d’accessibilité de votre appareil, puis revenez ici.';}
+function voiceNotice(message='',retry=false){
+ $('#voiceAlert').hidden=!message;$('#voiceAlertText').textContent=message;
+ $('#voiceRetry').hidden=!retry;
 }
-if('speechSynthesis'in window){window.speechSynthesis.addEventListener?.('voiceschanged',updateVoiceChoices);setTimeout(updateVoiceChoices,0);setTimeout(updateVoiceChoices,900)}
+function voicePlayback(message){$('#voicePlayback').textContent=message}
+function clearVoiceTimers(){
+ clearTimeout(voiceStartTimer);clearTimeout(voiceEndTimer);clearTimeout(voiceReplayTimer);
+ voiceStartTimer=voiceEndTimer=voiceReplayTimer=null;
+}
+function stopSpeech(){
+ const shouldCancel=speechSupported&&(voiceBusy||window.speechSynthesis.speaking||window.speechSynthesis.pending||window.speechSynthesis.paused);
+ // Invalidate callbacks before cancel(), which can synchronously emit an error.
+ voiceSerial++;clearVoiceTimers();voiceQueue=[];voiceBusy=false;activeUtterance=null;activeVoiceJob=null;
+ if(shouldCancel)try{window.speechSynthesis.cancel()}catch(_){}
+}
+function failVoice(code,job){
+ stopSpeech();voiceBlocked=true;lastVoiceJob=job;
+ const messages={
+  'not-allowed':'Le navigateur demande un nouveau toucher pour autoriser la voix.',
+  'voice-unavailable':'La voix choisie est indisponible. Choisissez une autre voix avec 🎧.',
+  'language-unavailable':'La voix française est indisponible. Vérifiez les voix françaises dans les réglages de votre appareil.',
+  'network':'La voix ne peut pas se charger. Vérifiez la connexion ou choisissez une voix locale avec 🎧.',
+  'audio-busy':'La sortie audio est occupée. Arrêtez les autres lectures, puis réessayez.',
+  'audio-hardware':'La sortie audio est indisponible. Vérifiez le volume et la sortie Bluetooth.',
+  'start-timeout':'La lecture n’a pas démarré. Réessayez, puis vérifiez les voix françaises avec 🎧.',
+  'end-timeout':'La lecture semble bloquée. Touchez Réessayer pour la relancer.',
+  'canceled':'La lecture a été interrompue. Touchez Réessayer pour la relancer.',
+  'interrupted':'La lecture a été interrompue. Touchez Réessayer pour la relancer.'
+ };
+ const message=messages[code]||'La lecture a échoué. Réessayez ou choisissez une autre voix avec 🎧.';
+ voicePlayback(message);voiceNotice(message,true);
+}
+function drainVoices(){
+ if(voiceBusy||voiceReplayTimer!==null||voiceBlocked||!voiceQueue.length||!state.sound||!speechSupported)return;
+ const job=voiceQueue.shift(),gen=voiceSerial;lastVoiceJob=job;
+ let u;
+ try{u=new window.SpeechSynthesisUtterance(job.text)}catch(_){failVoice('synthesis-unavailable',job);return}
+ // Refresh at playback time too: Safari may populate (or hide) the list later.
+ voiceList=frenchVoiceList();const picked=getRoleVoice(job.who);
+ u.lang=picked?.lang||'fr-FR';if(picked)u.voice=picked;
+ u.rate=job.who==='learner'?.94:job.who==='customer'?1.00:.97;
+ const distinct=voiceList.length>1 && getRoleVoice('server')?.voiceURI!==getRoleVoice('customer')?.voiceURI;
+ u.pitch=distinct?1:(job.who==='server'?.93:job.who==='customer'?1.11:1.03);
+ u.volume=1;voiceBusy=true;activeUtterance=u;activeVoiceJob=job;
+ const current=()=>gen===voiceSerial&&activeUtterance===u;
+ voicePlayback('Démarrage de la lecture…');
+ voiceNotice(picked?'':'Aucune voix française détectée : essai avec la voix du système. Réglages : 🎧.');
+ voiceStartTimer=setTimeout(()=>{if(current())failVoice('start-timeout',job)},8000);
+ u.onstart=()=>{
+  if(!current())return;voiceStarted=true;clearTimeout(voiceStartTimer);voiceStartTimer=null;
+  voicePlayback('Lecture démarrée (signal du navigateur).');
+  if(picked)voiceNotice();
+  // A missing end/error must not leave every later dialogue waiting forever.
+  voiceEndTimer=setTimeout(()=>{if(current())failVoice('end-timeout',job)},Math.max(30000,job.text.length*150+15000));
+ };
+ u.onend=()=>{
+  if(!current())return;
+  clearVoiceTimers();voiceBusy=false;activeUtterance=null;activeVoiceJob=null;
+  voicePlayback('Lecture terminée (signal du navigateur).');drainVoices();
+ };
+ u.onerror=e=>{if(current())failVoice(e.error,job)};
+ try{if(window.speechSynthesis.paused)window.speechSynthesis.resume();window.speechSynthesis.speak(u)}catch(_){if(current())failVoice('synthesis-failed',job)}
+}
+function speak(txt,who='server',replace=false){
+ if(!txt)return;
+ if(!speechSupported){voiceNotice('La voix est indisponible dans ce navigateur. Essayez Safari ou un navigateur récent.');return}
+ // An explicit Écouter / Réessayer tap also turns sound back on.
+ if(replace){state.sound=true;voiceBlocked=false;refreshSoundButton()}
+ if(!state.sound)return;
+ const job={text:txt,who};
+ if(voiceBlocked){lastVoiceJob=job;return}
+ if(replace&&(voiceBusy||voiceReplayTimer!==null||window.speechSynthesis.speaking||window.speechSynthesis.pending)){
+  stopSpeech();lastVoiceJob=job;
+  // Before any observed start, require a fresh tap instead of losing the
+  // activation gesture in a timeout. Never claim this proves audible output.
+  if(!voiceStarted){voiceBlocked=true;voiceNotice('Lecture réinitialisée. Touchez Réessayer pour lancer la voix.',true);return}
+  voiceQueue.push(job);const gen=voiceSerial;
+  voiceReplayTimer=setTimeout(()=>{
+   if(gen!==voiceSerial)return;voiceReplayTimer=null;drainVoices();
+  },100);
+  return;
+ }
+ voiceQueue.push(job);drainVoices();
+}
+updateVoiceChoices();
+if(speechSupported){window.speechSynthesis.addEventListener?.('voiceschanged',updateVoiceChoices);setTimeout(updateVoiceChoices,900)}
+$('#voiceRetry').onclick=()=>{if(lastVoiceJob)speak(lastVoiceJob.text,lastVoiceJob.who,true)};
+function suspendVoice(){
+ const interrupted=voiceBusy||voiceQueue.length>0||voiceReplayTimer!==null;
+ const job=activeVoiceJob||voiceQueue[0]||lastVoiceJob;
+ stopSpeech();voiceStarted=false;
+ if(interrupted&&state.sound){lastVoiceJob=job;voiceBlocked=true;voiceNotice('Lecture interrompue en quittant la page. Touchez Réessayer pour reprendre.',true);voicePlayback('Lecture interrompue.')}
+}
+document.addEventListener('visibilitychange',()=>{if(document.hidden)suspendVoice();else updateVoiceChoices()});
+window.addEventListener('pagehide',suspendVoice);
 function hideDialog(){state.dialogOpen=false;$('#dialogPanel').style.display='none'}
 function showDialog({name='Luc',role='LE SERVEUR',avatar='L',text,trans='',choices=[]}){closeMenu();const who=name==='Vous'?'learner':name==='Élise'?'customer':'server';state.dialogSpeaker=who;$('#dialogName').textContent=name;$('#dialogRole').textContent=role;$('#dialogPortrait').textContent=avatar;$('#dialogText').textContent=text;$('#dialogTranslate').textContent=trans;$('#dialogTranslate').style.display=trans?'block':'none';$('#dialogChoices').replaceChildren();choices.forEach(opt=>{const b=document.createElement('button');b.className='choice';const span=document.createElement('span');span.textContent=opt.label;const arrow=document.createElement('span');arrow.className='arrow';arrow.textContent='↗';b.append(span,arrow);b.addEventListener('click',()=>{if(opt.say)speak(opt.say,'learner');else if(opt.label&&!opt.nospeak)speak(opt.label,'learner');opt.run()});$('#dialogChoices').append(b)});$('#dialogPanel').style.display='block';state.dialogOpen=true;state.dialogText=text;speak(text,who);}
 function openWelcome(){state.phase='welcome';showDialog({text:'Bonjour ! Bienvenue au Café de Flore. Vous êtes combien ?',trans:'您好！欢迎来到光影咖啡馆。请问几位？',choices:[{label:'Une table pour une personne, s’il vous plaît.',run:()=>acceptTable()},{label:'Une table pour deux personnes, s’il vous plaît.',run:()=>acceptTable()}]});}
@@ -147,7 +228,7 @@ function refreshBasket(){const s=orderSentence();$('#orderSentence').textContent
 function openCulture(id){hideDialog();closeMenu();const c=culture[id];if(!c)return;state.currentCulture=id;$('#cultureKicker').textContent=c.kicker;$('#cultureTitle').textContent=c.title;$('#cultureLead').textContent=c.lead;$('#cultureText').textContent=c.text;$('#cultureGloss').textContent=c.gloss;$('#cultureQuestion').textContent=c.question;$('#cultureFeedback').textContent=state.answered.has(id)?'✓ Vous avez déjà répondu à cette question.':'';const area=$('#cultureAnswers');area.replaceChildren();c.answers.forEach((s,i)=>{const b=document.createElement('button');b.className='answer';b.textContent=String.fromCharCode(65+i)+'. '+s;b.addEventListener('click',()=>{if(i===c.correct){b.classList.add('correct');$('#cultureFeedback').textContent=c.why;state.answered.add(id);if(!state.culture.has(id)){state.culture.add(id);mark('culture');renderQuest()}}else{b.classList.add('wrong');$('#cultureFeedback').textContent='Pas tout à fait. Relisez le texte et réessayez !';setTimeout(()=>b.classList.remove('wrong'),900)}});area.append(b)});$('#cultureOverlay').classList.add('open');state.modal=true;}
 function closeCulture(){state.modal=false;$('#cultureOverlay').classList.remove('open')}
 function openNeighbor(){showDialog({name:'Élise',role:'UNE CLIENTE PARISIENNE',avatar:'É',text:'Vous aimez les cafés ? Pour moi, c’est un lieu pour discuter, lire et retrouver des amis.',trans:'您喜欢咖啡馆吗？对我来说，这里是聊天、阅读和朋友相聚的地方。',choices:[{label:'Pourquoi les cafés sont-ils importants ?',run:()=>openCulture('flore')},{label:'Parlez-moi des bonnes manières.',run:()=>openCulture('manieres')},{label:'Merci pour cette conversation !',run:hideDialog}]});}
-function restart(){state.done.clear();state.culture.clear();state.answered.clear();state.cart=[];state.endSeen=false;state.phase='intro';state.cam={x:.18,y:1.7,z:22.1,yaw:0,pitch:-.045};state.targetCam=null;renderQuest();closeCulture();hideDialog();closeMenu();$('#end').classList.remove('open');$('#intro').classList.add('open');}
+function restart(){stopSpeech();voiceBlocked=false;lastVoiceJob=null;voiceNotice();voicePlayback('Touchez Écouter pour tester la voix.');state.done.clear();state.culture.clear();state.answered.clear();state.cart=[];state.endSeen=false;state.phase='intro';state.cam={x:.18,y:1.7,z:22.1,yaw:0,pitch:-.045};state.targetCam=null;renderQuest();closeCulture();hideDialog();closeMenu();$('#end').classList.remove('open');$('#intro').classList.add('open');}
 $('#startBtn').addEventListener('click',()=>{
   state.started=true;$('#intro').classList.remove('open');state.targetCam={x:.25,z:20.0,yaw:0,duration:1.4};
   updateVoiceChoices();
@@ -161,7 +242,9 @@ $('#menuClose').onclick=closeMenu;$$('.menuTab').forEach(b=>b.onclick=()=>{state
 $('#cultureClose').onclick=$('#cultureDone').onclick=closeCulture;$('#cultureOverlay').addEventListener('click',e=>{if(e.target.id==='cultureOverlay')closeCulture()});
 $('#helpBtn').onclick=()=>$('#help').classList.add('open');$('#helpClose').onclick=$('#helpDone').onclick=()=>$('#help').classList.remove('open');
 function refreshSoundButton(){
- const b=$('#soundBtn');b.textContent=state.sound?'🔊':'🔇';
+ const b=$('#soundBtn');
+ if(!speechSupported){b.textContent='🔇';b.disabled=true;b.title='Voix indisponible';b.setAttribute('aria-label','Voix indisponible dans ce navigateur');b.setAttribute('aria-pressed','false');return}
+ b.textContent=state.sound?'🔊':'🔇';
  b.title=state.sound?'Voix activée · touchez pour couper':'Voix désactivée · touchez pour écouter';
  b.setAttribute('aria-label',state.sound?'Couper la voix':'Activer la voix');
  b.setAttribute('aria-pressed',String(state.sound));
@@ -169,17 +252,18 @@ function refreshSoundButton(){
 refreshSoundButton();
 $('#soundBtn').onclick=()=>{
  state.sound=!state.sound;refreshSoundButton();
- if(!state.sound){stopSpeech();toast('Voix désactivée');return;}
+ if(!state.sound){stopSpeech();voiceBlocked=false;voiceNotice();voicePlayback('Voix désactivée.');toast('Voix désactivée');return;}
+ voiceBlocked=false;
  updateVoiceChoices();
  // The user explicitly tapped sound ON, so initiate playback in that gesture.
  speak(state.dialogOpen?state.dialogText:roleSamples.server,state.dialogOpen?(state.dialogSpeaker||'server'):'server');
- toast('Voix activée · Vérifiez le volume du téléphone si vous n’entendez rien.');
+ toast('Voix activée · Essai de lecture en cours.');
 };
-$('#voiceSettingsBtn').onclick=()=>{updateVoiceChoices();$('#voiceOverlay').classList.add('open');state.modal=true;stopSpeech()};
-function closeVoiceSettings(){state.modal=false;$('#voiceOverlay').classList.remove('open');stopSpeech()}
+$('#voiceSettingsBtn').onclick=()=>{stopSpeech();voiceNotice();voicePlayback('Touchez Écouter pour tester la voix.');updateVoiceChoices();$('#voiceOverlay').classList.add('open');state.modal=true};
+function closeVoiceSettings(){state.modal=false;$('#voiceOverlay').classList.remove('open');stopSpeech();if(!voiceBlocked)voiceNotice()}
 $('#voiceClose').onclick=$('#voiceDone').onclick=closeVoiceSettings;
 $('#voiceOverlay').addEventListener('click',e=>{if(e.target.id==='voiceOverlay')closeVoiceSettings()});
-for(const [role,id] of [['server','#voiceServer'],['customer','#voiceCustomer'],['learner','#voiceLearner']]){$(id).addEventListener('change',e=>{voicePrefs[role]=e.target.value;stopSpeech()})}
+for(const [role,id] of [['server','#voiceServer'],['customer','#voiceCustomer'],['learner','#voiceLearner']]){$(id).addEventListener('change',e=>{voicePrefs[role]=e.target.value;stopSpeech();voiceNotice();voicePlayback('Touchez Écouter pour tester la voix choisie.')})}
 $$('[data-testvoice]').forEach(b=>b.onclick=()=>speak(roleSamples[b.dataset.testvoice],b.dataset.testvoice,true));
 $('#restartBtn').onclick=restart;$('#endExplore').onclick=()=>$('#end').classList.remove('open');
 $('#end').addEventListener('click',e=>{if(e.target.id==='end')$('#end').classList.remove('open')});
