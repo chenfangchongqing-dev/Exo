@@ -29,6 +29,36 @@
   @media(max-width:1100px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
   @media(max-width:560px){.wrap{padding:16px}.hero{padding:30px 18px}.grid{grid-template-columns:1fr;gap:12px}
     a.card{min-height:112px;padding:22px 19px}a.card .fr{font-size:21px;white-space:normal}}
+
+/* Exo journey entrance follows the existing homepage blue/white visual language. */
+.journey{position:relative;margin-top:22px;border:1px solid #dfe8f3;border-radius:19px;overflow:hidden;background:linear-gradient(118deg,#f9fbff 0%,#edf5ff 54%,#e4f1fc 100%);box-shadow:0 10px 30px rgba(36,72,112,.055);display:flex;align-items:center;justify-content:space-between;gap:20px;padding:20px 24px 14px;min-height:210px}
+.journey:before{content:"";position:absolute;width:430px;height:240px;right:4%;bottom:-130px;border-radius:50%;background:radial-gradient(ellipse,#cce4f4b9,transparent 70%);pointer-events:none}
+.journey-copy{position:relative;z-index:2;flex:1 1 320px;align-self:center;padding-bottom:8px}
+.journey-kicker{font:700 11px/1.3 Arial,Helvetica,sans-serif;letter-spacing:.21em;color:#728eae}
+.journey-copy h2{font:600 clamp(29px,3.4vw,44px)/1.1 Georgia,"Times New Roman",serif;color:#24466d;margin:10px 0 9px}
+.journey-copy p{font-size:14px;color:#607d99;max-width:530px;line-height:1.7;margin:0}
+.journey-launch{display:inline-flex;align-items:center;gap:9px;margin-top:14px;color:#315f91;font:700 13px/1.4 Arial,Helvetica,sans-serif;text-decoration:none}
+.journey-launch:hover{text-decoration:underline;color:#1e487a}
+.journey-walkers{position:relative;z-index:1;display:flex;gap:10px;align-items:flex-end;justify-content:flex-end;flex:0 0 310px;align-self:stretch}
+.journey-figure{position:relative;display:grid;align-items:end;justify-items:center;flex:0 0 150px;height:180px;color:#466b94;text-decoration:none;border-radius:16px;outline-offset:5px}
+.journey-figure:focus-visible{outline:3px solid #6992cd}
+.journey-figure:hover{background:#ffffff74}
+.journey-figure .figure-caption{position:absolute;bottom:-2px;font-size:11px;letter-spacing:.035em;color:#6385a7}
+.journey-figure svg{width:125px;height:175px;overflow:visible;filter:drop-shadow(0 7px 6px #6784a438)}
+.journey-figure .body-bob{transform-origin:center 86%;animation:exo-bob .6s ease-in-out infinite alternate}
+.journey-figure .left-leg{transform-box:fill-box;transform-origin:50% 6%;animation:exo-left .75s ease-in-out infinite alternate}
+.journey-figure .right-leg{transform-box:fill-box;transform-origin:50% 6%;animation:exo-right .75s ease-in-out infinite alternate}
+.journey-figure .scarf-tail{transform-origin:100% 50%;animation:exo-scarf 1s ease-in-out infinite alternate}
+.journey-figure:nth-child(2) .body-bob{animation-delay:-.23s}
+.journey-figure:nth-child(2) .left-leg{animation-delay:-.26s}.journey-figure:nth-child(2) .right-leg{animation-delay:-.26s}
+@keyframes exo-bob{from{transform:translateY(0)}to{transform:translateY(-3px)}}
+@keyframes exo-left{from{transform:rotate(-13deg)}to{transform:rotate(12deg)}}
+@keyframes exo-right{from{transform:rotate(12deg)}to{transform:rotate(-13deg)}}
+@keyframes exo-scarf{from{transform:rotate(-4deg)}to{transform:rotate(5deg)}}
+@media(max-width:780px){.journey{flex-direction:column;align-items:stretch;padding:22px 18px 10px;gap:2px}.journey-copy{align-self:stretch}.journey-walkers{justify-content:center;flex-basis:auto}.journey-figure{height:170px;flex-basis:145px}.journey-figure svg{height:166px}}
+@media(max-width:450px){.journey-figure{flex-basis:132px}.journey-walkers{gap:4px}.journey-figure svg{width:118px}.journey-copy h2{font-size:33px}}
+@media(prefers-reduced-motion:reduce){.journey-figure .body-bob,.journey-figure .left-leg,.journey-figure .right-leg,.journey-figure .scarf-tail{animation:none}}
+
   .teacher-entry{margin:23px 1px 0;padding-top:14px;border-top:1px solid #e5e7eb;text-align:right;font-size:13px;color:#64748b}
   .teacher-entry a{color:inherit;text-decoration:none}
   .teacher-entry a:hover,.teacher-entry a:focus-visible{text-decoration:underline;color:#334155}
@@ -54,7 +84,63 @@
   <span class="tag" style="--accent:#9387c5;--accent-text:#6254a4"><span class="zh">文化解读</span><span class="fr" lang="fr">Regards croisés</span></span>
 </a>
       </div>
-      <div class="teacher-entry"><a href="./Events/au-cafe-de-flore/" aria-label="免密码进入花神咖啡馆 3D 法语互动场景">Au Café de Flore · 3D 互动咖啡馆 ↗</a><span aria-hidden="true" style="margin:0 14px;color:#cbd5e1">|</span><a href="./Events/" aria-label="进入教师专用的教学研讨与临时活动">教学研讨与临时活动 <span lang="fr">· Espace enseignant</span> ↗</a></div>
+<section class="journey" aria-labelledby="journeyTitle">
+  <div class="journey-copy"><div class="journey-kicker">EXO · LE FRANÇAIS EN SITUATION</div>
+  <h2 id="journeyTitle" lang="fr">En route !</h2>
+  <p>在法语世界里边走边学。选择一位探索者，开启第一站：巴黎花神咖啡馆。</p>
+  <a class="journey-launch" href="./Events/au-cafe-de-flore/" aria-label="进入 Café de Flore 情景互动游戏">Explorer le Café de Flore <span aria-hidden="true">↗</span></a>
+  </div>
+  <div class="journey-walkers">
+    <a class="journey-figure" href="./Events/au-cafe-de-flore/" aria-label="与抱蓝色笔记本的女生一起进入情景游戏"><svg viewBox="0 0 150 215" role="img" aria-label="手抱蓝色笔记本、背指南针挎包的女生在行走">
+<defs><linearGradient id="exoGirlPant" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#8eaac6"/><stop offset="1" stop-color="#5c7e9f"/></linearGradient></defs>
+<ellipse cx="78" cy="203" rx="55" ry="6" fill="#9eb6cb" opacity=".32"/>
+<g class="body-bob">
+<g class="right-leg"><path d="M73 131Q79 145 92 167L104 197L91 201Q79 183 64 164L56 141Z" fill="url(#exoGirlPant)" stroke="#527796" stroke-width="2"/><path d="M89 194q7-4 15-2l15 10q4 5-5 7H92q-6-2-3-15" fill="#fbfcff" stroke="#8f9cb1" stroke-width="2"/></g>
+<g class="left-leg"><path d="M49 129L76 130L69 165L48 196L34 191Q36 165 40 144Z" fill="url(#exoGirlPant)" stroke="#527796" stroke-width="2"/><path d="M33 188q9-2 15 4l13 11q2 6-6 6H31q-5-3 2-21" fill="#fff" stroke="#8f9cb1" stroke-width="2"/></g>
+<path class="scarf-tail" d="M59 89Q41 78 14 83Q21 75 39 72Q17 69 10 61Q38 62 64 77Z" fill="#cd787a"/>
+<path d="M42 95Q47 87 62 85L91 88L106 134L93 143L39 141Q35 111 42 95Z" fill="#f7f1df" stroke="#9ba9bb" stroke-width="2"/>
+<path d="M43 109h57M43 123h61" stroke="#668cac" stroke-width="5" opacity=".93"/>
+<path d="M43 87L60 80Q58 89 66 94L49 102Z" fill="#cd7679"/>
+<path d="M38 96Q26 108 24 131" fill="none" stroke="#b78056" stroke-width="7"/>
+<path d="M21 127Q34 123 44 136L44 166Q35 174 21 164L11 145Q12 137 21 127Z" fill="#bf9a70" stroke="#8d725b" stroke-width="2"/>
+<circle cx="29" cy="147" r="10" fill="#ecdfc2" stroke="#8f7c67"/><path d="M29 141v8l5 3m-5-11l-3 6" fill="none" stroke="#507390" stroke-width="1.5" stroke-linecap="round"/>
+<path d="M89 99Q104 111 108 137" fill="none" stroke="#f3d6ae" stroke-width="13" stroke-linecap="round"/>
+<rect x="92" y="106" width="22" height="39" rx="2" fill="#2e527f" stroke="#fff5db" stroke-width="2" transform="rotate(8 101 122)"/>
+<path d="M95 111L108 113" stroke="#a9bdd5" stroke-width="2"/>
+<ellipse cx="102" cy="129" rx="8" ry="10" fill="#f2d6b6" transform="rotate(-9 102 129)"/>
+<path d="M49 69Q43 53 51 41Q68 23 89 38Q103 47 99 69L94 76L91 94H65L60 79Z" fill="#6f4939"/>
+<ellipse cx="78" cy="65" rx="22" ry="27" fill="#f4d6bc"/>
+<path d="M54 57Q48 39 64 32Q86 19 96 42Q98 50 92 57Q85 44 74 46Q66 56 54 57Z" fill="#6b4337"/>
+<path d="M47 49Q42 35 56 31Q64 25 69 29M83 30Q93 23 101 37" fill="none" stroke="#765244" stroke-width="7" stroke-linecap="round"/>
+<path d="M65 64l5-1M84 62l6 1" stroke="#60483f" stroke-width="2" stroke-linecap="round"/>
+<circle cx="68" cy="64" r="1.8" fill="#412e2a"/><circle cx="86" cy="63" r="1.8" fill="#412e2a"/>
+<path d="M72 74q8 7 16-1" fill="none" stroke="#b86b61" stroke-width="2" stroke-linecap="round"/>
+<circle cx="58" cy="78" r="3" fill="#c2a264" stroke="#fff0b9" stroke-width="1"/>
+</g></svg><span class="figure-caption">En route !</span></a>
+    <a class="journey-figure" href="./Events/au-cafe-de-flore/" aria-label="与抱蓝色笔记本的男生一起进入情景游戏"><svg viewBox="0 0 150 215" role="img" aria-label="穿蓝色外套、手抱蓝色笔记本的男生在行走">
+<defs><linearGradient id="exoBoyJacket" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#7ca4c7"/><stop offset="1" stop-color="#456c93"/></linearGradient></defs>
+<ellipse cx="75" cy="203" rx="54" ry="6" fill="#9eb6cb" opacity=".32"/>
+<g class="body-bob">
+<g class="right-leg"><path d="M72 133L90 139L102 173L107 197L94 200Q77 183 63 161Z" fill="#c9ae8a" stroke="#937f65" stroke-width="2"/><path d="M93 195q8-5 15-2l14 10q4 5-3 6H95q-6-3-2-14" fill="#fff" stroke="#8a99ae" stroke-width="2"/></g>
+<g class="left-leg"><path d="M44 134L73 133L66 167L47 196L34 191Q35 167 37 143Z" fill="#c8ae8d" stroke="#927d64" stroke-width="2"/><path d="M32 188q10-3 18 4l14 11q2 6-6 6H30q-5-3 2-21" fill="#fff" stroke="#8a99ae" stroke-width="2"/></g>
+<path d="M47 91Q30 87 20 96Q13 116 19 140L35 145L42 110Z" fill="#374f6e" stroke="#263e58" stroke-width="2"/>
+<path d="M46 96Q50 89 64 85L92 88L104 139Q87 144 43 138L38 111Z" fill="url(#exoBoyJacket)" stroke="#3e6488" stroke-width="2"/>
+<path d="M61 90Q71 80 82 89L79 124H66Z" fill="#f4f4ee"/><path d="M66 93l5 14l7-14" fill="none" stroke="#bcc6cf" stroke-width="3"/>
+<path d="M91 106Q111 115 110 137" fill="none" stroke="#7196b9" stroke-width="13" stroke-linecap="round"/>
+<rect x="92" y="107" width="22" height="39" rx="2" transform="rotate(8 103 124)" fill="#335a89" stroke="#e9f3fd" stroke-width="2"/>
+<path d="M97 112l11 1" stroke="#9ebbd8" stroke-width="2"/>
+<ellipse cx="103" cy="133" rx="8" ry="10" fill="#eecba6" transform="rotate(-10 103 133)"/>
+<path d="M49 94Q41 110 40 132" fill="none" stroke="#567ca2" stroke-width="12" stroke-linecap="round"/>
+<path d="M47 48Q54 30 75 31Q96 31 97 56L91 82L83 90H64L53 80Z" fill="#81593e"/>
+<ellipse cx="76" cy="63" rx="21" ry="26" fill="#f0cfad"/>
+<path d="M55 53Q45 45 53 34Q56 24 66 28Q77 19 89 27Q101 27 98 49Q81 44 71 38Q66 52 55 53Z" fill="#805336"/>
+<path d="M50 35q5-12 15-8M76 29q14-9 22 3" fill="none" stroke="#755037" stroke-width="7" stroke-linecap="round"/>
+<circle cx="68" cy="65" r="1.8" fill="#3e2d28"/><circle cx="84" cy="64" r="1.8" fill="#3e2d28"/>
+<path d="M72 75q8 6 14-1" fill="none" stroke="#b77461" stroke-width="2" stroke-linecap="round"/>
+</g></svg><span class="figure-caption">On y va !</span></a>
+  </div>
+</section>
+      <div class="teacher-entry"><a href="./Events/" aria-label="进入教师专用的教学研讨与临时活动">教学研讨与临时活动 <span lang="fr">· Espace enseignant</span> ↗</a></div>
     </section>
     <footer>© 《高级法语综合课》</footer>
   </div>
