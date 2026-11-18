@@ -91,6 +91,12 @@ async function equals(a,b){
 }
 export async function onRequest(ctx){
  const {request,env}=ctx,url=new URL(request.url),path=url.pathname;
+ // Server-side account implementation and D1 migrations are not course assets.
+ // Deny direct static exposure even if the Pages output directory is the repo root.
+ let normalized=path;
+ for(let i=0;i<3;i++){try{const d=decodeURIComponent(normalized);if(d===normalized)break;normalized=d;}catch(_){return new Response("Not found",{status:404});}}
+ normalized=normalized.replace(/\\/g,"/").replace(/\/+/g,"/").toLowerCase();
+ if(/^\/(?:src|db)(?:\/|$)/.test(normalized))return new Response("Not found",{status:404});
  // Pilot mode provides optional personal logins. Individual mode replaces shared passwords
  // across all learning modules, including the previously public Café de Flore game.
  const individual=await exoAccountRouter(ctx);
