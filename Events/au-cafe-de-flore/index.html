@@ -41,6 +41,29 @@
   @media(max-width:570px){.brand .main{font-size:23px}.brand .sub{font-size:7px;letter-spacing:.05em}.voiceRow{grid-template-columns:1fr 1fr;gap:7px}.voiceRow span{grid-column:1 / -1}.voiceRow select{grid-column:1}.voiceRow button{grid-column:2}}
   @media(max-width:850px){#topbar{top:15px;left:17px;right:16px}.brand .main{font-size:25px}.brand .sub{font-size:8px}.stat{font-size:11px;padding:9px 12px;min-height:34px}.iconbtn{width:35px;min-height:35px;font-size:15px}.topactions{gap:5px}.quest{left:14px;bottom:78px;width:210px;padding:12px 13px}.questTitle{font-size:17px}.questline{font-size:11px;margin:4px 0}.hint{display:none}#mobileNav{display:flex}#intro.open{display:flex}.introbox{margin-left:25px}.introbox h1{font-size:66px}#dialogPanel{right:10px;bottom:9px;padding:17px;width:min(360px,calc(100vw - 20px))}#menuPanel{right:9px;top:64px;bottom:9px;width:min(430px,calc(100vw - 18px))}.hotspot{padding:5px 8px 5px 5px;gap:5px}.hotspot .bubble{width:28px;height:28px}.hotspot .tx{font-size:11px}}
   @media(max-width:570px){.quest{display:none}#mobileNav{bottom:15px}.introbox h1{font-size:64px}.introbox .desc{font-size:13px}.topactions .stat:first-child{display:none}.saying{font-size:18px}.modal{padding:21px}.modal h2{font-size:28px}.culturetext{font-size:16px;padding:16px}}
+
+
+/* Service du café : in-scene delivery and order checking */
+#deliveryPanel{position:fixed;z-index:9;right:27px;bottom:27px;width:min(410px,calc(100vw - 30px));max-height:min(78vh,680px);background:#fff9ef;border:1px solid #d9c4a6;border-radius:19px;box-shadow:0 25px 70px #120b0866;display:none;flex-direction:column;overflow:hidden;color:#382a22}
+#deliveryPanel.open{display:flex}
+#deliveryPanel .deliveryTop{padding:19px 21px 13px;background:linear-gradient(110deg,#f2e5cf,#fff9ee)}
+#deliveryPanel h2{font:700 25px/1.15 Georgia,serif;margin:5px 0 6px;color:#284b39}
+#deliveryPanel .deliveryLead{font-size:12px;color:#806959;line-height:1.5;margin:0}
+#deliveryItems{padding:10px 18px;overflow-y:auto;display:grid;gap:8px;min-height:60px}
+.deliveryItem{border:1px solid #ddcbb9;background:#fffdf7;border-radius:11px;padding:11px 12px;display:flex;gap:11px;align-items:center;text-align:left;color:#4d392f;min-height:55px}
+.deliveryItem .deliveryFood{font-size:24px;flex:none;line-height:1}
+.deliveryItem .deliveryName{flex:1;min-width:0;font-size:14px;font-weight:700}
+.deliveryItem .deliveryName small{display:block;color:#947e6b;font-weight:400;font-size:11px;margin-top:3px}
+.deliveryItem .deliveryCheck{border:1px solid #d6bc96;border-radius:50%;width:26px;height:26px;display:grid;place-items:center;flex:none;font-weight:800;color:#856853}
+.deliveryItem:hover{border-color:#4e8063;background:#f2f8ef}
+.deliveryItem.checked{background:#eaf4e8;border-color:#9abda0}
+.deliveryItem.checked .deliveryCheck{background:#346a4d;color:#fff;border-color:#346a4d}
+.deliveryBottom{border-top:1px solid #e5d7c4;padding:12px 20px 18px;display:grid;gap:10px;background:#fff8eb}
+.deliveryBottom .deliveryProgress{font-size:12px;color:#806957}
+#deliveryConfirm{width:100%;min-height:42px}
+#deliveryConfirm:enabled{background:#315e46;color:#fff;box-shadow:0 3px 0 #163d2c}
+#deliveryConfirm:disabled{background:#c3b7a9;color:#fff;box-shadow:none}
+@media(max-width:570px){#deliveryPanel{right:9px;bottom:10px;max-height:65dvh;width:calc(100vw - 18px)}#deliveryItems{padding:9px 13px}#deliveryPanel .deliveryTop{padding:13px 16px 10px}#deliveryPanel h2{font-size:22px}}
 </style>
 </head>
 <body>
@@ -53,10 +76,15 @@
 <div id="mobileNav"><button class="movebtn" data-move="left" aria-label="Gauche">◀</button><button class="movebtn" data-move="forward" aria-label="Avancer">▲</button><button class="movebtn" data-move="back" aria-label="Reculer">▼</button><button class="movebtn" data-move="right" aria-label="Droite">▶</button></div>
 <aside id="dialogPanel" class="panel" aria-live="polite"><div class="speaker"><div class="portrait" id="dialogPortrait">L</div><div><div class="speakername" id="dialogName">Luc</div><div class="speakerrole" id="dialogRole">LE SERVEUR</div></div><button class="close" style="margin-left:auto" id="dialogClose" aria-label="Fermer">×</button></div><div class="eyebrow" style="margin-bottom:7px">Il vous dit…</div><div class="saying" id="dialogText"></div><div class="translation" id="dialogTranslate"></div><div class="choices" id="dialogChoices"></div><div class="minirow"><button class="micro" id="repeatBtn">♫ Écouter en français</button><button class="micro" id="dialogHide">Fermer ×</button></div></aside>
 <aside id="menuPanel" class="panel"><div class="menuTop"><div class="panelhead"><div><div class="eyebrow">Café de Flore · Paris</div><div class="menuTitle">La carte</div><div class="menuSub">Choisissez ce que vous souhaitez commander. · Prix fictifs pour l’activité.</div></div><button class="close" id="menuClose" aria-label="Fermer">×</button></div><div class="menuTabs"><button class="menuTab active" data-tab="boissons">☕ Les boissons</button><button class="menuTab" data-tab="patisseries">🥐 À manger</button></div></div><div class="menuScroll" id="menuItems"></div><div class="menuBottom"><div class="basketlabel"><strong>Votre commande <span id="cartQty">(0)</span></strong><strong id="cartTotal">0,00 €</strong></div><div class="basketItems" id="cartItems">Touchez + pour choisir un produit.</div><div class="eyebrow" style="margin-top:10px;font-size:9px">Ma phrase en français</div><div class="sentence" id="orderSentence">Je voudrais …, s'il vous plaît.</div><div class="menubuttons"><button class="smallbtn" id="listenOrder" title="Écouter ma phrase">♫</button><button class="smallbtn" id="clearOrder" title="Vider la commande">↺</button><button class="primary" id="confirmOrder" disabled>Commander →</button></div></div></aside>
+<aside id="deliveryPanel" aria-labelledby="deliveryTitle" role="dialog" aria-modal="true">
+  <div class="deliveryTop"><div class="panelhead"><div><div class="eyebrow">LE SERVICE · VOTRE COMMANDE</div><h2 id="deliveryTitle">À votre table !</h2><p class="deliveryLead">Vérifiez les boissons et les pâtisseries apportées par Luc.</p></div><button class="close" id="deliveryClose" aria-label="Fermer">×</button></div></div>
+  <div id="deliveryItems"></div>
+  <div class="deliveryBottom"><div class="deliveryProgress" id="deliveryProgress" aria-live="polite">Vérifiez votre commande.</div><button class="primary" type="button" id="deliveryConfirm" disabled>Tout est là, merci ! →</button><button class="micro" type="button" id="deliveryBack">Retour à la table ↗</button></div>
+</aside>
 <div class="overlay" id="cultureOverlay"><article class="modal" role="dialog" aria-modal="true" aria-labelledby="cultureTitle"><div class="panelhead"><div><div class="eyebrow" id="cultureKicker">CULTURE · LECTURE</div><h2 id="cultureTitle"></h2></div><button class="close" id="cultureClose" aria-label="Fermer">×</button></div><p class="lead" id="cultureLead"></p><div class="culturetext" id="cultureText"></div><div class="gloss" id="cultureGloss"></div><div style="height:1px;background:#e7d9ca;margin:21px 0"></div><div class="question" id="cultureQuestion"></div><div class="answers" id="cultureAnswers"></div><div class="feedback" id="cultureFeedback"></div><div class="cultureBtns"><span class="small" id="cultureFoot">Leçon 16 · Au café · Café de Flore</span><button class="secondary" id="cultureDone">Retour au café ↗</button></div></article></div>
 <div class="overlay" id="help"><article class="modal" role="dialog" aria-modal="true" aria-label="Mode d’emploi"><div class="panelhead"><div><div class="eyebrow">COMMENT JOUER</div><h2>Bienvenue au café !</h2></div><button class="close" id="helpClose" aria-label="Fermer">×</button></div><p>Vous êtes dans une reconstitution pédagogique stylisée du Café de Flore à Paris. Admirez la terrasse, puis explorez la salle et cliquez sur les bulles pour parler aux personnages ou découvrir la culture.</p><ul><li><b>Ordinateur :</b> glissez la souris pour regarder autour de vous ; utilisez ZQSD, WASD ou les flèches pour marcher.</li><li><b>Téléphone :</b> glissez le doigt sur la scène pour tourner la tête ; utilisez les quatre flèches en bas.</li><li><b>Votre mission :</b> saluer, choisir une table, commander, recevoir votre commande et payer.</li><li><b>Culture :</b> découvrez trois cartes de lecture, chacune avec une mini-question.</li><li><b>Voix :</b> touchez ♫ pour écouter les phrases françaises (si votre navigateur prend en charge la synthèse vocale).</li></ul><p>Les personnages, le mobilier et les façades sont générés par code, sans images ni modèles externes. Cette reconstitution pédagogique n’est pas un relevé architectural exact. Les prix sont fictifs et les voix dépendent de votre navigateur.</p><button class="primary" id="helpDone">Compris !</button></article></div>
 <div class="overlay" id="voiceOverlay"><article class="modal voiceModal" role="dialog" aria-modal="true" aria-labelledby="voiceTitle"><div class="panelhead"><div><div class="eyebrow">ÉCOUTER · PARLER · INTERAGIR</div><h2 id="voiceTitle">Les voix du café</h2></div><button class="close" id="voiceClose" aria-label="Fermer">×</button></div><p class="lead">Attribuez une voix française à chaque personnage. Les voix disponibles dépendent de votre appareil et de votre navigateur. Le choix automatique privilégie les voix locales. Touchez Écouter pour essayer une voix et activer le son.</p><div class="voiceGrid"><label class="voiceRow"><span><b>Luc</b><small>Le serveur · service</small></span><select id="voiceServer" aria-label="Voix du serveur"></select><button class="secondary" data-testvoice="server" type="button">Écouter</button></label><label class="voiceRow"><span><b>Élise</b><small>La cliente · culture</small></span><select id="voiceCustomer" aria-label="Voix de la cliente"></select><button class="secondary" data-testvoice="customer" type="button">Écouter</button></label><label class="voiceRow"><span><b>Vous</b><small>Votre phrase · apprentissage</small></span><select id="voiceLearner" aria-label="Voix de l’apprenant"></select><button class="secondary" data-testvoice="learner" type="button">Écouter</button></label></div><p class="voiceNote" id="voiceNote">Recherche des voix françaises installées…</p><p class="voiceNote" id="voicePlayback" role="status" aria-live="polite">Touchez Écouter pour tester la voix.</p><p class="voiceNote">Une lecture annoncée ne garantit pas un son audible. Si vous n’entendez rien, vérifiez le volume et la sortie audio (haut-parleur ou Bluetooth). Sur iPhone, essayez directement dans Safari. Vérifiez les voix françaises dans Réglages → Accessibilité → Contenu énoncé / Lire et énoncer → Voix (le nom varie selon iOS), puis revenez tester.</p><div class="voiceActions"><button class="primary" id="voiceDone" type="button">Retour au café ↗</button></div></article></div>
-<div class="overlay open" id="intro"><section class="introbox"><div class="brow">LE FRANÇAIS EN SITUATION</div><h1>Au <i>café.</i></h1><p class="ch">走进巴黎花神咖啡馆 · 第一视角互动体验</p><p class="desc">Une petite table, un café, quelques mots en français… 走进花神咖啡馆，与服务员交谈，选择你喜欢的饮品，探索藏在店里的法国文化。</p><button class="enter" id="startBtn">Commencer la visite &nbsp; ↗</button><div class="introfoot">☕ A1–A2 &nbsp; · &nbsp; INTERACTION · CULTURE · COMPRÉHENSION</div></section></div>
+<div class="overlay open" id="intro"><section class="introbox"><div class="brow">LE FRANÇAIS EN SITUATION</div><h1>Au <i>café.</i></h1><p class="desc">Une petite table, un café, quelques mots en français… 走进花神咖啡馆，与服务员交谈，选择你喜欢的饮品，探索藏在店里的法国文化。</p><button class="enter" id="startBtn">Commencer la visite &nbsp; ↗</button><div class="introfoot">☕ A1–A2 &nbsp; · &nbsp; INTERACTION · CULTURE · COMPRÉHENSION</div></section></div>
 <div class="overlay" id="end"><article class="modal" role="dialog" aria-modal="true" aria-labelledby="endTitle"><div class="seal">✦ ☕ ✦</div><div class="eyebrow">MISSION ACCOMPLIE</div><h2 id="endTitle">Bravo, et à bientôt !</h2><p style="font-size:13px;line-height:1.8;color:#7a6256">Vous avez réussi votre première visite dans un café français. Vous savez saluer, commander, remercier et payer.</p><div class="endwords" id="endQuote">« Je voudrais un café, s'il vous plaît. »</div><div class="endcount" id="endSummary"></div><button class="primary" id="restartBtn">Recommencer la visite ↗</button><button class="secondary" id="endExplore" style="margin-left:7px">Continuer à explorer</button></article></div>
 <div id="toast"></div>
 <div id="voiceAlert" hidden><span id="voiceAlertText" role="status" aria-live="polite"></span><button class="secondary" id="voiceRetry" type="button" hidden>Réessayer</button></div>
@@ -215,20 +243,97 @@ function hideDialog(){state.dialogOpen=false;$('#dialogPanel').style.display='no
 function showDialog({name='Luc',role='LE SERVEUR',avatar='L',text,trans='',choices=[]}){closeMenu();const who=name==='Vous'?'learner':name==='Élise'?'customer':'server';state.dialogSpeaker=who;$('#dialogName').textContent=name;$('#dialogRole').textContent=role;$('#dialogPortrait').textContent=avatar;$('#dialogText').textContent=text;$('#dialogTranslate').textContent=trans;$('#dialogTranslate').style.display=trans?'block':'none';$('#dialogChoices').replaceChildren();choices.forEach(opt=>{const b=document.createElement('button');b.className='choice';const span=document.createElement('span');span.textContent=opt.label;const arrow=document.createElement('span');arrow.className='arrow';arrow.textContent='↗';b.append(span,arrow);b.addEventListener('click',()=>{if(opt.say)speak(opt.say,'learner');else if(opt.label&&!opt.nospeak)speak(opt.label,'learner');opt.run()});$('#dialogChoices').append(b)});$('#dialogPanel').style.display='block';state.dialogOpen=true;state.dialogText=text;speak(text,who);}
 function openWelcome(){state.phase='welcome';showDialog({text:'Bonjour ! Bienvenue au Café de Flore. Vous êtes combien ?',trans:'您好！欢迎来到光影咖啡馆。请问几位？',choices:[{label:'Une table pour une personne, s’il vous plaît.',run:()=>acceptTable()},{label:'Une table pour deux personnes, s’il vous plaît.',run:()=>acceptTable()}]});}
 function acceptTable(){mark('greet');state.phase='seated';state.targetCam={x:.1,z:5.25,yaw:-.06,duration:1.0};showDialog({text:'Très bien ! Installez-vous près de la fenêtre. Voici la carte.',trans:'好的！请在窗边坐。给您菜单。',choices:[{label:'Merci ! Je voudrais voir la carte.',run:openMenu},{label:'Je regarde un peu autour de moi.',run:()=>{hideDialog();toast('Cliquez sur « La carte » pour commander.')}}]});}
-function prepareFood(){state.phase='awaitDish';showDialog({text:'Très bien ! Je vous apporte votre commande tout de suite.',trans:'好的！马上为您送上点的餐。',choices:[{label:'Merci beaucoup !',run:()=>{showDialog({text:'Votre commande arrive !',trans:'您的餐点来了！',choices:[{label:'Recevoir ma commande →',run:serveFood}]})}},{label:'Recevoir ma commande →',nospeak:true,run:serveFood}]});}
-function serveFood(){state.phase='served';hideDialog();const parts=orderParts();const name=parts.length===1?parts[0]:parts.slice(0,-1).join(', ')+' et '+parts[parts.length-1];showDialog({text:'Et voilà '+name+' ! Bon appétit !',trans:'您的餐点来了！请慢用！',choices:[{label:'Merci beaucoup !',run:thanks},{label:'Merci, c’est très gentil !',run:thanks}]});}
+// Keep the placed order immutable once the waiter has accepted it.
+state.orderLocked=false;
+state.servingVisible=false;
+state.servingVerified=new Set();
+let servingMeshGpu=null;
+function groupedOrder(){
+  const counts=new Map();
+  for(const id of state.cart)counts.set(id,(counts.get(id)||0)+1);
+  return [...counts].map(([id,quantity])=>({item:items.find(i=>i.id===id),quantity}));
+}
+function friendlyList(parts){
+  return parts.length===1?parts[0]:parts.slice(0,-1).join(', ')+' et '+parts[parts.length-1];
+}
+function orderSummaryCN(){return groupedOrder().map(g=>g.quantity+' × '+g.item.cn).join('、');}
+function prepareFood(){
+  if(!state.cart.length)return;
+  state.orderLocked=true;state.phase='awaitDish';
+  const ordered=friendlyList(orderParts());
+  showDialog({text:'Très bien, '+ordered+'. Je vous apporte cela tout de suite !',trans:'好的，我记下了：'+orderSummaryCN()+'。马上给您送来。',choices:[
+    {label:'Merci, je vais attendre à ma table.',run:waitForOrder},
+    {label:'D’accord, merci !',run:waitForOrder}
+  ]});
+}
+function waitForOrder(){
+  state.phase='waiting';state.targetCam={x:3.2,z:8.2,yaw:0,pitch:-.18,duration:1.3};
+  showDialog({text:'Voilà, votre commande arrive !',trans:'Luc 正端着您点的餐点走来。',choices:[
+    {label:'Je reçois ma commande. →',run:serveFood}
+  ]});
+}
+function serveFood(){
+  if(!state.cart.length)return;
+  state.phase='serving';state.servingVisible=true;state.servingVerified.clear();
+  state.targetCam={x:3.2,z:8.2,yaw:0,pitch:-.18,duration:1.0};
+  rebuildServingMesh();
+  showDialog({text:'Et voilà votre commande : '+friendlyList(orderParts())+' ! Bon appétit !',trans:'您的餐点来了：'+orderSummaryCN()+'。请慢用！',choices:[
+    {label:'Je vais vérifier ma commande.',run:openDelivery},
+    {label:'Merci, tout est là !',run:thanks}
+  ]});
+}
+function openDelivery(){
+  if(!state.servingVisible||!state.cart.length){toast('Passez d’abord votre commande.');return;}
+  hideDialog();state.modal=true;
+  const area=$('#deliveryItems');area.replaceChildren();
+  const groups=groupedOrder();
+  for(const g of groups){
+    const button=document.createElement('button');button.type='button';button.className='deliveryItem';
+    const icon=document.createElement('span');icon.className='deliveryFood';icon.textContent=g.item.icon;
+    const name=document.createElement('span');name.className='deliveryName';
+    name.textContent=g.quantity>1?String(g.quantity)+' × '+g.item.name:g.item.name;
+    const sub=document.createElement('small');sub.textContent=g.item.cn;name.append(sub);
+    const check=document.createElement('span');check.className='deliveryCheck';check.textContent='✓';
+    button.append(icon,name,check);button.setAttribute('aria-pressed',String(state.servingVerified.has(g.item.id)));
+    button.classList.toggle('checked',state.servingVerified.has(g.item.id));
+    button.onclick=()=>{
+      if(state.servingVerified.has(g.item.id))state.servingVerified.delete(g.item.id);else{
+        state.servingVerified.add(g.item.id);
+        speak(g.quantity===1?g.item.name:(g.quantity+' '+pluralNames[g.item.id]),'learner',true);
+      }
+      button.classList.toggle('checked',state.servingVerified.has(g.item.id));
+      button.setAttribute('aria-pressed',String(state.servingVerified.has(g.item.id)));
+      updateDeliveryProgress();
+    };
+    area.append(button);
+  }
+  $('#deliveryPanel').classList.add('open');updateDeliveryProgress();
+}
+function updateDeliveryProgress(){
+  const groups=groupedOrder();const checked=groups.filter(g=>state.servingVerified.has(g.item.id)).length;
+  $('#deliveryProgress').textContent=checked+' / '+groups.length+' produits vérifiés · '+state.cart.length+' article(s) au total';
+  $('#deliveryConfirm').disabled=checked!==groups.length;
+}
+function closeDelivery(){
+  $('#deliveryPanel').classList.remove('open');state.modal=false;
+  if(state.phase==='serving'&&!state.done.has('serve'))toast('Touchez « Votre commande » sur la table pour reprendre.');
+}
+function confirmDelivery(){
+  if(groupedOrder().some(g=>!state.servingVerified.has(g.item.id)))return;
+  closeDelivery();thanks();
+}
 function thanks(){mark('serve');state.phase='free';showDialog({text:'Je vous en prie ! Prenez votre temps.',trans:'不客气！请慢慢享用。',choices:[{label:'Je vais découvrir le café.',run:()=>{hideDialog();toast('Explorez les personnages, les affiches ou le téléphone !')}},{label:'L’addition, s’il vous plaît.',run:checkout}]});}
 function checkout(){if(!state.done.has('serve')){toast('Commencez par commander et recevoir votre commande.');return}state.phase='paying';showDialog({text:'Bien sûr ! Cela vous fait '+fmt(total())+'. Comment souhaitez-vous payer ?',trans:'当然！一共 '+fmt(total())+'。您想如何支付？',choices:[{label:'Je peux payer par carte ?',run:()=>finish('par carte')},{label:'Je vais payer en espèces.',run:()=>finish('en espèces')}]});}
 function finish(method){mark('pay');state.phase='finished';showDialog({text:'C’est parfait. Merci et à bientôt !',trans:'好的。谢谢您，欢迎下次再来！',choices:[{label:'Merci, au revoir !',run:()=>{hideDialog();showEnd()}}]});}
 function showEnd(){state.endSeen=true;$('#endQuote').textContent='« '+orderSentence()+' »';$('#endSummary').innerHTML=`<strong>${['greet','order','serve','pay'].filter(x=>state.done.has(x)).length}/4</strong> étapes terminées &nbsp; · &nbsp; <strong>${state.culture.size}/3</strong> découvertes culturelles<br><span style="font-size:11px;color:#937768">Vous pouvez continuer à explorer les cartes après la mission.</span>`;$('#end').classList.add('open')}
-function openMenu(){hideDialog();state.menuOpen=true;$('#menuPanel').style.display='flex';renderMenu();}
+function openMenu(){if(state.orderLocked){toast('Votre commande a déjà été envoyée à Luc.');return;}hideDialog();state.menuOpen=true;$('#menuPanel').style.display='flex';renderMenu();}
 function closeMenu(){state.menuOpen=false;$('#menuPanel').style.display='none'}
 function renderMenu(){const target=$('#menuItems');target.replaceChildren();items.filter(i=>i.cat===state.tab).forEach(item=>{const row=document.createElement('div');row.className='menuItem';row.innerHTML=`<div class="foodicon">${item.icon}</div><div class="foodinfo"><div class="foodname">${item.name}</div><div class="foodcn">${item.cn}</div><div class="foodprice">${fmt(item.price)}</div></div>`;const step=document.createElement('div');step.className='stepper';const minus=document.createElement('button');minus.className='minusbtn';minus.textContent='−';minus.title='Retirer '+item.name;const count=document.createElement('span');count.className='qty';const plus=document.createElement('button');plus.className='addbtn';plus.textContent='+';plus.title='Ajouter '+item.name;const update=()=>{const n=state.cart.filter(x=>x===item.id).length;count.textContent=n?n:'';minus.disabled=!n;refreshBasket()};minus.onclick=()=>{const at=state.cart.lastIndexOf(item.id);if(at>=0)state.cart.splice(at,1);update()};plus.onclick=()=>{state.cart.push(item.id);update()};step.append(minus,count,plus);row.append(step);target.append(row);update()});$$('.menuTab').forEach(b=>b.classList.toggle('active',b.dataset.tab===state.tab));refreshBasket();}
 function refreshBasket(){const s=orderSentence();$('#orderSentence').textContent=s;$('#cartQty').textContent='('+state.cart.length+')';$('#cartTotal').textContent=fmt(total());$('#cartItems').textContent=orderParts().join(' + ')||'Touchez + pour choisir un produit.';$('#confirmOrder').disabled=!state.cart.length;}
 function openCulture(id){hideDialog();closeMenu();const c=culture[id];if(!c)return;state.currentCulture=id;$('#cultureKicker').textContent=c.kicker;$('#cultureTitle').textContent=c.title;$('#cultureLead').textContent=c.lead;$('#cultureText').textContent=c.text;$('#cultureGloss').textContent=c.gloss;$('#cultureQuestion').textContent=c.question;$('#cultureFeedback').textContent=state.answered.has(id)?'✓ Vous avez déjà répondu à cette question.':'';const area=$('#cultureAnswers');area.replaceChildren();c.answers.forEach((s,i)=>{const b=document.createElement('button');b.className='answer';b.textContent=String.fromCharCode(65+i)+'. '+s;b.addEventListener('click',()=>{if(i===c.correct){b.classList.add('correct');$('#cultureFeedback').textContent=c.why;state.answered.add(id);if(!state.culture.has(id)){state.culture.add(id);mark('culture');renderQuest()}}else{b.classList.add('wrong');$('#cultureFeedback').textContent='Pas tout à fait. Relisez le texte et réessayez !';setTimeout(()=>b.classList.remove('wrong'),900)}});area.append(b)});$('#cultureOverlay').classList.add('open');state.modal=true;}
 function closeCulture(){state.modal=false;$('#cultureOverlay').classList.remove('open')}
 function openNeighbor(){showDialog({name:'Élise',role:'UNE CLIENTE PARISIENNE',avatar:'É',text:'Vous aimez les cafés ? Pour moi, c’est un lieu pour discuter, lire et retrouver des amis.',trans:'您喜欢咖啡馆吗？对我来说，这里是聊天、阅读和朋友相聚的地方。',choices:[{label:'Pourquoi les cafés sont-ils importants ?',run:()=>openCulture('flore')},{label:'Parlez-moi des bonnes manières.',run:()=>openCulture('manieres')},{label:'Merci pour cette conversation !',run:hideDialog}]});}
-function restart(){stopSpeech();voiceBlocked=false;lastVoiceJob=null;voiceNotice();voicePlayback('Touchez Écouter pour tester la voix.');state.done.clear();state.culture.clear();state.answered.clear();state.cart=[];state.endSeen=false;state.phase='intro';state.cam={x:.18,y:1.7,z:22.1,yaw:0,pitch:-.045};state.targetCam=null;renderQuest();closeCulture();hideDialog();closeMenu();$('#end').classList.remove('open');$('#intro').classList.add('open');}
+function restart(){state.phase='intro';clearServingMesh();state.orderLocked=false;state.servingVisible=false;state.servingVerified.clear();closeDelivery();stopSpeech();voiceBlocked=false;lastVoiceJob=null;voiceNotice();voicePlayback('Touchez Écouter pour tester la voix.');state.done.clear();state.culture.clear();state.answered.clear();state.cart=[];state.endSeen=false;state.phase='intro';state.cam={x:.18,y:1.7,z:22.1,yaw:0,pitch:-.045};state.targetCam=null;renderQuest();closeCulture();hideDialog();closeMenu();$('#end').classList.remove('open');$('#intro').classList.add('open');}
 $('#startBtn').addEventListener('click',()=>{
   state.started=true;$('#intro').classList.remove('open');state.targetCam={x:.25,z:20.0,yaw:0,duration:1.4};
   updateVoiceChoices();
@@ -239,6 +344,7 @@ $('#startBtn').addEventListener('click',()=>{
 });
 $('#dialogClose').onclick=$('#dialogHide').onclick=hideDialog;$('#repeatBtn').onclick=()=>speak(state.dialogText,state.dialogSpeaker||'server',true);
 $('#menuClose').onclick=closeMenu;$$('.menuTab').forEach(b=>b.onclick=()=>{state.tab=b.dataset.tab;renderMenu()});$('#clearOrder').onclick=()=>{state.cart=[];refreshBasket()};$('#listenOrder').onclick=()=>speak(orderSentence(),'learner',true);$('#confirmOrder').onclick=()=>{if(!state.cart.length)return;const phrase=orderSentence();closeMenu();mark('order');state.phase='ordered';showDialog({name:'Vous',role:'VOTRE COMMANDE',avatar:'V',text:phrase,trans:'请向服务员说出这句话。',choices:[{label:'Envoyer ma commande au serveur →',run:prepareFood},{label:'Modifier ma commande',nospeak:true,run:openMenu}]});};
+$('#deliveryClose').onclick=$('#deliveryBack').onclick=closeDelivery;$('#deliveryConfirm').onclick=confirmDelivery;
 $('#cultureClose').onclick=$('#cultureDone').onclick=closeCulture;$('#cultureOverlay').addEventListener('click',e=>{if(e.target.id==='cultureOverlay')closeCulture()});
 $('#helpBtn').onclick=()=>$('#help').classList.add('open');$('#helpClose').onclick=$('#helpDone').onclick=()=>$('#help').classList.remove('open');
 function refreshSoundButton(){
@@ -447,6 +553,54 @@ function makeFloreTerrace(){
  B(2.8,1.35,13.15,.84,2.53,.18,C.floreForest);B(2.8,1.35,13.28,.72,2.33,.045,C.floreIvory);
 }
 function setupWorld(){makeFloor();makeArchitecture();makeStreet();makeLight();makeBar();makeSignage();makeTables();makePeople();makeDecor();makeParisianFacade();makeFloreCanopy();makeFloreTerrace();}
+
+/* Small procedural servings on the player's table, driven by the exact cart.
+   For large orders the tray shows up to nine miniature items; the checklist
+   still includes the full quantity of every ordered item. */
+function clearServingMesh(){
+  if(servingMeshGpu&&gl){for(const k of ['p','n','c'])gl.deleteBuffer(servingMeshGpu[k]);}
+  servingMeshGpu=null;
+}
+function rebuildServingMesh(){
+  clearServingMesh();if(!gl||!state.cart.length)return;
+  const m=new MeshBuilder();const xx=3.2,zz=6.15;
+  // Golden-rimmed serving tray above the existing café table.
+  m.cyl(xx,1.755,zz,.70,.70,.085,C.woodDark,24);
+  m.cyl(xx,1.804,zz,.675,.675,.022,C.brass,24);
+  m.cyl(xx,1.817,zz,.642,.642,.018,C.woodLite,24);
+  const chosen=state.cart.slice(0,9),cols=Math.min(3,Math.ceil(Math.sqrt(chosen.length))),rows=Math.ceil(chosen.length/cols);
+  const small=chosen.length>=7?.68:chosen.length>=4?.80:1;
+  const baseY=1.855;
+  chosen.forEach((id,i)=>{
+    const col=i%cols,row=Math.floor(i/cols);
+    const x=xx+(col-(cols-1)/2)*.39;
+    const z=zz+(row-(rows-1)/2)*.37;
+    const r=.13*small,plateY=baseY;
+    m.cyl(x,plateY,z,r*1.24,r*1.24,.025,C.cream,14);
+    if(['exp','creme','the','choc','jus'].includes(id)){
+      const glass=id==='jus',tea=id==='the';
+      const tall=glass||tea, rr=tall?.083*small:.098*small, hh=tall?.26*small:.17*small;
+      m.cyl(x,baseY+.045+hh/2,z,rr*.94,rr,hh,glass?C.glass:tea?C.brass:C.cream,12);
+      const drink=id==='jus'?[.94,.42,.08]:id==='the'?[.52,.27,.09]:id==='choc'?C.coffee:id==='creme'?[.62,.39,.23]:[.20,.105,.05];
+      m.cyl(x,baseY+.053+hh,z,rr*.90,rr*.90,.018*small,drink,12);
+      if(id==='creme'||id==='choc')m.sphere(x,baseY+.063+hh,z,.036*small,C.cream,6,9);
+      if(glass)m.rail([x+.04*small,baseY+.08+hh,z],[x+.075*small,baseY+.24+hh,z],.008*small,C.cream,7);
+    }else if(id==='croissant'){
+      const crust=[.85,.51,.18];
+      for(let j=-2;j<=2;j++)m.sphere(x+j*.038*small,baseY+.085+Math.cos(j*.53)*.035*small,z+Math.abs(j)*.01*small,(.069-Math.abs(j)*.009)*small,crust,6,10,1,.8,1);
+    }else if(id==='chocolatine'){
+      m.box(x,baseY+.105,z,.21*small,.11*small,.15*small,[.68,.37,.14]);
+      for(const d of [-.05,.05])m.box(x+d*small,baseY+.166,z,.017*small,.012*small,.145*small,C.coffee);
+    }else if(id==='tarte'){
+      m.cyl(x,baseY+.071,z,.105*small,.105*small,.056*small,[.74,.46,.19],12);
+      for(let j=0;j<5;j++){const a=j*Math.PI*2/5;m.sphere(x+Math.cos(a)*.057*small,baseY+.108,z+Math.sin(a)*.058*small,.044*small,[.94,.67,.32],5,7)}
+    }else if(id==='eclair'){
+      m.sphere(x,baseY+.085,z,.096*small,[.78,.49,.26],6,12,1.3,.53,.72);
+      m.sphere(x,baseY+.124,z,.086*small,C.coffee,5,12,1.26,.22,.64);
+    }
+  });
+  servingMeshGpu={p:createBuffer(m.p),n:createBuffer(m.n),c:createBuffer(m.c),count:m.p.length/3};
+}
 function compileShader(type,src){const s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))console.warn('Shader:',gl.getShaderInfoLog(s));return s}
 function makeProgram(v,f){const p=gl.createProgram();gl.attachShader(p,compileShader(gl.VERTEX_SHADER,v));gl.attachShader(p,compileShader(gl.FRAGMENT_SHADER,f));gl.linkProgram(p);if(!gl.getProgramParameter(p,gl.LINK_STATUS))console.warn('Link:',gl.getProgramInfoLog(p));return p}
 const vshader=`attribute vec3 aPos;attribute vec3 aNorm;attribute vec3 aColor;uniform vec3 uCam,uFront,uRight,uUp;uniform float uAspect,uTan;varying vec3 vColor;varying float vDepth;void main(){vec3 rel=aPos-uCam;float dep=dot(rel,uFront);float scale=max(dep,.02);gl_Position=vec4(dot(rel,uRight)/(uAspect*uTan),dot(rel,uUp)/uTan,dep*1.002-.201,dep);vec3 light=normalize(vec3(-.40,.77,.57));float diff=max(dot(normalize(aNorm),light),0.0);float hemi=clamp(aNorm.y*.24+.50,.25,.82);float shade=.64+diff*.31+hemi*.19;float warm=max(0.,1.-distance(aPos,vec3(-1.,4.,-4.)) / 13.);vColor=aColor*shade+vec3(.075,.042,.014)*warm;vDepth=scale;}`;
@@ -470,21 +624,22 @@ function setupGraphics(){if(!gl)return;setupWorld();prog=makeProgram(vshader,fsh
 }
 function basis(){const c=state.cam,ca=Math.cos(c.yaw),sa=Math.sin(c.yaw),cp=Math.cos(c.pitch),sp=Math.sin(c.pitch);const front=[sa*cp,sp,-ca*cp],right=[ca,0,sa],up=[-sa*sp,cp,ca*sp];return {front,right,up}}
 function commonUniform(p,b){gl.useProgram(p);gl.uniform3f(gl.getUniformLocation(p,'uCam'),state.cam.x,state.cam.y,state.cam.z);gl.uniform3fv(gl.getUniformLocation(p,'uFront'),b.front);gl.uniform3fv(gl.getUniformLocation(p,'uRight'),b.right);gl.uniform3fv(gl.getUniformLocation(p,'uUp'),b.up);gl.uniform1f(gl.getUniformLocation(p,'uAspect'),canvas.width/canvas.height);gl.uniform1f(gl.getUniformLocation(p,'uTan'),Math.tan(68*Math.PI/360));}
-function drawWorld(){if(!gl)return;const w=Math.min(2,devicePixelRatio||1),cw=Math.floor(innerWidth*w),ch=Math.floor(innerHeight*w);if(canvas.width!==cw||canvas.height!==ch){canvas.width=cw;canvas.height=ch;gl.viewport(0,0,cw,ch)}gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);const b=basis();commonUniform(prog,b);attachData(prog,'aPos',vbos.p,3);attachData(prog,'aNorm',vbos.n,3);attachData(prog,'aColor',vbos.c,3);gl.drawArrays(gl.TRIANGLES,0,vbos.count);commonUniform(texprog,b);for(const s of signs){attachData(texprog,'aPos',s.p,3);attachData(texprog,'aUV',s.uv,2);gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,s.tex);gl.uniform1i(gl.getUniformLocation(texprog,'uTex'),0);gl.drawArrays(gl.TRIANGLES,0,6)}updateHotspots(b)}
+function drawWorld(){if(!gl)return;const w=Math.min(2,devicePixelRatio||1),cw=Math.floor(innerWidth*w),ch=Math.floor(innerHeight*w);if(canvas.width!==cw||canvas.height!==ch){canvas.width=cw;canvas.height=ch;gl.viewport(0,0,cw,ch)}gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);const b=basis();commonUniform(prog,b);attachData(prog,'aPos',vbos.p,3);attachData(prog,'aNorm',vbos.n,3);attachData(prog,'aColor',vbos.c,3);gl.drawArrays(gl.TRIANGLES,0,vbos.count);if(state.servingVisible&&servingMeshGpu){commonUniform(prog,b);attachData(prog,'aPos',servingMeshGpu.p,3);attachData(prog,'aNorm',servingMeshGpu.n,3);attachData(prog,'aColor',servingMeshGpu.c,3);gl.drawArrays(gl.TRIANGLES,0,servingMeshGpu.count)}commonUniform(texprog,b);for(const s of signs){attachData(texprog,'aPos',s.p,3);attachData(texprog,'aUV',s.uv,2);gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,s.tex);gl.uniform1i(gl.getUniformLocation(texprog,'uTex'),0);gl.drawArrays(gl.TRIANGLES,0,6)}updateHotspots(b)}
 /* Floating world-space interaction markers */
 const hotspotData=[
-{id:'server',pos:[-1.48,3.0,11.45],emoji:'👋',title:'Luc · Serveur',sub:'Parler au serveur',click:()=>{if(state.phase==='welcome'||state.phase==='intro')openWelcome();else if(state.phase==='seated')openMenu();else if(state.phase==='awaitDish'||state.phase==='ordered')serveFood();else if(state.phase==='served')thanks();else if(state.phase==='free'||state.phase==='finished')checkout();else openWelcome()}},
-{id:'menu',pos:[-2.64,2.4,-2.95],emoji:'📖',title:'La carte',sub:'Choisir et commander',click:()=>{if(!state.started)return;openMenu()}},
+{id:'server',pos:[-1.48,3.0,11.45],emoji:'👋',title:'Luc · Serveur',sub:'Parler au serveur',click:()=>{if(state.phase==='welcome'||state.phase==='intro')openWelcome();else if(state.phase==='seated')openMenu();else if(state.phase==='ordered')prepareFood();else if(state.phase==='awaitDish')waitForOrder();else if(state.phase==='waiting')serveFood();else if(state.phase==='serving')openDelivery();else if(state.phase==='served')thanks();else if(state.phase==='free'||state.phase==='finished')checkout();else openWelcome()}},
+{id:'menu',pos:[-2.64,2.4,-2.95],emoji:'📖',title:'La carte',sub:'Choisir et commander',click:()=>{if(!state.started||state.orderLocked)return;openMenu()}},
 {id:'culture',pos:[3.2,2.6,13.15],emoji:'✦',title:'Café de Flore',sub:'Lecture culturelle',click:()=>openCulture('flore')},
 {id:'neighbor',pos:[4.42,3.0,1.6],emoji:'💬',title:'Élise · Cliente',sub:'Parler de la culture',click:openNeighbor},
 {id:'manners',pos:[-5.82,3.8,-.9],emoji:'✦',title:'Bonnes manières',sub:'Les formules de politesse',click:()=>openCulture('manieres')},
 {id:'phone',pos:[3.50,1.9,-4.14],emoji:'📱',title:'Le portable',sub:'Les codes de politesse',click:()=>openCulture('portable')},
+{id:'delivery',pos:[3.20,2.25,6.15],emoji:'🍽️',title:'Votre commande',sub:'Vérifier le service',click:openDelivery},
 {id:'pay',pos:[-2.23,2.6,-4.9],emoji:'€',title:'L’addition',sub:'Payer et dire au revoir',click:checkout}
 ];
 function buildHotspots(){const e=$('#hotspots');hotspotData.forEach(h=>{const b=document.createElement('button');b.className='hotspot hidden';b.id='spot-'+h.id;b.innerHTML=`<span class="bubble">${h.emoji}</span><span class="tx">${h.title}<small>${h.sub}</small></span>`;b.onclick=h.click;e.appendChild(b);h.el=b})}
-function updateHotspots(b){if(!state.started||state.modal||state.menuOpen||$('#intro').classList.contains('open')){hotspotData.forEach(h=>h.el.classList.add('hidden'));return}const tan=Math.tan(68*Math.PI/360),aspect=innerWidth/innerHeight;for(const h of hotspotData){const [x,y,z]=h.pos,c=state.cam,rel=[x-c.x,y-c.y,z-c.z],depth=rel[0]*b.front[0]+rel[1]*b.front[1]+rel[2]*b.front[2],dist=Math.hypot(...rel),enable=(h.id!=='pay'||state.done.has('serve'))&&(h.id!=='menu'||state.done.has('greet'))&&(h.id!=='server'||state.phase!=='finished');if(!enable||depth<.5||dist>17){h.el.classList.add('hidden');continue}const xx=(rel[0]*b.right[0]+rel[1]*b.right[1]+rel[2]*b.right[2])/(depth*tan*aspect),yy=(rel[0]*b.up[0]+rel[1]*b.up[1]+rel[2]*b.up[2])/(depth*tan);if(Math.abs(xx)>1.02||Math.abs(yy)>.88){h.el.classList.add('hidden');continue}h.el.classList.remove('hidden');h.el.style.left=(50+xx*50)+'%';h.el.style.top=(50-yy*50)+'%';h.el.style.opacity=String(Math.min(1,Math.max(.57,(15-dist)/7)));}
+function updateHotspots(b){if(!state.started||state.modal||state.menuOpen||$('#intro').classList.contains('open')){hotspotData.forEach(h=>h.el.classList.add('hidden'));return}const tan=Math.tan(68*Math.PI/360),aspect=innerWidth/innerHeight;for(const h of hotspotData){const [x,y,z]=h.pos,c=state.cam,rel=[x-c.x,y-c.y,z-c.z],depth=rel[0]*b.front[0]+rel[1]*b.front[1]+rel[2]*b.front[2],dist=Math.hypot(...rel),enable=(h.id!=='pay'||state.done.has('serve'))&&(h.id!=='menu'||(state.done.has('greet')&&!state.orderLocked))&&(h.id!=='delivery'||state.phase==='serving')&&(h.id!=='server'||state.phase!=='finished');if(!enable||depth<.5||dist>17){h.el.classList.add('hidden');continue}const xx=(rel[0]*b.right[0]+rel[1]*b.right[1]+rel[2]*b.right[2])/(depth*tan*aspect),yy=(rel[0]*b.up[0]+rel[1]*b.up[1]+rel[2]*b.up[2])/(depth*tan);if(Math.abs(xx)>1.02||Math.abs(yy)>.88){h.el.classList.add('hidden');continue}h.el.classList.remove('hidden');h.el.style.left=(50+xx*50)+'%';h.el.style.top=(50-yy*50)+'%';h.el.style.opacity=String(Math.min(1,Math.max(.57,(15-dist)/7)));}
 }
-function animateCam(dt){const t=state.targetCam;if(t){const c=state.cam;const alpha=Math.min(1,dt*2.15);c.x+=(t.x-c.x)*alpha;c.z+=(t.z-c.z)*alpha;let d=t.yaw-c.yaw;c.yaw+=d*alpha;if(Math.abs(c.z-t.z)<.06&&Math.abs(c.x-t.x)<.05){c.x=t.x;c.z=t.z;c.yaw=t.yaw;state.targetCam=null;if(t.onDone)t.onDone()}}else if(state.started&&!state.modal&&!state.menuOpen&&!state.dialogOpen&&!$('#help').classList.contains('open')&&!$('#end').classList.contains('open')){const k=state.walk,mb=state.mobileDown;const f=!!(k.w||k.z||k.arrowup||mb.forward),back=!!(k.s||k.arrowdown||mb.back),left=!!(k.a||k.q||k.arrowleft||mb.left),right=!!(k.d||k.arrowright||mb.right);const speed=dt*3.15;const a=state.cam.yaw;let movx=(f?Math.sin(a):0)-(back?Math.sin(a):0)-(left?Math.cos(a):0)+(right?Math.cos(a):0);let movz=-(f?Math.cos(a):0)+(back?Math.cos(a):0)-(left?Math.sin(a):0)+(right?Math.sin(a):0);const mag=Math.hypot(movx,movz);if(mag){movx/=mag;movz/=mag;state.cam.x=Math.max(-5.4,Math.min(5.4,state.cam.x+movx*speed));state.cam.z=Math.max(-8.8,Math.min(23.7,state.cam.z+movz*speed));state.cam.y=1.69+Math.sin(performance.now()*.011)*.035}else state.cam.y+=(1.70-state.cam.y)*.09;}}
+function animateCam(dt){const t=state.targetCam;if(t){const c=state.cam;const alpha=Math.min(1,dt*2.15);c.x+=(t.x-c.x)*alpha;c.z+=(t.z-c.z)*alpha;let d=t.yaw-c.yaw;c.yaw+=d*alpha;if(Number.isFinite(t.pitch))c.pitch+=(t.pitch-c.pitch)*alpha;if(Math.abs(c.z-t.z)<.06&&Math.abs(c.x-t.x)<.05){c.x=t.x;c.z=t.z;c.yaw=t.yaw;state.targetCam=null;if(t.onDone)t.onDone()}}else if(state.started&&!state.modal&&!state.menuOpen&&!state.dialogOpen&&!$('#help').classList.contains('open')&&!$('#end').classList.contains('open')){const k=state.walk,mb=state.mobileDown;const f=!!(k.w||k.z||k.arrowup||mb.forward),back=!!(k.s||k.arrowdown||mb.back),left=!!(k.a||k.q||k.arrowleft||mb.left),right=!!(k.d||k.arrowright||mb.right);const speed=dt*3.15;const a=state.cam.yaw;let movx=(f?Math.sin(a):0)-(back?Math.sin(a):0)-(left?Math.cos(a):0)+(right?Math.cos(a):0);let movz=-(f?Math.cos(a):0)+(back?Math.cos(a):0)-(left?Math.sin(a):0)+(right?Math.sin(a):0);const mag=Math.hypot(movx,movz);if(mag){movx/=mag;movz/=mag;state.cam.x=Math.max(-5.4,Math.min(5.4,state.cam.x+movx*speed));state.cam.z=Math.max(-8.8,Math.min(23.7,state.cam.z+movz*speed));state.cam.y=1.69+Math.sin(performance.now()*.011)*.035}else state.cam.y+=(1.70-state.cam.y)*.09;}}
 function loop(ts){const dt=Math.min(.22,(ts-(state.prevTime||ts))/1000);state.prevTime=ts;animateCam(dt);drawWorld();requestAnimationFrame(loop)}
 renderQuest();buildHotspots();if(gl){setupGraphics();requestAnimationFrame(loop)}
 </script>
