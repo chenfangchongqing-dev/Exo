@@ -1,3 +1,4 @@
+import { exoAccountRouter } from "../src/exo-auth.js";
 // Cloudflare Pages middleware: public homepage and Café de Flore demo; password-protected modules and teacher area.
 // COURSE_ACCESS_CODE is a module password independent of Idée's own GLM class code.
 // Configure encrypted secrets COURSE_ACCESS_CODE, PROF_ACCESS_CODE,
@@ -90,6 +91,10 @@ async function equals(a,b){
 }
 export async function onRequest(ctx){
  const {request,env}=ctx,url=new URL(request.url),path=url.pathname;
+ // Pilot mode provides optional personal logins. Individual mode replaces shared passwords
+ // across all learning modules, including the previously public Café de Flore game.
+ const individual=await exoAccountRouter(ctx);
+ if(individual!==null)return individual;
  // The homepage remains public even without configured secrets. Every module
  // and teacher-only file is checked below, including direct asset URLs.
  if(request.method==="GET" && (path==="/" || path==="/index.html")) return ctx.next();
