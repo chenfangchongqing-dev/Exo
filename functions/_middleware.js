@@ -104,6 +104,10 @@ export async function onRequest(ctx){
  // The homepage remains public even without configured secrets. Every module
  // and teacher-only file is checked below, including direct asset URLs.
  if(request.method==="GET" && (path==="/" || path==="/index.html")) return ctx.next();
+ // The public homepage needs exactly these two approved walking animations.
+ // Other /assets/ files retain their existing access policy.
+ const publicExplorerFiles=new Set(["/assets/exo-explorer-girl.webp","/assets/exo-explorer-boy.webp"]);
+ if((request.method==="GET"||request.method==="HEAD")&&publicExplorerFiles.has(path.toLowerCase()))return ctx.next();
  // Public Café de Flore game: allow only this exact page (and its canonical aliases).
  // Other /Events/ resources remain teacher-password protected.
  const publicCafePaths=new Set([
