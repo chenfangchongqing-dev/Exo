@@ -64,13 +64,40 @@
 #deliveryConfirm:enabled{background:#315e46;color:#fff;box-shadow:0 3px 0 #163d2c}
 #deliveryConfirm:disabled{background:#c3b7a9;color:#fff;box-shadow:none}
 @media(max-width:570px){#deliveryPanel{right:9px;bottom:10px;max-height:65dvh;width:calc(100vw - 18px)}#deliveryItems{padding:9px 13px}#deliveryPanel .deliveryTop{padding:13px 16px 10px}#deliveryPanel h2{font-size:22px}}
+
+/* EXO PASSEPORT : a calm collectible achievement layer, not a grade */
+#passportBtn{position:relative;font-size:19px;color:#f3d5a0}
+#passportCount{position:absolute;right:-5px;top:-5px;min-width:18px;height:18px;padding:2px 4px;border-radius:12px;background:#e9b96e;color:#422d22;font:800 10px/14px Arial,sans-serif;border:1px solid #fff1d1}
+.cultureReward{display:flex;align-items:center;gap:10px;margin:15px 0 6px;padding:13px 15px;border-radius:13px;border:1px solid #d9bb84;background:linear-gradient(115deg,#fff4d7,#f6ead5);color:#5a432d;font-size:13px}
+.cultureReward[hidden]{display:none}
+.rewardGlyph{width:39px;height:39px;flex:none;border-radius:50%;display:grid;place-items:center;font-size:22px;background:#2f5d47;color:#fff2d3;box-shadow:0 0 0 4px #dfcba4}
+.rewardWords{flex:1;line-height:1.5}.rewardWords b{display:block;font-size:14px;color:#2f5b45}.rewardWords small{color:#876e53;font-size:11px}
+.rewardPassportLink{border:1px solid #b9a283;border-radius:20px;padding:7px 10px;background:#fff9ee;color:#5a432d;font-size:11px;font-weight:700;flex:none}
+.cultureReward.rewardPop{animation:stampArrive .55s cubic-bezier(.16,1.5,.5,1) both}
+@keyframes stampArrive{0%{transform:scale(.88) rotate(-2deg);opacity:.15}65%{transform:scale(1.025) rotate(1deg)}100%{transform:scale(1);opacity:1}}
+#passportOverlay{z-index:12}
+.passportModal{width:min(590px,100%);border:2px solid #e2c89d;background:linear-gradient(140deg,#fffaf0,#f8efde)}
+.passportSummary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:18px 0}
+.passportMetric{border:1px solid #ddccb5;background:#fff9eb;border-radius:13px;padding:14px 8px;text-align:center}
+.passportMetric strong{display:block;font:700 28px/1.1 Georgia,serif;color:#365c48}.passportMetric span{display:block;font-size:11px;margin-top:6px;color:#8c745d}
+.passportCards{display:grid;gap:9px;margin:18px 0}
+.passportCard{display:flex;gap:13px;align-items:center;border-radius:13px;padding:12px 15px;border:1px dashed #cdbfac;background:#f2eee6;color:#6e6255}
+.passportCard.earned{border:1px solid #b9d0b6;background:#f0f7e9;color:#2c5d40}
+.passportCard .stamp{font-size:26px;width:41px;height:41px;border-radius:50%;display:grid;place-items:center;background:#e6dfd4;flex:none;filter:grayscale(1);opacity:.64}
+.passportCard.earned .stamp{background:#d4e7cc;filter:none;opacity:1}
+.passportCard .copy{flex:1}.passportCard b{display:block;font-size:14px}.passportCard small{display:block;font-size:11px;margin-top:3px;opacity:.8}
+.passportCard .claim{font-size:12px;font-weight:800;color:#2f6349;white-space:nowrap}
+.passportLevel{padding:11px 13px;border-left:3px solid #b99553;background:#f9edcf;color:#634c31;border-radius:0 10px 10px 0;font-size:13px;margin:12px 0}
+.passportNotice{font-size:12px;line-height:1.65;color:#866d59;margin:12px 0}
+@media(max-width:570px){.topactions .stat{display:none}.passportSummary{gap:5px}.passportMetric{padding:12px 6px}.passportMetric strong{font-size:24px}.cultureReward{padding:10px;gap:8px}.rewardPassportLink{padding:6px 8px;font-size:10px}.passportCard{padding:10px}.passportModal{padding:20px}}
+@media(prefers-reduced-motion:reduce){.cultureReward.rewardPop{animation:none}}
 </style>
 </head>
 <body>
 <canvas id="world" aria-label="Scène 3D interactive d'un café parisien"></canvas>
 <div class="colorwash"></div><div class="grain"></div>
 <div id="crosshair"></div>
-<header id="topbar"><div class="brand"><div class="small">UNE AVENTURE EN FRANÇAIS</div><div class="main">CAFÉ DE FLORE</div><div class="sub">SAINT-GERMAIN-DES-PRÉS · PARIS · LEÇON 16</div></div><div class="topactions"><div class="stat">✦ &nbsp; Culture <strong id="cultureCount">0/3</strong></div><div class="stat">Parcours <strong id="stageCount">0/5</strong></div><button class="iconbtn" id="soundBtn" title="Voix activée · touchez pour couper" aria-label="Couper la voix" aria-pressed="true">🔊</button><button class="iconbtn" id="voiceSettingsBtn" title="Régler les voix françaises" aria-label="Choisir les voix">🎧</button><button class="iconbtn" id="helpBtn" title="Mode d’emploi" aria-label="Aide">?</button></div></header>
+<header id="topbar"><div class="brand"><div class="small">UNE AVENTURE EN FRANÇAIS</div><div class="main">CAFÉ DE FLORE</div><div class="sub">SAINT-GERMAIN-DES-PRÉS · PARIS · LEÇON 16</div></div><div class="topactions"><div class="stat">✦ &nbsp; Culture <strong id="cultureCount">0/3</strong></div><button class="iconbtn" id="passportBtn" type="button" title="Mon passeport culturel" aria-label="Ouvrir mon passeport culturel">✦<span id="passportCount">0</span></button><div class="stat">Parcours <strong id="stageCount">0/5</strong></div><button class="iconbtn" id="soundBtn" title="Voix activée · touchez pour couper" aria-label="Couper la voix" aria-pressed="true">🔊</button><button class="iconbtn" id="voiceSettingsBtn" title="Régler les voix françaises" aria-label="Choisir les voix">🎧</button><button class="iconbtn" id="helpBtn" title="Mode d’emploi" aria-label="Aide">?</button></div></header>
 <div id="hud"><div class="quest"><div class="eyebrow">Votre mission</div><div class="questTitle">Un moment au Flore</div><div id="questLines"></div></div><div class="hint">Avancer <span class="kbd">Z</span><span class="kbd">Q</span><span class="kbd">S</span><span class="kbd">D</span> / WASD &nbsp; · &nbsp; Regarder : glisser la souris &nbsp; · &nbsp; Interagir : cliquer</div></div>
 <div id="hotspots"></div>
 <div id="mobileNav"><button class="movebtn" data-move="left" aria-label="Gauche">◀</button><button class="movebtn" data-move="forward" aria-label="Avancer">▲</button><button class="movebtn" data-move="back" aria-label="Reculer">▼</button><button class="movebtn" data-move="right" aria-label="Droite">▶</button></div>
@@ -81,7 +108,15 @@
   <div id="deliveryItems"></div>
   <div class="deliveryBottom"><div class="deliveryProgress" id="deliveryProgress" aria-live="polite">Vérifiez votre commande.</div><button class="primary" type="button" id="deliveryConfirm" disabled>Tout est là, merci ! →</button><button class="micro" type="button" id="deliveryBack">Retour à la table ↗</button></div>
 </aside>
-<div class="overlay" id="cultureOverlay"><article class="modal" role="dialog" aria-modal="true" aria-labelledby="cultureTitle"><div class="panelhead"><div><div class="eyebrow" id="cultureKicker">CULTURE · LECTURE</div><h2 id="cultureTitle"></h2></div><button class="close" id="cultureClose" aria-label="Fermer">×</button></div><p class="lead" id="cultureLead"></p><div class="culturetext" id="cultureText"></div><div class="gloss" id="cultureGloss"></div><div style="height:1px;background:#e7d9ca;margin:21px 0"></div><div class="question" id="cultureQuestion"></div><div class="answers" id="cultureAnswers"></div><div class="feedback" id="cultureFeedback"></div><div class="cultureBtns"><span class="small" id="cultureFoot">Leçon 16 · Au café · Café de Flore</span><button class="secondary" id="cultureDone">Retour au café ↗</button></div></article></div>
+<div class="overlay" id="cultureOverlay"><article class="modal" role="dialog" aria-modal="true" aria-labelledby="cultureTitle"><div class="panelhead"><div><div class="eyebrow" id="cultureKicker">CULTURE · LECTURE</div><h2 id="cultureTitle"></h2></div><button class="close" id="cultureClose" aria-label="Fermer">×</button></div><p class="lead" id="cultureLead"></p><div class="culturetext" id="cultureText"></div><div class="gloss" id="cultureGloss"></div><div style="height:1px;background:#e7d9ca;margin:21px 0"></div><div class="question" id="cultureQuestion"></div><div class="answers" id="cultureAnswers"></div><div class="feedback" id="cultureFeedback"></div><div class="cultureReward" id="cultureReward" role="status" aria-live="polite" hidden></div><div class="cultureBtns"><span class="small" id="cultureFoot">Leçon 16 · Au café · Café de Flore</span><button class="secondary" id="cultureDone">Retour au café ↗</button></div></article></div>
+<div class="overlay" id="passportOverlay"><article class="modal passportModal" role="dialog" aria-modal="true" aria-labelledby="passportTitle">
+<div class="panelhead"><div><div class="eyebrow">EXO · PASSEPORT CULTUREL</div><h2 id="passportTitle">Mon passeport ✦</h2></div><button type="button" class="close" id="passportClose" aria-label="Fermer le passeport">×</button></div>
+<p class="lead">Collectez des tampons en explorant le français et les cultures. 每完成一项文化理解任务，可收集一枚对应主题的印章。</p>
+<div class="passportSummary"><div class="passportMetric"><strong id="passportStamps">0/3</strong><span>文化印章 · Tampons</span></div><div class="passportMetric"><strong id="passportXp">0</strong><span>探索经验 · XP</span></div><div class="passportMetric"><strong id="passportUnit">0%</strong><span>本主题进度</span></div></div>
+<div class="passportCards" id="passportCards"></div><div class="passportLevel" id="passportLevel"></div>
+<p class="passportNotice">此处是本设备上的学习奖励预览。每张文化卡仅首次答对获得奖励，重复完成不刷分。正式的全平台累计与实物兑换，将使用教师核验的服务器记录；当前印章不是实物兑换凭证。</p>
+<div class="cultureBtns"><span class="small">Leçon 16 · Au café · Exo</span><button type="button" class="secondary" id="passportDone">Retour au café ↗</button></div>
+</article></div>
 <div class="overlay" id="help"><article class="modal" role="dialog" aria-modal="true" aria-label="Mode d’emploi"><div class="panelhead"><div><div class="eyebrow">COMMENT JOUER</div><h2>Bienvenue au café !</h2></div><button class="close" id="helpClose" aria-label="Fermer">×</button></div><p>Vous êtes dans une reconstitution pédagogique stylisée du Café de Flore à Paris. Admirez la terrasse, puis explorez la salle et cliquez sur les bulles pour parler aux personnages ou découvrir la culture.</p><ul><li><b>Ordinateur :</b> glissez la souris pour regarder autour de vous ; utilisez ZQSD, WASD ou les flèches pour marcher.</li><li><b>Téléphone :</b> glissez le doigt sur la scène pour tourner la tête ; utilisez les quatre flèches en bas.</li><li><b>Votre mission :</b> saluer, choisir une table, commander, recevoir votre commande et payer.</li><li><b>Culture :</b> découvrez trois cartes de lecture, chacune avec une mini-question.</li><li><b>Voix :</b> touchez ♫ pour écouter les phrases françaises (si votre navigateur prend en charge la synthèse vocale).</li></ul><p>Les personnages, le mobilier et les façades sont générés par code, sans images ni modèles externes. Cette reconstitution pédagogique n’est pas un relevé architectural exact. Les prix sont fictifs et les voix dépendent de votre navigateur.</p><button class="primary" id="helpDone">Compris !</button></article></div>
 <div class="overlay" id="voiceOverlay"><article class="modal voiceModal" role="dialog" aria-modal="true" aria-labelledby="voiceTitle"><div class="panelhead"><div><div class="eyebrow">ÉCOUTER · PARLER · INTERAGIR</div><h2 id="voiceTitle">Les voix du café</h2></div><button class="close" id="voiceClose" aria-label="Fermer">×</button></div><p class="lead">Attribuez une voix française à chaque personnage. Les voix disponibles dépendent de votre appareil et de votre navigateur. Le choix automatique privilégie les voix locales. Touchez Écouter pour essayer une voix et activer le son.</p><div class="voiceGrid"><label class="voiceRow"><span><b>Luc</b><small>Le serveur · service</small></span><select id="voiceServer" aria-label="Voix du serveur"></select><button class="secondary" data-testvoice="server" type="button">Écouter</button></label><label class="voiceRow"><span><b>Élise</b><small>La cliente · culture</small></span><select id="voiceCustomer" aria-label="Voix de la cliente"></select><button class="secondary" data-testvoice="customer" type="button">Écouter</button></label><label class="voiceRow"><span><b>Vous</b><small>Votre phrase · apprentissage</small></span><select id="voiceLearner" aria-label="Voix de l’apprenant"></select><button class="secondary" data-testvoice="learner" type="button">Écouter</button></label></div><p class="voiceNote" id="voiceNote">Recherche des voix françaises installées…</p><p class="voiceNote" id="voicePlayback" role="status" aria-live="polite">Touchez Écouter pour tester la voix.</p><p class="voiceNote">Une lecture annoncée ne garantit pas un son audible. Si vous n’entendez rien, vérifiez le volume et la sortie audio (haut-parleur ou Bluetooth). Sur iPhone, essayez directement dans Safari. Vérifiez les voix françaises dans Réglages → Accessibilité → Contenu énoncé / Lire et énoncer → Voix (le nom varie selon iOS), puis revenez tester.</p><div class="voiceActions"><button class="primary" id="voiceDone" type="button">Retour au café ↗</button></div></article></div>
 <div class="overlay open" id="intro"><section class="introbox"><div class="brow">LE FRANÇAIS EN SITUATION</div><h1>Au <i>café.</i></h1><p class="desc">Une petite table, un café, quelques mots en français… 走进花神咖啡馆，与服务员交谈，选择你喜欢的饮品，探索藏在店里的法国文化。</p><button class="enter" id="startBtn">Commencer la visite &nbsp; ↗</button><div class="introfoot">☕ A1–A2 &nbsp; · &nbsp; INTERACTION · CULTURE · COMPRÉHENSION</div></section></div>
@@ -344,7 +379,108 @@ function openMenu(){if(state.orderLocked){toast('Votre commande a déjà été e
 function closeMenu(){state.menuOpen=false;$('#menuPanel').style.display='none'}
 function renderMenu(){const target=$('#menuItems');target.replaceChildren();items.filter(i=>i.cat===state.tab).forEach(item=>{const row=document.createElement('div');row.className='menuItem';row.innerHTML=`<div class="foodicon">${menuIconMarkup(item)}</div><div class="foodinfo"><div class="foodname">${item.name}</div><div class="foodcn">${item.cn}</div><div class="foodprice">${fmt(item.price)}</div></div>`;const step=document.createElement('div');step.className='stepper';const minus=document.createElement('button');minus.className='minusbtn';minus.textContent='−';minus.title='Retirer '+item.name;const count=document.createElement('span');count.className='qty';const plus=document.createElement('button');plus.className='addbtn';plus.textContent='+';plus.title='Ajouter '+item.name;const update=()=>{const n=state.cart.filter(x=>x===item.id).length;count.textContent=n?n:'';minus.disabled=!n;refreshBasket()};minus.onclick=()=>{const at=state.cart.lastIndexOf(item.id);if(at>=0)state.cart.splice(at,1);update()};plus.onclick=()=>{state.cart.push(item.id);update()};step.append(minus,count,plus);row.append(step);target.append(row);update()});$$('.menuTab').forEach(b=>b.classList.toggle('active',b.dataset.tab===state.tab));refreshBasket();}
 function refreshBasket(){const s=orderSentence();$('#orderSentence').textContent=s;$('#cartQty').textContent='('+state.cart.length+')';$('#cartTotal').textContent=fmt(total());$('#cartItems').textContent=orderParts().join(' + ')||'Touchez + pour choisir un produit.';$('#confirmOrder').disabled=!state.cart.length;}
-function openCulture(id){hideDialog();closeMenu();const c=culture[id];if(!c)return;state.currentCulture=id;$('#cultureKicker').textContent=c.kicker;$('#cultureTitle').textContent=c.title;$('#cultureLead').textContent=c.lead;$('#cultureText').textContent=c.text;$('#cultureGloss').textContent=c.gloss;$('#cultureQuestion').textContent=c.question;$('#cultureFeedback').textContent=state.answered.has(id)?'✓ Vous avez déjà répondu à cette question.':'';const area=$('#cultureAnswers');area.replaceChildren();c.answers.forEach((s,i)=>{const b=document.createElement('button');b.className='answer';b.textContent=String.fromCharCode(65+i)+'. '+s;b.addEventListener('click',()=>{if(i===c.correct){b.classList.add('correct');$('#cultureFeedback').textContent=c.why;state.answered.add(id);if(!state.culture.has(id)){state.culture.add(id);mark('culture');renderQuest()}}else{b.classList.add('wrong');$('#cultureFeedback').textContent='Pas tout à fait. Relisez le texte et réessayez !';setTimeout(()=>b.classList.remove('wrong'),900)}});area.append(b)});$('#cultureOverlay').classList.add('open');state.modal=true;}
+
+/* Exo collectible passport v1: explicit local preview, never a verified redemption ledger. */
+const EXO_REWARD_KEY='exo.passport.local.v1';
+const CULTURE_REWARD_META={
+  flore:{title:'文化探索',french:'Curiosité culturelle',glyph:'✦',key:'cafe.flore.v1'},
+  manieres:{title:'交际礼仪',french:'Savoir-vivre',glyph:'🤝',key:'cafe.manieres.v1'},
+  portable:{title:'公共关怀',french:'Respect d’autrui',glyph:'♡',key:'cafe.portable.v1'}
+};
+function loadExoPassport(){
+  let data;try{data=JSON.parse(localStorage.getItem(EXO_REWARD_KEY)||'null')}catch(_){}
+  if(!data||data.version!==1||!Array.isArray(data.entries))return {version:1,entries:[]};
+  // Reject unknown IDs and deduplicate client-side entries.
+  const keys=new Set(),entries=[];
+  for(const e of data.entries){
+    if(!e||typeof e.id!=='string'||!CULTURE_REWARD_META[e.id]||keys.has(e.id))continue;
+    keys.add(e.id);entries.push({id:e.id,when:typeof e.when==='string'?e.when.slice(0,35):''});
+  }
+  return {version:1,entries};
+}
+const exoPassport=loadExoPassport();
+let exoPassportSaved=true;
+function hasExoStamp(id){return exoPassport.entries.some(e=>e.id===id);}
+function awardExoStamp(id){
+  if(!CULTURE_REWARD_META[id]||hasExoStamp(id))return false;
+  exoPassport.entries.push({id,when:new Date().toISOString()});
+  try{localStorage.setItem(EXO_REWARD_KEY,JSON.stringify(exoPassport));exoPassportSaved=true}
+  catch(_){exoPassportSaved=false}
+  updatePassportCounter();
+  return true;
+}
+function updatePassportCounter(){$('#passportCount').textContent=String(exoPassport.entries.length);}
+function showCultureReward(id,wasNew){
+  const meta=CULTURE_REWARD_META[id];if(!meta)return;
+  const node=$('#cultureReward');
+  node.replaceChildren();
+  const emblem=document.createElement('span');emblem.className='rewardGlyph';emblem.textContent=meta.glyph;
+  const words=document.createElement('span');words.className='rewardWords';
+  const title=document.createElement('b');title.textContent=meta.title+(wasNew?' +1':' ✓ 已收集');
+  const detail=document.createElement('small');detail.textContent=wasNew?'✦ 文化印章 +1 · 经验 +10 XP':'已获得的印章；复习不重复计分';
+  words.append(title,detail);
+  const button=document.createElement('button');button.type='button';button.className='rewardPassportLink';
+  button.textContent='查看护照 ↗';button.onclick=()=>{closeCulture();openPassport()};
+  node.append(emblem,words,button);node.hidden=false;
+  node.classList.remove('rewardPop');if(wasNew){void node.offsetWidth;node.classList.add('rewardPop')}
+  if(wasNew)toast(meta.glyph+' '+meta.title+' +1 · ✦ +10 XP');
+}
+function renderPassport(){
+  const count=exoPassport.entries.length;
+  $('#passportStamps').textContent=count+'/3';$('#passportXp').textContent=String(count*10);
+  $('#passportUnit').textContent=Math.round(count/3*100)+'%';
+  const levels=['尚未启程 · En route','初来乍到 · Curieux','文化观察员 · Observateur','咖啡馆文化达人 · Explorateur'];
+  $('#passportLevel').textContent='本章称号：'+levels[count]+(count===3?' · ☕ 本章三枚印章已集齐！':'');
+  const board=$('#passportCards');board.replaceChildren();
+  const names={flore:'Le Café de Flore',manieres:'Les bonnes manières',portable:'Le portable au café'};
+  for(const id of ['flore','manieres','portable']){
+    const meta=CULTURE_REWARD_META[id],earned=hasExoStamp(id);
+    const item=document.createElement('div');item.className='passportCard'+(earned?' earned':'');
+    const glyph=document.createElement('span');glyph.className='stamp';glyph.textContent=meta.glyph;
+    const body=document.createElement('span');body.className='copy';
+    const title=document.createElement('b');title.textContent=meta.title+' · '+meta.french;
+    const sub=document.createElement('small');sub.textContent=names[id];
+    body.append(title,sub);
+    const state=document.createElement('span');state.className='claim';state.textContent=earned?'✓ +1 / +10 XP':'待探索';
+    item.append(glyph,body,state);board.append(item);
+  }
+}
+function openPassport(){renderPassport();$('#passportOverlay').classList.add('open');state.modal=true;}
+function closePassport(){$('#passportOverlay').classList.remove('open');state.modal=false;}
+updatePassportCounter();
+
+function openCulture(id){
+  hideDialog();closeMenu();
+  const c=culture[id];if(!c)return;
+  state.currentCulture=id;
+  $('#cultureKicker').textContent=c.kicker;$('#cultureTitle').textContent=c.title;
+  $('#cultureLead').textContent=c.lead;$('#cultureText').textContent=c.text;$('#cultureGloss').textContent=c.gloss;
+  $('#cultureQuestion').textContent=c.question;
+  $('#cultureFeedback').textContent=state.answered.has(id)?'✓ Vous avez déjà répondu à cette question.':'';
+  const reward=$('#cultureReward');reward.hidden=true;reward.replaceChildren();
+  const area=$('#cultureAnswers');area.replaceChildren();
+  c.answers.forEach((answer,i)=>{
+    const b=document.createElement('button');b.className='answer';
+    b.textContent=String.fromCharCode(65+i)+'. '+answer;
+    b.addEventListener('click',()=>{
+      if(i===c.correct){
+        b.classList.add('correct');$('#cultureFeedback').textContent=c.why;
+        state.answered.add(id);
+        if(!state.culture.has(id)){state.culture.add(id);mark('culture');renderQuest()}
+        const fresh=awardExoStamp(id);
+        showCultureReward(id,fresh);
+        if(!exoPassportSaved)toast('本机存储受限，印章可能无法保留。');
+        area.querySelectorAll('button').forEach(choice=>{choice.disabled=true});
+      }else{
+        b.classList.add('wrong');
+        $('#cultureFeedback').textContent='Pas tout à fait. Relisez le texte et réessayez !';
+        setTimeout(()=>b.classList.remove('wrong'),900);
+      }
+    });
+    area.append(b);
+  });
+  $('#cultureOverlay').classList.add('open');state.modal=true;
+}
 function closeCulture(){state.modal=false;$('#cultureOverlay').classList.remove('open')}
 function openNeighbor(){showDialog({name:'Élise',role:'UNE CLIENTE PARISIENNE',avatar:'É',text:'Vous aimez les cafés ? Pour moi, c’est un lieu pour discuter, lire et retrouver des amis.',trans:'您喜欢咖啡馆吗？对我来说，这里是聊天、阅读和朋友相聚的地方。',choices:[{label:'Pourquoi les cafés sont-ils importants ?',say:'Pourquoi les cafés sont-ils importants ?',run:()=>openCulture('flore')},{label:'Parlez-moi des bonnes manières.',say:'Parlez-moi des bonnes manières.',run:()=>openCulture('manieres')},{label:'Merci pour cette conversation !',say:'Merci pour cette conversation !',run:hideDialog}]});}
 function restart(){state.phase='intro';clearServingMesh();state.orderLocked=false;state.servingVisible=false;state.servingVerified.clear();closeDelivery();stopSpeech();voiceBlocked=false;lastVoiceJob=null;voiceNotice();voicePlayback('Touchez Écouter pour tester la voix.');state.done.clear();state.culture.clear();state.answered.clear();state.cart=[];state.endSeen=false;state.phase='intro';state.cam={x:.18,y:1.7,z:22.1,yaw:0,pitch:-.045};state.targetCam=null;renderQuest();closeCulture();hideDialog();closeMenu();$('#end').classList.remove('open');$('#intro').classList.add('open');}
@@ -359,6 +495,8 @@ $('#startBtn').addEventListener('click',()=>{
 $('#dialogClose').onclick=$('#dialogHide').onclick=hideDialog;$('#repeatBtn').onclick=()=>speak(state.dialogText,state.dialogSpeaker||'server',true);
 $('#menuClose').onclick=closeMenu;$$('.menuTab').forEach(b=>b.onclick=()=>{state.tab=b.dataset.tab;renderMenu()});$('#clearOrder').onclick=()=>{state.cart=[];refreshBasket()};$('#listenOrder').onclick=()=>speak(orderSentence(),'learner',true);$('#confirmOrder').onclick=()=>{if(!state.cart.length)return;const phrase=orderSentence();closeMenu();mark('order');state.phase='ordered';showDialog({name:'Vous',role:'VOTRE COMMANDE',avatar:'V',text:phrase,trans:'请向服务员说出这句话。',choices:[{label:'Envoyer ma commande au serveur →',run:prepareFood},{label:'Modifier ma commande',nospeak:true,run:openMenu}]});};
 $('#deliveryClose').onclick=$('#deliveryBack').onclick=closeDelivery;$('#deliveryConfirm').onclick=confirmDelivery;
+$('#passportBtn').onclick=openPassport;$('#passportClose').onclick=$('#passportDone').onclick=closePassport;
+$('#passportOverlay').addEventListener('click',e=>{if(e.target.id==='passportOverlay')closePassport()});
 $('#cultureClose').onclick=$('#cultureDone').onclick=closeCulture;$('#cultureOverlay').addEventListener('click',e=>{if(e.target.id==='cultureOverlay')closeCulture()});
 $('#helpBtn').onclick=()=>$('#help').classList.add('open');$('#helpClose').onclick=$('#helpDone').onclick=()=>$('#help').classList.remove('open');
 function refreshSoundButton(){
@@ -387,7 +525,7 @@ for(const [role,id] of [['server','#voiceServer'],['customer','#voiceCustomer'],
 $$('[data-testvoice]').forEach(b=>b.onclick=()=>speak(roleSamples[b.dataset.testvoice],b.dataset.testvoice,true));
 $('#restartBtn').onclick=restart;$('#endExplore').onclick=()=>$('#end').classList.remove('open');
 $('#end').addEventListener('click',e=>{if(e.target.id==='end')$('#end').classList.remove('open')});
-window.addEventListener('keydown',e=>{const k=e.key.toLowerCase();if(['arrowup','arrowdown','arrowleft','arrowright',' '].includes(k))e.preventDefault();state.walk[k]=true;if(k==='escape'){hideDialog();closeMenu();closeCulture();$('#help').classList.remove('open');$('#end').classList.remove('open');closeVoiceSettings()}});
+window.addEventListener('keydown',e=>{const k=e.key.toLowerCase();if(['arrowup','arrowdown','arrowleft','arrowright',' '].includes(k))e.preventDefault();state.walk[k]=true;if(k==='escape'){closePassport();hideDialog();closeMenu();closeCulture();$('#help').classList.remove('open');$('#end').classList.remove('open');closeVoiceSettings()}});
 window.addEventListener('keyup',e=>{state.walk[e.key.toLowerCase()]=false});window.addEventListener('blur',()=>{state.walk={};state.mobileDown={}});
 $$('.movebtn').forEach(b=>{const k=b.dataset.move;const down=e=>{e.preventDefault();state.mobileDown[k]=true};const up=e=>{e.preventDefault();state.mobileDown[k]=false};b.addEventListener('pointerdown',down);b.addEventListener('pointerup',up);b.addEventListener('pointercancel',up);b.addEventListener('pointerleave',up)});
 canvas.addEventListener('pointerdown',e=>{if(!state.started||state.modal||state.menuOpen)return;state.panPointer={id:e.pointerId,x:e.clientX,y:e.clientY};try{canvas.setPointerCapture(e.pointerId)}catch(_){}});
