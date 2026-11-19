@@ -157,6 +157,14 @@ function exampleNeed(s){return /pas d'exemple|trouve.{0,15}exemple|pas trouver d
 function confused(s){return /je (ne )?sais pas|aucune idée|pas d'idée|je suis bloqu|不知道|没有想法|不清楚|想不到|没思路|不会/i.test(s)}
 function opinion(s){return /d'accord|pas d'accord|je pense|je crois|à mon avis|pour ma part|selon moi|je trouve|我觉得|我认为|我同意|我不同意|不赞同|赞同|我反对|不同意/i.test(s)}
 function isDraft(s){return s.length>190||((s.match(/[.!?。？！]/g)||[]).length>=3&&s.length>100)}
+function isCompleteWriting(s){
+ var v=String(s||"").trim();
+ if(v.length<165)return false;
+ var ends=(v.match(/[.!?。？！](?:\\s|$)/g)||[]).length;
+ var words=(v.match(/[A-Za-zÀ-ÖØ-öø-ÿ]+(?:[’'-][A-Za-zÀ-ÖØ-öø-ÿ]+)*/g)||[]).length;
+ var han=(v.match(/[\\u3400-\\u9fff]/g)||[]).length;
+ return ends>=2&&(words>=27||han>=40)&&!/^(?:peux-tu|pourrais-tu|comment|est-ce que|你能不能|请问)/i.test(v);
+}
 function topicish(s){return /bonheur|heureux|heureuse|couple|l'argent|argent|réussir|il faut|on doit|幸福|快乐|恋爱|金钱|成功/i.test(s)&&s.length>6}
 // Minimal safe inline formatting for model replies (no raw HTML insertion).
 function renderBotText(target,message){
@@ -188,7 +196,7 @@ function renderStage(){
  document.getElementById("diagNeed").textContent=coach===0?"确认原意":coach===1?"整体评价":coach===2?(labels[m.difficulty]||"修订目标"):(labels[m.difficulty]||"À préciser");
  document.getElementById("diagNext").textContent=m.next||(coach===0?"确认 Idée 对原文的理解":coach===1?"选择优先修订目标":coach===2?"围绕选定目标自主修订":"Présenter mon travail ou ma difficulté");
 }
-function addSuggestions(items){suggestions.textContent="";items.forEach(function(label){var b=document.createElement("button");b.className="chip";b.type="button";b.textContent=label;b.addEventListener("click",function(){if(label==="我想澄清一下我的意思"){input.value="我想澄清的是：";input.focus();return;}sendText(label)});suggestions.appendChild(b)})}
+function addSuggestions(items){suggestions.textContent="";items.forEach(function(label){var b=document.createElement("button");b.className="chip";b.type="button";b.textContent=label;b.addEventListener("click",function(){if(label==="我想澄清一下我的意思"){input.value="我想澄清的是：";input.focus();return;}if(label==="Je voudrais essayer une reformulation."){input.value="Je propose : ";input.focus();return;}if(label==="Peux-tu vérifier ma modification ?"){input.value="Voici ma modification : ";input.focus();return;}sendText(label)});suggestions.appendChild(b)})}
 function suggested(){
  var coach=state.meta&&state.meta.coachStage;
  if(coach==="comprehension")return ["对，就是这个意思。","我想澄清一下我的意思"];
@@ -239,7 +247,7 @@ async function sendText(value){
  addTurn("user",s);input.value="";
  // Progressive course resource: the learner has explicitly asked for help finding an idea.
  // This does not call or impersonate GLM; the next learner turn still uses the live model.
- var useLocalScaffold=!state.meta.coachStage&&!isDraft(s);
+ var useLocalScaffold=!state.meta.coachStage&&!isDraft(s)&&!isCompleteWriting(s);
  var ideaLocal=useLocalScaffold&&window.COMPAGNON_IDEATION_SUPPORT?window.COMPAGNON_IDEATION_SUPPORT(s,previous,state.meta):null;
  if(ideaLocal){
    state.phase=ideaLocal.phase||"position";
