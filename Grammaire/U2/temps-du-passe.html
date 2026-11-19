@@ -17,7 +17,10 @@ a{color:var(--dark)}[hidden]{display:none!important}button,input{font:inherit}bu
 .tense-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.tense{border:1px solid var(--line);border-top:3px solid var(--green);border-radius:13px;padding:16px;background:#fbfefb}.tense:nth-child(2){border-top-color:var(--blue)}.tense:nth-child(3){border-top-color:var(--gold)}.tense h3{font-size:17px}.tense p{color:#4d6858;font-size:14px;margin:0}.tense small{display:block;font:italic 16px/1.5 "Times New Roman",Georgia,serif;margin-top:9px;color:#38523f}
 .story{font:21px/2.12 "Times New Roman",Georgia,serif;color:#252d29}.story p{margin:0 0 15px}.given{color:var(--green);font-weight:bold}.slot{display:inline-flex;vertical-align:middle;align-items:baseline;flex-wrap:wrap;gap:4px;margin:0 3px 2px}.slot input{width:150px;max-width:70vw;min-height:42px;padding:6px 9px;border:1.5px solid #b4cdbd;border-radius:8px;background:#fcfffd;color:#204b34;font:19px/1.25 "Times New Roman",Georgia,serif}.slot input:focus{border-color:#2e9567}.slot .inf{color:#7d8981;font:13px/1.3 Arial,sans-serif;white-space:nowrap}.slot.is-good input{background:#effaf2;border-color:#65ac85}.slot.is-bad input{background:#fff6f3;border-color:#cf8b7c}.tip{display:block;font:12px/1.5 Arial,sans-serif;max-width:220px;color:var(--bad);margin-top:-4px}.slot.is-good .tip{color:var(--green)}
 .actions{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-top:21px}.button{border:1px solid #277c59;background:#247e59;color:#fff;font-size:15px;font-weight:800;padding:11px 18px;border-radius:10px}.button:hover{background:#1b6446}.button.alt{background:#fff;color:#277655;border-color:#b9d8c6}.button.alt:hover{background:#eff8f1}.score{margin:13px 0 0;color:#215d42;font-weight:750;font-size:15px}.score small{font-size:13px;color:var(--muted);font-weight:400}
-.corrected{font:20px/1.9 "Times New Roman",Georgia,serif}.corrected p{margin:0 0 11px}.corrected strong{color:var(--green);font-weight:750}.corrected .variant{display:inline;color:#6f756e;font:14px/1.4 Arial,sans-serif}.notice{font-size:14px;color:#456b50;background:#f0f9f2;border-left:4px solid #54a578;padding:12px 15px;border-radius:0 9px 9px 0;margin:12px 0 0}
+.corrected{font:20px/1.9 "Times New Roman",Georgia,serif}.corrected p{margin:0 0 11px}.corrected strong{color:var(--green);font-weight:750}.corrected .variant{display:inline;color:#6f756e;font:14px/1.4 Arial,sans-serif}
+.inline-gram{display:inline;padding:0 2px;margin:0 -2px;border:0;border-radius:4px;background:transparent;font:inherit;line-height:inherit;vertical-align:baseline;color:var(--green);text-align:inherit;text-decoration:underline dotted #85b99e;text-underline-offset:5px;cursor:help;transition:background .12s}.inline-gram strong{color:inherit}.inline-gram:hover,.inline-gram[aria-expanded="true"]{background:#ddf2e5}.inline-gram:focus-visible{outline:2px solid #418d68;outline-offset:2px}.inline-help{margin:8px 0 18px;font-size:14px;color:#4d7159}
+.inline-tooltip{position:fixed;z-index:9999;width:max-content;max-width:min(470px,calc(100vw - 28px));max-height:min(70vh,520px);overflow:auto;overscroll-behavior:contain;padding:17px 19px 19px;background:#fffefb;color:#284134;border:1px solid #a7cdb3;border-radius:14px;box-shadow:0 14px 38px rgba(24,65,41,.2);font:15px/1.66 Arial,"Helvetica Neue",sans-serif}.inline-tooltip[hidden]{display:none!important}.inline-tooltip:before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:#56a377;border-radius:14px 14px 0 0}.inline-tooltip-label{font-size:12px;font-weight:800;letter-spacing:.02em;color:#5e7c67;margin:0 0 4px}.inline-tooltip-form{font:700 21px/1.35 "Times New Roman",Georgia,serif;color:#225e43;margin:0 0 5px}.inline-tooltip-type{font-size:12px;color:#617b6c;margin:0 0 10px}.inline-tooltip-explain{white-space:pre-line;font-size:15px;line-height:1.7;margin:0}.inline-tooltip-hint{margin:12px 0 0;color:#75867a;font-size:12px}
+.notice{font-size:14px;color:#456b50;background:#f0f9f2;border-left:4px solid #54a578;padding:12px 15px;border-radius:0 9px 9px 0;margin:12px 0 0}
 .details{border:1px solid #d5e8dc;border-radius:12px;margin-top:13px;background:#fbfefc;overflow:hidden}.details summary{cursor:pointer;font-weight:800;color:#236647;padding:13px 16px;list-style:none}.details summary::-webkit-details-marker{display:none}.details summary:before{content:"＋";margin-right:10px}.details[open] summary:before{content:"－"}.detail-body{padding:0 16px 16px;color:#395749}.detail-body p{margin:5px 0 10px}
 .expl-grid{display:grid;grid-template-columns:1fr;gap:0}.expl{display:grid;grid-template-columns:44px minmax(200px,.8fr) minmax(250px,1.9fr);gap:12px;align-items:start;padding:13px 0;border-top:1px solid #e1eee6}.expl:first-child{border-top:none}.num{display:grid;place-items:center;width:30px;height:30px;background:#e7f4eb;color:#287c58;border-radius:9px;font-weight:850;font-size:13px}.form{font:19px/1.4 "Times New Roman",Georgia,serif;color:#214f39}.form small{display:block;font:12px/1.35 Arial,sans-serif;color:#6d7b70;margin-top:2px}.meaning{font-size:14px;line-height:1.65;color:#4c6053;white-space:pre-line}.meaning strong{color:#1f6246}
 .translation{font-size:17px;line-height:1.9;color:#33463b}.translation p{margin:0 0 14px}.fine{color:var(--muted);font-size:13px}
@@ -54,7 +57,7 @@ a{color:var(--dark)}[hidden]{display:none!important}button,input{font:inherit}bu
 <p>Adolescente, chaque mois, je <strong>me teignais</strong> les cheveux de différentes couleurs. Les passants me <strong>regardaient</strong> bizarrement et certains <strong>se moquaient</strong> de moi. Mes parents et mes amis <strong>ont essayé</strong> <span class="variant">(ou : avaient essayé)</span> de me parler mais j’<strong>étais</strong> têtue !</p>
 <p>Quand je <strong>suis devenue</strong> adulte, je <strong>me suis aperçue</strong> que je ne <strong>pouvais</strong> plus me permettre une telle originalité et porter certains vêtements que j’<strong>avais achetés</strong>.</p>
 <p>Cela fait deux ans que je travaille dans une banque et j’<strong>ai souvent été convoquée</strong> à cause de mes tenues, mes collègues m’<strong>ont alertée</strong> sur les risques. Bref, j’<strong>ai vécu</strong> quelques expériences désagréables et j’<strong>ai décidé</strong> d’être plus discrète, mais au travail seulement !</p></div>
-<details class="details" open><summary>Pourquoi ces temps ? · 逐题讲解</summary><div class="detail-body"><div class="expl-grid" id="explanations"></div></div></details>
+<p class="inline-help">Pourquoi ces temps ? · 将鼠标移至上方绿色动词，或点击／轻触动词，即可查看对应的逐题讲解。</p>
 <details class="details"><summary>Deux choix possibles · 时态选择与叙述视角</summary><div class="detail-body">
 <p><strong>que j’avais fabriqués / que je fabriquais</strong>：前者突出“穿出门之前已经做好的化装服”；后者把制作化装服呈现为童年反复发生的习惯。时态变化会改变叙述视角，二者均能成立。</p>
 <p><strong>mes parents et mes amis ont essayé / avaient essayé de me parler</strong>：复合过去时把劝说作为过去的一段经历来陈述；愈过去时则把劝说放在某个回顾中的过去参照点之前。若单纯描写当时持续或反复劝说的场景，未完成过去时也有其语义可能，但本题按所给两种答案判分。</p>
@@ -103,15 +106,92 @@ var answers=[
 ];
 var slots=Array.from(document.querySelectorAll(".slot"));
 function normalized(s){return String(s||"").toLowerCase().normalize("NFC").replace(/[‘’ʼ]/g,"'").replace(/\s+/g," ").trim().replace(/\s*'\s*/g,"'");}
-var root=document.getElementById("explanations");
-answers.forEach(function(a,i){
- var row=document.createElement("div");row.className="expl";
- var n=document.createElement("span");n.className="num";n.textContent=String(i+1).padStart(2,"0");
- var f=document.createElement("div");f.className="form";f.textContent=a.forms.join(" / ");
- var small=document.createElement("small");small.textContent=a.type;f.appendChild(small);
- var m=document.createElement("div");m.className="meaning";m.textContent=a.zh;
- row.append(n,f,m);root.appendChild(row);
+// Keep all 16 explanations in the original answer records, but attach
+// each explanation directly to the green verb in the corrected passage.
+var correctionVerbs=Array.from(document.querySelectorAll(".corrected strong"));
+if(correctionVerbs.length!==answers.length+1){
+ console.warn("Les explications grammaticales ne correspondent pas aux verbes.");
+}
+var pop=document.createElement("aside");
+pop.className="inline-tooltip";pop.id="inline-tense-tooltip";pop.hidden=true;
+pop.setAttribute("role","tooltip");
+var popLabel=document.createElement("p");popLabel.className="inline-tooltip-label";
+var popForm=document.createElement("p");popForm.className="inline-tooltip-form";
+var popType=document.createElement("p");popType.className="inline-tooltip-type";
+var popText=document.createElement("p");popText.className="inline-tooltip-explain";
+var popHint=document.createElement("p");popHint.className="inline-tooltip-hint";
+popHint.textContent="点击同一动词或页面空白处关闭 · Échap";
+pop.append(popLabel,popForm,popType,popText,popHint);document.body.appendChild(pop);
+var activeVerb=null,activeIndex=-1,pinned=false,hideTimeout=null;
+function cancelHide(){if(hideTimeout!==null){clearTimeout(hideTimeout);hideTimeout=null;}}
+function hideExplanation(){
+ cancelHide();
+ if(activeVerb)activeVerb.setAttribute("aria-expanded","false");
+ activeVerb=null;activeIndex=-1;pinned=false;pop.hidden=true;
+}
+function placeExplanation(){
+ if(!activeVerb||pop.hidden)return;
+ var rect=activeVerb.getBoundingClientRect(),w=pop.offsetWidth,h=pop.offsetHeight;
+ var viewWidth=document.documentElement.clientWidth,viewHeight=window.innerHeight;
+ var left=Math.max(12,Math.min(rect.left+(rect.width-w)/2,viewWidth-w-12));
+ var below=rect.bottom+11,above=rect.top-h-11;
+ var top=(below+h<=viewHeight-12||above<12)?below:above;
+ top=Math.max(12,Math.min(top,viewHeight-h-12));
+ pop.style.left=Math.round(left)+"px";pop.style.top=Math.round(top)+"px";
+}
+function showExplanation(button,index,lock){
+ cancelHide();
+ if(activeVerb&&activeVerb!==button)activeVerb.setAttribute("aria-expanded","false");
+ activeVerb=button;activeIndex=index;pinned=!!lock;
+ var answer=answers[index];
+ popLabel.textContent="Pourquoi ces temps ? · 第 "+(index+1)+" 题";
+ popForm.textContent=answer.forms.join(" / ");
+ popType.textContent=answer.type;
+ popText.textContent=answer.zh;
+ button.setAttribute("aria-expanded","true");
+ pop.hidden=false;
+ placeExplanation();
+}
+function maybeHide(){
+ cancelHide();
+ if(!pinned){
+  hideTimeout=setTimeout(function(){
+   if(activeVerb&&document.activeElement!==activeVerb&&!activeVerb.matches(":hover")&&!pop.matches(":hover"))hideExplanation();
+  },200);
+ }
+}
+pop.addEventListener("pointerenter",cancelHide);
+pop.addEventListener("pointerleave",maybeHide);
+correctionVerbs.slice(1).forEach(function(strong,index){
+ if(index>=answers.length)return;
+ var button=document.createElement("button");button.type="button";
+ button.className="inline-gram";
+ button.setAttribute("aria-label","Explication grammaticale : "+strong.textContent);
+ button.setAttribute("aria-controls",pop.id);
+ button.setAttribute("aria-expanded","false");
+ strong.parentNode.insertBefore(button,strong);button.appendChild(strong);
+ button.addEventListener("pointerenter",function(event){
+  if(event.pointerType==="mouse"||event.pointerType==="pen")showExplanation(button,index,false);
+ });
+ button.addEventListener("pointerleave",maybeHide);
+ button.addEventListener("focus",function(){
+  if(button.matches(":focus-visible"))showExplanation(button,index,false);
+ });
+ button.addEventListener("blur",maybeHide);
+ button.addEventListener("click",function(event){
+  event.preventDefault();
+  if(activeVerb===button&&pinned)hideExplanation();
+  else showExplanation(button,index,true);
+ });
 });
+document.addEventListener("pointerdown",function(event){
+ if(activeVerb&&!activeVerb.contains(event.target)&&!pop.contains(event.target))hideExplanation();
+});
+document.addEventListener("keydown",function(event){
+ if(event.key==="Escape")hideExplanation();
+});
+window.addEventListener("scroll",placeExplanation,{passive:true});
+window.addEventListener("resize",placeExplanation);
 function mark(){
  var correct=0,filled=0;
  slots.forEach(function(slot,i){
@@ -135,6 +215,7 @@ function mark(){
 }
 document.getElementById("quiz").addEventListener("submit",function(e){e.preventDefault();mark();});
 document.getElementById("reset").addEventListener("click",function(){
+ hideExplanation();
  slots.forEach(function(slot){slot.querySelector("input").value="";slot.classList.remove("is-good","is-bad");slot.querySelectorAll(".tip").forEach(function(x){x.remove();});});
  document.getElementById("score").hidden=true;
  document.getElementById("correction").hidden=true;
