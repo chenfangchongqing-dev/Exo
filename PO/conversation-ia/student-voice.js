@@ -49,7 +49,8 @@
     return {
       mode: selectedMode,
       level: selectedLevel,
-      topic: selectedMode === "libre" ? freeTopic : (otherTopic || (courseTopic === "autre" ? "" : (courseLabels[courseTopic] || "")))
+      topic: selectedMode === "libre" ? freeTopic : (otherTopic || (courseTopic === "autre" ? "" : (courseLabels[courseTopic] || ""))),
+      topicId: selectedMode === "guidee" && courseTopic === "unite2-uniforme" && !otherTopic ? "u2l8-discussion" : ""
     };
   }
   function lockOptions(locked) {
