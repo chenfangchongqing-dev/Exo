@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#FDBA12">
-<meta name="description" content="Idée · Compagnon métacognitif de production écrite B2. Révision autonome, ressources du cours et soutien linguistique adapté.">
+<meta name="description" content="Idée · Compagnon métacognitif de production écrite : comprendre son texte, évaluer ses acquis, réviser en autonomie.">
 <title>Idée | Production écrite</title>
 <style>
 :root{--bg:#faf8f3;--paper:#fffefa;--ink:#272720;--muted:#69695f;--line:#e9dfcd;--sun:#fdba12;--soft:#fff2d1;--orange:#996113;--green:#286d55;--shadow:0 16px 45px rgba(95,66,20,.075)}
@@ -38,7 +38,7 @@ h1{font-size:clamp(30px,4.8vw,48px);line-height:1.12;letter-spacing:-.035em;marg
 @media(max-width:590px){.sidebar{grid-template-columns:1fr}.hero{border-radius:17px}.panel{border-radius:16px}.chat{padding:16px 13px;min-height:320px}.turn{max-width:94%}.bubble{font-size:14px}.composer{padding:12px;gap:8px}.send{padding:13px 15px}.stage,.suggestions{padding-left:13px;padding-right:13px}.chat-footer{padding:0 13px 13px}}
 @media(prefers-reduced-motion:reduce){.chat{scroll-behavior:auto}}
 
-/* Live GLM connector: hidden until a backend endpoint is explicitly configured */
+/* Live Qwen connector; legacy configuration variable is retained for compatibility. */
 .access-box{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:#fffdf3;border:1px solid #e5cd98;border-radius:15px;padding:15px 17px;margin:0 0 20px}
 .access-box[hidden]{display:none!important}.access-box label{font-size:13px;font-weight:750;color:#6a4a19;display:block;margin-bottom:5px}
 .access-box input{padding:10px 12px;border:1px solid #d9bd88;border-radius:10px;min-height:43px;width:min(290px,100%);background:white;color:var(--ink)}
@@ -64,18 +64,18 @@ h1{font-size:clamp(30px,4.8vw,48px);line-height:1.12;letter-spacing:-.035em;marg
 </head>
 <body>
 <div class="wrap">
-<header><a class="brand" href="../../PE/index.html"><span aria-hidden="true"></span> INSPIRE 4 · PE</a><a class="back" href="../index.html">← Production écrite</a></header>
+<header><a class="brand" href="../../PE/index.html"><span aria-hidden="true"></span> ÉCRIRE · IDÉE</a><a class="back" href="../index.html">← Production écrite</a></header>
 <main>
 <section class="hero">
 <p class="overline">PRODUCTION ÉCRITE · ÉCRIRE EN RÉFLÉCHISSANT</p>
 <h1>Écrire et réviser avec <em style="font-family:Georgia,serif;font-weight:400">Idée.</em></h1>
-<p class="intro">Tu peux préparer, réviser ou améliorer un texte, seul puis avec les retours de ton enseignante. Idée t’aide à trouver des pistes et des expressions adaptées, sans écrire à ta place.</p>
-<div class="labels"><span>01 · Je précise mon besoin</span><span>02 · Je choisis une stratégie</span><span>03 · J’essaie</span><span>04 · J’évalue</span></div>
+<p class="intro">Idée lit d’abord ce que tu as écrit, t’aide à reconnaître tes acquis, puis t’accompagne dans tes propres révisions. Tu peux aussi lui poser une question précise à tout moment.</p>
+<div class="labels"><span>01 · Comprendre · 中文</span><span>02 · Évaluer · 中文</span><span>03 · Accompagner · Français</span></div>
 </section>
 <div class="layout">
 <section class="panel chat-panel" aria-labelledby="chatTitle">
-<div class="panel-head"><h2 id="chatTitle">Un dialogue adapté à mon travail</h2><small>ACCOMPAGNEMENT GUIDÉ</small></div>
-<div class="stage" aria-live="polite">Étape actuelle : <b id="stageName">Présenter ma tâche</b></div>
+<div class="panel-head"><h2 id="chatTitle">Un dialogue adapté à mon travail</h2><small>IDÉE · V0.6</small></div>
+<div class="stage" aria-live="polite">Mon parcours : <b id="stageName">Présenter ma tâche</b></div>
 <div class="chat" id="chat" role="log" aria-live="polite" aria-relevant="additions"></div>
 <div id="suggestions" class="suggestions" aria-label="Propositions pour commencer"></div>
 <form id="messageForm" class="composer">
@@ -83,27 +83,23 @@ h1{font-size:clamp(30px,4.8vw,48px);line-height:1.12;letter-spacing:-.035em;marg
 <textarea id="message" rows="2" maxlength="4500" placeholder="Présente ton sujet, ton brouillon, le retour reçu ou une difficulté…" required></textarea>
 <button id="send" class="send" type="submit">Envoyer</button>
 </form>
-<div class="chat-footer"><span class="muted">Retours en français · 简短中文评语帮助理解</span><div><button id="export" class="mini" type="button">Exporter mon dialogue</button><button id="restart" class="mini" type="button">Recommencer</button></div></div>
+<div class="chat-footer"><span class="muted">Comprendre et évaluer en chinois · Réviser en français</span><div><button id="export" class="mini" type="button">Exporter mon dialogue</button><button id="restart" class="mini" type="button">Recommencer</button></div></div>
 </section>
 <aside class="sidebar">
 <section class="panel">
 <div class="panel-head"><h2>Mon travail en cours</h2><small>JE GARDE LA MAIN</small></div>
-<div class="side-body"><p>Idée s'adapte à ce que tu as déjà fait. Ces repères ne sont pas des étapes obligatoires.</p>
-<ol id="progress" class="progress">
-<li data-phase="topic"><span class="num">1</span><span>Je précise mon travail</span></li>
-<li data-phase="position"><span class="num">2</span><span>Je clarifie une idée</span></li>
-<li data-phase="reason"><span class="num">3</span><span>Je développe une raison</span></li>
-<li data-phase="example"><span class="num">4</span><span>Je cherche un exemple</span></li>
-<li data-phase="interpretation"><span class="num">5</span><span>Je vérifie la pertinence</span></li>
-<li data-phase="writing"><span class="num">6</span><span>Je travaille l'expression</span></li>
-<li data-phase="review"><span class="num">7</span><span>Je fais un choix de révision</span></li>
+<div class="side-body"><p>Pour une copie complète, trois temps : comprendre ton intention, évaluer les acquis et accompagner ta révision. Une demande ponctuelle reçoit une aide directe.</p>
+<ol id="progress" class="progress" aria-label="Les trois étapes de l’accompagnement d’une copie complète">
+<li data-coach-stage="comprehension"><span class="num">1</span><span>Comprendre mon texte · 理解与确认</span></li>
+<li data-coach-stage="evaluation"><span class="num">2</span><span>Reconnaître mes acquis · 积极评价</span></li>
+<li data-coach-stage="accompagnement"><span class="num">3</span><span>Réviser à mon rythme · 自主修订</span></li>
 </ol>
 <div class="diagnosis" aria-label="Repères sur ma progression">
 <p class="diagnosis-title">MON POINT D'APPUI</p>
 <p class="diagnosis-line"><span class="diagnosis-label">Déjà là</span><span id="diagGoal">À préciser avec l'élève</span></p>
 <p class="diagnosis-line"><span class="diagnosis-label">Difficulté</span><span id="diagNeed">Pas encore identifiée</span></p>
 <p class="diagnosis-line"><span class="diagnosis-label">Prochain pas</span><span id="diagNext">Présenter ma tâche ou ma difficulté</span></p>
-<p class="diagnosis-help">Repères provisoires : tu peux les corriger dans la conversation. Tu décides des modifications à retenir.</p>
+<p class="diagnosis-help">Ces repères restent révisables : tu peux clarifier ton intention et choisir toi-même les modifications à retenir.</p>
 </div></div>
 </section>
 <section class="panel">
@@ -141,6 +137,7 @@ h1{font-size:clamp(30px,4.8vw,48px);line-height:1.12;letter-spacing:-.035em;marg
 "use strict";
 var chat=document.getElementById("chat"),form=document.getElementById("messageForm"),input=document.getElementById("message"),suggestions=document.getElementById("suggestions"),stageName=document.getElementById("stageName"),progress=document.getElementById("progress");
 var PHASES=["topic","position","reason","example","interpretation","writing","review"];
+var COACH_STAGES=["comprehension","evaluation","accompagnement"];
 var state={phase:"topic",lang:"fr",topic:"",stance:"",reason:"",example:"",interpretation:"",hint:0,history:[],meta:{}};
 // The backend URL is public, not a secret. Inlining a fallback avoids stale external config caches.
 var GLM_TEST_ENDPOINT="https://inspireompagnon-orzowiydrh.cn-hangzhou.fcapp.run/chat";
@@ -149,7 +146,7 @@ var CLASS_CODE="";
 if(GLM_ENDPOINT){
  document.getElementById("privacyNote").innerHTML="<strong>Confidentialité :</strong> tes messages et quelques réponses précédentes sont transmis au serveur pédagogique et au service Qwen de Bailian pour produire la réponse. N'entre aucune donnée personnelle sensible. Le dialogue n'est pas enregistré par cette page ; tu peux l'exporter.";
 }
-var STARTERS=["Je veux réviser mon brouillon avant le retour de l’enseignante.","J’ai reçu les remarques de mon enseignante : je voudrais réviser.","Je cherche une expression juste, éventuellement de niveau B2.","Je voudrais commencer un texte."];
+var STARTERS=["Je voudrais te soumettre ma rédaction.","J’ai reçu les remarques de mon enseignante : je voudrais réviser.","Je cherche une expression plus juste.","Je n’arrive pas à trouver une idée."];
 var STAGES={fr:["Préciser mon travail","Clarifier une idée","Développer une raison","Chercher un exemple","Vérifier la pertinence","Travailler mon expression","Décider d’une révision"],zh:["说明当前任务","明确已有想法","展开理由","寻找例子","检查例证相关性","解决表达问题","决定如何修改"]};
 function t(fr,zh){return state.lang==="zh"?zh:fr}
 function normal(s){return s.toLowerCase().replace(/[\u2019\u2018]/g,"'").trim()}
@@ -178,17 +175,25 @@ function renderBotText(target,message){
 function addTurn(role,text,sourceLabel){var el=document.createElement("div");el.className="turn "+role;var who=document.createElement("span");who.className="who";who.textContent=role==="bot"?(sourceLabel||"Idée"):"MOI";var bubble=document.createElement("div");bubble.className="bubble";if(role==="bot")renderBotText(bubble,text);else bubble.textContent=text;el.appendChild(who);el.appendChild(bubble);chat.appendChild(el);chat.scrollTop=chat.scrollHeight;state.history.push({role:role,text:text})}
 function phaseIndex(){return Math.max(0,PHASES.indexOf(state.phase))}
 function renderStage(){
- var phase=phaseIndex();
- stageName.textContent=STAGES[state.lang][phase]||STAGES[state.lang][0];
- Array.prototype.forEach.call(progress.children,function(el,i){el.classList.toggle("active",i===phase);el.classList.remove("done")});
  var m=state.meta||{};
- var labels={example:state.lang==="zh"?"需要具体例证":"Exemple à trouver",planning:state.lang==="zh"?"需要明确任务或求助":"Tâche ou besoin à préciser",reasoning:state.lang==="zh"?"检查论证关系":"Lien argument–preuve",language:state.lang==="zh"?"法语表达困难":"Formulation en français",drafting:state.lang==="zh"?"正在组织或修改":"Rédaction ou révision"};
- document.getElementById("diagGoal").textContent=m.goal||(state.lang==="zh"?"尚待明确":"Encore à préciser");
- document.getElementById("diagNeed").textContent=labels[m.difficulty]||(state.lang==="zh"?"尚未确定":"Non encore précisée");
- document.getElementById("diagNext").textContent=m.next||(state.lang==="zh"?"描述目前的想法或困难":"Présenter ma tâche ou ma difficulté");
+ var coach=COACH_STAGES.indexOf(m.coachStage);
+ stageName.textContent=coach===0?"理解写作意图 · Comprendre":coach===1?"综合评价 · Évaluer":coach===2?"Réviser en français · Accompagner":"Définir mon besoin · 自主求助";
+ Array.prototype.forEach.call(progress.children,function(el,i){
+  el.classList.toggle("active",i===coach);
+  el.classList.toggle("done",coach>i);
+ });
+ var labels={comprehension:"理解写作意图",evaluation:"综合评价",accompagnement:"自主修订",example:"寻找具体例证",planning:"明确任务或求助",reasoning:"检查论证关系",language:"法语表达",drafting:"组织与修改",ideation:"寻找思路"};
+ var fallbackGoal=coach>=0?"Texte reçu · 原稿已收到":"Encore à préciser";
+ document.getElementById("diagGoal").textContent=(m.goal||fallbackGoal).slice(0,160);
+ document.getElementById("diagNeed").textContent=coach===0?"确认原意":coach===1?"整体评价":coach===2?(labels[m.difficulty]||"修订目标"):(labels[m.difficulty]||"À préciser");
+ document.getElementById("diagNext").textContent=m.next||(coach===0?"确认 Idée 对原文的理解":coach===1?"选择优先修订目标":coach===2?"围绕选定目标自主修订":"Présenter mon travail ou ma difficulté");
 }
-function addSuggestions(items){suggestions.textContent="";items.forEach(function(label){var b=document.createElement("button");b.className="chip";b.type="button";b.textContent=label;b.addEventListener("click",function(){sendText(label)});suggestions.appendChild(b)})}
+function addSuggestions(items){suggestions.textContent="";items.forEach(function(label){var b=document.createElement("button");b.className="chip";b.type="button";b.textContent=label;b.addEventListener("click",function(){if(label==="我想澄清一下我的意思"){input.value="我想澄清的是：";input.focus();return;}sendText(label)});suggestions.appendChild(b)})}
 function suggested(){
+ var coach=state.meta&&state.meta.coachStage;
+ if(coach==="comprehension")return ["对，就是这个意思。","我想澄清一下我的意思"];
+ if(coach==="evaluation")return ["我想先完善论证和例证","我想先梳理文章结构","我想先改进法语表达"];
+ if(coach==="accompagnement")return ["Je voudrais essayer une reformulation.","Peux-tu vérifier ma modification ?","J’ai besoin d’un exemple précis."];
  if(state.phase==="topic")return STARTERS;
  if(state.meta&&state.meta.difficulty==="ideation"&&state.phase==="position"){
   var m=state.meta,appearance=m.ideaTheme==="apparence",bonheur=m.ideaTheme==="bonheur",planete=m.ideaTheme==="planete";
@@ -234,7 +239,8 @@ async function sendText(value){
  addTurn("user",s);input.value="";
  // Progressive course resource: the learner has explicitly asked for help finding an idea.
  // This does not call or impersonate GLM; the next learner turn still uses the live model.
- var ideaLocal=window.COMPAGNON_IDEATION_SUPPORT?window.COMPAGNON_IDEATION_SUPPORT(s,previous,state.meta):null;
+ var useLocalScaffold=!state.meta.coachStage&&!isDraft(s);
+ var ideaLocal=useLocalScaffold&&window.COMPAGNON_IDEATION_SUPPORT?window.COMPAGNON_IDEATION_SUPPORT(s,previous,state.meta):null;
  if(ideaLocal){
    state.phase=ideaLocal.phase||"position";
    state.lang=ideaLocal.language||state.lang;
@@ -245,7 +251,7 @@ async function sendText(value){
  }
  // Teacher-regulated, clearly labeled fallback for the S09 mixed-language draft.
  // A learner's French attempt still goes to the live GLM backend.
- var local=window.COMPAGNON_S09_SUPPORT?window.COMPAGNON_S09_SUPPORT(s,previous,state.meta):null;
+ var local=useLocalScaffold&&window.COMPAGNON_S09_SUPPORT?window.COMPAGNON_S09_SUPPORT(s,previous,state.meta):null;
  if(local){
    state.phase=local.phase||"writing";
    state.lang=local.language||state.lang;
@@ -272,7 +278,7 @@ async function sendText(value){
  }catch(error){addTurn("bot","[Connexion Idée] "+(error&&error.message?error.message:"Le service est indisponible.")+" Réessaie dans quelques instants.");update();}
  finally{send.disabled=false;send.textContent="Envoyer";input.focus();}
 }
-function restart(){state={phase:"topic",lang:"fr",topic:"",stance:"",reason:"",example:"",interpretation:"",hint:0,history:[],meta:{}};chat.textContent="";respond("Bonjour ! Que souhaites-tu travailler aujourd’hui ? Tu peux me présenter la consigne, une idée ou un passage déjà rédigé, ou expliquer ce qui te pose problème. Nous partirons de ce que tu as déjà fait.");}
+function restart(){state={phase:"topic",lang:"fr",topic:"",stance:"",reason:"",example:"",interpretation:"",hint:0,history:[],meta:{}};chat.textContent="";respond("Bonjour ! Tu peux m’envoyer une rédaction complète, une phrase à travailler, une idée ou les remarques de ton enseignante. Pour une rédaction complète, je commencerai par vérifier en chinois ce que tu souhaites exprimer.");}
 form.addEventListener("submit",function(e){e.preventDefault();sendText(input.value)});
 input.addEventListener("keydown",function(e){if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();form.requestSubmit()}});
 var accessDialog=document.getElementById("accessDialog");
@@ -295,7 +301,7 @@ document.getElementById("accessDialogForm").addEventListener("submit",function(e
 });
 document.getElementById("accessCancel").addEventListener("click",function(){accessInput.value="";accessDialog.close();input.focus();});
 document.getElementById("restart").addEventListener("click",function(){if(window.confirm("Recommencer le dialogue ? Le dialogue précédent ne sera pas conservé."))restart()});
-document.getElementById("export").addEventListener("click",function(){if(!state.history.length)return;var content=state.history.map(function(x){return(x.role==="bot"?"Idée":"MOI")+":\n"+x.text}).join("\n\n");var blob=new Blob([content],{type:"text/plain;charset=utf-8"});var url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="inspire4-compagnon-metacognitif-dialogue.txt";document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url)},1000)});
+document.getElementById("export").addEventListener("click",function(){if(!state.history.length)return;var content=state.history.map(function(x){return(x.role==="bot"?"Idée":"MOI")+":\n"+x.text}).join("\n\n");var blob=new Blob([content],{type:"text/plain;charset=utf-8"});var url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="idee-dialogue.txt";document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url)},1000)});
 restart();
 })();
 </script>
