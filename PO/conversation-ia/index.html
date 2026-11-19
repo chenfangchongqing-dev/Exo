@@ -222,7 +222,7 @@
 <label for="course-topic">Sujet ou tâche <span class="muted">(facultatif)</span></label>
 <select id="course-topic">
 <option value="unite2-vetements">Unité 2 · Les vêtements et l’image de soi</option>
-<option value="unite2-uniforme">Unité 2 · L’uniforme à l’école</option>
+<option value="unite2-uniforme">Unité 2 · Leçon 8 · L’uniforme à l’école</option>
 <option value="autre">Une autre tâche / un autre sujet</option>
 </select>
 <label for="other-topic">Ma consigne ou mon objectif <span class="muted">(facultatif)</span></label>
@@ -401,8 +401,13 @@ function render(){
   opening.textContent=topic?"« Tu avais envie de parler de "+topic+" : qu’est-ce qui t’intéresse dans ce sujet ? »":"« Salut ! Ça te dit de discuter un peu ? Comment s’est passée ta journée ? »";
  }else{
   var task=otherTopic.value.trim()||tasks[courseTopic.value]||"ton sujet";
-  description.textContent="Écho pourra travailler avec toi sur « "+task+" », en s’adaptant à ce que tu sais déjà faire et à tes difficultés.";
-  opening.textContent="« Qu’aimerais-tu essayer aujourd’hui à propos de "+task+" ? »";
+  if(courseTopic.value==="unite2-uniforme"&&!otherTopic.value.trim()){
+   description.textContent="Écho discutera de l’uniforme à l’école avec toi, à partir des stratégies de la leçon : réagir, nuancer, reformuler et demander des précisions.";
+   opening.textContent="« Pour l’uniforme à l’école, tu serais plutôt pour, contre ou partagé(e) ? »";
+  }else{
+   description.textContent="Écho pourra travailler avec toi sur « "+task+" », en s’adaptant à ce que tu sais déjà faire et à tes difficultés.";
+   opening.textContent="« Qu’aimerais-tu essayer aujourd’hui à propos de "+task+" ? »";
+  }
  }
 }
 buttons.forEach(function(b){b.addEventListener("click",function(){mode=b.dataset.mode;render()})});
@@ -410,6 +415,10 @@ levels.forEach(function(b){b.addEventListener("click",function(){level=b.dataset
 freeTopic.addEventListener("input",render);
 courseTopic.addEventListener("change",render);
 otherTopic.addEventListener("input",render);
+// Lien direct depuis la leçon U2-L8. Aucune autre valeur d’URL ne peut modifier le sujet.
+if(new URLSearchParams(window.location.search).get("topic")==="u2l8-discussion"){
+ mode="guidee";courseTopic.value="unite2-uniforme";otherTopic.value="";
+}
 render();
 document.querySelectorAll("[data-open-topic]").forEach(function(button){
  button.addEventListener("click",function(){
@@ -425,10 +434,11 @@ document.querySelectorAll("[data-open-topic]").forEach(function(button){
 });
 })();
 </script>
-<script src="./echo-pedagogy.js?v=20261113-3"></script>
+<script src="./echo-topic-packs.js?v=20261119-u2l8"></script>
+<script src="./echo-pedagogy.js?v=20261119-u2l8"></script>
 <script src="./echo-toolbox.js?v=20261113-4"></script>
 <script src="./echo-pilot-features.js?v=20261113-5"></script>
-<script src="./student-voice.js?v=20261113-8"></script>
+<script src="./student-voice.js?v=20261119-u2l8"></script>
 <script>
 (()=>{
 "use strict";
