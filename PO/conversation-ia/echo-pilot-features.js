@@ -10,6 +10,7 @@
  const PROMPT=[
    "",
    "BILAN MÉTACOGNITIF — DÉCLENCHEUR UNIQUE",
+   "LANGUE DE SORTIE : français exclusivement. Le bilan oral ainsi que tous les champs textuels de la boîte à outils doivent être en français uniquement, sans traduction ni annotation en chinois ou dans une autre langue.",
    "Deux moyens équivalents de demander le bilan : la demande ORALE « Écho, on fait le point ? » pendant la conversation, ou le bouton « Faire le point » sur la page.",
    "Écoute et comprends directement la demande orale dans le flux audio de la conversation, même si la transcription ASR continue est désactivée. Dès que l'apprenant dit « Écho, on fait le point ? », appelle l'outil publish_language_toolbox, puis réalise le bref bilan oral. Ne demande pas de consigne supplémentaire.",
    "Si l'apprenant utilise la phrase dans une discussion sur les expressions françaises sans demander un bilan, vérifie brièvement son intention avant de déclencher l'outil.",
@@ -21,7 +22,7 @@
    "Le texte de la boîte à outils apparaît sur la page : ne lis pas cette liste à voix haute.",
    "Aucun bilan automatique pendant une conversation ordinaire. N'exécute pas l'outil sans demande expresse ou sans déclenchement du bouton « Faire le point »."
  ].join("\n");
- const FORCE_SUFFIX="\nL'apprenant vient d'activer explicitement « Écho, on fait le point ? ». Ton action immédiate doit être d'appeler publish_language_toolbox pour fournir les ressources écrites, puis tu fais un bref bilan oral. Il ne faut pas demander au préalable un sujet ou une consigne.";
+ const FORCE_SUFFIX="\nL'apprenant vient d'activer explicitement « Écho, on fait le point ? ». Ton action immédiate doit être d'appeler publish_language_toolbox pour fournir les ressources écrites, puis tu fais un bref bilan oral. Il ne faut pas demander au préalable un sujet ou une consigne. Le bilan oral et tous les champs textuels de l’outil sont en français exclusivement.";
  function normalized(value){
    return String(value||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g," ").trim();
  }
