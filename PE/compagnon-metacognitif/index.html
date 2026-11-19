@@ -160,9 +160,9 @@ function isDraft(s){return s.length>190||((s.match(/[.!?。？！]/g)||[]).lengt
 function isCompleteWriting(s){
  var v=String(s||"").trim();
  if(v.length<165)return false;
- var ends=(v.match(/[.!?。？！](?:\\s|$)/g)||[]).length;
+ var ends=(v.match(/[.!?。？！](?:\s|$)/g)||[]).length;
  var words=(v.match(/[A-Za-zÀ-ÖØ-öø-ÿ]+(?:[’'-][A-Za-zÀ-ÖØ-öø-ÿ]+)*/g)||[]).length;
- var han=(v.match(/[\\u3400-\\u9fff]/g)||[]).length;
+ var han=(v.match(/[\u3400-\u9fff]/g)||[]).length;
  return ends>=2&&(words>=27||han>=40)&&!/^(?:peux-tu|pourrais-tu|comment|est-ce que|你能不能|请问)/i.test(v);
 }
 function topicish(s){return /bonheur|heureux|heureuse|couple|l'argent|argent|réussir|il faut|on doit|幸福|快乐|恋爱|金钱|成功/i.test(s)&&s.length>6}
