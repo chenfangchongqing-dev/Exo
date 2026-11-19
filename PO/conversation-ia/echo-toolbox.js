@@ -65,20 +65,28 @@
    function waiting(){state.textContent="Écho prépare les expressions à retenir…";}
    function setUnavailable(){if(!data)state.textContent="La boîte à outils n’a pas été produite pendant cet essai. Tu peux demander le bilan à voix haute, ou réessayer lors d’une autre conversation.";}
    function normalize(input){
-     return String(input||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLocaleLowerCase("fr").replace(/[^a-z0-9]+/g," ").trim();
+     return String(input||"").normalize("NFC").toLocaleLowerCase("fr").replace(/[^\p{L}\p{N}]+/gu," ").trim();
    }
-   function receive(payload,studentTranscript=""){
-     const studentWords=" "+normalize(studentTranscript)+" ";
+   function originLabel(origin){
+     return origin==="deja_utilisee"?"Déjà employé":origin==="a_reemployer"?"À réemployer":"Expression à retenir";
+   }
+   // Only a trusted caller may attest a checked, current-session student transcript.
+   // Model arguments and unverified ASR must never supply this attestation.
+   function receive(payload,studentTranscript="",transcriptVerified=false){
+     const verifiedText=transcriptVerified===true && typeof studentTranscript==="string"?normalize(studentTranscript):"";
+     const studentWords=" "+verifiedText+" ";
      const items=Array.isArray(payload?.items)?payload.items.slice(0,6):[];
      const rows=items.map(item=>{
        const expression=safe(item?.expression,180);
-       const confirmed=!!expression && studentWords.includes(" "+normalize(expression)+" ");
+       const words=normalize(expression);
+       const confirmed=!!verifiedText && !!words && studentWords.includes(" "+words+" ");
        return {
          expression,
          role:safe(item?.role,330),
          exemple:safe(item?.exemple,300),
          categorie:["lexique","expression","structure"].includes(item?.categorie)?item.categorie:"expression",
-         origine:confirmed && item?.origine==="deja_utilisee"?"deja_utilisee":"a_reemployer"
+         origine:confirmed && item?.origine==="deja_utilisee"?"deja_utilisee"
+           :verifiedText && words && item?.origine==="a_reemployer"?"a_reemployer":"non_verifiee"
        };
      }).filter(item=>item.expression && item.exemple && item.role);
      if(!rows.length){setUnavailable();return false;}
@@ -100,7 +108,7 @@
        const heading=document.createElement("div");heading.className="toolbox-item-head";
        const expr=document.createElement("strong");expr.textContent=item.expression;
        const flag=document.createElement("span");flag.className="toolbox-kind";
-       flag.textContent=item.origine==="deja_utilisee"?"Déjà employé":"À réemployer";
+       flag.textContent=originLabel(item.origine);
        heading.append(expr,flag);
        const usage=document.createElement("p");usage.textContent=item.role;
        const example=document.createElement("p");example.className="toolbox-example";example.textContent=item.exemple;
@@ -119,7 +127,7 @@
    }
    function getText(){
      if(!data)return "";
-     const body=data.items.map((item,i)=>(i+1)+". "+item.expression+" ("+(item.origine==="deja_utilisee"?"déjà employé":"à réemployer")+")\n   Usage : "+item.role+"\n   Exemple : "+item.exemple).join("\n\n");
+     const body=data.items.map((item,i)=>(i+1)+". "+item.expression+" ("+originLabel(item.origine).toLocaleLowerCase("fr")+")\n   Usage : "+item.role+"\n   Exemple : "+item.exemple).join("\n\n");
      return "Écho · Ma boîte à outils\n"+(data.theme||"Notre conversation")+"\n\nCe que j'ai réussi\n"+data.points_forts+"\n\nExpressions à retenir\n"+body+"\n\nPour mon prochain échange\n"+data.prochaine_piste+"\n";
    }
    copy.addEventListener("click",async()=>{
@@ -141,5 +149,5 @@
    clear();
    return Object.freeze({clear,waiting,setUnavailable,receive,getText,definition});
  }
- root.ECHO_TOOLBOX=Object.freeze({create,definition,version:"2026-11-19.fr-only"});
+ root.ECHO_TOOLBOX=Object.freeze({create,definition,version:"2026-11-19.verified-origin"});
 })(typeof window!=="undefined"?window:globalThis);
