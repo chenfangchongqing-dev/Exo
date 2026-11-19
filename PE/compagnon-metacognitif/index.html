@@ -244,6 +244,8 @@ async function sendText(value){
    openAccessDialog();return;
  }
  var previous=state.history.slice(-12);
+ // Keep the context within the FC request-size limit; the original draft is also kept in meta.
+ while(previous.length&&JSON.stringify({message:s,history:previous,meta:state.meta}).length>13500)previous.shift();
  addTurn("user",s);input.value="";
  // Progressive course resource: the learner has explicitly asked for help finding an idea.
  // This does not call or impersonate GLM; the next learner turn still uses the live model.
