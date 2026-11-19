@@ -83,7 +83,8 @@
       : (mode==="libre"
          ? "AUCUN SUJET FOURNI : ouvre la conversation avec une question facile et sincère, puis suis le fil de sa réponse. Ne l'oblige pas à définir une tâche."
          : "AUCUNE CONSIGNE PRÉCISE FOURNIE : pose une seule question pour comprendre ce qu'il souhaite pratiquer. S'il préfère bavarder, passe librement à la conversation spontanée.");
-    return [CORE,"","PARAMÈTRES DE CET ÉCHANGE",modeRule,"NIVEAU INITIAL : "+level+". "+levelRule,theme].join("\n");
+    const pack=mode==="guidee"&&root.ECHO_TOPIC_PACKS?.get?.(cfg.topicId);
+    return [CORE,"","PARAMÈTRES DE CET ÉCHANGE",modeRule,"NIVEAU INITIAL : "+level+". "+levelRule,theme,pack||""].filter(Boolean).join("\n");
   }
-  root.ECHO_PEDAGOGY=Object.freeze({build:build,version:"2026-11-13.3"});
+  root.ECHO_PEDAGOGY=Object.freeze({build:build,version:"2026-11-19.u2l8"});
 })(typeof window!=="undefined"?window:globalThis);
