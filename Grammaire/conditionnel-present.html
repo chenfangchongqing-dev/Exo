@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#298866">
+<meta name="description" content="Le conditionnel présent en contexte : imaginer une vie, exprimer une forte probabilité ou une possibilité. Exercices interactifs et traductions chinoises.">
+<title>Le conditionnel présent · Valeurs fonctionnelles · Grammaire en contexte</title>
+<style>
+:root{--bg:#f5f8f5;--white:#fff;--ink:#25362d;--muted:#647a6c;--line:#dce9dc;--forest:#1f684e;--green:#248662;--gold:#c59e54;--blue:#507d97}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.68 Arial,"Helvetica Neue",sans-serif;-webkit-font-smoothing:antialiased}
+[hidden]{display:none!important}button,input,select,textarea{font:inherit}button{cursor:pointer}a{color:var(--forest)}
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #7ab99c;outline-offset:3px}
+.shell{max-width:1100px;margin:auto;padding:0 23px 65px}.nav{display:flex;justify-content:space-between;gap:14px;align-items:center;padding:22px 0;font-size:14px;font-weight:750}.nav a{text-decoration:none}.nav a:hover{text-decoration:underline}
+.hero{position:relative;overflow:hidden;background:radial-gradient(860px 410px at -7% -15%,#bfe5ca,transparent 63%),linear-gradient(118deg,#eaf6ed,#fff);border:1px solid #c5ddcd;border-radius:21px;padding:37px clamp(21px,5vw,52px)}.hero:after{position:absolute;content:"";right:-95px;bottom:-152px;width:265px;height:265px;border:53px solid rgba(155,215,177,.2);border-radius:50%;pointer-events:none}
+.eyebrow{font-size:12px;font-weight:850;text-transform:uppercase;letter-spacing:.1em;color:#3d815e;margin:0 0 9px}h1{font-size:clamp(33px,4.8vw,50px);line-height:1.15;letter-spacing:-.024em;color:#235740;margin:0 0 11px}.subtitle{font-size:18px;color:#53725f;margin:0;max-width:800px}.chips{display:flex;gap:7px;flex-wrap:wrap;margin-top:18px}.chips span{border:1px solid #bddcc5;background:#fff;border-radius:30px;color:#286c4c;padding:5px 10px;font-size:12px;font-weight:750}
+.panel{margin-top:22px;background:var(--white);border:1px solid var(--line);border-radius:16px;padding:clamp(21px,3.5vw,35px);box-shadow:0 12px 28px rgba(29,65,40,.035)}
+h2{font-size:clamp(22px,2.7vw,30px);line-height:1.32;margin:0 0 11px}h3{font-size:19px;margin:0 0 7px}p{margin-top:0}.intro{font-size:14px;line-height:1.65;color:var(--muted);margin:0 0 20px}
+.function-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:18px}.func{background:#fcfdfa;border:1px solid #e2eadd;border-top:4px solid var(--green);border-radius:12px;padding:17px}.func:nth-child(2){border-top-color:var(--gold)}.func:nth-child(3){border-top-color:var(--blue)}.func h3{font-size:18px;color:#245d44;line-height:1.3}.func p{font-size:14px;color:#5b7362;margin:0 0 9px}.func .example{font:italic 18px/1.5 "Times New Roman",Georgia,serif;color:#354f40;margin:0}
+.func .hint{font-size:12px;line-height:1.55;color:#708275;margin-top:12px}
+.compare{padding:16px 18px;border:1px solid #d4e6d8;border-radius:11px;background:#f3faf5;margin:19px 0 0}.compare p{font-size:14px;margin:0 0 5px}.compare p:last-child{margin-bottom:0}
+.mini-quiz{margin-top:20px;border-top:1px solid #e5eee6;padding-top:17px}.classify{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 0;border-bottom:1px solid #edf2ed}.classify .quote{flex:1;min-width:220px;font:18px/1.55 "Times New Roman",Georgia,serif}.classify select{border-radius:9px;border:1px solid #bfd6c5;background:#fff;padding:8px 9px;min-width:205px;color:#2b5b40}.classify .mark{font-size:13px;min-width:70px;color:#6f8075}
+.btn-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:19px}.btn{border:1px solid #2d7858;background:#247954;color:#fff;border-radius:10px;padding:10px 17px;font-size:14px;font-weight:800}.btn:hover{background:#1b6544}.btn.ghost{background:#fff;color:#246848;border-color:#b3d5bd}.btn.ghost:hover{background:#f0f8f2}.status{font-size:14px;font-weight:760;color:#236b4b;margin:12px 0 0}
+.figure{font:italic 18px/1.65 "Times New Roman",Georgia,serif;border-left:4px solid var(--gold);background:#fcf9ee;padding:14px 18px;border-radius:0 10px 10px 0;margin:17px 0}.figure strong{font-weight:800;color:#927032}.source{font-size:12px;text-align:right;color:#7e897f;margin-top:5px}
+.story{font:20px/2 "Times New Roman",Georgia,serif}.story p{margin:0 0 13px}.given{color:var(--green);font-weight:bold}.slot{display:inline-flex;align-items:baseline;flex-wrap:wrap;vertical-align:middle;gap:4px;margin:0 2px 5px}.slot input{width:148px;max-width:68vw;min-height:41px;padding:5px 8px;border-radius:8px;border:1.5px solid #b7cfbf;background:#fff;color:#244d36;font:19px/1.3 "Times New Roman",Georgia,serif}.slot input:focus{border-color:#2c9a65}.slot.correct input{background:#edf8ef;border-color:#6fb188}.slot.wrong input{background:#fff4f0;border-color:#d6a092}.slot .feedback{display:block;flex-basis:100%;font:12px/1.4 Arial,sans-serif;color:#a15b46}
+.legend{font-size:13px;color:#637d69}
+.task{padding:14px 0;border-top:1px solid #e4ece5}.task:first-child{border-top:0}.task-label{color:#358e64;font-weight:850;display:inline-block;min-width:30px}.source-sentence{font:19px/1.65 "Times New Roman",Georgia,serif;margin:0 0 9px}.task textarea{width:100%;min-height:64px;resize:vertical;border:1.5px solid #bfd4c4;border-radius:10px;padding:11px 13px;color:#254834;font:18px/1.5 "Times New Roman",Georgia,serif}.task textarea:focus{border-color:#3c9965}
+.task .selfstate{font-size:12px;color:#63816c;min-height:20px;margin:4px 0 0}
+.details{border:1px solid #d7e8dc;border-radius:11px;background:#fbfefb;margin:15px 0 0;overflow:hidden}.details summary{cursor:pointer;padding:13px 16px;font-weight:780;color:#256d4b;list-style:none}.details summary::-webkit-details-marker{display:none}.details summary:before{content:"＋";margin-right:10px}.details[open] summary:before{content:"－"}.detail-body{padding:3px 17px 19px}.detail-body .zh{font-size:16px;line-height:1.85;color:#3d5141}.detail-body .zh p{margin:0 0 12px}.detail-body .zh p:last-child{margin-bottom:0}
+.answer-text{font:19px/1.9 "Times New Roman",Georgia,serif;color:#2a392d}.answer-text p{margin:0 0 11px}.answer-text strong{color:#228057}.small-note{color:#536d59;font-size:14px;line-height:1.7;margin:12px 0 0}
+.answer-list{padding:0;margin:0;list-style:none}.answer-list li{padding:12px 0;border-top:1px solid #e4ebe4}.answer-list li:first-child{border-top:0}.answer-list strong{color:#267950}.answer-list .fr{font:18px/1.7 "Times New Roman",Georgia,serif;margin:0}.answer-list .zh{margin:4px 0 0}.answer-list .badge{font:12px/1.5 Arial,sans-serif;color:#72897a;display:block;margin:0 0 5px}
+.footer-nav{display:flex;gap:12px;flex-wrap:wrap;justify-content:space-between;border-top:1px solid #dcebdc;padding-top:19px;margin-top:29px;font-size:14px}
+@media(max-width:810px){.function-grid{grid-template-columns:1fr}.classify .quote{flex-basis:100%}.story{font-size:18px}}
+@media(max-width:520px){.shell{padding:0 15px 42px}.hero{padding:28px 20px}.classify select{flex:1;min-width:0}.story{line-height:2}.slot input{width:132px}}
+</style>
+</head>
+<body><div class="shell">
+<nav class="nav"><a href="./index.html">← Grammaire en contexte</a><a href="../index.html">Accueil ↗</a></nav>
+<header class="hero"><p class="eyebrow">Unité 1 · Le bonheur / Unité 2 · L’apparence</p><h1>Le conditionnel présent</h1><p class="subtitle">Des formes aux intentions : imaginer une vie idéale, exprimer une forte probabilité ou évoquer une possibilité.</p><div class="chips"><span>Imaginer et décrire</span><span>Probabilité</span><span>Possibilité</span><span>Valeur fonctionnelle</span></div></header>
+<section class="panel" aria-labelledby="function-title">
+<h2 id="function-title">1. Qu’exprime le conditionnel présent ?</h2>
+<p class="intro">同一个语式时态，在不同语境中可以完成不同的表达任务。先确定说话人的意图，再观察条件式的形式。</p>
+<div class="function-grid">
+<article class="func"><h3>Imaginer, décrire un projet incertain</h3><p>想象一种尚未实现、并不确定会实现的生活或计划。</p><p class="example">Ce <b>serait</b> un lieu où il y <b>aurait</b> des habitations.</p><p class="hint">这里的条件式将描写置于想象中的可能世界。</p></article>
+<article class="func"><h3>Exprimer une forte probabilité</h3><p>带有隐含前提的推测，使用 <em>devoir</em> 的条件式表达较强的可能性。</p><p class="example">On <b>devrait</b> grandir encore un peu dans le futur.</p><p class="hint">= Il est probable qu’on grandira encore.</p></article>
+<article class="func"><h3>Exprimer une possibilité</h3><p>表示一种尚待验证的可能情况，用 <em>pouvoir</em> 的条件式保留较大不确定性。</p><p class="example">Ce à quoi nous <b>pourrions</b> ressembler d’ici 100 000 ans.</p><p class="hint">= Il est possible que nous ressemblions à cela.</p></article>
+</div>
+<div class="compare"><p><strong>À retenir：</strong> <em>devrait</em>（较有把握的推测）与 <em>pourrait</em>（可能出现的情况）表达的确定程度不同；这种区分需要结合语境判断。</p><p>在《Les Choses》的节选中，条件式的功能是<strong>描绘主人公设想的理想生活</strong>，即使文本中并没有出现明确的 <em>si</em> 从句。</p></div>
+<details class="details"><summary>Traduction des exemples · 例句中文翻译</summary><div class="detail-body zh" lang="zh-CN"><p>那会是一个有人居住的地方。</p><p>将来，我们的身高很可能还会进一步增长。</p><p>十万年后，我们或许会变成的样子。</p></div></details>
+<div class="mini-quiz" aria-label="Identifier les fonctions"><h3>Reconnaître l’intention de l’énoncé</h3><p class="intro">阅读三个句子，选择条件式在当前语境中的功能。</p>
+<div class="classify"><span class="quote">1. Là-bas, leur vie serait simple et heureuse.</span><select aria-label="Fonction, phrase 1"><option value="">Choisir la fonction</option><option value="imaginer">Imaginer une vie</option><option value="probabilite">Forte probabilité</option><option value="possibilite">Possibilité</option></select><span class="mark" aria-live="polite"></span></div>
+<div class="classify"><span class="quote">2. Les progrès médicaux devraient se poursuivre.</span><select aria-label="Fonction, phrase 2"><option value="">Choisir la fonction</option><option value="imaginer">Imaginer une vie</option><option value="probabilite">Forte probabilité</option><option value="possibilite">Possibilité</option></select><span class="mark" aria-live="polite"></span></div>
+<div class="classify"><span class="quote">3. Notre cerveau pourrait être connecté à une machine.</span><select aria-label="Fonction, phrase 3"><option value="">Choisir la fonction</option><option value="imaginer">Imaginer une vie</option><option value="probabilite">Forte probabilité</option><option value="possibilite">Possibilité</option></select><span class="mark" aria-live="polite"></span></div>
+<div class="btn-row"><button type="button" class="btn ghost" id="check-functions">Vérifier les fonctions</button></div><p class="status" id="function-score" hidden role="status"></p>
+</div>
+</section>
+<section class="panel" id="imaginer" aria-labelledby="story-title">
+<h2 id="story-title">2. Imaginer une vie idéale</h2>
+<p class="intro">Jérôme et Sylvie imaginent leur vie idéale. Retrouvez le texte avec les verbes au conditionnel présent. 先阅读和理解生活场景，再填写条件式；提交后展开答案和完整中文译文。</p>
+<div class="figure">La vie, là, <strong>serait</strong> facile, serait simple. Chaque groupe, chaque famille <strong>aurait</strong> une maison à elle ou <strong>pourrait</strong> partager une maison.</div>
+<p class="source">Repère grammatical · Pour imaginer, décrire un projet incertain</p>
+<details class="details"><summary>Texte de départ à l’indicatif · 查看原文动词</summary><div class="detail-body answer-text">
+<p>La vie, là, <b>est</b> facile, <b>est</b> simple. Toutes les obligations, tous les problèmes qu’implique la vie matérielle <b>trouvent</b> une solution naturelle […]. Ils <b>décachètent</b> leur courrier, ils <b>ouvrent</b> les journaux. Ils <b>allument</b> une première cigarette. Ils <b>sortent</b>. Leur travail ne les <b>retient</b> que quelques heures, le matin. Ils se <b>retrouvent</b> pour déjeuner, d’un sandwich ou d’une grillade, selon leur humeur ; ils <b>prennent</b> un café à une terrasse, puis <b>rentrent</b> chez eux, à pied lentement […]. Certains jours, ils <b>vont</b> à l’aventure. Nul projet ne leur <b>est</b> impossible. Ils ne <b>connaissent</b> pas la rancœur, ni l’amertume, ni l’envie. Car leurs moyens et leurs désirs <b>s’accordent</b> en tous points, en tout temps. Ils <b>appellent</b> cet équilibre bonheur et <b>savent</b> par leur liberté, par leur sagesse, par leur culture, le préserver, le découvrir à chaque instant de leur vie commune.</p>
+<p class="source">D’après <i>Les Choses</i>, Georges Perec, 1965.</p></div></details>
+<form id="story-form" autocomplete="off"><div class="story" lang="fr">
+<p>La vie, là, <span class="given">serait</span> facile, <span class="slot" data-i="0"><input aria-label="être, deuxième occurrence" spellcheck="false"></span> simple. Toutes les obligations, tous les problèmes qu’implique la vie matérielle <span class="slot" data-i="1"><input aria-label="trouver" spellcheck="false"></span> une solution naturelle […].</p>
+<p>Ils <span class="slot" data-i="2"><input aria-label="décacheter" spellcheck="false"></span> leur courrier, ils <span class="slot" data-i="3"><input aria-label="ouvrir" spellcheck="false"></span> les journaux. Ils <span class="slot" data-i="4"><input aria-label="allumer" spellcheck="false"></span> une première cigarette. Ils <span class="slot" data-i="5"><input aria-label="sortir" spellcheck="false"></span>. Leur travail ne les <span class="slot" data-i="6"><input aria-label="retenir" spellcheck="false"></span> que quelques heures, le matin.</p>
+<p>Ils se <span class="slot" data-i="7"><input aria-label="retrouver" spellcheck="false"></span> pour déjeuner, d’un sandwich ou d’une grillade, selon leur humeur ; ils <span class="slot" data-i="8"><input aria-label="prendre" spellcheck="false"></span> un café à une terrasse, puis <span class="slot" data-i="9"><input aria-label="rentrer" spellcheck="false"></span> chez eux, à pied lentement […]. Certains jours, ils <span class="slot" data-i="10"><input aria-label="aller" spellcheck="false"></span> à l’aventure.</p>
+<p>Nul projet ne leur <span class="slot" data-i="11"><input aria-label="être impossible" spellcheck="false"></span> impossible. Ils ne <span class="slot" data-i="12"><input aria-label="connaître" spellcheck="false"></span> pas la rancœur, ni l’amertume, ni l’envie. Car leurs moyens et leurs désirs s’<span class="slot" data-i="13"><input aria-label="accorder" spellcheck="false"></span> en tous points, en tout temps. Ils <span class="slot" data-i="14"><input aria-label="appeler" spellcheck="false"></span> cet équilibre bonheur et <span class="slot" data-i="15"><input aria-label="savoir" spellcheck="false"></span> par leur liberté, par leur sagesse, par leur culture, le préserver, le découvrir à chaque instant de leur vie commune.</p>
+</div>
+<div class="btn-row"><button class="btn" type="submit">Vérifier mes réponses</button><button class="btn ghost" type="button" id="reset-story">Recommencer</button><span class="legend">16 formes à retrouver · les deux graphies de décacheter sont acceptées</span></div>
+<p class="status" id="story-score" hidden role="status"></p></form>
+<div id="story-resource" hidden>
+<details class="details" id="story-answer"><summary>Corrigé · 完整答案</summary><div class="detail-body answer-text">
+<p>La vie, là, <strong>serait</strong> facile, <strong>serait</strong> simple. Toutes les obligations, tous les problèmes qu’implique la vie matérielle <strong>trouveraient</strong> une solution naturelle […]. Ils <strong>décachèteraient</strong> leur courrier, ils <strong>ouvriraient</strong> les journaux. Ils <strong>allumeraient</strong> une première cigarette. Ils <strong>sortiraient</strong>. Leur travail ne les <strong>retiendrait</strong> que quelques heures, le matin. Ils se <strong>retrouveraient</strong> pour déjeuner, d’un sandwich ou d’une grillade, selon leur humeur ; ils <strong>prendraient</strong> un café à une terrasse, puis <strong>rentreraient</strong> chez eux, à pied lentement […]. Certains jours, ils <strong>iraient</strong> à l’aventure. Nul projet ne leur <strong>serait</strong> impossible. Ils ne <strong>connaîtraient</strong> pas la rancœur, ni l’amertume, ni l’envie. Car leurs moyens et leurs désirs <strong>s’accorderaient</strong> en tous points, en tout temps. Ils <strong>appelleraient</strong> cet équilibre bonheur et <strong>sauraient</strong> par leur liberté, par leur sagesse, par leur culture, le préserver, le découvrir à chaque instant de leur vie commune.</p>
+<p class="small-note">La forme <em>décachetteraient</em> est également admise. Le conditionnel organise ici tout un scénario imaginé : chaque action s’inscrit dans cette vie idéale qui n’est pas présentée comme réalisée. <strong>La fonction du passage est de décrire un monde possible.</strong></p>
+</div></details>
+<details class="details" id="story-translation"><summary>Traduction chinoise · 原文完整译文</summary><div class="detail-body zh" lang="zh-CN">
+<p>在那里，生活会轻松又简单。物质生活带来的各种责任和难题都能自然而然地得到解决……他们会拆开信件，翻看报纸，点上一支烟，然后出门。每天上午只需工作几个小时，中午他们会聚在一起吃午饭，根据当时的心情，或是吃份三明治，或是来点烤肉；之后再到露台喝杯咖啡，慢悠悠地步行回家……</p>
+<p>有些日子，他们还会出门冒险。对他们而言，没有什么计划是不可能实现的。他们不会有怨恨、愤懑或嫉妒，因为无论何时，他们的物质条件都与自己的愿望完全契合。他们把这种平衡称作幸福，也懂得凭借自由、智慧和文化修养守护这份幸福，在共同生活的每时每刻不断发现它。</p>
+</div></details>
+</div>
+</section>
+<section class="panel" id="probabilite" aria-labelledby="prob-title">
+<h2 id="prob-title">3. Probabilité ou possibilité dans le futur ?</h2>
+<p class="intro">Reformulez avec <strong>devoir</strong> ou <strong>pouvoir</strong> au conditionnel présent selon le sens de la phrase. 读懂原句中的可能性程度，再选择相应的条件式。答案为参考改写，不排除其他自然且语义相当的表达。</p>
+<div class="compare"><p><strong>Probabilité assez forte :</strong> va probablement / vraisemblablement… → <em>devrait / devraient</em> + infinitif.</p><p><strong>Possibilité :</strong> peut-être / il est possible que… → <em>pourrait / pourraient</em> + infinitif.</p></div>
+<div class="figure">Ex. : L’être humain va peut-être disparaître. → L’être humain <strong>pourrait</strong> disparaître.</div>
+<form id="reformulate-form" autocomplete="off">
+<div class="task"><p class="source-sentence"><span class="task-label">a.</span> La technologie va probablement révolutionner la médecine.</p><textarea aria-label="Reformulez la phrase a" rows="2" placeholder="Écrivez votre reformulation…"></textarea><p class="selfstate" aria-live="polite"></p></div>
+<div class="task"><p class="source-sentence"><span class="task-label">b.</span> Les mains et les pieds vont vraisemblablement s’allonger.</p><textarea aria-label="Reformulez la phrase b" rows="2" placeholder="Écrivez votre reformulation…"></textarea><p class="selfstate" aria-live="polite"></p></div>
+<div class="task"><p class="source-sentence"><span class="task-label">c.</span> Il est possible que nous ayons tous au moins une prothèse.</p><textarea aria-label="Reformulez la phrase c" rows="2" placeholder="Écrivez votre reformulation…"></textarea><p class="selfstate" aria-live="polite"></p></div>
+<div class="task"><p class="source-sentence"><span class="task-label">d.</span> Il est probable que le corps humain ne ressemblera plus à celui d’aujourd’hui.</p><textarea aria-label="Reformulez la phrase d" rows="2" placeholder="Écrivez votre reformulation…"></textarea><p class="selfstate" aria-live="polite"></p></div>
+<div class="task"><p class="source-sentence"><span class="task-label">e.</span> Notre cerveau sera peut-être connecté à un ordinateur.</p><textarea aria-label="Reformulez la phrase e" rows="2" placeholder="Écrivez votre reformulation…"></textarea><p class="selfstate" aria-live="polite"></p></div>
+<div class="btn-row"><button type="submit" class="btn">Comparer avec les réponses</button><button type="button" class="btn ghost" id="reset-reform">Recommencer</button></div><p class="status" id="reform-score" role="status" hidden></p>
+</form>
+<div id="reform-resource" hidden>
+<details class="details" id="reform-answer"><summary>Corrigé · 答案与语义说明</summary><div class="detail-body"><ul class="answer-list">
+<li><span class="badge">a · Probabilité · devoir</span><p class="fr">La technologie <strong>devrait révolutionner</strong> la médecine.</p><p class="small-note">probablement → devrait：推测未来发生的可能性较大。</p></li>
+<li><span class="badge">b · Probabilité · devoir</span><p class="fr">Les mains et les pieds <strong>devraient s’allonger</strong>.</p><p class="small-note">vraisemblablement → devraient：表达较有根据的预测。</p></li>
+<li><span class="badge">c · Possibilité · pouvoir</span><p class="fr">Nous <strong>pourrions</strong> tous avoir au moins une prothèse.</p><p class="small-note">Il est possible que… → pourrions：保留一种可能性，并不意味着一定发生。</p></li>
+<li><span class="badge">d · Probabilité · devoir</span><p class="fr">Le corps humain <strong>ne devrait plus ressembler</strong> à celui d’aujourd’hui.</p><p class="small-note">Il est probable que… → ne devrait plus…：要保留原句的否定意义。</p></li>
+<li><span class="badge">e · Possibilité · pouvoir</span><p class="fr">Notre cerveau <strong>pourrait être connecté</strong> à un ordinateur.</p><p class="small-note">peut-être → pourrait：表示一种可能的未来情况。<em>être connecté</em> 保留原句的被动意义。</p></li>
+</ul></div></details>
+<details class="details" id="reform-translation"><summary>Traduction chinoise · 逐句中文译文</summary><div class="detail-body zh" lang="zh-CN">
+<p><strong>例句：</strong>人类或许会消失。</p>
+<p><strong>a.</strong> 科技很可能彻底改变医学。</p>
+<p><strong>b.</strong> 人的手和脚很可能进一步变长。</p>
+<p><strong>c.</strong> 我们每个人将来都有可能至少拥有一个人工假体。</p>
+<p><strong>d.</strong> 人体很可能不再像今天这样。</p>
+<p><strong>e.</strong> 我们的大脑或许会与一台计算机相连接。</p>
+</div></details>
+</div>
+</section>
+<div class="footer-nav"><a href="./index.html">← Grammaire en contexte</a><a href="./U2/futur-simple-anterieur.html">Le futur simple et le futur antérieur ↗</a></div>
+</div>
+<script>
+(function(){
+"use strict";
+const norm=t=>String(t||"").toLocaleLowerCase("fr").normalize("NFC").replace(/[’‘ʼ]/g,"'").replace(/\s+/g," ").trim().replace(/\s*[.!?]+\s*$/,"");
+const expectedFunctions=["imaginer","probabilite","possibilite"];
+document.getElementById("check-functions").addEventListener("click",()=>{
+ let ok=0;Array.from(document.querySelectorAll(".classify")).forEach((row,i)=>{
+  const v=row.querySelector("select").value,good=v===expectedFunctions[i],mark=row.querySelector(".mark");if(good)ok++;
+  mark.textContent=good?"✓":"À revoir";mark.style.color=good?"#27815a":"#ac624b";
+ });
+ const x=document.getElementById("function-score");x.hidden=false;
+ x.textContent=ok+" / 3 · "+(ok===3?"Très bien : la valeur dépend de l’intention exprimée.":"Relisez la situation : imaginer, juger probable ou envisager comme possible.");
+});
+const answerForms=[
+ ["serait"],["trouveraient"],["décachèteraient","décachetteraient"],["ouvriraient"],["allumeraient"],["sortiraient"],["retiendrait"],["retrouveraient"],["prendraient"],["rentreraient"],["iraient"],["serait"],["connaîtraient"],["accorderaient"],["appelleraient"],["sauraient"]
+];
+const blanks=Array.from(document.querySelectorAll("#story-form .slot"));
+function clearStoryMarks(){blanks.forEach(x=>{x.classList.remove("correct","wrong");x.querySelectorAll(".feedback").forEach(y=>y.remove());});document.getElementById("story-score").hidden=true}
+document.getElementById("story-form").addEventListener("submit",event=>{
+ event.preventDefault();clearStoryMarks();let right=0;
+ blanks.forEach((el,i)=>{
+  const value=norm(el.querySelector("input").value),good=answerForms[i].some(x=>norm(x)===value);if(good)right++;
+  el.classList.add(good?"correct":"wrong");
+  const feedback=document.createElement("span");feedback.className="feedback";feedback.textContent=good?"✓":("Réponse : "+answerForms[i].join(" / "));el.appendChild(feedback);
+ });
+ const score=document.getElementById("story-score");score.hidden=false;score.textContent=right+" / "+answerForms.length+" réponses correctes.";
+ document.getElementById("story-resource").hidden=false;
+ score.scrollIntoView({behavior:"smooth",block:"center"});
+});
+document.getElementById("reset-story").addEventListener("click",()=>{
+ blanks.forEach(x=>x.querySelector("input").value="");clearStoryMarks();const area=document.getElementById("story-resource");area.hidden=true;area.querySelectorAll("details").forEach(x=>x.open=false);
+ document.getElementById("imaginer").scrollIntoView({behavior:"smooth",block:"start"});
+});
+const modelSentences=[
+"La technologie devrait révolutionner la médecine.",
+"Les mains et les pieds devraient s’allonger.",
+"Nous pourrions tous avoir au moins une prothèse.",
+"Le corps humain ne devrait plus ressembler à celui d’aujourd’hui.",
+"Notre cerveau pourrait être connecté à un ordinateur."
+];
+const rows=Array.from(document.querySelectorAll("#reformulate-form .task"));
+document.getElementById("reformulate-form").addEventListener("submit",event=>{
+ event.preventDefault();let matches=0;
+ rows.forEach((row,i)=>{
+  const value=norm(row.querySelector("textarea").value),same=value===norm(modelSentences[i]);if(same)matches++;
+  row.querySelector(".selfstate").textContent=!value?"Aucune proposition saisie : consultez le corrigé.":same?"✓ Conforme à la proposition":"Comparez votre reformulation au modèle : d’autres formulations peuvent convenir.";
+ });
+ const out=document.getElementById("reform-score");out.hidden=false;
+ out.textContent=matches+" / 5 formulations identiques au modèle (les variantes acceptables ne sont pas automatiquement exclues).";
+ document.getElementById("reform-resource").hidden=false;
+ out.scrollIntoView({behavior:"smooth",block:"center"});
+});
+document.getElementById("reset-reform").addEventListener("click",()=>{
+ rows.forEach(row=>{row.querySelector("textarea").value="";row.querySelector(".selfstate").textContent=""});
+ document.getElementById("reform-score").hidden=true;
+ const area=document.getElementById("reform-resource");area.hidden=true;area.querySelectorAll("details").forEach(x=>x.open=false);
+ document.getElementById("probabilite").scrollIntoView({behavior:"smooth",block:"start"});
+});
+})();
+</script>
+</body></html>
