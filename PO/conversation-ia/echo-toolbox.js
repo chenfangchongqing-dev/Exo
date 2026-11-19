@@ -9,7 +9,7 @@
    type:"function",
    function:{
      name:"publish_language_toolbox",
-     description:"Publie une boîte à outils de FLE individualisée quand l'apprenant dit exactement « Écho, on fait le point ? » ou déclenche le bouton « Faire le point ». NE PAS appeler pendant une conversation ordinaire. Sélectionne 3 à 6 expressions ou structures liées aux propos effectivement échangés. Une expression dite par l'apprenant doit être distinguée d'une suggestion nouvelle. Ne pas inventer de citations, d'erreurs ou de réussites. Ensuite, après le résultat de cet outil, fais un bref bilan à l'oral en français sans lire toute la liste.",
+     description:"Publie une boîte à outils de FLE individualisée quand l'apprenant dit exactement « Écho, on fait le point ? » ou déclenche le bouton « Faire le point ». NE PAS appeler pendant une conversation ordinaire. Tous les champs textuels (theme, points_forts, expression, role, exemple, prochaine_piste) doivent être intégralement en français, sans traduction ni annotation dans une autre langue. Sélectionne 3 à 6 expressions ou structures liées aux propos effectivement échangés. Une expression dite par l'apprenant doit être distinguée d'une suggestion nouvelle. Ne pas inventer de citations, d'erreurs ou de réussites. Ensuite, après le résultat de cet outil, fais un bref bilan à l'oral en français sans lire toute la liste.",
      parameters:{
        type:"object",
        properties:{
@@ -37,6 +37,12 @@
    }
  };
  function safe(value,max){return String(value==null?"":value).replace(/[\x00-\x1F\x7F]+/g," ").trim().slice(0,max);}
+ // Évite de publier des sorties contenant des passages en écriture non latine.
+ // Cette protection vise notamment les insertions accidentelles en chinois.
+ // Elle ne garantit pas, à elle seule, la langue d'une réponse orale.
+ function unsupportedScript(value){
+   return /[\u3400-\u9fff\uf900-\ufaff\u3040-\u30ff\uac00-\ud7af\u0400-\u052f\u0600-\u06ff]/u.test(String(value||""));
+ }
  function create(){
    const panel=document.getElementById("toolbox-panel");
    const state=document.getElementById("toolbox-status");
@@ -76,6 +82,9 @@
        };
      }).filter(item=>item.expression && item.exemple && item.role);
      if(!rows.length){setUnavailable();return false;}
+     const visibleFields=[payload?.theme,payload?.points_forts,payload?.prochaine_piste];
+     for(const row of rows)visibleFields.push(row.expression,row.role,row.exemple);
+     if(visibleFields.some(unsupportedScript)){setUnavailable();return false;}
      data={
        theme:safe(payload.theme,150),
        points_forts:safe(payload.points_forts,550),
@@ -132,5 +141,5 @@
    clear();
    return Object.freeze({clear,waiting,setUnavailable,receive,getText,definition});
  }
- root.ECHO_TOOLBOX=Object.freeze({create,definition,version:"2026-11-13.1"});
+ root.ECHO_TOOLBOX=Object.freeze({create,definition,version:"2026-11-19.fr-only"});
 })(typeof window!=="undefined"?window:globalThis);
