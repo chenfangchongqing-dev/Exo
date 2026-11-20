@@ -72,6 +72,10 @@ footer nav{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;ma
 .translation-task .inside>p{margin:9px 0 12px}
 .translation-task label{display:block;color:var(--dark);font-weight:700;font-size:14px;margin-bottom:7px}
 .translation-task .answer p{margin:6px 0 10px}
+.translation-hint{background:#f2faf4;padding:11px 13px;border-radius:9px;font-size:14px;color:#3e5e47}
+.translation-task textarea{min-height:145px}
+.translation-task .details{padding:5px 18px 17px}
+.translation-task .details p{margin:8px 0}
 </style>
 </head>
 <body>
@@ -114,19 +118,26 @@ footer nav{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;ma
 <article class="card">
 <p class="kicker">SOURCE 2 · CHINE · LOI NATIONALE</p>
 <h3>《中华人民共和国就业促进法》 · 第二十六条</h3>
-<p class="quote zh" lang="zh-CN">“……应当向劳动者提供平等的就业机会和公平的就业条件，不得实施就业歧视。”</p>
+<p class="quote zh" lang="zh-CN">“用人单位招用人员、职业中介机构从事职业中介活动，应当向劳动者提供平等的就业机会和公平的就业条件，不得实施就业歧视。”</p>
 
 <details class="details translation-task">
-<summary>Traduire cet extrait juridique en français</summary>
+<summary>Traduire cet article juridique en français</summary>
 <div class="inside">
-<p>Essayez de traduire le passage en français. Comment exprimer les obligations et les interdictions formulées par « 应当 » et « 不得 » ?</p>
+<p><strong>Consigne :</strong> traduisez l’article 26 en vous inspirant des formulations du texte français (Doc. 3). Observez comment le français formule une règle applicable à tous, une obligation et une interdiction.</p>
+<details class="details" style="margin:10px 0 13px">
+<summary>Revoir le modèle français (Doc. 3)</summary>
+<div class="inside"><p>« <strong>Tout salarié, tout candidat</strong> à un emploi […] est protégé par la loi […] »</p><p>« Le Code du travail […] <strong>interdit toute distinction</strong> entre salariés […] »</p><p><a href="../">Relire le Doc. 3 complet ↗</a></p></div>
+</details>
+<p class="translation-hint"><strong>Repères :</strong> 用人单位 / 职业中介机构 → deux catégories de destinataires ; 应当 → <em>devoir / être tenu de</em> ; 不得 → <em>interdire / ne pas pouvoir</em>. Vous pouvez réutiliser <em>tout + nom au singulier</em> et <em>toute discrimination</em>.</p>
 <label for="art26Translation">Votre traduction</label>
-<textarea id="art26Translation" aria-label="Votre traduction de l'article 26" placeholder="Proposez votre traduction en français…" rows="4"></textarea>
+<textarea id="art26Translation" aria-label="Votre traduction en français de l'article 26" placeholder="Tout employeur… / Les employeurs qui…" rows="6"></textarea>
 <button type="button" id="showTranslation" disabled>Comparer avec une proposition de traduction</button>
 <div class="answer" id="translationFeedback" hidden>
 <p><strong>Proposition de traduction</strong></p>
-<p>« … doivent offrir aux travailleurs des chances égales en matière d’emploi et des conditions d’emploi équitables ; toute discrimination à l’embauche leur est interdite. »</p>
-<p><strong>À observer :</strong> « 应当 » exprime une obligation (<em>devoir / être tenu de</em>) ; « 不得 » une interdiction (<em>il est interdit de</em>). Cette proposition traduit uniquement l’extrait affiché ; elle ne constitue pas une traduction officielle.</p>
+<p>« Tout employeur qui recrute du personnel et tout organisme de placement exerçant une activité d’intermédiation professionnelle doivent offrir aux travailleurs des chances égales d’accès à l’emploi et des conditions d’emploi équitables. Toute discrimination en matière d’emploi est interdite. »</p>
+<p><strong>Observer la construction :</strong> <em>tout employeur / tout organisme</em> reprend la portée générale de <em>tout salarié / tout candidat</em> ; <em>doivent offrir</em> exprime « 应当 » ; <em>toute discrimination … est interdite</em> transpose « 不得实施就业歧视 ». Le sujet coordonné comporte deux groupes : le verbe est au pluriel (<em>doivent</em>).</p>
+<p class="small">Cette traduction pédagogique reprend le sens de l’article et certains tours du français juridique ; elle ne constitue pas une traduction officielle.</p>
+<p class="small"><a href="../../../Grammaire/U2/tout.html">Grammaire en contexte · Tous les emplois de « tout » ↗</a></p>
 </div>
 </div>
 </details>
