@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#29885f">
+<meta name="description" content="Tout, toute, tous, toutes : déterminant, pronom, adverbe, nom et locutions. Une grammaire en contexte à partir du Code du travail.">
+<title>Tout, toute, tous, toutes · Grammaire en contexte</title>
+<style>
+:root{--green:#287755;--ink:#1e3229;--muted:#647269;--line:#dce8dd;--bg:#f6f9f6;--pale:#edf7ef}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);margin:0;font:17px/1.64 Arial,"Helvetica Neue","Noto Sans CJK SC",sans-serif}
+a{color:var(--green)}
+a:focus-visible,button:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #74bd98;outline-offset:3px}
+.wrap{max-width:1020px;padding:0 24px;margin:auto}
+header{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;padding:21px 0;font-size:14px}
+header a{text-decoration:none}
+header a:first-child{font-weight:800}
+.hero{background:linear-gradient(112deg,#d0efdc,#f7fff8);border:1px solid #bfe0c9;border-radius:23px;padding:39px clamp(22px,5vw,50px)}
+.kicker{font-size:12px;letter-spacing:.12em;font-weight:800;color:#317a57}
+h1{font:400 clamp(36px,5vw,53px)/1.1 Georgia,"Times New Roman",serif;letter-spacing:-.03em;margin:13px 0 16px}
+.lead{max-width:760px;color:#476b56;font-size:18px;margin:0}
+.nav{display:flex;gap:7px;flex-wrap:wrap;margin-top:21px}
+.nav a{padding:6px 10px;background:#fff;border:1px solid #cde6d5;border-radius:999px;text-decoration:none;font-size:13px;font-weight:700}
+section{margin-top:34px;scroll-margin-top:16px}
+h2{font-size:clamp(22px,3vw,28px);margin:0 0 13px}
+h3{font-size:20px;line-height:1.35;margin:0 0 12px}
+p{margin:0 0 12px}
+.card{background:#fff;border:1px solid var(--line);padding:23px 25px;border-radius:16px}
+.card+.card{margin-top:12px}
+.excerpt{font:22px/1.53 "Times New Roman",Georgia,serif;background:#fff;border-left:4px solid #38a670;padding:18px 22px;border-radius:0 12px 12px 0}
+.excerpt strong{color:#247d54}
+.muted{color:var(--muted);font-size:14px}
+.terms{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:17px 0}
+.term{padding:16px 13px;border:1px solid var(--line);background:#fff;border-radius:12px}
+.term b{display:block;font-size:18px;color:#246747}
+.term span{font-size:13px;color:#64796c}
+table{border-collapse:collapse;width:100%;background:#fff;border:1px solid var(--line)}
+th,td{border-bottom:1px solid #e5eee7;padding:12px 14px;vertical-align:top;text-align:left}
+th{background:#eaf6ee;font-size:14px;color:#326248}
+td:first-child{font-weight:700;white-space:nowrap}
+td{font-size:15px}
+.example{font-family:"Times New Roman",Georgia,serif;font-size:19px}
+.translation{display:block;font-size:14px;color:#5d7466;font-family:Arial,"Noto Sans CJK SC",sans-serif;margin-top:4px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.guide{border-left:4px solid #54ae7d;background:#eef8f0;border-radius:0 12px 12px 0;padding:16px 20px;margin:16px 0}
+.guide p:last-child{margin:0}
+.minihead{font-size:12px;letter-spacing:.075em;font-weight:850;color:#267a53;margin:0 0 8px}
+.rule{border-bottom:1px solid #e3eee5;padding-bottom:13px;margin-bottom:13px}
+.rule:last-child{border-bottom:0;margin-bottom:0;padding-bottom:0}
+.rule strong{color:#215e42}
+.rule em{font-family:Georgia,"Times New Roman",serif}
+.formula{display:inline-block;border:1px solid #c5e3cf;background:#e9f5ec;color:#2a7452;padding:4px 8px;border-radius:6px;font:700 13px Arial;margin-bottom:9px}
+.gridex{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.gridex>div{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.gridex strong{display:block;color:#1f6546;margin-bottom:4px}
+details{background:#fff;border:1px solid var(--line);border-radius:12px;margin-top:12px;overflow:hidden}
+summary{cursor:pointer;color:#236545;font-weight:750;padding:13px 16px}
+.details{padding:5px 18px 17px}
+.question{padding:15px 18px;background:#fff;border:1px solid var(--line);border-radius:12px;margin:10px 0}
+.question label{display:block;font-size:16px;font-weight:700;margin-bottom:7px}
+select{max-width:100%;border:1px solid #b5d6c1;border-radius:9px;padding:8px 11px;background:#fff;color:var(--ink);font:15px Arial;min-width:200px}
+button{border:1px solid #277451;border-radius:9px;background:#277451;color:white;font:700 14px Arial;padding:10px 16px;cursor:pointer;margin-top:13px}
+button:hover{background:#19593c}
+#testResult{font-size:15px;margin-top:10px}
+footer{border-top:1px solid var(--line);padding:18px 0 34px;margin-top:38px;color:var(--muted);font-size:13px}
+.footnav{display:flex;justify-content:space-between;flex-wrap:wrap;gap:13px;margin:15px 0}
+@media(max-width:760px){.wrap{padding:0 15px}.hero{padding:30px 24px}.terms,.two,.gridex{grid-template-columns:1fr 1fr}.term{padding:12px}.card{padding:18px}.excerpt{font-size:20px}td{font-size:14px;padding:10px 8px}th{padding:10px 8px}}
+@media(max-width:510px){.two,.gridex{grid-template-columns:1fr}.terms{grid-template-columns:1fr 1fr}table{display:block;overflow-x:auto}td:first-child{white-space:normal;min-width:95px}}
+@media print{.hero,.card{box-shadow:none}header,button,.nav{display:none!important}section,.card,.gridex>div{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><a href="../index.html">Grammaire en contexte ↗</a><a href="../../Decodage/U2/">← Médiation · Unité 2</a></header>
+<main>
+<div class="hero">
+<div class="kicker">UNITÉ 2 · GRAMMAIRE EN CONTEXTE</div>
+<h1>Tout · toute · tous · toutes</h1>
+<p class="lead">Un même mot, plusieurs fonctions. Apprendre à reconnaître ce que <em>tout</em> quantifie, remplace ou intensifie, et choisir la bonne forme.</p>
+<nav class="nav" aria-label="Parcours grammatical"><a href="#texte">Dans le texte</a><a href="#det">Déterminant</a><a href="#pron">Pronom</a><a href="#adv">Adverbe</a><a href="#nom">Nom et expressions</a><a href="#test">S’exercer</a></nav>
+</div>
+
+<section id="texte">
+<h2>01 · Observer dans le texte</h2>
+<p class="muted">Extrait pédagogique du Code du travail · Doc. 3, « Corriger une fausse information »</p>
+<div class="excerpt"><strong>Tout</strong> salarié, <strong>tout</strong> candidat à un emploi, un stage ou une période de formation en entreprise est protégé par la loi contre les discriminations à l’embauche et au travail.<br><br>Le Code du travail interdit <strong>toute</strong> distinction entre salariés fondée notamment sur l’apparence physique.</div>
+<div class="guide"><p><strong>Tout salarié · tout candidat · toute distinction</strong>：这里的 <em>tout / toute</em> 放在单数名词前，表达“任何一名雇员／任何一位申请者／任何一种区别对待”。它强调适用范围不因个体而例外，尤其适合法律、规章和一般性陈述。</p><p>三个例子均属于 <strong>déterminant indéfini（不定限定词）</strong>，不是副词，也不是独立使用的代词。</p></div>
+</section>
+
+<section id="det">
+<h2>02 · Tout déterminant 不定限定词</h2>
+<p>限定词位于名词前，随名词的性、数变化。</p>
+<div class="terms">
+<div class="term"><b>tout</b><span>阳性单数</span></div>
+<div class="term"><b>toute</b><span>阴性单数</span></div>
+<div class="term"><b>tous</b><span>阳性复数</span></div>
+<div class="term"><b>toutes</b><span>阴性复数</span></div>
+</div>
+<table>
+<thead><tr><th>结构</th><th>意义和例句</th></tr></thead>
+<tbody>
+<tr><td>tout / toute + 单数名词（无冠词）</td><td><span class="example">Tout candidat peut déposer un recours.</span><span class="translation">任何申请者均可提出救济请求。＝ chaque candidat，但更强调无一例外的普遍适用。</span><span class="example">Toute discrimination est interdite.</span><span class="translation">任何歧视行为均被禁止。</span></td></tr>
+<tr><td>tout / toute + le / la / ce / mon…</td><td><span class="example">Toute la procédure doit être transparente.</span><span class="translation">整个程序必须透明。</span><span class="example">Tout ce dossier a été examiné.</span><span class="translation">这份卷宗已全部审查。</span></td></tr>
+<tr><td>tous / toutes + les / ces / mes…</td><td><span class="example">Tous les candidats ont été informés.</span><span class="translation">所有申请者都已收到通知。</span><span class="example">Toutes les demandes sont enregistrées.</span><span class="translation">所有申请均已登记。</span></td></tr>
+<tr><td>tout un / toute une + 名词</td><td><span class="example">C'est toute une affaire !</span><span class="translation">这可不是件简单的事！（带有强调色彩）</span></td></tr>
+</tbody>
+</table>
+<div class="guide">
+<p><strong>关键区别：</strong> <em>Tout candidat…</em>（任何一位申请者，一般规则）与 <em>Tous les candidats…</em>（某一范围内的所有申请者，整体）不能在所有语境下互换。</p>
+<p><em>Toute la journée</em>＝一整天；<em>tous les jours</em>＝每天。前者表示一个时段的整体，后者表示重复的日常频率。</p>
+</div>
+</section>
+
+<section id="pron">
+<h2>03 · Tout pronom 代词</h2>
+<p>代词可以独立承担主语、宾语等句法功能，不需要紧随一个名词。</p>
+<div class="card">
+<div class="rule"><span class="formula">tout · 中性单数</span><p><span class="example">Tout est prévu dans le règlement.</span><span class="translation">规章中已经对一切作出规定。</span></p><p><span class="example">Je n'ai pas tout compris.</span><span class="translation">我并没有全部理解。</span></p><p><em>tout</em> 在这里概括“所有事物／全部内容”，通常不指代一组具体的人。</p></div>
+<div class="rule"><span class="formula">tous / toutes · 复数</span><p><span class="example">Les candidats ont tous été informés.</span><span class="translation">申请者全都已经获知。</span></p><p><span class="example">Ces salariées sont toutes concernées.</span><span class="translation">这些女员工全都涉及此事。</span></p><p>此时 <em>tous / toutes</em> 回指前文的一组人或事物，也可以出现在代词主语之后。</p></div>
+<div class="rule"><span class="formula">tout ce qui / tout ce que / tout ce dont</span><p><span class="example">Tout ce qui est interdit doit être précisé.</span><span class="translation">凡属禁止的事项，都应予以明确。</span></p><p><span class="example">Tout ce que la loi prévoit doit être respecté.</span><span class="translation">法律规定的一切都应得到遵守。</span></p><p><span class="example">Tout ce dont il a besoin est indiqué ici.</span><span class="translation">他所需的一切都在这里列明。</span></p></div>
+</div>
+<div class="guide"><p><strong>发音：</strong> <em>tous les salariés</em> 中的 <em>tous</em> 是限定词，通常读 /tu/；<em>Ils sont tous présents</em> 中的 <em>tous</em> 是代词，通常读 /tus/。复数代词 <em>toutes</em> 读 /tut/。</p><p><em>Tout le monde</em>＝所有人，但整个词组作<strong>单数主语</strong>：<em>Tout le monde est concerné.</em></p></div>
+</section>
+
+<section id="adv">
+<h2>04 · Tout adverbe 副词</h2>
+<p>副词 <em>tout</em> 表示“完全、很、十分”，可以修饰形容词或其他副词。它原则上不变形，但存在一个需要掌握的配合特例。</p>
+<div class="card">
+<h3>L'accord de l'adverbe tout</h3>
+<div class="gridex">
+<div><strong>阳性形容词前：不变</strong><span class="example">Il est tout content.</span><span class="translation">他非常高兴。</span><span class="example">Ils sont tout surpris.</span><span class="translation">他们十分惊讶。</span></div>
+<div><strong>阴性＋元音或哑音 h：不变</strong><span class="example">Elle est tout étonnée.</span><span class="translation">她非常惊讶。</span><span class="example">Elles sont tout heureuses.</span><span class="translation">她们十分高兴。</span></div>
+<div><strong>阴性＋辅音：配合</strong><span class="example">Elle est toute petite.</span><span class="translation">她非常娇小。</span><span class="example">Elles sont toutes petites.</span><span class="translation">她们非常娇小（也可能有“全都娇小”的代词性解读）。</span></div>
+<div><strong>阴性＋嘘音 h：配合</strong><span class="example">Elle est toute honteuse.</span><span class="translation">她羞愧极了。</span><span class="example">Elles sont toutes honteuses.</span><span class="translation">她们羞愧极了。</span></div>
+</div>
+<div class="guide"><p><strong>记忆要点：</strong>副词 <em>tout</em> 通常不变；只有修饰<strong>以辅音或嘘音 h 开头的阴性形容词</strong>时，才写成 <em>toute / toutes</em>。</p><p><em>tout doucement</em>、<em>tout simplement</em>、<em>tout près</em> 中的 <em>tout</em> 修饰副词，始终不变。</p></div>
+</div>
+<div class="card" style="margin-top:12px">
+<h3>Deux sens à ne pas confondre</h3>
+<p><span class="example">Ils sont <strong>tous</strong> contents.</span><span class="translation">他们每个人都高兴。（代词：人人都高兴）</span></p>
+<p><span class="example">Ils sont <strong>tout</strong> contents.</span><span class="translation">他们高兴极了。（副词：程度很高）</span></p>
+<p><span class="example">C'est une <strong>tout autre</strong> question.</span><span class="translation">这是完全不同的问题。（副词：完全）</span></p>
+<p><span class="example"><strong>Toute autre</strong> question devra être examinée.</span><span class="translation">任何其他问题都应予以审查。（限定词：任何）</span></p>
+</div>
+</section>
+
+<section id="nom">
+<h2>05 · Le nom « tout » 与常用固定表达</h2>
+<div class="two">
+<div class="card"><h3>Nom masculin · 名词</h3><p><span class="example">Le tout forme un ensemble cohérent.</span><span class="translation">整体构成一个连贯的体系。</span></p><p><span class="example">Il faut considérer le texte comme un tout.</span><span class="translation">应将文本作为一个整体看待。</span></p><p><strong>le tout / un tout</strong>：整体、全部。名词用法通常带冠词。</p></div>
+<div class="card"><h3>Gérondif et concession</h3><p><span class="example">Tout en respectant la liberté de recrutement, la loi interdit les discriminations.</span><span class="translation">法律在尊重招聘自主权的同时，禁止就业歧视。</span></p><p><strong>tout en + participe présent</strong>：强调同时发生，也常表达“虽然／尽管……仍……”的让步关系。</p><p><span class="example">Tout petit qu'il soit, ce détail compte.</span><span class="translation">尽管这个细节很小，它仍然重要。（书面让步结构）</span></p></div>
+</div>
+<div class="card" style="margin-top:12px">
+<h3>Locutions fréquentes 常见固定搭配</h3>
+<table>
+<thead><tr><th>表达</th><th>中文</th><th>例句</th></tr></thead>
+<tbody>
+<tr><td>tout à fait</td><td>完全、确实</td><td>Je suis tout à fait d'accord.</td></tr>
+<tr><td>pas du tout</td><td>完全不、一点也不</td><td>Ce n'est pas du tout la même règle.</td></tr>
+<tr><td>tout de suite</td><td>立即、马上</td><td>Il faut répondre tout de suite.</td></tr>
+<tr><td>tout à coup</td><td>突然</td><td>Tout à coup, il a compris son erreur.</td></tr>
+<tr><td>tout d'abord</td><td>首先</td><td>Tout d'abord, lisez le texte.</td></tr>
+<tr><td>avant tout</td><td>首先、最重要的是</td><td>Il faut avant tout vérifier la source.</td></tr>
+<tr><td>en tout cas</td><td>无论如何、至少</td><td>En tout cas, ce critère doit être justifié.</td></tr>
+<tr><td>à tout prix</td><td>不惜一切代价</td><td>Il veut réussir à tout prix.</td></tr>
+<tr><td>tout au long de</td><td>在整个……期间</td><td>Tout au long de la procédure.</td></tr>
+<tr><td>tout le monde</td><td>所有人（谓语用单数）</td><td>Tout le monde a le droit de postuler.</td></tr>
+<tr><td>tout le temps</td><td>总是、一直</td><td>Il ne faut pas tout le temps répéter la même chose.</td></tr>
+<tr><td>tous les jours</td><td>每天</td><td>Il vérifie ses messages tous les jours.</td></tr>
+</tbody>
+</table>
+</div>
+<div class="guide"><p><strong>法律阅读中的否定范围：</strong> <em>Tous les candidats ne sont pas retenus</em> 通常表示“并非所有申请者都被录用”，不等于“没有任何申请者被录用”。后一层意思要说 <em>Aucun candidat n'est retenu</em>。</p></div>
+</section>
+
+<section id="test">
+<h2>06 · Vérifier ses acquis</h2>
+<p>Choisissez la bonne forme dans chaque contexte, puis vérifiez vos réponses.</p>
+<div class="question"><label for="q1">1. … candidat doit connaître ses droits.</label><select id="q1"><option value="">Choisir…</option><option>Tout</option><option>Tous</option><option>Toute</option></select></div>
+<div class="question"><label for="q2">2. Les candidates sont … informées.</label><select id="q2"><option value="">Choisir…</option><option>Tous</option><option>Toutes</option><option>Tout</option></select></div>
+<div class="question"><label for="q3">3. Elle est … étonnée par cette décision.</label><select id="q3"><option value="">Choisir…</option><option>Toute</option><option>Tout</option><option>Toutes</option></select></div>
+<div class="question"><label for="q4">4. Elles sont … petites. (très petites)</label><select id="q4"><option value="">Choisir…</option><option>Tout</option><option>Toutes</option><option>Tous</option></select></div>
+<div class="question"><label for="q5">5. … distinction discriminatoire est interdite.</label><select id="q5"><option value="">Choisir…</option><option>Tous</option><option>Toute</option><option>Tout</option></select></div>
+<button id="check" type="button">Vérifier mes réponses</button>
+<p id="testResult" role="status" aria-live="polite"></p>
+<details><summary>Revoir les explications et les sources</summary><div class="details">
+<p><strong>1.</strong> <em>Tout</em> est un déterminant indéfini au masculin singulier. <strong>2.</strong> <em>Toutes</em> renvoie à l’ensemble des candidates. <strong>3.</strong> <em>Tout</em> est un adverbe devant une voyelle. <strong>4.</strong> <em>Toutes</em> s’accorde devant un adjectif féminin commençant par une consonne. <strong>5.</strong> <em>Toute</em> est un déterminant indéfini au féminin singulier.</p>
+<p>Références : Riegel, Pellat et Rioul, <em>Grammaire méthodique du français</em>, VII § 2.4.6 et § 5.2.4 ; XIII § 4.1 ; <a href="https://www.dictionnaire-academie.fr/article/A9T1677" target="_blank" rel="noopener noreferrer">Dictionnaire de l’Académie française, « tout » ↗</a>.</p></div></details>
+</section>
+</main>
+<footer>
+<p><strong>Grammaire en contexte · Unité 2</strong> · Le point de départ est l’extrait pédagogique du Code du travail utilisé dans l’activité de médiation.</p>
+<div class="footnav"><a href="../../Decodage/U2/">← Revenir au texte du manuel</a><a href="../../Decodage/U2/regards-croises/">→ Lecture juridique comparée</a></div>
+</footer>
+</div>
+<script>
+(function(){
+const keys=["Tout","Toutes","Tout","Toutes","Toute"];
+document.getElementById("check").addEventListener("click",function(){
+let score=0,missing=0,issues=[];
+keys.forEach(function(k,i){let v=document.getElementById("q"+(i+1)).value;if(!v){missing++;return;}if(v===k){score++;}else{issues.push(i+1);}});
+let result=document.getElementById("testResult");
+if(missing){result.textContent="Répondez aux cinq questions avant de vérifier.";return;}
+result.textContent="Résultat : "+score+"/5. "+(issues.length?"À revoir : question"+(issues.length>1?"s ":" ")+issues.join(", ")+".":"Toutes les réponses sont correctes.");
+});
+})();
+</script>
+</body>
+</html>
