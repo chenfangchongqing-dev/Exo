@@ -66,6 +66,12 @@ footer p{margin:0 0 9px}
 footer nav{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:14px}
 @media(max-width:720px){.wrap{padding:0 15px}header{padding:17px 0}.hero{padding:30px 23px}.cards,.compare{grid-template-columns:1fr}.card,.case{padding:20px}.section{margin-top:28px}.quote{font-size:21px}}
 @media print{.hero,.card,.case{box-shadow:none}button,header,.path{display:none!important}.section,.card,.case{break-inside:avoid}}
+
+.translation-task{margin-top:15px}
+.translation-task .inside{padding:0 18px 18px}
+.translation-task .inside>p{margin:9px 0 12px}
+.translation-task label{display:block;color:var(--dark);font-weight:700;font-size:14px;margin-bottom:7px}
+.translation-task .answer p{margin:6px 0 10px}
 </style>
 </head>
 <body>
@@ -109,7 +115,21 @@ footer nav{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;ma
 <p class="kicker">SOURCE 2 · CHINE · LOI NATIONALE</p>
 <h3>《中华人民共和国就业促进法》 · 第二十六条</h3>
 <p class="quote zh" lang="zh-CN">“……应当向劳动者提供平等的就业机会和公平的就业条件，不得实施就业歧视。”</p>
-<p class="small">Principe général : les employeurs doivent garantir des possibilités et conditions d’emploi équitables. Cette disposition ne nomme pas expressément l’apparence.</p>
+
+<details class="details translation-task">
+<summary>Traduire cet extrait juridique en français</summary>
+<div class="inside">
+<p>Essayez de traduire le passage en français. Comment exprimer les obligations et les interdictions formulées par « 应当 » et « 不得 » ?</p>
+<label for="art26Translation">Votre traduction</label>
+<textarea id="art26Translation" aria-label="Votre traduction de l'article 26" placeholder="Proposez votre traduction en français…" rows="4"></textarea>
+<button type="button" id="showTranslation" disabled>Comparer avec une proposition de traduction</button>
+<div class="answer" id="translationFeedback" hidden>
+<p><strong>Proposition de traduction</strong></p>
+<p>« … doivent offrir aux travailleurs des chances égales en matière d’emploi et des conditions d’emploi équitables ; toute discrimination à l’embauche leur est interdite. »</p>
+<p><strong>À observer :</strong> « 应当 » exprime une obligation (<em>devoir / être tenu de</em>) ; « 不得 » une interdiction (<em>il est interdit de</em>). Cette proposition traduit uniquement l’extrait affiché ; elle ne constitue pas une traduction officielle.</p>
+</div>
+</div>
+</details>
 <p class="source"><a href="https://www.mohrss.gov.cn/xxgk2020/fdzdgknr/zcfg/fl/202011/t20201102_394626.html?xxgkhide=1" target="_blank" rel="noopener noreferrer">Texte officiel · Ministère chinois ↗</a></p>
 </article>
 </div>
@@ -197,6 +217,15 @@ footer nav{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;ma
     var id=field.getAttribute("data-q"),btn=document.querySelector('[data-show="'+id+'"]'),ans=document.querySelector('[data-a="'+id+'"]');
     field.addEventListener("input",function(){btn.disabled=field.value.trim().length<12;if(btn.disabled)ans.hidden=true;});
     btn.addEventListener("click",function(){ans.hidden=false;ans.scrollIntoView({behavior:"smooth",block:"nearest"});});
+  });
+  var legalTranslation=document.getElementById("art26Translation"),translateButton=document.getElementById("showTranslation"),translateAnswer=document.getElementById("translationFeedback");
+  legalTranslation.addEventListener("input",function(){
+    var words=legalTranslation.value.trim().split(/\s+/).filter(Boolean);
+    translateButton.disabled=words.length<10;
+    if(translateButton.disabled)translateAnswer.hidden=true;
+  });
+  translateButton.addEventListener("click",function(){
+    translateAnswer.hidden=false;
   });
   var area=document.getElementById("mediation"),btn=document.getElementById("compare"),sample=document.getElementById("sample");
   area.addEventListener("input",function(){var t=area.value.trim(),n=t?t.split(/\s+/).length:0;document.getElementById("words").textContent=n+" mot"+(n>1?"s":"");btn.disabled=n<40;if(btn.disabled)sample.hidden=true;});
