@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#329c75">
+<meta name="description" content="Unité 2 · Médiation : corriger une fausse information à partir d'un message et d'un extrait pédagogique du Code du travail.">
+<title>Unité 2 · Corriger une fausse information | Regards croisés</title>
+<style>
+:root{--green:#299a70;--deep:#1c694d;--mint:#ecf8f0;--pale:#f7fbf8;--ink:#24312c;--muted:#627269;--border:#d9e8dd;--paper:#fff;--shadow:0 12px 35px #143c2610}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--pale);color:var(--ink);font:17px/1.62 Arial,"Helvetica Neue","Noto Sans CJK SC",sans-serif}
+a{color:var(--deep)}
+button,textarea,select{font:inherit}
+button{cursor:pointer}
+a:focus-visible,button:focus-visible,textarea:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #70b994;outline-offset:3px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 23px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 1px;font-size:14px}
+.top a{text-decoration:none}.top a:hover{text-decoration:underline}.top .home{font-weight:800;color:#25372e}
+.top .module{color:var(--muted)}
+.hero{background:linear-gradient(115deg,#d6f2e3 0%,#e7f8ef 67%,#f7fff9 100%);border:1px solid #b8ddc9;border-radius:24px;padding:35px clamp(23px,5vw,50px);position:relative;overflow:hidden;box-shadow:var(--shadow)}
+.hero:after{content:"";position:absolute;border:49px solid #ffffff67;width:270px;height:270px;border-radius:50%;right:-96px;bottom:-175px;pointer-events:none}
+.hero>*{position:relative;z-index:1}
+.unit{display:inline-block;background:#fff;border:1px solid #c5decf;color:#1d664a;border-radius:999px;padding:5px 12px;font-weight:800;font-size:12px;letter-spacing:.06em}
+.eyebrow{color:#246b4d;font-size:12px;font-weight:800;letter-spacing:.11em;margin:17px 0 7px}
+h1{font-size:clamp(32px,4.7vw,49px);letter-spacing:-.025em;line-height:1.14;margin:0 0 13px;max-width:740px}
+.lead{font-size:18px;color:#476455;margin:0}
+.steps{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.steps a{display:inline-block;background:#fffdfb;border:1px solid #cae2d3;border-radius:999px;padding:6px 12px;text-decoration:none;font-size:13px;color:#286b50;font-weight:700}
+.steps a:hover{background:#eff8f0}
+.section{margin-top:35px;scroll-margin-top:20px}
+.section-heading{display:flex;align-items:baseline;gap:12px;margin-bottom:12px}
+.section-heading .num{font-size:15px;font-weight:850;color:var(--green)}
+h2{font-size:clamp(23px,3.2vw,29px);line-height:1.25;margin:0}
+h3{font-size:19px;line-height:1.35;margin:0 0 13px}
+.intro{color:#52655a;margin:0 0 17px}
+.documents{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:17px}
+.doc{background:#fff;border:1px solid var(--border);border-radius:19px;box-shadow:var(--shadow);overflow:hidden;min-width:0}
+.doc-top{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 19px;background:#f0f9f3;border-bottom:1px solid var(--border);font-weight:800;font-size:13px;color:var(--deep)}
+.doc-top span:last-child{color:#6a8776;font-size:12px;font-weight:600}
+.doc-body{padding:22px 23px}
+.tweet-user{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.avatar{width:47px;height:47px;border-radius:50%;background:#d8efe0;display:grid;place-items:center;font-weight:900;font-size:23px;color:#317c57}
+.tweet-user strong{display:block;font-size:18px;line-height:1.23}
+.handle{font-size:14px;color:#7b8880}
+.tweet-body{font-size:21px;line-height:1.48;margin:0}
+.hashtags{color:#1787aa;font-size:16px;margin-top:14px;overflow-wrap:anywhere}
+.browser{padding:10px 18px;background:#edf0ee;display:flex;align-items:center;gap:10px;border-bottom:1px solid #dfe9e0}
+.dots{color:#e9a852;letter-spacing:.06em;flex:none}
+.address{background:#fff;border:1px solid #d2ded3;border-radius:7px;color:#566c60;padding:4px 10px;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1}
+.law h3{font-size:22px;color:#2a4b6f;margin-bottom:9px}
+.law-text{font-size:17px;line-height:1.67;margin:0;text-align:left}
+.law-text button{display:inline;border:0;border-bottom:2px dotted #48ad80;background:transparent;border-radius:2px;padding:1px 2px;color:inherit;text-align:left;line-height:inherit;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.law-text button:hover{background:#eef9f0}
+.law-text button.selected{background:#bdeed0;border-bottom:2px solid #328c5c}
+.source-note{font-size:13px;color:#667a6b;line-height:1.6;margin:13px 0 0}
+.source-note a{font-weight:700}
+.task{background:#fff;border:1px solid var(--border);border-radius:18px;padding:23px 25px;margin-top:16px;box-shadow:0 6px 18px #284b3310}
+.task-title{display:flex;gap:13px;align-items:center;margin:0 0 15px}
+.number{flex:none;display:grid;place-items:center;background:#ddf5e5;color:#1d7951;border-radius:11px;width:39px;height:39px;font-size:22px;font-weight:900}
+.task-title h3{margin:0;font-size:20px}
+.duration{margin-left:auto;color:#708578;font-size:13px;white-space:nowrap}
+.prompt{margin:13px 0 8px;font-weight:700}
+.subtle{font-size:14px;color:var(--muted);margin:0 0 13px}
+.field-label{display:block;color:#476653;font-weight:700;font-size:14px;margin:14px 0 7px}
+select,textarea{display:block;width:100%;border:1px solid #bcd8c7;background:#fff;border-radius:11px;color:#25362a;padding:12px 13px}
+select{max-width:510px}
+textarea{min-height:88px;resize:vertical}
+textarea.reply{min-height:155px}
+button.action{display:inline-flex;align-items:center;justify-content:center;background:var(--deep);border:1px solid var(--deep);color:#fff;border-radius:10px;padding:10px 16px;font-size:15px;font-weight:800;margin-top:15px}
+button.action:hover{background:#1c7c55}
+button.action:disabled{background:#9fb4a6;border-color:#9fb4a6;cursor:not-allowed}
+.feedback{background:#f0f9f3;border:1px solid #c7e6d0;border-radius:13px;padding:16px 18px;margin-top:15px;font-size:16px}
+.feedback[hidden]{display:none}
+.feedback strong{color:#1d6747}
+.feedback p{margin:7px 0 0}
+.feedback p+p{margin-top:9px}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin:13px 0 0}
+.pills span{padding:6px 10px;border:1px solid #d1e9d9;background:#f4fcf6;color:#327353;border-radius:8px;font-size:13px;font-weight:700}
+.meta{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;color:#627a6a;font-size:13px;margin-top:7px}
+.note{background:#f2f8f4;border-left:3px solid var(--green);padding:13px 17px;margin:20px 0 0;border-radius:0 10px 10px 0;font-size:14px;color:#4e6656}
+footer{margin:37px 0 30px;border-top:1px solid var(--border);padding-top:16px;font-size:13px;color:#6b7b71}
+footer p{margin:0 0 10px}
+.footlinks{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:16px}
+@media(max-width:860px){.documents{grid-template-columns:1fr}.tweet-body{font-size:20px}}
+@media(max-width:640px){.wrap{padding:0 15px}.top{padding:16px 1px}.hero{padding:30px 23px}.section{margin-top:29px}.task{padding:19px}.doc-body{padding:18px}.law-text{font-size:16px}.tweet-body{font-size:20px}.duration{font-size:12px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media print{body{background:#fff}.hero,.doc,.task{box-shadow:none}.top,.steps,.action{display:none!important}.feedback[hidden]{display:none!important}.documents{grid-template-columns:1fr 1fr}.doc,.task{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top"><a class="home" href="../../index.html">Accueil ↗</a><a class="module" href="../index.html">← Regards croisés</a></header>
+<main>
+<section class="hero">
+<span class="unit">UNITÉ 2 · SOMMES-NOUS PRISONNIERS DE NOTRE APPARENCE ?</span>
+<p class="eyebrow">TECHNIQUES POUR · LA MÉDIATION</p>
+<h1>Corriger une fausse information</h1>
+<p class="lead">Comprendre un message, vérifier une information et expliquer ce que dit la loi.</p>
+<nav class="steps" aria-label="Étapes de l'activité"><a href="#comprendre">01 · Comprendre</a><a href="#verifier">02 · Vérifier</a><a href="#expliquer">03 · Expliquer</a></nav>
+</section>
+
+<section class="section" id="documents">
+<div class="section-heading"><span class="num">DOCUMENTS</span><h2>Deux textes à confronter</h2></div>
+<div class="documents">
+<article class="doc" aria-labelledby="tweet-title">
+<div class="doc-top"><span>DOC. 2 · LE MESSAGE DE WAYNE</span><span>Réseau social</span></div>
+<div class="doc-body">
+<div class="tweet-user"><span class="avatar" aria-hidden="true">W</span><div><strong id="tweet-title">WayneBarnes</strong><div class="handle">@WayneBarnes</div></div></div>
+<p class="tweet-body">Oooh... la discrimination ! 😯 Les entreprises françaises n’ont pas le droit d’embaucher de jolies femmes. Et c’est la loi ! 😭<br>Tout va bien en France ! 😹</p>
+<div class="hashtags">#cafaitdebat &nbsp;#television &nbsp;#discrimination</div>
+<p class="handle">@cafaitdebatlemission</p>
+<p class="source-note">Wayne, étudiant australien, a regardé une émission sur la discrimination. Surpris, il publie ce message le soir même.</p>
+</div>
+</article>
+<article class="doc law" aria-labelledby="law-title">
+<div class="doc-top"><span>DOC. 3 · CODE DU TRAVAIL</span><span>Texte du manuel</span></div>
+<div class="browser" aria-hidden="true"><span class="dots">● ● ●</span><span class="address">www.legifrance.gouv.fr</span></div>
+<div class="doc-body">
+<h3 id="law-title">CODE DU TRAVAIL</h3>
+<p class="law-text"> <button type="button" class="extract" aria-pressed="false" data-key="protection">Tout salarié, tout candidat à un emploi, un stage ou une période de formation en entreprise est protégé par la loi contre les discriminations à l’embauche et au travail.</button> <button type="button" class="extract" aria-pressed="false" data-key="interdiction">Le Code du travail (art. L.1132-1) interdit toute distinction entre salariés fondée notamment sur :</button> l’origine ; <button type="button" class="extract" aria-pressed="false" data-key="sexe">le sexe</button> ; les mœurs ; l’orientation ; l’identité sexuelle ; l’âge ; la situation de famille ; la grossesse ; les caractéristiques génétiques ; l’appartenance ou la non-appartenance, vraie ou supposée, à une ethnie, une nation ou une race ; les opinions politiques ; les activités syndicales ou mutualistes ; les convictions religieuses ; <button type="button" class="extract" aria-pressed="false" data-key="apparence">l’apparence physique</button> ; le nom de famille ; le lieu de résidence ; l’état de santé ; le handicap.</p>
+<p class="source-note"><strong>Source pédagogique :</strong> formulation simplifiée reproduite d’après le document du manuel. Elle ne correspond pas mot à mot à la version intégrale actuelle du Code. <a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000045391841/" target="_blank" rel="noopener noreferrer">Consulter l’art. L.1132-1 en vigueur ↗</a></p>
+</div>
+</article>
+</div>
+</section>
+
+<section class="section" id="comprendre">
+<div class="section-heading"><span class="num">01</span><h2>Comprendre le message</h2></div>
+<div class="task">
+<div class="task-title"><span class="number">5</span><h3>Lisez le tweet de Wayne (Doc. 2).</h3><span class="duration">5 min</span></div>
+<label class="field-label" for="q5a">a. Quel est le domaine de la discrimination mentionnée par Wayne ?</label>
+<select id="q5a">
+<option value="">Choisissez une réponse…</option>
+<option value="emploi">L’emploi et le recrutement</option>
+<option value="logement">L’accès au logement</option>
+<option value="education">L’éducation</option>
+</select>
+<label class="field-label" for="q5b">b. Pensez-vous que ce qu’il dit est vrai ? Expliquez brièvement.</label>
+<textarea id="q5b" rows="3" placeholder="Je pense que…"></textarea>
+<button class="action" id="check5" type="button">Comparer mes réponses</button>
+<div class="feedback" id="feedback5" hidden aria-live="polite">
+<strong>Éléments de correction</strong>
+<p><strong>5a.</strong> La discrimination à l’embauche : Wayne parle de la beauté des femmes.</p>
+<p><strong>5b.</strong> Le message repose sur une mauvaise interprétation. La loi n’interdit pas d’embaucher de jolies femmes : elle protège contre les discriminations à l’embauche.</p>
+</div>
+</div>
+</section>
+
+<section class="section" id="verifier">
+<div class="section-heading"><span class="num">02</span><h2>Vérifier dans le texte juridique</h2></div>
+<div class="task">
+<div class="task-title"><span class="number">6</span><h3>Lisez l’extrait du Code du travail (Doc. 3).</h3><span class="duration">10 min</span></div>
+<p class="prompt">Relevez les informations qui contredisent le tweet de Wayne.</p>
+<p class="subtle">Touchez ou cliquez sur les passages utiles dans le Doc. 3, puis comparez votre sélection.</p>
+<div class="meta"><span id="selectionCount" aria-live="polite">Aucun passage sélectionné.</span><a href="#documents">↑ Revenir au Doc. 3</a></div>
+<button class="action" type="button" id="check6">Comparer mes repérages</button>
+<div class="feedback" id="feedback6" hidden aria-live="polite">
+<strong>Éléments de correction</strong>
+<p>Le texte explique que les candidats sont <strong>protégés contre les discriminations</strong> et que la loi <strong>interdit les distinctions fondées sur des critères protégés</strong>, notamment <strong>l’apparence physique</strong>.</p>
+<p>La loi protège les personnes contre les discriminations à l’embauche ; elle n’interdit pas aux employeurs d’embaucher des femmes jugées jolies.</p>
+</div>
+</div>
+</section>
+
+<section class="section" id="expliquer">
+<div class="section-heading"><span class="num">03</span><h2>Expliquer et corriger</h2></div>
+<div class="task">
+<div class="task-title"><span class="number">7</span><h3>Rédigez un commentaire au tweet de Wayne.</h3><span class="duration">15 min</span></div>
+<p class="prompt">Corrigez son erreur en vous appuyant sur le Doc. 3.</p>
+<div class="pills" aria-label="Formules possibles"><span>Je ne crois pas que…</span><span>C’est plutôt…</span><span>Ce n’est pas… c’est…</span><span>En France, on n’a pas le droit de…</span></div>
+<label class="field-label" for="q7">Votre commentaire</label>
+<textarea class="reply" id="q7" placeholder="Wayne, je crois que…"></textarea>
+<div class="meta"><span id="wordCount" aria-live="polite">0 mot</span><span>Écrivez votre propre réponse avant de comparer.</span></div>
+<button class="action" id="check7" type="button" disabled>Comparer avec la proposition du manuel</button>
+<div class="feedback" id="feedback7" hidden aria-live="polite">
+<strong>Proposition de correction du manuel</strong>
+<p>« Wayne, je ne crois pas que tu aies bien compris l’émission. Ce n’est pas une interdiction d’employer de jolies femmes, c’est plutôt une protection contre une discrimination fondée sur la beauté. »</p>
+<p><strong>Pour aller plus loin :</strong> dans un commentaire qui reprend le vocabulaire juridique, préférez « l’apparence physique » à « la beauté ».</p>
+</div>
+</div>
+<p class="note"><strong>Médiation :</strong> vous aidez une personne à comprendre une information qui lui était peu familière. Le but est de reformuler avec précision, en tenant compte de votre destinataire.</p>
+</section>
+</main>
+
+<footer>
+<p><strong>Regards croisés · Unité 2 · Médiation</strong></p>
+<p>Documents 2 et 3 et activités 5 à 7 reproduits et mis en activité à partir des deux pages du manuel fournies en cours. Le Doc. 3 est un extrait adapté pour l'apprentissage ; le lien vers Légifrance permet de consulter le texte légal en vigueur. Vos réponses restent dans votre navigateur et ne sont pas envoyées à l’enseignante.</p>
+<div class="footlinks"><a href="../index.html">← Regards croisés</a><a href="../../index.html">Accueil ↗</a></div>
+</footer>
+</div>
+<script>
+(function(){
+  "use strict";
+  var q5a=document.getElementById("q5a"),q5b=document.getElementById("q5b");
+  document.getElementById("check5").addEventListener("click",function(){
+    if(!q5a.value || q5b.value.trim().length<8){q5b.focus(); alert("Choisissez une réponse et rédigez quelques mots avant de comparer.");return;}
+    var box=document.getElementById("feedback5");
+    box.hidden=false;
+    box.scrollIntoView({behavior:"smooth",block:"nearest"});
+  });
+  var selected=new Set();
+  var count=document.getElementById("selectionCount");
+  Array.from(document.querySelectorAll(".extract")).forEach(function(el){
+    el.addEventListener("click",function(){
+      var key=el.getAttribute("data-key");
+      if(selected.has(key)){selected.delete(key);}else{selected.add(key);}
+      var isSelected=selected.has(key);
+      el.classList.toggle("selected",isSelected);
+      el.setAttribute("aria-pressed",String(isSelected));
+      count.textContent=selected.size?selected.size+" passage"+(selected.size>1?"s":"")+" sélectionné"+(selected.size>1?"s":"")+".":"Aucun passage sélectionné.";
+    });
+  });
+  document.getElementById("check6").addEventListener("click",function(){
+    if(!selected.size){count.textContent="Sélectionnez au moins un passage dans le Doc. 3.";return;}
+    document.getElementById("feedback6").hidden=false;
+    document.getElementById("feedback6").scrollIntoView({behavior:"smooth",block:"nearest"});
+  });
+  var q7=document.getElementById("q7"),check7=document.getElementById("check7"),wordCount=document.getElementById("wordCount");
+  function countWords(){
+    var txt=q7.value.trim();
+    var n=txt?txt.split(/\s+/).length:0;
+    wordCount.textContent=n+" mot"+(n>1?"s":"");
+    check7.disabled=n<15;
+    if(n<15)document.getElementById("feedback7").hidden=true;
+  }
+  q7.addEventListener("input",countWords);
+  check7.addEventListener("click",function(){document.getElementById("feedback7").hidden=false;document.getElementById("feedback7").scrollIntoView({behavior:"smooth",block:"nearest"});});
+})();
+</script>
+</body>
+</html>
