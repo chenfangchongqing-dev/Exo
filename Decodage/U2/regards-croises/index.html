@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#349c75">
+<title>Unité 2 · Apparence et recrutement | Regards croisés</title>
+<style>
+:root{--green:#299a71;--dark:#1b684c;--bg:#f8faf8;--ink:#25352d;--muted:#607168;--border:#d8e8de;--gold:#bb8444}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;color:var(--ink);background:var(--bg);font:17px/1.65 Arial,"Helvetica Neue","Noto Sans CJK SC",sans-serif}
+.wrap{max-width:1050px;margin:auto;padding:0 23px}
+a{color:var(--dark)}
+a:focus-visible,button:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid #73bc9c;outline-offset:3px}
+header{display:flex;justify-content:space-between;gap:14px;padding:22px 0;font-size:14px}
+header a{text-decoration:none}
+header a:first-child{font-weight:800}
+.hero{border:1px solid #b9e0c9;background:linear-gradient(115deg,#d3f0e0,#f8fff9);border-radius:23px;padding:38px clamp(23px,5vw,52px)}
+.unit{display:inline-block;border-radius:22px;border:1px solid #d0e7d6;background:#fff;color:#22674b;padding:5px 11px;font-size:12px;font-weight:800}
+.over{color:#257c56;letter-spacing:.09em;font-weight:800;font-size:12px;margin:18px 0 6px}
+h1{font-size:clamp(30px,4.4vw,44px);line-height:1.2;letter-spacing:-.025em;margin:0 0 14px}
+.lead{font-size:19px;line-height:1.5;color:#4d6858;max-width:740px;margin:0}
+.path{display:flex;flex-wrap:wrap;gap:8px;margin-top:21px}
+.path a{text-decoration:none;border:1px solid #cce4d2;background:#fff;border-radius:999px;padding:6px 11px;font-size:13px;font-weight:700}
+.section{margin-top:35px;scroll-margin-top:15px}
+.titleline{display:flex;align-items:baseline;gap:12px;margin-bottom:14px}
+.no{color:var(--green);font-weight:900;font-size:15px}
+h2{font-size:clamp(23px,3vw,29px);line-height:1.3;margin:0}
+h3{font-size:19px;line-height:1.3;margin:0 0 10px}
+.intro{color:#53675a;margin:0 0 17px}
+.card{background:#fff;border:1px solid var(--border);border-radius:17px;padding:24px;box-shadow:0 10px 29px #173a2310;min-width:0}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.kicker{font-size:12px;font-weight:800;color:#2e855c;letter-spacing:.05em;margin:0 0 11px}
+.quote{font:23px/1.45 Georgia,"Times New Roman",serif;margin:11px 0 13px}
+.zh{font:18px/1.85 "Songti SC","Noto Serif CJK SC",serif}
+.source{font-size:13px;color:#596f5f;margin:13px 0 0}
+.small{font-size:14px;color:#5c7163;line-height:1.6}
+.tag{font-size:12px;border-radius:6px;padding:4px 8px;color:#306a4c;background:#eaf7ee;border:1px solid #cfe7d8;font-weight:700}
+.keywords{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.keywords span{padding:6px 10px;border:1px solid #cfe4d7;background:#f0f9f3;border-radius:9px;font-size:13px;color:#27674a;font-weight:700}
+.rule{border-left:4px solid #4cb080;background:#f1faf5;padding:19px 23px;border-radius:0 15px 15px 0;margin-top:16px}
+.rule p{margin:0 0 10px}.rule p:last-child{margin-bottom:0}
+.details{border:1px solid var(--border);border-radius:13px;background:#fff;margin:14px 0 0;overflow:hidden}
+.details summary{cursor:pointer;padding:14px 17px;font-weight:700;color:var(--dark)}
+.details .inside{padding:0 18px 15px;font-size:15px;color:#506757}
+.case{border:1px solid #badfc9;border-radius:17px;background:#fff;padding:24px}
+.casehead{display:flex;align-items:center;flex-wrap:wrap;gap:9px;margin-bottom:15px}
+.casehead .kicker{margin:0}
+.case h3{font-size:21px}
+.casequote{padding:16px 20px;border-left:4px solid #65b891;background:#f1f9f4;font:18px/1.83 "Songti SC","Noto Serif CJK SC",serif;margin:14px 0}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:17px}
+.compare>div{border:1px solid var(--border);border-radius:13px;padding:17px 19px;background:#f6fbf7}
+.compare strong{display:block;color:var(--dark)}
+.compare p{margin:7px 0 0;font-size:15px}
+.question{background:#fff;border:1px solid var(--border);border-radius:14px;padding:17px 20px;margin:12px 0}
+.question strong{display:block;margin-bottom:9px}
+textarea{display:block;width:100%;min-height:83px;border:1px solid #c2dbca;background:#fff;border-radius:9px;padding:11px 12px;font:16px/1.55 Arial,"Noto Sans CJK SC",sans-serif;resize:vertical}
+button{background:#246a4c;border:1px solid #246a4c;color:white;border-radius:9px;padding:9px 15px;font-weight:800;cursor:pointer;margin-top:11px}
+button:disabled{background:#a4b9aa;border-color:#a4b9aa;cursor:not-allowed}
+.answer{margin-top:15px;border-top:1px solid #e1eee4;padding-top:12px;color:#365c44;font-size:15px}
+.answer[hidden]{display:none}
+.writing{background:#f1faf4;border:1px solid #cee5d5;border-radius:16px;padding:22px;margin-top:20px}
+.writing textarea{min-height:142px}
+.count{display:block;font-size:13px;color:#637466;margin-top:7px}
+footer{margin:40px 0 30px;padding-top:17px;border-top:1px solid var(--border);color:#607268;font-size:13px}
+footer p{margin:0 0 9px}
+footer nav{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:14px}
+@media(max-width:720px){.wrap{padding:0 15px}header{padding:17px 0}.hero{padding:30px 23px}.cards,.compare{grid-template-columns:1fr}.card,.case{padding:20px}.section{margin-top:28px}.quote{font-size:21px}}
+@media print{.hero,.card,.case{box-shadow:none}button,header,.path{display:none!important}.section,.card,.case{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><a href="../../../index.html">Accueil ↗</a><a href="../../index.html">← Regards croisés</a></header>
+<main>
+<section class="hero">
+<span class="unit">UNITÉ 2 · SOMMES-NOUS PRISONNIERS DE NOTRE APPARENCE ?</span>
+<p class="over">REGARDS CROISÉS · LECTURE JURIDIQUE COMPARÉE</p>
+<h1>L’apparence physique peut-elle être un critère de recrutement ?</h1>
+<p class="lead">Comment le droit français et le droit chinois protègent-ils les candidats contre les discriminations à l’embauche ?</p>
+<nav class="path"><a href="#principes">01 · Liberté et obligation</a><a href="#lois">02 · Textes de loi</a><a href="#cas">03 · Le juge interprète</a><a href="#questions">04 · Réfléchir</a></nav>
+</section>
+
+<section class="section" id="principes">
+<div class="titleline"><span class="no">01</span><h2>Liberté, interdiction et obligation</h2></div>
+<p class="intro">La liberté de recruter connaît-elle des limites ? Un texte fondateur permet de distinguer ce que la loi interdit de ce qu’elle n’impose pas.</p>
+<div class="card">
+<p class="kicker">FRANCE · 1789 · DÉCLARATION DES DROITS DE L’HOMME ET DU CITOYEN · ART. 5</p>
+<p class="quote">« Tout ce qui n'est pas défendu par la loi ne peut être empêché »</p>
+<p class="quote">« nul ne peut être contraint à faire ce qu'elle n'ordonne pas »</p>
+<p class="source">Passages de l’article 5 · <a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006527431" target="_blank" rel="noopener noreferrer">Lire l’article complet sur Légifrance ↗</a></p>
+</div>
+<div class="keywords"><span>interdiction · 禁止</span><span>obligation · 义务</span><span>permission · 许可</span></div>
+<div class="rule"><p><strong>À distinguer :</strong> « ne pas avoir le droit de faire » signifie qu’un acte est interdit. « Ne pas être obligé de faire » signifie qu’un acte n’est pas imposé.</p><p>Un employeur n’est pas obligé d’embaucher tous les candidats. Il n’a cependant pas le droit de les écarter pour un motif discriminatoire.</p></div>
+</section>
+
+<section class="section" id="lois">
+<div class="titleline"><span class="no">02</span><h2>Les textes de loi français et chinois</h2></div>
+<p class="intro">Comparez les mots employés et le niveau des normes. Le texte national chinois énonce un principe général ; une réglementation locale mentionne plus précisément l’apparence.</p>
+<div class="cards">
+<article class="card">
+<p class="kicker">SOURCE 1 · FRANCE · CODE DU TRAVAIL</p>
+<h3>Article L.1132-1</h3>
+<p class="quote">« Aucune personne ne peut être écartée d'une procédure de recrutement »</p>
+<p class="quote">« de son apparence physique »</p>
+<p class="small">Extraits non consécutifs : le texte complet interdit diverses mesures discriminatoires fondées notamment sur l’apparence physique.</p>
+<p class="source"><a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000045391841" target="_blank" rel="noopener noreferrer">Texte officiel · Légifrance ↗</a></p>
+</article>
+<article class="card">
+<p class="kicker">SOURCE 2 · CHINE · LOI NATIONALE</p>
+<h3>《中华人民共和国就业促进法》 · 第二十六条</h3>
+<p class="quote zh" lang="zh-CN">“……应当向劳动者提供平等的就业机会和公平的就业条件，不得实施就业歧视。”</p>
+<p class="small">Principe général : les employeurs doivent garantir des possibilités et conditions d’emploi équitables. Cette disposition ne nomme pas expressément l’apparence.</p>
+<p class="source"><a href="https://www.mohrss.gov.cn/xxgk2020/fdzdgknr/zcfg/fl/202011/t20201102_394626.html?xxgkhide=1" target="_blank" rel="noopener noreferrer">Texte officiel · Ministère chinois ↗</a></p>
+</article>
+</div>
+<div class="card" style="margin-top:16px">
+<p class="kicker">SOURCE 3 · CHINE · TEXTE LOCAL (PROVINCE DU HUNAN)</p>
+<h3>《湖南省实施〈中华人民共和国就业促进法〉办法》 · 第十九条</h3>
+<p class="quote zh" lang="zh-CN">“不得以……相貌、身高……等与劳动岗位无关的因素为由，对劳动者就业给予不平等待遇。”</p>
+<p class="small">Extrait abrégé. Le texte cite expressément <strong>相貌</strong> (apparence du visage) et <strong>身高</strong> (taille), parmi les facteurs sans lien avec les fonctions du poste.</p>
+<p class="source"><a href="https://rst.hunan.gov.cn/rst/xxgk/zcfg/dfxfg/202211/t20221110_29122255.html" target="_blank" rel="noopener noreferrer">Texte officiel · Province du Hunan ↗</a></p>
+</div>
+<div class="rule">
+<p><strong>Comparer les termes :</strong> <em>l'apparence physique</em> a un sens plus large que <span lang="zh-CN">相貌</span>, qui renvoie surtout à l’apparence du visage.</p>
+<p><strong>Comparer les normes :</strong> la loi nationale chinoise s’applique à l’échelle nationale ; le texte du Hunan est un texte local. Ce dernier précise certains facteurs sans que sa formulation soit automatiquement celle du droit national.</p>
+</div>
+<details class="details"><summary>Dans quelles conditions une différence de traitement peut-elle être autorisée ?</summary><div class="inside">
+<p><strong>France · Code du travail, art. L.1133-1 :</strong> une distinction doit répondre à « une exigence professionnelle essentielle et déterminante » et son objectif doit être légitime, l’exigence proportionnée. <a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000018881575" target="_blank" rel="noopener noreferrer">Consulter ↗</a></p>
+<p><strong>Hunan · Art. 19 :</strong> le texte envisage notamment une différence de traitement fondée sur les besoins particuliers d’un poste, sous réserve des autres règles applicables. <a href="https://rst.hunan.gov.cn/rst/xxgk/zcfg/dfxfg/202211/t20221110_29122255.html" target="_blank" rel="noopener noreferrer">Consulter ↗</a></p>
+</div></details>
+<div class="keywords"><span>un motif légitime · 正当理由</span><span>une différence de traitement · 区别对待</span><span>les exigences du poste · 岗位要求</span><span>une exigence proportionnée · 符合比例要求</span></div>
+</section>
+
+<section class="section" id="cas">
+<div class="titleline"><span class="no">03</span><h2>Comment le juge interprète-t-il la loi ?</h2></div>
+<p class="intro">Lorsqu’un texte interdit la « discrimination à l’embauche » sans énumérer tous les motifs possibles, comment les juridictions déterminent-elles si un traitement est discriminatoire ?</p>
+<article class="case">
+<div class="casehead"><p class="kicker">SOURCE 4 · CHINE · 最高人民法院指导案例185号</p><span class="tag">案例指导 · Jurisprudence</span></div>
+<h3>闫佳琳诉浙江喜来登度假村有限公司平等就业权纠纷案</h3>
+<p class="small">Guiding Case n° 185 de la Cour populaire suprême · 4 juillet 2022 · Affaire de discrimination fondée sur l’origine géographique, et non sur l’apparence physique.</p>
+<p class="kicker" style="margin-top:18px">裁判要点 · EXTRAIT</p>
+<blockquote class="casequote" lang="zh-CN">用人单位在招用人员时，基于地域、性别等与“工作内在要求”无必然联系的因素，对劳动者进行无正当理由的差别对待的，构成就业歧视。</blockquote>
+<p><strong>Pour comprendre :</strong> un traitement différent peut constituer une discrimination à l’embauche lorsqu’il repose, sans motif légitime, sur un critère sans lien nécessaire avec les exigences intrinsèques du poste.</p>
+<p class="small">Le raisonnement de la décision mentionne aussi « 外貌 » parmi les facteurs susceptibles d’être sans rapport avec les exigences du travail. Le cas jugé lui-même concernait le lieu d’origine.</p>
+<p class="source"><a href="https://www.court.gov.cn/shenpan/xiangqing/364691.html" target="_blank" rel="noopener noreferrer">Lire le texte intégral sur le site de la Cour populaire suprême ↗</a></p>
+</article>
+<div class="compare">
+<div><strong>Le texte législatif</strong><p>Formule une norme générale, comme l’interdiction de la discrimination à l’embauche.</p></div>
+<div><strong>La décision judiciaire</strong><p>Explique comment apprécier la différence de traitement dans une situation concrète.</p></div>
+</div>
+<p class="note small">Un <em>cas directeur</em> chinois (指导性案例) n’a pas le même statut qu’une loi ou qu’une interprétation judiciaire. Les tribunaux doivent s’y référer dans les affaires similaires selon les règles applicables.</p>
+</section>
+
+<section class="section" id="questions">
+<div class="titleline"><span class="no">04</span><h2>Comprendre et réfléchir</h2></div>
+<p class="intro">Répondez avant de consulter les éléments de réponse.</p>
+<div class="question">
+<strong>1. Quel est le rapport entre la liberté de recrutement et l’interdiction de discriminer ?</strong>
+<textarea data-q="1" aria-label="Question 1" placeholder="L'employeur peut…"></textarea><button type="button" data-show="1" disabled>Comparer ma réponse</button>
+<div class="answer" data-a="1" hidden>La liberté de recrutement permet à l’employeur de sélectionner les candidats selon des critères licites. Elle ne permet pas de les écarter sur la base d’un critère discriminatoire.</div>
+</div>
+<div class="question">
+<strong>2. Quels textes citent explicitement l’apparence ou la taille ? Leurs termes recouvrent-ils exactement la même réalité ?</strong>
+<textarea data-q="2" aria-label="Question 2" placeholder="En France…"></textarea><button type="button" data-show="2" disabled>Comparer ma réponse</button>
+<div class="answer" data-a="2" hidden>Le Code du travail français cite l’apparence physique. Le texte local du Hunan cite 相貌 et 身高. La portée lexicale de « l’apparence physique » est plus large que celle de 相貌.</div>
+</div>
+<div class="question">
+<strong>3. Pourquoi la Source 4 est-elle utile pour comprendre une notion que la loi nationale ne définit pas de façon exhaustive ?</strong>
+<textarea data-q="3" aria-label="Question 3" placeholder="La décision explique…"></textarea><button type="button" data-show="3" disabled>Comparer ma réponse</button>
+<div class="answer" data-a="3" hidden>La décision précise des critères permettant d’identifier une discrimination : une différence de traitement, un motif sans lien nécessaire avec les exigences du poste et l’absence de justification légitime. Elle applique la norme à un cas concret.</div>
+</div>
+<div class="question">
+<strong>4. Une offre d’emploi exige une secrétaire « jeune, jolie et mince ». Quels éléments examineriez-vous avant de juger ces critères ?</strong>
+<textarea data-q="4" aria-label="Question 4" placeholder="Il faut vérifier…"></textarea><button type="button" data-show="4" disabled>Comparer ma réponse</button>
+<div class="answer" data-a="4" hidden>Il faut examiner si les critères sont pertinents pour le poste et s’il existe une justification objective, essentielle et proportionnée selon les règles applicables. Dans ce scénario, aucune nécessité professionnelle ne paraît étayer ces critères d’apparence.</div>
+</div>
+<div class="writing">
+<h3>À vous d’expliquer · Médiation</h3>
+<p>Un étudiant croit qu’en France un employeur est obligé d’embaucher toute personne qui postule. Corrigez ce malentendu en 60 à 80 mots, en vous appuyant sur un texte de cette lecture.</p>
+<textarea id="mediation" aria-label="Votre commentaire" placeholder="Je crois qu’il y a un malentendu…"></textarea>
+<span class="count" id="words">0 mot</span>
+<button type="button" id="compare" disabled>Comparer avec une proposition</button>
+<div class="answer" id="sample" hidden>Un employeur n’est pas obligé d’embaucher toutes les personnes qui postulent. Il peut choisir un candidat selon ses compétences et les exigences du poste. Cependant, il n’a pas le droit de refuser quelqu’un pour un motif discriminatoire, par exemple en raison de son apparence physique. Le Code du travail protège les candidats contre ces discriminations. La liberté de recrutement s’exerce donc dans le respect du principe de non-discrimination.</div>
+</div>
+</section>
+</main>
+<footer>
+<p><strong>Regards croisés · Unité 2</strong></p>
+<p>Documents officiels : Déclaration de 1789, art. 5 ; Code du travail français, art. L.1132-1 et L.1133-1 ; 《中华人民共和国就业促进法》, art. 26 ; 《湖南省实施〈中华人民共和国就业促进法〉办法》, art. 19 ; 最高人民法院指导案例185号. Extraits parfois abrégés. Les explications françaises sont des reformulations pédagogiques et non des traductions officielles.</p>
+<p>Les réponses restent sur cette page et ne sont pas transmises à l’enseignante.</p>
+<nav><a href="../../index.html">← Regards croisés</a><a href="../index.html">← Médiation · Unité 2</a></nav>
+</footer>
+</div>
+<script>
+(function(){
+  document.querySelectorAll("textarea[data-q]").forEach(function(field){
+    var id=field.getAttribute("data-q"),btn=document.querySelector('[data-show="'+id+'"]'),ans=document.querySelector('[data-a="'+id+'"]');
+    field.addEventListener("input",function(){btn.disabled=field.value.trim().length<12;if(btn.disabled)ans.hidden=true;});
+    btn.addEventListener("click",function(){ans.hidden=false;ans.scrollIntoView({behavior:"smooth",block:"nearest"});});
+  });
+  var area=document.getElementById("mediation"),btn=document.getElementById("compare"),sample=document.getElementById("sample");
+  area.addEventListener("input",function(){var t=area.value.trim(),n=t?t.split(/\s+/).length:0;document.getElementById("words").textContent=n+" mot"+(n>1?"s":"");btn.disabled=n<40;if(btn.disabled)sample.hidden=true;});
+  btn.addEventListener("click",function(){sample.hidden=false;sample.scrollIntoView({behavior:"smooth",block:"nearest"});});
+})();
+</script>
+</body>
+</html>
