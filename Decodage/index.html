@@ -21,5 +21,32 @@ a:focus-visible{outline-color:#4f46e5}
 .method span{background:#e0e7ff;border-color:#c7d2fe;color:#4338ca}
 .tag{background:#e0e7ff;color:#4338ca}
 
-</style></head><body><div class="wrap"><header class="top"><a class="brand" href="../index.html">Accueil <span aria-hidden="true" style="color:#4f46e5">↗</span></a></header><main><section class="hero"><div class="over">Culture · Décodage culturel</div><h1>Regards sur les cultures.</h1><p class="lead">Des lectures complémentaires pour mieux comprendre les idées, les références et les traditions qui se rencontrent dans les textes.</p></section><h2>Lectures par unité</h2><a class="card" href="./U1/index.html"><span class="tag">UNITÉ 1 · LE BONHEUR EST-IL UTOPIQUE ?</span><h3>De l’idéal d’une société heureuse aux règles de droit</h3><p>Regards croisés sur la France et la Chine : imaginer une société heureuse, organiser l’entraide et réfléchir au rôle du droit. Avec des extraits courts, quatre questions et une activité d’expression.</p><div class="action">Lire le dossier →</div></a><p class="small">Lecture complémentaire · Regards croisés · Compréhension et expression écrite</p>
-<a class="card" style="margin-top:16px" href="./U2/index.html"><span class="tag" style="color:#247853;background:#e4f6e9">UNITÉ 2 · SOMMES-NOUS PRISONNIERS DE NOTRE APPARENCE ?</span><h3>La médiation · Corriger une fausse information</h3><p>Lire un message, repérer les informations qui le contredisent dans un extrait du Code du travail et rédiger un commentaire pour expliquer la règle.</p><div class="action">Commencer l’activité →</div></a><p class="small">Médiation · Lecture juridique · Activités 5 à 7</p></main><footer>© 《高级法语综合课》 · Décodage culturel</footer></div></body></html>
+
+/* Unités comme niveau parent, activités comme sous-cartes */
+.unit-group{margin-top:22px}
+.unit-heading{font-size:18px;font-weight:750;line-height:1.45;margin:0 0 14px;display:flex;align-items:center;gap:11px}
+.unit-number{font:800 15px/1 Arial;flex:0 0 42px;height:42px;border-radius:12px;display:grid;place-items:center}
+.u1-number{background:#fff2d6;color:#98630f}
+.u2-number{background:#e3f5e9;color:#217a53}
+.unit-green{padding:20px;border:1px solid #d6ebde;background:#f4faf6;border-radius:19px}
+.subcards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.subcard{height:100%;padding:23px;display:flex;flex-direction:column}
+.subcard h3{font-size:22px;line-height:1.28}
+.subcard .action{margin-top:auto;padding-top:9px}
+.unit-green .tag{background:#e3f5e9;color:#247851}
+.unit-green .action{color:#28764d}
+.unit-green .card:hover{border-color:#77be95}
+@media(max-width:700px){.subcards{grid-template-columns:1fr}.unit-green{padding:15px}.unit-heading{font-size:16px}}
+</style></head><body><div class="wrap"><header class="top"><a class="brand" href="../index.html">Accueil <span aria-hidden="true" style="color:#4f46e5">↗</span></a></header><main><section class="hero"><div class="over">Culture · Décodage culturel</div><h1>Regards sur les cultures.</h1><p class="lead">Des lectures complémentaires pour mieux comprendre les idées, les références et les traditions qui se rencontrent dans les textes.</p></section><h2>Lectures par unité</h2>
+<section class="unit-group" aria-labelledby="u1heading">
+<h3 id="u1heading" class="unit-heading"><span class="unit-number u1-number">01</span> Unité 1 · Le bonheur est-il utopique ?</h3>
+<a class="card" href="./U1/index.html"><span class="tag">LECTURE COMPARÉE</span><h3>De l’idéal d’une société heureuse aux règles de droit</h3><p>Regards croisés sur la France et la Chine : imaginer une société heureuse, organiser l’entraide et réfléchir au rôle du droit.</p><div class="action">Lire le dossier →</div></a>
+</section>
+<section class="unit-group unit-green" aria-labelledby="u2heading">
+<h3 id="u2heading" class="unit-heading"><span class="unit-number u2-number">02</span> Unité 2 · Sommes-nous prisonniers de notre apparence ?</h3>
+<div class="subcards">
+<a class="card subcard" href="./U2/index.html"><span class="tag">MÉDIATION · LEÇON 8</span><h3>Corriger une fausse information</h3><p>Comprendre le tweet de Wayne, confronter sa lecture au Code du travail et expliquer ce que dit la loi.</p><div class="action">Commencer l’activité →</div></a>
+<a class="card subcard" href="./U2/regards-croises/"><span class="tag">REGARDS CROISÉS · DROIT COMPARÉ</span><h3>L’apparence physique peut-elle être un critère de recrutement ?</h3><p>Comparer les textes français et chinois, puis analyser le raisonnement du Guiding Case chinois n° 185.</p><div class="action">Lire le dossier →</div></a>
+</div>
+</section>
+</main><footer>© 《高级法语综合课》 · Décodage culturel</footer></div></body></html>
