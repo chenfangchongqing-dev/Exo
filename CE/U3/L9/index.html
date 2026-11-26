@@ -71,12 +71,37 @@
 }
 @media print{.paper.source-sheet{border-radius:0;box-shadow:none}.source-sheet .bubble{display:none}.source-sheet .term{text-decoration:none}}
 
+
+/* Classroom projection aids. No changes to the source text or its annotations. */
+.teacher-focus-tools{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.focus-tool{display:inline-flex;align-items:center;justify-content:center;gap:6px;white-space:nowrap}
+.focus-tool svg{flex:none}
+.focus-adjust{display:flex;align-items:center;gap:4px}
+.focus-size,.focus-stop{padding:5px 10px;min-width:34px;min-height:34px;font-size:18px;line-height:1}
+.focus-value{font-size:12px;font-weight:750;color:#76635d;white-space:nowrap;min-width:34px;text-align:center}
+.focus-status{font-size:11px;color:#806258;max-width:210px;line-height:1.3}
+.teacher-focus-float{position:fixed;z-index:980;right:max(14px,env(safe-area-inset-right));bottom:max(14px,env(safe-area-inset-bottom));display:flex;align-items:center;justify-content:flex-end;gap:5px;flex-wrap:wrap;background:#fff;border:1px solid var(--line);border-radius:12px;padding:7px;max-width:calc(100vw - 28px);box-shadow:0 6px 22px #39221c2e}
+.teacher-focus-float .focus-tool{padding:7px 9px;min-height:34px;font-size:12px}
+.teacher-focus-float .focus-status{flex-basis:100%;max-width:100%;text-align:right}
+.teacher-focus-spot,.teacher-focus-lens{position:fixed;pointer-events:none;z-index:900;box-sizing:border-box}
+.teacher-focus-spot{border:2px solid #ffe6a0;border-radius:48%;box-shadow:0 0 0 200vmax rgba(14,17,24,.68),inset 0 0 7px #ffebb666}
+.teacher-focus-spot[data-locked=true]{border:3px solid #ffda79}
+.teacher-focus-lens{overflow:hidden;border:3px solid #bd3024;border-radius:16px;background:#fff;box-shadow:0 7px 30px #24161055}
+.teacher-focus-lens[data-locked=true]{border-color:#9d261e;box-shadow:0 0 0 2px #f5cc85,0 7px 30px #24161055}
+.teacher-lens-stage{position:absolute;inset:0;overflow:hidden}
+.teacher-lens-stage>.paper.source-sheet{position:absolute;top:0;left:0;max-width:none;margin:0;transform-origin:0 0;box-shadow:none;pointer-events:none;user-select:none}
+.teacher-lens-stage [data-focus-original-id="definition"] h3{text-transform:uppercase}
+.teacher-lens-marker{position:absolute;left:50%;top:50%;width:10px;height:10px;border:1px solid #ba332c88;border-radius:50%;transform:translate(-50%,-50%);opacity:.7}
+body.teacher-spot-mode .paper.source-sheet,body.teacher-lens-mode .paper.source-sheet{cursor:crosshair}
+@media(max-width:760px){.teacher-focus-tools{width:100%}.teacher-focus-float{right:9px;bottom:max(9px,env(safe-area-inset-bottom));max-width:calc(100vw - 18px)}.teacher-focus-float .focus-status{font-size:10px}.teacher-focus-lens{border-radius:12px}}
+@media print{.teacher-focus-tools,.teacher-focus-float,.teacher-focus-spot,.teacher-focus-lens{display:none!important}}
+
 </style></head>
 <body><div class="wrap"><header class="nav"><a href="../../lecture-guidee/U3/">← Unité 3 · La planète</a><a href="../../index.html">Compréhension écrite ↗</a></header><main>
 <section class="hero"><div class="ring" aria-hidden="true"><small>LEÇON</small>9</div><div><p class="kicker">Unité 3 · Lecture guidée</p><h1>Faire un état des lieux sur la pollution</h1><p>La pollution lumineuse</p></div></section>
 <section class="panel" id="structure"><p class="kicker">01 · Aide à la lecture</p><h2>Comment est construit un texte explicatif ?</h2><p>Un texte explicatif cherche à faire comprendre un phénomène : il le définit, en explique les causes ou les effets et peut proposer des solutions. Cette lettre d’information a également une visée de sensibilisation.</p><p class="small">Observez les intertitres. Cliquez sur chaque étape pour retrouver le passage correspondant.</p>
 <div class="structure"><a class="step" href="#contexte"><small>INTRODUCTION · D’OÙ VIENT LE PROBLÈME ?</small><b>Contextualiser</b><span>Le développement des sociétés → l’urbanisation → la multiplication des éclairages → la pollution lumineuse.</span></a><div class="arrow" aria-hidden="true">↓</div><a class="step" href="#definition"><small>DE QUOI PARLE-T-ON ?</small><b>Définir le phénomène</b><span>Qu’est-ce que la pollution lumineuse ? Définition et exemples de sources lumineuses.</span></a><div class="arrow" aria-hidden="true">↓</div><a class="step" href="#energie"><small>QUELLE EST SON AMPLEUR ?</small><b>Quantifier le phénomène</b><span>La consommation énergétique en France : des données chiffrées attribuées à une source.</span></a><div class="arrow" aria-hidden="true">↓</div><div class="branches"><a class="step" href="#biodiversite"><small>QUELS EFFETS ?</small><b>Expliquer les conséquences</b><span>Sur la biodiversité : orientation, migration, rythmes, habitats.</span></a><a class="step" href="#sante"><small>QUELS EFFETS ?</small><b>Expliquer les conséquences</b><span>Sur la santé humaine : la nuit et la mélatonine.</span></a></div><div class="arrow" aria-hidden="true">↓</div><a class="step" href="#solutions"><small>COMMENT AGIR ?</small><b>Proposer des solutions</b><span>Adapter, préserver, baisser, éteindre, maîtriser.</span></a></div><p class="reading-tip"><strong>À retenir.</strong> Les intertitres organisent l’information. Les chiffres précisent l’ampleur du problème ; les marqueurs de cause et de conséquence expliquent les mécanismes ; les verbes à l’infinitif formulent des mesures concrètes.</p></section>
-<section id="texte"><div class="controls" aria-label="Annotations"><div class="filters"><button class="filter" data-filter="all" aria-pressed="true" type="button">Toutes</button><button class="filter" data-filter="lex" aria-pressed="false" type="button"><span class="dot"></span>Lexique</button><button class="filter" data-filter="gram" aria-pressed="false" type="button"><span class="dot gram"></span>Grammaire</button><button class="filter" data-filter="disc" aria-pressed="false" type="button"><span class="dot disc"></span>Organisation du discours</button></div><div class="tools"><button id="clean" class="tool" aria-pressed="false" type="button">Sans bulles</button><button id="smaller" class="tool" type="button" aria-label="Réduire la taille du texte">A−</button><button id="larger" class="tool" type="button" aria-label="Agrandir le texte">A+</button></div></div>
+<section id="texte"><div class="controls" aria-label="Annotations"><div class="filters"><button class="filter" data-filter="all" aria-pressed="true" type="button">Toutes</button><button class="filter" data-filter="lex" aria-pressed="false" type="button"><span class="dot"></span>Lexique</button><button class="filter" data-filter="gram" aria-pressed="false" type="button"><span class="dot gram"></span>Grammaire</button><button class="filter" data-filter="disc" aria-pressed="false" type="button"><span class="dot disc"></span>Organisation du discours</button></div><div class="tools"><button id="clean" class="tool" aria-pressed="false" type="button">Sans bulles</button><button id="smaller" class="tool" type="button" aria-label="Réduire la taille du texte">A−</button><button id="larger" class="tool" type="button" aria-label="Agrandir le texte">A+</button></div><div class="teacher-focus-tools" id="teacher-focus-tools" role="group" aria-label="Outils de projection"><button class="tool focus-tool" type="button" data-focus-mode="spot" aria-pressed="false" title="Suivre le pointeur ou fixer une zone d'un clic"><svg viewBox="0 0 24 24" aria-hidden="true" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="6"/><path d="M12 1v4m0 14v4M1 12h4m14 0h4"/></svg><span>Projecteur</span></button><button class="tool focus-tool" type="button" data-focus-mode="lens" aria-pressed="false" title="Agrandir localement le texte"><svg viewBox="0 0 24 24" aria-hidden="true" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="10" cy="10" r="6.5"/><path d="m15 15 6 6M7 10h6m-3-3v6"/></svg><span>Loupe</span></button><div class="focus-adjust" hidden><button class="tool focus-size" type="button" data-focus-adjust="-1" aria-label="Réduire la zone ou le grossissement">−</button><span class="focus-value" aria-hidden="true"></span><button class="tool focus-size" type="button" data-focus-adjust="1" aria-label="Augmenter la zone ou le grossissement">+</button><button class="tool focus-stop" type="button" data-focus-stop aria-label="Quitter le mode de mise en évidence" title="Quitter (Échap)">×</button></div><span class="focus-status" aria-live="polite" hidden></span></div></div>
 <div class="layout"><article class="paper source-sheet" aria-labelledby="doc2-title">
   <header class="source-header">
     <div class="source-masthead">
@@ -131,4 +156,113 @@ document.querySelectorAll('.filter').forEach(b=>b.addEventListener('click',()=>{
 byId('clean').addEventListener('click',()=>{close();clean=!clean;document.body.classList.toggle('clean',clean);byId('clean').textContent=clean?'Afficher les bulles':'Sans bulles';byId('clean').setAttribute('aria-pressed',String(clean));count();});
 function size(d){font=Math.max(18,Math.min(34,font+d));document.documentElement.style.setProperty('--fs',font+'px');close();}
 byId('smaller').addEventListener('click',()=>size(-2));byId('larger').addEventListener('click',()=>size(2));document.addEventListener('keydown',ev=>{if(ev.key==='Escape')close(true)});window.addEventListener('resize',place);window.addEventListener('scroll',place,{passive:true});
+</script><div class="teacher-focus-float" id="teacher-focus-float" role="group" aria-label="Outils de projection" hidden><button class="tool focus-tool" type="button" data-focus-mode="spot" aria-pressed="false" title="Suivre le pointeur ou fixer une zone d'un clic"><svg viewBox="0 0 24 24" aria-hidden="true" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="6"/><path d="M12 1v4m0 14v4M1 12h4m14 0h4"/></svg><span>Projecteur</span></button><button class="tool focus-tool" type="button" data-focus-mode="lens" aria-pressed="false" title="Agrandir localement le texte"><svg viewBox="0 0 24 24" aria-hidden="true" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="10" cy="10" r="6.5"/><path d="m15 15 6 6M7 10h6m-3-3v6"/></svg><span>Loupe</span></button><div class="focus-adjust" hidden><button class="tool focus-size" type="button" data-focus-adjust="-1" aria-label="Réduire la zone ou le grossissement">−</button><span class="focus-value" aria-hidden="true"></span><button class="tool focus-size" type="button" data-focus-adjust="1" aria-label="Augmenter la zone ou le grossissement">+</button><button class="tool focus-stop" type="button" data-focus-stop aria-label="Quitter le mode de mise en évidence" title="Quitter (Échap)">×</button></div><span class="focus-status" hidden></span></div><div id="teacher-focus-spot" class="teacher-focus-spot" aria-hidden="true" hidden></div><div id="teacher-focus-lens" class="teacher-focus-lens" aria-hidden="true" hidden inert><div class="teacher-lens-stage"></div><span class="teacher-lens-marker"></span></div>
+<script>
+(() => {
+ 'use strict';
+ const article=document.querySelector('#texte > .layout > article.paper.source-sheet');
+ const controls=document.getElementById('teacher-focus-tools');
+ const floating=document.getElementById('teacher-focus-float');
+ const spot=document.getElementById('teacher-focus-spot');
+ const lens=document.getElementById('teacher-focus-lens');
+ const stage=lens.querySelector('.teacher-lens-stage');
+ const annotationPopup=document.getElementById('popup');
+ if(!article||!controls||!floating||!spot||!lens||!stage)return;
+ const modeButtons=[...document.querySelectorAll('[data-focus-mode]')];
+ const sizes=[...document.querySelectorAll('[data-focus-adjust]')];
+ const values=[...document.querySelectorAll('.focus-value')];
+ const adjusts=[...document.querySelectorAll('.focus-adjust')];
+ const statuses=[...document.querySelectorAll('.focus-status')];
+ const spotSizes=[260,340,430,530];
+ const zooms=[1.5,1.8,2.2,2.6];
+ let mode='',spotIndex=1,zoomIndex=1,point=null,locked=false,lockOffset=null,copy=null,copyWidth=0,dirty=true,frame=0;
+ const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+ function rect(){return article.getBoundingClientRect();}
+ function inside(x,y,r){return x>=r.left&&x<=r.right&&y>=r.top&&y<=r.bottom;}
+ function visible(r){return r.bottom>0&&r.top<innerHeight&&r.right>0&&r.left<innerWidth;}
+ function popupOpen(){return annotationPopup&&!annotationPopup.hidden;}
+ function schedule(){if(!frame)frame=requestAnimationFrame(draw);}
+ function hide(){spot.hidden=true;lens.hidden=true;}
+ function centerVisible(){
+  const r=rect();if(!visible(r))return null;
+  const l=Math.max(r.left,0),t=Math.max(r.top,0),right=Math.min(r.right,innerWidth),bottom=Math.min(r.bottom,innerHeight);
+  return {x:(l+right)/2,y:(t+bottom)/2};
+ }
+ function refreshUI(){
+  for(const b of modeButtons)b.setAttribute('aria-pressed',String(b.dataset.focusMode===mode));
+  for(const a of adjusts)a.hidden=!mode;
+  const n=mode==='spot'?spotIndex:zoomIndex,arr=mode==='spot'?spotSizes:zooms;
+  for(const v of values)v.textContent=mode==='spot'?['S','M','L','XL'][spotIndex]:'×'+zooms[zoomIndex];
+  for(const b of sizes)b.disabled=!mode||(Number(b.dataset.focusAdjust)<0?n===0:n===arr.length-1);
+  for(const s of statuses){
+   s.hidden=!mode;
+   s.textContent=locked?'Zone fixée · clic pour libérer · Échap': 'Suivre le pointeur · clic pour fixer · Échap';
+  }
+  document.body.classList.toggle('teacher-spot-mode',mode==='spot');
+  document.body.classList.toggle('teacher-lens-mode',mode==='lens');
+ }
+ function setMode(next){
+  mode=mode===next?'':next;locked=false;lockOffset=null;
+  if(mode){point=centerVisible();dirty=true;}
+  else{point=null;hide();stage.replaceChildren();copy=null;copyWidth=0;}
+  refreshUI();schedule();
+ }
+ function rebuild(r){
+  if(!dirty&&copy&&Math.abs(copyWidth-r.width)<.1)return;
+  copy=article.cloneNode(true);copy.removeAttribute('id');copy.removeAttribute('aria-labelledby');copy.setAttribute('aria-hidden','true');copy.inert=true;
+  for(const el of copy.querySelectorAll('[id]')){el.dataset.focusOriginalId=el.id;el.removeAttribute('id');}
+  for(const el of copy.querySelectorAll('button,a,input,select,textarea,[tabindex]'))el.setAttribute('tabindex','-1');
+  copy.style.width=r.width+'px';copy.style.maxWidth='none';copy.style.minWidth='0';
+  stage.replaceChildren(copy);copyWidth=r.width;dirty=false;
+ }
+ function draw(){
+  frame=0;const r=rect(),c=controls.getBoundingClientRect();
+  const controlVisible=c.bottom>0&&c.top<innerHeight;
+  floating.hidden=controlVisible||(!visible(r)&&!mode);
+  if(!mode||!point||!visible(r)||popupOpen()){hide();return;}
+  const p=locked&&lockOffset?{x:r.left+lockOffset.x,y:r.top+lockOffset.y}:point;
+  if(!inside(p.x,p.y,r)||p.x<0||p.x>innerWidth||p.y<0||p.y>innerHeight){hide();return;}
+  if(mode==='spot'){
+   lens.hidden=true;
+   const w=Math.min(spotSizes[spotIndex],Math.max(100,innerWidth-18)),h=Math.min(w*.63,Math.max(80,innerHeight-18));
+   Object.assign(spot.style,{width:w+'px',height:h+'px',left:(p.x-w/2)+'px',top:(p.y-h/2)+'px'});
+   spot.dataset.locked=String(locked);spot.hidden=false;
+  }else{
+   spot.hidden=true;
+   const w=Math.min(380,innerWidth-18),h=Math.min(228,innerHeight-18),z=zooms[zoomIndex];
+   const l=clamp(p.x-w/2,7,Math.max(7,innerWidth-w-7)),t=clamp(p.y-h/2,7,Math.max(7,innerHeight-h-7));
+   Object.assign(lens.style,{width:w+'px',height:h+'px',left:l+'px',top:t+'px'});
+   rebuild(r);
+   // The enlarged copy retains the original article width, so line wraps and columns match.
+   const x=(w-6)/2-(p.x-r.left)*z,y=(h-6)/2-(p.y-r.top)*z;
+   copy.style.transform='translate('+x+'px,'+y+'px) scale('+z+')';
+   lens.dataset.locked=String(locked);lens.hidden=false;
+  }
+ }
+ for(const b of modeButtons)b.addEventListener('click',()=>setMode(b.dataset.focusMode));
+ for(const b of document.querySelectorAll('[data-focus-stop]'))b.addEventListener('click',()=>{if(mode)setMode('');});
+ for(const b of sizes)b.addEventListener('click',()=>{const d=Number(b.dataset.focusAdjust);if(mode==='spot')spotIndex=clamp(spotIndex+d,0,spotSizes.length-1);else if(mode==='lens')zoomIndex=clamp(zoomIndex+d,0,zooms.length-1);refreshUI();schedule();});
+ document.addEventListener('pointermove',e=>{
+  if(!mode||locked||e.pointerType==='touch')return;
+  point=inside(e.clientX,e.clientY,rect())?{x:e.clientX,y:e.clientY}:null;schedule();
+ },{passive:true});
+ document.addEventListener('pointerleave',()=>{if(!locked){point=null;schedule();}},{passive:true});
+ article.addEventListener('click',e=>{
+  if(!mode||e.target.closest('button,a,input,textarea,select,summary')||popupOpen())return;
+  const selected=window.getSelection();if(selected&&!selected.isCollapsed)return;
+  const r=rect();
+  if(!inside(e.clientX,e.clientY,r))return;
+  point={x:e.clientX,y:e.clientY};
+  if(locked){locked=false;lockOffset=null;}else{locked=true;lockOffset={x:point.x-r.left,y:point.y-r.top};}
+  refreshUI();schedule();
+ });
+ // Annotation bubbles still open normally; suspend the projection layer while their popup is open.
+ if(annotationPopup)new MutationObserver(schedule).observe(annotationPopup,{attributes:true,attributeFilter:['hidden']});
+ for(const b of document.querySelectorAll('.filter,#clean,#smaller,#larger'))b.addEventListener('click',()=>{dirty=true;locked=false;lockOffset=null;refreshUI();schedule();});
+ window.addEventListener('scroll',schedule,{passive:true});
+ window.addEventListener('resize',()=>{dirty=true;locked=false;lockOffset=null;refreshUI();schedule();},{passive:true});
+ if(typeof ResizeObserver==='function')new ResizeObserver(()=>{dirty=true;schedule();}).observe(article);
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&mode)setMode('');});
+ refreshUI();schedule();
+})();
 </script></body></html>
