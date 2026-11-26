@@ -6,8 +6,8 @@
 </style></head><body><div class="wrap"><header class="nav"><a href="../../index.html#comprendre">← Écouter et comprendre</a><a href="../../../CE/U3/L9/#solutions">La pollution lumineuse ↗</a></header>
 <main><section class="hero"><p class="kicker">Unité 3 · Leçon 9 · Vidéo</p><h1>Le Grand Genève cartographie sa « trame noire »</h1><p class="meta">Léman Bleu · 3 juillet 2024 · 40 s</p></section>
 <section class="panel" aria-label="Vidéo">
-<div class="player" id="player" hidden><video id="video" controls playsinline preload="metadata" aria-label="Le Grand Genève cartographie sa trame noire"></video></div>
-<div class="pending" id="pending"><p>La vidéo locale n’est pas encore disponible.</p><a href="https://www.lemanbleu.ch/fr/Actualites/Geneve/Le-Grand-Geneve-cartographie-sa-pollution-lumineuse-pour-agir-efficacement.html" target="_blank" rel="noopener noreferrer">Voir le reportage original ↗</a></div>
+<div class="player" id="player" hidden><video id="video" controls playsinline preload="auto" aria-label="Le Grand Genève cartographie sa trame noire"></video></div>
+<div class="pending" id="pending"><p role="status" aria-live="polite">Chargement de la vidéo…</p><a href="https://www.lemanbleu.ch/fr/Actualites/Geneve/Le-Grand-Geneve-cartographie-sa-pollution-lumineuse-pour-agir-efficacement.html" target="_blank" rel="noopener noreferrer">Voir le reportage original ↗</a></div>
 <div class="controls" id="controls" hidden><button id="subtitles" type="button" class="subtitle-switch" aria-pressed="false" disabled><span>Sous-titres</span><span class="switch" aria-hidden="true"></span></button></div><p class="status" id="status" role="status" hidden></p>
 <details class="local" id="local"><summary>Ouvrir des fichiers locaux</summary><label>Vidéo MP4<input type="file" id="video-file" accept="video/mp4,video/*"></label><label>Sous-titres français (.vtt)<input type="file" id="vtt-file" accept=".vtt,text/vtt"></label></details>
 <p class="source">Source : <a href="https://www.lemanbleu.ch/fr/Actualites/Geneve/Le-Grand-Geneve-cartographie-sa-pollution-lumineuse-pour-agir-efficacement.html" target="_blank" rel="noopener noreferrer">Léman Bleu</a> · <a href="https://www.facebook.com/watch/?v=788087983439662" target="_blank" rel="noopener noreferrer">Extrait original</a></p>
@@ -16,16 +16,38 @@
 (()=>{'use strict';
 const video=document.getElementById('video'),player=document.getElementById('player'),pending=document.getElementById('pending'),button=document.getElementById('subtitles'),controls=document.getElementById('controls'),local=document.getElementById('local'),status=document.getElementById('status'),vf=document.getElementById('video-file'),sf=document.getElementById('vtt-file');
 let track=null,ready=false,mediaReady=false,videoURL=null,captionURL=null,initializing=false,localMedia=false,localCaption=false;
+const mediaAbort=new AbortController(),pendingText=pending.querySelector('p'),pendingLink=pending.querySelector('a');
+function mediaUnavailable(message){pendingText.textContent=message;pendingLink.hidden=false;pending.hidden=false;local.hidden=false;}
 function sync(){button.disabled=!ready||!mediaReady;button.setAttribute('aria-pressed',String(!!(ready&&track?.track.mode==='showing')));status.hidden=ready||!mediaReady;status.textContent=ready?'':'Sous-titres non disponibles.';local.hidden=mediaReady&&ready&&!localMedia&&!localCaption;}
 function attachTrack(url){ready=false;if(track){track.remove();track=null;}const t=document.createElement('track');track=t;t.kind='captions';t.srclang='fr';t.label='Français';t.src=url;t.addEventListener('load',()=>{if(track!==t)return;ready=true;t.track.mode='disabled';sync();});t.addEventListener('error',()=>{if(track!==t)return;ready=false;sync();});video.append(t);t.track.mode='hidden';sync();}
 button.addEventListener('click',()=>{if(!ready||!track||!mediaReady)return;track.track.mode=track.track.mode==='showing'?'disabled':'showing';sync();});
 video.textTracks.addEventListener('change',sync);
 function setMedia(url){mediaReady=false;player.hidden=false;pending.hidden=true;controls.hidden=false;video.src=url;video.load();sync();}
 video.addEventListener('loadedmetadata',()=>{mediaReady=true;player.hidden=false;pending.hidden=true;controls.hidden=false;sync();});
-video.addEventListener('error',()=>{mediaReady=false;player.hidden=true;pending.hidden=false;controls.hidden=true;local.hidden=false;sync();});
-vf.addEventListener('change',()=>{const f=vf.files?.[0];if(!f)return;localMedia=true;if(videoURL)URL.revokeObjectURL(videoURL);videoURL=URL.createObjectURL(f);setMedia(videoURL);});
+video.addEventListener('error',()=>{mediaReady=false;player.hidden=true;controls.hidden=true;mediaUnavailable('La vidéo ne peut pas être lue.');sync();});
+vf.addEventListener('change',()=>{const f=vf.files?.[0];if(!f)return;localMedia=true;mediaAbort.abort();if(videoURL)URL.revokeObjectURL(videoURL);videoURL=URL.createObjectURL(f);setMedia(videoURL);});
 sf.addEventListener('change',async()=>{const f=sf.files?.[0];if(!f)return;const raw=await f.text();if(!/^\uFEFF?WEBVTT(?:[\r\n \t]|$)/.test(raw)&&!/^WEBVTT(?:[\r\n \t]|$)/.test(raw)){status.hidden=false;status.textContent='Fichier WebVTT invalide.';return;}if(captionURL)URL.revokeObjectURL(captionURL);localCaption=true;captionURL=URL.createObjectURL(new Blob([raw],{type:'text/vtt'}));attachTrack(captionURL);});
-async function init(){if(initializing)return;initializing=true;try{const r=await fetch('./trame-noire.mp4',{method:'HEAD',cache:'no-cache'});if(!localMedia&&r.ok&&/^(video\/|application\/octet-stream)/i.test(r.headers.get('content-type')||''))setMedia('./trame-noire.mp4');}catch(e){}try{const r=await fetch('./trame-noire.fr.vtt',{cache:'no-cache'});if(r.ok&&!localCaption){const raw=await r.text();if(/^\uFEFF?WEBVTT(?:[\r\n \t]|$)/.test(raw)||/^WEBVTT(?:[\r\n \t]|$)/.test(raw)){captionURL=URL.createObjectURL(new Blob([raw],{type:'text/vtt'}));attachTrack(captionURL);}}}catch(e){}sync();}
+// Buffer these short lesson videos before playback so seeking does not depend on
+// HTTP byte-range support through the protected Pages middleware.
+async function loadRemoteMedia(){
+  pendingText.textContent='Chargement de la vidéo…';
+  pendingLink.hidden=true;
+  try{
+    const r=await fetch('./trame-noire.mp4',{cache:'no-cache',credentials:'same-origin',signal:mediaAbort.signal});
+    if(r.status!==200||!/^(video\/|application\/octet-stream)/i.test(r.headers.get('content-type')||''))throw new Error('Video unavailable');
+    const blob=await r.blob();
+    if(localMedia||mediaAbort.signal.aborted)return;
+    if(!blob.size)throw new Error('Empty video');
+    // Always use an MP4 media type for the fully buffered local object.
+    if(videoURL)URL.revokeObjectURL(videoURL);
+    videoURL=URL.createObjectURL(blob.type==='video/mp4'?blob:new Blob([blob],{type:'video/mp4'}));
+    setMedia(videoURL);
+  }catch(e){
+    if(localMedia||mediaAbort.signal.aborted)return;
+    mediaUnavailable('Impossible de charger la vidéo. Actualisez la page pour réessayer.');
+  }
+}
+async function init(){if(initializing)return;initializing=true;const mediaTask=loadRemoteMedia();try{const r=await fetch('./trame-noire.fr.vtt',{cache:'no-cache'});if(r.ok&&!localCaption){const raw=await r.text();if(/^\uFEFF?WEBVTT(?:[\r\n \t]|$)/.test(raw)||/^WEBVTT(?:[\r\n \t]|$)/.test(raw)){captionURL=URL.createObjectURL(new Blob([raw],{type:'text/vtt'}));attachTrack(captionURL);}}}catch(e){}await mediaTask;sync();}
 init();
 })();
 </script></body></html>
