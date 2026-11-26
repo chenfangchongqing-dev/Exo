@@ -134,7 +134,7 @@ window.U3_NETWORK = {
         "appauvrir la biodiversité",
         "une perte de biodiversité"
       ],
-      "sentence": "La fragmentation des habitats menace la biodiversité.",
+      "sentence": "Le morcellement des habitats menace la biodiversité.",
       "target": "la biodiversité"
     },
     {
