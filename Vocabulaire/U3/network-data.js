@@ -96,6 +96,7 @@ window.U3_NETWORK = {
         "alerter",
         "lutter",
         "mobiliser",
+        "stimuler",
         "mesure",
         "adapter",
         "preconiser"
@@ -979,6 +980,25 @@ window.U3_NETWORK = {
       "target": "se mobilisent"
     },
     {
+      "id": "stimuler",
+      "group": "action",
+      "source": "Cours · Complément",
+      "word": "stimuler",
+      "def": "Favoriser, par une action ou une incitation, le développement, l’intensification ou le dynamisme d’une activité, d’une capacité ou d’un processus. Fonction : favoriser et dynamiser un processus. Construction : stimuler + COD.",
+      "zh": "刺激、激发、促进、推动。强调通过某种因素或措施增强活动、能力或过程的活力。",
+      "family": "stimuler → la stimulation ; stimulant(e) ; un stimulant",
+      "chunks": [
+        "stimuler les investissements dans les énergies renouvelables",
+        "stimuler l’innovation technologique",
+        "stimuler l’intérêt des jeunes pour les enjeux environnementaux",
+        "stimuler le débat public sur la pollution numérique",
+        "stimuler la création d’emplois",
+        "stimuler la recherche ; stimuler la croissance économique"
+      ],
+      "sentence": "Des aides publiques peuvent stimuler les investissements dans les énergies renouvelables.",
+      "target": "stimuler les investissements"
+    },
+    {
       "id": "mesure",
       "group": "action",
       "source": "L10/L11 · Guide",
@@ -1565,6 +1585,36 @@ window.U3_NETWORK = {
       "to": "epargner",
       "type": "Contraste",
       "note": "Un milieu pollué ↔ un milieu épargné par la pollution."
+    },
+    {
+      "from": "stimuler",
+      "to": "mobiliser",
+      "type": "Nuance",
+      "note": "Stimuler met l’accent sur le dynamisme d’une activité, d’un intérêt ou d’une capacité ; mobiliser met l’accent sur l’engagement de personnes ou de ressources dans l’action."
+    },
+    {
+      "from": "stimuler",
+      "to": "sensibiliser",
+      "type": "Nuance",
+      "note": "Sensibiliser quelqu’un à un enjeu = lui en faire prendre conscience ; stimuler son intérêt pour cet enjeu = éveiller ou renforcer cet intérêt."
+    },
+    {
+      "from": "stimuler",
+      "to": "consequence",
+      "type": "Nuance",
+      "note": "Entraîner, générer et provoquer introduisent un effet produit ; stimuler souligne le renforcement d’une activité ou d’un processus. Une aide peut générer des économies et stimuler l’innovation."
+    },
+    {
+      "from": "stimuler",
+      "to": "transition",
+      "type": "Moyen",
+      "note": "Des mesures de soutien peuvent stimuler les investissements et l’innovation nécessaires à la transition énergétique."
+    },
+    {
+      "from": "stimuler",
+      "to": "renouvelables",
+      "type": "Collocation",
+      "note": "Stimuler les investissements dans les énergies renouvelables."
     }
   ],
   "chains": [
