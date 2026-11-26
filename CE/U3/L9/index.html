@@ -147,6 +147,23 @@ body.teacher-spot-mode > .wrap,body.teacher-lens-mode > .wrap{cursor:crosshair}
 #doc2-source-close:hover{background:var(--pale)}
 @media print{.source-info-trigger,.source-info-dialog{display:none!important}}
 
+
+/* Optional legal-culture note attached to the publisher's mark. */
+.source-sheet .source-publisher{position:relative}
+.culture-info-trigger{right:-7px;top:-7px}
+.culture-info-dialog{width:min(980px,calc(100vw - 36px))}
+.culture-kicker{display:block;font:750 12px/1.4 Arial,sans-serif;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin:0 0 5px}
+.culture-close{display:grid;place-items:center;flex:none;width:32px;height:32px;border-radius:8px;border:1px solid var(--line);background:#fff;color:var(--accent);padding:0}
+.culture-close:hover{background:var(--pale)}
+.culture-info-dialog p{font-size:clamp(17px,2.2vw,24px);line-height:1.48}
+.culture-institution p+p{margin-top:10px}
+.culture-lexique{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:clamp(13px,1.5vw,17px);color:var(--muted);margin:12px 0 0}
+.culture-reading{border-top:1px solid var(--line);margin:18px 0 0;padding-top:13px}
+.culture-reading h3{font-size:clamp(19px,2.4vw,26px);color:var(--accent);margin:0 0 10px}
+.culture-reading h4{font-size:clamp(17px,2vw,22px);color:var(--ink);margin:0 0 3px}
+.culture-reading>div+div{margin-top:12px}
+.culture-references{border-top:1px solid var(--line);margin-top:17px;padding-top:10px;font-size:13px;color:var(--muted)}
+
 </style></head>
 <body><div class="wrap"><header class="nav"><a href="../../lecture-guidee/U3/">← Unité 3 · La planète</a><a href="../../index.html">Compréhension écrite ↗</a></header><main>
 <section class="hero"><div class="ring" aria-hidden="true"><small>LEÇON</small>9</div><div><p class="kicker">Unité 3 · Lecture guidée</p><h1>Faire un état des lieux sur la pollution</h1><p>La pollution lumineuse</p></div></section>
@@ -158,7 +175,7 @@ body.teacher-spot-mode > .wrap,body.teacher-lens-mode > .wrap{cursor:crosshair}
     <div class="source-masthead">
       <div class="source-issue" aria-label="L’Écho logique, juin 2020, numéro 12"><div class="source-issue-medallion"><strong>L’ÉCHO<br>LOGIQUE</strong><span>JUIN<br>2020</span></div><small>N° 12</small><button class="source-info-trigger" id="doc2-source-info" type="button" aria-label="Informations sur le document" title="Informations sur le document" aria-haspopup="dialog" aria-controls="doc2-source-dialog"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.7h.01"/></svg></button></div>
       <h2 id="doc2-title">La pollution lumineuse</h2>
-      <div class="source-publisher"><span>VOTRE AGGLOMÉRATION VOUS INFORME</span><b>MARNE <i>et</i> GONDOIRE</b><small>Communauté d’agglomération</small></div>
+      <div class="source-publisher"><span>VOTRE AGGLOMÉRATION VOUS INFORME</span><b>MARNE <i>et</i> GONDOIRE</b><small>Communauté d’agglomération</small><button class="source-info-trigger culture-info-trigger" id="doc2-culture-info" type="button" aria-label="Culture juridique : la coopération intercommunale" title="Culture juridique · La coopération intercommunale" aria-haspopup="dialog" aria-controls="doc2-culture-dialog"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7c-3-2-6-2-9-1v13c3-1 6-1 9 1 3-2 6-2 9-1V6c-3-1-6-1-9 1Zm0 0v13"/></svg></button></div>
     </div>
     <section class="read-part source-lede" id="contexte" aria-label="Introduction"><p class="prose"><span class="annot" data-cat="lex" data-id="n1"><span class="term">Le développement</span><button class="bubble" type="button" aria-label="Annotation : Le développement" aria-expanded="false">◦</button></span> des sociétés humaines <span class="annot" data-cat="gram" data-id="n2"><span class="term">s’est traduit ces dernières décennies par</span><button class="bubble" type="button" aria-label="Annotation : Se traduire par + nom" aria-expanded="false">◦</button></span> une <span class="annot" data-cat="lex" data-id="n3"><span class="term">urbanisation massive</span><button class="bubble" type="button" aria-label="Annotation : L’urbanisation (n. f.)" aria-expanded="false">◦</button></span>, <span class="annot" data-cat="gram" data-id="n4"><span class="term">accompagnée d’une démultiplication</span><button class="bubble" type="button" aria-label="Annotation : Accompagné(e) de + nom" aria-expanded="false">◦</button></span> des <span class="annot" data-cat="lex" data-id="n5"><span class="term">éclairages artificiels nocturnes</span><button class="bubble" type="button" aria-label="Annotation : L’éclairage artificiel nocturne" aria-expanded="false">◦</button></span>. <span class="annot" data-cat="disc" data-id="n6"><span class="term">Cela génère</span><button class="bubble" type="button" aria-label="Annotation : Cela génère + nom" aria-expanded="false">◦</button></span> une pollution lumineuse qui <span class="annot" data-cat="lex" data-id="n7"><span class="term">a pris de l’ampleur ces dernières années</span><button class="bubble" type="button" aria-label="Annotation : Prendre de l’ampleur" aria-expanded="false">◦</button></span> et <span class="annot" data-cat="gram" data-id="n8"><span class="term">dont les conséquences sont nombreuses</span><button class="bubble" type="button" aria-label="Annotation : Dont · complément du nom" aria-expanded="false">◦</button></span> : non seulement sur <span class="annot" data-cat="lex" data-id="n10"><span class="term">la faune et la flore</span><button class="bubble" type="button" aria-label="Annotation : La faune / la flore" aria-expanded="false">◦</button></span>, <span class="annot" data-cat="disc" data-id="n9"><span class="term">mais aussi sur les ressources énergétiques ou encore sur l’astronomie ou sur la santé humaine</span><button class="bubble" type="button" aria-label="Annotation : Non seulement… mais aussi… ou encore…" aria-expanded="false">◦</button></span>.</p></section>
   </header>
@@ -220,6 +237,7 @@ byId('smaller').addEventListener('click',()=>size(-2));byId('larger').addEventLi
  const stage=lens?.querySelector('.teacher-lens-stage');
  const annotationPopup=document.getElementById('popup');
  const sourceDialog=document.getElementById('doc2-source-dialog');
+ const cultureDialog=document.getElementById('doc2-culture-dialog');
  const mapDialog=document.getElementById('doc1-fullscreen');
  if(!page||!controls||!floating||!spot||!lens||!stage)return;
  const modeButtons=[...document.querySelectorAll('[data-focus-mode]')];
@@ -234,7 +252,7 @@ byId('smaller').addEventListener('click',()=>size(-2));byId('larger').addEventLi
  const rect=()=>page.getBoundingClientRect();
  const inside=(x,y,r)=>x>=r.left&&x<=r.right&&y>=r.top&&y<=r.bottom;
  const visible=r=>r.bottom>0&&r.top<innerHeight&&r.right>0&&r.left<innerWidth;
- const modalOpen=()=>!!(sourceDialog?.open||(mapDialog&&!mapDialog.hidden));
+ const modalOpen=()=>!!(sourceDialog?.open||cultureDialog?.open||(mapDialog&&!mapDialog.hidden));
  const popupOpen=()=>!!(annotationPopup&&!annotationPopup.hidden)||modalOpen();
  const overToolbar=target=>!!target?.closest?.('.teacher-focus-tools,.teacher-focus-float');
  function schedule(){if(!frame)frame=requestAnimationFrame(draw);}
@@ -328,7 +346,7 @@ byId('smaller').addEventListener('click',()=>size(-2));byId('larger').addEventLi
  // Changes to the real page (including opened answers) invalidate the magnified copy.
  if(typeof MutationObserver==='function'){
   new MutationObserver(invalidate).observe(page,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['open','hidden','class','style','aria-pressed','aria-expanded','disabled']});
-  for(const el of [annotationPopup,sourceDialog,mapDialog])if(el)new MutationObserver(schedule).observe(el,{attributes:true,attributeFilter:['open','hidden']});
+  for(const el of [annotationPopup,sourceDialog,cultureDialog,mapDialog])if(el)new MutationObserver(schedule).observe(el,{attributes:true,attributeFilter:['open','hidden']});
  }
  page.addEventListener('toggle',invalidate,true);
  page.addEventListener('input',invalidate);
@@ -447,5 +465,32 @@ byId('smaller').addEventListener('click',()=>size(-2));byId('larger').addEventLi
  dialog.addEventListener('click',e=>{if(e.target!==dialog)return;const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)closeInfo();});
  dialog.addEventListener('close',()=>trigger.focus({preventScroll:true}));
  document.addEventListener('keydown',e=>{if(dialog.open&&e.key==='Escape'){e.preventDefault();e.stopImmediatePropagation();closeInfo();}},true);
+})();
+</script><dialog id="doc2-culture-dialog" class="source-info-dialog culture-info-dialog" aria-labelledby="doc2-culture-title">
+<div class="source-info-head"><div><span class="culture-kicker">Culture juridique</span><h2 id="doc2-culture-title">La coopération intercommunale</h2></div><button class="culture-close" id="doc2-culture-close" type="button" aria-label="Fermer" title="Fermer (Échap)" autofocus><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
+<div class="culture-institution">
+<p>En France, plusieurs communes peuvent mettre en commun leurs moyens pour assurer des services publics et réaliser des projets à l’échelle intercommunale.</p>
+<p>Une <strong>communauté d’agglomération</strong> est une forme d’<strong>EPCI</strong> (établissement public de coopération intercommunale). Les communes membres conservent leur statut de collectivités territoriales. L’EPCI exerce les compétences que la loi lui attribue ou que les communes lui transfèrent.</p>
+<p><strong>Marne et Gondoire</strong> regroupe aujourd’hui 20 communes. Ses compétences concernent notamment l’aménagement du territoire, la collecte et le traitement des déchets et la prévention des inondations.</p>
+<div class="culture-lexique"><span>la coopération intercommunale · 市镇间合作</span><span>un EPCI · 市镇间公共合作机构</span><span>une compétence · 职权</span></div>
+</div>
+<div class="culture-reading"><h3>Explorer les paratextes</h3>
+<div><h4>Identifier l’émetteur</h4><p>→ Ce document est publié par la communauté d’agglomération de Marne et Gondoire.</p></div>
+<div><h4>Identifier le public visé</h4><p>→ Il s’adresse principalement aux habitants de l’agglomération.</p></div>
+<div><h4>Identifier la visée du document</h4><p>→ Il vise à informer et à sensibiliser les habitants à la pollution lumineuse.</p></div>
+</div>
+<div class="culture-references">Sources : <a href="https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006070633/LEGISCTA000006164733/2026-07-24/" target="_blank" rel="noopener noreferrer">CGCT, art. L. 5216-1 et L. 5216-5</a> · <a href="https://www.marneetgondoire.fr/votre-agglo/l-institution/missions-competences/" target="_blank" rel="noopener noreferrer">Marne et Gondoire – Missions et compétences</a></div>
+</dialog>
+<script>
+(() => {
+ 'use strict';
+ const trigger=document.getElementById('doc2-culture-info'),dialog=document.getElementById('doc2-culture-dialog'),closeButton=document.getElementById('doc2-culture-close');
+ if(!trigger||!dialog||!closeButton)return;
+ function closeCulture(){if(dialog.open)dialog.close();}
+ trigger.addEventListener('click',()=>{if(!dialog.open)dialog.showModal();});
+ closeButton.addEventListener('click',closeCulture);
+ dialog.addEventListener('click',e=>{if(e.target!==dialog)return;const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)closeCulture();});
+ dialog.addEventListener('close',()=>trigger.focus({preventScroll:true}));
+ document.addEventListener('keydown',e=>{if(dialog.open&&e.key==='Escape'){e.preventDefault();e.stopImmediatePropagation();closeCulture();}},true);
 })();
 </script></body></html>
