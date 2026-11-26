@@ -89,6 +89,7 @@ window.U3_NETWORK = {
       "ids": [
         "proteger",
         "preserver",
+        "epargner",
         "sauvegarder",
         "agir",
         "sensibiliser",
@@ -865,8 +866,25 @@ window.U3_NETWORK = {
         "préserver un habitat",
         "préserver X de Y"
       ],
-      "sentence": "Il est nécessaire de préserver les zones naturelles encore peu éclairées.",
+      "sentence": "Il est nécessaire de préserver les zones naturelles encore épargnées par la pollution lumineuse.",
       "target": "préserver"
+    },
+    {
+      "id": "epargner",
+      "group": "action",
+      "source": "Complément · L9",
+      "word": "épargner / être épargné par",
+      "def": "Ne pas atteindre quelqu’un ou quelque chose, ou lui éviter un dommage. Dans ce contexte, être épargné par un phénomène signifie ne pas en subir les effets nuisibles. À distinguer d’épargner de l’argent (économiser).",
+      "zh": "使……免受损害；未受到……的侵害或影响。注意与 épargner de l’argent（存钱、储蓄）区分。",
+      "family": "épargner → épargné(e) ; épargner quelqu’un ou quelque chose ; être épargné(e) par",
+      "chunks": [
+        "La sécheresse a épargné cette région.",
+        "Une forêt épargnée par les incendies.",
+        "Une zone naturelle épargnée par la pollution lumineuse.",
+        "La sécheresse n’a pas épargné cette région. (= Cette région a été touchée par la sécheresse.)"
+      ],
+      "sentence": "Cette région a été épargnée par les inondations.",
+      "target": "épargnée par"
     },
     {
       "id": "sauvegarder",
@@ -1523,6 +1541,30 @@ window.U3_NETWORK = {
       "to": "risque",
       "type": "Association",
       "note": "Un risque de disparition ; une espèce menacée."
+    },
+    {
+      "from": "preserver",
+      "to": "epargner",
+      "type": "Nuance",
+      "note": "Préserver désigne une action de conservation ; être épargné par décrit l’absence d’une atteinte. On peut préserver une zone encore épargnée par la pollution."
+    },
+    {
+      "from": "proteger",
+      "to": "epargner",
+      "type": "Nuance",
+      "note": "Protéger X contre Y vise à éviter une atteinte ; être épargné par Y signifie ne pas l’avoir subie."
+    },
+    {
+      "from": "secheresse",
+      "to": "epargner",
+      "type": "Collocation",
+      "note": "Une région épargnée par la sécheresse ; une région touchée par la sécheresse (contraste)."
+    },
+    {
+      "from": "polluer",
+      "to": "epargner",
+      "type": "Contraste",
+      "note": "Un milieu pollué ↔ un milieu épargné par la pollution."
     }
   ],
   "chains": [
