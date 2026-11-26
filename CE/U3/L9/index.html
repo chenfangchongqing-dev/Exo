@@ -137,12 +137,12 @@ body.teacher-spot-mode > .wrap,body.teacher-lens-mode > .wrap{cursor:crosshair}
 .source-sheet .source-issue{position:relative}
 .source-info-trigger{position:absolute;right:-7px;top:-7px;width:25px;height:25px;padding:0;display:grid;place-items:center;color:#536b6c;background:#fff;border:1px solid #c7d6d5;border-radius:50%;z-index:1;line-height:1}
 .source-info-trigger:hover{color:var(--accent);border-color:var(--accent)}
-.source-info-dialog{width:min(475px,calc(100vw - 36px));max-height:calc(100vh - 36px);padding:21px 23px;border:1px solid var(--line);border-radius:14px;background:#fff;color:var(--ink);box-shadow:0 12px 44px #271b1b40;overflow:auto}
+.source-info-dialog{width:min(820px,calc(100vw - 36px));max-height:calc(100vh - 36px);padding:clamp(20px,3vw,36px);border:1px solid var(--line);border-radius:14px;background:#fff;color:var(--ink);box-shadow:0 12px 44px #271b1b40;overflow:auto}
 .source-info-dialog:not([open]){display:none}
 .source-info-dialog::backdrop{background:rgba(24,22,22,.36)}
 .source-info-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 10px}
-.source-info-head h2{margin:0;font:700 18px/1.3 Arial,Helvetica,sans-serif;color:var(--accent)}
-.source-info-dialog p{margin:0;font:15px/1.6 Arial,Helvetica,sans-serif;color:var(--ink)}
+.source-info-head h2{margin:0;font:700 clamp(23px,3vw,30px)/1.3 Arial,Helvetica,sans-serif;color:var(--accent)}
+.source-info-dialog p{margin:0;font:clamp(20px,2.7vw,27px)/1.55 Arial,Helvetica,sans-serif;color:var(--ink)}
 #doc2-source-close{display:grid;place-items:center;flex:none;width:32px;height:32px;border-radius:8px;border:1px solid var(--line);background:#fff;color:var(--accent);padding:0}
 #doc2-source-close:hover{background:var(--pale)}
 @media print{.source-info-trigger,.source-info-dialog{display:none!important}}
@@ -434,7 +434,7 @@ byId('smaller').addEventListener('click',()=>size(-2));byId('larger').addEventLi
   else if(e.key==='Tab'){e.preventDefault();closeButton.focus({preventScroll:true});}
  },true);
 })();
-</script><dialog id="doc2-source-dialog" class="source-info-dialog" aria-labelledby="doc2-source-title"><div class="source-info-head"><h2 id="doc2-source-title">Informations sur le document</h2><button id="doc2-source-close" type="button" aria-label="Fermer" title="Fermer (Échap)" autofocus><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div><p>Source : L’Écho logique, juin 2020, n° 12, extrait reproduit dans le manuel Inspire 4, p. 46. Les chiffres correspondent au document de 2020. Les annotations et les réponses proposées sont ajoutées pour la lecture guidée.</p></dialog>
+</script><dialog id="doc2-source-dialog" class="source-info-dialog" aria-labelledby="doc2-source-title"><div class="source-info-head"><h2 id="doc2-source-title">Présenter la source.</h2><button id="doc2-source-close" type="button" aria-label="Fermer" title="Fermer (Échap)" autofocus><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div><p>→ Il s’agit d’un article tiré du numéro 12 du magazine <em>L’Écho logique</em>, paru en juin 2020.</p></dialog>
 <script>
 (() => {
  'use strict';
